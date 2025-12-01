@@ -1,0 +1,34 @@
+<div class="flex flex-column border-round-bottom-xl overflow-hidden shadow-2 surface-card">
+
+  <div class="flex align-items-center p-4 absolute footer-medico w-full">
+    <div class="flex-shrink-0 mr-4">
+      <img
+      [src]="imgPerfil"
+        alt="Foto del médico aspirante"
+        class="border-circle"
+        style="width: 60px; height: 60px; object-fit: cover;">
+    </div>
+
+    <div class="flex-grow-1">
+
+      <div class="grid p-nogutter">
+
+        <div class="col-12 md:col-6">
+          <p class="text-sm font-medium text-blue mb-0">Nombre del médico aspirante</p>
+          <p class="text-xl font-semibold mt-1 mb-0">
+            {{ sesion?.nomNombre }} {{ sesion?.nomApellidoPaterno }}  {{ sesion?.nomApellidoMaterno }}
+          </p>
+        </div>
+
+        <div class="col-12 md:col-6">
+          <p class="text-sm font-medium text-blue mb-0">{{ sesion?.cveMatricula?'Matrícula':'Folio' }}</p>
+          <p class="text-xl font-semibold mt-1 mb-0"> {{ sesion?.cveMatricula?sesion?.cveMatricula:sesion?.refFolio }}</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="w-full" style="height: 20px; background-color: #4fa9d5;">
+  </div>
+</div>

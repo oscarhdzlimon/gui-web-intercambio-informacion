@@ -1,0 +1,75 @@
+<main class="flex flex-wrap login-background">
+  <aside class="lg:col-6 col-12 flex flex-column justify-content-center align-items-center lg:p-6 px-6 py-0 ">
+  
+  <div>
+    <span class="login-titulo">CA</span><br>
+    <span class="login-subtitulo">Consulta de antecedentes</span>
+  </div>  
+    <!-- <h1 class="login-titulo">CA</h1>
+    <h2 class="login-subtitulo">Consulta de antecedentes </h2> -->
+  
+  </aside>
+  <section class="lg:col-6 col-12 lg:mb-0 mb-6 flex justify-content-end align-items-center">
+   <p-card class="px-2 login-card border-round-bottom-3xl border-round-bottom width-lg "  >
+     
+        <div class="divcardtitulo">
+        <span class="login-card-titulo h2cardtitulo">Inicio de sesión</span>
+      </div>
+      
+      <form [formGroup]="formLogin" (ngSubmit)="iniciarSesion()">
+        <div class="login-card-body mt-4">
+          <div class="field">
+            <label class="field-label" for="curp">CURP</label>
+            <input
+              autocomplete="off"
+              
+              pInputText
+              class="w-full"
+              type="text"
+              id="curp"
+              placeholder="Ingresar usuario"
+              formControlName="curp"/>
+            <div class="flex flex-column">
+             
+            </div>
+          </div>
+          <div class="form-icon" style="margin-top: 16px;margin-bottom: 48px;">
+            <label class="field-label" for="password">Contraseña</label>
+            <div class="contenedor-password">
+              <input #input
+                     pInputText
+                     class="w-full"
+                     type="password"
+                     id="password"
+                     (keypress)="ingresoPass = true"
+                     appBloquearCaracterPassword
+                     placeholder="Ingresa contraseña"
+                     formControlName="password"
+                     autocomplete="off"/>
+              <i [ngClass]="{'pi-eye': input.type==='password', 'pi-eye-slash':  input.type ==='text'}"
+                 class="cursor-pointer icon pi"
+                 (click)="input.type = input.type==='password'?'text':'password'"></i>
+            </div>
+
+            
+          </div>
+          
+         <!--  <div class="flex justify-content-end my-3">
+            <a [routerLink]="'../recuperar-contrasenia'" class="login-hipervinculo cursor-pointer">Olvidé mi
+              contraseña</a>
+          </div> -->
+          
+        </div>
+        <div class="flex justify-content-end divboton">
+           
+            <p-button type="submit" [disabled]="formLogin.invalid" label="Iniciar sesión"/>
+          </div>
+      </form>
+     
+    
+
+    </p-card> 
+  
+
+</section>
+</main>

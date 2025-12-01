@@ -1,0 +1,151 @@
+<!-- <div class="flex justify-content-start align-items-center gap-3 mt-5 lg:mt-0">
+  <btn-regresar/>
+  <h3 class="titulo-seccion">Módulo de verificación de documentos</h3>
+</div> -->
+
+<p-card class="mx-2 empty-border" [header]="'Verificación de Documentos'">
+  <form [formGroup]="filtroForm">
+    <article class="flex flex-row flex-wrap">
+      <div class="lg:col-3 col-12">
+        <div class="flex justify-content-between">
+          <label class="field-label" for="especialidad">Especialidad</label>
+        </div>
+        <p-select formControlName="especialidad" [options]="especialidad" optionLabel="label"
+                  placeholder="Ingresa especialidad" class="w-full"/>
+      </div>
+      <div class="lg:col-3 col-12">
+        <div class="flex justify-content-between">
+          <label class="field-label" for="estatus">Estatus</label>
+        </div>
+        <p-select formControlName="estatus" [options]="estatus" optionLabel="label" placeholder="Ingresa estatus"
+                  class="w-full"/>
+      </div>
+      <div class="lg:col-3 col-12">
+        <div class="flex justify-content-between">
+          <label class="field-label" for="matricula">Matrícula</label>
+        </div>
+        <input pInputText class="w-full" type="text" id="matricula"
+               placeholder="Ingresa matrícula"
+               formControlName="matricula"
+        />
+      </div>
+      <div class="flex lg:col-3  col-12 justify-content-end align-items-center mt-3 gap-4">
+        <p-button type="button" (onClick)="limpiar()" variant="outlined" label="Limpiar"/>
+        <p-button type="button" (onClick)="paginar()" label="Buscar"/>
+      </div>
+    </article>
+  </form>
+</p-card>
+
+<p-table
+  [value]="usuarioDocumentos()"
+  [scrollable]="true"
+
+>
+  <ng-template #caption>
+    <div class="flex justify-content-between seccion-titulo">
+      <span class="titulo-tabla">Verificación de Documentos</span>
+      <div style="cursor: pointer" class="flex align-items-center boton-descargar" (click)="descargarExcelHistoricoDocs()">
+        <i class="cme-download" [style]="{ 'font-size': '1.8rem', color: '#018699'}"></i>
+        <span class="ms-2 font-medium">Exportar datos</span>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template #header>
+    <tr>
+      <th scope="col">Nombre</th>
+      <th scope="col">Matrícula/Folio</th>
+      <th scope="col">Correo</th>
+      <th scope="col">Especialidad</th>
+      <th scope="col">Estatus</th>
+      <th scope="col">Observaciones</th>
+      <th scope="col">Modalidad</th>
+      <th scope="col">Tipo de modalidad</th>
+      <th scope="col">Fecha de verificación</th>
+      <th scope="col"
+          style="min-width: 100px"
+          alignFrozen="right"
+          pFrozenColumn
+      >
+        Acciones
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template #body let-usuarioDocumentos>
+    <tr>
+      <td>{{ usuarioDocumentos.nombreCompleto }}</td>
+      <td>{{ usuarioDocumentos.matriculaFolio }}</td>
+      <td>{{ usuarioDocumentos.correo }}</td>
+      <td>{{ usuarioDocumentos.especialidad }}</td>
+      <td>
+        <div class="pill flex justify-content-start">
+          <p [ngClass]="settearClase(usuarioDocumentos.idEstatusValidacion)" class="p-2">
+            {{ usuarioDocumentos.estatusValidacion }}
+          </p>
+        </div>
+      </td>
+      <td>{{ usuarioDocumentos.observaciones }}</td>
+      <td>{{ usuarioDocumentos.modalidad }}</td>
+      <td>{{ usuarioDocumentos.tipoModalidad }}</td>
+      <td>{{ usuarioDocumentos.fechaVerificacion }}</td>
+      <td alignFrozen="right" pFrozenColumn class="flex align-items-center justify-content-center">
+        <i (click)="consultaDocumento($event, usuarioDocumentos)" class="cme-ellipsis cursor-pointer border-round-3xl"
+           [style]="{ 'font-size': '2.2rem', color: '#a9c9f8', background: '#f6faff' }"></i>
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template #emptymessage>
+    <tr>
+      <td colspan="10">
+        <div class="flex justify-content-center align-items-center">
+          <img class="p-0"
+               src="/assets/images/tabla_sin_resultados.svg" alt="Sin resultados">
+        </div>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+<p-paginator
+  styleClass="justify-content-end"
+  [showFirstLastIcon]="false"
+  [first]="first"
+  [rows]="rows"
+  [totalRecords]="totalElementos"
+  (onPageChange)="onPageChange($event)"
+>
+  <ng-template pTemplate="previouspagelinkicon">
+    <div class="flex align-items-center">
+      <span class="pi pi-chevron-left text-xl font-normal mr-2"></span>
+      <span class="font-semibold mr-5">Anterior</span>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="nextpagelinkicon">
+    <div class="flex align-items-center">
+      <span class="font-semibold ml-5">Siguiente</span>
+      <span class="pi pi-chevron-right text-xl font-normal ml-2"></span>
+    </div>
+  </ng-template>
+</p-paginator>
+
+<p-popover #op (onHide)="documentoSeleccionado == null">
+  <ng-template #content>
+    <div class="flex align-items-center boton-descargar cursor-pointer "
+         (click)="irDetalleDocumentacion(documentoSeleccionado)">
+      <i class="icon pi pi-eye" [style]="{ 'font-size': '1.2rem', color: '#a9c9f8'}"></i>
+      <span class="ms-2 acciones-tabla">Consultar documentos</span>
+    </div>
+    <div class="flex align-items-center boton-descargar cursor-pointer margin-top-8"
+         (click)="imprimirDocumento(documentoSeleccionado)" *ngIf="documentoSeleccionado && (documentoSeleccionado.idEstatusValidacion === 3 || documentoSeleccionado.idEstatusValidacion === 4)">
+      <i class="icon pi pi-print" [style]="{ 'font-size': '1.2rem', color: '#a9c9f8'}"></i>
+      @if(documentoSeleccionado.idTipoConvocatoria==1){
+          <span class="ms-2 acciones-tabla">Imprimir dictamen</span>
+      }
+
+      @if(documentoSeleccionado.idTipoConvocatoria==2){
+          <span class="ms-2 acciones-tabla">Imprimir opinión técnica</span>
+      }
+
+
+    </div>
+  </ng-template>
+</p-popover>

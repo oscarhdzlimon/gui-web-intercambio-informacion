@@ -1,0 +1,18 @@
+<div class="flex vertical-empty-card gap-4">
+  <header-tab [title]="'Especialidad'" class="header-tab"/>
+  <p-table [value]="valoresVacios" class="flex-grow-1">
+    <ng-template #header>
+      <tr>
+        <th scope="col">Tipo documento</th>
+        <th scope="col">Especialidad médica</th>
+        <th scope="col">Acciones</th>
+      </tr>
+    </ng-template>
+    <ng-template #emptymessage>
+      <tr>
+        <td colspan="3">
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

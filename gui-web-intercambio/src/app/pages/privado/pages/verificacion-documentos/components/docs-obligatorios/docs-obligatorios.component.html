@@ -1,0 +1,43 @@
+<div class="flex flex-wrap">
+  <div class="archivos lg:col-6 col-12 pt-3">
+    @for (doc of docsObligatorios; track doc.idDocumentoObligatorio; ) {
+      <div class="flex align-items-center px-2 mb-4" [ngClass]="{'select': tabActive() === doc.idDocumentoObligatorio }"
+           (click)="docSeleccionado(doc.idDocumentoObligatorio, doc.documento.refGuid)">
+        <i class="cme-file" style="font-size: 2rem"></i>
+        <p class="ms-3 texto-campo">{{ doc.tipoDocumentoObligatorio.desDocumentoObligatorio }}</p>
+      </div>
+
+      @if (isMobileView && tabActive() === doc.idDocumentoObligatorio) {
+        <ng-container [ngTemplateOutlet]="pdf_doc"></ng-container>
+      }
+    }
+  </div>
+
+  @if (!isMobileView) {
+    <div class="flex  col-12 lg:col-6 p-4 flex-column archivos-previsualizacion">
+      @if (docsObligatorios.length != 0) {
+        <span class="subtitle-previsualizacion">Previsualización</span>
+      } @else {
+        <span class="subtitle-previsualizacion">No se han cargado documentos obligatorios</span>
+      }
+
+      @if (tabActive() === 0) {
+        <p>{{ _Mensajes.MSJ_SELECCIONAR_DOCUMENTO }}</p>
+      } @else {
+        <ng-container [ngTemplateOutlet]="pdf_doc"></ng-container>
+      }
+    </div>
+  }
+</div>
+
+<ng-template #pdf_doc>
+  @if (pdfSrc) {
+    <div style="height: 80vh;" class="my-4">
+      <iframe width="100%" height="100%" [src]="pdfSrc" frameborder="0">
+        <p>{{ _Mensajes.MSJ_NOT_SUPPORT_IFRAMES }}</p>
+      </iframe>
+    </div>
+  } @else {
+    <span class="loader">{{ _Mensajes.MSJ_CARGANDO_DOCUMENTO }}</span>
+  }
+</ng-template>

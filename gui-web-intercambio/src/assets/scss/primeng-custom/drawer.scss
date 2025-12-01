@@ -1,0 +1,13 @@
+@layer app-component {
+    :root {
+        --p-drawer-content-padding: 10px;
+    }
+
+    .p-drawer-left{
+        margin-top: 22%;
+        height: 45%;
+        border-radius: 10px;
+        width: 85%;
+    }
+    
+}

@@ -1,0 +1,209 @@
+<div class="grid">
+  <div class="col-12 mt-4">
+    <p-card class="empty-border">
+      <div class="flex flex-column justify-content-center align-items-center gap-1 m-2">
+        <p class="tablero-titulo">Tablero oferta laboral</p>
+        <p class="tablero-descripcion">La disponibilidad de plazas puede variar. Esta información se proporciona con
+          fines exclusivamente
+          informativos.</p>
+      </div>
+    </p-card>
+  </div>
+  <div class="col-fixed min-h-full oferta-laboral-tarjetas" style="width:260px">
+    <p-card class="empty-border" styleClass="min-h-full">
+      <div class="flex flex-column">
+        <p class="seccion-menu-titulo mb-2">Oferta laboral</p>
+        <div class="flex flex-column flex-wrap">
+          <ul class="m-0 p-0 list-none p-1 flex flex-column gap-2 w-full">
+            @for (item of data; track item.id) {
+              <li
+                class="p-2 hover:bg-blue-oferta-laboral rounded border border-transparent transition-all transition-duration-200
+                  hover:border-blue-500 hover:text-white cursor-pointer" (click)="actualizarTab(item.id)"
+                [ngClass]="{ 'bg-blue-oferta-laboral text-white': activeTab() === item.id }">
+                <div class="flex p-2 gap-3">
+                  <div class="flex justify-content-center align-items-center">
+                    <i [class]="item.icono" [style]="{ 'font-size': '1.8rem'}"></i>
+                  </div>
+                  <div class="flex flex-column gap-1 flex-1">
+                    <p class="menu-titulo">{{ item.name }}</p>
+                    <p class="menu-descripcion">{{ item.description }}</p>
+                  </div>
+                  <div class="justify-content-end align-items-start">
+                    @if (item.price) {
+                      <p class="menu-cantidad">{{ item.price }}</p>
+                    } @else {
+                      <div class="m-2"></div>
+                    }
+                  </div>
+                </div>
+              </li>
+            }
+          </ul>
+        </div>
+      </div>
+    </p-card>
+  </div>
+  <div class="col flex flex-column gap-4">
+    @if ([0, 1].includes(activeTab())) {
+      <p-card class="empty-border">
+        <form [formGroup]="formTablero">
+          <div class="flex flex-wrap flex-row">
+            <div class="col-12 lg:col-4">
+              <div class="flex justify-content-between">
+                <label class="field-label" for="ooad_tablero">OOAD</label>
+              </div>
+              <p-select [options]="ooad_tablero" formControlName="ooad_tablero" optionLabel="label"
+                        placeholder="Selecciona una OOAD" class="w-full"/>
+            </div>
+            <div class="col-12 lg:col-4">
+              <div class="flex justify-content-between">
+                <label class="field-label" for="zona_tablero">Zona</label>
+              </div>
+              <p-select [options]="zona_tablero" formControlName="zona_tablero" optionLabel="label"
+                        placeholder="Selecciona una zona" class="w-full"/>
+            </div>
+            <div class="col-12 lg:col-4">
+              <div class="flex justify-content-between">
+                <label class="field-label" for="especialidad_tablero">Especialidad</label>
+              </div>
+              <p-select [options]="especialidad_tablero" formControlName="especialidad_tablero" optionLabel="label"
+                        placeholder="Selecciona una especialidad" class="w-full"/>
+            </div>
+            <div class="col-12 lg:col-4">
+              <div class="flex justify-content-between">
+                <label class="field-label" for="regimen_tablero">Régimen</label>
+              </div>
+              <p-select [options]="regimen_tablero" formControlName="regimen_tablero"
+                        optionLabel="label"
+                        placeholder="Selecciona un regimen" class="w-full"/>
+            </div>
+            <div class="col-12 lg:col-4">
+              <div class="flex justify-content-between">
+                <label class="field-label" for="bono_tablero">Bono difícil cobertura</label>
+              </div>
+              <p-select [options]="bono_tablero" formControlName="bono_tablero" optionLabel="label"
+                        placeholder="Selecciona un bono" class="w-full"/>
+            </div>
+            <div class="col-12 lg:col-4 flex btn-paginacion align-items-end">
+              <p-button type="button" label="Consultar" (click)="seleccionarPaginacion()"/>
+            </div>
+          </div>
+        </form>
+      </p-card>
+      <p-card class="empty-border">
+        <div class="flex flex-wrap">
+          <div class="col-12 lg:col-4">
+            @if (activeTab() === 0) {
+              <kpi-card encabezado="Total de ofertas" [descripcion]="cantidadOfertasLaborales().toString()"
+                        icono="cme-deals" bg_color="#9ce2c2"></kpi-card>
+            } @else {
+              <kpi-card encabezado="Total de favoritos" [descripcion]="cantidadOfertasLaborales().toString()"
+                        icono="cme-fav" bg_color="#ffdf7f"></kpi-card>
+            }
+          </div>
+          <div class="col-12 lg:col-4">
+            <kpi-card encabezado="Nuevos hospitales" [descripcion]="cantidadNuevosHospitalesFiltro().toString()"
+                      icono="cme-hospital"
+                      bg_color="#abc8f0"></kpi-card>
+          </div>
+          <div class="col-12 lg:col-4">
+            <kpi-card encabezado="Salario promedio" [descripcion]="cantidadSalarioPromedio() " icono="cme-money"
+                      bg_color="#7bc1e0"></kpi-card>
+          </div>
+        </div>
+        @for (registro of registros(); track registro.idPlaza) {
+          <oferta-card [detalleOportunidad]="registro" (abrirDetalleEvent)="show($event)"
+                       (actualizarTotales)="obtenerTotalFavoritos()"/>
+        }
+        @if (registros().length === 0) {
+        }
+      </p-card>
+
+      @if (totalElementos > 1) {
+        <p-paginator class="paginator-oferta" (onPageChange)="cambiarPagina($event)" [first]="first" [rows]="rows"
+                      [totalRecords]="totalElementos">
+          <ng-template pTemplate="previouspagelinkicon">
+            <div class="flex align-items-center">
+              <span class="pi pi-chevron-left text-xl font-normal mr-2"></span>
+              <span class="font-semibold mr-5">Anterior</span>
+            </div>
+          </ng-template>
+          <ng-template pTemplate="nextpagelinkicon">
+            <div class="flex align-items-center">
+              <span class="font-semibold ml-5">Siguiente</span>
+              <span class="pi pi-chevron-right text-xl font-normal ml-2"></span>
+            </div>
+          </ng-template>
+        </p-paginator>
+      }
+    }
+    @if (activeTab() === 2) {
+      <p-card class="empty-border">
+        <div class="flex flex-wrap flex-row">
+          <div class="col-12">
+            <p-card class="bg-blue-oferta-laboral empty-border" styleClass="text-white shadow-4">
+              <div class="flex flex-column align-items-center gap-3 m-2">
+                <p class="ayuda-titulo">Centro de ayuda</p>
+                <p class="ayuda-descripcion">Encuentre respuestas a las preguntas más comunes sobre el proceso de
+                  postulación</p>
+              </div>
+            </p-card>
+          </div>
+          @for (pregunta of preguntas_frecuentes(); let idx = $index; track $index) {
+            <div class="col-12 lg:col-6">
+              <p-card class="empty-border" styleClass="min-h-full shadow-4">
+                <div class="flex flex-column gap-3 m-2">
+                  <p class="ayuda-pregunta">{{ pregunta.desPregunta }}</p>
+                  <p class="ayuda-respuesta">{{ pregunta.desRespuesta }}</p>
+                </div>
+              </p-card>
+            </div>
+          }
+        </div>
+      </p-card>
+    }
+  </div>
+</div>
+
+
+
+
+<p-drawer appendTo="body" blockScroll="true" [(visible)]="visible" closable="false">
+  
+  <div class="flex flex-column">
+    <p class="seccion-menu-titulo m-2 mb-4">Oferta laboral</p>
+    <div class="flex flex-column flex-wrap">
+      <ul class="m-0 p-0 list-none p-1 flex flex-column gap-2 w-full">
+        @for (item of data; track item.id) {
+          <li
+            class="p-2 hover:bg-blue-oferta-laboral rounded border border-transparent transition-all transition-duration-200
+              hover:border-blue-500 hover:text-white cursor-pointer" (click)="actualizarTab(item.id)"
+            [ngClass]="{ 'bg-blue-oferta-laboral text-white': activeTab() === item.id }">
+            <div class="flex p-2 gap-3">
+              <div class="flex justify-content-center align-items-center">
+                <i [class]="item.icono" [style]="{ 'font-size': '1.8rem'}"></i>
+              </div>
+              <div class="flex flex-column gap-1 flex-1">
+                <p class="menu-titulo">{{ item.name }}</p>
+                <p class="menu-descripcion">{{ item.description }}</p>
+              </div>
+              <div class="justify-content-end align-items-start">
+                @if (item.price) {
+                  <p class="menu-cantidad">{{ item.price }}</p>
+                } @else {
+                  <div class="m-2"></div>
+                }
+              </div>
+            </div>
+          </li>
+        }
+      </ul>
+    </div>
+  </div>
+</p-drawer>
+@if (visible) {
+  <span 
+    class="custom-close"
+    (click)="visible = false">
+  </span>
+}

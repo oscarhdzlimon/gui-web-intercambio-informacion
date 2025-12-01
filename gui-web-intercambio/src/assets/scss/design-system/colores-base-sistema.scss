@@ -1,0 +1,36 @@
+:root {
+  //Primario
+  --bs-primary-emphasis: #052c65;
+  --bs-primary-hex-color: #0AA16E;; // --> en sistema
+  --bs-primary-bg-subtle: #9ec5fe;
+  --bs-primary-border-sub: #cfe2ff;
+
+  //Éxito
+  --bs-success-emphasis: #0a3622;
+  --bs-success-hex-color: #198754;
+  --bs-success-bg-subtle: #a3cfbb;
+  --bs-success-border-sub: #cfe2ff;
+
+  //Peligro
+  --bs-danger-emphasis: #58151c;
+  --bs-danger-hex-color: #dc3545;
+  --bs-danger-bg-subtle: #f1aeb5;
+  --bs-danger-border-sub: #f8d7da;
+
+  //Adventencia
+  --bs-warning-emphasis: #664d03;
+  --bs-warning-hex-color: #ffc107;
+  --bs-warning-bg-subtle: #ffe69c;
+  --bs-warning-border-sub: #fff3cd;
+
+  //Información
+  --bs-info-emphasis: #055160;
+  --bs-info-hex-color: #0dcaf0;
+  --bs-info-bg-subtle: #9eeaf9;
+  --bs-info-border-sub: #cff4fc;
+
+  // Stepper
+  --stepper-active-color: #ABC8F0;
+  --stepper-done-color: #34d399;
+  --stepper-pending-color: #e5e7eb;
+}

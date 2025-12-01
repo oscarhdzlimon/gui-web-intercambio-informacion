@@ -1,0 +1,84 @@
+<main class="flex flex-wrap  login-background">
+  <aside class="lg:col-6 col-12 flex flex-column justify-content-center align-items-center p-6">
+    <h1 class="login-titulo">Convocatoria para médicos especialistas</h1>
+    <h2 class="login-subtitulo">Reclutamiento IMSS 2026</h2>
+  </aside>
+  <section class="lg:col-6 col-12 flex justify-content-center align-items-center lg:mb-0  mb-6">
+    <p-card class="px-2 login-card border-round-bottom-3xl border-round-bottom width-lg">
+
+      <div class="flex justify-content-center px-3">
+        <h2 class="login-card-titulo">Recuperar contraseña</h2>
+      </div>
+      <div class="px-0">
+        <hr class=" border-1 text-gray-100">
+      </div>
+      <form [formGroup]="registroForm" (ngSubmit)="cambiarPassword()">
+        <div class="row mt-3 field">
+          <label for="nuevoPass1" class="field-label">Nueva contraseña</label>
+          <div class="w-full mt-3 z-4">
+            <p-password formControlName="nuevaContrasena" #nuevoPass1 id="nuevoPass1"
+                        placeholder="Ingresar contraseña" maxlength="12" minlength="8" [pattern]="REGEX_PASS"
+                        promptLabel="Introduce una nueva contraseña" weakLabel="Seguridad Débil"
+                        mediumLabel="Seguridad Media" strongLabel="Seguridad Fuerte" [feedback]="true"
+                        [toggleMask]="true" [inputStyleClass]="'w-full'" class="w-full" [appendTo]="'body'">
+              <ng-template pTemplate="footer">
+                <p-divider/>
+                <p class="my-2 field-label">Restricciones de contraseña</p>
+                <ul class="pl-2 ml-2 mt-0" style="line-height: 1.5">
+                  <li class="info-em-texto mb-1">Longitud: entre 8 y 12 caracteres.</li>
+                  <li class="info-em-texto mb-1">Al menos una letra mayúscula.</li>
+                  <li class="info-em-texto mb-1">Al menos una letra minúscula.</li>
+                  <li class="info-em-texto mb-1">Al menos un número</li>
+                  <li class="info-em-texto mb-1">Al menos un carácter especial</li>
+                  <li class="info-em-texto mb-1">No se permiten espacios, caracteres no imprimibles o emojis.</li>
+                </ul>
+              </ng-template>
+            </p-password>
+          </div>
+          <div class="flex flex-column">
+            @if (f['nuevaContrasena'].errors?.['pattern'] && (f['nuevaContrasena'].dirty || f['nuevaContrasena'].touched)) {
+              <span class="text-danger">{{ mensajes.MSJ_FORMATO_NO_VALIDO }}</span>
+            }
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col-md-12">
+            <label for="nuevoPass2" class="field-label">Confirmar contraseña</label>
+            <div class="position-relative input-icon-right w-full mt-3">
+              <p-password formControlName="confirmarContrasena" #nuevoPass2
+                          placeholder="Ingresar confirmación de contraseña" id="nuevoPass2"
+                          promptLabel="Introduce una nueva contraseña" maxlength="12" minlength="8"
+                          weakLabel="Seguridad Debíl" mediumLabel="Seguridad Media" [pattern]="REGEX_PASS"
+                          strongLabel="Seguridad Fuerte" [inputStyleClass]="'w-full'" [toggleMask]="true"
+                          class="w-full" [appendTo]="'body'" [feedback]="true">
+                <ng-template pTemplate="footer">
+                  <p-divider/>
+                  <p class="my-2 field-label">Restricciones de contraseña</p>
+                  <ul class="pl-2 ml-2 mt-0" style="line-height: 1.5">
+                    <li class="info-em-texto mb-1">Longitud: entre 8 y 12 caracteres.</li>
+                    <li class="info-em-texto mb-1">Al menos una letra mayúscula.</li>
+                    <li class="info-em-texto mb-1">Al menos una letra minúscula.</li>
+                    <li class="info-em-texto mb-1">Al menos un número</li>
+                    <li class="info-em-texto mb-1">Al menos un carácter especial</li>
+                    <li class="info-em-texto mb-1">No se permiten espacios, caracteres no imprimibles o emojis.</li>
+                  </ul>
+                </ng-template>
+              </p-password>
+            </div>
+          </div>
+          <div class="flex flex-column">
+            @if (f['confirmarContrasena'].errors?.['pattern'] && (f['confirmarContrasena'].dirty || f['confirmarContrasena'].touched)) {
+              <span class="text-danger">{{ mensajes.MSJ_FORMATO_NO_VALIDO }}</span>
+            }
+          </div>
+        </div>
+        <div class="flex justify-content-end mt-3 gap-2">
+          @if (solicitarNuevoCodigo) {
+            <p-button type="button" label="Solicitar nuevo código" [routerLink]="'../recuperar-contrasenia'"/>
+          }
+          <p-button type="submit" [disabled]="registroForm.invalid || solicitarNuevoCodigo" label="Enviar"/>
+        </div>
+      </form>
+    </p-card>
+  </section>
+</main>

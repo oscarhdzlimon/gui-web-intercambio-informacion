@@ -1,0 +1,78 @@
+<main class="flex flex-wrap login-background">
+  <aside class="lg:col-6 col-12 flex flex-column justify-content-center align-items-center p-6">
+    <h1 class="login-titulo">Convocatoria para Médicos Especialistas</h1>
+    <h2 class="login-subtitulo">Reclutamiento IMSS 2026</h2>
+  </aside>
+  <section class="lg:col-6 col-12 flex justify-content-center align-items-center lg:mb-0  mb-6">
+    <p-card class="px-2 login-card border-round-bottom-3xl border-round-bottom width-lg">
+
+      <div class="flex">
+        <div class="flex justify-content-start align-items-center col-1 mt-4">
+          <btn-regresar [ruta]="'/publico/inicio-sesion'"/>
+        </div>
+        <div class="flex justify-content-center px-3 col-11">
+          <h2 class="login-card-titulo">Recuperar contraseña</h2>
+        </div>
+      </div>
+      <div class="px-0">
+        <hr class=" border-1 text-gray-100">
+      </div>
+      <form [formGroup]="formRecuperarCuenta" (submit)="abrirModalRecuperarContrasenia()">
+        <div class=" mt-4">
+          <div class="field">
+            <label for="curp_recuperar_cuenta" class="field-label">CURP</label>
+            <input
+              pInputText
+              alphanumericOnly
+              class="w-full"
+              type="text"
+              id="curp_recuperar_cuenta"
+              oninput="this.value = this.value.toUpperCase()"
+              placeholder="Ingresa tu CURP"
+              minlength="18"
+              maxlength="18"
+              formControlName="curp"/>
+            <div class="flex flex-column">
+              @if (f['curp'].errors?.['minlength'] && (f['curp'].dirty || f['curp'].touched)) {
+                <span class="text-danger">{{ mensajes.MSJ_LONG_CURP }}</span>
+              }
+              @if (f['curp'].errors?.['pattern'] && (f['curp'].dirty || f['curp'].touched)) {
+                <span class="text-danger">{{ mensajes.MSJ_FORMATO_NO_VALIDO }}</span>
+              }
+            </div>
+          </div>
+          <div class="form-icon">
+            <label class="field-label" for="correoPersonal_recuperar_cuenta">Correo personal</label>
+            <input
+              pInputText
+              emailAllowCaracters
+              class="w-full"
+              type="text"
+              id="correoPersonal_recuperar_cuenta"
+              oninput="this.value = this.value.toLowerCase()"
+              placeholder="Ingresa correo personal"
+              formControlName="correoPersonal"/>
+            <div class="flex flex-column">
+              @if (f['correoPersonal'].errors?.['email'] && (f['correoPersonal'].dirty || f['correoPersonal'].touched)) {
+                <span class="text-danger">{{ mensajes.MSJ_FORMATO_NO_VALIDO }}</span>
+              }
+            </div>
+          </div>
+        </div>
+        <div class="flex justify-content-end mt-3">
+          <p-button type="submit" [disabled]="formRecuperarCuenta.invalid" label="Enviar"/>
+        </div>
+      </form>
+    </p-card>
+  </section>
+</main>
+
+<p-confirmDialog>
+  <ng-template #message let-message let-onAccept="onAccept" let-onReject="onReject">
+    <div class="flex flex-column align-items-center w-full gap-4 border-b border-surface-200 dark:border-surface-700">
+      <i [ngClass]="message.icon" class="text-primary-500" [style]="{ 'font-size': '5rem'}"></i>
+      <p class="mb-7">{{ message.message }}</p>
+    </div>
+  </ng-template>
+</p-confirmDialog>
+

@@ -1,0 +1,103 @@
+<div class="my-4"></div>
+<p-card class="empty-border" styleClass="shadow-4">
+  <div class="flex flex-oferta-card">
+    <article class="col-12 lg:col-9">
+      <div class="flex flex-row flex-oferta-card">
+        <div class="flex flex-column col-12 lg:col-4 p-0 mt-1">
+          <div class="header-oferta-flex mb-2">
+            <p class="titulo-oferta-card texto-ajustable">
+              {{ detalleOportunidad.especialidad | titlecase }}
+            </p>
+
+            @if (isMobileView) {
+              <div class="rating-container">
+                <p-rating [(ngModel)]="value" [stars]="1" (onRate)="agregarFavorito()"
+                          (onCancel)="quitarFavorito()"/>
+              </div>
+            }
+          </div>
+          <p class="especificacion-oferta-card">{{ detalleOportunidad.categoria | titlecase }}</p>
+        </div>
+        @if (isMobileView) {
+          <div class="flex flex-column col-12 lg:col-4 p-0 mt-1">
+            <p class="nombre-unidad-oferta-card">{{ detalleOportunidad.umf | titlecase }}</p>
+            @if (detalleOportunidad.nuevoHospital == 1) {
+              <p-badge [value]="'• ' + 'Nuevo hospital'" severity="warn"/>
+            }
+          </div>
+        }
+        <div class="flex flex-column col-4 lg:col-2 p-0 mt-1">
+          <p class="titulo-label-oferta-card">Regimen</p>
+          <p class="texto-label-oferta-card">{{ detalleOportunidad.regimen | titlecase }}</p>
+        </div>
+        <div class="flex flex-column col-4 lg:col-2 p-0 mt-1">
+          <p class="titulo-label-oferta-card">Turno</p>
+          <p class="texto-label-oferta-card">{{ detalleOportunidad.turno | titlecase }}</p>
+        </div>
+        <div class="flex flex-column col-4 lg:col-2 p-0 mt-1">
+          <p class="titulo-label-oferta-card">Tipo de plaza</p>
+          <p class="texto-label-oferta-card">{{ detalleOportunidad.tipoPlaza | titlecase }}</p>
+        </div>
+        <div class="flex flex-column col-12 lg:col-2 p-0 mt-1">
+          <p class="titulo-label-oferta-card">Marca de ocupación</p>
+          <p class="texto-label-oferta-card">{{ detalleOportunidad.marcaOcupacion | titlecase }}</p>
+        </div>
+      </div>
+      <hr class="my-4">
+      @if (!isMobileView) {
+        <div class="flex flex-row justify-content-start align-items-center gap-2 mb-4">
+          <p class="nombre-unidad-oferta-card">{{ detalleOportunidad.umf | titlecase }}</p>
+          @if (detalleOportunidad.nuevoHospital == 1) {
+            <p-badge [value]="'• ' + 'Nuevo hospital'" severity="warn"/>
+          }
+        </div>
+      }
+      <div class="flex flex-row">
+        <div class="flex justify-content-between w-100 flex-oferta-card flex-row">
+          <div class="flex flex-column col-6 lg:col-4 p-0 mt-1">
+            <div class="flex flex-row gap-2 align-items-center">
+              <i class="cme-pin" [style]="{ 'font-size': '2.2rem', color: '#23c8a7'}"></i>
+              <div class="flex flex-column">
+                <p class="titulo-label-oferta-card">Ubicación</p>
+                <p class="texto-label-oferta-card">{{ detalleOportunidad.ubicacion | titlecase }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-column col-6 lg:col-2 p-0 mt-1">
+            <p class="titulo-label-oferta-card">Zona</p>
+            <p class="texto-label-oferta-card">{{ detalleOportunidad.zona | titlecase }}</p>
+          </div>
+          <div class="flex flex-column col-12 lg:col-6 p-0 mt-1">
+            <p class="titulo-label-oferta-card">Dirección</p>
+            <p class="texto-label-oferta-card">{{ detalleOportunidad.direccion | titlecase }}</p>
+          </div>
+        </div>
+      </div>
+    </article>
+    <div class="border-left-1 vertical-border mx-1"></div>
+    <article class="col-12 lg:col-3 flex flex-column gap-2 justify-content-between">
+      @if (!isMobileView) {
+        <div class="flex justify-content-end">
+          <p-rating [(ngModel)]="value" [stars]="1" (onRate)="agregarFavorito()"
+                    (onCancel)="quitarFavorito()"/>
+        </div>
+      }
+      <div class="flex justify-content-center">
+        <p class="leyenda-sueldo">Sueldo mensual</p>
+      </div>
+      <div class="flex justify-content-evenly">
+        <div class="flex flex-column align-items-center gap-2">
+          <p class="texto-sueldo"> {{ detalleOportunidad.sueldoMensualBruto |  currency:'USD':'symbol':'1.2-2' }} </p>
+          <p class="leyenda-sueldo"> Estimado bruto </p>
+        </div>
+        <div class="flex flex-column align-items-center gap-2">
+          <p class="texto-sueldo"> {{ detalleOportunidad.sueldoMensualNeto |  currency:'USD':'symbol':'1.2-2' }} </p>
+          <p class="leyenda-sueldo"> Estimado neto </p>
+        </div>
+      </div>
+      <div class="flex justify-content-center">
+        <a class="link-ver-mas-oferta-card cursor-pointer" (click)="verMas()">Ver más</a>
+      </div>
+    </article>
+  </div>
+</p-card>

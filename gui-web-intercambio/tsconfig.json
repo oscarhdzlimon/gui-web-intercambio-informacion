@@ -1,0 +1,43 @@
+/* To learn more about Typescript configuration file: https://www.typescriptlang.org/docs/handbook/tsconfig-json.html. */
+/* To learn more about Angular compiler options: https://angular.dev/reference/configs/angular-compiler-options. */
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "outDir": "./dist/out-tsc",
+    "strict": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "bundler",
+    "importHelpers": true,
+    "target": "ES2022",
+    "module": "ES2022",
+    "paths": {
+      "@directives/*": ["./src/app/core/directives/*"],
+      "@guards/*": ["./src/app/core/guards/*"],
+      "@interceptors/*": ["./src/app/core/interceptors/*"],
+      "@models/*": ["./src/app/core/models/*"],
+      "@pipes/*": ["./src/app/core/pipes/*"],
+      "@services/*": ["./src/app/core/services/*"],
+      "@utils/*": ["./src/app/core/utils/*"],
+      "@shared/*":["./src/app/shared/*"],
+      "@env/*":["./src/environments/*"],
+      "@pages/*":["./src/app/pages/*"],
+      "@privado/*":["./src/app/pages/privado/pages/*"],
+      "@publico/*":["./src/app/pages/publico/pages/*"],
+      "@validators/*":["./src/app/core/validators/*"],
+      "@components/*": ["./src/app/components/*"]
+    }
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
+  }
+}

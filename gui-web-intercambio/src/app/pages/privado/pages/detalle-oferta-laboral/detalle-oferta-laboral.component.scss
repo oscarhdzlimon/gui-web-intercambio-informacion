@@ -1,0 +1,76 @@
+.titulo-detalle-oferta-laboral {
+  color: #222;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.seccion-detalle-oferta-laboral {
+  color: #597190;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  text-align: start;
+}
+
+.texto-detalle-oferta-laboral {
+  color: #222;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  text-align: end;
+}
+
+
+.card-compensacion-seccion {
+  color: #FFF;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.card-compensacion-titulo {
+  color: #FFF;
+  text-align: center;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.card-compensacion-sub-titulo {
+  color: #FFF;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.align-last-right {
+  text-align: left;
+  text-align-last: right;
+}
+
+
+
+::ng-deep.p-button-text.p-button-secondary {
+  background-color: #e3eaf2;
+  margin-left: 0px;
+}
+
+
+
+@media screen and (max-width: 765px) {
+  .header-tab-oferta{
+    i{
+      display: none;
+    }
+  }
+
+
+}
+

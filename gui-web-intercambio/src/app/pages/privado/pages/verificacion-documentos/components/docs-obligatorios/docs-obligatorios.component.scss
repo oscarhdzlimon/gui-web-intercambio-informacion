@@ -1,0 +1,22 @@
+.archivos{
+  div{
+    border: solid 1px #eeeeee;
+    border-radius: 10px 6px 6px 10px;
+    border-right: solid 6px #d6ddea;
+    height: 56px;
+    cursor: pointer;
+    i {
+      color: #fff;
+      border-radius: 3px;
+      background: #d6ddea;
+    }
+  }
+  div.select{
+    border-right: solid 6px #5fd350;
+    i {
+      color: #74dd66;
+      border-radius: 3px;
+      background: #d7f4d3;
+    }
+  }
+}

@@ -1,0 +1,139 @@
+@layer app-root {
+
+  :root {
+    --p-tabs-tablist-border-color: transparent;
+    --p-tabs-tab-border-color: transparent;
+  }
+
+
+  .p-accordionheader {
+    border-right: 6px solid #d6ddea;
+
+    .cme-file {
+      color: white;
+      background: #d6ddea;
+      border-radius: 3px;
+    }
+  }
+
+  .p-accordionpanel-active {
+    .p-accordionheader {
+      border-right: 6px solid #00cd6f;
+
+      .cme-file {
+        color: #00cd6f;
+        background: #d9f9ef;
+      }
+    }
+  }
+
+  .p-tablist-tab-list {
+    border: solid 1px #bd9b3b;
+    border-right: solid 6px #BD9B3D;
+    border-radius: 9px 6px 6px 9px;
+  }
+
+  .p-tab {
+    //background-color: red;
+    width: 100%;
+    border: none !important;
+  }
+}
+
+.archivo-especialidad {
+  border: solid 1px #eeeeee;
+  border-radius: 10px 6px 6px 10px;
+  border-right: solid 6px #d6ddea;
+  height: 40px;
+
+  span {
+    color: #40434E;
+    font-feature-settings: 'liga' off, 'clig' off;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 120%; /* 16.8px */
+    margin-left: 1px;
+  }
+}
+
+.select {
+  border: solid 1px #bd9b3b;
+  border-right: solid 6px #5fd350;
+
+  .nombreDoc {
+    color: #40434E;
+    font-feature-settings: 'liga' off, 'clig' off;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%; /* 16.8px */
+    text-align: start;
+  }
+}
+
+.tab-especialidad {
+  gap: 10px;
+  align-items: center;
+
+  i {
+    height: 25px;
+  }
+
+  p {
+    text-align: start;
+  }
+}
+
+.tab-cve-especialidad {
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+
+@media screen and (min-width: 768px) {
+  .tab-cve-especialidad {
+    width: fit-content;
+    justify-content: start;
+    margin-bottom: 0;
+  }
+
+  .dialog {
+    width: 100%;
+  }
+}
+
+.nombreDoc {
+  color: #40434E;
+  font-feature-settings: 'liga' off, 'clig' off;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%; /* 16.8px */
+  text-align: start;
+}
+
+
+@media screen and (max-width: 350px) {
+
+  .nombreDoc {
+    font-size: 11px !important;
+  }
+
+}
+
+:host ::ng-deep .p-accordioncontent-content {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+:host ::ng-deep .p-dialog {
+  border-top: 14px solid #0f9b9b !important;
+}
+
+.dialog {
+  width: 50%;
+  padding: 0 30px;
+}

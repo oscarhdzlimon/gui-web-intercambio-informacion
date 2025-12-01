@@ -1,0 +1,12 @@
+<div
+  class="card border-round flex flex-row w-tab py-3 justify-content-between border-tab align-items-center gap-3">
+  <div class="flex gap-2 ml-3 align-items-center justify-content-start">
+    <i class="cme-file" style="font-size: 2rem"></i>
+    <p class="titulo-tab" >{{ title }}</p>
+  </div>
+  @if (numDocs) {
+    <div class="documento-tab">
+      <p class="doc-tab">{{ numDocs }} Doc.</p>
+    </div>
+  }
+</div>

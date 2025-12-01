@@ -1,0 +1,161 @@
+@layer app-components {
+
+  .seccion-menu-titulo {
+    color: #000;
+    font-feature-settings: 'liga' off, 'clig' off;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+
+  .menu-titulo {
+    color: #58595C;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+
+  .menu-descripcion {
+    color: #58595C;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+  }
+
+  .menu-cantidad {
+    color: #58595C;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+
+  .hover\:text-white:hover .menu-cantidad, .hover\:text-white:hover .menu-descripcion, .hover\:text-white:hover .menu-titulo {
+    color: #FFFFFF !important;
+  }
+
+  .text-white .menu-cantidad, .text-white .menu-descripcion, .text-white .menu-titulo {
+    color: #FFFFFF !important;
+  }
+
+  .hover\:bg-blue-oferta-laboral:hover {
+    background: #41ABCA;
+  }
+
+  .bg-blue-oferta-laboral {
+    background: #41ABCA;
+  }
+
+  .ayuda-pregunta {
+    color: #000;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+
+  .ayuda-respuesta {
+    color: var(--Grays-Tone3, #7781A5);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+
+  .ayuda-titulo {
+    color: #FFF;
+    text-align: center;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
+
+  .ayuda-descripcion {
+    color: #FFF;
+    text-align: center;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+
+  .tablero-titulo {
+    color: #404041;
+    text-align: center;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 136.146%; /* 32.675px */
+  }
+
+  .tablero-descripcion {
+    color: #404041;
+    text-align: center;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+
+  .btn-paginacion {
+    justify-content: start;
+  }
+
+  @media screen and (max-width: 765px) {
+    :host ::ng-deep .p-paginator{
+      .p-paginator-prev-icon{
+        span{
+          margin: 0 2px!important;
+        }
+      }
+      .p-paginator-next-icon{
+        span{
+          margin: 0 2px!important;
+        }
+      }
+    }
+
+    .oferta-laboral-tarjetas{
+      display: none;
+    }
+  }
+
+  :host ::ng-deep .p-paginator-page-selected{
+    background: #59d0a9;
+  }
+  .custom-close {
+    position: fixed;       
+    top: 100px;
+    left: 90%;           
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    z-index: 2000;         
+  }
+  
+  .custom-close::before,
+  .custom-close::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 55%;
+    width: 2px;
+    height: 24px;
+    background-color: #ffffff;
+    transform-origin: center;
+  }
+  
+  .custom-close::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+  
+  .custom-close::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+  
+  
+}

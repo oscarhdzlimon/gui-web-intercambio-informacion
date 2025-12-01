@@ -1,0 +1,85 @@
+.bg-menu {
+  background-color: #fff;
+  margin-top: 10px;
+}
+
+.ajuste-avatar {
+  top: 90px;
+  right: 3%;
+}
+
+:host ::ng-deep .p-speeddial {
+  max-width: 50px;
+}
+
+:host ::ng-deep .ajuste-avatar .p-speeddial-list {
+  position: relative;
+  right: 120%;
+  top: 5px;
+}
+.divinterno1{
+  margin-top: 16px;
+  margin-left: 18px;
+  padding-left: 38px;
+}
+
+
+.bg-menu-btn {
+  background-color: #008f39;
+}
+
+@media (max-width: 767px) {
+  .menu-nombre-sistema {
+    display: none;
+  }
+
+  .ajuste-avatar {
+    right: 8%;
+  }
+}
+
+@media (max-width: 540px) {
+
+  .ajuste-avatar {
+    right: 11%;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 890px) {
+  .ajuste-avatar {
+    right: 5.5%;
+  }
+}
+
+@media (min-width: 891px) and (max-width: 991px) {
+  .ajuste-avatar {
+    right: 5%;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .ajuste-avatar {
+    right: 4%;
+  }
+}
+.alinear-izquierda {
+    text-align: left !important; /* Usar !important solo si hay un conflicto de estilos */
+}
+.margin-right-10 {
+    margin-right: 10px !important; /* Usar !important solo si hay un conflicto de estilos */
+}
+
+.min-width-responsive {
+    /* min-width: 250px se aplica por defecto en móviles */
+    min-width: 250px;
+}
+
+/* 💻 MEDIA QUERY: Pantallas grandes (ej. 992px o más, que PrimeFlex usa para lg/xl) */
+/* Usaremos 992px como punto de quiebre estándar para considerar "pantalla grande" */
+@media screen and (min-width: 992px) {
+    .min-width-responsive {
+        /* min-width: 290px sobrescribe el valor base en pantallas grandes */
+        min-width: 290px;
+    }
+}
+

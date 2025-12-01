@@ -1,0 +1,134 @@
+.stepper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.stepper-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  flex-grow: 1;
+}
+
+.stepper-step {
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.25rem;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.stepper-step-active {
+  background-color: var(--stepper-active-color);
+  color: #fff;
+}
+
+.stepper-step-done {
+  background-color: var(--stepper-done-color);
+  color: #fff;
+}
+
+.stepper-step-pending {
+  background-color: var(--stepper-pending-color);
+  color: #fff;
+}
+
+.stepper-label-container {
+  position: relative;
+}
+
+.stepper-label {
+  color: var(--Primary-Color-4-Tone1, #3F5C7C);
+  font-feature-settings: 'liga' off, 'clig' off;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 120%; /* 14.4px */
+  position: absolute;
+  top: 100%;
+  left: -10px;
+  padding-top: 10px;
+}
+
+
+@media screen and (min-width: 768px) {
+  .stepper-label {
+    white-space: nowrap;
+  }
+}
+
+.stepper-line {
+  height: 0.20rem;
+  width: 500px;
+  flex-grow: 1;
+  margin-left: 5px;
+  margin-right: 5px;
+  transition: background-color 0.3s;
+}
+
+.stepper-line-done {
+  background-color: var(--stepper-done-color);
+}
+
+.stepper-line-pending {
+  background-color: var(--stepper-pending-color);
+}
+
+.stepper-line-active {
+  background-color: var(--stepper-active-color);
+}
+
+
+@media (max-width: 767px) {
+  .stepper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .stepper-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+    width: 100%;
+    padding-bottom: 20px;
+  }
+
+  .stepper-header-mobile {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+  }
+
+  .stepper-line {
+    display: block;
+    height: 0.20rem;
+    flex-grow: 1;
+    margin-left: 10px;
+    margin-right: 0;
+  }
+
+  .stepper-label-container {
+    position: static;
+    margin-top: 5px;
+    margin-left: 0;
+  }
+
+  .stepper-label {
+    position: static;
+    white-space: normal;
+  }
+
+  .stepper-step {
+    flex-shrink: 0;
+  }
+}

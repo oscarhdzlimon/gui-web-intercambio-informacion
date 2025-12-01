@@ -1,0 +1,172 @@
+.contenedor-password {
+  position: relative;
+
+  .icon {
+    position: absolute;
+    top: 50%;
+    right: 6px;
+    transform: translate(-25%, -50%);
+    font-size: 18px;
+    color: #adb8cc;
+  }
+}
+
+/* login.component.css */
+
+/* .login-card {
+  width: 454px;
+  height: 396px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  .p-card {
+    box-shadow: none;
+  }
+} */
+
+.login-card {
+    /* ESTILOS POR DEFECTO PARA MÓVILES (Menor a 800px) */
+    
+    /* El ancho se ajusta al 100% del contenedor en pantallas pequeñas */
+    width: 100%; 
+    
+    /* Mantenemos la altura fija (si es necesaria) */
+    height: 511px;
+    
+    /* En móviles, es mejor quitar el margen derecho fijo o hacerlo pequeño */
+    margin-right: 0; 
+}
+
+@media screen and (min-width: 800px) {
+    /* ESTILOS PARA PANTALLAS GRANDES (≥ 800px) */
+    
+    .login-card {
+        /* Aplicamos el ancho fijo que quieres para escritorio/tablet grande */
+        width: 607.5px;
+        
+        /* Aplicamos el margen derecho fijo */
+        margin-right: 80px;
+    }
+}
+
+.pcard{
+  width: 567.5px;
+  height: 495px;
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.login-title {
+  text-align: center;
+  font-family: Inter, sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: #000;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  font-family: Inter, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #333;
+}
+.divcardtitulo{
+
+  display: flex;
+padding: 16px 0;
+justify-content: center;
+align-items: center;
+gap: 10px;
+align-self: stretch;
+  border-bottom: 1px solid #E2E2E2;
+ margin-left: 24px;
+ margin-right: 24px;
+ margin-top: 16px;
+}
+
+.login-card-body{
+  margin-left: 24px;
+ margin-right: 24px;
+}
+
+.divboton{
+background-color: #F1F4FD;
+padding-bottom: 16px;
+padding-top: 16px;
+padding-right: 24px;
+
+border-radius: 0 0 12px 12px;
+border-top: 1px solid #E2E2E2;
+
+}
+
+.recaptcha-container {
+    width: 100%;
+    max-width: 302px;  /* ancho natural del recaptcha v2 */
+    overflow: hidden;
+}
+
+@media (max-width: 360px) {
+    .recaptcha-container {
+        transform: scale(0.90);
+        transform-origin: 0 0;
+        max-width: calc(302px * 0.90);
+    }
+}
+.input {
+  width: 100%;
+  padding: 12px;
+  font-family: Inter, sans-serif;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.password-wrapper {
+  position: relative;
+
+  .eye-icon {
+    position: absolute;
+    right: 10px;
+    top: 12px;
+    font-size: 1.2rem;
+    color: #999;
+    cursor: pointer;
+  }
+}
+
+.captcha-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.captcha-placeholder {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  span {
+    font-family: Inter, sans-serif;
+    font-size: 14px;
+  }
+}
+
+.divtitulo{
+  display: flex;
+padding: 16px 0;
+justify-content: center;
+align-items: center;
+gap: 10px;
+align-self: stretch;
+ border-bottom: 1px solid #E2E2E2;
+}

@@ -1,0 +1,442 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap');
+
+.login-titulo {
+  color: #DDB649;
+font-family: 'Inter', sans-serif;
+font-size: 70px;
+font-style: normal;
+font-weight: 700;
+line-height: 60px; /* 114.583% */
+}
+
+.login-subtitulo {
+  color: #FFF;
+font-family: 'Inter', sans-serif;
+font-size: 70px !important;
+font-style: normal;
+font-weight: 700;
+line-height: 60px !important;
+}
+
+.etiquetasesion{
+  color: #404041;
+
+
+font-feature-settings: 'liga' off, 'clig' off;
+font-family: "Noto Sans";
+font-size: 13px;
+font-style: normal;
+font-weight: 700;
+line-height: 130%;
+}
+
+/* 📱 NUEVO BLOQUE: Estilos para Móviles y Tabletas (MAX-WIDTH) */
+@media screen and (max-width: 991px) {
+  .login-titulo {
+    /* Sobrescribe explícitamente el tamaño grande si existe */
+    font-size: 3rem !important; 
+    line-height: 1.2 !important;
+  }
+  
+  .login-subtitulo {
+    font-size: 1.5rem !important;
+    line-height: 1.2 !important;
+  }
+}
+
+.login-card-titulo {
+  color: #000;
+font-feature-settings: 'liga' off, 'clig' off;
+
+/* NotoGob/H5 SB Title Text */
+font-family: "Noto Sans";
+font-size: 27px;
+font-style: normal;
+font-weight: 600;
+line-height: 120%; /* 24px */ /* 24px */
+}
+
+.field-label {
+  color: #626262;
+  font-feature-settings: 'liga' off, 'clig' off;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%; /* 12px */
+  text-align: start;
+}
+
+.login-hipervinculo {
+  color: #404041;
+  text-align: right;
+  font-feature-settings: 'liga' off, 'clig' off;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 30px; /* 250% */
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+  text-decoration-skip-ink: none;
+  text-decoration-thickness: auto;
+  text-underline-offset: auto;
+  text-underline-position: from-font;
+
+}
+
+.titulo-seccion {
+  margin-top: 0;
+  margin-bottom: 0;
+  display: flex;
+  width: 284px;
+  height: 28px;
+  flex-direction: column;
+  justify-content: flex-end;
+  color: #6776A8;
+  font-feature-settings: 'liga' off, 'clig' off;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  max-width: calc(100% - 40px);
+  text-align: start;
+}
+
+.usuario-menu {
+  color: #374060;
+  text-align: right;
+  font-feature-settings: 'liga' off, 'clig' off;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%; /* 16.8px */
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 130px;
+}
+
+.letras-menu-imss {
+  color: #006455;
+  text-align: right;
+  font-feature-settings: 'liga' off, 'clig' off;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 120%; /* 24px */
+}
+
+.menu-nombre-sistema {
+  color: #374957;
+  font-feature-settings: 'liga' off, 'clig' off;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 120%; /* 21.6px */
+  text-align: start;
+}
+
+.label-medico {
+  color: #BC955C;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.nombre-medico {
+  color: #222;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px; /* 142.857% */
+}
+
+.label-campo {
+  color: var(--Grays-Tone3, #7781A5);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 100%; /* 14px */
+}
+
+.texto-campo {
+  color: #374957;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 100%; /* 16px */
+}
+
+.label1-subir-imagen {
+  color: #7D8FB3;
+  text-align: center;
+  font-feature-settings: 'liga' off, 'clig' off;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 100%; /* 12px */
+}
+
+.label-obligatorio {
+  color: #7D8FB3;
+  font-feature-settings: 'liga' off, 'clig' off;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 121%;
+  text-align: center;
+}
+
+.cmr-texto {
+  border-radius: 20px !important;
+  border: 1px solid #9CE2C2;
+  background: #0AA16E;
+  font-size: 10px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  color: var(--gob-mx-base-blanco);
+  font-weight: 600;
+}
+
+.info-em-texto {
+  color: #7D8FB3;
+  font-feature-settings: 'liga' off, 'clig' off;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 100%; /* 12px */
+}
+
+.titulo-tab {
+  color: #95969C;
+  font-feature-settings: 'liga' off, 'clig' off;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%; /* 16.8px */
+  width: 160px;
+  overflow: hidden;
+  text-align: start;
+}
+
+.p-tab-active .titulo-tab {
+  color: #5383EB;
+}
+
+.doc-tab {
+  color: #95969C;
+  font-feature-settings: 'liga' off, 'clig' off;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%; /* 16.8px */
+}
+
+.documento-tab {
+  display: flex;
+  width: 60px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.leyenda-documento {
+  color: var(--Grises-gris-tono2, #7D8FB3);
+  font-feature-settings: 'liga' off, 'clig' off;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 100%; /* 10px */
+}
+
+.titulo-documento {
+  color: #7C97AC;
+  font-feature-settings: 'liga' off, 'clig' off;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+}
+
+.text-danger {
+  color: var(--gob-mx-pr-rojo-tono1) !important;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.label-th {
+  color: #58595C;
+  font-feature-settings: 'liga' off, 'clig' off;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 100%; /* 14px */
+}
+
+.label-documento-td {
+  color: #428EFF;
+  font-feature-settings: 'liga' off, 'clig' off;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 120%; /* 16.8px */
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+  text-decoration-skip-ink: auto;
+  text-decoration-thickness: auto;
+  text-underline-offset: auto;
+  text-underline-position: from-font;
+}
+
+
+.label-td {
+  color: #58595C;
+  font-feature-settings: 'liga' off, 'clig' off;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 120%; /* 16.8px */
+}
+
+.h1, .h2, .h3, h1, h2, h3 {
+  font-family: 'Noto Sans', Arial, Helvetica, sans-serif;
+}
+
+
+.header-tab-oferta {
+  display: flex;
+  height: 43px;
+  padding: 6px 0;
+  justify-content: center;
+  align-items: center;
+  color: #404041;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.acciones-tabla {
+  color: #869fd4;
+  font-size: 15px;
+}
+
+.titulo-nombre-aspirante {
+  color: #000;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 100%; /* 24px */
+}
+
+.detalle-aspirante {
+  span {
+    color: #597190;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+
+  p {
+    color: #222;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+}
+
+
+.header-tab-documentacion {
+  display: flex;
+  color: #161A1D;
+  font-feature-settings: 'liga' off, 'clig' off;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%; /* 16.8px */
+}
+
+.header-accordeon {
+  color: #40434E;
+  font-feature-settings: 'liga' off, 'clig' off;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%; /* 21.6px */
+}
+
+.nombre-doc {
+  color: #40434E;
+  font-feature-settings: 'liga' off, 'clig' off;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.select-option-doc {
+  color: #40434E;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 12px; /* 100% */
+  text-align: start;
+}
+
+.subtitle-previsualizacion {
+  color: #40434E;
+  font-feature-settings: 'liga' off, 'clig' off;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 120%; /* 21.6px */
+}
+
+.info-monto{
+  color: #fff;
+  font-feature-settings: 'liga' off, 'clig' off;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%; /* 21.6px */
+}
+
+
+@media screen and (min-width: 769px) {
+  .login-titulo {
+    font-size: 70px;
+    line-height: 70px; /* 125% */
+  }
+
+  .login-subtitulo {
+    font-size: 32px;
+    line-height: 40px;
+  }
+
+  .usuario-menu {
+    max-width: fit-content;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .titulo-tab {
+    font-size: 12px;
+    width: 140px;
+  }
+
+  .titulo-seccion {
+    margin-top: 20px;
+  }
+
+
+}
+
+@media screen and (max-width: 380px) {
+
+  .select-option-doc {
+    font-size: 10px;
+  }
+}
+
+
+.label-doc {
+  max-width: 54px;
+  white-space: nowrap;
+}

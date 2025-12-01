@@ -1,0 +1,309 @@
+/* You can add global styles to this file, and also import other style files */
+@use "primeflex/primeflex.css";
+@use "primeicons/primeicons.css";
+@use "assets/scss/design-system/index" as design;
+@use "assets/scss/primeng-custom/index" as customprimeng;
+@use "assets/scss/icons/index" as icons;
+
+/* src/styles.css */
+@layer framework {
+  .navbar-expand-md .navbar-nav {
+    margin-left: 0 !important;
+  }
+}
+
+@import url("https://framework-gb.cdn.gob.mx/gm/v3/assets/styles/main.css") layer(framework);
+
+@layer primeng-base {
+  .navbar-expand-md .navbar-nav {
+    margin-left: 0;
+  }
+}
+
+@layer app-components {
+
+  :root {
+    --cme-max-width: 1440px;
+
+    @media screen and (min-width: 1440px) {
+      --cme-max-width: 1600px;
+    }
+
+    @media screen and (min-width: 1600px) {
+      --cme-max-width: 1900px;
+    }
+
+    @media screen and (min-width: 1900px) {
+      --cme-max-width: 2100px;
+    }
+  }
+
+  .container {
+    width: 100% !important;
+  }
+
+  .container-cme {
+    max-width: var(--cme-max-width);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  html {
+    font-size: 12px;
+    font-family: 'Noto Sans', Arial, Helvetica, sans-serif;
+  }
+
+  html,
+  body {
+    height: 100%;
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--gob-mx-gris-tono4);
+  }
+
+  .login-background {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), /* Black overlay */
+    url("assets/backgrounds/login-background.jpg") no-repeat center center / cover;
+    min-height: 100vh;
+  }
+
+  .footer-cme {
+    background-color: var(--gob-mx-pr-imss-tono1);
+  }
+
+  hr.vertical {
+    border: 10px;
+    margin: 10px;
+    border-left: 1px solid #ccc;
+    height: 20px;
+    width: 0;
+    float: left;
+  }
+
+  .bg-green {
+    background-color: var(--gob-mx-pr-imss-tono1);
+  }
+
+  .bg-white {
+    background-color: var(--gob-mx-base-blanco);
+  }
+
+  .p-fileupload-content .p-progressbar, .p-fileupload-header, .p-fileupload-file-list, p-progressbar {
+    display: none;
+  }
+
+  p {
+    margin: 0;
+  }
+
+
+  .border-tab {
+    border-right: 8px solid rgba(193, 198, 207, 0.50);
+  }
+
+  .p-tab-active .border-tab {
+    background: rgba(112, 153, 230, 0.1);
+    border-right: 8px solid #5383EB;
+  }
+
+  .border-tab i {
+    background: rgba(193, 198, 207, 0.1);
+  }
+
+  .w-tab {
+    width: 290px;
+  }
+
+  .p-tab-active .border-tab i {
+    color: #455B88;
+    background: rgba(112, 153, 230, 0.1);
+  }
+
+  .p-card-title {
+    border-bottom: 1px solid rgba(193, 198, 207, 0.50);
+  }
+
+  :host ::ng-deep .p-card-body .p-card-title {
+    /* Anula el padding para que el borde se pegue a los lados */
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .alert {
+    text-align: center;
+    font-feature-settings: 'liga' off, 'clig' off;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%; /* 21px */
+
+  }
+
+  .alert-success {
+    background: var(--Sistema-Success-100, #D1E7DD);
+    color: var(--Sistema-Success-800, #0A3622);
+
+
+  }
+
+  .alert-info {
+
+  }
+
+  .alert-warning {
+
+  }
+
+  .p-tabpanels, .p-password {
+    width: 100% !important;
+  }
+
+  .p-select-list {
+    font-size: 1rem;
+  }
+
+  .field {
+    margin-bottom: 0.1rem !important;
+  }
+
+  .oferta-detail .p-dialog-footer {
+    padding: 0 !important;
+    display: block;
+  }
+
+  .oferta-detail .p-dialog-header {
+    padding: 0 !important;
+    display: block;
+  }
+
+  .oferta-detail .p-tabpanels {
+    padding: 0 !important;
+  }
+
+  .icon-white .p-button-icon {
+    color: #fff;
+  }
+
+  .icon-white .p-button-text:not(:disabled):hover {
+    background: #41ABCA;
+    border-color: transparent;
+    color: #fff;
+  }
+
+  .oferta-detail .p-tab {
+    padding: 0.1rem 1rem;
+  }
+
+  .paginator-oferta .p-paginator {
+    justify-content: end;
+  }
+
+  .paginator-oferta .p-paginator-first, .paginator-oferta .p-paginator-last {
+    display: none;
+  }
+
+  .p-carousel-content {
+    position: relative;
+  }
+
+  .p-carousel-prev-button {
+    position: absolute;
+    z-index: 10;
+    left: 10%;
+    color: #fff;
+  }
+
+  .p-carousel-next-button {
+    position: absolute;
+    right: 20%;
+    z-index: 10;
+    color: #fff;
+  }
+
+  .p-carousel-indicator-list {
+    display: none;
+  }
+
+  .p-carousel-viewport {
+    height: 460px !important;
+    width:400px;
+    
+    padding:0px;
+  }
+
+  .carousel-image {
+    height: 320px;
+    width: 300px;
+    object-fit: fill;
+  }
+
+  .loader {
+    color: #FFF;
+    display: inline-block;
+    position: relative;
+    font-size: 48px;
+    font-family: Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+  }
+
+  .loader::after {
+    content: '';
+    width: 5px;
+    height: 5px;
+    background: currentColor;
+    position: absolute;
+    bottom: 10px;
+    right: -5px;
+    box-sizing: border-box;
+    animation: animloader 1s linear infinite;
+  }
+
+  @keyframes animloader {
+    0% {
+      box-shadow: 10px 0 rgba(255, 255, 255, 0), 20px 0 rgba(255, 255, 255, 0);
+    }
+    50% {
+      box-shadow: 10px 0 white, 20px 0 rgba(255, 255, 255, 0);
+    }
+    100% {
+      box-shadow: 10px 0 white, 20px 0 white;
+    }
+  }
+
+  .width-lg {
+    width: 28rem;
+  }
+
+  @media screen and (min-width: 768px) {
+    .width-lg {
+      width: 45rem;
+      overflow: hidden;
+    }
+  }
+
+  .bg-header-medico {
+    background: url("assets/backgrounds/header-foto-bg.png") no-repeat top center / cover;
+    background-size: 100% 80px;
+  }
+
+  .imagen-tabla {
+    object-fit: contain;
+  }
+
+  .fixed-center-x {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+  }
+
+  @media screen and (max-width: 350px) {
+    .w-tab {
+      width: 250px;
+    }
+  }
+
+
+}

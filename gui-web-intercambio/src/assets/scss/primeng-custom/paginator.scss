@@ -1,0 +1,67 @@
+@layer app-components {
+  :root {
+    --p-paginator-background: #f1f4fd;
+  }
+
+  .p-paginator{
+    border-radius: 0 0 10px 10px;
+  }
+
+  .p-paginator-prev{
+    color: var(--Neutro-Neutro04, #7D7E7F);
+    text-align: center;
+    font-family: Montserrat, sans-serif;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+
+  }
+
+  .p-paginator-next{
+    color: var(--Neutro-Neutro04, #7D7E7F);
+    text-align: center;
+    font-family: Montserrat, sans-serif;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+
+  .p-paginator-pages{
+    color: var(--Neutro-Neutro03, #606162);
+    text-align: center;
+    font-family: Montserrat, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+
+  .p-paginator-page-selected{
+    color: #FFF;
+    text-align: center;
+    font-family: Montserrat, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    display: flex;
+    width: 30px;
+    height: 30px;
+    padding: 4px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 20px;
+    border: 3px solid #DFE5FB;
+    background: var(--Primario_02-principal, #0F9B9B);
+  }
+
+  .p-paginator .p-paginator-prev:not(.p-disabled):not(.p-highlight):hover,
+  .p-paginator-next:not(.p-disabled):not(.p-highlight):hover{
+    background-color: transparent;
+    outline: none;
+    box-shadow: none;
+  }
+}

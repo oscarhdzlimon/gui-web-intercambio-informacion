@@ -1,0 +1,37 @@
+<section class="flex flex-column bg-header-medico">
+  <article class="flex flex-row p-4">
+      <span class="flex-column">
+        <p class="m-1 label-medico">Nombre del médico</p>
+        <strong
+          class="m-1 nombre-medico">{{ userData()?.nomNombre }} {{ userData()?.nomApellidoPaterno }} {{ userData()?.nomApellidoMaterno }}</strong>
+      </span>
+  </article>
+  <article class="flex flex-row flex-wrap">
+    <div class="justify-content-start md:flex ml-3 md:ml-0">
+      <icon-card class="icono-header" iconClass="cme-user" cardColor="#bd9b3b" bgColor="#fede82"
+                 [leftBorderRound]="true"></icon-card>
+      <div class="flex justify-content-between align-items-start">
+        <div class="flex flex-column justify-content-center mr-0 md:mr-5">
+          @if (userData()?.cveMatricula) {
+            <p class="m-2 label-campo">Matrícula</p>
+            <strong class="m-2 texto-campo">{{ userData()?.cveMatricula }}</strong>
+          } @else if (userData()?.refFolio) {
+            <p class="m-2 label-campo">Folio</p>
+            <strong class="m-2 texto-campo">{{ userData()?.refFolio }}</strong>
+          }
+        </div>
+        <div class="flex flex-column justify-content-center mr-0 md:mr-5">
+          @if (userData()?.refCurp) {
+            <p class="m-2 label-campo">CURP</p>
+            <strong class="m-2 texto-campo text-curp">{{ userData()?.refCurp }}</strong>
+          }
+        </div>
+      </div>
+      <icon-card class="icono-header" iconClass="cme-document" cardColor="#3CB34F" bgColor="#dbffc0"></icon-card>
+      <div class="flex flex-column justify-content-center">
+        <p class="m-2 label-campo">Fecha de registro</p>
+        <strong class="m-2 texto-campo">{{ userData()?.fechaRegistro }}</strong>
+      </div>
+    </div>
+  </article>
+</section>

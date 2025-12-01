@@ -1,0 +1,59 @@
+<p-card class="mx-2 empty-border" [header]="'Consulta'">
+  <form [formGroup]="filtroForm">
+    <article class="flex flex-row flex-wrap">
+      <div class="lg:col-3 col-12">
+        <div class="flex justify-content-between">
+          <label class="field-label" for="especialidad">Consultar por</label>
+        </div>
+        <p-select formControlName="tipoconsulta" [options]="tipoconsulta" optionLabel="label"
+                  placeholder="Selecciona una opción" class="w-full" (onChange)="onTipoConsultaChange($event)"/>
+      </div>
+      <div class="lg:col-3 col-12">
+        <div class="flex justify-content-between">
+          <label class="field-label" for="nss">NSS</label>
+        </div>
+        <input pInputText class="w-full" type="text" id="nss"
+               placeholder="Ingresa NSS"
+               formControlName="nss"
+        />
+      </div>
+      <div class="lg:col-3 col-12">
+        <div class="flex justify-content-between">
+          <label class="field-label" for="nombre">Nombre</label>
+        </div>
+        <input pInputText class="w-full" type="text" id="nombre"
+               placeholder="Ingresa el nombre"
+               formControlName="nombre"
+        />
+      </div>
+      <div class="lg:col-3 col-12">
+        <div class="flex justify-content-between">
+          <label class="field-label" for="apaterno">Primer apellido</label>
+        </div>
+        <input pInputText class="w-full" type="text" id="apaterno"
+               placeholder="Ingresa el primer apellido"
+               formControlName="apaterno"
+        />
+      </div>
+
+      
+   
+    </article>
+    <article class="flex flex-row flex-wrap">
+        <div class="lg:col-3 col-12">
+        <div class="flex justify-content-between">
+          <label class="field-label" for="apaterno">Segundo apellido</label>
+        </div>
+        <input pInputText class="w-full" type="text" id="amaterno"
+               placeholder="Ingresa el segundo apellido"
+               formControlName="amaterno"
+        />
+      </div>
+      <div class="flex lg:col-9  col-4 justify-content-end align-items-center mt-3 gap-4">
+        <p-button type="button" [disabled]="filtroForm.invalid" (onClick)="limpiar()" variant="outlined" label="Limpiar"/>
+        <p-button type="button" [disabled]="filtroForm.invalid" (onClick)="paginar()" label="Buscar"/>
+      </div>
+    </article>
+
+  </form>
+</p-card>

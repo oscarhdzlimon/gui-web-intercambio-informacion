@@ -1,0 +1,148 @@
+<div class="flex flex-wrap" [formGroup]="formularioValidacion">
+
+  <div class="doc-especialidades lg:col-6 col-12">
+
+    <div formArrayName="especialidadesDocumentos">
+      @for (item of docsEspecialidad; track item.cveEspecialidad; let i = $index) {
+
+        <div [formGroupName]="i" class="flex flex-column acordeon my-3">
+
+          <p-accordion>
+            <p-accordion-panel value="0">
+              <p-accordion-header>
+                <div class="flex gap-2 tab-especialidad">
+                  <i class="cme-file" style="font-size: 2rem"></i>
+                  <p class="header-accordeon ms-3">{{ item.desEspecialidad }}</p>
+                </div>
+              </p-accordion-header>
+
+              <p-accordion-content>
+
+                <div [formArrayName]="'documentosEspecialidad'">
+
+                  @for (doc of item.documentosEspecialidad; track doc.idDocumentoEspecialidad; let j = $index) {
+
+                    <div [formGroupName]="j"
+                         class="flex flex-nowrap align-items-center cursor-pointer archivo-especialidad mt-2"
+                         [ngClass]="{'select': tabActive() === doc.idDocumentoEspecialidad }"
+                         (click)="docSeleccionado(doc.idDocumentoEspecialidad, doc.documento.refGuid)">
+
+                      <div class="flex md:col-6 md:ml-3 justify-content-start">
+                        <span class="nombreDoc">{{ doc.tipoDocumentoEspecialidad.desTipoDocumentoEspecialidad }}</span>
+                      </div>
+
+                      <div class="md:col-6 flex gap-2 justify-content-center align-items-center">
+                        @for (option of credentialOptions; track option.value) {
+                          <label [for]="option.value + doc.idDocumentoEspecialidad"
+                                 class="mt-2 ml-2 select-option-doc label-doc">{{ option.label }}</label>
+                          <p-radioButton [inputId]="option.value + doc.idDocumentoEspecialidad"
+                                         class="flex align-items-center mr-3"
+                                         [value]="option.value === '1'"
+                                         [formControl]="getFormControl(getDocumentosArray(i).at(j), 'indCubre')"
+                                         [name]="'cubre_' + doc.idDocumentoEspecialidad"/>
+                        }
+                      </div>
+
+                    </div>
+
+                    @if (isMobileView && tabActive() === doc.idDocumentoEspecialidad) {
+                      <ng-container [ngTemplateOutlet]="pdf_doc"></ng-container>
+                    }
+                  }
+                </div>
+              </p-accordion-content>
+            </p-accordion-panel>
+          </p-accordion>
+
+
+          <div formGroupName="evaluacionEspecialidad">
+            <div formGroupName="estatusVerificacion"
+                 class="flex justify-content-between align-items-center p-3 gap-3 border-round-xl border mt-2">
+              @for (option of estatusDocumentos; track option.value) {
+                <div class="flex align-items-center gap-2 tab-cve-especialidad">
+                  <label [for]="option.value + item.cveEspecialidad"
+                         class="select-option-doc lg:ml-4 mb-0">{{ option.label }}</label>
+                  <p-radioButton [inputId]="option.value + item.cveEspecialidad"
+                                 (change)="estatusRequisitoCambio(getEstatusGroup(i), item)"
+                                 class="flex align-items-center"
+                                 [value]="option.value"
+                                 [formControl]="getFormControl(getEstatusGroup(i), 'idEstatusVerificacion')"
+                                 [name]="'estatus_' + item.cveEspecialidad"/>
+                </div>
+              }
+            </div>
+          </div>
+        </div>
+
+      }
+
+    </div>
+
+    <p-card>
+      <div class="flex justify-content-between">
+        <label class="field-label" for="refObservaciones">Observaciones</label>
+        <p class="label-obligatorio">Obligatorio</p>
+      </div>
+      <textarea rows="1" cols="30" class="w-full" [autoResize]="true" pTextarea formControlName="refObservaciones"
+                maxlength="500"></textarea>
+      <label class="label-obligatorio"
+             for="refObservaciones">{{ formularioValidacion.get('refObservaciones')?.value?.length || 0 }}/500</label>
+    </p-card>
+  </div>
+
+  @if (!isMobileView) {
+    <div class="flex p-4 lg:col-6 cl-12 flex-column">
+      <h6>Previsualización</h6>
+
+      @if (tabActive() === 0) {
+        <p>Seleccione la especialidad que desea obtener la previsualización</p>
+      } @else {
+        <ng-container [ngTemplateOutlet]="pdf_doc"></ng-container>
+      }
+    </div>
+  }
+</div>
+
+<div class="flex justify-content-end">
+  <p-button type="button" variant="outlined" class="me-2" label="Cancelar"
+            [routerLink]="'privado/verificacion-documentos'"/>
+  @if (estatusId !== 3) {
+    <p-button type="submit" [disabled]="formularioValidacion.invalid" label="Finalizar verificación"
+              (click)="finalizarVerificacion()"/>
+  }
+</div>
+
+
+<ng-template #pdf_doc>
+  @if (pdfUrl) {
+    <div style="height: 80vh;" class="my-4">
+      <iframe [src]="pdfUrl" width="100%" height="100%" title="Previsualizacion documentacion">
+        Tu navegador no soporta iframes.
+      </iframe>
+    </div>
+  } @else {
+    <span class="loader">Cargando documento</span>
+  }
+</ng-template>
+
+
+<p-dialog
+  [(visible)]="confCambioEstatus"
+  [modal]="true"
+  [closable]="true"
+  [styleClass]="'dialog'"
+  [draggable]="false"
+  [resizable]="false"
+  [showHeader]="true">
+
+  <div class="flex justify-content-center mb-5">
+    <p>¿Está seguro de cambiar el estatus del médico a <strong>'Cumple con Requisitos?'</strong></p>
+  </div>
+
+  <div class="flex justify-content-end">
+    <p-button variant="outlined" label="Cancelar cambio" severity="warn" (onClick)="cambiarEstatus(false)"
+              class="me-3"/>
+    <p-button variant="outlined" label="Sí, cambiar estatus" (onClick)="cambiarEstatus(true)"/>
+
+  </div>
+</p-dialog>

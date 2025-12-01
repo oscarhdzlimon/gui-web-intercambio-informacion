@@ -1,0 +1,19 @@
+@layer app-components {
+  :root{
+    //--p-accordion-panel-border-width:
+    --p-accordion-panel-border-color: transparent;
+    //--p-accordion-header-border-radius: 10px;
+    //--p-accordion-header-first-top-border-radius: red;
+    //--p-accordion-content-border-color:red;
+    //--p-accordion-content-border-width:100px;
+
+  }
+
+  .p-accordionheader{
+    border: 1px solid #eeeeee;
+    border-radius: 10px 6px 6px 10px;
+    border-right: 6px solid #00cd6f;
+  }
+
+
+}

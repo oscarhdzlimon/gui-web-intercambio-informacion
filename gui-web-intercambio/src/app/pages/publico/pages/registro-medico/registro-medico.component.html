@@ -1,0 +1,367 @@
+<main class="flex flex-wrap login-background">
+  <aside class="lg:col-6 col-12  flex flex-column justify-content-center align-items-center p-6">
+    <h1 class="login-titulo">{{ _Mensajes.MSJ_TITULO_CONVOCATORIA }}</h1>
+    <h2 class="login-subtitulo">{{ _Mensajes.MSJ_SUBTITULO_CONVOCATORIA }}</h2>
+  </aside>
+  <section
+    class="lg:col-6 col-12 flex justify-content-center align-items-center vertical-align:middle align-items:center lg:mb-0  mb-6">
+    <p-card class="top-rounded-card width-lg">
+      <section class="flex flex-column">
+
+        <div class="flex">
+          <div class="flex justify-content-start align-items-center col-1 mt-4">
+            <btn-regresar [ruta]="'/publico/crear-cuenta'"/>
+          </div>
+          <div class="flex justify-content-center px-3 col-11">
+            <h2 class="login-card-titulo">{{ strTitulo }}</h2>
+          </div>
+        </div>
+        <div class="px-0">
+          <hr class=" border-1 text-gray-100">
+        </div>
+
+        <article class="lg:flex flex-row flex-wrap p-4">
+          <form [formGroup]="form" (ngSubmit)="btnCrearCuenta()">
+
+            @if (medico.blnInterno) {
+              <div class=" mt-1 row flex">
+                <div class="field col-8 mr-3">
+                  <label class="field-label" for="matricula">Matrícula</label>
+                  <input pInputText class="w-full" type="text" id="matricula"
+                         (input)="onlyNumbers($event)" (change)="limpiarMatriculaChange()"
+                         placeholder="Ingresa matrícula" maxlength="10"
+                         [ngClass]="{'ng-touched ng-dirty ng-invalid': (f['matricula'].errors?.['required'] &&
+                         (f['matricula'].dirty || f['matricula'].touched))}"
+                         autocomplete="off" formControlName="matricula"/>
+                  @if ((f['matricula'].dirty || f['matricula'].touched)) {
+                    @for (validation of msjValidation.matricula; track validation.msj) {
+                      @if (f['matricula'].errors?.[validation.type]) {
+                        <p class="text-danger">{{ validation.msj }}</p>
+                      }
+                    }
+                  }
+                </div>
+
+                <div class="field col-3 flex justify-content-end align-items-start" style="padding-top: 33px;">
+                  <p-button variant="outlined" label="Validar" [disabled]="habilitarBtnMatricula"
+                            (click)="btnValidarMatricula()"/>
+                </div>
+              </div>
+
+              <div class=" mt-1 row flex">
+                <div class="field col-12">
+                  <label class="field-label" for="nombre">Nombres(s)</label>
+                  <input pInputText class="w-full" type="text" id="nombre" placeholder="Ingresa nombre"
+                         [ngClass]="{'ng-touched ng-dirty ng-invalid': (f['nombre'].errors?.['required'] &&
+                         (f['nombre'].dirty || f['nombre'].touched))}"
+                         autocomplete="off" oninput="this.value = this.value.toUpperCase()"
+                         formControlName="nombre" maxlength="40"/>
+                  @if ((f['nombre'].dirty || f['nombre'].touched)) {
+                    @for (validation of msjValidation.nombre; track validation.msj) {
+                      @if (f['nombre'].errors?.[validation.type]) {
+                        <p class="text-danger">{{ validation.msj }}</p>
+                      }
+                    }
+                  }
+                </div>
+              </div>
+            }
+
+
+            @if (!medico.blnInterno) {
+              <div class=" mt-1 row flex">
+                <div class="field col-12">
+                  <label class="field-label" for="modalidad">Modalidad del médico</label>
+                  <p-select id="modalidad" formControlName="modalidad" [options]="lstModalidad"
+                            optionLabel="nomSubperfil" optionValue="idSubperfil" placeholder="Selecciona una modalidad"
+                            class="w-full" (ngModelChange)="cambiaModalidad()">
+                    <ng-template let-modalidad pTemplate="item">
+                      <div class="flex align-items-center gap-2">
+                        <div style="white-space: normal;">{{ modalidad.nomSubperfil }}</div>
+                      </div>
+                    </ng-template>
+                  </p-select>
+                </div>
+              </div>
+            }
+            @if (!medico.blnPasaporte && !medico.blnInterno) {
+              <div class=" mt-1 row flex">
+                <div class="field col-8 mr-3">
+                  <label class="field-label" for="curp">CURP</label>
+                  <input pInputText class="w-full" type="text" id="curp" placeholder="Ingresa CURP"
+                         maxlength="18" autocomplete="off" formControlName="curp" (change)="limpiarCurpChange()"
+                         [ngClass]="{'ng-touched ng-dirty ng-invalid': (f['curp'].errors?.['required'] &&
+                       (f['curp'].dirty || f['curp'].touched))}"
+                         alphanumericOnly (keyup)="desbloquearValidar(); convertMayusculas($event);"/>
+                  @if ((f['curp'].dirty || f['curp'].touched)) {
+                    @for (validation of msjValidation.curp; track validation.msj) {
+                      @if (f['curp'].errors?.[validation.type]) {
+                        <p class="text-danger">{{ validation.msj }}</p>
+                      }
+                    }
+                  }
+                </div>
+
+                <div class="field col-3 flex justify-content-end align-items-start" style="padding-top: 33px;">
+                  <p-button class="btn-outLine" label="Validar" [disabled]="blnBtnValidar" (click)="btnValidarCurp()"/>
+                </div>
+
+              </div>
+
+              <div class=" mt-1 row flex">
+
+                <div class="field col-12 md:col-6">
+                  <label class="field-label" for="rfc">RFC</label>
+                  <input pInputText class="w-full" type="text" id="rfc" placeholder="Ingresa RFC"
+                         [ngClass]="{'ng-touched ng-dirty ng-invalid': (f['rfc'].errors?.['required'] &&
+                         (f['rfc'].dirty || f['rfc'].touched))}"
+                         autocomplete="off" formControlName="rfc" maxlength="13" (keyup)="convertMayusculas($event);"/>
+                  @if ((f['rfc'].dirty || f['rfc'].touched)) {
+                    @for (validation of msjValidation.rfc; track validation.msj) {
+                      @if (f['rfc'].errors?.[validation.type]) {
+                        <p class="text-danger">{{ validation.msj }}</p>
+                      }
+                    }
+                  }
+                </div>
+                <div class="field col-12 md:col-6">
+
+                  <label class="field-label" for="nombre">Nombre(s)</label>
+                  <input #input pInputText class="w-full" type="text" id="nombre"
+                         [ngClass]="{'ng-touched ng-dirty ng-invalid': (f['nombre'].errors?.['required'] &&
+                         (f['nombre'].dirty || f['nombre'].touched))}" oninput="this.value = this.value.toUpperCase()"
+                         placeholder="Ingresa nombre(s)" autocomplete="off" formControlName="nombre"
+                         maxlength="40"/>
+                  @if ((f['nombre'].dirty || f['nombre'].touched)) {
+                    @for (validation of msjValidation.nombre; track validation.msj) {
+                      @if (f['nombre'].errors?.[validation.type]) {
+                        <p class="text-danger">{{ validation.msj }}</p>
+                      }
+                    }
+                  }
+                </div>
+              </div>
+
+            } @else if (medico.blnPasaporte && !medico.blnInterno) {
+
+              <div class=" mt-1 row flex">
+
+                <div class="field col-6">
+                  <label class="field-label" for="pasaporte">Pasaporte</label>
+                  <input pInputText class="w-full" type="text" id="pasaporte"
+                         placeholder="Ingresa pasaporte" (keypress)="inPasaporte = true" autocomplete="off"
+                         formControlName="pasaporte"
+                         maxlength="9" minlength="6" (keyup)="convertMayusculas($event);"
+
+                         alphanumericOnly/>
+                  @if ((f['pasaporte'].dirty || f['pasaporte'].touched)) {
+                    @for (validation of msjValidation.pasaporte; track validation.msj) {
+                      @if (f['pasaporte'].errors?.[validation.type]) {
+                        <p class="text-danger">{{ validation.msj }}</p>
+                      }
+                    }
+                  }
+                </div>
+                <div class="field lg:col-6 col-12">
+
+                  <label class="field-label" for="pais">País</label>
+                  <!-- <input #input pInputText class="w-full" type="text" id="pais" placeholder="Ingresa país"
+                      autocomplete="off" formControlName="pais"   /> -->
+                  <p-select id="pais" formControlName="pais" [options]="lstPais"
+                            optionLabel="desPais" optionValue="idPais" placeholder="Selecciona un país"
+                            filterBy="desPais" [filter]="true" class="w-full" (ngModelChange)="cambiaPais()">
+                  </p-select>
+                  @if ((f['pais'].dirty || f['pais'].touched)) {
+                    @for (validation of msjValidation.pais; track validation.msj) {
+                      @if (f['pais'].errors?.[validation.type]) {
+                        <p class="text-danger">{{ validation.msj }}</p>
+                      }
+                    }
+                  }
+
+
+                </div>
+
+              </div>
+              <div class=" mt-1 row flex">
+
+                <div class="field col-12">
+                  <label class="field-label" for="nombre">Nombre(s)</label>
+                  <input pInputText class="w-full" type="text" id="nombre" placeholder="Ingresa nombre"
+                         [ngClass]="{'ng-touched ng-dirty ng-invalid': (f['nombre'].errors?.['required'] &&
+                         (f['nombre'].dirty || f['nombre'].touched))}" oninput="this.value = this.value.toUpperCase()"
+                         autocomplete="off" (keypress)="inNombre = true" formControlName="nombre" maxlength="40"/>
+                  @if ((f['nombre'].dirty || f['nombre'].touched)) {
+                    @for (validation of msjValidation.nombre; track validation.msj) {
+                      @if (f['nombre'].errors?.[validation.type]) {
+                        <p class="text-danger">{{ validation.msj }}</p>
+                      }
+                    }
+                  }
+                </div>
+
+
+              </div>
+            }
+
+
+            <div class=" mt-1 row flex">
+              <div class="field lg:col-6 col-12">
+                <label class="field-label" for="apellidoP">Primer apellido</label>
+                <input pInputText class="w-full" type="text" id="apellidoP" autocomplete="off"
+                       [ngClass]="{'ng-touched ng-dirty ng-invalid': (f['apellidoP'].errors?.['required'] &&
+                         (f['apellidoP'].dirty || f['apellidoP'].touched))}"
+                       oninput="this.value = this.value.toUpperCase()"
+                       placeholder="Ingresa primer apellido" (keypress)="inAp = true" formControlName="apellidoP"
+                       maxlength="40"/>
+                @if ((f['apellidoP'].dirty || f['apellidoP'].touched)) {
+                  @for (validation of msjValidation.apellidoP; track validation.msj) {
+                    @if (f['apellidoP'].errors?.[validation.type]) {
+                      <p class="text-danger">{{ validation.msj }}</p>
+                    }
+                  }
+                }
+              </div>
+              <div class="field lg:col-6 col-12">
+                <label class="field-label" for="apellidoM">Segundo apellido</label>
+                <input pInputText class="w-full" type="text" id="apellidoM" autocomplete="off"
+                       [ngClass]="{'ng-touched ng-dirty ng-invalid': (f['apellidoM'].errors?.['required'] &&
+                         (f['apellidoM'].dirty || f['apellidoM'].touched))}"
+                       oninput="this.value = this.value.toUpperCase()"
+                       placeholder="Ingresa segundo apellido" (keypress)="inAm = true" formControlName="apellidoM"
+                       maxlength="40"/>
+                @if ((f['apellidoM'].dirty || f['apellidoM'].touched)) {
+                  @for (validation of msjValidation.apellidoM; track validation.msj) {
+                    @if (f['apellidoM'].errors?.[validation.type]) {
+                      <p class="text-danger">{{ validation.msj }}</p>
+                    }
+                  }
+                }
+              </div>
+
+            </div>
+            @if (medico.blnPasaporte || medico.blnInterno) {
+              <div class=" mt-1 row flex">
+                <div class="field lg:col-6 col-12">
+                  <label class="field-label" for="curp">CURP</label>
+                  <input #input pInputText class="w-full" type="text" id="curp" placeholder="Ingresa CURP"
+                         autocomplete="off" (keypress)="inCurp = true" formControlName="curp" maxlength="18"
+                         alphanumericOnly (change)="dinamicoCurp()"
+                         [ngClass]="{'ng-touched ng-dirty ng-invalid': (f['curp'].errors?.['required'] &&
+                       (f['curp'].dirty || f['curp'].touched))}"
+                         (keyup)="convertMayusculas($event);"/>
+                  @if ((f['curp'].dirty || f['curp'].touched)) {
+                    @for (validation of msjValidation.curp; track validation.msj) {
+                      @if (f['curp'].errors?.[validation.type]) {
+                        <p class="text-danger">{{ validation.msj }}</p>
+                      }
+                    }
+                  }
+                </div>
+
+                <div class="field lg:col-6 col-12">
+                  <label class="field-label" for="rfc">RFC</label>
+                  <input pInputText class="w-full" type="text" id="rfc" placeholder="Ingresa RFC"
+                         autocomplete="off" (keypress)="inRfc = true" formControlName="rfc" maxlength="13"
+                         [ngClass]="{'ng-touched ng-dirty ng-invalid': (f['rfc'].errors?.['required'] &&
+                       (f['rfc'].dirty || f['rfc'].touched))}"
+                         alphanumericOnly (keyup)="convertMayusculas($event);"/>
+                  @if ((f['rfc'].dirty || f['rfc'].touched)) {
+                    @for (validation of msjValidation.rfc; track validation.msj) {
+                      @if (f['rfc'].errors?.[validation.type]) {
+                        <p class="text-danger">{{ validation.msj }}</p>
+                      }
+                    }
+                  }
+                </div>
+              </div>
+            }
+
+
+            <div class=" mt-1 row flex">
+              <div class="field lg:col-6 col-12">
+                <label class="field-label" for="correo">Correo electrónico</label>
+                <input pInputText class="w-full" type="text" id="correo"
+                       placeholder="Ingresa correo electrónico" formControlName="correo"
+                       autocomplete="off"
+                       [ngClass]="{'ng-touched ng-dirty ng-invalid': (f['correo'].errors?.['required'] && (f['correo'].dirty || f['correo'].touched))
+                       || (f['correo'].errors?.['pattern'] && (f['correo'].dirty || f['correo'].touched))}"
+                       (change)="compararCorreos()" (keyup)="convertMinusculas($event);"/>
+                @if ((f['correo'].dirty || f['correo'].touched)) {
+                  @for (validation of msjValidation.correo; track validation.msj) {
+                    @if (f['correo'].errors?.[validation.type]) {
+                      <p class="text-danger">{{ validation.msj }}</p>
+                    }
+                  }
+                }
+              </div>
+              <div class="field lg:col-6 col-12">
+                <label class="field-label" for="correoc">Confirmar correo electrónico</label>
+                <input pInputText class="w-full" type="text" id="correoc" autocomplete="off"
+                       placeholder="Confirmar correo electrónico" (keypress)="inCorreo2 = true"
+                       [ngClass]="{'ng-touched ng-dirty ng-invalid': (f['correo'].errors?.['required'] && (f['correoc'].dirty || f['correoc'].touched))
+                       || (f['correoc'].errors?.['pattern'] && (f['correoc'].dirty || f['correoc'].touched))}"
+                       formControlName="correoc"
+                       (keyup)="convertMinusculas($event);" (change)="compararCorreos()"/>
+                @if ((f['correoc'].dirty || f['correoc'].touched)) {
+                  @for (validation of msjValidation.correoc; track validation.msj) {
+                    @if (f['correoc'].errors?.[validation.type]) {
+                      <p class="text-danger">{{ validation.msj }}</p>
+                    }
+                  }
+                }
+              </div>
+
+            </div>
+
+            <div class=" mt-1 row flex">
+              <div class="form-icon lg:col-6 col-12">
+                <label class="field-label" for="pass">Contraseña</label>
+                <input #input pInputText class="w-full" type="password" id="pass"
+                       placeholder="Ingresa contraseña" autocomplete="off" (keypress)="inPass = true"
+                       formControlName="pass"
+                       [ngClass]="{'ng-touched ng-dirty ng-invalid': (f['pass'].errors?.['required'] &&
+                       (f['pass'].dirty || f['pass'].touched))}"
+                       minlength="8" maxlength="12" (change)="compararPassword()"/>
+                <i [ngClass]="{'pi-eye': input.type==='password', 'pi-eye-slash':  input.type ==='text'}"
+                   class="cursor-pointer icon pi"
+                   (click)="input.type = input.type==='password'?'text':'password'"></i>
+                @if ((f['pass'].dirty || f['pass'].touched)) {
+                  @for (validation of msjValidation.pass; track validation.msj) {
+                    @if (f['pass'].errors?.[validation.type]) {
+                      <p class="text-danger">{{ validation.msj }}</p>
+                    }
+                  }
+                }
+              </div>
+              <div class="form-icon lg:col-6 col-12">
+                <label class="field-label" for="passc">Confirmar contraseña</label>
+                <input #input2 pInputText class="w-full" type="password" id="passc"
+                       placeholder="Confirmar contraseña" autocomplete="off" (keypress)="inPass2 = true"
+                       formControlName="passc"
+                       [ngClass]="{'ng-touched ng-dirty ng-invalid': (f['passc'].errors?.['required'] &&
+                       (f['passc'].dirty || f['passc'].touched))}"
+                       minlength="8" maxlength="12" (change)="compararPassword()"/>
+                <i [ngClass]="{'pi-eye': input2.type==='password', 'pi-eye-slash':  input2.type ==='text'}"
+                   class="cursor-pointer icon pi"
+                   (click)="input2.type = input2.type==='password'?'text':'password'"></i>
+                @if ((f['passc'].dirty || f['passc'].touched)) {
+                  @for (validation of msjValidation.passc; track validation.msj) {
+                    @if (f['passc'].errors?.[validation.type]) {
+                      <p class="text-danger">{{ validation.msj }}</p>
+                    }
+                  }
+                }
+              </div>
+            </div>
+
+            <div class=" mt-4 flex justify-content-end">
+              <p-button label="Crear cuenta" type="submit" [disabled]="form.invalid || !usuarioValidado"/>
+            </div>
+          </form>
+        </article>
+
+      </section>
+    </p-card>
+  </section>
+</main>

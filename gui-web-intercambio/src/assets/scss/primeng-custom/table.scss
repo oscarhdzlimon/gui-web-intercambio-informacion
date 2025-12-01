@@ -1,0 +1,50 @@
+@layer app-components {
+  :root {
+    --p-datatable-border-color: #f1f3f5;
+  }
+
+  .p-datatable-thead > tr > th {
+    color: #58595C;
+    font-feature-settings: 'liga' off, 'clig' off;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 100%; /* 14px */
+    background: #F1F4FD;
+  }
+
+  .p-datatable-header {
+    border-radius: 10px 10px 0 0;
+    border-style: none;
+
+    .titulo-tabla {
+      color: #374957;
+      text-align: right;
+      font-feature-settings: 'liga' off, 'clig' off;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 120%; /* 19.2px */
+    }
+
+    .boton-descargar {
+      color: #339ead;
+      font-size: 12px;
+    }
+  }
+
+
+  .p-datatable-tbody > tr > td {
+    color: #58595C;
+    font-feature-settings: 'liga' off, 'clig' off;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 120%; /* 16.8px */
+  }
+
+  .p-datatable-frozen-column {
+    box-shadow: -4px 4px 10px 0px rgba(0, 0, 0, 0.13);
+
+  }
+}

@@ -1,0 +1,20 @@
+export class Alert {
+    id!: string;
+    type!: AlertType;
+    title!: string;
+    message!: string;
+    autoClose: boolean = true;
+    keepAfterRouteChange!: boolean;
+    fade!: boolean;
+
+    constructor(init?: Partial<Alert>) {
+        Object.assign(this, init);
+    }
+}
+
+export enum AlertType {
+    Success,
+    Error,
+    Info,
+    Warning
+}

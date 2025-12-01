@@ -1,0 +1,27 @@
+.surface-bg-card {
+  width: 60px;
+  height: 60px;
+  position: relative;
+  z-index: 1;
+  margin-right: 30px;
+}
+
+.surface-bg-card:after {
+  content: "\2B22";
+  font-size: 92px;
+  position: absolute;
+  margin-left: 43px;
+  margin-top: -38px;
+  color: #fff;
+  clip-path: inset(0 50% 30% 0);
+}
+
+.icon-card {
+  width: 38px;
+  position: absolute;
+  z-index: 3;
+}
+
+.border-round-bottom-left {
+  border-bottom-left-radius: 12px;
+}

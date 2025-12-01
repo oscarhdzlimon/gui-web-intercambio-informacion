@@ -1,0 +1,29 @@
+.form-icon {
+    position: relative;
+    .icon {
+      position: absolute;
+      top: 53px;
+      right: 8px;
+      transform: translate(-25%, -50%);
+      font-size: 18px;
+      color:#adb8cc;
+    }
+  }
+
+  .bordeTitulo{
+      height: 40px;
+      border-bottom: 1px solid var(--p-gray-100);
+      padding-bottom: 5px;
+  }
+
+
+  .p-button.btn-outLine{
+      border: 1px solid var(--p-button-primary-hover-background);
+      color:var(--p-button-primary-hover-background);
+      background-color: var(--gob-mx-base-blanco);
+  }
+
+.p-select-item {
+  white-space: normal !important; /* Permite que el texto se envuelva */
+  overflow-wrap: break-word;     /* Rompe palabras largas que desborden */
+}

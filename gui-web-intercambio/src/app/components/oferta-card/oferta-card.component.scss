@@ -1,0 +1,125 @@
+.titulo-oferta-card {
+  color: #000;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 100%; /* 24px */
+  text-align: start;
+}
+
+.especificacion-oferta-card {
+  color: #000;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 100%; /* 14px */
+}
+
+.titulo-label-oferta-card {
+  color: #597190;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  text-align: start;
+}
+
+.texto-label-oferta-card {
+  color: #222;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+}
+
+.nombre-unidad-oferta-card {
+  color: #000;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.texto-sueldo {
+  color: #000;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.leyenda-sueldo {
+  color: #222;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+hr {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border-color: #41ABCA;
+}
+
+.link-ver-mas-oferta-card {
+  color: #1153FE;
+  font-size: 11.997px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  text-decoration: none;
+}
+
+.vertical-border {
+  color: #41ABCA;
+}
+
+.flex-oferta-card {
+  flex-wrap: initial;
+}
+
+@media screen and (max-width: 900px) {
+  .vertical-border {
+    display: none;
+  }
+
+  .flex-oferta-card {
+    flex-wrap: wrap;
+  }
+
+  .header-oferta-flex {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .texto-ajustable {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex-grow: 1;
+    flex-shrink: 1;
+    min-width: 0;
+    padding-bottom: 5px;
+  }
+
+  .rating-container {
+    flex-shrink: 0;
+    flex-grow: 0;
+  }
+
+}
+
+@media screen and (max-width: 330px) {
+
+  .nombre-unidad-oferta-card {
+    font-size: 16px;
+  }
+
+  .texto-label-oferta-card {
+    font-size: 11px;
+  }
+
+  .texto-sueldo {
+    font-size: 20px;
+  }
+}

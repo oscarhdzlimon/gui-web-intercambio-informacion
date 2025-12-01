@@ -1,0 +1,67 @@
+:root {
+  //Grises
+  --gob-mx-gris-tono1: #404041; // login card título
+  --gob-mx-gris-tono2: #6f7271;
+  --gob-mx-gris-tono3: #a9a8a9;
+  --gob-mx-gris-tono4: #dddddd;
+  --gob-mx-gris-tono5: #f6f6f6;
+
+  //Institucional IMSS
+  --gob-mx-pr-imss-tono1: #006455;
+
+  //Primarios
+  --gob-mx-pr-dor-tono1: #bc955c;
+  --gob-mx-pr-dor-tono2: #ddc9a3;
+  --gob-mx-pr-verd-tono1: #10312b;
+  --gob-mx-pr-verd-tono2: #235b4e;
+  --gob-mx-pr-rojo-tono1: #691c32;
+
+  --gob-mx-pr-rojo-tono2: #9f2241;
+  --gob-mx-pr-gris-tono1: #6f7271;
+  --gob-mx-pr-gris-tono2: #98989a;
+
+  //Adicionales
+  --gob-mx-ad-rojo: #9d2449;
+  --gob-mx-ad-verde-H1: #0c231e;
+  --gob-mx-ad-verde-H2: #13322b;
+  --gob-mx-pr-dorado-cta: #b38e5d;
+
+  //Base
+  --gob-mx-base-blanco: #ffffff;
+  --gob-mx-base-negro: #000000;
+}
+
+.gob-mx-gris-tono1 {
+  color: var(--gob-mx-gris-tono1) !important;
+}
+.gob-mx-gris-tono2 {
+  color: var(--gob-mx-gris-tono2) !important;
+}
+.gob-mx-gris-tono3 {
+  color: var(--gob-mx-gris-tono3) !important;
+}
+.gob-mx-gris-tono4 {
+  color: var(--gob-mx-gris-tono4) !important;
+}
+.gob-mx-gris-tono5 {
+  color: var(--gob-mx-gris-tono5) !important;
+}
+
+.gob-mx-pr-imss-tono1 {
+  color: var(--gob-mx-pr-imss-tono1) !important;
+}
+
+.gob-mx-pr-dor-tono1 {
+  color: var(--gob-mx-pr-dor-tono1) !important;
+}
+
+.gob-mx-base-blanco {
+  color: var(--gob-mx-base-blanco) !important;
+}
+
+.gob-mx-pr-verd-tono2 {
+  color: var(--gob-mx-pr-verd-tono2) !important;
+}
+.bg-gob-mx-pr-verd-tono2 {
+  background-color: var(--gob-mx-pr-verd-tono2) !important;
+}

@@ -1,0 +1,85 @@
+<div class="flex justify-content-between bg-menu px-4 py-3 mb-2 lg:mb-0">
+
+  <div class="flex align-items-center">
+    <p-button variant="text" icon="pi pi-bars" (onClick)="emitirClick()" class="md:hidden"/>
+    <p class="letras-menu-imss pr-4">IMSS</p>
+    <hr class="vertical mx-0 me-3"/>
+    <span class="border-circle bg-green cmr-texto mr-2">CME</span>
+    <p class="menu-nombre-sistema ms-3">Consulta de antecedentes</p>
+  </div>
+
+  <div class="flex align-items-center margin-right-10">
+    <div>
+        <span class="usuario-menu pr-4 mr-6 text-overflow-ellipsis alinear-izquierda">
+      {{ usuario?.nombre  }} {{ usuario?.apellidoPaterno }} {{ usuario?.apellidoMaterno }}
+    </span>
+    <br>
+    <span class="usuario-menu pr-4 mr-6 text-overflow-ellipsis alinear-izquierda">
+      {{ usuario?.tipoUsuario }}</span>
+
+    </div>
+  
+    <p-speeddial [model]="items" direction="down" [transitionDelay]="80" class="absolute ajuste-avatar"
+                 [(visible)]="speedDialVisible">
+      <ng-template pTemplate="button" let-toggleCallback="toggleCallback">
+        <!-- <p-avatar icon="pi pi-user" (click)="toggleCallback($event)" [style]="{ 'background-color': '#5BACB5', color: '#D2F0E3', 'border-color': '#5BACB5',
+     'border': '2px solid' }" class="ml-8 my-2 cursor-pointer" size="xlarge" shape="circle"/> --> 
+     <img [src]="'assets/images/User_info.svg'" style="margin-left: 50px;margin-top: 16px;" (click)="toggleCallback($event)" /> 
+      </ng-template>
+      <ng-template pTemplate="item" let-item let-toggleCallback="toggleCallback">
+        <div class="bg-white border-round shadow-2 w-15rem md:w-auto min-width-responsive" >
+          <div class="bg-menu-btn text-white p-3 border-round-top">
+            <div class="flex justify-content-between align-items-start">
+              <div class="flex align-items-center">
+                <!-- <i class="pi pi-user" style="font-size: 1.5rem; margin-right: 0.5rem;"></i> -->
+                <img [src]="'assets/images/User.svg'"  />
+                <div class="ml-1">
+                  <p class="font-bold text-lg mb-0 alinear-izquierda">
+                    {{ usuario?.nombre  }} {{ usuario?.apellidoPaterno }} {{ usuario?.apellidoMaterno }}
+                  </p>
+                  
+                  <small>  {{ usuario?.tipoUsuario }}</small>
+                 
+                 
+                </div>
+              </div>
+              <i class="pi pi-times cursor-pointer" style="font-size: 1.2rem;"
+                 (click)="speedDialVisible = !speedDialVisible"></i>
+            </div>
+          </div>
+          <div>
+            <div class="divinterno1">
+               <small>Sistema de origen</small>
+            <br>
+            <span class="etiquetasesion">{{ usuario?.sistema }}</span>
+            </div>
+            <div class="divinterno1" >
+               <small>Módulo</small>
+            <br>
+            <span class="etiquetasesion">{{ usuario?.modulo }}</span>
+            </div>
+            <div class="d-flex align-items-center" style="margin-left: 18px;margin-top: 16px;">
+              <img [src]="'assets/images/Unidad.svg'"  />
+              <div style="margin-left: 3px;">
+                 <small>OOAD/UMAE</small>
+                <br>
+                <span class="etiquetasesion">{{ usuario?.ooadmin }}</span>
+
+              </div>
+             
+
+            </div>
+            
+          </div>
+
+          <div
+            class="flex justify-content-start align-items-center gap-2 border-round card py-3 px-2 flex-row cursor-pointer hover:surface-200"
+            (click)="toggleCallback($event, item)" style="background-color: #FFFBFF;">
+            <i class="pi pi-sign-out" style="font-size: 1.2rem;"></i>
+            <span class="text-xl">Salir</span>
+          </div>
+        </div>
+      </ng-template>
+    </p-speeddial>
+  </div>
+</div>

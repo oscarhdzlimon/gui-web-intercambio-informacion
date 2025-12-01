@@ -1,0 +1,103 @@
+@layer app-components {
+  :root {
+    --p-button-primary-color: var(--gob-mx-base-blanco);
+    --p-button-padding-x: 15px;
+    --p-button-padding-y: 10px;
+    --p-button-primary-active-background: '#08865C';
+    --p-rating-icon-size: 1.5rem;
+    --p-rating-focus-ring-color: #cbaf59;
+    --p-rating-icon-hover-color: #cbaf59;
+    --p-rating-icon-active-color: #cbaf59;
+    --p-rating-icon-color: #cbaf59;
+    --p-badge-warn-background: #ffccac;
+    --p-button-outlined-warn-color: #e9080c;
+    --p-button-outlined-warn-border-color: #e9080c;
+  }
+
+
+  .p-button {
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%;
+    border-radius: 8px;
+  }
+
+  .p-button-outlined:not(:disabled) {
+    border-color: #08865C;
+    color: #08865C;
+    background: #FFF;
+  }
+
+  .p-button-outlined:not(:disabled):hover {
+    background: var(--p-button-primary-hover-background);
+    border: 1px solid var(--p-button-primary-hover-border-color);
+    color: var(--p-button-primary-hover-color);
+  }
+
+  .image-upload-button > .p-button {
+    background: var(--bs-info-emphasis);
+    border-color: var(--bs-info-emphasis);
+    border-radius: 50%;
+    color: var(--gob-mx-base-blanco);
+  }
+
+  .image-upload-button > .p-splitbutton {
+    position: absolute;
+    top: 0;
+    right: 22%
+  }
+
+  .image-upload-button > .p-button-icon-only {
+    padding-inline-start: 10px;
+    padding-inline-end: 10px;
+    height: 30px;
+  }
+
+  .image-upload-button > p-splitbutton-dropdown {
+    background: var(--bs-info-emphasis);
+    border-color: var(--bs-info-emphasis);
+    border-radius: 50%;
+    color: var(--gob-mx-base-blanco);
+  }
+
+  .p-button-outlined.p-button-danger {
+    border-color: var(--p-button-outlined-danger-border-color);
+    color: var(--p-button-outlined-danger-color);
+  }
+
+  .p-button-text.p-button-danger {
+    background: transparent;
+    border-color: transparent;
+    color: var(--p-button-text-danger-color);
+  }
+
+  .p-button-outlined.p-button-danger:not(:disabled):hover {
+    background: var(--p-button-outlined-danger-hover-background);
+    border-color: var(--p-button-outlined-danger-border-color);
+    color: var(--p-button-outlined-danger-color);
+  }
+
+  .p-button-outlined.p-button-danger {
+    border-color: var(--p-button-outlined-danger-border-color);
+    color: var(--p-button-outlined-danger-color);
+    border-radius: 50%;
+  }
+
+  .p-button-outlined.p-button-warn {
+    border-color: var(--p-button-outlined-warn-border-color);
+    color: var(--p-button-outlined-warn-color);
+  }
+
+  .p-button-text.p-button-warn {
+    background: transparent;
+    border-color: transparent;
+    color: var(--p-button-text-warn-color);
+  }
+
+  .p-button-outlined.p-button-warn:not(:disabled):hover {
+    background: var(--p-button-outlined-warn-color);
+    border-color: var(--p-button-outlined-warn-border-color);
+    color: var(--gob-mx-base-blanco);
+  }
+}

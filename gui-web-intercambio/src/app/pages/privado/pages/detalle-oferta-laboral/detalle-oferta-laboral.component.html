@@ -1,0 +1,248 @@
+<div class="mb-5 pb-5">
+  <p-tabs value="0">
+    <p-tablist>
+      <p-tab value="0" (click)="cambioDatosHeader(0)">
+        <div class="header-tab-oferta">
+          <i class="cme-deals" style="color: #41ABD9; font-size: 1.4rem"></i>
+          Información general
+        </div>
+      </p-tab>
+      @if(mapaRef){
+        <p-tab value="1" (click)="cambioDatosHeader(1)">
+          <div class="header-tab-oferta">
+            <i class="cme-pin" style="color: #41ABD9; font-size: 1.4rem"></i>
+            Ubicación y servicios
+          </div>
+        </p-tab>
+      }
+      @if(pdfSrcSede){
+        <p-tab value="2" (click)="cambioDatosHeader(2)">
+          <div class="header-tab-oferta">
+            <i class="cme-sedes" style="color: #41ABD9; font-size: 1.4rem"></i>
+            Sedes
+          </div>
+        </p-tab>
+      }
+    </p-tablist>
+    <p-tabpanels>
+      <p-tabpanel value="0">
+        <div class="flex flex-wrap flex-row">
+          <div class="sm:col-12 md:col-6  pr-4">
+            <div class="flex flex-column">
+              <div class="flex align-items-center gap-4">
+                <i class="pi pi-exclamation-circle" style="color: #41ABD9; font-size: 1.8rem"></i>
+                <h4 class="titulo-detalle-oferta-laboral"> Información del puesto</h4>
+              </div>
+              <div class="flex justify-content-between">
+                <p class="seccion-detalle-oferta-laboral">Horario:</p>
+                <p class="texto-detalle-oferta-laboral">{{ ofertaSeleccionada.horario }}</p>
+              </div>
+              <div class="flex justify-content-between">
+                <p class="seccion-detalle-oferta-laboral">Régimen:</p>
+                <p class="texto-detalle-oferta-laboral">{{ ofertaSeleccionada.regimen }}</p>
+              </div>
+              <div class="flex justify-content-between">
+                <p class="seccion-detalle-oferta-laboral">No de plaza:</p>
+                <p class="texto-detalle-oferta-laboral">{{ ofertaSeleccionada.numPlaza }}</p>
+              </div>
+              <div class="flex justify-content-between">
+                <p class="seccion-detalle-oferta-laboral">Categoría:</p>
+                <p class="texto-detalle-oferta-laboral">{{ ofertaSeleccionada.categoria }}</p>
+              </div>
+              <div class="flex justify-content-between">
+                <p class="seccion-detalle-oferta-laboral">Clasificación:</p>
+                <p class="texto-detalle-oferta-laboral">{{ ofertaSeleccionada.clasificacion }}</p>
+              </div>
+              <div class="flex justify-content-between">
+                <p class="seccion-detalle-oferta-laboral">Tipo de plaza:</p>
+                <p class="texto-detalle-oferta-laboral">{{ ofertaSeleccionada.tipoPlaza }}</p>
+              </div>
+              <div class="flex justify-content-between">
+                <p class="seccion-detalle-oferta-laboral">Marca de ocupación:</p>
+                <p class="texto-detalle-oferta-laboral">{{ ofertaSeleccionada.marcaOcupacion }}</p>
+              </div>
+            </div>
+
+          <div class="flex flex-column mt-4">
+            <div class="flex align-items-center gap-4">
+              <i class="cme-hospital" style="color: #41ABD9; font-size: 2rem"></i>
+              <h4 class="titulo-detalle-oferta-laboral">Información del hospital</h4>
+            </div>
+            <div class="flex justify-content-between">
+              <p class="seccion-detalle-oferta-laboral">OOAD:</p>
+              <p class="texto-detalle-oferta-laboral">{{ ofertaSeleccionada.ooad }}</p>
+            </div>
+            <div class="flex justify-content-between">
+              <p class="seccion-detalle-oferta-laboral">UMF:</p>
+              <p class="texto-detalle-oferta-laboral">{{ ofertaSeleccionada.umf }}</p>
+            </div>
+            <div class="flex justify-content-between">
+              <p class="seccion-detalle-oferta-laboral">Zona:</p>
+              <p class="texto-detalle-oferta-laboral">{{ ofertaSeleccionada.zona }}</p>
+            </div>
+            <div class="flex justify-content-between">
+              <p class="seccion-detalle-oferta-laboral">Ubicación:</p>
+              <p class="texto-detalle-oferta-laboral align-last-right"
+                 [appSplitByWidth]="ofertaSeleccionada.ubicacion!"></p>
+            </div>
+          </div>
+        </div>
+        <div class="p-0 my-4 md:col-6 md:pl-4 w-screen md:w-6">
+          <p-card class="empty-border bg-secondary-blue-oferta-laboral">
+            <div class="flex justify-content-between">
+              <p class="card-compensacion-titulo">Compensación</p>
+              <p-rating [(ngModel)]="value" [stars]="1" (onRate)="agregarFavorito()"
+                        (onCancel)="quitarFavorito()"/>
+            </div>
+            <div class="flex">
+              <div class="flex col-12 flex-column p-0 mt-3">
+                <p class="card-compensacion-sub-titulo">Sueldo mensual</p>
+                <div class="flex justify-content-start gap-4 my-2">
+                  <div class="flex flex-column">
+                    <p class="card-compensacion-seccion">Estimado bruto</p>
+
+                      <p
+                        class="card-compensacion-titulo">{{ ofertaSeleccionada.sueldoMensualBruto |  currency:'USD':'symbol':'1.2-2' }}</p>
+                    </div>
+                    <div class="flex align-items-end">
+                      <p class="card-compensacion-titulo">-</p>
+                    </div>
+                    <div class="flex flex-column">
+                      <p class="card-compensacion-seccion">Estimado neto</p>
+                      <p
+                        class="card-compensacion-titulo">{{ ofertaSeleccionada.sueldoMensualNeto |  currency:'USD':'symbol':'1.2-2' }}</p>
+                    </div>
+                  </div>
+                  <div class="flex justify-content-between p-0 mt-1">
+                    <div class="col-6 flex justify-content-start p-0">
+                      <p class="card-compensacion-seccion">Créditos:</p>
+                    </div>
+                    <div class="col-6 flex justify-content-start p-0">
+                      <p
+                        class="card-compensacion-seccion">{{ ofertaSeleccionada.creditos }} {{ ofertaSeleccionada.creditos! > 1 ? "Disponibles" : "Disponible" }}</p>
+                    </div>
+                  </div>
+                  <div class="flex justify-content-between p-0 mt-1">
+                    <div class="col-6 flex justify-content-start p-0">
+                      <p class="card-compensacion-seccion">Bono difícil:</p>
+                    </div>
+                    <div class="col-6 flex justify-content-start p-0">
+                      <p
+                        class="card-compensacion-seccion">{{ ofertaSeleccionada.bonoDificilCobertura ? ofertaSeleccionada.bonoDificilCobertura : "No" }}</p>
+
+                    </div>
+                  </div>
+                  <div class="flex justify-content-between p-0 mt-1">
+                    <div class="col-6 flex justify-content-start p-0">
+                      <p class="card-compensacion-seccion">Acceso a crédito:</p>
+                    </div>
+                    <div class="col-6 flex justify-content-start p-0">
+                      <p class="card-compensacion-seccion">{{ ofertaSeleccionada.accesoCredito ? 'Sí' : 'No' }}</p>
+                    </div>
+                  </div>
+                  @if (ofertaSeleccionada.accesoCredito) {
+                    @if ( ofertaSeleccionada.creditoAutomotriz ) {
+                  <div class="flex justify-content-between p-0 mt-1">
+                    <div class="col-6 flex justify-content-start p-0">
+                      <p class="card-compensacion-seccion">Crédito automotriz:</p>
+                    </div>
+                    <div class="col-6 flex justify-content-start p-0">
+                      <p class="card-compensacion-seccion">Monto máx {{ ofertaSeleccionada.creditoAutomotriz }}
+
+                          <i class="pi pi-question-circle ms-2" style=" font-size: 1rem;" tooltipPosition="top" [pTooltip]="tooltipContent"></i>
+                          <ng-template #tooltipContent>
+                            <div class="flex items-center info-monto">
+                              {{infoTexto(ofertaSeleccionada.descuentoQuincenalCreditoAutomotriz)}}
+                            </div>
+                          </ng-template>
+
+
+
+                      </p>
+                    </div>
+                  </div>
+                }
+                @if ( ofertaSeleccionada.creditoHipotecario ) {
+                  <div class="flex justify-content-between p-0 mt-1">
+                    <div class="col-6 flex justify-content-start p-0">
+                      <p class="card-compensacion-seccion">Crédito hipotecario:</p>
+                    </div>
+                    <div class="col-6 flex justify-content-start p-0">
+                      <p class="card-compensacion-seccion">Monto máx  {{ ofertaSeleccionada.creditoHipotecario }}
+                        @if (ofertaSeleccionada.creditoHipotecario) {
+                          <i class="pi pi-question-circle ms-2" style=" font-size: 1rem;" tooltipPosition="top"
+                            [pTooltip]="tooltipCredHipo"></i>
+                            <ng-template #tooltipCredHipo>
+                              <div class="flex items-center info-monto">
+                                {{infoTexto(ofertaSeleccionada.descuentoQuincenalCreditoHipotecario)}}
+                              </div>
+                            </ng-template>
+                        }
+                      </p>
+                    </div>
+                  </div>
+                }
+                }
+                </div>
+              </div>
+            </p-card>
+          </div>
+  <!--         <div class="col-12 flex justify-content-end mt-2">
+            @if (value === 0) {
+              <p-button variant="outlined" (onClick)=agregarFavorito() label="Agregar a favoritos"/>
+            }
+            @if (value === 1) {
+              <p-button variant="outlined" (onClick)=eliminarFavorito() label="Eliminar de favoritos"/>
+            }
+          </div> -->
+        </div>
+      </p-tabpanel>
+      <p-tabpanel value="1" >
+        <div class="flex flex-wrap h-full">
+          <div class="col-12 md:col-6  pr-4 justify-content-center flex" >
+            <p-image [src]="ref + mapaRef" alt="Image" width="380"
+                    height="460"/>
+          </div>
+          <div class="col-12 md:col-6   pl-4 justify-content-center ">
+            <p-carousel
+              styleClass="carousel slide"
+              [value]="imgCarrusel"
+              [numVisible]="1"
+              [numScroll]="1"  [responsiveOptions]="responsiveOptions">
+              <ng-template let-product #item  >
+                <div class="flex rounded justify-content-center " style="width: 300px; background-color: blue;" >
+                  <div class="relative mx-auto justify-content-center">
+                    <p-image width="320px" height="460"
+                      [src]="ref + product.refGuid"
+
+                      [alt]="product.name" styleClass="carousel-image"
+                      class="rounded-border flex"/>
+
+                  </div>
+                </div>
+              </ng-template>
+            </p-carousel>
+          </div>
+          <div class="col-12 flex justify-content-end mt-2" style="margin-bottom: 30px;">
+            <p-button  (click)="btnDescargar(1)" variant="outlined" label="Descargar PDF"/>
+          </div>
+        </div>
+      </p-tabpanel>
+      <p-tabpanel value="2">
+        <div class="flex flex-wrap flex-row">
+          <div class="col-12 justify-content-center flex" style="overflow: hide; ">
+            @if (pdfSrcSede) {
+              <iframe width="100%" height="475px"  [src]="pdfSrcSede" frameborder="0">
+                <p>{{ _Mensajes.MSJ_NOT_SUPPORT_IFRAMES }}</p>
+              </iframe>
+            }
+          </div>
+          <div class="col-12 flex justify-content-end mt-2" style="margin-bottom: 30px;">
+
+            <p-button  (click)="btnDescargarSede(2)" variant="outlined"  label="Descargar PDF"/>
+          </div>
+        </div>
+      </p-tabpanel>
+    </p-tabpanels>
+  </p-tabs>
+</div>

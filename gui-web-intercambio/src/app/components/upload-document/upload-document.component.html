@@ -1,0 +1,80 @@
+<p-fileupload #fileDocument name="myfile[]" url="https://www.primefaces.org/cdn/api/upload.php" [multiple]="false"
+              accept="application/pdf" [invalidFileTypeMessageDetail]="'El formato de documento es incorrecto.'"
+              [invalidFileLimitMessageSummary]="''" [invalidFileTypeMessageSummary]="''"
+              [invalidFileSizeMessageSummary]="''" [ngClass]="{'fileupload-not-empty': files.length > 0 }"
+              [invalidFileLimitMessageDetail]="'El peso del documento excede al permitido.'"
+              [invalidFileSizeMessageDetail]="'El peso del documento excede al permitido.'"
+              [maxFileSize]="maxFileSize" (onUpload)="onTemplatedUpload()" (onSelect)="onSelectedFiles($event)">
+
+  <ng-template pTemplate="header" let-files let-chooseCallback="chooseCallback"
+               let-uploadCallback="uploadCallback" let-clearCallback="clearCallback">
+    <div class="flex flex-wrap justify-content-between align-items-center flex-1 gap-2">
+      <div class="flex gap-2">
+        <p-button (onClick)="choose($event, chooseCallback)" icon="pi pi-images" [rounded]="true"
+                  [outlined]="true"
+                  [id]="'choose_btn_' + this.idArchivo"/>
+        <p-button (onClick)="uploadEvent(uploadCallback)" icon="pi pi-cloud-upload" [rounded]="true"
+                  [outlined]="true"
+                  severity="success" [disabled]="!files || files.length === 0" id="load_btn"/>
+        <p-button (onClick)="clearCallback()" icon="pi pi-times" [rounded]="true" [outlined]="true"
+                  severity="danger"
+                  [disabled]="!files || files.length === 0" id="clear_btn"/>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="content" let-files let-uploadedFiles="uploadedFiles"
+               let-removeFileCallback="removeFileCallback"
+               let-removeUploadedFileCallback="removeUploadedFileCallback">
+    @if (files?.length > 0) {
+      <div class="flex flex-wrap justify-content-center">
+        @for (file of files; track file.objectURL; let index = $index) {
+          <div
+            class="card m-0 gap-2 py-2 px-4 flex flex-row border-1 surface-border align-items-center bg-file border-round">
+            <div class="cursor-pointer gap-2 flex" (click)="descargarArchivo()">
+              <i class="cme-pdf mr-2" style="font-size: 1.2rem; color: red"></i>
+              <div class="surface-overlay white-space-nowrap overflow-hidden text-overflow-ellipsis
+                flex align-items-center mr-2"
+                   style="width:160px; font-size: 12px">
+                {{ file.name }}
+              </div>
+            </div>
+            @if (disabled) {
+              <div class="my-1 mx-2" style="width: 24px; height: 26px"></div>
+            } @else {
+              <p-button icon="pi pi-times" class="border-circle mb-2" [outlined]="true"
+                        [text]="true" severity="danger" size="small" (click)="onRemoveFile(files, 0)"/>
+            }
+          </div>
+        }
+      </div>
+    }
+    @if (uploadedFiles?.length > 0) {
+      <div>
+        <div class="flex flex-wrap p-0 sm:p-5 gap-5">
+          @for (file of uploadedFiles; track file.objectURL; let index = $index) {
+            <div class="card m-0 pr-8 flex flex-row border-1 surface-border align-items-center gap-3 bg-file"
+                 [style]="{width: '500px'}">
+              <div class="md:col-2">
+                <img role="presentation" [alt]="file.name" src="/assets/images/icons/icon-pdf.svg" width="100"
+                     height="50"/>
+              </div>
+              <div class="md:col-10 flex flex-column justify-content-start align-items-center">
+                <i class="cme-upload" style="font-size: 1.2rem"></i>
+                <span class="font-semibold">{{ file.name }}</span>
+                <div>{{ formatSize(file.size) }} Documento cargado</div>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    }
+  </ng-template>
+  <ng-template pTemplate="file"></ng-template>
+  <ng-template pTemplate="empty">
+    <div class="flex align-items-center justify-content-center flex-row mt-3 gap-2"
+         (click)="seleccionarArchivo()" [ngClass]="{'cursor-pointer': !disabled, 'cursor-default': disabled}">
+      <i class="cme-upload" style="font-size: 1.2rem"></i>
+      <p style="font-size: 12px">Adjunta un archivo en formato .PDF</p>
+    </div>
+  </ng-template>
+</p-fileupload>

@@ -1,0 +1,10 @@
+@layer app-components {
+    :root {
+        --p-inputtext-placeholder-color:#C3CAD5;
+        --p-inputtext-border-color: #f5f6f7;
+        --p-inputtext-padding-y: 10px;
+    }
+    input.ng-invalid:not(.ng-untouched){
+      border: 1px solid #e10000;
+    }
+}

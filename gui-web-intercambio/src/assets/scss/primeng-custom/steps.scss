@@ -1,0 +1,23 @@
+@layer app-components {
+  .p-steps-item-number {
+    background-color: var(--gob-mx-gris-tono4);
+    border: none;
+    color: var(--gob-mx-base-blanco);
+  }
+
+  .p-steps-item:before {
+    border-color: var(--gob-mx-gris-tono4);
+  }
+
+  .p-steps-item-active:before {
+    border-color: var(--bs-primary-bg-subtle); /* Color para el paso activo */
+  }
+
+  .p-steps-item-active .p-steps-item-number {
+    background-color: var(--bs-primary-bg-subtle);
+    border: none;
+    color: var(--gob-mx-base-blanco);
+  }
+
+}
+

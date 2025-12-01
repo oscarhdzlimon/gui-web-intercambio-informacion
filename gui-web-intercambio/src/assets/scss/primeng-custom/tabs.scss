@@ -1,0 +1,18 @@
+@layer app-components {
+  :root{
+    --p-tabs-active-bar-height: 2px;
+  }
+
+  .p-tablist-active-bar{
+    background-color: #049481;
+  }
+
+  .p-tab > div > p
+  {
+    color: #049481;
+  }
+
+  .p-tab.p-tab-active > div > p{
+    color: #000;
+  }
+}

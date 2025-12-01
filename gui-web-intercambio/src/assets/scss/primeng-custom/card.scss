@@ -1,0 +1,42 @@
+@layer app-components {
+  .p-card-body {
+    border-top: 18px solid var(--bs-primary-hex-color);
+    border-radius: 10px 10px 0 0;
+    padding: 0px !important;
+  }
+
+  .card-padding-0 > .p-card-body {
+    padding: 0;
+  }
+
+  .no-padding-empty-border .p-card-body {
+    border-top: none;
+    padding: 0;
+  }
+
+  .empty-border .p-card-body {
+    border-top: none;
+    padding: 0;
+  }
+
+  .empty-border .p-card-title {
+    padding: 1rem;
+    font-weight: 600;
+    background: #FAFDFE;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    border-bottom: 2px solid #e6eaf7;
+  }
+
+  .empty-border .p-card-content {
+    padding: 1rem;
+  }
+
+  .bg-blue-oferta-laboral > .p-card {
+    background: #41ABCA;
+  }
+
+  .bg-secondary-blue-oferta-laboral > .p-card {
+    background: #7091f9;
+  }
+}

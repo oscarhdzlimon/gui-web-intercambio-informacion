@@ -1,0 +1,19 @@
+<p-dialog
+  [(visible)]="dialogFinalizacionSesion"
+  [modal]="true"
+  [closable]="false"
+  [style]="{ width: '454px' }"
+  [draggable]="false"
+  [resizable]="false"
+  [showHeader]="false">
+  <div class="flex align-content-start align-items-center pl-2">
+    <div class="circular-image">
+      <img src="assets/images/icons/alerta-warn.svg" alt="Precaución"/>
+    </div>
+    <h5 class="pl-3">Inactividad</h5>
+  </div>
+  <p class="pl-2">Su sesión está próxima a cerrarse. ¿Desea continuar dentro del sistema?</p>
+  <div class="flex justify-content-center gap-8 pt-5">
+    <button id="cancel_inactivity_btn" pButton (click)="this.continuarSesion()">Continuar</button>
+  </div>
+</p-dialog>
