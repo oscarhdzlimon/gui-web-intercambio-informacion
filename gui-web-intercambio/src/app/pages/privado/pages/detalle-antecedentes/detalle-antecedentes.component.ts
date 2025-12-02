@@ -13,6 +13,7 @@ import { PaginatorModule } from 'primeng/paginator';
 import { PopoverModule } from 'primeng/popover';
 import { SelectModule } from 'primeng/select';
 import { TableModule } from 'primeng/table';
+import { NgbAccordionModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-detalle-antecedentes',
@@ -26,6 +27,7 @@ import { TableModule } from 'primeng/table';
     ConfirmPopupModule,
     PaginatorModule,
     PopoverModule,
+    NgbAccordionModule,
   BtnRegresarComponent],
   templateUrl: './detalle-antecedentes.component.html',
   styleUrl: './detalle-antecedentes.component.scss'
