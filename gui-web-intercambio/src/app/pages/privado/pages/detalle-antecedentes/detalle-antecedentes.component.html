@@ -1,0 +1,57 @@
+<p>detalle-antecedentes works!</p>
+<btn-regresar [ruta]="ruta" [titulo]="titulo"></btn-regresar>
+<div class="seccionA">
+    Resultado de la búsqueda por NSS: 123456789000
+</div>
+
+<p-card class="mx-2 empty-border" [header]="'Antecedentes'">
+    <p-table [value]="lstGestion" [tableStyle]="{ 'min-width': '50rem' }">
+        <ng-template #header>
+          <tr>
+            <th scope="col"># consecutivo</th>
+            <th scope="col">No. de Expediente</th>
+            <th scope="col">Persona promovente</th>
+            <th scope="col">CURP</th>
+            <th scope="col">NSS</th>
+            <th scope="col">Fecha del suceso</th>
+            <th scope="col">Descripción del suceso</th>
+          </tr>
+        </ng-template>
+        <ng-template #body let-zona let-rowIndex="rowIndex">
+          <tr>
+            <td>{{ zona.desOoad }}</td>
+            <td>{{ zona.desZona }}</td>
+            <td>{{ zona.desZona }}</td>
+            <td>{{ zona.desZona }}</td>
+            <td>{{ zona.desZona }}</td>
+            <td>
+              @if (!estatusPendienteDocumentacion) {
+                <p-button icon="cme-trash" [text]="true" severity="danger" [style]="{'font-size': '2.5rem'}"
+                          (click)="(eliminar(rowIndex))"/>
+              }
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template #emptymessage>
+          <tr>
+            <td colspan="3">
+              <div class="flex justify-content-center align-items-center">
+                <img class="p-0"
+                     src="/assets/images/tabla_sin_resultados.svg" alt="Sin resultados">
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template #footer>
+          <td colspan="3" class="lg:hidden">
+            <div class="flex justify-content-center align-items-center">
+              <img src="/assets/images/touch_icon.png" height="40"
+                   width="40"
+                   alt="Imagen centrada para móvil"
+                   class="imagen-tabla"
+              />
+            </div>
+          </td>
+        </ng-template>
+      </p-table>
+</p-card>

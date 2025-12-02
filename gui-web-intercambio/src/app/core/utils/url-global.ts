@@ -11,4 +11,5 @@ export const NAV = {
   ofertaLaboral: 'oferta-laboral',
   home: 'inicio',
   consultaantecedentes:'consulta-antecedentes',
+  detalleAntecedentes: 'detalle-antecedentes',
 };
