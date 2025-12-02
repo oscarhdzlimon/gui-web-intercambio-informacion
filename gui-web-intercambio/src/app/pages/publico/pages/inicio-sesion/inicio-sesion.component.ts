@@ -13,6 +13,7 @@ import {ActivatedRoute, RouterLink} from '@angular/router';
 import {HttpRespuesta} from '@models/http-respuesta.interface';
 import {EmailAllowCaractersDirective} from '@directives/email-allow-caracters.directive';
 import { Usuario } from '@models/usuario';
+import { NAV } from '@utils/url-global';
 
 declare var grecaptcha: any;
 
@@ -94,7 +95,9 @@ export class InicioSesionComponent extends GeneralComponent implements OnInit,Af
     usuario.modulo='Módulo Gestión'
     usuario.ooadmin = 'DF Sur';
     this.guardarUsuario(usuario);
-    void this._router.navigate(['/privado/consulta-antecedentes'], {relativeTo: this.activatedRoute,});
+    //void this._router.navigate(['/privado/consulta-antecedentes'], {relativeTo: this.activatedRoute,});
+    this._router.navigate(['/privado', NAV.consultaantecedentes]);
+
 
 
     /* if (this.formLogin.invalid) {

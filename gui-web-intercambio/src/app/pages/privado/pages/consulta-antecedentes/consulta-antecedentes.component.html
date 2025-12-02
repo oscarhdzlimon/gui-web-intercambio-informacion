@@ -69,6 +69,14 @@
   (pageChange)="cargarPagina($event)"
   (checkboxChanged)="cambiarEstado($event)"
 ></app-tabla-principal>
+<app-tabla-principal *ngIf="data_nombre.length > 0"
+  [titulo]="tituloTablanombre"
+  [data]="data_nombre"
+  [rows]="10"
+  [total]="totalregistrosnombre"
+  (pageChange)="cargarPagina($event)"
+  (checkboxChanged)="cambiarEstado($event)"
+></app-tabla-principal>
 <article class="flex flex-row flex-wrap" *ngIf="data.length > 0">
        
       <div class="flex lg:col-12  col-12 justify-content-end align-items-center mt-3 gap-4">

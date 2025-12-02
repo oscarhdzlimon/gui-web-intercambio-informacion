@@ -36,9 +36,13 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
     filtroForm!: FormGroup;
 
 tituloTabla: string = 'Resultados de la búsqueda';
+tituloTablanombre: string = 'Resultados de la búsqueda';
+totalregistros: number = 0;
+totalregistrosnombre: number = 0;
 
 data:any[] = [
   ];
+  data_nombre:any=[];
   constructor(private fb: FormBuilder) {
     super();
   }
@@ -62,6 +66,17 @@ data:any[] = [
   { asociar: false,nss:"123456789",nombre: "Juan", apaterno: "Pérez", amaterno:"López",gestion:1,queja:0,inconformidades:0,amparo:1,procedimiento:0,juicio:1} ,
   { asociar: false,nss:"123456789",nombre: "Jose de Jesus", apaterno: "Pérez", amaterno:"López",gestion:2,queja:1,inconformidades:0,amparo:1,procedimiento:0,juicio:1} ,
 ];
+  }
+
+    inicializatablaNombre(){
+    this.data_nombre = [
+  { asociar: false,nss:"123456789",nombre: "Ricardo", apaterno: "Palma", amaterno:"García",gestion:1,queja:0,inconformidades:0,amparo:1,procedimiento:0,juicio:1} ,
+  { asociar: false,nss:"123456789",nombre: "Ricardo", apaterno: "Palma", amaterno:"López",gestion:1,queja:0,inconformidades:0,amparo:1,procedimiento:0,juicio:1} ,
+ { asociar: false,nss:"123456789",nombre: "Ricardo", apaterno: "Palma", amaterno:"Hernández",gestion:1,queja:0,inconformidades:0,amparo:1,procedimiento:0,juicio:1} ,
+ { asociar: false,nss:"123456789",nombre: "Ricardo", apaterno: "Palma", amaterno:"Ramírez",gestion:1,queja:0,inconformidades:0,amparo:1,procedimiento:0,juicio:1} ,
+  { asociar: false,nss:"123456789",nombre: "Ricardo", apaterno: "Palma", amaterno:"Vazquez",gestion:1,queja:0,inconformidades:0,amparo:1,procedimiento:0,juicio:1} ,
+];
+this.totalregistrosnombre=this.data_nombre.length;
   }
 
   cambiarEstado(event: any) {
@@ -180,7 +195,9 @@ paginar(){
     }
   }else{
     this.tituloTabla='Resultados de la búsqueda por NSS: '+nss?.value;
+    this.tituloTablanombre='Resultados de la búsqueda por nombre y primer aplellido: '+nombre?.value + ' ' + apaterno?.value;
     this.inicializatabla();
+    this.inicializatablaNombre();
   }
 }
 limpiar(){
