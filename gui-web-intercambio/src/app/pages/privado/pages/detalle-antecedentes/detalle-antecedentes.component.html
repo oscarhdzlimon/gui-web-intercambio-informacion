@@ -1,4 +1,3 @@
-
 <btn-regresar [ruta]="ruta" [titulo]="titulo"></btn-regresar>
 <div class="seccionA">
     Resultado de la búsqueda por NSS: 123456789000
@@ -6,9 +5,9 @@
 
 
 
-<div ngbAccordion >
-    <div ngbAccordionItem [collapsed]="false" >
-        <div ngbAccordionHeader >
+<div ngbAccordion>
+    <div ngbAccordionItem [collapsed]="false">
+        <div ngbAccordionHeader>
             <button ngbAccordionButton>Gestión
 
             </button>
@@ -17,7 +16,7 @@
             <div ngbAccordionBody>
                 <ng-template>
 
-                    <p-table [value]="lstGestion" [tableStyle]="{ 'min-width': '50rem' }">
+                    <p-table [value]="lstGestion()" [tableStyle]="{ 'min-width': '50rem' }">
                         <ng-template #header>
                             <tr>
                                 <th scope="col"># consecutivo</th>
@@ -27,28 +26,31 @@
                                 <th scope="col">NSS</th>
                                 <th scope="col">Fecha del suceso</th>
                                 <th scope="col">Descripción del suceso</th>
-                                <th scope="col">Ver detalle</th>
+                                <th scope="col" style="min-width: 100px" alignFrozen="right" pFrozenColumn>
+                                    Ver detalle
+                                </th>
                             </tr>
                         </ng-template>
-                        <ng-template #body let-zona let-rowIndex="rowIndex">
+                        <ng-template #body let-gestion let-rowIndex="rowIndex">
                             <tr>
-                                <td>{{ zona.desOoad }}</td>
-                                <td>{{ zona.desZona }}</td>
-                                <td>{{ zona.desZona }}</td>
-                                <td>{{ zona.desZona }}</td>
-                                <td>{{ zona.desZona }}</td>
-                                <td>{{ zona.desZona }}</td>
-                                <td>{{ zona.desZona }}</td>
-                              
+                                <td>{{ gestion.idConsecutivo }}</td>
+                                <td>{{ gestion.idExpediente }}</td>
+                                <td>{{ gestion.personaPromovente }}</td>
+                                <td>{{ gestion.strCurp }}</td>
+                                <td>{{ gestion.strNSS }}</td>
+                                <td>{{ gestion.fchSuceso }}</td>
+                                <td>{{ gestion.strDescripcionSuceso }}</td>
+
                             </tr>
                         </ng-template>
                         <ng-template #emptymessage>
                             <tr>
-                                <td colspan="3">
+                                <td colspan="8">
                                     <div class="flex justify-content-center align-items-center">
                                         <img class="p-0" src="/assets/images/tabla_sin_resultados.svg"
                                             alt="Sin resultados">
                                     </div>
+                                    <div style="text-align: center;">Sin resultados de búsqueda</div>
                                 </td>
                             </tr>
                         </ng-template>
@@ -71,18 +73,18 @@
 
 
 
-    <div ngbAccordion >
-        <div ngbAccordionItem [collapsed]="false" >
-            <div ngbAccordionHeader >
+    <div ngbAccordion>
+        <div ngbAccordionItem [collapsed]="false">
+            <div ngbAccordionHeader>
                 <button ngbAccordionButton>Queja médica
-    
+
                 </button>
             </div>
             <div ngbAccordionCollapse>
                 <div ngbAccordionBody>
                     <ng-template>
-    
-                        <p-table [value]="lstGestion" [tableStyle]="{ 'min-width': '50rem' }">
+
+                        <p-table [value]="lstGestion()" [tableStyle]="{ 'min-width': '50rem' }">
                             <ng-template #header>
                                 <tr>
                                     <th scope="col"># consecutivo</th>
@@ -92,7 +94,9 @@
                                     <th scope="col">NSS</th>
                                     <th scope="col">Fecha del suceso</th>
                                     <th scope="col">Descripción del suceso</th>
-                                    <th scope="col">Ver detalle</th>
+                                    <th scope="col" style="min-width: 100px" alignFrozen="right" pFrozenColumn>
+                                        Ver detalle
+                                    </th>
                                 </tr>
                             </ng-template>
                             <ng-template #body let-zona let-rowIndex="rowIndex">
@@ -104,16 +108,17 @@
                                     <td>{{ zona.desZona }}</td>
                                     <td>{{ zona.desZona }}</td>
                                     <td>{{ zona.desZona }}</td>
-                                  
+
                                 </tr>
                             </ng-template>
                             <ng-template #emptymessage>
                                 <tr>
-                                    <td colspan="3">
+                                    <td colspan="8">
                                         <div class="flex justify-content-center align-items-center">
                                             <img class="p-0" src="/assets/images/tabla_sin_resultados.svg"
                                                 alt="Sin resultados">
                                         </div>
+                                        <div style="text-align: center;">Sin resultados de búsqueda</div>
                                     </td>
                                 </tr>
                             </ng-template>
@@ -126,27 +131,27 @@
                                 </td>
                             </ng-template>
                         </p-table>
-    
-    
-    
+
+
+
                     </ng-template>
                 </div>
             </div>
         </div>
-    
 
-        <div ngbAccordion >
-            <div ngbAccordionItem [collapsed]="false" >
-                <div ngbAccordionHeader >
+
+        <div ngbAccordion>
+            <div ngbAccordionItem [collapsed]="false">
+                <div ngbAccordionHeader>
                     <button ngbAccordionButton>Inconformidades
-        
+
                     </button>
                 </div>
                 <div ngbAccordionCollapse>
                     <div ngbAccordionBody>
                         <ng-template>
-        
-                            <p-table [value]="lstGestion" [tableStyle]="{ 'min-width': '50rem' }">
+
+                            <p-table [value]="lstGestion()" [tableStyle]="{ 'min-width': '50rem' }">
                                 <ng-template #header>
                                     <tr>
                                         <th scope="col"># consecutivo</th>
@@ -156,7 +161,9 @@
                                         <th scope="col">NSS</th>
                                         <th scope="col">Fecha del suceso</th>
                                         <th scope="col">Descripción del suceso</th>
-                                        <th scope="col">Ver detalle</th>
+                                        <th scope="col" style="min-width: 100px" alignFrozen="right" pFrozenColumn>
+                                            Ver detalle
+                                        </th>
                                     </tr>
                                 </ng-template>
                                 <ng-template #body let-zona let-rowIndex="rowIndex">
@@ -168,16 +175,17 @@
                                         <td>{{ zona.desZona }}</td>
                                         <td>{{ zona.desZona }}</td>
                                         <td>{{ zona.desZona }}</td>
-                                      
+
                                     </tr>
                                 </ng-template>
                                 <ng-template #emptymessage>
                                     <tr>
-                                        <td colspan="3">
+                                        <td colspan="7">
                                             <div class="flex justify-content-center align-items-center">
                                                 <img class="p-0" src="/assets/images/tabla_sin_resultados.svg"
                                                     alt="Sin resultados">
                                             </div>
+                                            <div style="text-align: center;">Sin resultados de búsqueda</div>
                                         </td>
                                     </tr>
                                 </ng-template>
@@ -190,28 +198,28 @@
                                     </td>
                                 </ng-template>
                             </p-table>
-        
-        
-        
+
+
+
                         </ng-template>
                     </div>
                 </div>
             </div>
-        
 
 
-            <div ngbAccordion >
-                <div ngbAccordionItem [collapsed]="false" >
-                    <div ngbAccordionHeader >
+
+            <div ngbAccordion>
+                <div ngbAccordionItem [collapsed]="false">
+                    <div ngbAccordionHeader>
                         <button ngbAccordionButton>Amparo indirecto
-            
+
                         </button>
                     </div>
                     <div ngbAccordionCollapse>
                         <div ngbAccordionBody>
                             <ng-template>
-            
-                                <p-table [value]="lstGestion" [tableStyle]="{ 'min-width': '50rem' }">
+
+                                <p-table [value]="lstGestion()" [tableStyle]="{ 'min-width': '50rem' }">
                                     <ng-template #header>
                                         <tr>
                                             <th scope="col"># consecutivo</th>
@@ -221,7 +229,9 @@
                                             <th scope="col">NSS</th>
                                             <th scope="col">Fecha del suceso</th>
                                             <th scope="col">Descripción del suceso</th>
-                                            <th scope="col">Ver detalle</th>
+                                            <th scope="col" style="min-width: 100px" alignFrozen="right" pFrozenColumn>
+                                                Ver detalle
+                                            </th>
                                         </tr>
                                     </ng-template>
                                     <ng-template #body let-zona let-rowIndex="rowIndex">
@@ -233,61 +243,65 @@
                                             <td>{{ zona.desZona }}</td>
                                             <td>{{ zona.desZona }}</td>
                                             <td>{{ zona.desZona }}</td>
-                                          
+
                                         </tr>
                                     </ng-template>
                                     <ng-template #emptymessage>
                                         <tr>
-                                            <td colspan="3">
+                                            <td colspan="7">
                                                 <div class="flex justify-content-center align-items-center">
                                                     <img class="p-0" src="/assets/images/tabla_sin_resultados.svg"
                                                         alt="Sin resultados">
                                                 </div>
+                                                <div style="text-align: center;">Sin resultados de búsqueda</div>
                                             </td>
                                         </tr>
                                     </ng-template>
                                     <ng-template #footer>
-                                        <td colspan="3" class="lg:hidden">
+                                        <td colspan="7" class="lg:hidden">
                                             <div class="flex justify-content-center align-items-center">
                                                 <img src="/assets/images/touch_icon.png" height="40" width="40"
                                                     alt="Imagen centrada para móvil" class="imagen-tabla" />
                                             </div>
+                                            
                                         </td>
                                     </ng-template>
                                 </p-table>
-            
-            
-            
+
+
+
                             </ng-template>
                         </div>
                     </div>
                 </div>
-            
 
 
-                <div ngbAccordion >
-                    <div ngbAccordionItem [collapsed]="false" >
-                        <div ngbAccordionHeader >
+
+                <div ngbAccordion>
+                    <div ngbAccordionItem [collapsed]="false">
+                        <div ngbAccordionHeader>
                             <button ngbAccordionButton>Juicio Constancioso Administrativo Federal
-                
+
                             </button>
                         </div>
                         <div ngbAccordionCollapse>
                             <div ngbAccordionBody>
                                 <ng-template>
-                
-                                    <p-table [value]="lstGestion" [tableStyle]="{ 'min-width': '50rem' }">
+
+                                    <p-table [value]="lstGestion()" [tableStyle]="{ 'min-width': '50rem' }">
                                         <ng-template #header>
                                             <tr>
                                                 <th scope="col"># consecutivo</th>
                                                 <th scope="col">Expediente</th>
                                                 <th scope="col">Persona promovente</th>
-                                                
+
                                                 <th scope="col">NSS</th>
                                                 <th scope="col">Fecha del suceso</th>
                                                 <th scope="col">Descripción del suceso</th>
                                                 <th scope="col">OOAD</th>
-                                                <th scope="col">Ver detalle</th>
+                                                <th scope="col" style="min-width: 100px" alignFrozen="right" pFrozenColumn>
+                                                    Ver detalle
+                                                </th>
                                             </tr>
                                         </ng-template>
                                         <ng-template #body let-zona let-rowIndex="rowIndex">
@@ -299,16 +313,17 @@
                                                 <td>{{ zona.desZona }}</td>
                                                 <td>{{ zona.desZona }}</td>
                                                 <td>{{ zona.desZona }}</td>
-                                              
+
                                             </tr>
                                         </ng-template>
                                         <ng-template #emptymessage>
                                             <tr>
-                                                <td colspan="3">
+                                                <td colspan="7">
                                                     <div class="flex justify-content-center align-items-center">
                                                         <img class="p-0" src="/assets/images/tabla_sin_resultados.svg"
                                                             alt="Sin resultados">
                                                     </div>
+                                                    <div style="text-align: center;">Sin resultados de búsqueda</div>
                                                 </td>
                                             </tr>
                                         </ng-template>
@@ -321,22 +336,28 @@
                                             </td>
                                         </ng-template>
                                     </p-table>
-                
-                
-                
+
+
+
                                 </ng-template>
                             </div>
                         </div>
                     </div>
-                
+
 
                     <p-card class="mx-2 empty-border aviso" [header]="'Aviso de confidencialidad'">
                         <article>
-                            La información aqui mostrada es confidencial y de propiedad del IMSS. Su uso está restringido exclusivamente a las actividades de consulta autorizada.  Queda estrictamente prohibida su divulgación, copia, distribución o uso para fines no establecidos. Todo acceso queda registrado y auditado. El incumplimiento de esta politica acarreará sanciones en términos de la legislación aplicable, ya sean del orden civil, penal o de culaquier otro tipo que se puedan derivar de los mismos hechos.
-                            <br/>
-                            <br/>
-                            Información consultada en SSCV1 con corte al 30/10/2025; SSCV2 con corte al 30/10/2025 y SIADE con corte al 30/10/2025.
+                            La información aqui mostrada es confidencial y de propiedad del IMSS. Su uso está
+                            restringido exclusivamente a las actividades de consulta autorizada. Queda estrictamente
+                            prohibida su divulgación, copia, distribución o uso para fines no establecidos. Todo acceso
+                            queda registrado y auditado. El incumplimiento de esta politica acarreará sanciones en
+                            términos de la legislación aplicable, ya sean del orden civil, penal o de culaquier otro
+                            tipo que se puedan derivar de los mismos hechos.
+                            <br />
+                            <br />
+                            Información consultada en SSCV1 con corte al 30/10/2025; SSCV2 con corte al 30/10/2025 y
+                            SIADE con corte al 30/10/2025.
                         </article>
                     </p-card>
 
-</div>
+                </div>

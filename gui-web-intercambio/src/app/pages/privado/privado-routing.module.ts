@@ -43,7 +43,7 @@ const routes: Routes = [{
     },
     {
       path: NAV.consultaantecedentes,
-      component: DetalleAntecedentesComponent,
+      component: ConsultaAntecedentesComponent,
       
     },
     {
