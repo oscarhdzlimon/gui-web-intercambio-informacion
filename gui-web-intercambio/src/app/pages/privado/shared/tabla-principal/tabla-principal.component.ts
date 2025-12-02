@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, HostListener, Input, Output, SimpleChanges } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ColumnDefinition } from '@models/columa-tabla';
 import { ButtonModule } from 'primeng/button';
@@ -29,7 +29,7 @@ import { TableModule } from 'primeng/table';
 export class TablaPrincipalComponent {
   @Input() titulo: string = 'Consulta';
   @Input() data: any[] = [];
-  @Input() columns: ColumnDefinition[] = [];
+  
 
   @Input() rows: number = 10;
   @Input() first: number = 0;
@@ -37,31 +37,59 @@ export class TablaPrincipalComponent {
 
   @Output() pageChange = new EventEmitter<any>();
   @Output() checkboxChanged = new EventEmitter<{ row: any, column: ColumnDefinition }>();
-
+  tituloTabla: string = 'Resultados de la búsqueda'; 
   // 🔒 Columnas congeladas
   frozenColumns: ColumnDefinition[] = [];
 
   // 🔓 Columnas normales
   unfrozenColumns: ColumnDefinition[] = [];
+totalWidth:any;
+  // Definición fija de columnas
+  columns: ColumnDefinition[] = [
+    { field: 'asociar', header: 'Asociar', width: '80px', checkbox: true },
+    { field: 'nss', header: 'NSS', width: '150px' },
+    { field: 'nombre', header: 'Nombre', width: '200px' },
+    { field: 'apaterno', header: 'Apellido paterno', width: '200px' },
+    { field: 'amaterno', header: 'Apellido materno', width: '200px' },
+    { field: 'gestion', header: 'Gestión', width: '150px' },
+    { field: 'queja', header: 'Queja médica', width: '150px' },
+    { field: 'inconformidades', header: 'Inconformidades', width: '150px' },
+    { field: 'amparo', header: 'Amparo Indirecto', width: '150px' },
+    { field: 'procedimiento', header: 'Procedimiento RP', width: '150px' },
+    { field: 'juicio', header: 'Juicio Contencioso Administrativo Federal', width: '150px' },
+  ];
+// Propiedad para controlar si la tabla debe ser desplazable
+  esPantallaGrande: boolean = true;
+  // Define el punto de quiebre (breakpoint) para considerar 'móvil'
+  readonly TABLET_BREAKPOINT = 992; // El estándar 'lg' en PrimeFlex/Bootstrap
 
+  constructor(private cd: ChangeDetectorRef) { }
   ngOnInit() {
-  this.frozenColumns = this.columns.filter(c => c.frozen);
-  this.unfrozenColumns = this.columns.filter(c => !c.frozen);
+  console.log('TablaPrincipalComponent initialized with data:', this.data);
+  const dynamicWidth = this.columns
+    .map(c => parseInt(c.width))
+    .reduce((a, b) => a + b, 0);
+
+  const fixedWidth = 200; // 100px + 100px de las columnas fijas
+  this.totalWidth = dynamicWidth + fixedWidth;
+  this.checkScreenSize();
+  this.tituloTabla=this.tituloTabla + this.titulo;
 }
+@HostListener('window:resize', ['$event'])
+  onResize(event: any): void {
+    this.checkScreenSize();
+  }
+
 
 
   // Detecta cambios cuando el padre cambia las columnas
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['columns']) {
-      this.splitColumns();
+      
     }
   }
 
-  // Divide las columnas automáticamente
-  private splitColumns(): void {
-    this.frozenColumns = this.columns.filter(c => c.frozen);
-    this.unfrozenColumns = this.columns.filter(c => !c.frozen);
-  }
+
 
   // Evento paginador
   onPageChange(event: any) {
@@ -80,5 +108,26 @@ onCheckboxEvent(row: any, col: any, event: Event) {
 onCheckboxChange(row: any, col: ColumnDefinition) {
   this.checkboxChanged.emit({ row, column: col });
 }
+
+visualizar(row: any) {
+  console.log('Visualizar:', row);
+  // Aquí tu lógica: abrir modal, navegar, etc.
+}
+
+imprimir(row: any) {
+  console.log('Imprimir:', row);
+  // Aquí tu lógica: exportar, imprimir, etc.
+}
+// 2. Lógica para determinar si es pantalla grande
+  checkScreenSize(): void {
+    // Si el ancho de la ventana es mayor al punto de quiebre
+    const nuevoEstado = window.innerWidth >= this.TABLET_BREAKPOINT;
+
+    if (this.esPantallaGrande !== nuevoEstado) {
+      this.esPantallaGrande = nuevoEstado;
+      // Forzar la detección de cambios para actualizar las propiedades de la tabla
+      this.cd.detectChanges();
+    }
+  }
 
 }

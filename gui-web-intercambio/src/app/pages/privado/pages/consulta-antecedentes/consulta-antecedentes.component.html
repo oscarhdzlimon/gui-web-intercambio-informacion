@@ -4,6 +4,7 @@
       <div class="lg:col-3 col-12">
         <div class="flex justify-content-between">
           <label class="field-label" for="especialidad">Consultar por</label>
+          <span class="field-label-obligatorio">Obligatorio</span>
         </div>
         <p-select formControlName="tipoconsulta" [options]="tipoconsulta" optionLabel="label"
                   placeholder="Selecciona una opción" class="w-full" (onChange)="onTipoConsultaChange($event)"/>
@@ -11,6 +12,7 @@
       <div class="lg:col-3 col-12">
         <div class="flex justify-content-between">
           <label class="field-label" for="nss">NSS</label>
+          <span class="field-label-obligatorio">Obligatorio</span>
         </div>
         <input pInputText class="w-full" type="text" id="nss"
                placeholder="Ingresa NSS"
@@ -20,6 +22,7 @@
       <div class="lg:col-3 col-12">
         <div class="flex justify-content-between">
           <label class="field-label" for="nombre">Nombre</label>
+          <span class="field-label-obligatorio">Obligatorio</span>
         </div>
         <input pInputText class="w-full" type="text" id="nombre"
                placeholder="Ingresa el nombre"
@@ -29,6 +32,7 @@
       <div class="lg:col-3 col-12">
         <div class="flex justify-content-between">
           <label class="field-label" for="apaterno">Primer apellido</label>
+          <span class="field-label-obligatorio">Obligatorio</span>
         </div>
         <input pInputText class="w-full" type="text" id="apaterno"
                placeholder="Ingresa el primer apellido"
@@ -49,7 +53,7 @@
                formControlName="amaterno"
         />
       </div>
-      <div class="flex lg:col-9  col-4 justify-content-end align-items-center mt-3 gap-4">
+      <div class="flex lg:col-9  col-12 justify-content-end align-items-center mt-3 gap-4">
         <p-button type="button" [disabled]="filtroForm.invalid" (onClick)="limpiar()" variant="outlined" label="Limpiar"/>
         <p-button type="button" [disabled]="filtroForm.invalid" (onClick)="paginar()" label="Buscar"/>
       </div>
@@ -58,9 +62,8 @@
   </form>
 </p-card>
 <app-tabla-principal
-  [titulo]="'Listado de Usuarios'"
+  [titulo]="tituloTabla"
   [data]="data"
-  [columns]="columns"
   [rows]="10"
   [total]="4"
   (pageChange)="cargarPagina($event)"

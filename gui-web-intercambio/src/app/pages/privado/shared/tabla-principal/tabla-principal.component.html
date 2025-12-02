@@ -1,69 +1,94 @@
-<p-card class="mx-2 empty-border no-padding-card" [header]="titulo">
-<p-table 
+<p-card class="mx-2 empty-border no-padding-card" [header]="tituloTabla">
+<p-table
   [value]="data"
-  [scrollable]="true"
-  scrollHeight="400px"
+  [scrollable]=esPantallaGrande
+  frozenAlign="right"
+
 >
-  <!-- HEADER -->
-  <ng-template pTemplate="header">
+
+  <ng-template #header>
     <tr>
-      <th *ngFor="let col of columns"
-    [attr.alignFrozen]="col.frozen ? 'right' : null">
-
-        {{ col.header }}
-
-      </th>
+      <th scope="col">Asociar</th>
+      <th scope="col">NSS</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Apellido paterno</th>
+      <th scope="col">Apellido materno</th>
+      <th scope="col">Gestión</th>
+      <th scope="col">Queja médica</th>
+      <th scope="col">Inconformidades</th>
+      <th scope="col">Amparo Indirecto</th>
+      <th scope="col">Procedimiento RPE</th>
+      <th scope="col">Juicio Contencioso Administrativo Federal</th>
+      <th scope="col" pFrozenColumn style="min-width: 100px;">Visualizar</th>
+       <th scope="col" pFrozenColumn style="min-width: 100px;">Imprimir</th> 
     </tr>
   </ng-template>
-
-  <!-- BODY -->
-  <ng-template pTemplate="body" let-row>
+  <ng-template #body let-data>
     <tr>
-      <td *ngFor="let col of columns"
-          [attr.alignFrozen]="col.frozen ? 'right' : null">
-
-        <!-- checkbox -->
-        <ng-container *ngIf="col.checkbox; else normalCell">
-          <input 
+      <td><input 
             type="checkbox"
-            [(ngModel)]="row[col.field]"
-            (change)="onCheckboxChange(row, col)"
-          />
-        </ng-container>
-
-        <ng-template #normalCell>
-          {{ row[col.field] }}
-        </ng-template>
-
+            [(ngModel)]="data.asociar"
+            
+          /></td>
+      <td>{{ data.nss }}</td>
+      <td>{{ data.nombre}}</td>
+      <td>{{ data.apaterno }}</td>
+      <td>
+        {{ data.amaterno }}
       </td>
+      <td>{{ data.gestion }}</td>
+      <td>{{ data.queja }}</td>
+      <td>{{ data.inconformidades }}</td>
+      <td>{{ data.amparo }}</td>
+      <td>{{ data.procedimiento }}</td>
+      <td>{{ data.juicio }}</td>
+    <td pFrozenColumn style="min-width: 100px;">
+      <div class="flex justify-content-center align-items-center" style="height: 100%;">
+         <i class="icon pi pi-eye" [style]="{ 'font-size': '1.2rem', color: '#a9c9f8'}"></i>
+      </div>
+    </td>
+
+     <td pFrozenColumn style="min-width: 100px;">
+      <div class="flex justify-content-center align-items-center" style="height: 100%;">
+        <i class="icon pi pi-print" [style]="{ 'font-size': '1.2rem', color: '#a9c9f8'}"></i>
+      </div>
+    </td> 
     </tr>
   </ng-template>
+  <ng-template #emptymessage>
+  <tr>
+    <td colspan="13">
+      <div class="flex flex-column justify-content-center align-items-center">
+        <img class="p-0"
+             src="/assets/images/sinresultados.png" alt="Sin resultados">
+        <p class="mt-2">No hay resultados de búsqueda</p>
+      </div>
+    </td>
+  </tr>
+</ng-template>
 </p-table>
+<p-paginator
+  styleClass="justify-content-end"
+  [showFirstLastIcon]="false"
+  [first]="first"
+  [rows]="rows"
+  [totalRecords]="total"
+  (onPageChange)="onPageChange($event)"
+>
+  <ng-template pTemplate="previouspagelinkicon">
+    <div class="flex align-items-center">
+      <span class="pi pi-chevron-left text-xl font-normal mr-2"></span>
+      <span class="font-semibold mr-5">Anterior</span>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="nextpagelinkicon">
+    <div class="flex align-items-center">
+      <span class="font-semibold ml-5">Siguiente</span>
+      <span class="pi pi-chevron-right text-xl font-normal ml-2"></span>
+    </div>
+  </ng-template>
+</p-paginator>
 
-
-  <!-- PAGINADOR -->
-  <p-paginator
-    styleClass="justify-content-end"
-    [showFirstLastIcon]="false"
-    [first]="first"
-    [rows]="rows"
-    [totalRecords]="total"
-    (onPageChange)="onPageChange($event)"
-  >
-    <ng-template pTemplate="previouspagelinkicon">
-      <div class="flex align-items-center">
-        <span class="pi pi-chevron-left text-xl mr-2"></span>
-        <span class="font-semibold mr-5">Anterior</span>
-      </div>
-    </ng-template>
-
-    <ng-template pTemplate="nextpagelinkicon">
-      <div class="flex align-items-center">
-        <span class="font-semibold ml-5">Siguiente</span>
-        <span class="pi pi-chevron-right text-xl ml-2"></span>
-      </div>
-    </ng-template>
-  </p-paginator>
 
 </p-card>
 

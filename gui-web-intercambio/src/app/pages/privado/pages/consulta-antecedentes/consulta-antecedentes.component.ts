@@ -35,19 +35,10 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
     
     filtroForm!: FormGroup;
 
-   columns: ColumnDefinition[] = [
-  { field: 'asociar', header: 'Asociar', checkbox: true },
-  { field: 'nss', header: 'NSS' },
-  { field: 'nombre', header: 'Nombre' },   // 👈 checkbox
-  { field: 'apaterno', header: 'Apellido paterno' },
-  { field: 'visualizar', header: 'Visualizar', frozen: true },
-  { field: 'imprimir', header: 'Imprimir', frozen: true }
-];
+tituloTabla: string = '';
 
-data = [
-  { asociar: false,nss:"123456789",nombre: "Juan", apaterno: "Pérez", visualizar: true, imprimir: true },
-  { asociar: false,nss:"123456789",nombre: "Juan", apaterno: "Pérez", visualizar: true, imprimir: true },
-];
+data:any[] = [
+  ];
   constructor(private fb: FormBuilder) {
     super();
   }
@@ -65,6 +56,12 @@ data = [
    }
    cargarPagina(event: any) {
     console.log("Paginación:", event);
+  }
+  inicializatabla(){
+    this.data = [
+  { asociar: false,nss:"123456789",nombre: "Juan", apaterno: "Pérez", amaterno:"López",gestion:1,queja:0,inconformidades:0,amparo:1,procedimiento:0,juicio:1} ,
+  { asociar: false,nss:"123456789",nombre: "Jose de Jesus", apaterno: "Pérez", amaterno:"López",gestion:2,queja:1,inconformidades:0,amparo:1,procedimiento:0,juicio:1} ,
+];
   }
 
   cambiarEstado(event: any) {
@@ -109,7 +106,7 @@ onTipoConsultaChange(event: any) {
     nombre?.enable(); apaterno?.enable(); amaterno?.enable();
     nombre?.setValidators([Validators.required]);
     apaterno?.setValidators([Validators.required]);
-    amaterno?.setValidators([Validators.required]);
+    
 
   } else if (tipo === 3) { // Ambos
     nss?.enable();
@@ -156,7 +153,28 @@ validacionCondicional(): ValidatorFn {
   };
 }
 
-paginar(){}
+paginar(){
+
+  const tipo = this.filtroForm.get('tipoconsulta');
+  const nss = this.filtroForm.get('nss');
+  const nombre = this.filtroForm.get('nombre');
+  const apaterno = this.filtroForm.get('apaterno');
+  const amaterno = this.filtroForm.get('amaterno');
+  console.log("Tipo de consulta:", tipo?.value.value);
+  if(tipo?.value.value==1){
+    if(nss?.value=='94987906512'){
+       this._alertServices.error('Sin coincidencias');
+    }else{
+      this.tituloTabla='por NSS: '+nss?.value;
+      this.inicializatabla();
+    }
+
+  }else if(tipo?.value.value==2){
+    if(nombre?.value=='Juan' && apaterno?.value=='Pérez'){
+       this._alertServices.error('Sin coincidencias');
+    }
+  }
+}
 limpiar(){}
 
   
