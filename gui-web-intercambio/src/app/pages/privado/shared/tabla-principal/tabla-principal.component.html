@@ -1,0 +1,69 @@
+<p-card class="mx-2 empty-border no-padding-card" [header]="titulo">
+<p-table 
+  [value]="data"
+  [scrollable]="true"
+  scrollHeight="400px"
+>
+  <!-- HEADER -->
+  <ng-template pTemplate="header">
+    <tr>
+      <th *ngFor="let col of columns"
+    [attr.alignFrozen]="col.frozen ? 'right' : null">
+
+        {{ col.header }}
+
+      </th>
+    </tr>
+  </ng-template>
+
+  <!-- BODY -->
+  <ng-template pTemplate="body" let-row>
+    <tr>
+      <td *ngFor="let col of columns"
+          [attr.alignFrozen]="col.frozen ? 'right' : null">
+
+        <!-- checkbox -->
+        <ng-container *ngIf="col.checkbox; else normalCell">
+          <input 
+            type="checkbox"
+            [(ngModel)]="row[col.field]"
+            (change)="onCheckboxChange(row, col)"
+          />
+        </ng-container>
+
+        <ng-template #normalCell>
+          {{ row[col.field] }}
+        </ng-template>
+
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+
+  <!-- PAGINADOR -->
+  <p-paginator
+    styleClass="justify-content-end"
+    [showFirstLastIcon]="false"
+    [first]="first"
+    [rows]="rows"
+    [totalRecords]="total"
+    (onPageChange)="onPageChange($event)"
+  >
+    <ng-template pTemplate="previouspagelinkicon">
+      <div class="flex align-items-center">
+        <span class="pi pi-chevron-left text-xl mr-2"></span>
+        <span class="font-semibold mr-5">Anterior</span>
+      </div>
+    </ng-template>
+
+    <ng-template pTemplate="nextpagelinkicon">
+      <div class="flex align-items-center">
+        <span class="font-semibold ml-5">Siguiente</span>
+        <span class="pi pi-chevron-right text-xl ml-2"></span>
+      </div>
+    </ng-template>
+  </p-paginator>
+
+</p-card>
+

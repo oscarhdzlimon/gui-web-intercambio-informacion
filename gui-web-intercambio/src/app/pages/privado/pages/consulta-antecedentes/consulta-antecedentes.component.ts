@@ -2,8 +2,10 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 import { GeneralComponent } from '@components/general.component';
+import { ColumnDefinition } from '@models/columa-tabla';
 import { Tipoconsulta } from '@models/tipo-consulta';
 import { TipoDropdown } from '@models/tipo-dropdown.interface';
+import { TablaPrincipalComponent } from '@pages/privado/shared/tabla-principal/tabla-principal.component';
 import { ButtonModule } from 'primeng/button';
 import { Card } from 'primeng/card';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
@@ -24,7 +26,7 @@ import { TableModule } from 'primeng/table';
     ButtonModule,
     ConfirmPopupModule,
     PaginatorModule,
-    PopoverModule],
+    PopoverModule,TablaPrincipalComponent],
   templateUrl: './consulta-antecedentes.component.html',
   styleUrl: './consulta-antecedentes.component.scss'
 })
@@ -32,6 +34,20 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
    tipoconsulta: TipoDropdown[] = []
     
     filtroForm!: FormGroup;
+
+   columns: ColumnDefinition[] = [
+  { field: 'asociar', header: 'Asociar', checkbox: true },
+  { field: 'nss', header: 'NSS' },
+  { field: 'nombre', header: 'Nombre' },   // 👈 checkbox
+  { field: 'apaterno', header: 'Apellido paterno' },
+  { field: 'visualizar', header: 'Visualizar', frozen: true },
+  { field: 'imprimir', header: 'Imprimir', frozen: true }
+];
+
+data = [
+  { asociar: false,nss:"123456789",nombre: "Juan", apaterno: "Pérez", visualizar: true, imprimir: true },
+  { asociar: false,nss:"123456789",nombre: "Juan", apaterno: "Pérez", visualizar: true, imprimir: true },
+];
   constructor(private fb: FormBuilder) {
     super();
   }
@@ -47,6 +63,13 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
      this.filtroForm=this.inicializarFiltroForm()
 
    }
+   cargarPagina(event: any) {
+    console.log("Paginación:", event);
+  }
+
+  cambiarEstado(event: any) {
+    console.log("Checkbox cambiado:", event);
+  }
 
    inicializarFiltroForm(): FormGroup {
   return this.fb.group({

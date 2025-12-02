@@ -57,3 +57,12 @@
 
   </form>
 </p-card>
+<app-tabla-principal
+  [titulo]="'Listado de Usuarios'"
+  [data]="data"
+  [columns]="columns"
+  [rows]="10"
+  [total]="4"
+  (pageChange)="cargarPagina($event)"
+  (checkboxChanged)="cambiarEstado($event)"
+></app-tabla-principal>

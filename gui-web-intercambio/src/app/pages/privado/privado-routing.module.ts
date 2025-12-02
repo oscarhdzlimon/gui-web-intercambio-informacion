@@ -7,8 +7,7 @@ import {ofertaLaboralResolver} from '../../core/resolvers/oferta-laboral.resolve
 import {VerificacionDocumentosComponent} from './pages/verificacion-documentos/verificacion-documentos.component';
 import {DocumentacionComponent} from './pages/verificacion-documentos/components/documentacion/documentacion.component';
 import {NAV} from '@utils/url-global';
-import {medicoGuard} from '@guards/medico.guard';
-import {validadorGuard} from '@guards/validador.guard';
+
 import {documentacionAspiranteResolver} from '../../core/resolvers/documentacion-aspirante.resolver';
 import { verficacionDocsResolver } from '../../core/resolvers/verificacion-docs.resolver';
 import { OfertaLaboralComponent } from './pages/oferta-laboral/oferta-laboral.component';
@@ -30,12 +29,12 @@ const routes: Routes = [{
         respuesta: inicioResolver,
         respuesta_oferta: ofertaLaboralResolver,
       },
-      canActivate: [medicoGuard]
+   
     },
     {
       path: NAV.verificacionDocumentos,
       component: VerificacionDocumentosComponent,
-      canActivate: [validadorGuard],
+    
       resolve:{
         respuesta: verficacionDocsResolver
       }
