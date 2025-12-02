@@ -12,6 +12,7 @@ import {documentacionAspiranteResolver} from '../../core/resolvers/documentacion
 import { verficacionDocsResolver } from '../../core/resolvers/verificacion-docs.resolver';
 import { OfertaLaboralComponent } from './pages/oferta-laboral/oferta-laboral.component';
 import { ConsultaAntecedentesComponent } from './pages/consulta-antecedentes/consulta-antecedentes.component';
+import { DetalleAntecedentesComponent } from './pages/detalle-antecedentes/detalle-antecedentes.component';
 
 const routes: Routes = [{
   path: '',
@@ -41,7 +42,7 @@ const routes: Routes = [{
     },
     {
       path: NAV.consultaantecedentes,
-      component: ConsultaAntecedentesComponent,
+      component: DetalleAntecedentesComponent,
       
     },
     {
@@ -59,6 +60,13 @@ const routes: Routes = [{
         respuesta_oferta: ofertaLaboralResolver
       }
 
+    },
+
+    {
+      path: NAV.detalleAntecedentes,
+      component: DetalleAntecedentesComponent,
+ 
+      
     },
 
 

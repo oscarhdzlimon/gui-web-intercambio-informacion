@@ -9,6 +9,7 @@ import {GeneralComponent} from '../general.component';
 })
 export class BtnRegresarComponent extends GeneralComponent {
   @Input() ruta!: any;
+  @Input() titulo!: any;
 
   public btnRegresar() {
     console.log("la ruta es: ", this.ruta);
