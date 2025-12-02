@@ -206,6 +206,50 @@ line-height: 120%; /* 24px */ /* 24px */
   color: var(--gob-mx-base-blanco);
   font-weight: 600;
 }
+.aviso{
+  font-family: Noto Sans;
+font-weight: 500;
+font-style: Medium;
+font-size: 13.5px;
+
+line-height: 150%;
+letter-spacing: -1.9%;
+vertical-align: middle;
+
+}
+.titulo_totales{
+  font-family: Noto Sans;
+font-weight: 600;
+font-style: SemiBold;
+font-size: 14px;
+line-height: 100%;
+letter-spacing: 0%;
+vertical-align: middle;
+
+}
+.subtitulo_totales{
+  font-family: Noto Sans;
+font-weight: 400;
+font-style: Regular;
+font-size: 12px;
+
+line-height: 100%;
+letter-spacing: 0%;
+text-align: center;
+vertical-align: middle;
+
+}
+.totales{
+  font-family: Noto Sans;
+font-weight: 700;
+font-style: Bold;
+font-size: 14px;
+
+line-height: 100%;
+letter-spacing: 0%;
+vertical-align: middle;
+
+}
 
 .info-em-texto {
   color: #7D8FB3;
