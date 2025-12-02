@@ -69,7 +69,13 @@
   (pageChange)="cargarPagina($event)"
   (checkboxChanged)="cambiarEstado($event)"
 ></app-tabla-principal>
-<p-card class="mx-2 empty-border" [header]="'Total de antecedentes'" >
+<article class="flex flex-row flex-wrap" *ngIf="data.length > 0">
+       
+      <div class="flex lg:col-12  col-12 justify-content-end align-items-center mt-3 gap-4">
+          <p-button type="button" [disabled]="filtroForm.invalid" (onClick)="paginar()" label="Guardar"/>
+      </div>
+    </article>
+<p-card class="mx-2 empty-border" [header]="'Total de antecedentes'" *ngIf="data.length > 0">
  <!--  <div class="flex justify-content-between align-items-center">
     <span class="total-registros">Total de registros: {{ totalRegistros }}</span>
   </div> -->
@@ -171,6 +177,16 @@
       </div>
     </div>
   </article>
+
+</p-card>
+<p-card class="mx-2 empty-border" [header]="'Total de antecedentes'" *ngIf="data.length == 0">
+
+    <div class="flex flex-column justify-content-center align-items-center">
+        <img class="p-0"
+             src="/assets/images/Lupa.svg" alt="Sin resultados">
+        <p class="mt-2 sinResultados">No hay resultados de búsqueda</p>
+      
+      </div>
 
 </p-card>
 <p-card class="mx-2 empty-border" [header]="'Aviso de confidencialidad'">

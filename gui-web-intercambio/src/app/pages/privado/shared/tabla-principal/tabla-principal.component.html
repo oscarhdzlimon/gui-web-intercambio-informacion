@@ -1,4 +1,4 @@
-<p-card class="mx-2 empty-border no-padding-card" [header]="tituloTabla">
+<p-card class="mx-2 empty-border no-padding-card" [header]="titulo">
 <p-table
   [value]="data"
   [scrollable]=esPantallaGrande
@@ -58,10 +58,11 @@
   <ng-template #emptymessage>
   <tr>
     <td colspan="13">
-      <div class="flex flex-column justify-content-center align-items-center">
+       <div class="flex flex-column justify-content-center align-items-center">
         <img class="p-0"
-             src="/assets/images/sinresultados.png" alt="Sin resultados">
-        <p class="mt-2">No hay resultados de búsqueda</p>
+             src="/assets/images/Lupa.svg" alt="Sin resultados">
+        <p class="mt-2 sinResultados">No hay resultados de búsqueda</p>
+      
       </div>
     </td>
   </tr>

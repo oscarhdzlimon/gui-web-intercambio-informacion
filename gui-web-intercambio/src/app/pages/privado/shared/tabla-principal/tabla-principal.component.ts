@@ -27,7 +27,7 @@ import { TableModule } from 'primeng/table';
   styleUrl: './tabla-principal.component.scss'
 })
 export class TablaPrincipalComponent {
-  @Input() titulo: string = 'Consulta';
+  @Input() titulo: string = '';
   @Input() data: any[] = [];
   
 
@@ -69,11 +69,11 @@ totalWidth:any;
   const dynamicWidth = this.columns
     .map(c => parseInt(c.width))
     .reduce((a, b) => a + b, 0);
-
+console.log('titulo',this.titulo);
   const fixedWidth = 200; // 100px + 100px de las columnas fijas
   this.totalWidth = dynamicWidth + fixedWidth;
   this.checkScreenSize();
-  this.tituloTabla=this.tituloTabla + this.titulo;
+  //this.tituloTabla=this.tituloTabla + this.titulo;
 }
 @HostListener('window:resize', ['$event'])
   onResize(event: any): void {

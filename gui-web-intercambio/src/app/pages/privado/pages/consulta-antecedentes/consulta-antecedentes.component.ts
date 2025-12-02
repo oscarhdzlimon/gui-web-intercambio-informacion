@@ -35,7 +35,7 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
     
     filtroForm!: FormGroup;
 
-tituloTabla: string = '';
+tituloTabla: string = 'Resultados de la búsqueda';
 
 data:any[] = [
   ];
@@ -79,6 +79,7 @@ data:any[] = [
 }
 
 onTipoConsultaChange(event: any) {
+  this.limpiar();
   const tipo = event.value?.value;
 
   const nss = this.filtroForm.get('nss');
@@ -114,7 +115,7 @@ onTipoConsultaChange(event: any) {
     nss?.setValidators([Validators.required]);
     nombre?.setValidators([Validators.required]);
     apaterno?.setValidators([Validators.required]);
-    amaterno?.setValidators([Validators.required]);
+   
   }
 
   // Actualizar cambios
@@ -144,9 +145,9 @@ validacionCondicional(): ValidatorFn {
     if (tipoconsulta === 1) {
       if (!nss) valido = false;
     } else if (tipoconsulta === 2) {
-      if (!nombre || !apaterno || !amaterno) valido = false;
+      if (!nombre || !apaterno ) valido = false;
     } else if (tipoconsulta === 3) {
-      if (!nss || !nombre || !apaterno || !amaterno) valido = false;
+      if (!nss || !nombre || !apaterno ) valido = false;
     }
 
     return valido ? null : { camposRequeridosFaltantes: true };
@@ -165,17 +166,32 @@ paginar(){
     if(nss?.value=='94987906512'){
        this._alertServices.error('Sin coincidencias');
     }else{
-      this.tituloTabla='por NSS: '+nss?.value;
+      this.tituloTabla='Resultados de la búsqueda por NSS: '+nss?.value;
+      console.log("Título de la tabla:", this.tituloTabla);
       this.inicializatabla();
     }
 
   }else if(tipo?.value.value==2){
     if(nombre?.value=='Juan' && apaterno?.value=='Pérez'){
        this._alertServices.error('Sin coincidencias');
+    }else{
+      this.tituloTabla='Resultados de la búsqueda por nombre y primer aplellido: '+nombre?.value + ' ' + apaterno?.value;
+      this.inicializatabla();
     }
+  }else{
+    this.tituloTabla='Resultados de la búsqueda por NSS: '+nss?.value;
+    this.inicializatabla();
   }
 }
-limpiar(){}
+limpiar(){
+  this.data = [];  
+  this.filtroForm.patchValue({
+  nss: null,
+  nombre: null,
+  apaterno: null,
+  amaterno: null
+});
+}
 
   
 }
