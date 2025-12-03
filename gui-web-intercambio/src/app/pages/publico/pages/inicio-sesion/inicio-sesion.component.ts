@@ -65,15 +65,15 @@ export class InicioSesionComponent extends GeneralComponent implements OnInit,Af
 
   inicializarFormLogin(): FormGroup {
     return this.fb.group({
-      curp: ['', [Validators.required, Validators.minLength(18)]],
-      password: ['', [Validators.required, passwordValidator()]],
+      curp: ['', [Validators.required]],
+      password: ['', [Validators.required]],
     });
   }
 
   iniciarSesion() {
 
     const curpControl = this.formLogin.get('curp') !=null? this.formLogin.get('curp')!.value : '';
-    if(curpControl == 'salj791014hmclps09'){
+   /*  if(curpControl == 'salj791014hmclps09'){
       this._alertServices.error('Sin coincidencias');
 
     }
@@ -84,7 +84,7 @@ export class InicioSesionComponent extends GeneralComponent implements OnInit,Af
     if(curpControl == 'salj791014hmclps07'){
       this._alertServices.alerta('CURP inactiva, favor de contactar al administrador del sistema.');
 
-    }
+    } */
     let usuario = new Usuario();
     usuario.curp = curpControl;
     usuario.nombre = 'Juan';
@@ -96,7 +96,9 @@ export class InicioSesionComponent extends GeneralComponent implements OnInit,Af
     usuario.ooadmin = 'DF Sur';
     this.guardarUsuario(usuario);
     //void this._router.navigate(['/privado/consulta-antecedentes'], {relativeTo: this.activatedRoute,});
-    this._router.navigate(['/privado', NAV.detalleAntecedentes]);
+
+    this._router.navigate(['/privado', NAV.consultaantecedentes]);
+
 
 
 

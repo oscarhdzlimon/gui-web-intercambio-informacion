@@ -44,13 +44,15 @@
       <td>{{ data.juicio }}</td>
     <td pFrozenColumn style="min-width: 100px;">
       <div class="flex justify-content-center align-items-center" style="height: 100%;">
-         <i class="icon pi pi-eye" [style]="{ 'font-size': '1.2rem', color: '#a9c9f8'}"></i>
+         <img class="p-0" (click)="ver()"
+             src="/assets/logos/eye.svg" >
       </div>
     </td>
 
      <td pFrozenColumn style="min-width: 100px;">
       <div class="flex justify-content-center align-items-center" style="height: 100%;">
-        <i class="icon pi pi-print" [style]="{ 'font-size': '1.2rem', color: '#a9c9f8'}"></i>
+        <img class="p-0"
+             src="/assets/logos/print.svg" >
       </div>
     </td> 
     </tr>

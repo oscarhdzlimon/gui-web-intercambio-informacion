@@ -22,11 +22,8 @@ export class FooterMedicoComponent extends GeneralComponent implements OnInit {
 
     ngOnInit() {
       console.log("session",this.sesion);
-      let datosF = this.getSession('datosFoto');
-      if (datosF) {
-        console.log("datosF:",datosF);
-        this.getFoto(datosF);
-      }
+  
+   
     }
 
     private getFoto(datosFoto: any) {

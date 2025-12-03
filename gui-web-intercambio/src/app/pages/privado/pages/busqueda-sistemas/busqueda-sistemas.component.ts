@@ -47,6 +47,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
     this.inicializatablaNSS1();
     this.inicializatablaNSS2();
     this.inicializatabla3();
+    console.log("init");
   }
 
   inicializatablaNSS1(){
