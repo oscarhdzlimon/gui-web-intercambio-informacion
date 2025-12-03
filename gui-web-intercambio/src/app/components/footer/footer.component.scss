@@ -2,33 +2,3 @@
   height: 10px;
   background-color: #BC955C;
 }
-.divimagenes-footer {
-width: 560.3053588867188;
-height: 43;
-gap: 100px;
-opacity: 1;
-}
-
-.footer-ca {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 30px; /* tu gap original */
-  padding: 10px 0;
-}
-
-.footer-ca .logo {
-  margin: 10px 0;
-  /* opcional: limita tamaño */
-}
-
-/* Media query para pantallas menores a 400px */
-@media screen and (max-width: 400px) {
-  .footer-ca {
-    flex-direction: column;
-  }
-
-  .footer-ca .logo {
-    margin-right: 0;
-  }
-}

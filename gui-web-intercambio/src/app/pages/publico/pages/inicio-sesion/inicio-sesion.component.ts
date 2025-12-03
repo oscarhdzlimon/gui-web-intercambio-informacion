@@ -13,7 +13,6 @@ import {ActivatedRoute, RouterLink} from '@angular/router';
 import {HttpRespuesta} from '@models/http-respuesta.interface';
 import {EmailAllowCaractersDirective} from '@directives/email-allow-caracters.directive';
 import { Usuario } from '@models/usuario';
-import { NAV } from '@utils/url-global';
 
 declare var grecaptcha: any;
 
@@ -37,11 +36,29 @@ declare var grecaptcha: any;
 export class InicioSesionComponent extends GeneralComponent implements OnInit,AfterViewInit {
  captchaWidgetId: any;
   ngAfterViewInit(): void {
-    
+    // Si el script ya cargó, renderiza
+    if ((window as any).grecaptcha && (window as any).grecaptcha.render) {
+      this.renderCaptcha();
+    } else {
+      // Si el script APENAS está cargando, registra callback
+      (window as any).recaptchaLoaded = () => {
+        this.renderCaptcha();
+      };
+    }
   }
 
 
-
+renderCaptcha() {
+    this.captchaWidgetId = grecaptcha.render('recaptcha-element', {
+      sitekey: '6Lc1JBosAAAAAChZzjvTxNRoLDwr-ODWKqhBUtTD',
+      callback: (response: string) => {
+        console.log('Captcha OK:', response);
+      },
+      'expired-callback': () => {
+        console.log('Captcha expirado');
+      }
+    });
+  }
   
   fb = inject(FormBuilder)
   destroyRef = inject(DestroyRef);
@@ -95,9 +112,7 @@ export class InicioSesionComponent extends GeneralComponent implements OnInit,Af
     usuario.modulo='Módulo Gestión'
     usuario.ooadmin = 'DF Sur';
     this.guardarUsuario(usuario);
-    //void this._router.navigate(['/privado/consulta-antecedentes'], {relativeTo: this.activatedRoute,});
-    this._router.navigate(['/privado', NAV.consultaantecedentes]);
-
+    void this._router.navigate(['/privado/consulta-antecedentes'], {relativeTo: this.activatedRoute,});
 
 
     /* if (this.formLogin.invalid) {

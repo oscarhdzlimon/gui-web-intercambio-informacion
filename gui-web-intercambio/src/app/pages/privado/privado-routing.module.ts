@@ -7,13 +7,12 @@ import {ofertaLaboralResolver} from '../../core/resolvers/oferta-laboral.resolve
 import {VerificacionDocumentosComponent} from './pages/verificacion-documentos/verificacion-documentos.component';
 import {DocumentacionComponent} from './pages/verificacion-documentos/components/documentacion/documentacion.component';
 import {NAV} from '@utils/url-global';
-
+import {medicoGuard} from '@guards/medico.guard';
+import {validadorGuard} from '@guards/validador.guard';
 import {documentacionAspiranteResolver} from '../../core/resolvers/documentacion-aspirante.resolver';
 import { verficacionDocsResolver } from '../../core/resolvers/verificacion-docs.resolver';
 import { OfertaLaboralComponent } from './pages/oferta-laboral/oferta-laboral.component';
 import { ConsultaAntecedentesComponent } from './pages/consulta-antecedentes/consulta-antecedentes.component';
-import { DetalleAntecedentesComponent } from './pages/detalle-antecedentes/detalle-antecedentes.component';
-import { BusquedaSistemasComponent } from './pages/busqueda-sistemas/busqueda-sistemas.component';
 
 const routes: Routes = [{
   path: '',
@@ -31,12 +30,12 @@ const routes: Routes = [{
         respuesta: inicioResolver,
         respuesta_oferta: ofertaLaboralResolver,
       },
-   
+      canActivate: [medicoGuard]
     },
     {
       path: NAV.verificacionDocumentos,
       component: VerificacionDocumentosComponent,
-    
+      canActivate: [validadorGuard],
       resolve:{
         respuesta: verficacionDocsResolver
       }
@@ -44,11 +43,6 @@ const routes: Routes = [{
     {
       path: NAV.consultaantecedentes,
       component: ConsultaAntecedentesComponent,
-      
-    },
-    {
-      path: NAV.busquedasistema,
-      component: BusquedaSistemasComponent,
       
     },
     {
@@ -66,13 +60,6 @@ const routes: Routes = [{
         respuesta_oferta: ofertaLaboralResolver
       }
 
-    },
-
-    {
-      path: NAV.detalleAntecedentes,
-      component: DetalleAntecedentesComponent,
- 
-      
     },
 
 
