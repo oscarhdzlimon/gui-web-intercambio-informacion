@@ -1,0 +1,10 @@
+.accordion-body,
+[ngbAccordionBody],
+[ngbAccordionCollapse] {
+  overflow-x: auto !important;
+}
+
+/* Opcional: que no crezca más allá de su contenedor */
+.accordion-body table {
+  width: max-content;
+}

@@ -1,1 +1,319 @@
-<p>busqueda-sistemas works!</p>
+<form >
+
+     <article class="flex flex-row flex-wrap">
+
+        <div class="lg:col-4 col-12 flex align-items-center">
+            <span class="titulobusqueda">Expediente: 123456678-0</span>
+        </div>
+ <div class="lg:col-4 col-12">
+  <div class="flex align-items-center">
+    <!-- Grupo 1: Label + Select -->
+    <div class="flex flex-column align-items-start">
+      <label class="field-label mb-1 tituloInputBusqueda" for="tipoconsulta">Mostrar resultados por:</label>
+      <p-select 
+        formControlName="tipoconsulta"
+        optionLabel="label"
+        placeholder="Selecciona"
+        [style.width.px]="154">
+      </p-select>
+    </div>
+
+    <!-- Grupo 2: Label + Input -->
+    <div class="flex flex-column align-items-start">
+      <label class="field-label mb-1 tituloInputBusqueda" for="amaterno">Selecciona resultado</label>
+      <div class="contenedor-lupa">
+              <input #input
+                     pInputText
+                      [style.width.px]="302"
+                     type="password"
+                     id="password"
+                     placeholder="Buscar"
+                     formControlName="password"
+                     
+                     />
+              <i class="icon pi pi-search"
+                 ></i>
+            </div>
+     
+    </div>
+  </div>
+</div>
+
+
+
+
+      <div class="flex lg:col-4  col-12 justify-content-end align-items-center mt-3 gap-4">
+        <p-button type="button"  label="Buscar" styleClass="btn-buscar" />
+        <p-button type="button"  variant="outlined"  label="Mostrar todo"/>
+        
+      </div>
+    </article>
+ 
+ <!--    <article class="flex flex-row flex-wrap">
+  <div class="lg:col-6 col-12">
+    <span class="titulobusqueda">Expediente: 123456678-0</span>
+  </div>
+  <div class="lg:col-3 col-12">
+            <div class="container mt-3">
+
+      
+        <div class="d-flex gap-2 mb-1">
+            <span class="text-muted small">Mostrar resultados por:</span>
+            <span class="text-muted small">Selecciona resultado</span>
+        </div>
+
+  
+        <div class="combined-container d-flex">
+            
+         
+            <select class="form-select border-0 rounded-0 combined-select">
+            <option>Selecciona</option>
+            </select>
+
+           
+            <div class="input-group flex-grow-1 combined-input-group">
+            <input type="text" class="form-control border-0 rounded-0" placeholder="Buscar">
+            <span class="input-group-text border-0 bg-white">
+                <i class="bi bi-search"></i>
+            </span>
+            </div>
+
+        </div>
+
+        </div>
+  </div>
+  <div class="lg:col-3 col-12">
+    <p-button type="button" variant="outlined" label="Limpiar"></p-button>
+    <p-button type="button" label="Buscar"></p-button>
+  </div>
+</article> -->
+</form>
+
+<div ngbAccordion >
+    <div ngbAccordionItem [collapsed]="false" >
+        <div ngbAccordionHeader >
+            <button ngbAccordionButton>Resultado de la búsqueda por NSS: 17482569321</button>
+        </div>
+
+        <div ngbAccordionCollapse>
+            <div ngbAccordionBody style="padding: 0px;">
+                
+                <app-tabla-acordeon 
+                    [titulo]="tituloTabla" 
+                    [data]="data"
+                    [rows]="10"
+                    [total]="totalRecords"
+                    (pageChange)="cargarPagina($event)"
+                    (checkboxChanged)="cambiarEstado($event)">
+                </app-tabla-acordeon>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div ngbAccordion >
+    <div ngbAccordionItem [collapsed]="false" >
+        <div ngbAccordionHeader >
+            <button ngbAccordionButton>Resultado de la búsqueda por NSS: 00234567890</button>
+        </div>
+
+        <div ngbAccordionCollapse>
+            <div ngbAccordionBody style="padding: 0px;">
+                
+                <app-tabla-acordeon 
+                    [titulo]="tituloTabla" 
+                    [data]="data2"
+                    [rows]="10"
+                    [total]="totalRecords2"
+                    (pageChange)="cargarPagina($event)"
+                    (checkboxChanged)="cambiarEstado($event)">
+                </app-tabla-acordeon>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div ngbAccordion >
+    <div ngbAccordionItem [collapsed]="false" >
+        <div ngbAccordionHeader >
+            <button ngbAccordionButton>Resultado de la búsqueda por nombre: Ricardo Palma</button>
+        </div>
+
+        <div ngbAccordionCollapse>
+            <div ngbAccordionBody style="padding: 0px;">
+                
+                <app-tabla-acordeon 
+                    [titulo]="tituloTabla" 
+                    [data]="data3"
+                    [rows]="10"
+                    [total]="totalRecords3"
+                    (pageChange)="cargarPagina($event)"
+                    (checkboxChanged)="cambiarEstado($event)">
+                </app-tabla-acordeon>
+
+            </div>
+        </div>
+    </div>
+</div>
+<article class="flex flex-row flex-wrap" *ngIf="data.length > 0">
+       
+      <div class="flex lg:col-12  col-12 justify-content-end align-items-center mt-3 gap-4">
+          <p-button type="button"  label="Guardar"/>
+      </div>
+    </article>
+
+    <p-card class="mx-2 empty-border" [header]="'Total de antecedentes'" *ngIf="data.length > 0">
+
+  <article class="flex flex-row flex-wrap">
+    <div class="lg:col-2 col-12">
+      <div class="divTotales" style="background-color: #FFF8F5;">
+        <div class="divgestion">
+<span class="titulo_totales">Gestión</span>
+        </div>
+       <div class="flex flex-column justify-content-center align-items-center">
+          <div class="flex flex-column justify-content-center align-items-center divgestion2" style="margin-top: 10px; width: 100%;">
+  <span class="subtitulo_totales" style="margin-bottom: 5px;">Total de antecedentes</span>
+  <span class="totales itemtotal">139</span>
+</div>
+       </div>
+
+        <div class="flex flex-column justify-content-center align-items-center">
+          <div class="flex flex-column justify-content-center align-items-center" style="margin-top: 10px; width: 80%;">
+  <span class="subtitulo_totales" style="margin-bottom: 5px;">Total de antecedentes asociados</span>
+  <span class="totales">0</span>
+</div>
+       </div>
+     
+       
+      </div>
+    </div>
+    <div class="lg:col-2 col-12">
+      <div class="divTotales" style="background-color: #F1FAFE;">
+        <div class="divqueja">
+<span class="titulo_totales">Queja médica</span>
+        </div>
+       <div class="flex flex-column justify-content-center align-items-center">
+          <div class="flex flex-column justify-content-center align-items-center divqueja2" style="margin-top: 10px; width: 100%;">
+  <span class="subtitulo_totales" style="margin-bottom: 5px;">Total de antecedentes</span>
+  <span class="totales itemtotal">40</span>
+</div>
+       </div>
+       <div class="flex flex-column justify-content-center align-items-center">
+          <div class="flex flex-column justify-content-center align-items-center" style="margin-top: 10px; width: 80%;">
+  <span class="subtitulo_totales" style="margin-bottom: 5px;">Total de antecedentes asociados</span>
+  <span class="totales">0</span>
+</div>
+       </div>
+
+       
+      </div>
+    </div>
+    <div class="lg:col-2 col-12">
+      <div class="divTotales" style="background-color: #F6F9F6;;">
+        <div class="divinconformidades">
+<span class="titulo_totales">Inconformidades</span>
+        </div>
+       <div class="flex flex-column justify-content-center align-items-center divinconformidades2">
+          <div class="flex flex-column justify-content-center align-items-center" style="margin-top: 10px; width: 100%;">
+  <span class="subtitulo_totales" style="margin-bottom: 5px;">Total de antecedentes</span>
+  <span class="totales itemtotal">51</span>
+</div>
+       </div>
+       <div class="flex flex-column justify-content-center align-items-center">
+          <div class="flex flex-column justify-content-center align-items-center" style="margin-top: 10px; width: 80%;">
+  <span class="subtitulo_totales" style="margin-bottom: 5px;">Total de antecedentes asociados</span>
+  <span class="totales">0</span>
+</div>
+       </div>
+
+       
+      </div>
+    </div>
+    <div class="lg:col-2 col-12">
+      <div class="divTotales" style="background-color:  #F5F6FF;">
+        <div class="divamparo">
+<span class="titulo_totales">Amparo Indirecto</span>
+        </div>
+       <div class="flex flex-column justify-content-center align-items-center divamparo2">
+          <div class="flex flex-column justify-content-center align-items-center" style="margin-top: 10px; width: 100%;">
+  <span class="subtitulo_totales" style="margin-bottom: 5px;">Total de antecedentes</span>
+  <span class="totales itemtotal">19</span>
+</div>
+       </div>
+       <div class="flex flex-column justify-content-center align-items-center">
+          <div class="flex flex-column justify-content-center align-items-center" style="margin-top: 10px; width: 80%;">
+  <span class="subtitulo_totales" style="margin-bottom: 5px;">Total de antecedentes asociados</span>
+  <span class="totales">0</span>
+</div>
+       </div>
+
+       
+      </div>
+    </div>
+    <div class="lg:col-2 col-12">
+      <div class="divTotales" style="background: #FEFDFB;">
+        <div class="divprocedimiento">
+<span class="titulo_totales">Procedimiento RPE</span>
+        </div>
+       <div class="flex flex-column justify-content-center align-items-center divprocedimiento2">
+          <div class="flex flex-column justify-content-center align-items-center" style="margin-top: 10px; width: 100%;">
+  <span class="subtitulo_totales" style="margin-bottom: 5px;">Total de antecedentes</span>
+  <span class="totales itemtotal">24</span>
+</div>
+       </div>
+       <div class="flex flex-column justify-content-center align-items-center">
+          <div class="flex flex-column justify-content-center align-items-center" style="margin-top: 10px; width: 80%;">
+  <span class="subtitulo_totales" style="margin-bottom: 5px;">Total de antecedentes asociados</span>
+  <span class="totales">0</span>
+</div>
+       </div>
+
+       
+      </div>
+    </div>
+    <div class="lg:col-2 col-12">
+      <div class="divTotales" style="background: #FEF5FA; height: 160px;">
+        <div class="divjuicio">
+<span class="titulo_totales">Juicio Contencioso Administrativo Federal</span>
+        </div>
+       <div class="flex flex-column justify-content-center align-items-center divjuicio2">
+          <div class="flex flex-column justify-content-center align-items-center" style="margin-top: 10px; width: 100%;">
+  <span class="subtitulo_totales" style="margin-bottom: 5px;">Total de antecedentes</span>
+  <span class="totales itemtotal">139</span>
+</div>
+       </div>
+       <div class="flex flex-column justify-content-center align-items-center">
+          <div class="flex flex-column justify-content-center align-items-center" style="margin-top: 10px; width: 80%;">
+  <span class="subtitulo_totales" style="margin-bottom: 5px;">Total de antecedentes asociados</span>
+  <span class="totales">0</span>
+</div>
+       </div>
+
+       
+      </div>
+    </div>
+  </article>
+
+</p-card>
+<p-card class="mx-2 empty-border" [header]="'Total de antecedentes'" *ngIf="data.length == 0">
+
+    <div class="flex flex-column justify-content-center align-items-center">
+        <img class="p-0"
+             src="/assets/images/Lupa.svg" alt="Sin resultados">
+        <p class="mt-2 sinResultados">No hay resultados de búsqueda</p>
+      
+      </div>
+
+</p-card>
+
+<p-card class="mx-2 empty-border" [header]="'Aviso de confidencialidad'">
+<p class="aviso">La información aquí mostrada es confidencial y de propiedad del IMSS. Su uso está restringido exclusivamente a las actividades de consulta autorizadas. Queda estrictamente prohibida su divulgación, copía, distribución o uso para fines no establecidos.
+  Todo acceso queda registrado y auditado. El incumplimiento de esta política acarreará sanciones en términos de la legislación aplicable, ya sean del orden civil, penal o de cualquier otro tipo que se puedan derivar de los mismos hechos.
+</p>
+<br>
+<p class="aviso">Información consultada en SSCV1, con corte al 30/10/2025; SSCV2, con corte al 30/10/2025 y SIADE, con corte al 30/10/2025.</p>
+</p-card>
+
+
+
