@@ -1,1 +1,93 @@
-<p>busqueda-sistemas works!</p>
+<form >
+
+     <article class="flex flex-row flex-wrap">
+
+        <div class="lg:col-4 col-12 flex align-items-center">
+            <span class="titulobusqueda">Expediente: 123456678-0</span>
+        </div>
+        <div class="lg:col-4 col-12">
+  <div class="flex align-items-center">
+    <!-- Grupo 1: Label + Select -->
+    <div class="flex flex-column align-items-start">
+      <label class="field-label mb-1 tituloInputBusqueda" for="tipoconsulta">Mostrar resultados por:</label>
+      <p-select 
+        formControlName="tipoconsulta"
+        optionLabel="label"
+        placeholder="Selecciona"
+        [style.width.px]="154">
+      </p-select>
+    </div>
+
+    <!-- Grupo 2: Label + Input -->
+    <div class="flex flex-column align-items-start">
+      <label class="field-label mb-1 tituloInputBusqueda" for="amaterno">Selecciona resultado</label>
+      <div class="contenedor-lupa">
+              <input #input
+                     pInputText
+                      [style.width.px]="302"
+                     type="password"
+                     id="password"
+                     placeholder="Buscar"
+                     formControlName="password"
+                     
+                     />
+              <i class="icon pi pi-search"
+                 ></i>
+            </div>
+      <!-- <input
+        pInputText
+        [style.width.px]="302"
+        type="text"
+        id="amaterno"
+        placeholder="Buscar"
+        formControlName="amaterno" /> -->
+    </div>
+  </div>
+</div>
+
+      <div class="flex lg:col-4  col-12 justify-content-end align-items-center mt-3 gap-4">
+        <p-button type="button"  label="Buscar" styleClass="btn-buscar" />
+        <p-button type="button"  variant="outlined"  label="Mostrar todo"/>
+        
+      </div>
+    </article>
+ 
+ <!--    <article class="flex flex-row flex-wrap">
+  <div class="lg:col-6 col-12">
+    <span class="titulobusqueda">Expediente: 123456678-0</span>
+  </div>
+  <div class="lg:col-3 col-12">
+            <div class="container mt-3">
+
+      
+        <div class="d-flex gap-2 mb-1">
+            <span class="text-muted small">Mostrar resultados por:</span>
+            <span class="text-muted small">Selecciona resultado</span>
+        </div>
+
+  
+        <div class="combined-container d-flex">
+            
+         
+            <select class="form-select border-0 rounded-0 combined-select">
+            <option>Selecciona</option>
+            </select>
+
+           
+            <div class="input-group flex-grow-1 combined-input-group">
+            <input type="text" class="form-control border-0 rounded-0" placeholder="Buscar">
+            <span class="input-group-text border-0 bg-white">
+                <i class="bi bi-search"></i>
+            </span>
+            </div>
+
+        </div>
+
+        </div>
+  </div>
+  <div class="lg:col-3 col-12">
+    <p-button type="button" variant="outlined" label="Limpiar"></p-button>
+    <p-button type="button" label="Buscar"></p-button>
+  </div>
+</article> -->
+</form>
