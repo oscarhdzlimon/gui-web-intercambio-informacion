@@ -96,7 +96,9 @@ export class InicioSesionComponent extends GeneralComponent implements OnInit,Af
     usuario.ooadmin = 'DF Sur';
     this.guardarUsuario(usuario);
     //void this._router.navigate(['/privado/consulta-antecedentes'], {relativeTo: this.activatedRoute,});
+
     this._router.navigate(['/privado', NAV.consultaantecedentes]);
+
 
 
 

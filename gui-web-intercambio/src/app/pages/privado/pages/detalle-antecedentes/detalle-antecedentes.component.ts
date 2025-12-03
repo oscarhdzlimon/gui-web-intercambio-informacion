@@ -45,9 +45,18 @@ export class DetalleAntecedentesComponent extends GeneralComponent {
   titulo = 'Antecedentes';
 
   lstGestion: WritableSignal<TablaDetalleGestionInterface[]> = signal([]);
+  lstQueja: WritableSignal<TablaDetalleGestionInterface[]> = signal([]);
+  lstInconformidad: WritableSignal<TablaDetalleGestionInterface[]> = signal([]);
+  lstAmparo: WritableSignal<TablaDetalleGestionInterface[]> = signal([]);
+  lstJuicio: WritableSignal<TablaDetalleGestionInterface[]> = signal([]);
   estatusPendienteDocumentacion =false;
   
   ref: DynamicDialogRef | undefined;
+
+  paginaActual: number = 0;
+  first: number = 0;
+  totalElementos: number = 0;
+  rows: number = 4;
   
   constructor(
     public dialogService: DialogService) {
@@ -55,7 +64,8 @@ export class DetalleAntecedentesComponent extends GeneralComponent {
    
   }
 
-  
+  tabla!: Array<TablaDetalleGestionInterface>;
+  tabla2!: Array<TablaDetalleGestionInterface>;
   ngOnInit(): void {
    let reg1 ={
     idConsecutivo: 1,
@@ -66,12 +76,115 @@ export class DetalleAntecedentesComponent extends GeneralComponent {
     fchSuceso: '02/12/2025',
     strDescripcionSuceso: 'los hechos ocurrieron de tal forma que uno se sorprende al leerlos',
    }
-   let tabla  =[];
-   tabla.push(reg1);
-   this.lstGestion.set(tabla);
+   let reg2 ={
+    idConsecutivo: 2,
+    idExpediente: 'ABCDFE',
+    personaPromovente: "Ameyalli Victoria Sarmiento",
+    strCurp: 'VISA900901MTLCRM00',
+    strNSS: '031708259993',
+    fchSuceso: '02/12/2025',
+    strDescripcionSuceso: 'los hechos ocurrieron de tal forma que uno se sorprende al leerlos',
+   }
+   let reg3 ={
+    idConsecutivo: 3,
+    idExpediente: 'ABCDFE',
+    personaPromovente: "Ameyalli Victoria Sarmiento",
+    strCurp: 'VISA900901MTLCRM00',
+    strNSS: '031708259993',
+    fchSuceso: '02/12/2025',
+    strDescripcionSuceso: 'los hechos ocurrieron de tal forma que uno se sorprende al leerlos',
+   }
+   let reg4 ={
+    idConsecutivo: 4,
+    idExpediente: 'ABCDFE',
+    personaPromovente: "Ameyalli Victoria Sarmiento",
+    strCurp: 'VISA900901MTLCRM00',
+    strNSS: '031708259993',
+    fchSuceso: '02/12/2025',
+    strDescripcionSuceso: 'los hechos ocurrieron de tal forma que uno se sorprende al leerlos',
+   }
+   let reg5 ={
+    idConsecutivo: 5,
+    idExpediente: 'ABCDFE',
+    personaPromovente: "Ameyalli Victoria Sarmiento",
+    strCurp: 'VISA900901MTLCRM00',
+    strNSS: '031708259993',
+    fchSuceso: '02/12/2025',
+    strDescripcionSuceso: 'los hechos ocurrieron de tal forma que uno se sorprende al leerlos',
+   }
+   let reg6 ={
+    idConsecutivo: 6,
+    idExpediente: 'ABCDFE',
+    personaPromovente: "Ameyalli Victoria Sarmiento",
+    strCurp: 'VISA900901MTLCRM00',
+    strNSS: '031708259993',
+    fchSuceso: '02/12/2025',
+    strDescripcionSuceso: 'los hechos ocurrieron de tal forma que uno se sorprende al leerlos',
+   }
+   let reg7 ={
+    idConsecutivo: 7,
+    idExpediente: 'ABCDFE',
+    personaPromovente: "Ameyalli Victoria Sarmiento",
+    strCurp: 'VISA900901MTLCRM00',
+    strNSS: '031708259993',
+    fchSuceso: '02/12/2025',
+    strDescripcionSuceso: 'los hechos ocurrieron de tal forma que uno se sorprende al leerlos',
+   }
+   let reg8 ={
+    idConsecutivo: 8,
+    idExpediente: 'ABCDFE',
+    personaPromovente: "Ameyalli Victoria Sarmiento",
+    strCurp: 'VISA900901MTLCRM00',
+    strNSS: '031708259993',
+    fchSuceso: '02/12/2025',
+    strDescripcionSuceso: 'los hechos ocurrieron de tal forma que uno se sorprende al leerlos',
+   }
+   let reg9 ={
+    idConsecutivo: 0,
+    idExpediente: 'ABCDFE',
+    personaPromovente: "Ameyalli Victoria Sarmiento",
+    strCurp: 'VISA900901MTLCRM00',
+    strNSS: '031708259993',
+    fchSuceso: '02/12/2025',
+    strDescripcionSuceso: 'los hechos ocurrieron de tal forma que uno se sorprende al leerlos',
+   }
+   let reg10 ={
+    idConsecutivo: 10,
+    idExpediente: 'ABCDFE',
+    personaPromovente: "Ameyalli Victoria Sarmiento",
+    strCurp: 'VISA900901MTLCRM00',
+    strNSS: '031708259993',
+    fchSuceso: '02/12/2025',
+    strDescripcionSuceso: 'los hechos ocurrieron de tal forma que uno se sorprende al leerlos',
+   }
+   let reg11 ={
+    idConsecutivo: 11,
+    idExpediente: 'ABCDFE',
+    personaPromovente: "Ameyalli Victoria Sarmiento",
+    strCurp: 'VISA900901MTLCRM00',
+    strNSS: '031708259993',
+    fchSuceso: '02/12/2025',
+    strDescripcionSuceso: 'los hechos ocurrieron de tal forma que uno se sorprende al leerlos',
+   }
+   this.tabla =Array<TablaDetalleGestionInterface>();
+   this.tabla2 =Array<TablaDetalleGestionInterface>();
+   this.tabla.push(reg1);
+   this.tabla.push(reg2);
+   this.tabla.push(reg3);
+   this.tabla.push(reg4);
+   this.tabla.push(reg5);
+   this.tabla.push(reg6);
+   this.tabla.push(reg7);
+   this.tabla.push(reg8);
+   this.tabla.push(reg9);
+   this.tabla.push(reg10);
+   this.tabla2.push(reg11);
+   this.lstGestion.set(this.tabla);
+   this.lstQueja.set(this.tabla2);
+   this.paginar();
   }
 
-  public btnVerGestion(idRegistro:number, registro:any){
+  public btnVerDetalle(idRegistro:number, registro:any){
     let titulo= 'Detalle de Gestión';
     this.ref = this.dialogService.open(DetalleComponent, {
       data: {...registro,idRegistro, titulo},
@@ -91,4 +204,25 @@ export class DetalleAntecedentesComponent extends GeneralComponent {
     });
   }
 
+
+  onPageChange(event: any): void {
+ this.first = event.first;
+    this.rows = event.rows;
+    this.paginaActual = event.page;
+    this.paginar(); 
+  }
+
+  paginar() {
+    this.lstGestion.set(this.tabla);
+    //this.first = 0;
+    this.totalElementos =     this.lstGestion().length;
+    /* this.verificacionDocsService.consultarDocs(this.filtros()).subscribe({
+      next: (respuesta: HttpRespuesta<any>) => {
+        this.usuarioDocumentos.set(respuesta.respuesta['content']);
+
+        //this.first: number = 0;
+        this.totalElementos = respuesta.respuesta.page.totalElements;
+      }
+    }) */
+  }
 }
