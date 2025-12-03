@@ -1,7 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, EventEmitter, HostListener, Input, Output, SimpleChanges } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, HostListener, inject, Input, Output, SimpleChanges } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ColumnDefinition } from '@models/columa-tabla';
+import { NAV } from '@utils/url-global';
 import { ButtonModule } from 'primeng/button';
 import { Card, CardModule } from 'primeng/card';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
@@ -27,6 +29,9 @@ import { TableModule } from 'primeng/table';
   styleUrl: './tabla-principal.component.scss'
 })
 export class TablaPrincipalComponent {
+protected _router: Router;
+ _nav = NAV;
+
   @Input() titulo: string = '';
   @Input() data: any[] = [];
   
@@ -63,7 +68,9 @@ totalWidth:any;
   // Define el punto de quiebre (breakpoint) para considerar 'móvil'
   readonly TABLET_BREAKPOINT = 992; // El estándar 'lg' en PrimeFlex/Bootstrap
 
-  constructor(private cd: ChangeDetectorRef) { }
+  constructor(private cd: ChangeDetectorRef) {
+     this._router = inject(Router);
+   }
   ngOnInit() {
   console.log('TablaPrincipalComponent initialized with data:', this.data);
   const dynamicWidth = this.columns
@@ -89,7 +96,9 @@ console.log('titulo',this.titulo);
     }
   }
 
-
+ver(){
+  this._router.navigate(['/privado', NAV.detalleAntecedentes]);
+}
 
   // Evento paginador
   onPageChange(event: any) {
