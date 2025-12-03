@@ -55,3 +55,85 @@
     color: #adb8cc;
   }
 }
+
+.divTotales{
+    width: 220px;
+height: 168px;
+gap: 4px;
+
+opacity: 1;
+padding: 8px;
+border-radius: 8px;
+
+}
+.divgestion{
+border-bottom: 1px solid #FF8848;
+height: 52px;
+display: flex;
+    /* Centra los elementos hijos verticalmente */
+    align-items: center;
+
+}
+
+.divgestion2{
+border-bottom: 1px solid #FDD8C4;
+
+}
+.divqueja{
+border-bottom: 1px solid #5EC5F4;
+height: 52px;
+display: flex;
+    /* Centra los elementos hijos verticalmente */
+    align-items: center;
+}
+.divqueja2{
+border-bottom: 1px solid #CFEEFC;
+
+}
+.divinconformidades{
+border-bottom: 1px solid #0AA16E;
+height: 52px;
+display: flex;
+    /* Centra los elementos hijos verticalmente */
+    align-items: center;
+}
+.divinconformidades2{
+border-bottom: 1px solid #B7FBD3
+}
+.divamparo{
+border-bottom: 1px solid #2F5EFF;
+height: 52px;
+display: flex;
+    /* Centra los elementos hijos verticalmente */
+    align-items: center;
+}
+.divamparo2{
+border-bottom: 1px solid #CCD7FF;
+}
+.divprocedimiento{
+border-bottom: 1px solid #B28100;
+height: 52px;
+display: flex;
+    /* Centra los elementos hijos verticalmente */
+    align-items: center;
+
+}
+.divprocedimiento2{
+border-bottom: 1px solid #FFEAB3;
+
+  
+}
+.divjuicio{
+border-bottom: 1px solid #DC0A70;
+text-align: left;
+height: 52px;
+
+}
+.divjuicio2{
+border-bottom: 1px solid #FDCEE5
+
+}
+.itemtotal{
+  margin-bottom: 5px;
+}
+
