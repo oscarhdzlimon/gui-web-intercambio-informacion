@@ -25,9 +25,7 @@ export class GeneralComponent {
   protected _Mensajes: Mensajes;
   protected _router: Router;
   protected _alertServices: AlertService;
-  protected _CatalogoGenService: CatalogosGeneralesService;
-  protected _RegistroMedicoService: RegistroMedicoService;
-  protected _ConvocatoriaService: ConvocatoriaService;
+
   protected authService = inject(AuthService);
   protected documentoService = inject(DocumentoService);
   /* SE COMENTA TIMER */
@@ -38,10 +36,8 @@ export class GeneralComponent {
     this._Mensajes = inject(Mensajes);
     this._router = inject(Router);
     this._alertServices = inject(AlertService);
-    this._CatalogoGenService = inject(CatalogosGeneralesService);
-    this._RegistroMedicoService = inject(RegistroMedicoService);
-    this._ConvocatoriaService = inject(ConvocatoriaService);
-    this.authService = inject(AuthService);
+    
+
     this.documentoService = inject(DocumentoService);
   }
 
@@ -85,23 +81,9 @@ export class GeneralComponent {
     return hoy.getFullYear();
   }
 
-  public getSession(objeto: string): any {
-    let p: any;
-    let encodeJson = sessionStorage.getItem(objeto);
 
-    if (encodeJson) {
-      p = JSON.parse(decodeURIComponent(window.atob(encodeJson)));
-    }
-    return p;
-  }
 
-  public saveSession(objeto: string, data: any) {
-    sessionStorage.setItem(objeto, window.btoa(encodeURIComponent(JSON.stringify(data))));
-  }
 
-  public removeSession(objeto: string) {
-    sessionStorage.removeItem(objeto);
-  }
 
   public comparaCampos(texto1: string, texto2: string): boolean {
     let blnIguales = false;
