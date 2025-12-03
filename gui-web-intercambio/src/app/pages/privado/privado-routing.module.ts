@@ -13,6 +13,7 @@ import { verficacionDocsResolver } from '../../core/resolvers/verificacion-docs.
 import { OfertaLaboralComponent } from './pages/oferta-laboral/oferta-laboral.component';
 import { ConsultaAntecedentesComponent } from './pages/consulta-antecedentes/consulta-antecedentes.component';
 import { DetalleAntecedentesComponent } from './pages/detalle-antecedentes/detalle-antecedentes.component';
+import { BusquedaSistemasComponent } from './pages/busqueda-sistemas/busqueda-sistemas.component';
 
 const routes: Routes = [{
   path: '',
@@ -43,6 +44,11 @@ const routes: Routes = [{
     {
       path: NAV.consultaantecedentes,
       component: ConsultaAntecedentesComponent,
+      
+    },
+    {
+      path: NAV.busquedasistema,
+      component: BusquedaSistemasComponent,
       
     },
     {
