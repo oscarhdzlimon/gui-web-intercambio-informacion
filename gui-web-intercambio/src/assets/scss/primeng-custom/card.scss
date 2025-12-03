@@ -22,7 +22,7 @@
   .empty-border .p-card-title {
     padding: 1rem;
     font-weight: 600;
-    background: #FAFDFE;
+    background: #F4F7FC;
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
     border-bottom: 2px solid #e6eaf7;
@@ -31,6 +31,12 @@
   .empty-border .p-card-content {
     padding: 1rem;
   }
+
+  .no-padding-card .p-card-content {
+    /* La doble clase le da mayor especificidad que solo .empty-border */
+    padding: 0 !important; /* Usar !important si es necesario, pero intenta evitarlo */
+    padding: 0; 
+}
 
   .bg-blue-oferta-laboral > .p-card {
     background: #41ABCA;

@@ -72,7 +72,9 @@
   .footer-cme {
     background-color: var(--gob-mx-pr-imss-tono1);
   }
-
+ .footer-ca {
+    background-color: var(--gob-mx-pr-rojo-tono1);
+  }
   hr.vertical {
     border: 10px;
     margin: 10px;
@@ -306,4 +308,29 @@
   }
 
 
+}
+
+
+.accordion-item:first-of-type>.accordion-header .accordion-button {
+  background-color: #FAFDFE;
+  border: none;
+  height: 50px;
+  font-weight: 400;
+  text-align: start;
+  vertical-align: middle;
+  padding-top: 10px;
+  border-radius: 15px;
+  color: black;
+  font-weight: 400;
+  
+}
+
+
+  .accordion-item:first-of-type {
+  margin-top: 30px;
+}
+
+.accordion-item:last-of-type>.accordion-collapse {
+
+  margin-top: -42px;
 }

@@ -2,8 +2,10 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 import { GeneralComponent } from '@components/general.component';
+import { ColumnDefinition } from '@models/columa-tabla';
 import { Tipoconsulta } from '@models/tipo-consulta';
 import { TipoDropdown } from '@models/tipo-dropdown.interface';
+import { TablaPrincipalComponent } from '@pages/privado/shared/tabla-principal/tabla-principal.component';
 import { ButtonModule } from 'primeng/button';
 import { Card } from 'primeng/card';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
@@ -24,7 +26,7 @@ import { TableModule } from 'primeng/table';
     ButtonModule,
     ConfirmPopupModule,
     PaginatorModule,
-    PopoverModule],
+    PopoverModule,TablaPrincipalComponent],
   templateUrl: './consulta-antecedentes.component.html',
   styleUrl: './consulta-antecedentes.component.scss'
 })
@@ -32,6 +34,15 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
    tipoconsulta: TipoDropdown[] = []
     
     filtroForm!: FormGroup;
+
+tituloTabla: string = 'Resultados de la búsqueda';
+tituloTablanombre: string = 'Resultados de la búsqueda';
+totalregistros: number = 0;
+totalregistrosnombre: number = 0;
+
+data:any[] = [
+  ];
+  data_nombre:any=[];
   constructor(private fb: FormBuilder) {
     super();
   }
@@ -47,6 +58,30 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
      this.filtroForm=this.inicializarFiltroForm()
 
    }
+   cargarPagina(event: any) {
+    console.log("Paginación:", event);
+  }
+  inicializatabla(){
+    this.data = [
+  { asociar: false,nss:"123456789",nombre: "Juan", apaterno: "Pérez", amaterno:"López",gestion:1,queja:0,inconformidades:0,amparo:1,procedimiento:0,juicio:1} ,
+  { asociar: false,nss:"123456789",nombre: "Jose de Jesus", apaterno: "Pérez", amaterno:"López",gestion:2,queja:1,inconformidades:0,amparo:1,procedimiento:0,juicio:1} ,
+];
+  }
+
+    inicializatablaNombre(){
+    this.data_nombre = [
+  { asociar: false,nss:"123456789",nombre: "Ricardo", apaterno: "Palma", amaterno:"García",gestion:1,queja:0,inconformidades:0,amparo:1,procedimiento:0,juicio:1} ,
+  { asociar: false,nss:"123456789",nombre: "Ricardo", apaterno: "Palma", amaterno:"López",gestion:1,queja:0,inconformidades:0,amparo:1,procedimiento:0,juicio:1} ,
+ { asociar: false,nss:"123456789",nombre: "Ricardo", apaterno: "Palma", amaterno:"Hernández",gestion:1,queja:0,inconformidades:0,amparo:1,procedimiento:0,juicio:1} ,
+ { asociar: false,nss:"123456789",nombre: "Ricardo", apaterno: "Palma", amaterno:"Ramírez",gestion:1,queja:0,inconformidades:0,amparo:1,procedimiento:0,juicio:1} ,
+  { asociar: false,nss:"123456789",nombre: "Ricardo", apaterno: "Palma", amaterno:"Vazquez",gestion:1,queja:0,inconformidades:0,amparo:1,procedimiento:0,juicio:1} ,
+];
+this.totalregistrosnombre=this.data_nombre.length;
+  }
+
+  cambiarEstado(event: any) {
+    console.log("Checkbox cambiado:", event);
+  }
 
    inicializarFiltroForm(): FormGroup {
   return this.fb.group({
@@ -59,6 +94,7 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
 }
 
 onTipoConsultaChange(event: any) {
+  this.limpiar();
   const tipo = event.value?.value;
 
   const nss = this.filtroForm.get('nss');
@@ -86,7 +122,7 @@ onTipoConsultaChange(event: any) {
     nombre?.enable(); apaterno?.enable(); amaterno?.enable();
     nombre?.setValidators([Validators.required]);
     apaterno?.setValidators([Validators.required]);
-    amaterno?.setValidators([Validators.required]);
+    
 
   } else if (tipo === 3) { // Ambos
     nss?.enable();
@@ -94,7 +130,7 @@ onTipoConsultaChange(event: any) {
     nss?.setValidators([Validators.required]);
     nombre?.setValidators([Validators.required]);
     apaterno?.setValidators([Validators.required]);
-    amaterno?.setValidators([Validators.required]);
+   
   }
 
   // Actualizar cambios
@@ -124,17 +160,55 @@ validacionCondicional(): ValidatorFn {
     if (tipoconsulta === 1) {
       if (!nss) valido = false;
     } else if (tipoconsulta === 2) {
-      if (!nombre || !apaterno || !amaterno) valido = false;
+      if (!nombre || !apaterno ) valido = false;
     } else if (tipoconsulta === 3) {
-      if (!nss || !nombre || !apaterno || !amaterno) valido = false;
+      if (!nss || !nombre || !apaterno ) valido = false;
     }
 
     return valido ? null : { camposRequeridosFaltantes: true };
   };
 }
 
-paginar(){}
-limpiar(){}
+paginar(){
+
+  const tipo = this.filtroForm.get('tipoconsulta');
+  const nss = this.filtroForm.get('nss');
+  const nombre = this.filtroForm.get('nombre');
+  const apaterno = this.filtroForm.get('apaterno');
+  const amaterno = this.filtroForm.get('amaterno');
+  console.log("Tipo de consulta:", tipo?.value.value);
+  if(tipo?.value.value==1){
+    if(nss?.value=='94987906512'){
+       this._alertServices.error('Sin coincidencias');
+    }else{
+      this.tituloTabla='Resultados de la búsqueda por NSS: '+nss?.value;
+      console.log("Título de la tabla:", this.tituloTabla);
+      this.inicializatabla();
+    }
+
+  }else if(tipo?.value.value==2){
+    if(nombre?.value=='Juan' && apaterno?.value=='Pérez'){
+       this._alertServices.error('Sin coincidencias');
+    }else{
+      this.tituloTabla='Resultados de la búsqueda por nombre y primer aplellido: '+nombre?.value + ' ' + apaterno?.value;
+      this.inicializatabla();
+    }
+  }else{
+    this.tituloTabla='Resultados de la búsqueda por NSS: '+nss?.value;
+    this.tituloTablanombre='Resultados de la búsqueda por nombre y primer aplellido: '+nombre?.value + ' ' + apaterno?.value;
+    this.inicializatabla();
+    this.inicializatablaNombre();
+  }
+}
+limpiar(){
+  this.data = [];  
+  this.filtroForm.patchValue({
+  nss: null,
+  nombre: null,
+  apaterno: null,
+  amaterno: null
+});
+}
 
   
 }
