@@ -7,9 +7,7 @@ import {providePrimeNG} from 'primeng/config';
 import {HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
 import {provideAnimations} from '@angular/platform-browser/animations';
 import {Mensajes} from '@utils/mensajes';
-import {ApiKeyInterceptor} from '@interceptors/api-key.interceptor';
-import {JwtInterceptorService} from '@interceptors/autentication.interceptor';
-import {LoadingInterceptor} from '@interceptors/loader-interceptor.service';
+
 import {provideUserIdleConfig} from "angular-user-idle";
 import {TIEMPO_MAXIMO_SESION} from '@utils/tokens';
 import {TiempoSesion} from '@models/tiempo-sesion.interface';
@@ -41,9 +39,9 @@ export const appConfig: ApplicationConfig = {
         }, translation: es,
       }
     ),
-    {provide: HTTP_INTERCEPTORS, useClass: ApiKeyInterceptor, multi: true},
-    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorService, multi: true},
-    {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true},
+    /* {provide: HTTP_INTERCEPTORS, useClass: ApiKeyInterceptor, multi: true},
+    
+    {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true}, */
     provideAnimations(),
     provideUserIdleConfig({idle: 1140, timeout: 60, ping: 120}),
   ]

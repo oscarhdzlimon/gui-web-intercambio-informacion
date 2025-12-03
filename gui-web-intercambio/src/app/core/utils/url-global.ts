@@ -12,4 +12,5 @@ export const NAV = {
   home: 'inicio',
   consultaantecedentes:'consulta-antecedentes',
   detalleAntecedentes: 'detalle-antecedentes',
+  busquedasistema:'busqueda-sistema',
 };
