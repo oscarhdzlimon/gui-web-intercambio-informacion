@@ -40,6 +40,7 @@ const routes: Routes = [{
     {
       path: NAV.busquedasistema,
       component: BusquedaSistemasComponent,
+
       
     },
 
