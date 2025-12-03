@@ -7,9 +7,7 @@ import {providePrimeNG} from 'primeng/config';
 import {HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
 import {provideAnimations} from '@angular/platform-browser/animations';
 import {Mensajes} from '@utils/mensajes';
-import {ApiKeyInterceptor} from '@interceptors/api-key.interceptor';
 
-import {LoadingInterceptor} from '@interceptors/loader-interceptor.service';
 import {provideUserIdleConfig} from "angular-user-idle";
 import {TIEMPO_MAXIMO_SESION} from '@utils/tokens';
 import {TiempoSesion} from '@models/tiempo-sesion.interface';
