@@ -27,7 +27,7 @@
                                 <th scope="col">Fecha del suceso</th>
                                 <th scope="col">Descripción del suceso</th>
                                 <th scope="col" style="min-width: 100px" alignFrozen="right" pFrozenColumn>
-                                    Ver detalle
+                                 Ver detalle
                                 </th>
                             </tr>
                         </ng-template>
@@ -40,6 +40,7 @@
                                 <td>{{ gestion.strNSS }}</td>
                                 <td>{{ gestion.fchSuceso }}</td>
                                 <td>{{ gestion.strDescripcionSuceso }}</td>
+                                <td> <div (click)="btnVerGestion(gestion, rowIndex)">   Ver detalle</div></td>
 
                             </tr>
                         </ng-template>
