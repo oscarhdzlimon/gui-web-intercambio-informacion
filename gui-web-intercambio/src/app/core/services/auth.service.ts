@@ -40,7 +40,7 @@ export class AuthService {
 
   constructor(private userIdleService: UserIdleService,
               @Inject(TIEMPO_MAXIMO_SESION) private tiempoSesion: TiempoSesion) {
-    this.recuperarSesionAlRecargarPagina()
+   // this.recuperarSesionAlRecargarPagina()
   }
 
   login(login: Login): Observable<any> {

@@ -36,6 +36,7 @@ export class GeneralComponent {
     this._Mensajes = inject(Mensajes);
     this._router = inject(Router);
     this._alertServices = inject(AlertService);
+    console.log("🟦 Constructor GeneralComponent");
     
 
     this.documentoService = inject(DocumentoService);

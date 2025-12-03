@@ -21,16 +21,8 @@ const routes: Routes = [{
   children: [
     {
       path: '',
-      redirectTo: NAV.home,
+      redirectTo: NAV.consultaantecedentes,
       pathMatch: 'full',
-    },
-       {
-      path: NAV.verificacionDocumentos,
-      component: VerificacionDocumentosComponent,
-    
-      resolve:{
-        respuesta: verficacionDocsResolver
-      }
     },
     {
       path: NAV.consultaantecedentes,
