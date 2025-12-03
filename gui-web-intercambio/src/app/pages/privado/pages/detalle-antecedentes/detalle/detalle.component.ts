@@ -29,7 +29,5 @@ ngOnInit() {
 
 }
 
-btnCerrar(){
-  this.ref.close();
-}
+
 }
