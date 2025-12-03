@@ -300,6 +300,11 @@
     object-fit: contain;
   }
 
+  table {
+    margin-top: 30px;
+    
+}
+
   .fixed-center-x {
     position: fixed;
     left: 50%;
@@ -316,7 +321,10 @@
 
 }
 
-
+.accordion-body {
+  
+  padding-top: 0px;
+}
 .accordion-item:first-of-type>.accordion-header .accordion-button {
   background-color: #FAFDFE;
   border: none;
@@ -328,12 +336,15 @@
   border-radius: 15px;
   color: black;
   font-weight: 400;
+  margin-bottom: 0px;
   
 }
 
 
   .accordion-item:first-of-type {
   margin-top: 30px;
+  
+  padding-top: 0px;
 }
 
 .accordion-item:last-of-type>.accordion-collapse {
