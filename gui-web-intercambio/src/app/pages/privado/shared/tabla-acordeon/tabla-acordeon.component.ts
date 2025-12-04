@@ -1,8 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ColumnDefinition } from '@models/columa-tabla';
 import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
+import { NAV } from '@utils/url-global';
 import { ButtonModule } from 'primeng/button';
 import { Card } from 'primeng/card';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
@@ -31,6 +33,8 @@ import { TableModule } from 'primeng/table';
   styleUrl: './tabla-acordeon.component.scss'
 })
 export class TablaAcordeonComponent {
+  protected _router: Router;
+ _nav = NAV;
 @Input() titulo: string = '';
  @Input() data: any[] = [];
   
@@ -41,11 +45,17 @@ export class TablaAcordeonComponent {
 
   @Output() pageChange = new EventEmitter<any>();
   @Output() checkboxChanged = new EventEmitter<{ row: any, column: ColumnDefinition }>();
+  constructor() {
+     this._router = inject(Router);
+   }
    onPageChange(event: any) {
     this.pageChange.emit(event);
    
 }
  ngOnInit() {
   console.log('total',this.total);
+ }
+ ver(){
+   this._router.navigate(['/privado', NAV.detalleAntecedentes,2]);
  }
 }

@@ -57,14 +57,61 @@ line-height: 120%; /* 24px */ /* 24px */
 }
 
 .field-label {
-  color: #626262;
+  color: #404041;
   font-feature-settings: 'liga' off, 'clig' off;
-  font-size: 12px;
+  font-size: 13px;
   font-style: normal;
-  font-weight: 500;
-  line-height: 120%; /* 12px */
+  font-weight: 600;
+  line-height: 100%; /* 12px */
   text-align: start;
 }
+
+.ph-custom::placeholder {
+  color: #8E90A4;
+font-feature-settings: 'liga' off, 'clig' off;
+font-family: "Noto Sans";
+font-size: 14px;
+font-style: normal;
+font-weight: 400;
+line-height: 120%; /* 16.8px */
+}
+
+.ph-custom:disabled {
+  background-color: #f5f6f7 !important;   /* Ejemplo color */
+  color: #8E90A4 !important;
+}
+
+.ph-custom {
+ color: #1B353A;
+font-feature-settings: 'liga' off, 'clig' off;
+font-family: "Noto Sans";
+font-size: 14px;
+font-style: normal;
+font-weight: 400;
+line-height: 120%; /* 16.8px */
+}
+
+.custom-dropdown .p-dropdown-label.p-placeholder {
+  color: #8E90A4 !important;
+font-feature-settings: 'liga' off, 'clig' off;
+font-family: "Noto Sans";
+font-size: 14px;
+font-style: normal;
+font-weight: 400;
+line-height: 120%; /* 16.8px */         /* opcional */
+}
+
+/* Estilo del texto seleccionado */
+.custom-dropdown .p-dropdown-label {
+    color: #1B353A !important;
+font-feature-settings: 'liga' off, 'clig' off;
+font-family: "Noto Sans";
+font-size: 14px;
+font-style: normal;
+font-weight: 400;
+line-height: 120%; /* 16.8px */        /* negritas opcional */
+}
+
 .field-label-obligatorio {
     color: #626262;
     font-feature-settings: "liga" off, "clig" off;
@@ -557,4 +604,26 @@ vertical-align: middle;
 .label-doc {
   max-width: 54px;
   white-space: nowrap;
+}
+
+.etiqueta1modal{
+  color: var(--grises-404040, #404040);
+
+/* Typography/Modal/Data */
+font-family: "Noto Sans";
+font-size: 12px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+}
+
+.etiquetasmodal{
+  color: var(--Text-Secondary, #445461);
+
+/* Typography/Modal/Display */
+font-family: "Noto Sans";
+font-size: 14px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
 }

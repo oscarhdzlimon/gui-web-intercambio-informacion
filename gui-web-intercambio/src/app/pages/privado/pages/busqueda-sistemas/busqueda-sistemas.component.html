@@ -1,12 +1,12 @@
-<form >
+<div style="margin-left: 10px;margin-right: 10px;" >
+  <div class="row">
 
-     <article class="flex flex-row flex-wrap">
+    <div class="lg:col-4 col-12 flex align-items-center">
+      <span class="titulobusqueda">Expediente: 123456678-0</span>
+    </div>
 
-        <div class="lg:col-4 col-12 flex align-items-center">
-            <span class="titulobusqueda">Expediente: 123456678-0</span>
-        </div>
- <div class="lg:col-4 col-12">
-  <div class="flex align-items-center">
+ <div class="lg:col-4 col-12 flex align-items-center">
+        <div class="flex align-items-center">
     <!-- Grupo 1: Label + Select -->
     <div class="flex flex-column align-items-start">
       <label class="field-label mb-1 tituloInputBusqueda" for="tipoconsulta">Mostrar resultados por:</label>
@@ -29,7 +29,7 @@
                      id="password"
                      placeholder="Buscar"
                      formControlName="password"
-                     
+                     class="ph-custom input-movil-302"
                      />
               <i class="icon pi pi-search"
                  ></i>
@@ -37,57 +37,22 @@
      
     </div>
   </div>
+    </div>
+
+
+    <div class="lg:col-4 col-12 flex align-items-center" style="justify-content: end;">
+      <p-button 
+  type="button"  
+  label="Buscar" 
+  styleClass="btn-buscar btn-background"  
+  [style]="{'width':'126px','margin-right':'30px'}">
+</p-button>
+        <p-button type="button"  variant="outlined"  label="Mostrar todo" [style]="{'width': '168px'}"/>
+
+    </div>
+
+  </div>
 </div>
-
-
-
-
-      <div class="flex lg:col-4  col-12 justify-content-end align-items-center mt-3 gap-4">
-        <p-button type="button"  label="Buscar" styleClass="btn-buscar" />
-        <p-button type="button"  variant="outlined"  label="Mostrar todo"/>
-        
-      </div>
-    </article>
- 
- <!--    <article class="flex flex-row flex-wrap">
-  <div class="lg:col-6 col-12">
-    <span class="titulobusqueda">Expediente: 123456678-0</span>
-  </div>
-  <div class="lg:col-3 col-12">
-            <div class="container mt-3">
-
-      
-        <div class="d-flex gap-2 mb-1">
-            <span class="text-muted small">Mostrar resultados por:</span>
-            <span class="text-muted small">Selecciona resultado</span>
-        </div>
-
-  
-        <div class="combined-container d-flex">
-            
-         
-            <select class="form-select border-0 rounded-0 combined-select">
-            <option>Selecciona</option>
-            </select>
-
-           
-            <div class="input-group flex-grow-1 combined-input-group">
-            <input type="text" class="form-control border-0 rounded-0" placeholder="Buscar">
-            <span class="input-group-text border-0 bg-white">
-                <i class="bi bi-search"></i>
-            </span>
-            </div>
-
-        </div>
-
-        </div>
-  </div>
-  <div class="lg:col-3 col-12">
-    <p-button type="button" variant="outlined" label="Limpiar"></p-button>
-    <p-button type="button" label="Buscar"></p-button>
-  </div>
-</article> -->
-</form>
 
 <div ngbAccordion >
     <div ngbAccordionItem [collapsed]="false" >
@@ -158,8 +123,9 @@
 </div>
 <article class="flex flex-row flex-wrap" *ngIf="data.length > 0">
        
-      <div class="flex lg:col-12  col-12 justify-content-end align-items-center mt-3 gap-4">
-          <p-button type="button"  label="Guardar"/>
+      <div class="flex lg:col-12  col-12 justify-content-end align-items-center mt-3 ">
+          <p-button type="button"  label="Guardar" styleClass="btn-buscar btn-background"  
+  [style]="{'width':'136px','margin-right':'30px'}"/>
       </div>
     </article>
 

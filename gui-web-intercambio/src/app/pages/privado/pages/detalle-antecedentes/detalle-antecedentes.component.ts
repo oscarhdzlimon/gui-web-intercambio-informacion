@@ -20,6 +20,9 @@ import {DialogService, DynamicDialogRef} from 'primeng/dynamicdialog';
 import { DetalleComponent } from './detalle/detalle.component';
 import { FooterGenericoComponent } from '../../shared/footer-generico/footer-generico.component';
 import { HeaderGenericoComponent } from '../../shared/header-generico/header-generico.component';
+import { TablaAntecedentesComponent } from '@pages/privado/shared/tabla-antecedentes/tabla-antecedentes.component';
+import { NAV } from '@utils/url-global';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-detalle-antecedentes',
   imports: [  CommonModule,
@@ -34,15 +37,29 @@ import { HeaderGenericoComponent } from '../../shared/header-generico/header-gen
     PopoverModule,
     NgbAccordionModule,
 
-  BtnRegresarComponent],
+  BtnRegresarComponent,TablaAntecedentesComponent],
   templateUrl: './detalle-antecedentes.component.html',
   styleUrl: './detalle-antecedentes.component.scss',
   providers: [DialogService]
 })
 export class DetalleAntecedentesComponent extends GeneralComponent {
-
+idpagina:number=0;
   ruta= this._nav.consultaantecedentes;
   titulo = 'Antecedentes';
+   data:any[] = [
+  ];
+  data2:any[] = [
+  ];
+  data4:any[] = [
+  ];
+  data5:any[] = [
+  ];
+  data6:any[] = [
+  ];
+
+  data7:any[] = [
+  ];
+
 
   lstGestion: WritableSignal<TablaDetalleGestionInterface[]> = signal([]);
   lstQueja: WritableSignal<TablaDetalleGestionInterface[]> = signal([]);
@@ -59,7 +76,7 @@ export class DetalleAntecedentesComponent extends GeneralComponent {
   rows: number = 4;
   
   constructor(
-    public dialogService: DialogService) {
+    public dialogService: DialogService,private route: ActivatedRoute) {
     super();
    
   }
@@ -67,6 +84,16 @@ export class DetalleAntecedentesComponent extends GeneralComponent {
   tabla!: Array<TablaDetalleGestionInterface>;
   tabla2!: Array<TablaDetalleGestionInterface>;
   ngOnInit(): void {
+
+
+   this.idpagina= Number(this.route.snapshot.paramMap.get('id'));
+   console.log(this.idpagina);
+ 
+
+    this.inicializatablagestion();
+     this.inicializatablagestion2();
+    this.inicializatablaamparo();
+    this.inicializatablaprocedimiento();
    let reg1 ={
     idConsecutivo: 1,
     idExpediente: 'ABCDFE',
@@ -184,6 +211,37 @@ export class DetalleAntecedentesComponent extends GeneralComponent {
    this.paginar();
   }
 
+    inicializatablagestion(){
+    this.data = [
+  { consecutivo: 1,expediente:"GST2023001",persona:"Ricardo Palma García",curp:"PAGR830521HDFRLC05",nss:"17482569321",fecha: "20-03-2022", descripcion: "El promovente manifestó retraso en ...", ooad:"OOAD Ciudad de México Norte",unidad:"HGZ No. 24 Insurgentes",notificacion:"20-03-2022",estado:"En trámite",cierre:"20-03-2022",resolucion:"20-03-2022",acuerdo:"20-03-2022",revoco:"Sí - 20-03-2022"} ,
+  { consecutivo: 1,expediente:"GST2023001",persona:"Ricardo Palma García",curp:"PAGR830521HDFRLC05",nss:"17482569321",fecha: "20-03-2022", descripcion: "El promovente manifestó retraso en ...", ooad:"OOAD Ciudad de México Norte",unidad:"HGZ No. 24 Insurgentes",notificacion:"20-03-2022",estado:"En trámite",cierre:"20-03-2022",resolucion:"20-03-2022",acuerdo:"20-03-2022",revoco:"Sí - 20-03-2022"} ,
+];
+
+}
+
+ inicializatablagestion2(){
+    this.data7 = [
+  { consecutivo: 1,folio:"GST2023001",persona:"Ricardo Palma García",peticionarios:"Ricardo Palma Hernández, María Fernanda ...",nss:"17482569321",fecha: "20-03-2022", ooad:"OOAD Ciudad de México Norte",unidad:"HGZ No. 24 Insurgentes",creacion:"20-03-2022",estado:"En trámite",cierre:"20-03-2022"} ,
+  { consecutivo: 2,folio:"GST2023001",persona:"Ricardo Palma García",peticionarios:"Ricardo Palma Vázquez, Claudia  Méndez ...",nss:"17482569321",fecha: "20-03-2022",  ooad:"OOAD Ciudad de México Norte",unidad:"HGZ No. 24 Insurgentes",creacion:"20-03-2022",estado:"En trámite",cierre:"20-03-2022"} ,
+];
+
+}
+ inicializatablaamparo(){
+    this.data4 = [
+  { consecutivo: 1,expediente:"GST2023001",persona:"Ricardo Palma García",peticionarios:"Ricardo Palma Hernández, María Fernanda ...",nss:"17482569321",fecha: "20-03-2022", descripcion: "El promovente manifestó retraso en ...", ooad:"OOAD Ciudad de México Norte",unidad:"HGZ No. 24 Insurgentes",notificacion:"20-03-2022",estado:"En trámite",cierre:"20-03-2022",resolucion:"20-03-2022",acuerdo:"20-03-2022",revoco:"Sí - 20-03-2022"} ,
+  { consecutivo: 1,expediente:"GST2023001",persona:"Ricardo Palma García",peticionarios:"Ricardo Palma Vázquez, Claudia Méndez ...",nss:"17482569321",fecha: "20-03-2022", descripcion: "El promovente manifestó retraso en ...", ooad:"OOAD Ciudad de México Norte",unidad:"HGZ No. 24 Insurgentes",notificacion:"20-03-2022",estado:"En trámite",cierre:"20-03-2022",resolucion:"20-03-2022",acuerdo:"20-03-2022",revoco:"Sí - 20-03-2022"} ,
+];
+
+}
+ inicializatablaprocedimiento(){
+    this.data5 = [
+  { consecutivo: 1,expediente:"GST2023001",persona:"Ricardo Palma García",peticionarios:"Ricardo Palma Hernández, María Fernanda ...",nss:"17482569321",fecha: "20-03-2022", descripcion: "El promovente manifestó retraso en ...", ooad:"OOAD Ciudad de México Norte",unidad:"HGZ No. 24 Insurgentes",notificacion:"20-03-2022",estado:"En trámite",cierre:"20-03-2022",resolucion:"20-03-2022",acuerdo:"20-03-2022",revoco:"Sí - 20-03-2022",convenio:"Sí"} ,
+  { consecutivo: 1,expediente:"GST2023001",persona:"Ricardo Palma García",peticionarios:"Ricardo Palma Vázquez, Claudia Méndez ...",nss:"17482569321",fecha: "20-03-2022", descripcion: "El promovente manifestó retraso en ...", ooad:"OOAD Ciudad de México Norte",unidad:"HGZ No. 24 Insurgentes",notificacion:"20-03-2022",estado:"En trámite",cierre:"20-03-2022",resolucion:"20-03-2022",acuerdo:"20-03-2022",revoco:"Sí - 20-03-2022",convenio:"No"} ,
+];
+
+}
+ver(){}
+
   public btnVerDetalle(idRegistro:number, registro:any){
     let titulo= 'Detalle de Gestión';
     this.ref = this.dialogService.open(DetalleComponent, {
@@ -224,5 +282,20 @@ export class DetalleAntecedentesComponent extends GeneralComponent {
         this.totalElementos = respuesta.respuesta.page.totalElements;
       }
     }) */
+  }
+     cargarPagina(event: any) {
+    console.log("Paginación:", event);
+  }
+  cambiarEstado(event: any) {
+    console.log("Checkbox cambiado:", event);
+  }
+
+  regresar(){
+    if(this.idpagina==1){
+this._router.navigate(['/privado', NAV.consultaantecedentes]);
+    }else{
+      this._router.navigate(['/privado', NAV.busquedasistema]);
+    }
+    
   }
 }

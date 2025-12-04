@@ -1,5 +1,5 @@
 .seccionA{
-    height: 50px;
+   /*  height: 50px;
     background-color: #F4F7FC;
     text-align: start;
     vertical-align: middle;
@@ -8,7 +8,23 @@
     color: black;
     font-weight: 400;
 padding-left: 10px;
-    margin-bottom: 30px;
+    margin-bottom: 30px; */
+    display: flex;
+height: 60px;
+padding: 10px;
+align-items: center;
+gap: 10px;
+align-self: stretch;
+border-radius: 8px;
+background: #F4F7FC;
+color: #374957;
+text-align: right;
+font-feature-settings: 'liga' off, 'clig' off;
+font-family: "Noto Sans";
+font-size: 18px;
+font-style: normal;
+font-weight: 600;
+line-height: 120%; /* 19.2px */
 }
 
 .aviso{
@@ -27,4 +43,24 @@ padding-left: 10px;
     margin-left: 10px;
     position: absolute;
     z-index: 99;
+}
+
+.alinear {
+  display: flex;              /* activa flexbox */
+  align-items: center;        /* centra verticalmente */
+  gap: 8px;                   /* espacio entre elementos */
+}
+.tituloantecedentes{
+    color: #374957;
+font-feature-settings: 'liga' off, 'clig' off;
+font-family: "Noto Sans";
+font-size: 24px;
+font-style: normal;
+font-weight: 600;
+line-height: 120%; /* 28.8px */
+}
+.divacordeon{
+border-bottom: 1px solid #D6DDD6;
+background-color: #ffffff;
+
 }
