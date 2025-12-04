@@ -11,7 +11,7 @@ RUN npm install --legacy-peer-deps
 COPY . .
 
 # Ajusta el nombre exactamente del proyecto según angular.json
-RUN npm run build --configuration production
+RUN npm run build -- --configuration production
 # o si tu proyecto requiere especificar la app:
 # RUN npm run build gui-web-intercambio --configuration production
 
