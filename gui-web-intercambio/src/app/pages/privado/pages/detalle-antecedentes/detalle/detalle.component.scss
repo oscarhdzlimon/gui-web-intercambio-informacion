@@ -36,3 +36,62 @@ font-style: normal;
 font-weight: 600;
 line-height: normal;
 }
+
+.dialog-container {
+    max-width: 768px;         /* puedes ajustar a 800, 950, etc. */
+    margin: 0 auto;           /* centra el contenido horizontalmente */
+    padding-left: 10px;
+    padding-right: 10px;      /* iguala espacios laterales */
+}
+
+/* Ajuste para móvil */
+@media (max-width: 768px) {
+    .dialog-container {
+        max-width: 100%;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+}
+
+.dialog-container .row {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+.divetiqueta{
+    padding-left: 8px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    background: #EDEFF2;
+}
+.divcontenido{
+   font-family: "Noto Sans";
+font-size: 12px;
+font-style: normal;
+font-weight: 400;
+line-height: normal; 
+color :#374957;
+ padding-left: 8px;
+}
+
+
+.fila-modal {
+    display: flex;
+    gap: 20px;              /* Aumenta separación entre columnas */
+    padding: 0;             /* Quita el espacio izquierda/derecha */
+    margin: 0;              /* por si el row tenía márgenes */
+    margin-top: 12px;
+}
+
+.item-modal {
+    width: 50%;             /* Ambas columnas ocupan el ancho sin dejar espacio externo */
+ 
+    box-sizing: border-box; /* evita que el padding rompa el 50% */
+    
+}
+.item-modal2 {
+    width: 100%;             /* Ambas columnas ocupan el ancho sin dejar espacio externo */
+ 
+    box-sizing: border-box; /* evita que el padding rompa el 50% */
+    
+}

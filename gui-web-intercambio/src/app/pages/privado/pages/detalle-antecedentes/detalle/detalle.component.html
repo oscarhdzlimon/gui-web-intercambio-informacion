@@ -1,4 +1,4 @@
-
+<div class="dialog-container">
 <div class="row col-12 flex justify-content-between align-items-center">
 
     <span class="col-6 etiqueta1modal">
@@ -23,56 +23,60 @@
 <span class="subtitulo">Resultado de la búsqueda por NSS : 123456789 y nombre: Ricardo Palma</span>
 </div>
 
-<div class="row col-12 flex">
-    <div class="col-6 titulo-dato">
-        Consecutivo
-    </div>
-    <div class="col-6 titulo-dato">
-        Folio de la gestión
-    </div>
-</div>
-<div class="row col-12 flex">
-    <div class="col-6 titulo-dato">
-        {{registro.idConsecutivo}}
-    </div>
-    <div class="col-6 titulo-dato">
-        {{registro.idExpediente}}
-    </div>
+
+<div class="fila-modal">
+    <div class="item-modal etiquetasmodal divetiqueta">Consecutivo</div>
+    <div class="item-modal etiquetasmodal divetiqueta">Folio de la gestión</div>
 </div>
 
-<div class="row col-12 flex">
-    <div class="col-6 titulo-dato">
-        Persona promovente
-    </div>
-    <div class="col-6 titulo-dato">
-        Nombre del/los peticionario(s)
-    </div>
-</div>
-<div class="row col-12 flex">
-    <div class="col-6">
-        {{registro.personaPromovente}}
-    </div>
-    <div class="col-6">
-        {{registro.idExpediente}}
-    </div>
+<div class="fila-modal">
+    <div class="item-modal divcontenido ">{{consecutivo}}</div>
+    <div class="item-modal divcontenido ">{{folio}}</div>
 </div>
 
-<div class="row col-12 flex">
-    <div class="col-6 titulo-dato">
-        NSS
-    </div>
-    <div class="col-6 titulo-dato">
-        Fecha del suceso
-    </div>
+<div class="fila-modal">
+    <div class="item-modal etiquetasmodal divetiqueta">Persona promovente</div>
+    <div class="item-modal etiquetasmodal divetiqueta">Nombre del / los peticionario(s)</div>
 </div>
-<div class="row col-12 flex">
-    <div class="col-6">
-        {{registro.strNSS}}
-    </div>
-    <div class="col-6">
-        {{registro.fchSuceso}}
-    </div>
+<div class="fila-modal">
+    <div class="item-modal divcontenido ">{{persona}}</div>
+    <div class="item-modal divcontenido ">{{peticionarios}}</div>
 </div>
-<hr/>
+<div class="fila-modal">
+    <div class="item-modal etiquetasmodal divetiqueta">NSS</div>
+    <div class="item-modal etiquetasmodal divetiqueta">Fecha del suceso</div>
+</div>
+<div class="fila-modal">
+    <div class="item-modal divcontenido ">{{nss}}</div>
+    <div class="item-modal divcontenido ">{{fecha}}</div>
+</div>
+<div class="fila-modal">
+    <div class="item-modal etiquetasmodal divetiqueta">OOAD involucrado</div>
+    <div class="item-modal etiquetasmodal divetiqueta">Unidad involucrada</div>
+</div>
+<div class="fila-modal">
+    <div class="item-modal divcontenido ">{{ooad}}</div>
+    <div class="item-modal divcontenido ">{{unidad}}</div>
+</div>
+<div class="fila-modal">
+    <div class="item-modal etiquetasmodal divetiqueta">Fecha del suceso</div>
+    <div class="item-modal etiquetasmodal divetiqueta">Estado</div>
+</div>
+<div class="fila-modal">
+    <div class="item-modal divcontenido ">{{fecha}}</div>
+    <div class="item-modal divcontenido ">{{estado}}</div>
+</div>
+<div class="fila-modal">
+    <div class="item-modal2 etiquetasmodal divetiqueta">Fecha del cierr del acuerdo/juicio/procedimiento/queja médica/gestión</div>
+  
+</div>
+<div class="fila-modal">
+    <div class="item-modal2 divcontenido ">{{cierre}}</div>
+    
+</div>
 
 
+
+
+
+</div>

@@ -37,7 +37,7 @@ const routes: Routes = [{
     },
 
     {
-      path: NAV.detalleAntecedentes,
+      path: `${NAV.detalleAntecedentes}/:id`,
       component: DetalleAntecedentesComponent,
  
       

@@ -97,7 +97,7 @@ console.log('titulo',this.titulo);
   }
 
 ver(){
-  this._router.navigate(['/privado', NAV.detalleAntecedentes]);
+  this._router.navigate(['/privado', NAV.detalleAntecedentes,1]);
 }
 
   // Evento paginador

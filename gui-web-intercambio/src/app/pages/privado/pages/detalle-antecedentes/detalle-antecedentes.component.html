@@ -10,7 +10,7 @@
 
 
 
-<div ngbAccordion>
+<div ngbAccordion *ngIf="idpagina==1">
     <div ngbAccordionItem [collapsed]="false">
         <div ngbAccordionHeader class="divacordeon">
             <button ngbAccordionButton>Gestión
@@ -110,6 +110,110 @@
             </div>
         </div>
     </div>
+</div>
+    
+
+<div ngbAccordion *ngIf="idpagina==2">
+    <div ngbAccordionItem [collapsed]="false">
+        <div ngbAccordionHeader class="divacordeon">
+            <button ngbAccordionButton>Gestión
+
+            </button>
+        </div>
+        <div ngbAccordionCollapse>
+            <div ngbAccordionBody style="padding: 0px;">
+                <!-- <ng-template>
+
+                    <p-table [value]="lstGestion()" [scrollable]="true" [tableStyle]="{ 'min-width': '50rem' }">
+
+                        <ng-template #header>
+                            <tr>
+                                <th scope="col"># consecutivo</th>
+                                <th scope="col">No. de Expediente</th>
+                                <th scope="col">Persona promovente</th>
+                                <th scope="col">CURP</th>
+                                <th scope="col">NSS</th>
+                                <th scope="col">Fecha del suceso</th>
+                                <th scope="col">Descripción del suceso</th>
+                                <th scope="col" style="min-width: 100px" alignFrozen="right" pFrozenColumn>
+                                    Ver detalle
+                                </th>
+                            </tr>
+                        </ng-template>
+                        <ng-template #body let-gestion let-rowIndex="rowIndex">
+                            <tr>
+                                <td>{{ gestion.idConsecutivo }}</td>
+                                <td>{{ gestion.idExpediente }}</td>
+                                <td>{{ gestion.personaPromovente }}</td>
+                                <td>{{ gestion.strCurp }}</td>
+                                <td>{{ gestion.strNSS }}</td>
+                                <td>{{ gestion.fchSuceso }}</td>
+                                <td>{{ gestion.strDescripcionSuceso }}</td>
+
+
+                                <td alignFrozen="center" pFrozenColumn
+                                    class="flex align-items-center justify-content-center">
+                                    <i class="cursor-pointer icon pi pi-eye" (click)="btnVerDetalle(gestion, rowIndex)"
+                                        [style]="{ 'font-size': '2.2rem',  background: '#f6faff' }"></i>
+                                </td>
+                            </tr>
+                        </ng-template>
+                        <ng-template #emptymessage>
+                            <tr>
+                                <td colspan="8">
+                                    <div class="flex justify-content-center align-items-center">
+                                        <img class="p-0" src="/assets/images/Lupa.svg" alt="Sin resultados">
+                                    </div>
+                                    <div style="text-align: center;">Sin resultados de búsqueda</div>
+                                </td>
+                            </tr>
+                        </ng-template>
+                        <ng-template #footer>
+                            <td colspan="3" class="lg:hidden">
+                                <div class="flex justify-content-center align-items-center">
+                                    <img src="/assets/images/touch_icon.png" height="40" width="40"
+                                        alt="Imagen centrada para móvil" class="imagen-tabla" />
+                                </div>
+                            </td>
+                        </ng-template>
+                    </p-table>
+                    <p-paginator styleClass="justify-content-end" [showFirstLastIcon]="false" [first]="first"
+                        [rows]="rows" [totalRecords]="totalElementos" (onPageChange)="onPageChange($event)">
+
+
+                        <ng-template pTemplate="previouspagelinkicon">
+                            <div class="flex align-items-center">
+                                <span class="pi pi-chevron-left text-xl font-normal mr-2"></span>
+                                <span class="font-semibold mr-5">Anterior</span>
+                            </div>
+                        </ng-template>
+
+                        <ng-template pTemplate="nextpagelinkicon">
+                            <div class="flex align-items-center">
+                                <span class="font-semibold ml-5">Siguiente</span>
+                                <span class="pi pi-chevron-right text-xl font-normal ml-2"></span>
+                            </div>
+                        </ng-template>
+
+                    </p-paginator>
+                    <span class="font-semibold mr-4 resultados">Resultados
+                        {{totalElementos}}</span>
+
+               </ng-template> -->
+            
+            <app-tabla-antecedentes 
+                    [tabla]="7"
+                    [data]="data7"
+                    [rows]="10"
+                    [total]="2"
+                    (pageChange)="cargarPagina($event)"
+                    (checkboxChanged)="cambiarEstado($event)">
+                </app-tabla-antecedentes>
+            
+            </div>
+        </div>
+    </div>
+</div>
 
 
 

@@ -414,3 +414,12 @@
 input:-webkit-autofill::first-line {
   color: #000 !important; /* color de texto al autocompletar */
 }
+
+.dialog-body {
+    padding: 20px !important;
+    width: 100%;
+}
+
+:host ::ng-deep .p-dialog .p-dialog-content {
+    padding: 15px !important;
+}

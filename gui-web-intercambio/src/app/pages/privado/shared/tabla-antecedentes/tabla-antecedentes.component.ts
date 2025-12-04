@@ -50,13 +50,13 @@ export class TablaAntecedentesComponent {
  ver(){
 
   let idRegistro:number=0;
-  let registro:any
-   let titulo= 'Detalle de Gestión';
+  let registro:any={consecutivo:1,folio:'GES240015',persona:'Ricardo Palma García',peticionarios:'PAGR890101HDFRRC01',nss:'17482569321',fecha:'15-03-2022',ooad:'OOAD Ciudad de México Norte',unidad:'HGZ No. 24 Insurgentes',estado:'Concluido',cierre:'25-04-2022'};
+   let titulo= 'Detalle de: Gestión';
       this.ref = this.dialogService.open(DetalleComponent, {
         data: {...registro,idRegistro, titulo},
         modal: true,
         width: '768px',
-        height: '80vh',
+        height: '440px',
         focusOnShow: false,
         breakpoints: {
           '360px': '75vw',

@@ -56,6 +56,6 @@ export class TablaAcordeonComponent {
   console.log('total',this.total);
  }
  ver(){
-   this._router.navigate(['/privado', NAV.detalleAntecedentes]);
+   this._router.navigate(['/privado', NAV.detalleAntecedentes,2]);
  }
 }

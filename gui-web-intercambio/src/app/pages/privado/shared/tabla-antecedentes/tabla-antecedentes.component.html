@@ -1,4 +1,4 @@
-<div style="width:100%; overflow:auto" *ngIf="tabla==1">
+<div style="width:100%; overflow:auto;margin-top: 35px;" *ngIf="tabla==1">
 <p-table 
   [value]="data" 
   [scrollable]="true" 
@@ -332,7 +332,7 @@
       <th scope="col" style="min-width:250px">Descripción del suceso o hechos</th>
       <th scope="col" style="min-width:150px">OOAD involucrado</th>
       <th scope="col" style="min-width:200px">Unidad involucrada</th>
-      <th scope="col" style="min-width:200px">Fecha de recepción o not</th>
+      <th scope="col" style="min-width:200px">Fecha de recepción / notiifcación</th>
       <th scope="col" style="min-width:150px">Estado</th>
       <th scope="col" style="min-width:200px">Fecha de cierre del acuerdo/juicio/procedimiento/queja médica /gestión</th>
       <th scope="col" style="min-width:200px">Fecha de notificación de la Resolución</th>
@@ -633,9 +633,101 @@
 
 </div>
 
+<div style="width:100%; overflow:auto; margin-top: 35px;" *ngIf="tabla==7">
+<p-table 
+  [value]="data" 
+  [scrollable]="true" 
+  scrollHeight="400px"
+  responsiveLayout="scroll">
 
+  <!-- Header -->
+  <ng-template pTemplate="header">
+    <tr>
+      <th scope="col" style="min-width:80px"># consecutivo</th>
+      <th scope="col" style="min-width:150px">Folio de la gestión</th>
+      <th scope="col" style="min-width:200px">Persona promovente</th>
+      <th scope="col" style="min-width:150px">Nombre del / los peticionario(s)</th>
+      <th scope="col" style="min-width:150px">NSS</th>
+      <th scope="col" style="min-width:150px">Fecha del suceso</th>
+      <th scope="col" style="min-width:250px">Descripción del suceso o hechos</th>
+      <th scope="col" style="min-width:150px">OOAD involucrado</th>
+      <th scope="col" style="min-width:200px">Unidad involucrada</th>
+      <th scope="col" style="min-width:200px">Fecha de creación</th>
+      <th scope="col" style="min-width:150px">Estado</th>
+      <th scope="col" style="min-width:200px">Fecha de cierre del acuerdo/juicio/procedimiento/queja médica /gestión</th>
+            <!-- columnas congeladas a la derecha -->
+      <th scope="col" pFrozenColumn alignFrozen="right" style="min-width:100px">Ver detalle</th>
+      
+    </tr>
+  </ng-template>
 
+  <!-- Body -->
+  <ng-template pTemplate="body" let-rowData let-i="rowIndex">
+    <tr>
+      <td style="min-width:80px">{{ rowData.consecutivo }}</td>
+      <td style="min-width:150px">{{ rowData.folio }}</td>
+      <td style="min-width:200px">{{ rowData.persona }}</td>
+      <td style="min-width:150px">{{ rowData.peticionarios }}</td>
+      <td style="min-width:150px">{{ rowData.nss }}</td>
+      <td style="min-width:150px">{{ rowData.fecha }}</td>
+      <td style="min-width:250px">{{ rowData.descripcion }}</td>
+      <td style="min-width:150px">{{ rowData.ooad }}</td>
+      <td style="min-width:200px">{{ rowData.unidad }}</td>
+      <td style="min-width:200px">{{ rowData.creacion }}</td>
+      <td style="min-width:150px">{{ rowData.estado }}</td>
+      <td style="min-width:200px">{{ rowData.cierre }}</td>
+       
+      <!-- columnas congeladas -->
+      <td pFrozenColumn alignFrozen="right" style="min-width:100px">
+        <div class="flex justify-content-center align-items-center" style="height:100%;">
+          <img src="/assets/logos/eye.svg" (click)="ver()" />
+        </div>
+      </td>
+      
+    </tr>
+  </ng-template>
 
+  <!-- Empty message -->
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td colspan="13">
+        <div class="flex flex-column justify-content-center align-items-center">
+          <img src="/assets/images/Lupa.svg" alt="Sin resultados">
+          <p class="mt-2 sinResultados">No hay resultados de búsqueda</p>
+        </div>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
 
+<!-- PAGINADOR -->
+<div class="flex align-items-center" style="background-color: #F1F4FD;">
+    <div class="text-muted small" >
+    <span class="textresultado">Resultados:</span><span class="texttotal">{{ total }}</span>
+  </div>
+    <div styleClass="justify-content-end" style="width: 95%;">
+<p-paginator
+  styleClass="justify-content-end"
+  [showFirstLastIcon]="false"
+  [first]="first"
+  [rows]="rows"
+  [totalRecords]="total"
+  (onPageChange)="onPageChange($event)"
+>
+  <ng-template pTemplate="previouspagelinkicon">
+    <div class="flex align-items-center">
+      <span class="pi pi-chevron-left text-xl font-normal mr-2"></span>
+      <span class="font-semibold mr-5">Anterior</span>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="nextpagelinkicon">
+    <div class="flex align-items-center">
+      <span class="font-semibold ml-5">Siguiente</span>
+      <span class="pi pi-chevron-right text-xl font-normal ml-2"></span>
+    </div>
+  </ng-template>
+</p-paginator>
+    </div>
 
+</div>
 
