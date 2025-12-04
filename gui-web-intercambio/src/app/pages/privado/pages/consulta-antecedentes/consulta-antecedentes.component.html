@@ -6,15 +6,16 @@
           <label class="field-label" for="especialidad">Consultar por</label>
           <span class="field-label-obligatorio">Obligatorio</span>
         </div>
-        <p-select formControlName="tipoconsulta" [options]="tipoconsulta" optionLabel="label"
-                  placeholder="Selecciona una opción" class="w-full" (onChange)="onTipoConsultaChange($event)"/>
+        <p-select formControlName="tipoconsulta" [options]="tipoconsulta" optionLabel="label" class="ph-custom"
+                  placeholder="Selecciona una opción" class="w-full custom-dropdown" (onChange)="onTipoConsultaChange($event)">
+        </p-select>
       </div>
       <div class="lg:col-3 col-12">
         <div class="flex justify-content-between">
           <label class="field-label" for="nss">NSS</label>
           <span class="field-label-obligatorio">Obligatorio</span>
         </div>
-        <input pInputText class="w-full" type="text" id="nss"
+        <input pInputText class="w-full ph-custom" type="text" id="nss"
                placeholder="Ingresa NSS"
                formControlName="nss"
         />
@@ -24,7 +25,7 @@
           <label class="field-label" for="nombre">Nombre</label>
           <span class="field-label-obligatorio">Obligatorio</span>
         </div>
-        <input pInputText class="w-full" type="text" id="nombre"
+        <input pInputText class="w-full ph-custom" type="text" id="nombre"
                placeholder="Ingresa el nombre"
                formControlName="nombre"
         />
@@ -34,7 +35,7 @@
           <label class="field-label" for="apaterno">Primer apellido</label>
           <span class="field-label-obligatorio">Obligatorio</span>
         </div>
-        <input pInputText class="w-full" type="text" id="apaterno"
+        <input pInputText class="w-full ph-custom" type="text" id="apaterno"
                placeholder="Ingresa el primer apellido"
                formControlName="apaterno"
         />
@@ -46,16 +47,16 @@
     <article class="flex flex-row flex-wrap">
         <div class="lg:col-3 col-12">
         <div class="flex justify-content-between">
-          <label class="field-label" for="apaterno">Segundo apellido</label>
+          <label class="field-label " for="apaterno">Segundo apellido</label>
         </div>
-        <input pInputText class="w-full" type="text" id="amaterno"
+        <input pInputText class="w-full ph-custom" type="text" id="amaterno"
                placeholder="Ingresa el segundo apellido"
                formControlName="amaterno"
         />
       </div>
       <div class="flex lg:col-9  col-12 justify-content-end align-items-center mt-3 gap-4">
-        <p-button type="button" [disabled]="filtroForm.invalid" (onClick)="limpiar()" variant="outlined" label="Limpiar"/>
-        <p-button type="button" [disabled]="filtroForm.invalid" (onClick)="paginar()" label="Buscar"/>
+        <p-button type="button" [disabled]="filtroForm.invalid" (onClick)="limpiar()" variant="outlined" label="Limpiar" [style]="{'width': '135px'}"/>
+        <p-button type="button" [disabled]="filtroForm.invalid" (onClick)="paginar()" label="Buscar" [style]="{'width': '135px'}" styleClass="btn-background"/>
       </div>
     </article>
 
@@ -80,7 +81,7 @@
 <article class="flex flex-row flex-wrap" *ngIf="data.length > 0">
        
       <div class="flex lg:col-12  col-12 justify-content-end align-items-center mt-3 gap-4">
-          <p-button type="button" [disabled]="filtroForm.invalid" (onClick)="paginar()" label="Guardar"/>
+          <p-button type="button" [disabled]="filtroForm.invalid" (onClick)="paginar()" label="Guardar" [style]="{'width': '135px'}" styleClass="btn-background"/>
       </div>
     </article>
 <p-card class="mx-2 empty-border" [header]="'Total de antecedentes'" *ngIf="data.length > 0">

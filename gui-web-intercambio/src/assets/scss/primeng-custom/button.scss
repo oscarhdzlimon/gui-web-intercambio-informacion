@@ -21,7 +21,40 @@
     font-weight: 400;
     line-height: 120%;
     border-radius: 8px;
+   // background: #08865C !important;
   }
+/* En tu archivo de estilos global (styles.scss) para máxima efectividad */
+
+.btn-background.p-button {
+    /* 1. ESTADO NORMAL (Background y Border) */
+    background: #08865C !important;
+    border-color: #08865C !important;
+    color: white !important; /* Asegura el color del texto */
+
+    /* 2. ESTADO HOVER */
+    &:hover {
+        background-color: #86DDBF !important; 
+        border-color: #86DDBF !important;
+    }
+}
+
+
+  .btn-primario {
+    /* Estilos del estado normal (base) */
+    .p-button {
+        background: #08865C !important;
+        /* Estilos del estado HOVER */
+        &:hover {
+            background-color: #86DDBF; /* Un azul ligeramente más oscuro al pasar el ratón */
+            border-color: #86DDBF;
+        }
+    }
+
+    /* Opcional: Estilo de PrimeNG para el texto al hacer hover */
+    .p-button:hover {
+        color: white; /* Asegura que el texto siga siendo blanco */
+    }
+}
 
   .p-button-outlined:not(:disabled) {
     border-color: #08865C;

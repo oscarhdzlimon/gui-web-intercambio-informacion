@@ -63,8 +63,8 @@ data:any[] = [
   }
   inicializatabla(){
     this.data = [
-  { asociar: false,nss:"123456789",nombre: "Juan", apaterno: "Pérez", amaterno:"López",gestion:1,queja:0,inconformidades:0,amparo:1,procedimiento:0,juicio:1} ,
-  { asociar: false,nss:"123456789",nombre: "Jose de Jesus", apaterno: "Pérez", amaterno:"López",gestion:2,queja:1,inconformidades:0,amparo:1,procedimiento:0,juicio:1} ,
+  { asociar: false,nss:"17482569321",nombre: "Juan", apaterno: "Pérez", amaterno:"López",gestion:1,queja:0,inconformidades:0,amparo:1,procedimiento:0,juicio:1} ,
+  { asociar: false,nss:"00234567890",nombre: "Jose de Jesus", apaterno: "Pérez", amaterno:"López",gestion:2,queja:1,inconformidades:0,amparo:1,procedimiento:0,juicio:1} ,
 ];
   }
 

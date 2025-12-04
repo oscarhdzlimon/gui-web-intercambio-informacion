@@ -60,7 +60,7 @@
 
   body {
     margin: 0;
-    background-color: var(--gob-mx-gris-tono4);
+    background-color: var(--gob-mx-gris-tono5);
   }
 
   .login-background {
@@ -326,7 +326,7 @@
   padding-top: 0px;
 }
 .accordion-item:first-of-type>.accordion-header .accordion-button {
-  background-color: #FAFDFE;
+  background-color: #FFFFFF;
   border: none;
   height: 50px;
   font-weight: 400;
@@ -350,4 +350,67 @@
 .accordion-item:last-of-type>.accordion-collapse {
 
   margin-top: -42px;
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center; /* Alineación vertical */
+
+    input[type="checkbox"] {
+        // 1. Ocultar el checkbox nativo para poder usar nuestros propios estilos
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+    }
+
+    label {
+        // 2. Definir la apariencia del cuadro (el checkbox personalizado)
+        height: 17px; /* Define el tamaño del cuadro */
+        width: 17px;  /* Define el tamaño del cuadro */
+        background-color: #eee; /* Fondo gris claro por defecto */
+        border: 2px solid #ccc;
+        border-radius: 4px; /* Bordes ligeramente redondeados */
+        display: block;
+        cursor: pointer;
+        transition: background-color 0.2s; /* Transición para el hover */
+        position: relative;
+    }
+
+    /* 3. Estilo para el hover (opcional) */
+    label:hover {
+        background-color: #ddd;
+    }
+}
+
+// 4. Estilo cuando el checkbox está CHECKED
+.checkbox-container input[type="checkbox"]:checked + label {
+    // Cuando el input está checked, aplica estos estilos al label adyacente
+    background-color: #08865C; /* Fondo verde cuando está checkeado */
+    border-color: #08865C;
+}
+
+// 5. Crear la palomita (el checkmark) usando el pseudo-elemento :after
+.checkbox-container input[type="checkbox"]:checked + label:after {
+    content: "";
+    position: absolute;
+    display: block;
+
+    /* Posición y forma de la palomita (ajusta estos valores según tu tamaño) */
+    left: 5px;
+    top: 1px;
+    width: 5px;
+    height: 11px;
+    border: solid white; /* Color de la palomita (blanco) */
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg); /* Rotar para formar la palomita */
+}
+
+.card-flat .p-card {
+  border-radius: 0 !important;
+}
+
+input:-webkit-autofill::first-line {
+  color: #000 !important; /* color de texto al autocompletar */
 }

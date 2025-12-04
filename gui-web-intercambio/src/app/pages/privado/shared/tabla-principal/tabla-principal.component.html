@@ -1,75 +1,82 @@
 <p-card class="mx-2 empty-border no-padding-card" [header]="titulo">
-<p-table
-  [value]="data"
-  [scrollable]=esPantallaGrande
-  frozenAlign="right"
+<p-table 
+  [value]="data" 
+  [scrollable]="true" 
+  scrollHeight="400px"
+  responsiveLayout="scroll">
 
->
-
-  <ng-template #header>
+  <!-- Header -->
+  <ng-template pTemplate="header">
     <tr>
-      <th scope="col">Asociar</th>
-      <th scope="col">NSS</th>
-      <th scope="col">Nombre</th>
-      <th scope="col">Apellido paterno</th>
-      <th scope="col">Apellido materno</th>
-      <th scope="col">Gestión</th>
-      <th scope="col">Queja médica</th>
-      <th scope="col">Inconformidades</th>
-      <th scope="col">Amparo Indirecto</th>
-      <th scope="col">Procedimiento RPE</th>
-      <th scope="col">Juicio Contencioso Administrativo Federal</th>
-      <th scope="col" pFrozenColumn style="min-width: 100px;">Visualizar</th>
-       <th scope="col" pFrozenColumn style="min-width: 100px;">Imprimir</th> 
+      <th scope="col" style="min-width:80px">Asociar</th>
+      <th scope="col" style="min-width:100px">NSS</th>
+      <th scope="col" style="min-width:150px">Nombre</th>
+      <th scope="col" style="min-width:150px">Apellido paterno</th>
+      <th scope="col" style="min-width:150px">Apellido materno</th>
+      <th scope="col" style="min-width:150px">Gestión</th>
+      <th scope="col" style="min-width:150px">Queja médica</th>
+      <th scope="col" style="min-width:150px">Inconformidades</th>
+      <th scope="col" style="min-width:150px">Amparo Indirecto</th>
+      <th scope="col" style="min-width:150px">Procedimiento RPE</th>
+      <th scope="col" style="min-width:180px">Juicio Contencioso Administrativo Federal</th>
+      <!-- columnas congeladas a la derecha -->
+      <th scope="col" pFrozenColumn alignFrozen="right" style="min-width:100px">Visualizar</th>
+      <th scope="col" pFrozenColumn alignFrozen="right" style="min-width:100px">Imprimir</th>
     </tr>
   </ng-template>
-  <ng-template #body let-data>
-    <tr>
-      <td><input 
-            type="checkbox"
-            [(ngModel)]="data.asociar"
-            
-          /></td>
-      <td>{{ data.nss }}</td>
-      <td>{{ data.nombre}}</td>
-      <td>{{ data.apaterno }}</td>
-      <td>
-        {{ data.amaterno }}
-      </td>
-      <td>{{ data.gestion }}</td>
-      <td>{{ data.queja }}</td>
-      <td>{{ data.inconformidades }}</td>
-      <td>{{ data.amparo }}</td>
-      <td>{{ data.procedimiento }}</td>
-      <td>{{ data.juicio }}</td>
-    <td pFrozenColumn style="min-width: 100px;">
-      <div class="flex justify-content-center align-items-center" style="height: 100%;">
-         <img class="p-0" (click)="ver()"
-             src="/assets/logos/eye.svg" >
-      </div>
-    </td>
 
-     <td pFrozenColumn style="min-width: 100px;">
-      <div class="flex justify-content-center align-items-center" style="height: 100%;">
-        <img class="p-0"
-             src="/assets/logos/print.svg" >
-      </div>
-    </td> 
-    </tr>
-  </ng-template>
-  <ng-template #emptymessage>
-  <tr>
-    <td colspan="13">
-       <div class="flex flex-column justify-content-center align-items-center">
-        <img class="p-0"
-             src="/assets/images/Lupa.svg" alt="Sin resultados">
-        <p class="mt-2 sinResultados">No hay resultados de búsqueda</p>
+  <!-- Body -->
+  <ng-template pTemplate="body" let-rowData let-i="rowIndex">
+    <tr>
+      <td style="min-width:80px">
+
+        <div class="checkbox-container">
+    <input 
+        id="checkbox-{{i}}"
+        type="checkbox"
+        [(ngModel)]="rowData.asociar"
+    />
+    <label for="checkbox-{{i}}"></label> 
+</div>
       
-      </div>
-    </td>
-  </tr>
-</ng-template>
+      </td>
+      <td style="min-width:100px">{{ rowData.nss }}</td>
+      <td style="min-width:150px">{{ rowData.nombre }}</td>
+      <td style="min-width:150px">{{ rowData.apaterno }}</td>
+      <td style="min-width:150px">{{ rowData.amaterno }}</td>
+      <td style="min-width:150px">{{ rowData.gestion }}</td>
+      <td style="min-width:150px">{{ rowData.queja }}</td>
+      <td style="min-width:150px">{{ rowData.inconformidades }}</td>
+      <td style="min-width:150px">{{ rowData.amparo }}</td>
+      <td style="min-width:150px">{{ rowData.procedimiento }}</td>
+      <td style="min-width:180px">{{ rowData.juicio }}</td>
+      <!-- columnas congeladas -->
+      <td pFrozenColumn alignFrozen="right" style="min-width:100px">
+        <div class="flex justify-content-center align-items-center" style="height:100%;">
+          <img src="/assets/logos/eye.svg" (click)="ver()" />
+        </div>
+      </td>
+      <td pFrozenColumn alignFrozen="right" style="min-width:100px">
+        <div class="flex justify-content-center align-items-center" style="height:100%;">
+          <img src="/assets/logos/print.svg" />
+        </div>
+      </td>
+    </tr>
+  </ng-template>
+
+  <!-- Empty message -->
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td colspan="13">
+        <div class="flex flex-column justify-content-center align-items-center">
+          <img src="/assets/images/Lupa.svg" alt="Sin resultados">
+          <p class="mt-2 sinResultados">No hay resultados de búsqueda</p>
+        </div>
+      </td>
+    </tr>
+  </ng-template>
 </p-table>
+
 <p-paginator
   styleClass="justify-content-end"
   [showFirstLastIcon]="false"
