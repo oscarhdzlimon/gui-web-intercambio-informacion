@@ -2,3 +2,37 @@
     background-color: #EDEFF2;
     margin-right: 4px;
 }
+
+.contenedor-responsive {
+  width: 100%;
+}
+
+/* Pantallas grandes → 768px */
+@media (min-width: 992px) {   /* puedes usar 768px o 1024px según prefieras */
+  .contenedor-responsive {
+    width: 768px;
+  }
+}
+
+.divsubtitulo{
+    display: flex;
+height: 60px;
+padding: 10px;
+align-items: center;
+gap: 10px;
+align-self: stretch;
+border-radius: 8px;
+background: #F1F4FD;
+
+
+}
+.subtitulo{
+    color: #374957;
+
+/* Typography/Modal/Display */
+font-family: "Noto Sans";
+font-size: 14px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+}
