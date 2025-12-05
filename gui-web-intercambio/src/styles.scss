@@ -423,3 +423,7 @@ input:-webkit-autofill::first-line {
 :host ::ng-deep .p-dialog .p-dialog-content {
     padding: 15px !important;
 }
+
+ul.p-speeddial-list[role="menu"] {
+  z-index: 99999 !important;
+}
