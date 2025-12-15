@@ -65,7 +65,7 @@
 </p-card>
 <app-tabla-principal
   [titulo]="tituloTabla"
-  [data]="data"
+  [data]="data()"
   [rows]="10"
   [total]="4"
   (pageChange)="cargarPagina($event)"
@@ -79,14 +79,16 @@
                      (pageChange)="cargarPagina($event)"
                      (checkboxChanged)="cambiarEstado($event)"
 ></app-tabla-principal>
-<article class="flex flex-row flex-wrap" *ngIf="data.length > 0">
+@if (data().length > 0) {
+  <article class="flex flex-row flex-wrap">
 
-  <div class="flex lg:col-12  col-12 justify-content-end align-items-center mt-3 gap-4">
-    <p-button type="button" [disabled]="filtroForm.invalid" (onClick)="paginar()" label="Guardar"
-              [style]="{'width': '135px'}" styleClass="btn-background"/>
-  </div>
-</article>
-@if (data.length > 0) {
+    <div class="flex lg:col-12  col-12 justify-content-end align-items-center mt-3 gap-4">
+      <p-button type="button" [disabled]="filtroForm.invalid" (onClick)="paginar()" label="Guardar"
+                [style]="{'width': '135px'}" styleClass="btn-background"/>
+    </div>
+  </article>
+}
+@if (data().length > 0) {
   <p-card class="mx-2 empty-border" [header]="'Total de antecedentes'">
 
     <article class="flex flex-row flex-wrap">

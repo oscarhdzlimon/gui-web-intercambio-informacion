@@ -1,5 +1,5 @@
 import {CommonModule} from '@angular/common';
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, OnInit, signal, WritableSignal} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {GeneralComponent} from '@components/general.component';
 import {TipoDropdown} from '@models/tipo-dropdown.interface';
@@ -18,6 +18,7 @@ import {SolicitudAntecedentes} from '../../../../core/interfaces/solicitud-antec
 import {AntecedentesService} from '@services/antecedentes.service';
 import {forkJoin} from 'rxjs';
 import {TotalesAntecedentes} from '../../../../core/interfaces/totales-antecedentes.interface';
+import {RegistroAntecedentes} from '../../../../core/interfaces/registro-antecedentes.interface';
 
 @Component({
   selector: 'app-consulta-antecedentes',
@@ -50,7 +51,7 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
   totalregistros: number = 0;
   totalregistrosnombre: number = 0;
 
-  data: any[] = [];
+  data: WritableSignal<RegistroAntecedentes[]> =  signal([]);
   data_nombre: any = [];
 
   totalAntecedentes!: TotalesAntecedentes
@@ -154,12 +155,12 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
     ]).subscribe({
       next: ([dataResponse, totalResponse]) => {
         // Actualizar la lista de la página
-        this.data = dataResponse.content || [];
+        this.data.update(() => dataResponse.content || []);
 
         // Actualizar el total de registros
         this.totalAntecedentes = totalResponse;
 
-        if (this.data.length === 0) {
+        if (this.data().length === 0) {
           this._alertServices.informacion('No se encontraron antecedentes con los criterios seleccionados.');
         }
 
@@ -167,7 +168,7 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
       error: (error) => {
         this._alertServices.error('Ocurrió un error al obtener los antecedentes.');
         console.error('Error al paginar/obtener totales:', error);
-        this.data = [];
+        this.data.update(() => []);
         this.totalregistros = 0;
       }
     });
