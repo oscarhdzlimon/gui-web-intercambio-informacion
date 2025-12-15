@@ -51,7 +51,7 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
   totalregistros: number = 0;
   totalregistrosnombre: number = 0;
 
-  data: WritableSignal<RegistroAntecedentes[]> =  signal([]);
+  data: WritableSignal<RegistroAntecedentes[]> = signal([]);
   data_nombre: any = [];
 
   totalAntecedentes!: TotalesAntecedentes
@@ -155,7 +155,7 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
     ]).subscribe({
       next: ([dataResponse, totalResponse]) => {
         // Actualizar la lista de la página
-        this.data.update(() => dataResponse.content || []);
+        this.data.update(() => dataResponse.content);
 
         // Actualizar el total de registros
         this.totalAntecedentes = totalResponse;
@@ -199,6 +199,7 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
   limpiar(): void {
     this.limpiarValidadores();
     this.filtroForm.patchValue({});
+    this.data.update(() => []);
   }
 
 }
