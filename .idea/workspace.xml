@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="limpieza de validadores -&gt; antecedentes" />
+    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="ajuste servicio de antecedentes">
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/interfaces/solicitud-antecedentes.interface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/interfaces/solicitud-antecedentes.interface.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.ts" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -80,7 +83,7 @@
       <updated>1765819096987</updated>
       <workItem from="1765819098117" duration="1438000" />
       <workItem from="1765821241131" duration="1922000" />
-      <workItem from="1765833097414" duration="4346000" />
+      <workItem from="1765833097414" duration="4754000" />
     </task>
     <task id="LOCAL-00001" summary="constants -&gt; tipo de antecedentes">
       <option name="closed" value="true" />
@@ -106,7 +109,15 @@
       <option name="project" value="LOCAL" />
       <updated>1765838616648</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="ajuste servicio de antecedentes">
+      <option name="closed" value="true" />
+      <created>1765838956021</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1765838956021</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -127,6 +138,7 @@
     <MESSAGE value="constants -&gt; tipo de antecedentes" />
     <MESSAGE value="ajustes de filtros -&gt; antecedentes" />
     <MESSAGE value="limpieza de validadores -&gt; antecedentes" />
-    <option name="LAST_COMMIT_MESSAGE" value="limpieza de validadores -&gt; antecedentes" />
+    <MESSAGE value="ajuste servicio de antecedentes" />
+    <option name="LAST_COMMIT_MESSAGE" value="ajuste servicio de antecedentes" />
   </component>
 </project>

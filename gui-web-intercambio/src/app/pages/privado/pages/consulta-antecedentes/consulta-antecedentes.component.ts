@@ -14,6 +14,7 @@ import {SelectModule} from 'primeng/select';
 import {TableModule} from 'primeng/table';
 import {TIPO_CONSULTA_ANTECEDENTES} from '@utils/constants';
 import {filter} from 'rxjs/operators';
+import {SolicitudAntecedentes} from '../../../../core/interfaces/solicitud-antecedentes.interface';
 
 @Component({
   selector: 'app-consulta-antecedentes',
@@ -138,6 +139,7 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
   }
 
   paginar() {
+    const solicitud = this.generarSolicitudAntecedentes();
 
     const tipo = this.filtroForm.get('tipoconsulta');
     const nss = this.filtroForm.get('nss');
@@ -163,6 +165,28 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
       this.tituloTabla = 'Resultados de la búsqueda por NSS: ' + nss?.value;
       this.tituloTablanombre = 'Resultados de la búsqueda por nombre y primer aplellido: ' + nombre?.value + ' ' + apaterno?.value;
     }
+  }
+
+  generarSolicitudAntecedentes(): SolicitudAntecedentes {
+    return {
+      expediente: 'CC.NL.-0621/2016',
+      nombre: this.generarNombre(),
+      nss: this.filtroForm.get('nss')?.value
+    }
+  }
+
+  generarNombre(): string | null {
+    return this.filtroForm.get('nombre')?.value === null
+      ? null // Devuelve null si el nombre es estrictamente null (o no existe el control)
+      : [
+        this.filtroForm.get('nombre')?.value,
+        this.filtroForm.get('apaterno')?.value,
+        this.filtroForm.get('amaterno')?.value
+      ]
+        // Filtra los valores que son null, undefined o cadenas vacías ('')
+        .filter(segmento => !!segmento)
+        // Une los segmentos restantes con un espacio.
+        .join(' ');
   }
 
   limpiar(): void {

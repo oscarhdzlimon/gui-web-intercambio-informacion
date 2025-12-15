@@ -1,5 +1,5 @@
 export interface SolicitudAntecedentes {
-  nombre: string,
-  nss: string,
-  expediente: string,
+  nombre: string | null,
+  nss: string | null,
+  expediente: string | null,
 }
