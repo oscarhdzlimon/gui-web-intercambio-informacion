@@ -131,33 +131,7 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
       nombre: [{value: null, disabled: false}], // Sin required inicial
       apaterno: [{value: null, disabled: false}],
       amaterno: [{value: null, disabled: false}] // Sin required inicial
-    }, {validators: this.validacionCondicional()}); // <--- CLAVE: El validador de grupo
-  }
-
-  validacionCondicional(): ValidatorFn {
-    return (group: AbstractControl): { [key: string]: any } | null => {
-
-      const tipoconsulta = group.get('tipoconsulta')?.value?.value;
-      const nss = group.get('nss')?.value;
-      const nombre = group.get('nombre')?.value;
-      const apaterno = group.get('apaterno')?.value;
-      const amaterno = group.get('amaterno')?.value;
-
-      if (!tipoconsulta) return null;
-
-      let valido = true;
-
-      // 1 = NSS, 2 = Nombre y apellidos, 3 = Ambos
-      if (tipoconsulta === 1) {
-        if (!nss) valido = false;
-      } else if (tipoconsulta === 2) {
-        if (!nombre || !apaterno) valido = false;
-      } else if (tipoconsulta === 3) {
-        if (!nss || !nombre || !apaterno) valido = false;
-      }
-
-      return valido ? null : {camposRequeridosFaltantes: true};
-    };
+    });
   }
 
   paginar() {
