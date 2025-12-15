@@ -4,16 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="constants -&gt; tipo de antecedentes">
-      <change afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/interfaces/solicitud-antecedentes.interface.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/services/antecedentes.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/models/config-environment.interface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/models/config-environment.interface.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/environments/environment.development.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/environments/environment.development.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/environments/environment.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/environments/environment.ts" afterDir="false" />
-    </list>
+    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="limpieza de validadores -&gt; antecedentes" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -89,7 +80,7 @@
       <updated>1765819096987</updated>
       <workItem from="1765819098117" duration="1438000" />
       <workItem from="1765821241131" duration="1922000" />
-      <workItem from="1765833097414" duration="4032000" />
+      <workItem from="1765833097414" duration="4346000" />
     </task>
     <task id="LOCAL-00001" summary="constants -&gt; tipo de antecedentes">
       <option name="closed" value="true" />
@@ -99,7 +90,23 @@
       <option name="project" value="LOCAL" />
       <updated>1765835757907</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="ajustes de filtros -&gt; antecedentes">
+      <option name="closed" value="true" />
+      <created>1765838497316</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1765838497316</updated>
+    </task>
+    <task id="LOCAL-00003" summary="limpieza de validadores -&gt; antecedentes">
+      <option name="closed" value="true" />
+      <created>1765838616648</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1765838616648</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -118,6 +125,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="constants -&gt; tipo de antecedentes" />
-    <option name="LAST_COMMIT_MESSAGE" value="constants -&gt; tipo de antecedentes" />
+    <MESSAGE value="ajustes de filtros -&gt; antecedentes" />
+    <MESSAGE value="limpieza de validadores -&gt; antecedentes" />
+    <option name="LAST_COMMIT_MESSAGE" value="limpieza de validadores -&gt; antecedentes" />
   </component>
 </project>

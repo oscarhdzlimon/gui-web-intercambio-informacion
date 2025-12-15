@@ -1,6 +1,6 @@
 import {CommonModule} from '@angular/common';
 import {Component, OnInit} from '@angular/core';
-import {AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, ValidatorFn, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {GeneralComponent} from '@components/general.component';
 import {TipoDropdown} from '@models/tipo-dropdown.interface';
 import {TablaPrincipalComponent} from '@pages/privado/shared/tabla-principal/tabla-principal.component';
@@ -37,6 +37,9 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
 
   tituloTabla: string = 'Resultados de la búsqueda';
   tituloTablanombre: string = 'Resultados de la búsqueda';
+
+  registrosPorPagina: number = 5;
+  paginaActual: number = 0;
 
   totalregistros: number = 0;
   totalregistrosnombre: number = 0;

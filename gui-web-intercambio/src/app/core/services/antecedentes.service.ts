@@ -11,7 +11,7 @@ export class AntecedentesService {
 
   http: HttpClient = inject(HttpClient);
 
-  getLstAntecedente(size: number, page: number, solicitud: SolicitudAntecedentes) {
+  getLstAntecedentes(size: number, page: number, solicitud: SolicitudAntecedentes) {
     const params = new HttpParams();
     params.append('size', size);
     params.append('page', page);
@@ -19,5 +19,8 @@ export class AntecedentesService {
     return this.http.post<any>(`${this.URL_BASE}/General/`, solicitud, {params});
   }
 
+  getTotalAntecedentes(solicitud: SolicitudAntecedentes) {
+    return this.http.post<any>(`${this.URL_BASE}/Totales`, solicitud);
+  }
 
 }
