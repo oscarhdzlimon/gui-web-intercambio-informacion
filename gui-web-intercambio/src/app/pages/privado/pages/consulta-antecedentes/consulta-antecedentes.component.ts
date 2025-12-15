@@ -13,6 +13,7 @@ import {PopoverModule} from 'primeng/popover';
 import {SelectModule} from 'primeng/select';
 import {TableModule} from 'primeng/table';
 import {TIPO_CONSULTA_ANTECEDENTES} from '@utils/constants';
+import {filter} from 'rxjs/operators';
 
 @Component({
   selector: 'app-consulta-antecedentes',
@@ -36,6 +37,7 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
 
   tituloTabla: string = 'Resultados de la búsqueda';
   tituloTablanombre: string = 'Resultados de la búsqueda';
+
   totalregistros: number = 0;
   totalregistrosnombre: number = 0;
 
@@ -48,112 +50,74 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
 
   ngOnInit(): void {
     this.filtroForm = this.inicializarFiltroForm();
+    this.suscribirATipoConsulta();
+  }
+
+  suscribirATipoConsulta(): void {
+    this.filtroForm.get('tipoconsulta')?.valueChanges
+      .pipe(filter(value => value !== null && value !== undefined))
+      .subscribe(event => {
+        const tipo = typeof event === 'object' && event !== null && 'value' in event ? event.value : event;
+        this.limpiarValidadores();
+        this.aplicarValidacionCondicional(tipo);
+      });
+  }
+
+  aplicarValidacionCondicional(tipo: number): void {
+    const nss = this.filtroForm.get('nss');
+    const nombre = this.filtroForm.get('nombre');
+    const apaterno = this.filtroForm.get('apaterno');
+    const amaterno = this.filtroForm.get('amaterno');
+
+    this.limpiarValidadores();
+
+    // Lógica de habilitación y validación
+    if (tipo === 1) { // NSS
+      nss?.enable();
+      nss?.setValidators([Validators.required]);
+
+    }
+    if (tipo === 2) { // Nombre y apellidos
+      nombre?.enable();
+      apaterno?.enable();
+      amaterno?.enable();
+      nombre?.setValidators([Validators.required]);
+      apaterno?.setValidators([Validators.required]);
+
+    }
+    if (tipo === 3) { // Ambos
+      nss?.enable();
+      nombre?.enable();
+      apaterno?.enable();
+      amaterno?.enable();
+      nss?.setValidators([Validators.required]);
+      nombre?.setValidators([Validators.required]);
+      apaterno?.setValidators([Validators.required]);
+    }
+
+    // Actualizar validaciones
+    [nss, nombre, apaterno, amaterno].forEach(control => {
+      control?.updateValueAndValidity();
+    });
+
+    this.filtroForm.updateValueAndValidity();
+  }
+
+  limpiarValidadores(): void {
+    const nss = this.filtroForm.get('nss');
+    const nombre = this.filtroForm.get('nombre');
+    const apaterno = this.filtroForm.get('apaterno');
+    const amaterno = this.filtroForm.get('amaterno');
+
+    [nss, nombre, apaterno, amaterno].forEach(control => {
+      control?.clearValidators();
+      control?.disable();
+    });
+
   }
 
   cargarPagina(event: any) {
     console.log("Paginación:", event);
-  }
-
-  inicializatabla() {
-    this.data = [
-      {
-        asociar: false,
-        nss: "17482569321",
-        nombre: "Juan",
-        apaterno: "Pérez",
-        amaterno: "López",
-        gestion: 1,
-        queja: 0,
-        inconformidades: 0,
-        amparo: 1,
-        procedimiento: 0,
-        juicio: 1
-      },
-      {
-        asociar: false,
-        nss: "00234567890",
-        nombre: "Jose de Jesus",
-        apaterno: "Pérez",
-        amaterno: "López",
-        gestion: 2,
-        queja: 1,
-        inconformidades: 0,
-        amparo: 1,
-        procedimiento: 0,
-        juicio: 1
-      },
-    ];
-  }
-
-  inicializatablaNombre() {
-    this.data_nombre = [
-      {
-        asociar: false,
-        nss: "123456789",
-        nombre: "Ricardo",
-        apaterno: "Palma",
-        amaterno: "García",
-        gestion: 1,
-        queja: 0,
-        inconformidades: 0,
-        amparo: 1,
-        procedimiento: 0,
-        juicio: 1
-      },
-      {
-        asociar: false,
-        nss: "123456789",
-        nombre: "Ricardo",
-        apaterno: "Palma",
-        amaterno: "López",
-        gestion: 1,
-        queja: 0,
-        inconformidades: 0,
-        amparo: 1,
-        procedimiento: 0,
-        juicio: 1
-      },
-      {
-        asociar: false,
-        nss: "123456789",
-        nombre: "Ricardo",
-        apaterno: "Palma",
-        amaterno: "Hernández",
-        gestion: 1,
-        queja: 0,
-        inconformidades: 0,
-        amparo: 1,
-        procedimiento: 0,
-        juicio: 1
-      },
-      {
-        asociar: false,
-        nss: "123456789",
-        nombre: "Ricardo",
-        apaterno: "Palma",
-        amaterno: "Ramírez",
-        gestion: 1,
-        queja: 0,
-        inconformidades: 0,
-        amparo: 1,
-        procedimiento: 0,
-        juicio: 1
-      },
-      {
-        asociar: false,
-        nss: "123456789",
-        nombre: "Ricardo",
-        apaterno: "Palma",
-        amaterno: "Vazquez",
-        gestion: 1,
-        queja: 0,
-        inconformidades: 0,
-        amparo: 1,
-        procedimiento: 0,
-        juicio: 1
-      },
-    ];
-    this.totalregistrosnombre = this.data_nombre.length;
   }
 
   cambiarEstado(event: any) {
@@ -168,60 +132,6 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
       apaterno: [{value: null, disabled: false}],
       amaterno: [{value: null, disabled: false}] // Sin required inicial
     }, {validators: this.validacionCondicional()}); // <--- CLAVE: El validador de grupo
-  }
-
-  onTipoConsultaChange(event: any) {
-    this.limpiar();
-    const tipo = event.value?.value;
-
-    const nss = this.filtroForm.get('nss');
-    const nombre = this.filtroForm.get('nombre');
-    const apaterno = this.filtroForm.get('apaterno');
-    const amaterno = this.filtroForm.get('amaterno');
-
-    // Limpiar validators antes de asignar nuevos
-    nss?.clearValidators();
-    nombre?.clearValidators();
-    apaterno?.clearValidators();
-    amaterno?.clearValidators();
-
-    // Deshabilitar todo primero
-    nss?.disable();
-    nombre?.disable();
-    apaterno?.disable();
-    amaterno?.disable();
-
-    if (tipo === 1) { // NSS
-      nss?.enable();
-      nss?.setValidators([Validators.required]);
-
-    } else if (tipo === 2) { // Nombre y apellidos
-      nombre?.enable();
-      apaterno?.enable();
-      amaterno?.enable();
-      nombre?.setValidators([Validators.required]);
-      apaterno?.setValidators([Validators.required]);
-
-
-    } else if (tipo === 3) { // Ambos
-      nss?.enable();
-      nombre?.enable();
-      apaterno?.enable();
-      amaterno?.enable();
-      nss?.setValidators([Validators.required]);
-      nombre?.setValidators([Validators.required]);
-      apaterno?.setValidators([Validators.required]);
-
-    }
-
-    // Actualizar cambios
-    nss?.updateValueAndValidity();
-    nombre?.updateValueAndValidity();
-    apaterno?.updateValueAndValidity();
-    amaterno?.updateValueAndValidity();
-
-    // Reevaluar validador global
-    this.filtroForm.updateValueAndValidity();
   }
 
   validacionCondicional(): ValidatorFn {
@@ -264,7 +174,6 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
       } else {
         this.tituloTabla = 'Resultados de la búsqueda por NSS: ' + nss?.value;
         console.log("Título de la tabla:", this.tituloTabla);
-        this.inicializatabla();
       }
 
     } else if (tipo?.value.value == 2) {
@@ -272,25 +181,16 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
         this._alertServices.error('Sin coincidencias');
       } else {
         this.tituloTabla = 'Resultados de la búsqueda por nombre y primer aplellido: ' + nombre?.value + ' ' + apaterno?.value;
-        this.inicializatabla();
       }
     } else {
       this.tituloTabla = 'Resultados de la búsqueda por NSS: ' + nss?.value;
       this.tituloTablanombre = 'Resultados de la búsqueda por nombre y primer aplellido: ' + nombre?.value + ' ' + apaterno?.value;
-      this.inicializatabla();
-      this.inicializatablaNombre();
     }
   }
 
-  limpiar() {
-    this.data = [];
-    this.filtroForm.patchValue({
-      nss: null,
-      nombre: null,
-      apaterno: null,
-      amaterno: null
-    });
+  limpiar(): void {
+    this.limpiarValidadores();
+    this.filtroForm.patchValue({});
   }
-
 
 }
