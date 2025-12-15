@@ -1,5 +1,5 @@
 import {CommonModule} from '@angular/common';
-import {Component, OnInit} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {GeneralComponent} from '@components/general.component';
 import {TipoDropdown} from '@models/tipo-dropdown.interface';
@@ -15,6 +15,9 @@ import {TableModule} from 'primeng/table';
 import {TIPO_CONSULTA_ANTECEDENTES} from '@utils/constants';
 import {filter} from 'rxjs/operators';
 import {SolicitudAntecedentes} from '../../../../core/interfaces/solicitud-antecedentes.interface';
+import {AntecedentesService} from '@services/antecedentes.service';
+import {forkJoin} from 'rxjs';
+import {TotalesAntecedentes} from '../../../../core/interfaces/totales-antecedentes.interface';
 
 @Component({
   selector: 'app-consulta-antecedentes',
@@ -32,6 +35,8 @@ import {SolicitudAntecedentes} from '../../../../core/interfaces/solicitud-antec
   styleUrl: './consulta-antecedentes.component.scss'
 })
 export class ConsultaAntecedentesComponent extends GeneralComponent implements OnInit {
+  antecedentesService: AntecedentesService = inject(AntecedentesService);
+
   tipoconsulta: TipoDropdown[] = TIPO_CONSULTA_ANTECEDENTES;
 
   filtroForm!: FormGroup;
@@ -47,6 +52,8 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
 
   data: any[] = [];
   data_nombre: any = [];
+
+  totalAntecedentes!: TotalesAntecedentes
 
   constructor(private fb: FormBuilder) {
     super();
@@ -131,40 +138,39 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
   inicializarFiltroForm(): FormGroup {
     return this.fb.group({
       tipoconsulta: ['', Validators.required], // Este siempre es requerido
-      nss: [{value: null, disabled: false}], // Sin required inicial
-      nombre: [{value: null, disabled: false}], // Sin required inicial
-      apaterno: [{value: null, disabled: false}],
-      amaterno: [{value: null, disabled: false}] // Sin required inicial
+      nss: [{value: null, disabled: true}], // Sin required inicial
+      nombre: [{value: null, disabled: true}], // Sin required inicial
+      apaterno: [{value: null, disabled: true}],
+      amaterno: [{value: null, disabled: true}] // Sin required inicial
     });
   }
 
   paginar() {
-    const solicitud = this.generarSolicitudAntecedentes();
+    if (this.filtroForm.invalid) return;
+    const solicitud: SolicitudAntecedentes = this.generarSolicitudAntecedentes();
+    forkJoin([
+      this.antecedentesService.getLstAntecedentes(this.registrosPorPagina, this.paginaActual, solicitud),
+      this.antecedentesService.getTotalAntecedentes(solicitud)
+    ]).subscribe({
+      next: ([dataResponse, totalResponse]) => {
+        // Actualizar la lista de la página
+        this.data = dataResponse.content || [];
 
-    const tipo = this.filtroForm.get('tipoconsulta');
-    const nss = this.filtroForm.get('nss');
-    const nombre = this.filtroForm.get('nombre');
-    const apaterno = this.filtroForm.get('apaterno');
-    const amaterno = this.filtroForm.get('amaterno');
-    console.log("Tipo de consulta:", tipo?.value.value);
-    if (tipo?.value.value == 1) {
-      if (nss?.value == '94987906512') {
-        this._alertServices.error('Sin coincidencias');
-      } else {
-        this.tituloTabla = 'Resultados de la búsqueda por NSS: ' + nss?.value;
-        console.log("Título de la tabla:", this.tituloTabla);
-      }
+        // Actualizar el total de registros
+        this.totalAntecedentes = totalResponse;
 
-    } else if (tipo?.value.value == 2) {
-      if (nombre?.value == 'Juan' && apaterno?.value == 'Pérez') {
-        this._alertServices.error('Sin coincidencias');
-      } else {
-        this.tituloTabla = 'Resultados de la búsqueda por nombre y primer aplellido: ' + nombre?.value + ' ' + apaterno?.value;
+        if (this.data.length === 0) {
+          this._alertServices.informacion('No se encontraron antecedentes con los criterios seleccionados.');
+        }
+
+      },
+      error: (error) => {
+        this._alertServices.error('Ocurrió un error al obtener los antecedentes.');
+        console.error('Error al paginar/obtener totales:', error);
+        this.data = [];
+        this.totalregistros = 0;
       }
-    } else {
-      this.tituloTabla = 'Resultados de la búsqueda por NSS: ' + nss?.value;
-      this.tituloTablanombre = 'Resultados de la búsqueda por nombre y primer aplellido: ' + nombre?.value + ' ' + apaterno?.value;
-    }
+    });
   }
 
   generarSolicitudAntecedentes(): SolicitudAntecedentes {

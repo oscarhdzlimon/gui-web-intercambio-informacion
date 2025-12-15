@@ -7,7 +7,7 @@ import {SolicitudAntecedentes} from '../interfaces/solicitud-antecedentes.interf
   providedIn: 'root'
 })
 export class AntecedentesService {
-  private readonly URL_BASE: string = environment.api.login + 'antecedentes';
+  private readonly URL_BASE: string = environment.api.apiAntecedentes + 'antecedentes';
 
   http: HttpClient = inject(HttpClient);
 
@@ -16,11 +16,11 @@ export class AntecedentesService {
     params.append('size', size);
     params.append('page', page);
 
-    return this.http.post<any>(`${this.URL_BASE}/General/`, solicitud, {params});
+    return this.http.post<any>(`${this.URL_BASE}/General`, solicitud, {params});
   }
 
   getTotalAntecedentes(solicitud: SolicitudAntecedentes) {
-    return this.http.post<any>(`${this.URL_BASE}/Totales`, solicitud);
+    return this.http.post<any>(`${this.URL_BASE}/totales`, solicitud);
   }
 
 }

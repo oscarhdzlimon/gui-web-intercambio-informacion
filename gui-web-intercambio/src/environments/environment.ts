@@ -10,7 +10,7 @@ export const environment: ConfigEnvironment = {
     apiRegistro: base + 'mscme-registro/api',
     apiConvocatoria: base + '/mscme-convocatoria/api',
     apiDocumentos: "",
-    apiAntecedentes: base + 'msinif-antecedentes/api/v1/'
+    apiAntecedentes: 'http://10.166.120:1060/' + 'msinif-antecedentes/api/v1/'
   }
 }
 
