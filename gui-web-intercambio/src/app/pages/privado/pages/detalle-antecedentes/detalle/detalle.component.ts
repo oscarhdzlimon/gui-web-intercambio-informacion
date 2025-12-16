@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { TablaDetalleGestionInterface } from '@models/tablas-detalle-antecedentes.interface';
 import {DynamicDialogConfig,DynamicDialogRef} from 'primeng/dynamicdialog';
 import { ButtonModule } from 'primeng/button';
+import { UserService } from '@services/user.service';
+import { SesionUser } from '@models/sesion-user.interface';
 @Component({
   selector: 'app-detalle',
   imports: [ButtonModule],
@@ -16,6 +18,9 @@ export class DetalleComponent implements OnInit {
 ) {
 
 }
+userService = inject(UserService);
+userData: SesionUser | null = null;
+
 strTitulo ="";
 registro!:TablaDetalleGestionInterface;
 consecutivo!:number;
@@ -30,8 +35,12 @@ estado:string="";
 cierre:string="";
 
 datosDetalle: any;
-ngOnInit() {
 
+
+ngOnInit() {
+  this.userService.userData$.subscribe(user => this.userData = user);
+
+  this.userData;
   if (this.data?.data) {
 
     this.strTitulo = this.data.data.titulo;
