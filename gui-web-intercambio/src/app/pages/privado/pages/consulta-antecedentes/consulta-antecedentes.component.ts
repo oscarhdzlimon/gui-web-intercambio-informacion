@@ -129,7 +129,11 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
   }
 
   cargarPagina(event: any) {
-    console.log("Paginación:", event);
+    const nuevaPagina = event.page;
+    if (this.paginaActual !== nuevaPagina) {
+      this.paginaActual = nuevaPagina;
+      this.paginar();
+    }
   }
 
   cambiarEstado(event: any) {
@@ -146,7 +150,10 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
     });
   }
 
-  paginar() {
+  paginar(pagina?: number) {
+    if (pagina) {
+      this.paginaActual = pagina;
+    }
     if (this.filtroForm.invalid) return;
     const solicitud: SolicitudAntecedentes = this.generarSolicitudAntecedentes();
     forkJoin([
@@ -198,6 +205,7 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
 
   limpiar(): void {
     this.limpiarValidadores();
+    this.paginaActual = 0;
     this.filtroForm.patchValue({});
     this.data.update(() => []);
   }
