@@ -13,6 +13,7 @@ import { PaginatorModule } from 'primeng/paginator';
 import { PopoverModule } from 'primeng/popover';
 import { SelectModule } from 'primeng/select';
 import { TableModule } from 'primeng/table';
+import {TIPO_CONSULTA_ANTECEDENTES} from '@utils/constants';
 
 @Component({
   selector: 'app-busqueda-sistemas',
@@ -76,7 +77,7 @@ inicializatabla3(){
 this.tituloTabla = 'Resultados de la búsqueda por NSS: 17482569321';
 this.totalRecords3 = this.data3.length;
 }
-  
+
 
    cargarPagina(event: any) {
     console.log("Paginación:", event);
@@ -84,7 +85,7 @@ this.totalRecords3 = this.data3.length;
   cambiarEstado(event: any) {
     console.log("Checkbox cambiado:", event);
   }
-   
 
 
+  protected readonly tipoconsulta = TIPO_CONSULTA_ANTECEDENTES;
 }

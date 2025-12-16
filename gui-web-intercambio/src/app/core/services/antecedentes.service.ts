@@ -23,4 +23,8 @@ export class AntecedentesService {
     return this.http.post<any>(`${this.URL_BASE}/totales`, solicitud);
   }
 
+  getExpediente(numero: string) {
+    return this.http.post<any>(`${this.URL_BASE}/expediente/personas`, {numero});
+  }
+
 }
