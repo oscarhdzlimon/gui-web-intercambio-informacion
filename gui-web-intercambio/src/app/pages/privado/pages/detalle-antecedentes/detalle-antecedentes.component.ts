@@ -23,26 +23,31 @@ import { HeaderGenericoComponent } from '../../shared/header-generico/header-gen
 import { TablaAntecedentesComponent } from '@pages/privado/shared/tabla-antecedentes/tabla-antecedentes.component';
 import { NAV } from '@utils/url-global';
 import { ActivatedRoute } from '@angular/router';
+import { DetalleAntecedentesService } from '@services/detalle-antecedentes.service';
+import { Ordenamiento } from '@models/ordenamiento.enum';
+import { forkJoin } from 'rxjs';
 @Component({
   selector: 'app-detalle-antecedentes',
-  imports: [  CommonModule,
+  imports: [  
+    CommonModule,
     ReactiveFormsModule,
     Card,
     SelectModule,
-    InputText,
     TableModule,
     ButtonModule,
     ConfirmPopupModule,
     PaginatorModule,
     PopoverModule,
     NgbAccordionModule,
-
-  BtnRegresarComponent,TablaAntecedentesComponent],
+    BtnRegresarComponent,
+    TablaAntecedentesComponent
+  ],
   templateUrl: './detalle-antecedentes.component.html',
   styleUrl: './detalle-antecedentes.component.scss',
   providers: [DialogService]
 })
 export class DetalleAntecedentesComponent extends GeneralComponent {
+
 idpagina:number=0;
   ruta= this._nav.consultaantecedentes;
   titulo = 'Antecedentes';
@@ -76,14 +81,67 @@ idpagina:number=0;
   rows: number = 4;
   
   constructor(
-    public dialogService: DialogService,private route: ActivatedRoute) {
+    public dialogService: DialogService,
+    private route: ActivatedRoute,
+    private detalleAntecedentesService: DetalleAntecedentesService
+    ) {
     super();
    
   }
 
   tabla!: Array<TablaDetalleGestionInterface>;
   tabla2!: Array<TablaDetalleGestionInterface>;
+
+
+
+
+  llenarTablas(){
+
+    const parametros = {page:0,size:2,sort:Ordenamiento.ASC};
+
+    const datosUsuario = {
+      "nombre": null, 
+      "nss": "43886827680",
+      "expediente": "CC.NL.-0621/2016"
+    };
+
+
+
+    forkJoin({
+      gestionData: this.detalleAntecedentesService.consultarGestion(parametros,datosUsuario),
+      quejaMedicaData: this.detalleAntecedentesService.consultarQuejaMedica(parametros,datosUsuario),
+      inconformidadesData: this.detalleAntecedentesService.consultarInconformidad(parametros,datosUsuario),
+      amparoIndirectoData: this.detalleAntecedentesService.consultarAmparoIndirecto(parametros,datosUsuario),
+      procedimientoRpeData: this.detalleAntecedentesService.consultarProcedimiento(parametros,datosUsuario),
+      juicioContenciosoData: this.detalleAntecedentesService.consultarJuicioContencioso(parametros,datosUsuario),
+    }).subscribe({
+
+      next:({gestionData,quejaMedicaData,inconformidadesData,amparoIndirectoData,procedimientoRpeData,juicioContenciosoData}) => {
+
+        this.lstGestion = gestionData
+      }
+    })
+      
+    
+  }
+
   ngOnInit(): void {
+
+    this.llenarTablas();
+    /*this.detalleAntecedentesService.consultarGestion(
+      {page:0,size:10,sort:Ordenamiento.ASC},
+      {
+        "nombre": null, 
+        "nss": "43886827680",
+        "expediente": "CC.NL.-0621/2016"
+    }
+    ).subscribe({
+      next:(elemenit)  => {
+        debugger
+      }
+    })*/
+
+
 
 
    this.idpagina= Number(this.route.snapshot.paramMap.get('id'));
@@ -211,13 +269,12 @@ idpagina:number=0;
    this.paginar();
   }
 
-    inicializatablagestion(){
+  inicializatablagestion(){
     this.data = [
-  { consecutivo: 1,expediente:"GST2023001",persona:"Ricardo Palma García",curp:"PAGR830521HDFRLC05",nss:"17482569321",fecha: "20-03-2022", descripcion: "El promovente manifestó retraso en ...", ooad:"OOAD Ciudad de México Norte",unidad:"HGZ No. 24 Insurgentes",notificacion:"20-03-2022",estado:"En trámite",cierre:"20-03-2022",resolucion:"20-03-2022",acuerdo:"20-03-2022",revoco:"Sí - 20-03-2022"} ,
-  { consecutivo: 1,expediente:"GST2023001",persona:"Ricardo Palma García",curp:"PAGR830521HDFRLC05",nss:"17482569321",fecha: "20-03-2022", descripcion: "El promovente manifestó retraso en ...", ooad:"OOAD Ciudad de México Norte",unidad:"HGZ No. 24 Insurgentes",notificacion:"20-03-2022",estado:"En trámite",cierre:"20-03-2022",resolucion:"20-03-2022",acuerdo:"20-03-2022",revoco:"Sí - 20-03-2022"} ,
-];
-
-}
+      { consecutivo: 1,expediente:"GST2023001",persona:"Ricardo Palma García",curp:"PAGR830521HDFRLC05",nss:"17482569321",fecha: "20-03-2022", descripcion: "El promovente manifestó retraso en ...", ooad:"OOAD Ciudad de México Norte",unidad:"HGZ No. 24 Insurgentes",notificacion:"20-03-2022",estado:"En trámite",cierre:"20-03-2022",resolucion:"20-03-2022",acuerdo:"20-03-2022",revoco:"Sí - 20-03-2022"} ,
+      { consecutivo: 1,expediente:"GST2023001",persona:"Ricardo Palma García",curp:"PAGR830521HDFRLC05",nss:"17482569321",fecha: "20-03-2022", descripcion: "El promovente manifestó retraso en ...", ooad:"OOAD Ciudad de México Norte",unidad:"HGZ No. 24 Insurgentes",notificacion:"20-03-2022",estado:"En trámite",cierre:"20-03-2022",resolucion:"20-03-2022",acuerdo:"20-03-2022",revoco:"Sí - 20-03-2022"} ,
+    ];
+  }
 
  inicializatablagestion2(){
     this.data7 = [
