@@ -1,5 +1,4 @@
 
-
 .combined-container {
   border: 1px solid #dcdcdc;
   border-radius: 8px;
@@ -9,7 +8,7 @@
 }
 
 .combined-select {
-  max-width: 180px;     
+  max-width: 180px;
   border-right: 1px solid #e0e0e0 !important;
   font-size: 0.9rem;
 }
@@ -39,6 +38,7 @@
 .input-group-text i {
   font-size: 1rem;
 }
+
 .p-button.btn-buscar {
   width: 126px;
 }
@@ -56,89 +56,107 @@
   }
 }
 
-.divTotales{
-    width: 220px;
-height: 168px;
-gap: 4px;
+.divTotales {
+  width: 220px;
+  height: 168px;
+  gap: 4px;
 
-opacity: 1;
-padding: 8px;
-border-radius: 8px;
-
-}
-.divgestion{
-border-bottom: 1px solid #FF8848;
-height: 52px;
-display: flex;
-    /* Centra los elementos hijos verticalmente */
-    align-items: center;
+  opacity: 1;
+  padding: 8px;
+  border-radius: 8px;
 
 }
 
-.divgestion2{
-border-bottom: 1px solid #FDD8C4;
+.divgestion {
+  border-bottom: 1px solid #FF8848;
+  height: 52px;
+  display: flex;
+  /* Centra los elementos hijos verticalmente */
+  align-items: center;
 
 }
-.divqueja{
-border-bottom: 1px solid #5EC5F4;
-height: 52px;
-display: flex;
-    /* Centra los elementos hijos verticalmente */
-    align-items: center;
-}
-.divqueja2{
-border-bottom: 1px solid #CFEEFC;
+
+.divgestion2 {
+  border-bottom: 1px solid #FDD8C4;
 
 }
-.divinconformidades{
-border-bottom: 1px solid #0AA16E;
-height: 52px;
-display: flex;
-    /* Centra los elementos hijos verticalmente */
-    align-items: center;
+
+.divqueja {
+  border-bottom: 1px solid #5EC5F4;
+  height: 52px;
+  display: flex;
+  /* Centra los elementos hijos verticalmente */
+  align-items: center;
 }
-.divinconformidades2{
-border-bottom: 1px solid #B7FBD3
-}
-.divamparo{
-border-bottom: 1px solid #2F5EFF;
-height: 52px;
-display: flex;
-    /* Centra los elementos hijos verticalmente */
-    align-items: center;
-}
-.divamparo2{
-border-bottom: 1px solid #CCD7FF;
-}
-.divprocedimiento{
-border-bottom: 1px solid #B28100;
-height: 52px;
-display: flex;
-    /* Centra los elementos hijos verticalmente */
-    align-items: center;
+
+.divqueja2 {
+  border-bottom: 1px solid #CFEEFC;
 
 }
-.divprocedimiento2{
-border-bottom: 1px solid #FFEAB3;
 
-  
+.divinconformidades {
+  border-bottom: 1px solid #0AA16E;
+  height: 52px;
+  display: flex;
+  /* Centra los elementos hijos verticalmente */
+  align-items: center;
 }
-.divjuicio{
-border-bottom: 1px solid #DC0A70;
-text-align: left;
-height: 52px;
+
+.divinconformidades2 {
+  border-bottom: 1px solid #B7FBD3
+}
+
+.divamparo {
+  border-bottom: 1px solid #2F5EFF;
+  height: 52px;
+  display: flex;
+  /* Centra los elementos hijos verticalmente */
+  align-items: center;
+}
+
+.divamparo2 {
+  border-bottom: 1px solid #CCD7FF;
+}
+
+.divprocedimiento {
+  border-bottom: 1px solid #B28100;
+  height: 52px;
+  display: flex;
+  /* Centra los elementos hijos verticalmente */
+  align-items: center;
 
 }
-.divjuicio2{
-border-bottom: 1px solid #FDCEE5
+
+.divprocedimiento2 {
+  border-bottom: 1px solid #FFEAB3;
+
 
 }
-.itemtotal{
+
+.divjuicio {
+  border-bottom: 1px solid #DC0A70;
+  text-align: left;
+  height: 52px;
+
+}
+
+.divjuicio2 {
+  border-bottom: 1px solid #FDCEE5
+
+}
+
+.itemtotal {
   margin-bottom: 5px;
 }
+
 @media (max-width: 768px) {
   .input-movil-302 {
-    width: 210px !important;   /* ancho especial solo en móviles */
+    width: 210px !important; /* ancho especial solo en móviles */
   }
 }
 
+hr {
+  border: solid 1px #9E9E9E;
+  margin-bottom: 5px;
+  margin-top: 0;
+}
