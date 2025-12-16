@@ -21,20 +21,32 @@
                 optionLabel="label"
                 placeholder="Selecciona"
                 class="w-full"
+                optionValue="value"
                 [options]="filtroResultado"
                 [style.width.px]="154">
               </p-select>
             </div>
           </div>
           <!-- Grupo 2: Label + Input -->
-          <div class="lg:col-6 col-12">
-            <div class="flex flex-column align-items-start">
-              <label class="field-label mb-1 tituloInputBusqueda" for="amaterno">Selecciona resultado</label>
-              <p-select formControlName="valor" [options]="nss" optionLabel="label" optionValue="value"
-                        placeholder="Selecciona una opción" class="w-full custom-dropdown ph-custom ">
-              </p-select>
+          @if (filtroForm.get('filtro')?.value !== 2) {
+            <div class="lg:col-6 col-12">
+              <div class="flex flex-column align-items-start">
+                <label class="field-label mb-1 tituloInputBusqueda" for="amaterno">Selecciona resultado</label>
+                <p-select formControlName="valor" [options]="nss" optionLabel="label" optionValue="value"
+                          placeholder="Selecciona una opción" class="w-full custom-dropdown ph-custom ">
+                </p-select>
+              </div>
             </div>
-          </div>
+          } @else {
+            <div class="lg:col-6 col-12">
+              <div class="flex flex-column align-items-start">
+                <label class="field-label mb-1 tituloInputBusqueda" for="amaterno">Selecciona resultado</label>
+                <p-select formControlName="valor" [options]="nombres" optionLabel="label" optionValue="value"
+                          placeholder="Selecciona una opción" class="w-full custom-dropdown ph-custom ">
+                </p-select>
+              </div>
+            </div>
+          }
         </div>
       </div>
       <div class="lg:col-3 col-12 flex align-items-end justify-content-end lg:pb-2 ">

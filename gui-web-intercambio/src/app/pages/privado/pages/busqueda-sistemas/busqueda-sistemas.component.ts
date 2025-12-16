@@ -54,12 +54,29 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
     super();
     this.obtenerExpediente();
     this.filtroForm = this.inicializarFiltroForm();
+    this.suscribirACambiosFiltro();
   }
 
   inicializarFiltroForm(): FormGroup {
     return this.fb.group({
       filtro: ['', Validators.required],
       valor: [{value: null, disabled: true}]
+    });
+  }
+
+  suscribirACambiosFiltro(): void {
+    this.filtroForm.get('filtro')?.valueChanges.subscribe(filtroSeleccionado => {
+      const valorControl = this.filtroForm.get('valor');
+      if (!valorControl) return;
+      valorControl.setValue(null);
+      if (filtroSeleccionado) {
+        valorControl.enable();
+        valorControl.setValidators([Validators.required]);
+      } else {
+        valorControl.disable();
+        valorControl.clearValidators();
+      }
+      valorControl.updateValueAndValidity();
     });
   }
 
