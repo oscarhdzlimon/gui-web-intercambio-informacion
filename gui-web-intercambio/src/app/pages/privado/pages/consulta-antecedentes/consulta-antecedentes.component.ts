@@ -19,6 +19,7 @@ import {AntecedentesService} from '@services/antecedentes.service';
 import {forkJoin, Observable, of} from 'rxjs';
 import {TotalesAntecedentes} from '../../../../core/interfaces/totales-antecedentes.interface';
 import {RegistroAntecedentes} from '../../../../core/interfaces/registro-antecedentes.interface';
+import {SolicitudAsociacion} from '../../../../core/interfaces/solicitud-asociacion.interface';
 
 enum TipoTabla {
   NSS = 'NSS',
@@ -64,6 +65,12 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
   data_nombre: WritableSignal<RegistroAntecedentes[]> = signal([]);
 
   totalAntecedentes!: TotalesAntecedentes;
+
+  registrosAsociacion: SolicitudAsociacion[] = [];
+
+  REF_USUARIO: string = '';
+  REF_APLICATIVO: string = '';
+  REF_MODULO: string = '';
 
   constructor(private fb: FormBuilder) {
     super();
@@ -157,9 +164,64 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
     }
   }
 
-  cambiarEstado(event: any) {
-    console.log("Checkbox cambiado:", event);
+  private mapearASolicitud(evento: any): SolicitudAsociacion {
+    return {
+      idBitacoraAsociacion: evento.idBitacoraAsociacion,
+      refUsuarioAutentica: this.REF_USUARIO, // Contexto del componente
+      refAplicativoAsociacion: this.REF_APLICATIVO, // Contexto del componente
+      refModuloAsociacion: this.REF_MODULO, // Contexto del componente
+      refExpediente: evento.expediente,
+      nomPersona: evento.nombre,
+      nomApellidoPaterno: evento.apellidoPaterno,
+      nomApellidoMaterno: evento.apellidoMaterno,
+      refNss: evento.nss,
+      // Mapeo de nombres de propiedades
+      numGestion: evento.gestion,
+      numQuejaMedica: evento.quejaMedica,
+      numInconformidad: evento.inconformidades,
+      numAmparoIndirecto: evento.amparoIndirecto,
+      numProcedimientoRpe: evento.procedimientoRpe,
+      numJuicioContencioso: evento.juicioContencioso
+    };
   }
+
+  cambiarEstado(event: any): void {
+    console.log("Checkbox cambiado:", event);
+
+    // Identificador único para el elemento dentro del contexto de la búsqueda (usamos NSS y Expediente)
+    const identificador = `${event.nss}-${event.expediente}`;
+
+    console.log(event.asociar)
+    if (event.asociar === true) {
+      // ASOCIAR (Agregar)
+
+      // Mapear los datos al formato de destino (SolicitudAsociacion)
+      const nuevaSolicitud: SolicitudAsociacion = this.mapearASolicitud(event);
+
+      // Verificamos si el registro ya existe antes de añadirlo (usando el identificador)
+      const existe = this.registrosAsociacion.some(r => `${r.refNss}-${r.refExpediente}` === identificador);
+
+      if (!existe) {
+        this.registrosAsociacion.push(nuevaSolicitud);
+        console.log(`Registro añadido. Total: ${this.registrosAsociacion.length}`);
+      }
+
+    } else if (event.asociar === false) {
+      // DESASOCIAR (Eliminar)
+
+      // Filtramos el arreglo, manteniendo solo aquellos elementos que NO coincidan con el identificador
+      const totalAntes = this.registrosAsociacion.length;
+
+      this.registrosAsociacion = this.registrosAsociacion.filter(
+        r => `${r.refNss}-${r.refExpediente}` !== identificador
+      );
+
+      if (this.registrosAsociacion.length < totalAntes) {
+        console.log(`Registro eliminado. Total: ${this.registrosAsociacion.length}`);
+      }
+    }
+  }
+
 
   inicializarFiltroForm(): FormGroup {
     return this.fb.group({
