@@ -98,14 +98,14 @@
 
                </ng-template> -->
             
-            <app-tabla-antecedentes 
+            <!--<app-tabla-antecedentes 
                     [tabla]="1"
                     [data]="data"
                     [rows]="10"
                     [total]="2"
                     (pageChange)="cargarPagina($event)"
                     (checkboxChanged)="cambiarEstado($event)">
-                </app-tabla-antecedentes>
+                </app-tabla-antecedentes>-->
             
             </div>
         </div>
@@ -157,14 +157,14 @@
                                 <td><div>{{ gestion.fechaCierreFormateada }}</div></td>
                                 <td alignFrozen="right" pFrozenColumn
                                     class="flex align-items-center justify-content-center">
-                                    <i class="cursor-pointer icon pi pi-eye" (click)="btnVerDetalleGestion(gestion, rowIndex)"
+                                    <i class="cursor-pointer icon pi pi-eye" (click)="btnVerDetalle(gestion, rowIndex, 'Detalle de Gestión')"
                                         [style]="{ 'font-size': '2.2rem',  background: '#f6faff' }"></i>
                                 </td>
                             </tr>
                         </ng-template>
                         <ng-template #emptymessage>
                             <tr>
-                                <td colspan="8">
+                                <td colspan="11">
                                     <div class="flex justify-content-center align-items-center">
                                         <img class="p-0" src="/assets/images/Lupa.svg" alt="Sin resultados">
                                     </div>
@@ -281,7 +281,7 @@
                                     <td alignFrozen="right" pFrozenColumn
                                         class="flex align-items-center justify-content-center">
                                         <i class="cursor-pointer icon pi pi-eye"
-                                            (click)="btnVerDetalle(queja, rowIndex)"
+                                            (click)="btnVerDetalle(queja, rowIndex, 'Detalle de Queja médica')"
                                             [style]="{ 'font-size': '2.2rem',  background: '#f6faff' }"></i>
                                     </td>
                                 </tr>
@@ -399,7 +399,7 @@
                                     <td alignFrozen="right" pFrozenColumn
                                         class="flex align-items-center justify-content-center">
                                         <i class="cursor-pointer icon pi pi-eye"
-                                            (click)="btnVerDetalle(inconformidad, rowIndex)"
+                                            (click)="btnVerDetalle(inconformidad, rowIndex, 'Detalle de Inconformidades')"
                                             [style]="{ 'font-size': '2.2rem',  background: '#f6faff' }"></i>
                                     </td>
                                 </tr>
@@ -518,7 +518,7 @@
                                     <td alignFrozen="right" pFrozenColumn
                                         class="flex align-items-center justify-content-center">
                                         <i class="cursor-pointer icon pi pi-eye"
-                                            (click)="btnVerDetalle(amparo, rowIndex)"
+                                            (click)="btnVerDetalle(amparo, rowIndex, 'Detalle de Amparo indirecto')"
                                             [style]="{ 'font-size': '2.2rem',  background: '#f6faff' }"></i>
                                     </td>
                                 </tr>
@@ -644,7 +644,7 @@
                                     <td alignFrozen="right" pFrozenColumn
                                         class="flex align-items-center justify-content-center">
                                         <i class="cursor-pointer icon pi pi-eye"
-                                            (click)="btnVerDetalle(amparo, rowIndex)"
+                                            (click)="btnVerDetalle(amparo, rowIndex, 'Detalle de Procedimiento RPE')"
                                             [style]="{ 'font-size': '2.2rem',  background: '#f6faff' }"></i>
                                     </td>
                                 </tr>
@@ -724,24 +724,24 @@
 
                             <ng-template #header>
                                 <tr>
-                                    <th style="min-width:120px"># consecutivo</th>
-                                    <th>Expediente </th>
-                                    <th>Persona promovente </th>
-                                    <th>Nombre del / los peticionario(s)</th>
-                                    <th>NSS</th>
-                                    <th>Fecha del suceso</th>
-                                    <th>Descripción del suceso o hechos</th>
-                                    <th>OOAD involucrado</th>
-                                    <th>Unidad involucrada</th>
-                                    <th>Fecha de recepción/notificación</th>
-                                    <th>Estado</th>
-                                    <th>Fecha de cierre del acuerdo/juicio/procedimiento/queja médica /gestión</th>
-                                    <th>Fecha de notificación de la Resolución</th>
-                                    <th>Cierre del acuerdo/juicio/procedimiento/queja médica</th>
-                                    <th>Cantidad pagada</th>
-                                    <th>¿Se Revocó Resolución de Queja Médica? Fecha de Cumplimiento</th>
-                                    <th>¿Susceptible a convenio?</th>
-                                    <th scope="col" style="min-width: 100px" alignFrozen="right" pFrozenColumn>
+                                    <th scope="col" style="min-width:120px"># consecutivo</th>
+                                    <th scope="col">Expediente </th>
+                                    <th scope="col">Persona promovente </th>
+                                    <th scope="col">Nombre del / los peticionario(s)</th>
+                                    <th scope="col">NSS</th>
+                                    <th scope="col">Fecha del suceso</th>
+                                    <th scope="col">Descripción del suceso o hechos</th>
+                                    <th scope="col">OOAD involucrado</th>
+                                    <th scope="col">Unidad involucrada</th>
+                                    <th scope="col">Fecha de recepción/notificación</th>
+                                    <th scope="col">Estado</th>
+                                    <th scope="col">Fecha de cierre del acuerdo/juicio/procedimiento/queja médica /gestión</th>
+                                    <th scope="col">Fecha de notificación de la Resolución</th>
+                                    <th scope="col">Cierre del acuerdo/juicio/procedimiento/queja médica</th>
+                                    <th scope="col">Cantidad pagada</th>
+                                    <th scope="col">¿Se Revocó Resolución de Queja Médica? Fecha de Cumplimiento</th>
+                                    <th scope="col">¿Susceptible a convenio?</th>
+                                    <th scope="col" scope="col" style="min-width: 100px" alignFrozen="right" pFrozenColumn>
                                         Ver detalle
                                     </th>
                                 </tr>
@@ -769,7 +769,7 @@
                                     <td alignFrozen="right" pFrozenColumn
                                         class="flex align-items-center justify-content-center">
                                         <i class="cursor-pointer icon pi pi-eye"
-                                            (click)="btnVerDetalle(juicio, rowIndex)"
+                                            (click)="btnVerDetalle(juicio, rowIndex, 'Detalle de Juicio Constancioso Administrativo Federal')"
                                             [style]="{ 'font-size': '2.2rem',  background: '#f6faff' }"></i>
                                     </td>
                                 </tr>

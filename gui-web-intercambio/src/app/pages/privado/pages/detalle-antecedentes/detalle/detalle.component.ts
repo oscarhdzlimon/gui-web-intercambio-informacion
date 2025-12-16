@@ -28,10 +28,14 @@ ooad:string="";
 unidad:string="";
 estado:string="";
 cierre:string="";
+
+datosDetalle: any;
 ngOnInit() {
 
   if (this.data?.data) {
+
     this.strTitulo = this.data.data.titulo;
+    this.datosDetalle = this.data.data;
     this.registro = this.data.data.idRegistro;
     this.consecutivo = this.data.data.consecutivo;
     this.folio = this.data.data.folio;

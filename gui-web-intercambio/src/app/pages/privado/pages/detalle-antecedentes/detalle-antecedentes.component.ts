@@ -51,19 +51,6 @@ export class DetalleAntecedentesComponent extends GeneralComponent {
 idpagina:number=0;
   ruta= this._nav.consultaantecedentes;
   titulo = 'Antecedentes';
-   data:any[] = [
-  ];
-  data2:any[] = [
-  ];
-  data4:any[] = [
-  ];
-  data5:any[] = [
-  ];
-  data6:any[] = [
-  ];
-
-  data7:any[] = [
-  ];
 
 
   lstGestion: WritableSignal<TablaDetalleGestionInterface[]> = signal([]);
@@ -73,9 +60,6 @@ idpagina:number=0;
   lstProcedimientoRpe: WritableSignal<TablaProcedimientoRpeInterface[]> = signal([]);
   lstJuicio: WritableSignal<TablaJuicioContenciosoInterface[]> = signal([]);
   
-
-
-
   estatusPendienteDocumentacion =false;
   
   ref: DynamicDialogRef | undefined;
@@ -169,10 +153,10 @@ idpagina:number=0;
   */
 
 
-  datosUsuario =  {
-    "nombre": "LUIS ADRIAN ARIZPE DELGADO", 
-    "nss": "4312880790",
-    "expediente": "000403/2021-06-02-5"
+  datosUsuario =   {
+    "nombre": "ANGEL ARMANDO  BRAVO ZAMBRANO", 
+    "nss": "48068225530",
+    "expediente": "0923/2020-27"
   }
     
 
@@ -200,131 +184,16 @@ idpagina:number=0;
   ngOnInit(): void {
 
     this.llenarTablas();
+  
 
-   this.idpagina= Number(this.route.snapshot.paramMap.get('id'));
-   console.log(this.idpagina);
+  
+
+  
+ 
+  this.idpagina= Number(this.route.snapshot.paramMap.get('id'));
+  
  
    
-    return
-    //this.inicializatablagestion();
-     this.inicializatablagestion2();
-    this.inicializatablaamparo();
-    this.inicializatablaprocedimiento();
-   let reg1 ={
-    idConsecutivo: 1,
-    idExpediente: 'ABCDFE',
-    personaPromovente: "Ameyalli Victoria Sarmiento",
-    strCurp: 'VISA900901MTLCRM00',
-    strNSS: '031708259993',
-    fchSuceso: '02/12/2025',
-    strDescripcionSuceso: 'los hechos ocurrieron de tal forma que uno se sorprende al leerlos',
-   }
-   let reg2 ={
-    idConsecutivo: 2,
-    idExpediente: 'ABCDFE',
-    personaPromovente: "Ameyalli Victoria Sarmiento",
-    strCurp: 'VISA900901MTLCRM00',
-    strNSS: '031708259993',
-    fchSuceso: '02/12/2025',
-    strDescripcionSuceso: 'los hechos ocurrieron de tal forma que uno se sorprende al leerlos',
-   }
-   let reg3 ={
-    idConsecutivo: 3,
-    idExpediente: 'ABCDFE',
-    personaPromovente: "Ameyalli Victoria Sarmiento",
-    strCurp: 'VISA900901MTLCRM00',
-    strNSS: '031708259993',
-    fchSuceso: '02/12/2025',
-    strDescripcionSuceso: 'los hechos ocurrieron de tal forma que uno se sorprende al leerlos',
-   }
-   let reg4 ={
-    idConsecutivo: 4,
-    idExpediente: 'ABCDFE',
-    personaPromovente: "Ameyalli Victoria Sarmiento",
-    strCurp: 'VISA900901MTLCRM00',
-    strNSS: '031708259993',
-    fchSuceso: '02/12/2025',
-    strDescripcionSuceso: 'los hechos ocurrieron de tal forma que uno se sorprende al leerlos',
-   }
-   let reg5 ={
-    idConsecutivo: 5,
-    idExpediente: 'ABCDFE',
-    personaPromovente: "Ameyalli Victoria Sarmiento",
-    strCurp: 'VISA900901MTLCRM00',
-    strNSS: '031708259993',
-    fchSuceso: '02/12/2025',
-    strDescripcionSuceso: 'los hechos ocurrieron de tal forma que uno se sorprende al leerlos',
-   }
-   let reg6 ={
-    idConsecutivo: 6,
-    idExpediente: 'ABCDFE',
-    personaPromovente: "Ameyalli Victoria Sarmiento",
-    strCurp: 'VISA900901MTLCRM00',
-    strNSS: '031708259993',
-    fchSuceso: '02/12/2025',
-    strDescripcionSuceso: 'los hechos ocurrieron de tal forma que uno se sorprende al leerlos',
-   }
-   let reg7 ={
-    idConsecutivo: 7,
-    idExpediente: 'ABCDFE',
-    personaPromovente: "Ameyalli Victoria Sarmiento",
-    strCurp: 'VISA900901MTLCRM00',
-    strNSS: '031708259993',
-    fchSuceso: '02/12/2025',
-    strDescripcionSuceso: 'los hechos ocurrieron de tal forma que uno se sorprende al leerlos',
-   }
-   let reg8 ={
-    idConsecutivo: 8,
-    idExpediente: 'ABCDFE',
-    personaPromovente: "Ameyalli Victoria Sarmiento",
-    strCurp: 'VISA900901MTLCRM00',
-    strNSS: '031708259993',
-    fchSuceso: '02/12/2025',
-    strDescripcionSuceso: 'los hechos ocurrieron de tal forma que uno se sorprende al leerlos',
-   }
-   let reg9 ={
-    idConsecutivo: 0,
-    idExpediente: 'ABCDFE',
-    personaPromovente: "Ameyalli Victoria Sarmiento",
-    strCurp: 'VISA900901MTLCRM00',
-    strNSS: '031708259993',
-    fchSuceso: '02/12/2025',
-    strDescripcionSuceso: 'los hechos ocurrieron de tal forma que uno se sorprende al leerlos',
-   }
-   let reg10 ={
-    idConsecutivo: 10,
-    idExpediente: 'ABCDFE',
-    personaPromovente: "Ameyalli Victoria Sarmiento",
-    strCurp: 'VISA900901MTLCRM00',
-    strNSS: '031708259993',
-    fchSuceso: '02/12/2025',
-    strDescripcionSuceso: 'los hechos ocurrieron de tal forma que uno se sorprende al leerlos',
-   }
-   let reg11 ={
-    idConsecutivo: 11,
-    idExpediente: 'ABCDFE',
-    personaPromovente: "Ameyalli Victoria Sarmiento",
-    strCurp: 'VISA900901MTLCRM00',
-    strNSS: '031708259993',
-    fchSuceso: '02/12/2025',
-    strDescripcionSuceso: 'los hechos ocurrieron de tal forma que uno se sorprende al leerlos',
-   }
-   this.tabla =Array<TablaDetalleGestionInterface>();
-   this.tabla2 =Array<TablaDetalleGestionInterface>();
-   this.tabla.push(reg1);
-   this.tabla.push(reg2);
-   this.tabla.push(reg3);
-   this.tabla.push(reg4);
-   this.tabla.push(reg5);
-   this.tabla.push(reg6);
-   this.tabla.push(reg7);
-   this.tabla.push(reg8);
-   this.tabla.push(reg9);
-   this.tabla.push(reg10);
-   this.tabla2.push(reg11);
-   //this.lstGestion.set(this.tabla);
-   this.lstQueja.set(this.tabla2);
-   //this.paginar();
   }
 
 
@@ -332,8 +201,6 @@ idpagina:number=0;
   llenarTablas(){
 
     const parametros = {page:0,size:10,sort:Ordenamiento.ASC};
-    
-
     forkJoin({
       gestionData: this.detalleAntecedentesService.consultarGestion(parametros,this.datosUsuario),
       quejaMedicaData: this.detalleAntecedentesService.consultarQuejaMedica(parametros,this.datosUsuario),
@@ -369,40 +236,12 @@ idpagina:number=0;
 
 
 
-  inicializatablagestion(){
-    this.data = [
-      { consecutivo: 1,expediente:"GST2023001",persona:"Ricardo Palma García",curp:"PAGR830521HDFRLC05",nss:"17482569321",fecha: "20-03-2022", descripcion: "El promovente manifestó retraso en ...", ooad:"OOAD Ciudad de México Norte",unidad:"HGZ No. 24 Insurgentes",notificacion:"20-03-2022",estado:"En trámite",cierre:"20-03-2022",resolucion:"20-03-2022",acuerdo:"20-03-2022",revoco:"Sí - 20-03-2022"} ,
-      { consecutivo: 1,expediente:"GST2023001",persona:"Ricardo Palma García",curp:"PAGR830521HDFRLC05",nss:"17482569321",fecha: "20-03-2022", descripcion: "El promovente manifestó retraso en ...", ooad:"OOAD Ciudad de México Norte",unidad:"HGZ No. 24 Insurgentes",notificacion:"20-03-2022",estado:"En trámite",cierre:"20-03-2022",resolucion:"20-03-2022",acuerdo:"20-03-2022",revoco:"Sí - 20-03-2022"} ,
-    ];
-  }
 
- inicializatablagestion2(){
-    this.data7 = [
-  { consecutivo: 1,folio:"GST2023001",persona:"Ricardo Palma García",peticionarios:"Ricardo Palma Hernández, María Fernanda ...",nss:"17482569321",fecha: "20-03-2022", ooad:"OOAD Ciudad de México Norte",unidad:"HGZ No. 24 Insurgentes",creacion:"20-03-2022",estado:"En trámite",cierre:"20-03-2022"} ,
-  { consecutivo: 2,folio:"GST2023001",persona:"Ricardo Palma García",peticionarios:"Ricardo Palma Vázquez, Claudia  Méndez ...",nss:"17482569321",fecha: "20-03-2022",  ooad:"OOAD Ciudad de México Norte",unidad:"HGZ No. 24 Insurgentes",creacion:"20-03-2022",estado:"En trámite",cierre:"20-03-2022"} ,
-];
-
-}
- inicializatablaamparo(){
-    this.data4 = [
-  { consecutivo: 1,expediente:"GST2023001",persona:"Ricardo Palma García",peticionarios:"Ricardo Palma Hernández, María Fernanda ...",nss:"17482569321",fecha: "20-03-2022", descripcion: "El promovente manifestó retraso en ...", ooad:"OOAD Ciudad de México Norte",unidad:"HGZ No. 24 Insurgentes",notificacion:"20-03-2022",estado:"En trámite",cierre:"20-03-2022",resolucion:"20-03-2022",acuerdo:"20-03-2022",revoco:"Sí - 20-03-2022"} ,
-  { consecutivo: 1,expediente:"GST2023001",persona:"Ricardo Palma García",peticionarios:"Ricardo Palma Vázquez, Claudia Méndez ...",nss:"17482569321",fecha: "20-03-2022", descripcion: "El promovente manifestó retraso en ...", ooad:"OOAD Ciudad de México Norte",unidad:"HGZ No. 24 Insurgentes",notificacion:"20-03-2022",estado:"En trámite",cierre:"20-03-2022",resolucion:"20-03-2022",acuerdo:"20-03-2022",revoco:"Sí - 20-03-2022"} ,
-];
-
-}
- inicializatablaprocedimiento(){
-    this.data5 = [
-  { consecutivo: 1,expediente:"GST2023001",persona:"Ricardo Palma García",peticionarios:"Ricardo Palma Hernández, María Fernanda ...",nss:"17482569321",fecha: "20-03-2022", descripcion: "El promovente manifestó retraso en ...", ooad:"OOAD Ciudad de México Norte",unidad:"HGZ No. 24 Insurgentes",notificacion:"20-03-2022",estado:"En trámite",cierre:"20-03-2022",resolucion:"20-03-2022",acuerdo:"20-03-2022",revoco:"Sí - 20-03-2022",convenio:"Sí"} ,
-  { consecutivo: 1,expediente:"GST2023001",persona:"Ricardo Palma García",peticionarios:"Ricardo Palma Vázquez, Claudia Méndez ...",nss:"17482569321",fecha: "20-03-2022", descripcion: "El promovente manifestó retraso en ...", ooad:"OOAD Ciudad de México Norte",unidad:"HGZ No. 24 Insurgentes",notificacion:"20-03-2022",estado:"En trámite",cierre:"20-03-2022",resolucion:"20-03-2022",acuerdo:"20-03-2022",revoco:"Sí - 20-03-2022",convenio:"No"} ,
-];
-
-}
-ver(){}
-
-  public btnVerDetalleGestion(registro: TablaDetalleGestionInterface,idRegistro:number){
-    let titulo= 'Detalle de Gestión';
+  public btnVerDetalle(registro: TablaDetalleGestionInterface,idRegistro:number, titulo: string){
+    
+    
     this.ref = this.dialogService.open(DetalleComponent, {
-      data: {...registro,idRegistro, titulo},
+      data: {...registro, titulo},
       modal: true,
       width: '40vw',
       height: '80vh',
@@ -419,9 +258,7 @@ ver(){}
     });
   }
 
-  btnVerDetalle(algo:any,algos:any){
 
-  }
 
   onPageChange(event:any, from: string){
     
