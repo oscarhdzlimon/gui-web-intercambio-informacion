@@ -9,11 +9,11 @@ import {VerificacionDocumentosComponent} from './pages/verificacion-documentos/v
 import {NAV} from '@utils/url-global';
 
 import {documentacionAspiranteResolver} from '../../core/resolvers/documentacion-aspirante.resolver';
-import { verficacionDocsResolver } from '../../core/resolvers/verificacion-docs.resolver';
+import {verficacionDocsResolver} from '../../core/resolvers/verificacion-docs.resolver';
 
-import { ConsultaAntecedentesComponent } from './pages/consulta-antecedentes/consulta-antecedentes.component';
-import { DetalleAntecedentesComponent } from './pages/detalle-antecedentes/detalle-antecedentes.component';
-import { BusquedaSistemasComponent } from './pages/busqueda-sistemas/busqueda-sistemas.component';
+import {ConsultaAntecedentesComponent} from './pages/consulta-antecedentes/consulta-antecedentes.component';
+import {DetalleAntecedentesComponent} from './pages/detalle-antecedentes/detalle-antecedentes.component';
+import {BusquedaSistemasComponent} from './pages/busqueda-sistemas/busqueda-sistemas.component';
 
 const routes: Routes = [{
   path: '',
@@ -30,18 +30,14 @@ const routes: Routes = [{
 
     },
     {
-      path: NAV.busquedasistema,
+      path: `${NAV.busquedasistema}/:expediente`,
       component: BusquedaSistemasComponent,
     },
 
     {
       path: `${NAV.detalleAntecedentes}/:id`,
       component: DetalleAntecedentesComponent,
-
-
     },
-
-
   ]
 }];
 

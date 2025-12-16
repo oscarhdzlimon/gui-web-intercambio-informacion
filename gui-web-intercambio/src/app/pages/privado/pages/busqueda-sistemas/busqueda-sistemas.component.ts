@@ -20,6 +20,7 @@ import {TotalesAntecedentes} from '../../../../core/interfaces/totales-anteceden
 import {SolicitudAntecedentes} from '../../../../core/interfaces/solicitud-antecedentes.interface';
 import {Observable} from 'rxjs';
 import {TablaPrincipalComponent} from '@pages/privado/shared/tabla-principal/tabla-principal.component';
+import {ActivatedRoute} from '@angular/router';
 
 enum TipoTabla {
   NSS = 'NSS',
@@ -47,6 +48,8 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
   nombres: TipoDropdown[] = [];
   nss: TipoDropdown[] = [];
 
+  expedienteID: string = '';
+
   totalAntecedentes!: TotalesAntecedentes;
 
   consultas: ResultadoConsulta[] = [];
@@ -55,7 +58,8 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
 
   consulta_todos: boolean = false; // Asumiendo que 4 es el caso 'Todos'
 
-  constructor(private readonly fb: FormBuilder) {
+  constructor(private readonly fb: FormBuilder,
+              private readonly route: ActivatedRoute) {
     super();
     this.obtenerExpediente();
     this.filtroForm = this.inicializarFiltroForm();
@@ -86,7 +90,10 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
   }
 
   obtenerExpediente() {
-    this.antecedentesService.getExpediente('CC.NL.-0615/1999').subscribe({
+    this.route.paramMap.subscribe(params => {
+      this.expedienteID = params.get('expediente') ?? '';
+    });
+    this.antecedentesService.getExpediente(this.expedienteID).subscribe({
       next: (respuesta) => {
         this.nss = mapearArregloTipoDropdown(respuesta, 'nss', 'nss');
         this.nombres = mapearArregloTipoDropdown(respuesta, 'nombreCompleto', 'nombreCompleto');
@@ -241,7 +248,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
 
   generarSolicitudAntecedentesNombre(valor: string): SolicitudAntecedentes {
     return {
-      expediente: 'CC.NL.-0621/2016',
+      expediente: this.expedienteID,
       nombre: valor,
       nss: null
     }
@@ -295,13 +302,13 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
 
     if (tipoConsulta === 1) { // Caso 1: Búsqueda por NSS
       return {
-        expediente: 'CC.NL.-0621/2016',
+        expediente: this.expedienteID,
         nombre: null,
         nss: valorBusqueda
       };
     } else
       return {
-        expediente: 'CC.NL.-0621/2016',
+        expediente: this.expedienteID,
         nombre: valorBusqueda, // Enviar el Nombre como un arreglo de un elemento
         nss: null
       };
