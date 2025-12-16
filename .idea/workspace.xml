@@ -4,8 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="ajustes valores filtros busqueda sistema">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="generalización busqueda sistemas">
       <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" afterDir="false" />
     </list>
@@ -209,7 +208,15 @@
       <option name="project" value="LOCAL" />
       <updated>1765861098669</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="generalización busqueda sistemas">
+      <option name="closed" value="true" />
+      <created>1765884565590</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1765884565590</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -240,6 +247,7 @@
     <MESSAGE value="ajustes busqueda sistema" />
     <MESSAGE value="ajustes filtros busqueda sistema" />
     <MESSAGE value="ajustes valores filtros busqueda sistema" />
-    <option name="LAST_COMMIT_MESSAGE" value="ajustes valores filtros busqueda sistema" />
+    <MESSAGE value="generalización busqueda sistemas" />
+    <option name="LAST_COMMIT_MESSAGE" value="generalización busqueda sistemas" />
   </component>
 </project>

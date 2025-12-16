@@ -19,6 +19,7 @@ import {ResultadoConsulta} from '../../../../core/interfaces/resultado-consulta.
 import {TotalesAntecedentes} from '../../../../core/interfaces/totales-antecedentes.interface';
 import {SolicitudAntecedentes} from '../../../../core/interfaces/solicitud-antecedentes.interface';
 import {Observable} from 'rxjs';
+import {TablaPrincipalComponent} from '@pages/privado/shared/tabla-principal/tabla-principal.component';
 
 enum TipoTabla {
   NSS = 'NSS',
@@ -35,7 +36,7 @@ enum TipoTabla {
     ButtonModule,
     ConfirmPopupModule,
     PaginatorModule,
-    PopoverModule, TablaAcordeonComponent, NgbAccordionModule],
+    PopoverModule, TablaAcordeonComponent, NgbAccordionModule, TablaPrincipalComponent],
   templateUrl: './busqueda-sistemas.component.html',
   styleUrl: './busqueda-sistemas.component.scss'
 })
@@ -243,8 +244,14 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
   }
 
 
-  cargarPagina(event: any) {
-    console.log("Paginación:", event);
+  cargarPagina(event: any, index: number) {
+    const consulta = this.consultas[index];
+    const nuevaPagina = event.page;
+
+    if (consulta && (consulta.paginaActual !== nuevaPagina)) {
+      consulta.paginaActual = nuevaPagina;
+      this.ejecutarConsulta(index); // Ejecuta la búsqueda para esta consulta
+    }
   }
 
   cambiarEstado(event: any) {

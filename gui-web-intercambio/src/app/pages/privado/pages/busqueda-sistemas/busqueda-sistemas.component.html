@@ -56,6 +56,8 @@
               type="button"
               label="Buscar"
               class="w-full"
+              (click)="iniciarBusqueda()"
+              [disabled]="filtroForm.invalid"
               styleClass="btn-buscar btn-background w-full">
             </p-button>
           </div>
@@ -66,6 +68,18 @@
       </div>
     </div>
   </form>
+
+  @for (consulta of consultas; track $index) {
+    @if (consulta.data().length > 0) {
+      <app-tabla-principal
+        [titulo]="consulta.tituloCompleto"
+        [data]="consulta.data()"
+        [rows]="consulta.registrosPorPagina"
+        [total]="consulta.totalRegistros"
+        (pageChange)="cargarPagina($event, $index)"
+        (checkboxChanged)="cambiarEstado($event)"/>
+    }
+  }
 
   @if (consultas.length > 0) {
     <article class="flex flex-row flex-wrap">
