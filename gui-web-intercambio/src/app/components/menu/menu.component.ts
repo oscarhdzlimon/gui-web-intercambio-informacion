@@ -47,7 +47,8 @@ export class MenuComponent extends GeneralComponent implements OnInit {
         },
       }
     ]
-    this.usuario = this.obtenerUsuario()!;
+    //this.usuario = this.obtenerUsuario()!;
+    this.userService.userData$.subscribe(user => this.userData = user);
   }
 
   obtenerUsuario(): Usuario | null {
@@ -55,14 +56,14 @@ export class MenuComponent extends GeneralComponent implements OnInit {
       const USUARIO_KEY = 'usuario_actual';
       // 1. Obtener la cadena JSON de sessionStorage
       const usuarioJson = sessionStorage.getItem(USUARIO_KEY);
-      
+
       if (usuarioJson) {
         // 2. Deserializar la cadena JSON de vuelta al tipo Usuario
         // Usamos 'as Usuario' para forzar el tipado
-        return JSON.parse(usuarioJson) as Usuario; 
+        return JSON.parse(usuarioJson) as Usuario;
       }
       return null;
-      
+
     } catch (error) {
       console.error('Error al recuperar el usuario de sesión:', error);
       return null;

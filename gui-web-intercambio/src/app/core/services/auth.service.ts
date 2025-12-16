@@ -18,7 +18,7 @@ import {TiempoSesion} from '@models/tiempo-sesion.interface';
 })
 export class AuthService {
   private readonly URL_BASE: string = environment.api.login + 'auth/';
-  private readonly URL_AUTH: string = 'authenticate';
+  private readonly URL_AUTH: string = 'login';
   private readonly URL_CAMBIO_CONTRASENIA: string = 'solicitud-cambio-contrasena';
   private readonly URL_ACTUALIZAR_CONTRASENIA: string = 'cambio-contrasena';
   private mostrarAlertaSesionInactivaSubject = new Subject<boolean>();
@@ -46,6 +46,7 @@ export class AuthService {
   login(login: Login): Observable<any> {
     return this.http.post<any>(`${this.URL_BASE}${this.URL_AUTH}`, login).pipe(
       tap((respuesta: any) => {
+        debugger
         if (respuesta.exito) {
           localStorage.setItem(CME_TOKEN, respuesta.respuesta.token);
           this.settearSession(respuesta.respuesta.token);
@@ -71,6 +72,7 @@ export class AuthService {
   }
 
   private agregarUsuarioSesion(accessToken: string): void {
+    debugger
     const usuarioSesion: SesionUser = this.obtenerUsuarioDePayload(accessToken);
     this.usuarioSesionSubject.next(usuarioSesion);
   }
@@ -79,21 +81,13 @@ export class AuthService {
     let payload: any | null = new JwtHelperService().decodeToken<Payload>(token);
     if (payload) {
       return {
-        idPerfil: payload.idPerfil,
-        idUsuario: payload.idUsuario,
-        nomApellidoPaterno: payload.nomApellidoPaterno,
-        nomNombre: payload.nomNombre,
-        nomApellidoMaterno: payload.nomApellidoMaterno,
-        cveMatricula: payload?.cveMatricula,
-        perfil: payload.perfil,
-        refCurp: payload.refCurp,
-        refEmail: payload.refEmail,
+        curp: payload.sub,
+        modulo: payload.modulo,
+        nombreCompleto: payload.nombreCompleto,
+        sistemaOrigen: payload.sistemaOrigen,
+        ooad: payload.ooad,
         sub: payload.sub,
-        idSubperfil: payload.idSubperfil,
-        subperfil: payload.subperfil,
-        fechaRegistro: payload.fechaRegistro,
-        refPasaporte: payload.refPasaporte,
-        refFolio: payload?.refFolio
+
       };
     } else {
       throw new Error('Error al intentar obtener el usuario del payload en el token');

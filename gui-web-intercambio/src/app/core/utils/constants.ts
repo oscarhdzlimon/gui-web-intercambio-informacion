@@ -16,4 +16,4 @@ export const INSTITUCIONES = [
   { name: 'Privada', key: '2' }
 ]
 
-export const CME_TOKEN: string = "access_token";
+export const CME_TOKEN: string = "token";
