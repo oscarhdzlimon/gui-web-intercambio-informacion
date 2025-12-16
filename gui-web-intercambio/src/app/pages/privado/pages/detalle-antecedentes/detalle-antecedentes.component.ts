@@ -15,7 +15,7 @@ import { PopoverModule } from 'primeng/popover';
 import { SelectModule } from 'primeng/select';
 import { TableModule } from 'primeng/table';
 import { NgbAccordionModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { TablaDetalleGestionInterface } from '@models/table-detalle-gestion.interface';
+import { TablaAmparoIndirecto, TablaDetalleGestionInterface, TablaInconformidades, TablaJuicioContenciosoInterface, TablaProcedimientoRpeInterface, TablaQuejaMedicaInterface } from '@models/tablas-detalle-antecedentes.interface';
 import {DialogService, DynamicDialogRef} from 'primeng/dynamicdialog';
 import { DetalleComponent } from './detalle/detalle.component';
 import { FooterGenericoComponent } from '../../shared/footer-generico/footer-generico.component';
@@ -67,10 +67,15 @@ idpagina:number=0;
 
 
   lstGestion: WritableSignal<TablaDetalleGestionInterface[]> = signal([]);
-  lstQueja: WritableSignal<TablaDetalleGestionInterface[]> = signal([]);
-  lstInconformidad: WritableSignal<TablaDetalleGestionInterface[]> = signal([]);
-  lstAmparo: WritableSignal<TablaDetalleGestionInterface[]> = signal([]);
-  lstJuicio: WritableSignal<TablaDetalleGestionInterface[]> = signal([]);
+  lstQueja: WritableSignal<TablaQuejaMedicaInterface[]> = signal([]);
+  lstInconformidad: WritableSignal<TablaInconformidades[]> = signal([]);
+  lstAmparo: WritableSignal<TablaAmparoIndirecto[]> = signal([]);
+  lstProcedimientoRpe: WritableSignal<TablaProcedimientoRpeInterface[]> = signal([]);
+  lstJuicio: WritableSignal<TablaJuicioContenciosoInterface[]> = signal([]);
+  
+
+
+
   estatusPendienteDocumentacion =false;
   
   ref: DynamicDialogRef | undefined;
@@ -85,12 +90,92 @@ idpagina:number=0;
   firstGestion: number = 0;
   totalElementosGestion: number = 0;
 
+  paginaActualQueja: number = 0;
+  firstQueja: number = 0;
+  totalElementosQueja: number = 0;
 
-  datosUsuario = {
-    "nombre": null, 
-    "nss": "43886827680",
-    "expediente": "CC.NL.-0621/2016"
-  };
+  paginaActualInconformidad: number = 0;
+  firstInconformidad: number = 0;
+  totalElementosInconformidad: number = 0;
+  
+  paginaActualAmparoIndirecto: number = 0;
+  firstAmparoIndirecto: number = 0;
+  totalElementosAmparoIndirecto: number = 0;
+
+  paginaActualProcedimientoRpe: number = 0;
+  firstProcedimientoRpe: number = 0;
+  totalElementosProcedimientoRpe: number = 0;
+
+  paginaActualJuicio: number = 0;
+  firstJuicio: number = 0;
+  totalElementosJuicio: number = 0;
+
+
+  //Gestión
+  /*
+    {
+      "nombre": "ANGEL ARMANDO  BRAVO ZAMBRANO", 
+      "nss": "48068225530",
+      "expediente": "0923/2020-27"
+    }
+  */
+
+  //Queja médica
+  /*
+  {
+    "nombre": "ANGEL ARMANDO  BRAVO ZAMBRANO", 
+    "nss": "48068225530",
+    "expediente": "0923/2020-27"
+  }
+  */
+
+  //Inconformidad
+  /*
+    {
+      "nombre": "SANJUANA VEGA SIFUENTES", 
+      "nss": "43886827680",
+      "expediente": "CC.NL.-0621/2016"
+    }
+  */
+
+  //Amparo indirecto
+  /*
+  {
+    "nombre": "ANGEL ARMANDO  BRAVO ZAMBRANO", 
+    "nss": "48068225530",
+    "expediente": "0923/2020-27"
+  }
+  */
+
+
+  //procedimiento rpe
+  /*
+  {
+    "nombre": "RAUL  HERNANDEZ AMADOR", 
+    "nss": "13896904235",
+    "expediente": "0001/2020"
+  }
+  
+  */
+
+  //Juicio contencioso
+  /*
+  {
+  "nombre": "LUIS ADRIAN ARIZPE DELGADO", 
+  "nss": "4312880790",
+  "expediente": "000403/2021-06-02-5"
+}
+  
+  */
+
+
+  datosUsuario =  {
+    "nombre": "LUIS ADRIAN ARIZPE DELGADO", 
+    "nss": "4312880790",
+    "expediente": "000403/2021-06-02-5"
+  }
+    
+
 
 
 
@@ -246,7 +331,7 @@ idpagina:number=0;
 
   llenarTablas(){
 
-    const parametros = {page:0,size:2,sort:Ordenamiento.ASC};
+    const parametros = {page:0,size:10,sort:Ordenamiento.ASC};
     
 
     forkJoin({
@@ -261,6 +346,21 @@ idpagina:number=0;
         this.lstGestion.set(gestionData.content);
         this.totalElementosGestion = gestionData.page.totalElements;
 
+        this.lstQueja.set(quejaMedicaData['content']);
+        this.totalElementosQueja = quejaMedicaData['page'].totalElements;
+
+        this.lstInconformidad.set(inconformidadesData['content'])
+        this.totalElementosInconformidad = inconformidadesData['page'].totalElements;
+
+        this.lstAmparo.set(amparoIndirectoData['content']);
+        this.totalElementosAmparoIndirecto =  amparoIndirectoData['page'].totalElements;
+
+        this.lstProcedimientoRpe.set(procedimientoRpeData['content']);
+        this.totalElementosProcedimientoRpe = procedimientoRpeData['page'].totalElements;
+
+        this.lstJuicio.set(juicioContenciosoData['content']);
+        this.totalElementosJuicio = juicioContenciosoData['page'].totalElements;
+      
       }
     })
   }
@@ -300,7 +400,6 @@ idpagina:number=0;
 ver(){}
 
   public btnVerDetalleGestion(registro: TablaDetalleGestionInterface,idRegistro:number){
-    debugger
     let titulo= 'Detalle de Gestión';
     this.ref = this.dialogService.open(DetalleComponent, {
       data: {...registro,idRegistro, titulo},
@@ -320,6 +419,52 @@ ver(){}
     });
   }
 
+  btnVerDetalle(algo:any,algos:any){
+
+  }
+
+  onPageChange(event:any, from: string){
+    
+
+    
+
+      if(from == 'quejaMedica'){
+
+        this.paginaActualQueja = event.page;
+        this.firstQueja = event.first;
+        this.paginarQueja();
+      }
+
+      if(from == 'inconformidad'){
+
+        this.paginaActualInconformidad = event.page;
+        this.firstInconformidad = event.first;
+        this.paginarInconformidad();
+      }
+
+      if(from == 'amparoIndirecto'){
+        this.paginaActualAmparoIndirecto = event.page;
+        this.firstAmparoIndirecto = event.first;
+        this.paginarAmparoIndirecto();
+      }
+      
+      
+      if(from == 'procedimientoRpe'){
+        this.paginaActualProcedimientoRpe = event.page;
+        this.firstProcedimientoRpe = event.first;
+        this.paginarProcedimientoRpe();
+      }
+
+      if(from == 'juicio'){
+        this.paginaActualJuicio = event.page;
+        this.firstJuicio = event.first;
+        this.paginarJuicio();
+      }
+      
+
+    
+  }
+
 
   onPageChangeGestion(event: any): void {
     
@@ -328,6 +473,18 @@ ver(){}
     }
     this.firstGestion = event.first;
     this.paginarGestion(); 
+  }
+
+  paginarQueja(){
+    const parametros = {page:this.paginaActualQueja,size:10,sort:Ordenamiento.ASC};
+    
+    this.detalleAntecedentesService.consultarQuejaMedica(parametros,this.datosUsuario)
+    .subscribe({
+      next:(datos) => {
+        this.lstQueja.set(datos['content']);
+        this.totalElementosQueja = datos['page'].totalElements;
+      }
+    });
   }
 
   paginarGestion() {
@@ -341,30 +498,71 @@ ver(){}
         this.totalElementosGestion = datos.page.totalElements;
       }
       
-    })
-    
-    
-    //this.lstGestion.set(this.tabla);
-    //this.first = 0;
-    //this.totalElementos =     this.lstGestion().length;
-    /* this.verificacionDocsService.consultarDocs(this.filtros()).subscribe({
-      next: (respuesta: HttpRespuesta<any>) => {
-        this.usuarioDocumentos.set(respuesta.respuesta['content']);
+    });
+  }
 
-        //this.first: number = 0;
-        this.totalElementos = respuesta.respuesta.page.totalElements;
+
+
+
+  paginarInconformidad(){
+
+    const parametros = {page:this.paginaActualInconformidad,size:10,sort:Ordenamiento.ASC};
+    
+    this.detalleAntecedentesService.consultarInconformidad(parametros,this.datosUsuario)
+    .subscribe({
+      next:(datos) => {
+        this.lstInconformidad.set(datos['content']);
+        this.totalElementosInconformidad = datos['page'].totalElements;
       }
-    }) */
+    });
+  }
 
+  paginarAmparoIndirecto(){
+
+    const parametros = {page:this.paginaActualAmparoIndirecto,size:10,sort:Ordenamiento.ASC};
     
-
-
-
-
-
-
+    this.detalleAntecedentesService.consultarAmparoIndirecto(parametros,this.datosUsuario)
+    .subscribe({
+      next:(datos) => {
+        this.lstAmparo.set(datos['content']);
+        this.totalElementosAmparoIndirecto = datos['page'].totalElements;
+      }
+    });
 
   }
+
+
+  paginarProcedimientoRpe() {
+    const parametros = {page:this.paginaActualProcedimientoRpe,size:10,sort:Ordenamiento.ASC};
+    
+    this.detalleAntecedentesService.consultarProcedimiento(parametros,this.datosUsuario)
+    .subscribe({
+      next:(datos) => {
+        this.lstProcedimientoRpe.set(datos['content']);
+        this.totalElementosProcedimientoRpe = datos['page'].totalElements;
+      }
+    });
+  }
+
+  paginarJuicio() {
+    const parametros = {page:this.paginaActualJuicio,size:10,sort:Ordenamiento.ASC};
+    
+    this.detalleAntecedentesService.consultarJuicioContencioso(parametros,this.datosUsuario)
+    .subscribe({
+      next:(datos) => {
+        this.lstJuicio.set(datos['content']);
+        this.totalElementosJuicio = datos['page'].totalElements;
+      }
+    });
+  }
+
+
+
+
+
+
+
+
      cargarPagina(event: any) {
     console.log("Paginación:", event);
   }

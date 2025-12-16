@@ -35,7 +35,7 @@ export class DetalleAntecedentesService {
     parametros = parametros.set('size', size);
     parametros = parametros.set('sort', sort || 'asc');
     
-    const ruta = `${this.serverEndPointURLAntecedente}/v1/antecedentes/Detalle/Gestion`;
+    const ruta = `${this.serverEndPointURLAntecedente}antecedentes/Detalle/Gestion`;
     return this.http.post<HttpRespuesta<any>>(ruta, filtros, {headers: this.header, params: parametros}).pipe(
       catchError(this.handleError),
       map((response: any) => {
@@ -54,7 +54,7 @@ export class DetalleAntecedentesService {
     parametros = parametros.set('size', size);
     parametros = parametros.set('sort', sort || 'asc');
     
-    const ruta = `${this.serverEndPointURLAntecedente}/v1/antecedentes/Detalle/QuejaMedica`;
+    const ruta = `${this.serverEndPointURLAntecedente}antecedentes/Detalle/QuejaMedica`;
     return this.http.post<HttpRespuesta<any>>(ruta, filtros, {headers: this.header, params: parametros}).pipe(
       catchError(this.handleError),
       map((response: any) => {
@@ -73,7 +73,7 @@ export class DetalleAntecedentesService {
     parametros = parametros.set('size', size);
     parametros = parametros.set('sort', sort || 'asc');
     
-    const ruta = `${this.serverEndPointURLAntecedente}/v1/antecedentes/Detalle/Inconformidad`;
+    const ruta = `${this.serverEndPointURLAntecedente}antecedentes/Detalle/Inconformidad`;
     return this.http.post<HttpRespuesta<any>>(ruta, filtros, {headers: this.header, params: parametros}).pipe(
       catchError(this.handleError),
       map((response: any) => {
@@ -92,7 +92,7 @@ export class DetalleAntecedentesService {
     parametros = parametros.set('size', size);
     parametros = parametros.set('sort', sort || 'asc');
     
-    const ruta = `${this.serverEndPointURLAntecedente}/v1/antecedentes/Detalle/AmparoDirecto`;
+    const ruta = `${this.serverEndPointURLAntecedente}antecedentes/Detalle/AmparoDirecto`;
     return this.http.post<HttpRespuesta<any>>(ruta, filtros, {headers: this.header, params: parametros}).pipe(
       catchError(this.handleError),
       map((response: any) => {
@@ -111,7 +111,7 @@ export class DetalleAntecedentesService {
     parametros = parametros.set('size', size);
     parametros = parametros.set('sort', sort || 'asc');
     
-    const ruta = `${this.serverEndPointURLAntecedente}/v1/antecedentes/Detalle/ProcedimientoRPE`;
+    const ruta = `${this.serverEndPointURLAntecedente}antecedentes/Detalle/ProcedimientoRPE`;
     return this.http.post<HttpRespuesta<any>>(ruta, filtros, {headers: this.header, params: parametros}).pipe(
       catchError(this.handleError),
       map((response: any) => {
@@ -130,7 +130,7 @@ export class DetalleAntecedentesService {
     parametros = parametros.set('size', size);
     parametros = parametros.set('sort', sort || 'asc');
     
-    const ruta = `${this.serverEndPointURLAntecedente}/v1/antecedentes/Detalle/JuicioContencioso`;
+    const ruta = `${this.serverEndPointURLAntecedente}antecedentes/Detalle/JuicioContencioso`;
     return this.http.post<HttpRespuesta<any>>(ruta, filtros, {headers: this.header, params: parametros}).pipe(
       catchError(this.handleError),
       map((response: any) => {

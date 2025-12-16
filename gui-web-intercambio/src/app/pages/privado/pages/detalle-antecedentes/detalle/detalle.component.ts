@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TablaDetalleGestionInterface } from '@models/table-detalle-gestion.interface';
+import { TablaDetalleGestionInterface } from '@models/tablas-detalle-antecedentes.interface';
 import {DynamicDialogConfig,DynamicDialogRef} from 'primeng/dynamicdialog';
 import { ButtonModule } from 'primeng/button';
 @Component({
@@ -31,7 +31,6 @@ cierre:string="";
 ngOnInit() {
 
   if (this.data?.data) {
-    debugger
     this.strTitulo = this.data.data.titulo;
     this.registro = this.data.data.idRegistro;
     this.consecutivo = this.data.data.consecutivo;

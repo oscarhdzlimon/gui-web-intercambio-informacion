@@ -42,6 +42,10 @@
     font-weight: 300;
     line-height: 120%; /* 16.8px */
   }
+  
+  .p-datatable-tbody > tr > td > div {
+    white-space: nowrap;
+  }
 
   .p-datatable-frozen-column {
     box-shadow: -4px 4px 10px 0px rgba(0, 0, 0, 0.13);
