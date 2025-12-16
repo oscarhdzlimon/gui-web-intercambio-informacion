@@ -78,8 +78,23 @@ idpagina:number=0;
   paginaActual: number = 0;
   first: number = 0;
   totalElementos: number = 0;
-  rows: number = 4;
+  rows: number = 10;
   
+
+  paginaActualGestion: number = 0;
+  firstGestion: number = 0;
+  totalElementosGestion: number = 0;
+
+
+  datosUsuario = {
+    "nombre": null, 
+    "nss": "43886827680",
+    "expediente": "CC.NL.-0621/2016"
+  };
+
+
+
+
   constructor(
     public dialogService: DialogService,
     private route: ActivatedRoute,
@@ -89,66 +104,24 @@ idpagina:number=0;
    
   }
 
-  tabla!: Array<TablaDetalleGestionInterface>;
-  tabla2!: Array<TablaDetalleGestionInterface>;
+  tabla!: Array<any>;
+  tabla2!: Array<any>;
 
 
 
 
-  llenarTablas(){
-
-    const parametros = {page:0,size:2,sort:Ordenamiento.ASC};
-
-    const datosUsuario = {
-      "nombre": null, 
-      "nss": "43886827680",
-      "expediente": "CC.NL.-0621/2016"
-    };
-
-
-
-    forkJoin({
-      gestionData: this.detalleAntecedentesService.consultarGestion(parametros,datosUsuario),
-      quejaMedicaData: this.detalleAntecedentesService.consultarQuejaMedica(parametros,datosUsuario),
-      inconformidadesData: this.detalleAntecedentesService.consultarInconformidad(parametros,datosUsuario),
-      amparoIndirectoData: this.detalleAntecedentesService.consultarAmparoIndirecto(parametros,datosUsuario),
-      procedimientoRpeData: this.detalleAntecedentesService.consultarProcedimiento(parametros,datosUsuario),
-      juicioContenciosoData: this.detalleAntecedentesService.consultarJuicioContencioso(parametros,datosUsuario),
-    }).subscribe({
-
-      next:({gestionData,quejaMedicaData,inconformidadesData,amparoIndirectoData,procedimientoRpeData,juicioContenciosoData}) => {
-
-        this.lstGestion = gestionData
-      }
-    })
-      
-    
-  }
+  
 
   ngOnInit(): void {
 
     this.llenarTablas();
-    /*this.detalleAntecedentesService.consultarGestion(
-      {page:0,size:10,sort:Ordenamiento.ASC},
-      {
-        "nombre": null, 
-        "nss": "43886827680",
-        "expediente": "CC.NL.-0621/2016"
-    }
-    ).subscribe({
-      next:(elemenit)  => {
-        debugger
-      }
-    })*/
-
-
-
 
    this.idpagina= Number(this.route.snapshot.paramMap.get('id'));
    console.log(this.idpagina);
  
-
-    this.inicializatablagestion();
+   
+    return
+    //this.inicializatablagestion();
      this.inicializatablagestion2();
     this.inicializatablaamparo();
     this.inicializatablaprocedimiento();
@@ -264,10 +237,37 @@ idpagina:number=0;
    this.tabla.push(reg9);
    this.tabla.push(reg10);
    this.tabla2.push(reg11);
-   this.lstGestion.set(this.tabla);
+   //this.lstGestion.set(this.tabla);
    this.lstQueja.set(this.tabla2);
-   this.paginar();
+   //this.paginar();
   }
+
+
+
+  llenarTablas(){
+
+    const parametros = {page:0,size:2,sort:Ordenamiento.ASC};
+    
+
+    forkJoin({
+      gestionData: this.detalleAntecedentesService.consultarGestion(parametros,this.datosUsuario),
+      quejaMedicaData: this.detalleAntecedentesService.consultarQuejaMedica(parametros,this.datosUsuario),
+      inconformidadesData: this.detalleAntecedentesService.consultarInconformidad(parametros,this.datosUsuario),
+      amparoIndirectoData: this.detalleAntecedentesService.consultarAmparoIndirecto(parametros,this.datosUsuario),
+      procedimientoRpeData: this.detalleAntecedentesService.consultarProcedimiento(parametros,this.datosUsuario),
+      juicioContenciosoData: this.detalleAntecedentesService.consultarJuicioContencioso(parametros,this.datosUsuario),
+    }).subscribe({
+      next:({gestionData,quejaMedicaData,inconformidadesData,amparoIndirectoData,procedimientoRpeData,juicioContenciosoData}) => {
+        this.lstGestion.set(gestionData.content);
+        this.totalElementosGestion = gestionData.page.totalElements;
+
+      }
+    })
+  }
+
+
+
+
 
   inicializatablagestion(){
     this.data = [
@@ -299,7 +299,8 @@ idpagina:number=0;
 }
 ver(){}
 
-  public btnVerDetalle(idRegistro:number, registro:any){
+  public btnVerDetalleGestion(registro: TablaDetalleGestionInterface,idRegistro:number){
+    debugger
     let titulo= 'Detalle de Gestión';
     this.ref = this.dialogService.open(DetalleComponent, {
       data: {...registro,idRegistro, titulo},
@@ -320,17 +321,32 @@ ver(){}
   }
 
 
-  onPageChange(event: any): void {
- this.first = event.first;
-    this.rows = event.rows;
-    this.paginaActual = event.page;
-    this.paginar(); 
+  onPageChangeGestion(event: any): void {
+    
+    if (event.page) {
+      this.paginaActualGestion = event.page;
+    }
+    this.firstGestion = event.first;
+    this.paginarGestion(); 
   }
 
-  paginar() {
-    this.lstGestion.set(this.tabla);
+  paginarGestion() {
+
+    const parametros = {page:this.paginaActualGestion,size:10,sort:Ordenamiento.ASC};
+    
+    this.detalleAntecedentesService.consultarGestion(parametros,this.datosUsuario)
+    .subscribe({
+      next:(datos) => {
+        this.lstGestion.set(datos.content);
+        this.totalElementosGestion = datos.page.totalElements;
+      }
+      
+    })
+    
+    
+    //this.lstGestion.set(this.tabla);
     //this.first = 0;
-    this.totalElementos =     this.lstGestion().length;
+    //this.totalElementos =     this.lstGestion().length;
     /* this.verificacionDocsService.consultarDocs(this.filtros()).subscribe({
       next: (respuesta: HttpRespuesta<any>) => {
         this.usuarioDocumentos.set(respuesta.respuesta['content']);
@@ -339,6 +355,15 @@ ver(){}
         this.totalElementos = respuesta.respuesta.page.totalElements;
       }
     }) */
+
+    
+
+
+
+
+
+
+
   }
      cargarPagina(event: any) {
     console.log("Paginación:", event);

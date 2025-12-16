@@ -31,20 +31,21 @@ cierre:string="";
 ngOnInit() {
 
   if (this.data?.data) {
+    debugger
     this.strTitulo = this.data.data.titulo;
     this.registro = this.data.data.idRegistro;
     this.consecutivo = this.data.data.consecutivo;
     this.folio = this.data.data.folio;
     this.persona = this.data.data.persona;
-    this.peticionarios = this.data.data.peticionarios;
+    this.peticionarios = this.data.data.nombrePeticionario;
     this.nss = this.data.data.nss;
-    this.fecha = this.data.data.fecha;
-    this.ooad = this.data.data.ooad;
+    this.fecha = this.data.data.fechaCreacion;
+    this.ooad = this.data.data.ooadInvolucrado;
     this.unidad = this.data.data.unidad;
     this.estado = this.data.data.estado;
-    this.cierre = this.data.data.cierre;
+    this.cierre = this.data.data.fechaCierre;
   }
-    console.log(this.data);
+    
   }
 
 
