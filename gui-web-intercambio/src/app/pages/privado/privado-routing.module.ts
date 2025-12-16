@@ -30,7 +30,7 @@ const routes: Routes = [{
 
     },
     {
-      path: NAV.busquedasistema,
+      path: `${NAV.busquedasistema}/:expediente`,
       component: BusquedaSistemasComponent,
     },
 
