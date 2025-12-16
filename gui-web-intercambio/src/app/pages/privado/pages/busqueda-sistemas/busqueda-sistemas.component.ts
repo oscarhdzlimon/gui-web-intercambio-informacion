@@ -36,7 +36,7 @@ enum TipoTabla {
     ButtonModule,
     ConfirmPopupModule,
     PaginatorModule,
-    PopoverModule, TablaAcordeonComponent, NgbAccordionModule, TablaPrincipalComponent],
+    PopoverModule, NgbAccordionModule, TablaPrincipalComponent],
   templateUrl: './busqueda-sistemas.component.html',
   styleUrl: './busqueda-sistemas.component.scss'
 })
@@ -187,7 +187,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
       this.obtenerDatosExpediente();
     }
 
-    // this.ejecutarConsultaTotal();
+    this.ejecutarConsultaTotal();
 
   }
 
@@ -270,6 +270,42 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
     console.log("Checkbox cambiado:", event);
   }
 
+  ejecutarConsultaTotal(): void {
+    const solicitudTotal: SolicitudAntecedentes = this.generarSolicitudAntecedentesTotal();
+
+    this.antecedentesService.getTotalAntecedentes(solicitudTotal).subscribe({
+      next: (totalResponse) => {
+        this.totalAntecedentes = totalResponse;
+      },
+      error: (error) => {
+        this._alertServices.error('Ocurrió un error al obtener los totales de antecedentes.');
+        console.error('Error al obtener totales:', error);
+        this.totalAntecedentes = null as any;
+      }
+    });
+  }
+
+  generarSolicitudAntecedentesTotal(): SolicitudAntecedentes {
+    const tipoConsulta = this.filtroForm.get('filtro')?.value;
+    const valorBusqueda = this.filtroForm.get('valor')?.value;
+
+    if (this.consulta_todos) {
+      return {expediente: null, nombre: null, nss: null};
+    }
+
+    if (tipoConsulta === 1) { // Caso 1: Búsqueda por NSS
+      return {
+        expediente: 'CC.NL.-0621/2016',
+        nombre: null,
+        nss: valorBusqueda
+      };
+    } else
+      return {
+        expediente: 'CC.NL.-0621/2016',
+        nombre: valorBusqueda, // Enviar el Nombre como un arreglo de un elemento
+        nss: null
+      };
+  }
 
   protected readonly tipoconsulta = TIPO_CONSULTA_ANTECEDENTES;
 }
