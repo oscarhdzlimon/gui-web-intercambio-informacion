@@ -239,9 +239,9 @@ idpagina:number=0;
 
   public btnVerDetalle(registro: TablaDetalleGestionInterface,idRegistro:number, titulo: string){
     
-    
+    const dtosUsuario = this.datosUsuario;
     this.ref = this.dialogService.open(DetalleComponent, {
-      data: {...registro, titulo},
+      data: {...registro, titulo,dtosUsuario},
       modal: true,
       width: '40vw',
       height: '80vh',

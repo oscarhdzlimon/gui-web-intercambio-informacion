@@ -23,7 +23,21 @@
 
 
     <div class="divsubtitulo row col-12 flex">
-    <span class="subtitulo">Resultado de la búsqueda por NSS : 123456789 y nombre: Ricardo Palma</span>
+    <span class="subtitulo">
+        Resultado de la búsqueda por 
+        @if(datosDetalle.dtosUsuario.nss && datosDetalle.dtosUsuario.nombre){
+            NSS: {{datosDetalle.dtosUsuario.nss}} y nombre: {{datosDetalle.dtosUsuario.nombre}}
+        }@else {
+            @if(datosDetalle.dtosUsuario.nss){
+                NSS: {{datosDetalle.dtosUsuario.nss}}    
+            }
+            @if(datosDetalle.dtosUsuario.nombre){
+                Nombre: {{datosDetalle.dtosUsuario.nombre}}
+            }
+        }
+        
+    
+    </span>
     </div>
 
 

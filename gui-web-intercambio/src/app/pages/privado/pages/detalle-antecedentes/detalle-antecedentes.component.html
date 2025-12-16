@@ -5,7 +5,19 @@
     <span class="tituloantecedentes">{{titulo}}</span>
 </div>
 <div class="seccionA">
-    Resultado de la búsqueda por NSS: 123456789000
+    Resultado de la búsqueda por
+    @if(datosUsuario.nss && datosUsuario.nombre){
+        NSS: {{datosUsuario.nss}} y nombre: {{datosUsuario.nombre}}
+    }@else {
+        @if(datosUsuario.nss){
+            NSS: {{datosUsuario.nss}}    
+        }
+        @if(datosUsuario.nombre){
+            Nombre: {{datosUsuario.nombre}}
+        }
+    }
+    
+    
 </div>
 
 
