@@ -55,7 +55,7 @@
       <div class="flex lg:col-9  col-12 justify-content-end align-items-center mt-3 gap-4">
         <p-button type="reset" [disabled]="filtroForm.pristine" variant="outlined" label="Limpiar"
                   [style]="{'width': '135px'}"/>
-        <p-button type="button" [disabled]="filtroForm.invalid" (onClick)="paginar()" label="Buscar"
+        <p-button type="button" [disabled]="filtroForm.invalid" (onClick)="paginar(0)" label="Buscar"
                   [style]="{'width': '135px'}" styleClass="btn-background"/>
       </div>
     </article>
