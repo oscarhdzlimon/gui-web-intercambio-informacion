@@ -6,7 +6,7 @@
           <label class="field-label" for="especialidad">Consultar por</label>
           <span class="field-label-obligatorio">Obligatorio</span>
         </div>
-        <p-select formControlName="tipoconsulta" [options]="tipoconsulta" optionLabel="label"
+        <p-select formControlName="tipoconsulta" [options]="tipoconsulta" optionLabel="label" optionValue="value"
                   placeholder="Selecciona una opción" class="w-full custom-dropdown ph-custom">
         </p-select>
       </div>
@@ -55,7 +55,7 @@
       <div class="flex lg:col-9  col-12 justify-content-end align-items-center mt-3 gap-4">
         <p-button type="reset" [disabled]="filtroForm.pristine" variant="outlined" label="Limpiar"
                   [style]="{'width': '135px'}"/>
-        <p-button type="button" [disabled]="filtroForm.invalid" (onClick)="paginar(0)" label="Buscar"
+        <p-button type="button" [disabled]="filtroForm.invalid" (onClick)="paginar(0, 0)" label="Buscar"
                   [style]="{'width': '135px'}" styleClass="btn-background"/>
       </div>
     </article>
@@ -68,16 +68,17 @@
   [data]="data()"
   [rows]="10"
   [total]="4"
-  (pageChange)="cargarPagina($event)"
+  (pageChange)="cargarPagina($event, TipoTabla.NSS)"
   (checkboxChanged)="cambiarEstado($event)"/>
 
-<app-tabla-principal *ngIf="data_nombre.length > 0"
-                     [titulo]="tituloTablanombre"
-                     [data]="data_nombre"
-                     [rows]="10"
-                     [total]="totalregistrosnombre"
-                     (pageChange)="cargarPagina($event)"
-                     (checkboxChanged)="cambiarEstado($event)"/>
+@if (data_nombre().length > 0) {
+  <app-tabla-principal [titulo]="tituloTablanombre"
+                       [data]="data_nombre()"
+                       [rows]="10"
+                       [total]="totalregistrosnombre"
+                       (pageChange)="cargarPagina($event, TipoTabla.NOMBRE)"
+                       (checkboxChanged)="cambiarEstado($event)"/>
+}
 
 @if (data().length > 0) {
   <article class="flex flex-row flex-wrap">
@@ -184,7 +185,9 @@
       </div>
     </article>
   </p-card>
-} @else {
+}
+
+@if (data().length === 0 && data_nombre().length === 0) {
   <p-card class="mx-2 empty-border" [header]="'Total de antecedentes'">
 
     <div class="flex flex-column justify-content-center align-items-center">

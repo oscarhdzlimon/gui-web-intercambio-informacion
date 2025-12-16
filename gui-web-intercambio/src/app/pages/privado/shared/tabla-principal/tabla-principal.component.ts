@@ -45,6 +45,7 @@ export class TablaPrincipalComponent {
   @Input() titulo: string = '';
   @Input() data: RegistroAntecedentes[] = [];
 
+
   @Input() rows: number = 10;
   @Input() first: number = 0;
   @Input() total: number = 0;

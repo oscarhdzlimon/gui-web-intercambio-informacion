@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="ajustes de tabla de resultados" />
+    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="ajustes paginado">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/privado-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/privado-routing.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/shared/tabla-principal/tabla-principal.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/shared/tabla-principal/tabla-principal.component.ts" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -83,7 +89,7 @@
       <updated>1765819096987</updated>
       <workItem from="1765819098117" duration="1438000" />
       <workItem from="1765821241131" duration="1922000" />
-      <workItem from="1765833097414" duration="9070000" />
+      <workItem from="1765833097414" duration="13582000" />
     </task>
     <task id="LOCAL-00001" summary="constants -&gt; tipo de antecedentes">
       <option name="closed" value="true" />
@@ -157,7 +163,23 @@
       <option name="project" value="LOCAL" />
       <updated>1765842808518</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="ajustes paginado">
+      <option name="closed" value="true" />
+      <created>1765844882313</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1765844882313</updated>
+    </task>
+    <task id="LOCAL-00011" summary="ajustes paginado">
+      <option name="closed" value="true" />
+      <created>1765844903373</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1765844903373</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -184,6 +206,7 @@
     <MESSAGE value="solicitud de antecedentes" />
     <MESSAGE value="ajustes de solicitudes" />
     <MESSAGE value="ajustes de tabla de resultados" />
-    <option name="LAST_COMMIT_MESSAGE" value="ajustes de tabla de resultados" />
+    <MESSAGE value="ajustes paginado" />
+    <option name="LAST_COMMIT_MESSAGE" value="ajustes paginado" />
   </component>
 </project>

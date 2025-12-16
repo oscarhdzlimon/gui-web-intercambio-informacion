@@ -16,9 +16,14 @@ import {TIPO_CONSULTA_ANTECEDENTES} from '@utils/constants';
 import {filter} from 'rxjs/operators';
 import {SolicitudAntecedentes} from '../../../../core/interfaces/solicitud-antecedentes.interface';
 import {AntecedentesService} from '@services/antecedentes.service';
-import {forkJoin} from 'rxjs';
+import {forkJoin, Observable, of} from 'rxjs';
 import {TotalesAntecedentes} from '../../../../core/interfaces/totales-antecedentes.interface';
 import {RegistroAntecedentes} from '../../../../core/interfaces/registro-antecedentes.interface';
+
+enum TipoTabla {
+  NSS = 'NSS',
+  NOMBRE = 'NOMBRE'
+}
 
 @Component({
   selector: 'app-consulta-antecedentes',
@@ -42,19 +47,23 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
 
   filtroForm!: FormGroup;
 
-  tituloTabla: string = 'Resultados de la búsqueda';
-  tituloTablanombre: string = 'Resultados de la búsqueda';
+  // 🔑 Inicialización de los títulos base
+  tituloTablaBase: string = 'Resultados por NSS';
+  tituloTablanombreBase: string = 'Resultados por Nombre y Apellidos';
+  tituloTabla: string = 'Resultados de la búsqueda'; // Título que se muestra
+  tituloTablanombre: string = 'Resultados de la búsqueda'; // Título que se muestra
 
-  registrosPorPagina: number = 5;
-  paginaActual: number = 0;
-
+  registrosPorPaginaNss: number = 5;
+  paginaActualNss: number = 0;
   totalregistros: number = 0;
-  totalregistrosnombre: number = 0;
-
   data: WritableSignal<RegistroAntecedentes[]> = signal([]);
-  data_nombre: any = [];
 
-  totalAntecedentes!: TotalesAntecedentes
+  registrosPorPaginaNombre: number = 5;
+  paginaActualNombre: number = 0;
+  totalregistrosnombre: number = 0;
+  data_nombre: WritableSignal<RegistroAntecedentes[]> = signal([]);
+
+  totalAntecedentes!: TotalesAntecedentes;
 
   constructor(private fb: FormBuilder) {
     super();
@@ -70,7 +79,7 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
       .pipe(filter(value => value !== null && value !== undefined))
       .subscribe(event => {
         const tipo = typeof event === 'object' && event !== null && 'value' in event ? event.value : event;
-        this.limpiarValidadores();
+        this.limpiar(false); // Limpiar datos y validadores al cambiar el tipo, pero sin resetear el formulario
         this.aplicarValidacionCondicional(tipo);
       });
   }
@@ -123,16 +132,28 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
 
     [nss, nombre, apaterno, amaterno].forEach(control => {
       control?.clearValidators();
+      control?.setValue(null);
       control?.disable();
     });
 
   }
 
-  cargarPagina(event: any) {
+  cargarPagina(event: any, tipoTabla: TipoTabla) {
     const nuevaPagina = event.page;
-    if (this.paginaActual !== nuevaPagina) {
-      this.paginaActual = nuevaPagina;
-      this.paginar();
+    const nuevoTamanio = event.rows;
+
+    if (tipoTabla === TipoTabla.NSS) {
+      if (this.paginaActualNss !== nuevaPagina || this.registrosPorPaginaNss !== nuevoTamanio) {
+        this.paginaActualNss = nuevaPagina;
+        this.registrosPorPaginaNss = nuevoTamanio;
+        this.paginar();
+      }
+    } else if (tipoTabla === TipoTabla.NOMBRE) {
+      if (this.paginaActualNombre !== nuevaPagina || this.registrosPorPaginaNombre !== nuevoTamanio) {
+        this.paginaActualNombre = nuevaPagina;
+        this.registrosPorPaginaNombre = nuevoTamanio;
+        this.paginar();
+      }
     }
   }
 
@@ -142,41 +163,121 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
 
   inicializarFiltroForm(): FormGroup {
     return this.fb.group({
-      tipoconsulta: ['', Validators.required], // Este siempre es requerido
-      nss: [{value: null, disabled: true}], // Sin required inicial
-      nombre: [{value: null, disabled: true}], // Sin required inicial
+      tipoconsulta: ['', Validators.required],
+      nss: [{value: null, disabled: true}],
+      nombre: [{value: null, disabled: true}],
       apaterno: [{value: null, disabled: true}],
-      amaterno: [{value: null, disabled: true}] // Sin required inicial
+      amaterno: [{value: null, disabled: true}]
     });
   }
 
-  paginar(pagina?: number) {
-    if (pagina) {
-      this.paginaActual = pagina;
+  actualizarTitulosTabla(tipoConsultaActual: number): void {
+    const nss = this.filtroForm.get('nss')?.value;
+    const nombreCompleto = this.generarNombre();
+
+    this.tituloTabla = this.tituloTablaBase;
+    this.tituloTablanombre = this.tituloTablanombreBase;
+
+    // Concatena el valor de búsqueda al título
+    if ((tipoConsultaActual === 1 || tipoConsultaActual === 3) && nss) {
+      this.tituloTabla = `${this.tituloTablaBase}: ${nss}`;
     }
-    if (this.filtroForm.invalid) return;
+
+    if ((tipoConsultaActual === 2 || tipoConsultaActual === 3) && nombreCompleto) {
+      this.tituloTablanombre = `${this.tituloTablanombreBase}: ${nombreCompleto}`;
+    }
+
+  }
+
+  paginar(paginaNss?: number, paginaNombre?: number): void {
+    const tipoConsultaActual = this.filtroForm.get('tipoconsulta')?.value;
+
+    if (paginaNss !== undefined) {
+      this.paginaActualNss = paginaNss;
+      if (tipoConsultaActual === 1 || tipoConsultaActual === 3) {
+        this.paginaActualNombre = 0;
+      }
+    }
+    if (paginaNombre !== undefined) {
+      this.paginaActualNombre = paginaNombre;
+      if (tipoConsultaActual === 2 || tipoConsultaActual === 3) {
+        this.paginaActualNss = 0;
+      }
+    }
+
+    const pagNss = paginaNss !== undefined ? paginaNss : this.paginaActualNss;
+    const pagNombre = paginaNombre !== undefined ? paginaNombre : this.paginaActualNombre;
+
+    if (this.filtroForm.invalid) {
+      this._alertServices.informacion('Debe completar los campos requeridos para realizar la búsqueda.');
+      return;
+    }
+
+    this.actualizarTitulosTabla(tipoConsultaActual);
+
+    // Definir los observables de búsqueda necesarios
+    let listObservableNss: Observable<any> = of({
+      content: [],
+      page: {size: 0, number: 0, totalElements: 0, totalPages: 0}
+    });
+    let listObservableNombre: Observable<any> = of({
+      content: [],
+      page: {size: 0, number: 0, totalElements: 0, totalPages: 0}
+    });
     const solicitud: SolicitudAntecedentes = this.generarSolicitudAntecedentes();
+    let totalObservable: Observable<TotalesAntecedentes> = this.antecedentesService.getTotalAntecedentes(solicitud);
+
+    // --- Lógica de bifurcación de búsqueda ---
+
+    if (tipoConsultaActual === 1 || tipoConsultaActual === 3) {
+      const solicitudNss: SolicitudAntecedentes = this.generarSolicitudAntecedentesNSS();
+      listObservableNss = this.antecedentesService.getLstAntecedentes(this.registrosPorPaginaNss, pagNss, solicitudNss);
+    }
+
+    if (tipoConsultaActual === 2 || tipoConsultaActual === 3) {
+      const solicitudNombre: SolicitudAntecedentes = this.generarSolicitudAntecedentesNombre();
+      listObservableNombre = this.antecedentesService.getLstAntecedentes(this.registrosPorPaginaNombre, pagNombre, solicitudNombre);
+    }
+
+    // --- Ejecución de las búsquedas paralelas ---
+
     forkJoin([
-      this.antecedentesService.getLstAntecedentes(this.registrosPorPagina, this.paginaActual, solicitud),
-      this.antecedentesService.getTotalAntecedentes(solicitud)
+      listObservableNss,
+      listObservableNombre,
+      totalObservable
     ]).subscribe({
-      next: ([dataResponse, totalResponse]) => {
-        // Actualizar la lista de la página
-        this.data.update(() => dataResponse.content);
+      next: ([dataNss, dataNombre, totalResponse]) => {
 
-        // Actualizar el total de registros
-        this.totalAntecedentes = totalResponse;
-
-        if (this.data().length === 0) {
-          this._alertServices.informacion('No se encontraron antecedentes con los criterios seleccionados.');
+        // Limpieza de datos si el criterio no aplica
+        if (tipoConsultaActual === 1 || tipoConsultaActual === 3) {
+          this.data.set(dataNss.content);
+          this.totalregistros = dataNss.page.totalElements;
+        } else {
+          this.data.set([]);
+          this.totalregistros = 0;
         }
 
+        if (tipoConsultaActual === 2 || tipoConsultaActual === 3) {
+          this.data_nombre.set(dataNombre.content);
+          this.totalregistrosnombre = dataNombre.page.totalElements;
+        } else {
+          this.data_nombre.set([]);
+          this.totalregistrosnombre = 0;
+        }
+
+        this.totalAntecedentes = totalResponse;
+
+        if (this.totalregistros === 0 && this.totalregistrosnombre === 0) {
+          this._alertServices.informacion('No se encontraron antecedentes con los criterios seleccionados.');
+        }
       },
       error: (error) => {
         this._alertServices.error('Ocurrió un error al obtener los antecedentes.');
         console.error('Error al paginar/obtener totales:', error);
-        this.data.update(() => []);
+        this.data.set([]);
+        this.data_nombre.set([]);
         this.totalregistros = 0;
+        this.totalregistrosnombre = 0;
       }
     });
   }
@@ -189,25 +290,60 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
     }
   }
 
+  generarSolicitudAntecedentesNSS(): SolicitudAntecedentes {
+    return {
+      expediente: 'CC.NL.-0621/2016',
+      nombre: null,
+      nss: this.filtroForm.get('nss')?.value
+    }
+  }
+
+  generarSolicitudAntecedentesNombre(): SolicitudAntecedentes {
+    return {
+      expediente: 'CC.NL.-0621/2016',
+      nombre: this.generarNombre(),
+      nss: null
+    }
+  }
+
   generarNombre(): string | null {
-    return this.filtroForm.get('nombre')?.value === null
-      ? null // Devuelve null si el nombre es estrictamente null (o no existe el control)
-      : [
-        this.filtroForm.get('nombre')?.value,
-        this.filtroForm.get('apaterno')?.value,
-        this.filtroForm.get('amaterno')?.value
-      ]
-        // Filtra los valores que son null, undefined o cadenas vacías ('')
-        .filter(segmento => !!segmento)
-        // Une los segmentos restantes con un espacio.
-        .join(' ');
+    const nombre = this.filtroForm.get('nombre')?.value;
+    const apaterno = this.filtroForm.get('apaterno')?.value;
+    const amaterno = this.filtroForm.get('amaterno')?.value;
+
+    if (!nombre && !apaterno) return null; // Requiere al menos nombre o apellido paterno
+
+    return [nombre, apaterno, amaterno]
+      .filter(segmento => !!segmento)
+      .join(' ');
   }
 
-  limpiar(): void {
-    this.limpiarValidadores();
-    this.paginaActual = 0;
-    this.filtroForm.patchValue({});
-    this.data.update(() => []);
+  limpiar(resetForm: boolean = true): void {
+    if (resetForm) {
+      this.filtroForm.reset({
+        tipoconsulta: '',
+        nss: {value: null, disabled: true},
+        nombre: {value: null, disabled: true},
+        apaterno: {value: null, disabled: true},
+        amaterno: {value: null, disabled: true}
+      });
+      this.limpiarValidadores();
+    }
+
+    this.tituloTabla = 'Resultados de la búsqueda';
+    this.tituloTablanombre = 'Resultados de la búsqueda';
+
+    // Reiniciar paginación y datos de AMBAS tablas
+    this.paginaActualNss = 0;
+    this.registrosPorPaginaNss = 5;
+    this.totalregistros = 0;
+    this.data.set([]);
+
+    this.paginaActualNombre = 0;
+    this.registrosPorPaginaNombre = 5;
+    this.totalregistrosnombre = 0;
+    this.data_nombre.set([]);
   }
 
+  protected readonly TipoTabla = TipoTabla;
 }

@@ -27,20 +27,18 @@ const routes: Routes = [{
     {
       path: NAV.consultaantecedentes,
       component: ConsultaAntecedentesComponent,
-      
+
     },
     {
       path: NAV.busquedasistema,
       component: BusquedaSistemasComponent,
-
-      
     },
 
     {
       path: `${NAV.detalleAntecedentes}/:id`,
       component: DetalleAntecedentesComponent,
- 
-      
+
+
     },
 
 
