@@ -14,14 +14,14 @@ import {Router} from '@angular/router';
 import {ColumnDefinition} from '@models/columa-tabla';
 import {NAV} from '@utils/url-global';
 import {ButtonModule} from 'primeng/button';
-import {Card, CardModule} from 'primeng/card';
+import {Card} from 'primeng/card';
 import {ConfirmPopupModule} from 'primeng/confirmpopup';
 import {InputText} from 'primeng/inputtext';
 import {PaginatorModule} from 'primeng/paginator';
 import {SelectModule} from 'primeng/select';
 import {TableModule} from 'primeng/table';
 import {RegistroAntecedentes} from '../../../../core/interfaces/registro-antecedentes.interface';
-
+import {DataCacheService} from '@services/data-cache.service';
 
 @Component({
   selector: 'app-tabla-principal',
@@ -45,20 +45,17 @@ export class TablaPrincipalComponent {
   @Input() titulo: string = '';
   @Input() data: RegistroAntecedentes[] = [];
   @Input() showTitulo: boolean = true;
+  @Input() expediente: string = '';
 
   @Input() rows: number = 10;
   @Input() first: number = 0;
   @Input() total: number = 0;
 
   @Output() pageChange = new EventEmitter<any>();
-  @Output() checkboxChanged = new EventEmitter<{ row: any, column: ColumnDefinition }>();
-  tituloTabla: string = 'Resultados de la búsqueda';
-  // 🔒 Columnas congeladas
-  frozenColumns: ColumnDefinition[] = [];
+  @Output() checkboxChanged = new EventEmitter<{ row: any }>();
 
-  // 🔓 Columnas normales
-  unfrozenColumns: ColumnDefinition[] = [];
-  totalWidth: any;
+  dataCacheService: DataCacheService = inject(DataCacheService);
+
   // Definición fija de columnas
   columns: ColumnDefinition[] = [
     {field: 'asociar', header: 'Asociar', width: '80px', checkbox: true},
@@ -73,25 +70,14 @@ export class TablaPrincipalComponent {
     {field: 'procedimiento', header: 'Procedimiento RP', width: '150px'},
     {field: 'juicio', header: 'Juicio Contencioso Administrativo Federal', width: '150px'},
   ];
-// Propiedad para controlar si la tabla debe ser desplazable
+  // Propiedad para controlar si la tabla debe ser desplazable
   esPantallaGrande: boolean = true;
   // Define el punto de quiebre (breakpoint) para considerar 'móvil'
   readonly TABLET_BREAKPOINT = 992; // El estándar 'lg' en PrimeFlex/Bootstrap
 
+
   constructor(private cd: ChangeDetectorRef) {
     this._router = inject(Router);
-  }
-
-  ngOnInit() {
-    console.log('TablaPrincipalComponent initialized with data:', this.data);
-    const dynamicWidth = this.columns
-      .map(c => parseInt(c.width))
-      .reduce((a, b) => a + b, 0);
-    console.log('titulo', this.titulo);
-    const fixedWidth = 200; // 100px + 100px de las columnas fijas
-    this.totalWidth = dynamicWidth + fixedWidth;
-    this.checkScreenSize();
-    //this.tituloTabla=this.tituloTabla + this.titulo;
   }
 
   @HostListener('window:resize', ['$event'])
@@ -99,16 +85,18 @@ export class TablaPrincipalComponent {
     this.checkScreenSize();
   }
 
+  ver(registro: RegistroAntecedentes): void {
+    const datosContexto = {
+      nombre: registro.nombre,
+      nss: registro.nss,
+      expediente: this.expediente,
+    };
 
-  // Detecta cambios cuando el padre cambia las columnas
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['columns']) {
+    // Guardar el objeto de datos y obtener el UUID
+    const cacheId = this.dataCacheService.saveData(datosContexto);
 
-    }
-  }
-
-  ver() {
-    void this._router.navigate(['/privado', NAV.detalleAntecedentes, 1]);
+    // Navegar usando el UUID como parámetro posicional
+    void this._router.navigate(['/privado', NAV.detalleAntecedentes, cacheId]);
   }
 
   // Evento paginador
@@ -117,16 +105,15 @@ export class TablaPrincipalComponent {
   }
 
   // Evento checkbox
-  onCheckboxEvent(row: any, col: any, event: Event) {
+  onCheckboxEvent(row: any, event: Event) {
     const input = event.target as HTMLInputElement;
     const value = input.checked;
 
-    row[col.field] = value;
-    this.checkboxChanged.emit({row, column: col});
+    this.checkboxChanged.emit({row});
   }
 
   onCheckboxChange(row: any, col: ColumnDefinition) {
-    this.checkboxChanged.emit({row, column: col});
+    this.checkboxChanged.emit({row});
   }
 
   visualizar(row: any) {
@@ -151,4 +138,5 @@ export class TablaPrincipalComponent {
     }
   }
 
+  protected readonly event = event;
 }

@@ -21,6 +21,7 @@ import {SolicitudAntecedentes} from '../../../../core/interfaces/solicitud-antec
 import {Observable} from 'rxjs';
 import {TablaPrincipalComponent} from '@pages/privado/shared/tabla-principal/tabla-principal.component';
 import {ActivatedRoute} from '@angular/router';
+import {SolicitudAsociacion} from '../../../../core/interfaces/solicitud-asociacion.interface';
 
 enum TipoTabla {
   NSS = 'NSS',
@@ -55,6 +56,8 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
   consultas: ResultadoConsulta[] = [];
 
   filtroForm!: FormGroup;
+
+  registrosAsociacion: SolicitudAsociacion[] = [];
 
   consulta_todos: boolean = false; // Asumiendo que 4 es el caso 'Todos'
 
@@ -276,6 +279,12 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
   cambiarEstado(event: any) {
     console.log("Checkbox cambiado:", event);
   }
+
+  agregarRegistro(): void {
+
+  }
+
+  quitarRegistro(): void {}
 
   ejecutarConsultaTotal(): void {
     const solicitudTotal: SolicitudAntecedentes = this.generarSolicitudAntecedentesTotal();
