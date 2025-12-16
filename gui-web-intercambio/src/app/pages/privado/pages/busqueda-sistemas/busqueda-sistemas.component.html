@@ -1,56 +1,58 @@
 <div style="margin-left: 10px;margin-right: 10px;">
   <div class="row">
     <div class="lg:col-4 col-12 flex align-items-center">
-      <span class="titulobusqueda">Expediente: 123456678-0</span>
+      <span class="titulobusqueda">Expediente: CC.NL.-0621/2016</span>
     </div>
   </div>
   <hr>
-  <div class="row">
-    <div class="lg:col-4 col-12 flex align-items-end">
-      <span class="titulobusqueda">Resultados</span>
-    </div>
-    <div class="lg:col-5 col-12 flex align-items-center">
-      <div class="flex row w-full">
-        <!-- Grupo 1: Label + Select -->
-        <div class="lg:col-6 col-12">
-          <div class="flex flex-column align-items-start">
-            <label class="field-label mb-1 tituloInputBusqueda" for="tipoconsulta">Mostrar resultados por:</label>
-            <p-select
-              formControlName="tipoconsulta"
-              optionLabel="label"
-              placeholder="Selecciona"
+  <form [formGroup]="filtroForm">
+    <div class="row">
+      <div class="lg:col-4 col-12 flex align-items-end">
+        <span class="titulobusqueda">Resultados</span>
+      </div>
+      <div class="lg:col-5 col-12 flex align-items-center">
+        <div class="flex row w-full">
+          <!-- Grupo 1: Label + Select -->
+          <div class="lg:col-6 col-12">
+            <div class="flex flex-column align-items-start">
+              <label class="field-label mb-1 tituloInputBusqueda" for="tipoconsulta">Mostrar resultados por:</label>
+              <p-select
+                formControlName="filtro"
+                optionLabel="label"
+                placeholder="Selecciona"
+                class="w-full"
+                [style.width.px]="154">
+              </p-select>
+            </div>
+          </div>
+          <!-- Grupo 2: Label + Input -->
+          <div class="lg:col-6 col-12">
+            <div class="flex flex-column align-items-start">
+              <label class="field-label mb-1 tituloInputBusqueda" for="amaterno">Selecciona resultado</label>
+              <p-select formControlName="valor" [options]="tipoconsulta" optionLabel="label" optionValue="value"
+                        placeholder="Selecciona una opción" class="w-full custom-dropdown ph-custom ">
+              </p-select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="lg:col-3 col-12 flex align-items-end justify-content-end lg:pb-2 ">
+        <div class="flex row w-full">
+          <div class="lg:col-6 col-12">
+            <p-button
+              type="button"
+              label="Buscar"
               class="w-full"
-              [style.width.px]="154">
-            </p-select>
+              styleClass="btn-buscar btn-background w-full">
+            </p-button>
           </div>
-        </div>
-        <!-- Grupo 2: Label + Input -->
-        <div class="lg:col-6 col-12">
-          <div class="flex flex-column align-items-start">
-            <label class="field-label mb-1 tituloInputBusqueda" for="amaterno">Selecciona resultado</label>
-            <p-select formControlName="nss" [options]="tipoconsulta" optionLabel="label" optionValue="value"
-                      placeholder="Selecciona una opción" class="w-full custom-dropdown ph-custom ">
-            </p-select>
+          <div class="lg:col-6 col-12">
+            <p-button type="button" variant="outlined" label="Mostrar todo" [style]="{'width': '168px'}"/>
           </div>
         </div>
       </div>
     </div>
-    <div class="lg:col-3 col-12 flex align-items-end justify-content-end lg:pb-2 ">
-      <div class="flex row w-full">
-        <div class="lg:col-6 col-12">
-          <p-button
-            type="button"
-            label="Buscar"
-            class="w-full"
-            styleClass="btn-buscar btn-background w-full">
-          </p-button>
-        </div>
-        <div class="lg:col-6 col-12">
-          <p-button type="button" variant="outlined" label="Mostrar todo" [style]="{'width': '168px'}"/>
-        </div>
-      </div>
-    </div>
-  </div>
+  </form>
 
   <div ngbAccordion>
     <div ngbAccordionItem [collapsed]="false">
