@@ -99,11 +99,19 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
   ngOnInit(): void {
   }
 
+  iniciarBusquedaTodos(): void {
+    this.filtroForm.get('valor')?.disable();
+    this.filtroForm.get('valor')?.clearValidators();
+    this.filtroForm.reset({});
+    this.consulta_todos = true;
+    this.iniciarBusqueda();
+  }
+
   iniciarBusqueda(): void {
     const tipoConsulta = this.filtroForm.get('filtro')?.value;
     const valor = this.filtroForm.get('valor')?.value;
 
-    if (this.filtroForm.invalid) {
+    if (this.filtroForm.invalid && !this.consulta_todos) {
       this._alertServices.informacion('Debe seleccionar el filtro y proporcionar el valor de búsqueda.');
       return;
     }
@@ -115,6 +123,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
     // Construir las estructuras ResultadoConsulta necesarias
 
     if (tipoConsulta === 1) { // Caso 1: Búsqueda por NSS (solo tabla NSS)
+      this.consulta_todos = false;
       this.consultas.push({
         tipo: TipoTabla.NSS,
         tituloBase: 'Resultados por NSS',
@@ -131,6 +140,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
     }
 
     if (tipoConsulta === 2) { // Caso 2: Búsqueda por Nombre (solo tabla Nombre)
+      this.consulta_todos = false;
       this.consultas.push({
         tipo: TipoTabla.NOMBRE,
         tituloBase: 'Resultados por Nombre y Apellidos',
@@ -170,6 +180,8 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
         totalRegistros: 0,
         valorBusqueda: nombre.value as string
       }));
+
+
       this.consultas = [...nss, ...nombres];
 
       this.obtenerDatosExpediente();

@@ -62,7 +62,8 @@
             </p-button>
           </div>
           <div class="lg:col-6 col-12">
-            <p-button type="button" variant="outlined" label="Mostrar todo" [style]="{'width': '168px'}"/>
+            <p-button type="button" variant="outlined" label="Mostrar todo" [style]="{'width': '168px'}"
+                      (click)="iniciarBusquedaTodos()"/>
           </div>
         </div>
       </div>
@@ -70,11 +71,12 @@
   </form>
 
   @for (consulta of consultas; track $index) {
+
     @if (consulta.data().length > 0) {
       <div ngbAccordion>
         <div ngbAccordionItem [collapsed]="false">
           <div ngbAccordionHeader>
-            <button ngbAccordionButton>Resultado de la búsqueda por NSS: 17482569321</button>
+            <button ngbAccordionButton>{{ consulta.tituloCompleto }}</button>
           </div>
 
           <div ngbAccordionCollapse>
