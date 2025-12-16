@@ -5,9 +5,10 @@ import {SesionUser} from '@models/sesion-user.interface';
 import {UserService} from '@services/user.service';
 import {SpeedDial} from 'primeng/speeddial';
 import {MenuItem, PrimeTemplate} from 'primeng/api';
-import { ButtonModule } from 'primeng/button';
-import { ClickService } from '@services/click.service';
-import { Usuario } from '@models/usuario';
+import {ButtonModule} from 'primeng/button';
+import {ClickService} from '@services/click.service';
+import {Usuario} from '@models/usuario';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-menu',
@@ -30,13 +31,18 @@ export class MenuComponent extends GeneralComponent implements OnInit {
 
   items: MenuItem[] = [];
 
-  usuario:Usuario= new Usuario();
+  usuario: Usuario = new Usuario();
 
   private readonly MOBILE_BREAKPOINT = 768;
 
   isMobileView: boolean = false;
 
+  constructor(private readonly route: ActivatedRoute) {
+    super();
+  }
+
   ngOnInit() {
+    this.leerInformacionUsuario();
     this.checkScreenSize();
     this.items = [
       {
@@ -49,6 +55,16 @@ export class MenuComponent extends GeneralComponent implements OnInit {
     ]
     //this.usuario = this.obtenerUsuario()!;
     this.userService.userData$.subscribe(user => this.userData = user);
+  }
+
+  leerInformacionUsuario(): void {
+    this.route.queryParamMap.subscribe(params => {
+      if (!params) return;
+      this.usuario.nombreCompleto = params.get('n') as string;
+      this.usuario.sistema = params.get('s') as string;
+      this.usuario.modulo = params.get('m') as string;
+      this.usuario.ooadmin = params.get('o') as string;
+    });
   }
 
   obtenerUsuario(): Usuario | null {
@@ -86,7 +102,7 @@ export class MenuComponent extends GeneralComponent implements OnInit {
     this.authService.cerrarSesion();
   }
 
-  emitirClick(){
+  emitirClick() {
     this.clickService.emitirClick();
   }
 

@@ -1,7 +1,8 @@
 export class Usuario{
     curp!: string;
     nombre!: string;
-    apellidoPaterno!: string    
+    nombreCompleto!: string;
+    apellidoPaterno!: string
     apellidoMaterno!: string;
     tipoUsuario!: string;
     sistema!: string;
