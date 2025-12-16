@@ -35,6 +35,7 @@
               id="checkbox-{{i}}"
               type="checkbox"
               [(ngModel)]="rowData.asociar"
+              (change)="onCheckboxEvent(rowData, $event)"
             />
             <label for="checkbox-{{i}}"></label>
           </div>
@@ -52,8 +53,8 @@
         <td style="min-width:180px">{{ rowData.juicioContencioso }}</td>
         <!-- columnas congeladas -->
         <td pFrozenColumn alignFrozen="right" style="min-width:100px">
-          <div class="flex justify-content-center align-items-center" style="height:100%;">
-            <img src="/assets/logos/eye.svg" (click)="ver()"/>
+          <div class="flex justify-content-center align-items-center cursor-pointer" style="height:100%;">
+            <img src="/assets/logos/eye.svg" (click)="ver(rowData)"/>
           </div>
         </td>
         <td pFrozenColumn alignFrozen="right" style="min-width:100px">

@@ -63,18 +63,22 @@
   </form>
 </p-card>
 
-<app-tabla-principal
-  [titulo]="tituloTabla"
-  [data]="data()"
-  [rows]="10"
-  [total]="4"
-  (pageChange)="cargarPagina($event, TipoTabla.NSS)"
-  (checkboxChanged)="cambiarEstado($event)"/>
+@if (data().length > 0) {
+  <app-tabla-principal
+    [titulo]="tituloTabla"
+    [data]="data()"
+    [rows]="5"
+    [expediente]="'CC.NL.-0621/2016'"
+    [total]="totalregistros"
+    (pageChange)="cargarPagina($event, TipoTabla.NSS)"
+    (checkboxChanged)="cambiarEstado($event)"/>
+}
 
 @if (data_nombre().length > 0) {
   <app-tabla-principal [titulo]="tituloTablanombre"
                        [data]="data_nombre()"
-                       [rows]="10"
+                       [rows]="5"
+                       [expediente]="'CC.NL.-0621/2016'"
                        [total]="totalregistrosnombre"
                        (pageChange)="cargarPagina($event, TipoTabla.NOMBRE)"
                        (checkboxChanged)="cambiarEstado($event)"/>
