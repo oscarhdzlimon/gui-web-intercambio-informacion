@@ -1,7 +1,7 @@
 <div style="margin-left: 10px;margin-right: 10px;">
   <div class="row">
     <div class="lg:col-4 col-12 flex align-items-center">
-      <span class="titulobusqueda">Expediente: CC.NL.-0621/2016</span>
+      <span class="titulobusqueda">Expediente: CC.NL.-0615/1999</span>
     </div>
   </div>
   <hr>
@@ -21,6 +21,7 @@
                 optionLabel="label"
                 placeholder="Selecciona"
                 class="w-full"
+                [options]="filtroResultado"
                 [style.width.px]="154">
               </p-select>
             </div>
@@ -29,7 +30,7 @@
           <div class="lg:col-6 col-12">
             <div class="flex flex-column align-items-start">
               <label class="field-label mb-1 tituloInputBusqueda" for="amaterno">Selecciona resultado</label>
-              <p-select formControlName="valor" [options]="tipoconsulta" optionLabel="label" optionValue="value"
+              <p-select formControlName="valor" [options]="nss" optionLabel="label" optionValue="value"
                         placeholder="Selecciona una opción" class="w-full custom-dropdown ph-custom ">
               </p-select>
             </div>

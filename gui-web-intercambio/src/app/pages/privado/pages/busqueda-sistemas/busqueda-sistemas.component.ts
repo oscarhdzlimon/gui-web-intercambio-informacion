@@ -13,9 +13,10 @@ import {PaginatorModule} from 'primeng/paginator';
 import {PopoverModule} from 'primeng/popover';
 import {SelectModule} from 'primeng/select';
 import {TableModule} from 'primeng/table';
-import {TIPO_CONSULTA_ANTECEDENTES} from '@utils/constants';
+import {FILTRO_RESULTADOS_EXPEDIENTE, TIPO_CONSULTA_ANTECEDENTES} from '@utils/constants';
 import {TipoDropdown} from '@models/tipo-dropdown.interface';
 import {AntecedentesService} from '@services/antecedentes.service';
+import {mapearArregloTipoDropdown} from '@utils/funciones';
 
 @Component({
   selector: 'app-busqueda-sistemas',
@@ -43,7 +44,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
 
   antecedentesService: AntecedentesService = inject(AntecedentesService);
 
-  filtroResultado: TipoDropdown[] = [];
+  filtroResultado: TipoDropdown[] = FILTRO_RESULTADOS_EXPEDIENTE;
   nombres: TipoDropdown[] = [];
   nss: TipoDropdown[] = [];
 
@@ -63,9 +64,10 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
   }
 
   obtenerExpediente() {
-    this.antecedentesService.getExpediente('CC.NL.-0621/2016').subscribe({
+    this.antecedentesService.getExpediente('CC.NL.-0615/1999').subscribe({
       next: (respuesta) => {
-        console.log(respuesta);
+        this.nss = mapearArregloTipoDropdown(respuesta, 'nss', 'nss');
+        this.nombres = mapearArregloTipoDropdown(respuesta, 'nombreCompleto', 'nombreCompleto');
       },
       error: (error) => {
       }
