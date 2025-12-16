@@ -32,17 +32,17 @@ declare var grecaptcha: any;
   templateUrl: './inicio-sesion.component.html',
   styleUrl: './inicio-sesion.component.scss',
   standalone: true,
-  
+
 })
 export class InicioSesionComponent extends GeneralComponent implements OnInit,AfterViewInit {
  captchaWidgetId: any;
   ngAfterViewInit(): void {
-    
+
   }
 
 
 
-  
+
   fb = inject(FormBuilder)
   destroyRef = inject(DestroyRef);
 
@@ -65,27 +65,16 @@ export class InicioSesionComponent extends GeneralComponent implements OnInit,Af
 
   inicializarFormLogin(): FormGroup {
     return this.fb.group({
-      curp: ['', [Validators.required]],
+      refCurp: ['', [Validators.required]],
       password: ['', [Validators.required]],
     });
   }
 
   iniciarSesion() {
-
+debugger
     const curpControl = this.formLogin.get('curp') !=null? this.formLogin.get('curp')!.value : '';
-   /*  if(curpControl == 'salj791014hmclps09'){
-      this._alertServices.error('Sin coincidencias');
 
-    }
-    if(curpControl == 'salj791014hmclps08'){
-      this._alertServices.alerta('La CURP no cuenta con un perfil asociado, favor de contactar al administrador del sistema.');
-
-    }
-    if(curpControl == 'salj791014hmclps07'){
-      this._alertServices.alerta('CURP inactiva, favor de contactar al administrador del sistema.');
-
-    } */
-    let usuario = new Usuario();
+/*     let usuario = new Usuario();
     usuario.curp = curpControl;
     usuario.nombre = 'Juan';
     usuario.apellidoPaterno = 'Lopez';
@@ -95,14 +84,13 @@ export class InicioSesionComponent extends GeneralComponent implements OnInit,Af
     usuario.modulo='Módulo Gestión'
     usuario.ooadmin = 'DF Sur';
     this.guardarUsuario(usuario);
-    //void this._router.navigate(['/privado/consulta-antecedentes'], {relativeTo: this.activatedRoute,});
 
-    this._router.navigate(['/privado', NAV.consultaantecedentes]);
-
+    this._router.navigate(['/privado', NAV.consultaantecedentes]); */
 
 
 
-    /* if (this.formLogin.invalid) {
+
+    if (this.formLogin.invalid) {
       this._alertServices.alerta('Por favor, completa todos los campos obligatorios.');
       return;
     }
@@ -114,11 +102,11 @@ export class InicioSesionComponent extends GeneralComponent implements OnInit,Af
             return;
           }
 
-          
-
-          void this._router.navigate(['/privado/inicio'], {relativeTo: this.activatedRoute,});
+          //void this._router.navigate(['/privado/inicio'], {relativeTo: this.activatedRoute,});
+          this._router.navigate(['/privado', NAV.consultaantecedentes]);
         },
         error: (error) => {
+debugger
           if (error.error.mensaje.includes('Usuario no encontrado con email')) {
             this._alertServices.error('El correo electrónico no está registrado. Verifica tu información o regístrate.');
             return;
@@ -127,7 +115,7 @@ export class InicioSesionComponent extends GeneralComponent implements OnInit,Af
             this._alertServices.error(error.error.mensaje);
           }
         }
-      }) */
+      })
   }
 
   guardarUsuario(usuario: Usuario): void {
@@ -135,10 +123,10 @@ export class InicioSesionComponent extends GeneralComponent implements OnInit,Af
       const USUARIO_KEY = 'usuario_actual';
       // Serializar el objeto Usuario a una cadena JSON
       const usuarioJson = JSON.stringify(usuario);
-      
+
       // Guardar la cadena JSON en sessionStorage
       sessionStorage.setItem(USUARIO_KEY, usuarioJson);
-      
+
     } catch (error) {
       console.error('Error al guardar el usuario en sesión:', error);
     }

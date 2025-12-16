@@ -11,20 +11,20 @@
   <div class="flex align-items-center margin-right-10">
     <div>
         <span class="usuario-menu pr-4 mr-6 text-overflow-ellipsis alinear-izquierda">
-      {{ usuario?.nombre  }} {{ usuario?.apellidoPaterno }} {{ usuario?.apellidoMaterno }}
+      {{ userData?.nombreCompleto }}
     </span>
     <br>
     <span class="usuario-menu pr-4 mr-6 text-overflow-ellipsis alinear-izquierda">
-      {{ usuario?.tipoUsuario }}</span>
+      Operativo</span>
 
     </div>
-  
+
     <p-speeddial [model]="items" direction="down" [transitionDelay]="80" class="absolute ajuste-avatar"
                  [(visible)]="speedDialVisible">
       <ng-template pTemplate="button" let-toggleCallback="toggleCallback">
         <!-- <p-avatar icon="pi pi-user" (click)="toggleCallback($event)" [style]="{ 'background-color': '#5BACB5', color: '#D2F0E3', 'border-color': '#5BACB5',
-     'border': '2px solid' }" class="ml-8 my-2 cursor-pointer" size="xlarge" shape="circle"/> --> 
-     <img [src]="'assets/images/User_info.svg'" style="margin-left: 50px;margin-top: 16px;" (click)="toggleCallback($event)" /> 
+     'border': '2px solid' }" class="ml-8 my-2 cursor-pointer" size="xlarge" shape="circle"/> -->
+     <img [src]="'assets/images/User_info.svg'" style="margin-left: 50px;margin-top: 16px;" (click)="toggleCallback($event)" />
       </ng-template>
       <ng-template pTemplate="item" let-item let-toggleCallback="toggleCallback">
         <div class="bg-white border-round shadow-2 w-15rem md:w-auto min-width-responsive" >
@@ -35,12 +35,12 @@
                 <img [src]="'assets/images/User.svg'"  />
                 <div class="ml-1">
                   <p class="font-bold text-lg mb-0 alinear-izquierda">
-                    {{ usuario?.nombre  }} {{ usuario?.apellidoPaterno }} {{ usuario?.apellidoMaterno }}
+                    {{ userData?.nombreCompleto}}
                   </p>
-                  
-                  <small>  {{ usuario?.tipoUsuario }}</small>
-                 
-                 
+
+                  <small>Operativo</small>
+
+
                 </div>
               </div>
               <i class="pi pi-times cursor-pointer" style="font-size: 1.2rem;"
@@ -51,25 +51,25 @@
             <div class="divinterno1">
                <small>Sistema de origen</small>
             <br>
-            <span class="etiquetasesion">{{ usuario?.sistema }}</span>
+            <span class="etiquetasesion">{{ userData?.sistemaOrigen }}</span>
             </div>
             <div class="divinterno1" >
                <small>Módulo</small>
             <br>
-            <span class="etiquetasesion">{{ usuario?.modulo }}</span>
+            <span class="etiquetasesion">{{ userData?.modulo }}</span>
             </div>
             <div class="d-flex align-items-center" style="margin-left: 18px;margin-top: 16px;">
               <img [src]="'assets/images/Unidad.svg'"  />
               <div style="margin-left: 3px;">
                  <small>OOAD/UMAE</small>
                 <br>
-                <span class="etiquetasesion">{{ usuario?.ooadmin }}</span>
+                <span class="etiquetasesion">{{ userData?.ooad }}</span>
 
               </div>
-             
+
 
             </div>
-            
+
           </div>
 
           <div
