@@ -9,7 +9,7 @@ import {SolicitudAsociacion} from '../interfaces/solicitud-asociacion.interface'
 })
 export class AntecedentesService {
   private readonly URL_BASE: string = environment.api.apiAntecedentes + 'antecedentes';
-  private readonly URL_BITACORA: string = environment.api.apiAntecedentes + 'bitacra';
+  private readonly URL_BITACORA: string = environment.api.apiBitacora + 'bitacora';
 
   http: HttpClient = inject(HttpClient);
 

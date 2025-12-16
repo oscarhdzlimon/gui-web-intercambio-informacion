@@ -4,11 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="soolicitud e interface asociacion">
+    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="apartado de asignacion">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/models/config-environment.interface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/models/config-environment.interface.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/services/antecedentes.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/services/antecedentes.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/shared/tabla-principal/tabla-principal.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/shared/tabla-principal/tabla-principal.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/environments/environment.development.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/environments/environment.development.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/environments/environment.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/environments/environment.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -274,7 +277,15 @@
       <option name="project" value="LOCAL" />
       <updated>1765908756009</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="apartado de asignacion">
+      <option name="closed" value="true" />
+      <created>1765926737851</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1765926737851</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -313,6 +324,7 @@
     <MESSAGE value="ajustes de css por url" />
     <MESSAGE value="ajustes por url" />
     <MESSAGE value="soolicitud e interface asociacion" />
-    <option name="LAST_COMMIT_MESSAGE" value="soolicitud e interface asociacion" />
+    <MESSAGE value="apartado de asignacion" />
+    <option name="LAST_COMMIT_MESSAGE" value="apartado de asignacion" />
   </component>
 </project>

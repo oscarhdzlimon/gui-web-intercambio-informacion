@@ -20,6 +20,7 @@ import {forkJoin, Observable, of} from 'rxjs';
 import {TotalesAntecedentes} from '../../../../core/interfaces/totales-antecedentes.interface';
 import {RegistroAntecedentes} from '../../../../core/interfaces/registro-antecedentes.interface';
 import {SolicitudAsociacion} from '../../../../core/interfaces/solicitud-asociacion.interface';
+import {HttpErrorResponse} from '@angular/common/http';
 
 enum TipoTabla {
   NSS = 'NSS',
@@ -408,4 +409,34 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
   }
 
   protected readonly TipoTabla = TipoTabla;
+
+  guardarAsociacion(): void {
+    if (this.registrosAsociacion.length === 0) {
+      this._alertServices.alerta('No hay registros seleccionados para asociar.');
+      return;
+    }
+
+    this.antecedentesService.guardarAsociacion(this.registrosAsociacion).subscribe({
+      next: data => {
+        const mensajeExito = data?.mensaje || 'La asociación de registros se ha guardado exitosamente.';
+
+        this._alertServices.exito(mensajeExito);
+      },
+      error: (error: HttpErrorResponse) => {
+
+        let mensajeError = 'Ocurrió un error desconocido al intentar guardar la asociación.';
+
+        if (error.error && error.error.mensaje) {
+          mensajeError = error.error.mensaje;
+        } else if (error.status === 400) {
+          mensajeError = 'Error de validación: Verifique los datos e intente de nuevo.';
+        } else if (error.status === 403) {
+          mensajeError = 'No tiene permisos para realizar esta acción.';
+        }
+
+        this._alertServices.error(mensajeError);
+        console.error('Error al guardar asociación:', error);
+      }
+    });
+  }
 }
