@@ -71,13 +71,28 @@
 
   @for (consulta of consultas; track $index) {
     @if (consulta.data().length > 0) {
-      <app-tabla-principal
-        [titulo]="consulta.tituloCompleto"
-        [data]="consulta.data()"
-        [rows]="consulta.registrosPorPagina"
-        [total]="consulta.totalRegistros"
-        (pageChange)="cargarPagina($event, $index)"
-        (checkboxChanged)="cambiarEstado($event)"/>
+      <div ngbAccordion>
+        <div ngbAccordionItem [collapsed]="false">
+          <div ngbAccordionHeader>
+            <button ngbAccordionButton>Resultado de la búsqueda por NSS: 17482569321</button>
+          </div>
+
+          <div ngbAccordionCollapse>
+            <div ngbAccordionBody style="padding: 0">
+              <div class="my-4"></div>
+              <app-tabla-principal
+                [titulo]="consulta.tituloCompleto"
+                [showTitulo]="false"
+                [data]="consulta.data()"
+                [rows]="consulta.registrosPorPagina"
+                [total]="consulta.totalRegistros"
+                (pageChange)="cargarPagina($event, $index)"
+                (checkboxChanged)="cambiarEstado($event)"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
     }
   }
 
@@ -262,8 +277,7 @@
     </p>
     <br>
     <p class="aviso">Información consultada en SSCV1, con corte al 30/10/2025; SSCV2, con corte al 30/10/2025 y SIADE,
-      con
-      corte al 30/10/2025.</p>
+      con corte al 30/10/2025.</p>
   </p-card>
 </div>
 
