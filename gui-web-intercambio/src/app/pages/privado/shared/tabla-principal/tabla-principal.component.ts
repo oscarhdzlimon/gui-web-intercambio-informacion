@@ -34,7 +34,7 @@ export class TablaPrincipalComponent {
   @Input() titulo: string = '';
   @Input() data: RegistroAntecedentes[] = [];
   @Input() showTitulo: boolean = true;
-  @Input() expediente: string = '';
+  @Input() expediente: string | null = null;
 
   @Input() rows: number = 10;
   @Input() first: number = 0;
