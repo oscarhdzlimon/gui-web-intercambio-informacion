@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="regresar a la pagina anterior desde detalle antecedentes">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.ts" afterDir="false" />
-    </list>
+    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="cambio expediente a null" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -344,7 +341,15 @@
       <option name="project" value="LOCAL" />
       <updated>1765935193425</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="cambio expediente a null">
+      <option name="closed" value="true" />
+      <created>1765935898331</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1765935898331</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -362,7 +367,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="ajustes totales antecedentes" />
     <MESSAGE value="solicitud de antecedentes" />
     <MESSAGE value="ajustes de solicitudes" />
     <MESSAGE value="ajustes de tabla de resultados" />
@@ -387,6 +391,7 @@
     <MESSAGE value="ajustes de rutas" />
     <MESSAGE value="mantener los query params en cambio de página" />
     <MESSAGE value="regresar a la pagina anterior desde detalle antecedentes" />
-    <option name="LAST_COMMIT_MESSAGE" value="regresar a la pagina anterior desde detalle antecedentes" />
+    <MESSAGE value="cambio expediente a null" />
+    <option name="LAST_COMMIT_MESSAGE" value="cambio expediente a null" />
   </component>
 </project>
