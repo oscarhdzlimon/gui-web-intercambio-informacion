@@ -357,7 +357,7 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
 
   generarSolicitudAntecedentes(): SolicitudAntecedentes {
     return {
-      expediente: 'CC.NL.-0621/2016',
+      expediente: null,
       nombre: this.generarNombre(),
       nss: this.filtroForm.get('nss')?.value
     }
@@ -365,7 +365,7 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
 
   generarSolicitudAntecedentesNSS(): SolicitudAntecedentes {
     return {
-      expediente: 'CC.NL.-0621/2016',
+      expediente: null,
       nombre: null,
       nss: this.filtroForm.get('nss')?.value
     }
@@ -373,7 +373,7 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
 
   generarSolicitudAntecedentesNombre(): SolicitudAntecedentes {
     return {
-      expediente: 'CC.NL.-0621/2016',
+      expediente: null,
       nombre: this.generarNombre(),
       nss: null
     }
