@@ -10,7 +10,7 @@ import {
   SimpleChanges
 } from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {Router} from '@angular/router';
+import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
 import {ColumnDefinition} from '@models/columa-tabla';
 import {NAV} from '@utils/url-global';
 import {ButtonModule} from 'primeng/button';
@@ -75,9 +75,28 @@ export class TablaPrincipalComponent {
   // Define el punto de quiebre (breakpoint) para considerar 'móvil'
   readonly TABLET_BREAKPOINT = 992; // El estándar 'lg' en PrimeFlex/Bootstrap
 
+  currentQueryParams: { [key: string]: any } = {};
 
-  constructor(private cd: ChangeDetectorRef) {
+  constructor(private cd: ChangeDetectorRef,
+              private readonly route: ActivatedRoute) {
     this._router = inject(Router);
+    this.leerInformacionUsuario();
+  }
+
+  leerInformacionUsuario(): void {
+    this.route.queryParamMap.subscribe(params => {
+      this.currentQueryParams = {};
+
+      // Mapear los queryParams a un objeto simple
+      params.keys.forEach(key => {
+        const value = params.get(key);
+        if (value !== null) {
+          this.currentQueryParams[key] = value;
+        }
+      });
+
+      if (!params) return;
+    });
   }
 
   @HostListener('window:resize', ['$event'])
@@ -93,10 +112,15 @@ export class TablaPrincipalComponent {
     };
 
     // Guardar el objeto de datos y obtener el UUID
-    const cacheId = this.dataCacheService.saveData(datosContexto);
+    const cacheId: string = this.dataCacheService.saveData(datosContexto);
+
+    const navigationExtras: NavigationExtras = {
+      queryParams: this.currentQueryParams,
+      queryParamsHandling: 'preserve'
+    };
 
     // Navegar usando el UUID como parámetro posicional
-    void this._router.navigate(['/privado', NAV.detalleAntecedentes, cacheId]);
+    void this._router.navigate(['/privado', NAV.detalleAntecedentes, cacheId], navigationExtras);
   }
 
   // Evento paginador
