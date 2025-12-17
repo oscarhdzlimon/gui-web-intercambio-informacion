@@ -22,6 +22,8 @@ import {RegistroAntecedentes} from '../../../../core/interfaces/registro-anteced
 import {SolicitudAsociacion} from '../../../../core/interfaces/solicitud-asociacion.interface';
 import {HttpErrorResponse} from '@angular/common/http';
 import {Usuario} from '@models/usuario';
+import {UserService} from '@services/user.service';
+import {SesionUser} from '@models/sesion-user.interface';
 
 enum TipoTabla {
   NSS = 'NSS',
@@ -47,6 +49,8 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
   antecedentesService: AntecedentesService = inject(AntecedentesService);
 
   tipoconsulta: TipoDropdown[] = TIPO_CONSULTA_ANTECEDENTES;
+
+  userService = inject(UserService);
 
   filtroForm!: FormGroup;
 
@@ -74,14 +78,14 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
   REF_APLICATIVO: string = '';
   REF_MODULO: string = '';
 
+  userData: SesionUser | null = null;
+
   constructor(private fb: FormBuilder) {
     super();
-    const USUARIO_KEY = 'usuario_actual';
-    const usuario = sessionStorage.getItem(USUARIO_KEY) as string;
-    const Usuario_Sesion = JSON.parse(usuario) as Usuario;
-    this.REF_APLICATIVO = Usuario_Sesion.sistema;
-    this.REF_MODULO = Usuario_Sesion.modulo;
-    this.REF_USUARIO = Usuario_Sesion.curp;
+    this.userService.userData$.subscribe(user => this.userData = user);
+    this.REF_APLICATIVO = this.userData?.sistemaOrigen as string;
+    this.REF_MODULO = this.userData?.modulo as string;
+    this.REF_USUARIO = this.userData?.curp as string;
   }
 
   ngOnInit(): void {

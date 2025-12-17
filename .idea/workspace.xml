@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="consulta antecedentes">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/components/general.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/components/general.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" afterDir="false" />
-    </list>
+    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="ajustes de ref" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -306,7 +301,23 @@
       <option name="project" value="LOCAL" />
       <updated>1765931788188</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="faltantes de homologar">
+      <option name="closed" value="true" />
+      <created>1765933360119</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1765933360119</updated>
+    </task>
+    <task id="LOCAL-00029" summary="ajustes de ref">
+      <option name="closed" value="true" />
+      <created>1765933934911</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1765933934911</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -324,8 +335,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="constants -&gt; tipo de antecedentes" />
-    <MESSAGE value="ajustes de filtros -&gt; antecedentes" />
     <MESSAGE value="limpieza de validadores -&gt; antecedentes" />
     <MESSAGE value="ajuste servicio de antecedentes" />
     <MESSAGE value="ajustes solicitud de antecedentes" />
@@ -349,6 +358,8 @@
     <MESSAGE value="ajustes de servicios" />
     <MESSAGE value="ajustes menu" />
     <MESSAGE value="consulta antecedentes" />
-    <option name="LAST_COMMIT_MESSAGE" value="consulta antecedentes" />
+    <MESSAGE value="faltantes de homologar" />
+    <MESSAGE value="ajustes de ref" />
+    <option name="LAST_COMMIT_MESSAGE" value="ajustes de ref" />
   </component>
 </project>
