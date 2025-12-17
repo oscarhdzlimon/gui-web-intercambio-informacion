@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="ajustes de ref" />
+    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="ajustes de rutas">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/shared/tabla-principal/tabla-principal.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/shared/tabla-principal/tabla-principal.component.ts" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -317,7 +320,15 @@
       <option name="project" value="LOCAL" />
       <updated>1765933934911</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="ajustes de rutas">
+      <option name="closed" value="true" />
+      <created>1765934187224</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1765934187224</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -335,7 +346,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="limpieza de validadores -&gt; antecedentes" />
     <MESSAGE value="ajuste servicio de antecedentes" />
     <MESSAGE value="ajustes solicitud de antecedentes" />
     <MESSAGE value="ajustes totales antecedentes" />
@@ -360,6 +370,7 @@
     <MESSAGE value="consulta antecedentes" />
     <MESSAGE value="faltantes de homologar" />
     <MESSAGE value="ajustes de ref" />
-    <option name="LAST_COMMIT_MESSAGE" value="ajustes de ref" />
+    <MESSAGE value="ajustes de rutas" />
+    <option name="LAST_COMMIT_MESSAGE" value="ajustes de rutas" />
   </component>
 </project>
