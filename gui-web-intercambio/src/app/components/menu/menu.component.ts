@@ -53,8 +53,17 @@ export class MenuComponent extends GeneralComponent implements OnInit {
         },
       }
     ]
-    //this.usuario = this.obtenerUsuario()!;
-    this.userService.userData$.subscribe(user => this.userData = user);
+    const USUARIO_KEY = 'usuario_actual';
+    const usuario = sessionStorage.getItem(USUARIO_KEY) as string;
+    const Usuario_Sesion = JSON.parse(usuario) as Usuario;
+
+    if (!this.usuario.nombreCompleto) {
+      this.usuario.nombreCompleto = `${Usuario_Sesion?.nombre} ${Usuario_Sesion?.apellidoPaterno} ${Usuario_Sesion?.apellidoMaterno}`;
+      this.usuario.sistema = Usuario_Sesion?.sistema as string;
+      this.usuario.modulo = Usuario_Sesion?.modulo as string;
+      this.usuario.ooadmin = Usuario_Sesion?.ooadmin as string;
+      console.log(usuario)
+    }
   }
 
   leerInformacionUsuario(): void {
