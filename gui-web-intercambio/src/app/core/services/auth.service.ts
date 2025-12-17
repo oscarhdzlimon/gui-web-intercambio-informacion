@@ -40,7 +40,10 @@ export class AuthService {
 
   constructor(private userIdleService: UserIdleService,
               @Inject(TIEMPO_MAXIMO_SESION) private tiempoSesion: TiempoSesion) {
-    this.recuperarSesionAlRecargarPagina()
+    const rutaExclusion = '/privado/busqueda-sistema/';
+    if (!this.router.url.includes(rutaExclusion)) {
+      this.recuperarSesionAlRecargarPagina();
+    }
   }
 
   login(login: Login): Observable<any> {
@@ -61,7 +64,7 @@ export class AuthService {
     if (token) {
       this.settearSession(token);
     } else {
-      if(this.router.url != "/publico/crear-cuenta")this.cerrarSesion();
+      if (this.router.url != "/publico/crear-cuenta") this.cerrarSesion();
     }
   }
 
