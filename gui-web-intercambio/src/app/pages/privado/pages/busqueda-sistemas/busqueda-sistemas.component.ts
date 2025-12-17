@@ -21,6 +21,7 @@ import {Observable} from 'rxjs';
 import {TablaPrincipalComponent} from '@pages/privado/shared/tabla-principal/tabla-principal.component';
 import {ActivatedRoute} from '@angular/router';
 import {SolicitudAsociacion} from '../../../../core/interfaces/solicitud-asociacion.interface';
+import {BusquedaStateService, FiltrosBusqueda} from '@services/busqueda-state.service';
 
 enum TipoTabla {
   NSS = 'NSS',
@@ -65,11 +66,26 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
   REF_MODULO: string = '';
 
   constructor(private readonly fb: FormBuilder,
-              private readonly route: ActivatedRoute) {
+              private readonly route: ActivatedRoute,
+              private busquedaStateService: BusquedaStateService) {
     super();
     this.obtenerExpediente();
     this.filtroForm = this.inicializarFiltroForm();
     this.suscribirACambiosFiltro();
+    this.recuperarUltimaBusqueda();
+  }
+
+  recuperarUltimaBusqueda(): void {
+    const filtrosGuardados = this.busquedaStateService.obtenerFiltros();
+
+    if (filtrosGuardados) {
+      // Aplicar los valores guardados a las variables del componente/formulario
+      this.filtroForm.get('filtro')?.setValue(filtrosGuardados.filtro);
+      this.filtroForm.get('valor')?.setValue(filtrosGuardados.valor);
+      this.consulta_todos = filtrosGuardados.consulta_todos;
+
+      this.iniciarBusqueda();
+    }
   }
 
   inicializarFiltroForm(): FormGroup {
@@ -124,10 +140,18 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
     const tipoConsulta = this.filtroForm.get('filtro')?.value;
     const valor = this.filtroForm.get('valor')?.value;
 
+    const filtros: FiltrosBusqueda = {
+      filtro: tipoConsulta,
+      valor: valor,
+      consulta_todos: this.consulta_todos
+    };
+
     if (this.filtroForm.invalid && !this.consulta_todos) {
       this._alertServices.informacion('Debe seleccionar el filtro y proporcionar el valor de búsqueda.');
       return;
     }
+
+    this.busquedaStateService.guardarFiltros(filtros);
 
     // Limpiar consultas y totales anteriores
     this.consultas = [];
