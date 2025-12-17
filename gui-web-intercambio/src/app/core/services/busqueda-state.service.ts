@@ -7,6 +7,14 @@ export interface FiltrosBusqueda {
   consulta_todos: boolean;
 }
 
+export interface FiltrosAntecedentes {
+  tipoconsulta: number | null;
+  nss: string | null;
+  nombre: string | null;
+  apaterno: string | null;
+  amaterno: string | null;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -15,7 +23,11 @@ export class BusquedaStateService {
   // Almacena el estado actual de los filtros
   private filtrosSource = new BehaviorSubject<FiltrosBusqueda | null>(null);
 
+  private filtrosAntecedentes = new BehaviorSubject<FiltrosAntecedentes | null>(null);
+
   filtrosActuales$: Observable<FiltrosBusqueda | null> = this.filtrosSource.asObservable();
+
+  filtrosAntecedentesActuales$: Observable<FiltrosAntecedentes | null> = this.filtrosAntecedentes.asObservable();
 
   constructor() {
   }
@@ -28,10 +40,18 @@ export class BusquedaStateService {
     this.filtrosSource.next(filtros);
   }
 
+  guardarFiltrosAntecedentes(filtros: FiltrosAntecedentes): void {
+    this.filtrosAntecedentes.next(filtros);
+  }
+
   /**
    * Obtiene los filtros actuales de forma síncrona.
    */
   obtenerFiltros(): FiltrosBusqueda | null {
     return this.filtrosSource.getValue();
+  }
+
+  obtenerFiltrosAntecedentes(): FiltrosAntecedentes | null {
+    return this.filtrosAntecedentes.getValue();
   }
 }

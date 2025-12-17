@@ -23,6 +23,7 @@ import {SolicitudAsociacion} from '../../../../core/interfaces/solicitud-asociac
 import {HttpErrorResponse} from '@angular/common/http';
 import {UserService} from '@services/user.service';
 import {SesionUser} from '@models/sesion-user.interface';
+import {BusquedaStateService, FiltrosAntecedentes} from '@services/busqueda-state.service';
 
 enum TipoTabla {
   NSS = 'NSS',
@@ -79,7 +80,8 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
 
   userData: SesionUser | null = null;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,
+              private busquedaStateService: BusquedaStateService) {
     super();
     this.userService.userData$.subscribe(user => this.userData = user);
     this.REF_APLICATIVO = this.userData?.sistemaOrigen as string;
@@ -90,6 +92,20 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
   ngOnInit(): void {
     this.filtroForm = this.inicializarFiltroForm();
     this.suscribirATipoConsulta();
+    this.recuperarUltimaBusqueda();
+  }
+
+  recuperarUltimaBusqueda(): void {
+    const filtrosGuardados = this.busquedaStateService.obtenerFiltrosAntecedentes();
+
+    if (filtrosGuardados) {
+      this.filtroForm.get('tipoconsulta')?.setValue(filtrosGuardados.tipoconsulta);
+      this.filtroForm.get('nss')?.setValue(filtrosGuardados.nss);
+      this.filtroForm.get('nombre')?.setValue(filtrosGuardados.nombre);
+      this.filtroForm.get('apaterno')?.setValue(filtrosGuardados.apaterno);
+      this.filtroForm.get('amaterno')?.setValue(filtrosGuardados.amaterno);
+      this.paginar(0, 0);
+    }
   }
 
   suscribirATipoConsulta(): void {
@@ -285,6 +301,18 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
       this._alertServices.informacion('Debe completar los campos requeridos para realizar la búsqueda.');
       return;
     }
+
+    const filtros: FiltrosAntecedentes = {
+      amaterno: this.filtroForm.get('amaterno')?.value,
+      apaterno: this.filtroForm.get('apaterno')?.value,
+      nombre: this.filtroForm.get('nombre')?.value,
+      nss: this.filtroForm.get('nss')?.value,
+      tipoconsulta: this.filtroForm.get('tipoconsulta')?.value
+    }
+
+    console.log(filtros);
+
+    this.busquedaStateService.guardarFiltrosAntecedentes(filtros);
 
     this.actualizarTitulosTabla(tipoConsultaActual);
 
