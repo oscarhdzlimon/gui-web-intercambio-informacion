@@ -1,9 +1,15 @@
 <alert></alert>
-<ngx-spinner [fullScreen]="true" type="ball-spin-clockwise"
-                                        size="medium"></ngx-spinner>
+<ngx-spinner
+  bdColor="rgba(251, 246, 249, 0.8)">
+  <div class="custom-spinner">
+    <img [src]="'assets/images/CustomLoader.svg'">
+  </div>
+</ngx-spinner>
+
+
 <router-outlet/>
 <app-footer/>
-<svg-animation />
+<!--<svg-animation />-->
 
 <!-- <p-confirmDialog>
   <ng-template #message let-message let-onAccept="onAccept" let-onReject="onReject">

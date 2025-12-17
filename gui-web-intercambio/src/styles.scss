@@ -427,3 +427,18 @@ input:-webkit-autofill::first-line {
 ul.p-speeddial-list[role="menu"] {
   z-index: 99999 !important;
 }
+
+.custom-spinner img {
+  width: 200px;
+  height: 200px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
