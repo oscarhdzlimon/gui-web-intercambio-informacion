@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { DetalleAntecedentesComponent } from './detalle-antecedentes.component';
+import {DetalleAntecedentesComponent} from './detalle-antecedentes.component';
 
 describe('DetalleAntecedentesComponent', () => {
   let component: DetalleAntecedentesComponent;

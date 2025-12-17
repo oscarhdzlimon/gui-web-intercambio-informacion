@@ -21,7 +21,6 @@ import {TotalesAntecedentes} from '../../../../core/interfaces/totales-anteceden
 import {RegistroAntecedentes} from '../../../../core/interfaces/registro-antecedentes.interface';
 import {SolicitudAsociacion} from '../../../../core/interfaces/solicitud-asociacion.interface';
 import {HttpErrorResponse} from '@angular/common/http';
-import {Usuario} from '@models/usuario';
 import {UserService} from '@services/user.service';
 import {SesionUser} from '@models/sesion-user.interface';
 

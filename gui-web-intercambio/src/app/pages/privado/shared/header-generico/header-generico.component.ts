@@ -1,14 +1,12 @@
-import {Component, OnDestroy, OnInit, signal, WritableSignal,Inject} from '@angular/core';
+import {Component, OnDestroy, OnInit, signal, WritableSignal} from '@angular/core';
 import {Button} from 'primeng/button';
-import {Badge} from 'primeng/badge';
 import {Subscription} from 'rxjs';
-import {DynamicDialogConfig,DynamicDialogRef} from 'primeng/dynamicdialog';
+import {DynamicDialogConfig, DynamicDialogRef} from 'primeng/dynamicdialog';
 
 
 @Component({
   selector: 'app-header-generico',
-  imports: [    Button,
-    Badge],
+  imports: [Button],
   templateUrl: './header-generico.component.html',
   styleUrl: './header-generico.component.scss'
 })
@@ -30,16 +28,16 @@ strTitulo="";
   }
 
   ngOnInit(): void {
-    
-    
+
+
 
       if (this.data?.data) {
         this.strTitulo = this.data.data.titulo;
         console.log(this.data);
       }
-    
-    
-    
+
+
+
     // Suscribirse al Observable para reaccionar a los cambios de estado
    /*  this.estadoSubscription = this.estadoOfertaService.estadoActual$.subscribe(
       (estado: OfertaEstado) => {

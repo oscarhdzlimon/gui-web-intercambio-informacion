@@ -1,34 +1,16 @@
-import { CommonModule } from '@angular/common';
-import {
-  Component,
-  inject,
-  OnInit,
-  signal,
-  ViewChild,
-  WritableSignal,
-} from '@angular/core';
+import {CommonModule, Location} from '@angular/common';
+import {Component, signal, WritableSignal,} from '@angular/core';
 
-import {
-  AbstractControl,
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-  ValidatorFn,
-  Validators,
-} from '@angular/forms';
-import { BtnRegresarComponent } from '@components/btn-regresar/btn-regresar.component';
-import { GeneralComponent } from '@components/general.component';
-import { Tipoconsulta } from '@models/tipo-consulta';
-import { TipoDropdown } from '@models/tipo-dropdown.interface';
-import { ButtonModule } from 'primeng/button';
-import { Card } from 'primeng/card';
-import { ConfirmPopupModule } from 'primeng/confirmpopup';
-import { InputText } from 'primeng/inputtext';
-import { PaginatorModule } from 'primeng/paginator';
-import { PopoverModule } from 'primeng/popover';
-import { SelectModule } from 'primeng/select';
-import { TableModule } from 'primeng/table';
-import { NgbAccordionModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {ReactiveFormsModule,} from '@angular/forms';
+import {GeneralComponent} from '@components/general.component';
+import {ButtonModule} from 'primeng/button';
+import {Card} from 'primeng/card';
+import {ConfirmPopupModule} from 'primeng/confirmpopup';
+import {PaginatorModule} from 'primeng/paginator';
+import {PopoverModule} from 'primeng/popover';
+import {SelectModule} from 'primeng/select';
+import {TableModule} from 'primeng/table';
+import {NgbAccordionModule} from '@ng-bootstrap/ng-bootstrap';
 import {
   TablaAmparoIndirecto,
   TablaDetalleGestionInterface,
@@ -37,17 +19,16 @@ import {
   TablaProcedimientoRpeInterface,
   TablaQuejaMedicaInterface,
 } from '@models/tablas-detalle-antecedentes.interface';
-import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { DetalleComponent } from './detalle/detalle.component';
-import { FooterGenericoComponent } from '../../shared/footer-generico/footer-generico.component';
-import { HeaderGenericoComponent } from '../../shared/header-generico/header-generico.component';
-import { TablaAntecedentesComponent } from '@pages/privado/shared/tabla-antecedentes/tabla-antecedentes.component';
-import { NAV } from '@utils/url-global';
-import { ActivatedRoute } from '@angular/router';
-import { DetalleAntecedentesService } from '@services/detalle-antecedentes.service';
-import { Ordenamiento } from '@models/ordenamiento.enum';
-import { forkJoin } from 'rxjs';
-import { DataCacheService } from '@services/data-cache.service';
+import {DialogService, DynamicDialogRef} from 'primeng/dynamicdialog';
+import {DetalleComponent} from './detalle/detalle.component';
+import {FooterGenericoComponent} from '../../shared/footer-generico/footer-generico.component';
+import {HeaderGenericoComponent} from '../../shared/header-generico/header-generico.component';
+import {ActivatedRoute} from '@angular/router';
+import {DetalleAntecedentesService} from '@services/detalle-antecedentes.service';
+import {Ordenamiento} from '@models/ordenamiento.enum';
+import {forkJoin} from 'rxjs';
+import {DataCacheService} from '@services/data-cache.service';
+
 @Component({
   selector: 'app-detalle-antecedentes',
   imports: [
@@ -61,8 +42,6 @@ import { DataCacheService } from '@services/data-cache.service';
     PaginatorModule,
     PopoverModule,
     NgbAccordionModule,
-    BtnRegresarComponent,
-    TablaAntecedentesComponent,
   ],
   templateUrl: './detalle-antecedentes.component.html',
   styleUrl: './detalle-antecedentes.component.scss',
@@ -117,7 +96,7 @@ export class DetalleAntecedentesComponent extends GeneralComponent {
   //Gestión
   /*
     {
-      "nombre": "ANGEL ARMANDO  BRAVO ZAMBRANO", 
+      "nombre": "ANGEL ARMANDO  BRAVO ZAMBRANO",
       "nss": "48068225530",
       "expediente": "0923/2020-27"
     }
@@ -126,7 +105,7 @@ export class DetalleAntecedentesComponent extends GeneralComponent {
   //Queja médica
   /*
   {
-    "nombre": "ANGEL ARMANDO  BRAVO ZAMBRANO", 
+    "nombre": "ANGEL ARMANDO  BRAVO ZAMBRANO",
     "nss": "48068225530",
     "expediente": "0923/2020-27"
   }
@@ -135,7 +114,7 @@ export class DetalleAntecedentesComponent extends GeneralComponent {
   //Inconformidad
   /*
     {
-      "nombre": "SANJUANA VEGA SIFUENTES", 
+      "nombre": "SANJUANA VEGA SIFUENTES",
       "nss": "43886827680",
       "expediente": "CC.NL.-0621/2016"
     }
@@ -144,7 +123,7 @@ export class DetalleAntecedentesComponent extends GeneralComponent {
   //Amparo indirecto
   /*
   {
-    "nombre": "ANGEL ARMANDO  BRAVO ZAMBRANO", 
+    "nombre": "ANGEL ARMANDO  BRAVO ZAMBRANO",
     "nss": "48068225530",
     "expediente": "0923/2020-27"
   }
@@ -153,21 +132,21 @@ export class DetalleAntecedentesComponent extends GeneralComponent {
   //procedimiento rpe
   /*
   {
-    "nombre": "RAUL  HERNANDEZ AMADOR", 
+    "nombre": "RAUL  HERNANDEZ AMADOR",
     "nss": "13896904235",
     "expediente": "0001/2020"
   }
-  
+
   */
 
   //Juicio contencioso
   /*
   {
-  "nombre": "LUIS ADRIAN ARIZPE DELGADO", 
+  "nombre": "LUIS ADRIAN ARIZPE DELGADO",
   "nss": "4312880790",
   "expediente": "000403/2021-06-02-5"
 }
-  
+
   */
 
   datosUsuario = {
@@ -180,7 +159,8 @@ export class DetalleAntecedentesComponent extends GeneralComponent {
     public dialogService: DialogService,
     private route: ActivatedRoute,
     private detalleAntecedentesService: DetalleAntecedentesService,
-    private readonly dataCacheService: DataCacheService
+    private readonly dataCacheService: DataCacheService,
+    private _location: Location
   ) {
     super();
     this.route.paramMap.subscribe((params) => {
@@ -454,6 +434,6 @@ export class DetalleAntecedentesComponent extends GeneralComponent {
   }
 
   regresar() {
-    this._router.navigate(['/privado']);
+    this._location.back();
   }
 }

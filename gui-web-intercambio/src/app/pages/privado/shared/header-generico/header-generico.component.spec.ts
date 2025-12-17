@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { HeaderGenericoComponent } from './header-generico.component';
+import {HeaderGenericoComponent} from './header-generico.component';
 
 describe('HeaderGenericoComponent', () => {
   let component: HeaderGenericoComponent;

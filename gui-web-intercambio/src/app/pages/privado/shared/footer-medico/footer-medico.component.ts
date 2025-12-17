@@ -1,7 +1,6 @@
-import {Component, inject,OnInit} from '@angular/core';
-import {AuthService} from '@services/auth.service';
-import { GeneralComponent } from '@components/general.component';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import {Component, OnInit} from '@angular/core';
+import {GeneralComponent} from '@components/general.component';
+import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-footer-medico',
@@ -22,8 +21,8 @@ export class FooterMedicoComponent extends GeneralComponent implements OnInit {
 
     ngOnInit() {
       console.log("session",this.sesion);
-  
-   
+
+
     }
 
     private getFoto(datosFoto: any) {

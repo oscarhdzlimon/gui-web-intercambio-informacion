@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, inject} from '@angular/core';
+import {Component, inject, OnDestroy, OnInit} from '@angular/core';
 import {Card} from "primeng/card";
 import {Rating} from 'primeng/rating';
 import {FormsModule} from '@angular/forms';

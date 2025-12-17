@@ -11,8 +11,10 @@ import {
   WritableSignal
 } from '@angular/core';
 import {
-  AbstractControl, FormArray,
-  FormBuilder, FormControl,
+  AbstractControl,
+  FormArray,
+  FormBuilder,
+  FormControl,
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
@@ -31,7 +33,7 @@ import {VerificacionDocsService} from '@services/verificacion-docs.service';
 import {RouterLink} from '@angular/router';
 import {AlertService} from '@services/alert.service';
 import {Mensajes} from '@utils/mensajes';
-import { DialogModule } from 'primeng/dialog';
+import {DialogModule} from 'primeng/dialog';
 
 @Component({
   selector: 'app-docs-especialidad',

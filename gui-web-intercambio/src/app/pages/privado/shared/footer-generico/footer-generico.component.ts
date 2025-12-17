@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {DynamicDialogRef} from 'primeng/dynamicdialog';
-import { ButtonModule } from 'primeng/button';
+import {ButtonModule} from 'primeng/button';
+
 @Component({
   selector: 'app-footer-generico',
   imports: [ButtonModule],
@@ -10,7 +11,7 @@ import { ButtonModule } from 'primeng/button';
 export class FooterGenericoComponent {
 
   constructor(public ref: DynamicDialogRef,
-    
+
 
 ) {
 

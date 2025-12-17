@@ -1,10 +1,11 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { TablaDetalleGestionInterface } from '@models/tablas-detalle-antecedentes.interface';
-import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { ButtonModule } from 'primeng/button';
-import { UserService } from '@services/user.service';
-import { SesionUser } from '@models/sesion-user.interface';
-import { DatePipe } from '@angular/common';
+import {Component, inject, OnInit} from '@angular/core';
+import {TablaDetalleGestionInterface} from '@models/tablas-detalle-antecedentes.interface';
+import {DynamicDialogConfig, DynamicDialogRef} from 'primeng/dynamicdialog';
+import {ButtonModule} from 'primeng/button';
+import {UserService} from '@services/user.service';
+import {SesionUser} from '@models/sesion-user.interface';
+import {DatePipe} from '@angular/common';
+
 @Component({
   selector: 'app-detalle',
   imports: [ButtonModule],

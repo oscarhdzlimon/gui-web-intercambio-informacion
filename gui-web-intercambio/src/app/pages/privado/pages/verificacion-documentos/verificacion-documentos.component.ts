@@ -1,28 +1,28 @@
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { Component, inject, OnInit, signal, ViewChild, WritableSignal } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { Card } from 'primeng/card';
-import { SelectModule } from 'primeng/select';
-import { InputText } from 'primeng/inputtext';
-import { PaginatorModule } from 'primeng/paginator';
-import { ConfirmPopupModule } from 'primeng/confirmpopup';
-import { TableModule } from 'primeng/table';
-import { Popover, PopoverModule } from 'primeng/popover';
-import { GeneralComponent } from '../../../../components/general.component';
-import { TipoDropdown } from '@models/tipo-dropdown.interface';
-import { ButtonModule } from 'primeng/button';
-import { DUMMIE_TABLA_VERIFICACION_DOCUMENTOS } from '@utils/dummies';
-import { mapearArregloTipoDropdown } from '@utils/funciones';
-import { VerificacionDocsService } from '@services/verificacion-docs.service';
-import { VerificacionDocsInterface } from '@models/verificacion-docs.interface';
-import { HttpRespuesta } from '@models/http-respuesta.interface';
-import { TablaVerificacionDocsInterface } from '@models/tabla-verificacion-docs.interface';
-import { VerificacionDocsExcelInterface } from '@models/verificacion-docs-excel.interface';
-import { saveAs } from 'file-saver';
-import { DictamenRespuesta } from '@models/dictamen-respuesta.interface';
-import { AdjuntoOpinion, OpinionTecnicaRespuesta } from '@models/opnion-tecnia-respuesta.interface';
-import { AlertService } from '@services/alert.service';
+import {FormBuilder, FormGroup, ReactiveFormsModule} from '@angular/forms';
+import {Component, inject, OnInit, signal, ViewChild, WritableSignal} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {CommonModule} from '@angular/common';
+import {Card} from 'primeng/card';
+import {SelectModule} from 'primeng/select';
+import {InputText} from 'primeng/inputtext';
+import {PaginatorModule} from 'primeng/paginator';
+import {ConfirmPopupModule} from 'primeng/confirmpopup';
+import {TableModule} from 'primeng/table';
+import {Popover, PopoverModule} from 'primeng/popover';
+import {GeneralComponent} from '../../../../components/general.component';
+import {TipoDropdown} from '@models/tipo-dropdown.interface';
+import {ButtonModule} from 'primeng/button';
+import {DUMMIE_TABLA_VERIFICACION_DOCUMENTOS} from '@utils/dummies';
+import {mapearArregloTipoDropdown} from '@utils/funciones';
+import {VerificacionDocsService} from '@services/verificacion-docs.service';
+import {VerificacionDocsInterface} from '@models/verificacion-docs.interface';
+import {HttpRespuesta} from '@models/http-respuesta.interface';
+import {TablaVerificacionDocsInterface} from '@models/tabla-verificacion-docs.interface';
+import {VerificacionDocsExcelInterface} from '@models/verificacion-docs-excel.interface';
+import {saveAs} from 'file-saver';
+import {DictamenRespuesta} from '@models/dictamen-respuesta.interface';
+import {AdjuntoOpinion, OpinionTecnicaRespuesta} from '@models/opnion-tecnia-respuesta.interface';
+import {AlertService} from '@services/alert.service';
 
 
 @Component({
@@ -300,7 +300,7 @@ export class VerificacionDocumentosComponent extends GeneralComponent implements
     let base64 = b64Data.split(',')[1] ? b64Data.split(',')[1] : b64Data;
 
 
-    // Eliminar CUALQUIER carácter que NO sea una letra/número válido para Base64, 
+    // Eliminar CUALQUIER carácter que NO sea una letra/número válido para Base64,
     // incluyendo espacios, saltos de línea, y caracteres de control.
     // Base64 válido solo incluye A-Z, a-z, 0-9, +, / y = (relleno).
     base64 = base64.replace(/[^A-Za-z0-9+/=]/g, '');
