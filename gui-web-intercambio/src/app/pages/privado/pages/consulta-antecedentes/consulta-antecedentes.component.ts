@@ -19,6 +19,9 @@ import {AntecedentesService} from '@services/antecedentes.service';
 import {forkJoin, Observable, of} from 'rxjs';
 import {TotalesAntecedentes} from '../../../../core/interfaces/totales-antecedentes.interface';
 import {RegistroAntecedentes} from '../../../../core/interfaces/registro-antecedentes.interface';
+import {SolicitudAsociacion} from '../../../../core/interfaces/solicitud-asociacion.interface';
+import {HttpErrorResponse} from '@angular/common/http';
+import {Usuario} from '@models/usuario';
 
 enum TipoTabla {
   NSS = 'NSS',
@@ -65,8 +68,20 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
 
   totalAntecedentes!: TotalesAntecedentes;
 
+  registrosAsociacion: SolicitudAsociacion[] = [];
+
+  REF_USUARIO: string = '';
+  REF_APLICATIVO: string = '';
+  REF_MODULO: string = '';
+
   constructor(private fb: FormBuilder) {
     super();
+    const USUARIO_KEY = 'usuario_actual';
+    const usuario = sessionStorage.getItem(USUARIO_KEY) as string;
+    const Usuario_Sesion = JSON.parse(usuario) as Usuario;
+    this.REF_APLICATIVO = Usuario_Sesion.sistema;
+    this.REF_MODULO = Usuario_Sesion.modulo;
+    this.REF_USUARIO = Usuario_Sesion.curp;
   }
 
   ngOnInit(): void {
@@ -157,9 +172,64 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
     }
   }
 
-  cambiarEstado(event: any) {
-    console.log("Checkbox cambiado:", event);
+  private mapearASolicitud(evento: any): SolicitudAsociacion {
+    return {
+      idBitacoraAsociacion: evento.idBitacoraAsociacion,
+      refUsuarioAutentica: this.REF_USUARIO, // Contexto del componente
+      refAplicativoAsociacion: this.REF_APLICATIVO, // Contexto del componente
+      refModuloAsociacion: this.REF_MODULO, // Contexto del componente
+      refExpediente: evento.expediente,
+      nomPersona: evento.nombre,
+      nomApellidoPaterno: evento.apellidoPaterno,
+      nomApellidoMaterno: evento.apellidoMaterno,
+      refNss: evento.nss,
+      // Mapeo de nombres de propiedades
+      numGestion: evento.gestion,
+      numQuejaMedica: evento.quejaMedica,
+      numInconformidad: evento.inconformidades,
+      numAmparoIndirecto: evento.amparoIndirecto,
+      numProcedimientoRpe: evento.procedimientoRpe,
+      numJuicioContencioso: evento.juicioContencioso
+    };
   }
+
+  cambiarEstado(event: any): void {
+    console.log("Checkbox cambiado:", event);
+
+    // Identificador único para el elemento dentro del contexto de la búsqueda (usamos NSS y Expediente)
+    const identificador = `${event.nss}-${event.expediente}`;
+
+    console.log(event.asociar)
+    if (event.asociar === true) {
+      // ASOCIAR (Agregar)
+
+      // Mapear los datos al formato de destino (SolicitudAsociacion)
+      const nuevaSolicitud: SolicitudAsociacion = this.mapearASolicitud(event);
+
+      // Verificamos si el registro ya existe antes de añadirlo (usando el identificador)
+      const existe = this.registrosAsociacion.some(r => `${r.refNss}-${r.refExpediente}` === identificador);
+
+      if (!existe) {
+        this.registrosAsociacion.push(nuevaSolicitud);
+        console.log(`Registro añadido. Total: ${this.registrosAsociacion.length}`);
+      }
+
+    } else if (event.asociar === false) {
+      // DESASOCIAR (Eliminar)
+
+      // Filtramos el arreglo, manteniendo solo aquellos elementos que NO coincidan con el identificador
+      const totalAntes = this.registrosAsociacion.length;
+
+      this.registrosAsociacion = this.registrosAsociacion.filter(
+        r => `${r.refNss}-${r.refExpediente}` !== identificador
+      );
+
+      if (this.registrosAsociacion.length < totalAntes) {
+        console.log(`Registro eliminado. Total: ${this.registrosAsociacion.length}`);
+      }
+    }
+  }
+
 
   inicializarFiltroForm(): FormGroup {
     return this.fb.group({
@@ -346,4 +416,34 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
   }
 
   protected readonly TipoTabla = TipoTabla;
+
+  guardarAsociacion(): void {
+    if (this.registrosAsociacion.length === 0) {
+      this._alertServices.alerta('No hay registros seleccionados para asociar.');
+      return;
+    }
+
+    this.antecedentesService.guardarAsociacion(this.registrosAsociacion).subscribe({
+      next: data => {
+        const mensajeExito = data?.mensaje || 'La asociación de registros se ha guardado exitosamente.';
+
+        this._alertServices.exito(mensajeExito);
+      },
+      error: (error: HttpErrorResponse) => {
+
+        let mensajeError = 'Ocurrió un error desconocido al intentar guardar la asociación.';
+
+        if (error.error && error.error.mensaje) {
+          mensajeError = error.error.mensaje;
+        } else if (error.status === 400) {
+          mensajeError = 'Error de validación: Verifique los datos e intente de nuevo.';
+        } else if (error.status === 403) {
+          mensajeError = 'No tiene permisos para realizar esta acción.';
+        }
+
+        this._alertServices.error(mensajeError);
+        console.error('Error al guardar asociación:', error);
+      }
+    });
+  }
 }

@@ -7,5 +7,6 @@ export interface ConfigEnvironment {
     apiConvocatoria: string;
     apiDocumentos: string;
     apiAntecedentes: string;
+    apiBitacora: string;
   }
 }

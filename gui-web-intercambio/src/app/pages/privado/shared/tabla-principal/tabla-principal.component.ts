@@ -52,7 +52,7 @@ export class TablaPrincipalComponent {
   @Input() total: number = 0;
 
   @Output() pageChange = new EventEmitter<any>();
-  @Output() checkboxChanged = new EventEmitter<{ row: any }>();
+  @Output() checkboxChanged = new EventEmitter<any>();
 
   dataCacheService: DataCacheService = inject(DataCacheService);
 
@@ -109,11 +109,11 @@ export class TablaPrincipalComponent {
     const input = event.target as HTMLInputElement;
     const value = input.checked;
 
-    this.checkboxChanged.emit({row});
+    this.checkboxChanged.emit(row);
   }
 
   onCheckboxChange(row: any, col: ColumnDefinition) {
-    this.checkboxChanged.emit({row});
+    this.checkboxChanged.emit(row);
   }
 
   visualizar(row: any) {
