@@ -21,6 +21,7 @@ import {TotalesAntecedentes} from '../../../../core/interfaces/totales-anteceden
 import {RegistroAntecedentes} from '../../../../core/interfaces/registro-antecedentes.interface';
 import {SolicitudAsociacion} from '../../../../core/interfaces/solicitud-asociacion.interface';
 import {HttpErrorResponse} from '@angular/common/http';
+import {Usuario} from '@models/usuario';
 
 enum TipoTabla {
   NSS = 'NSS',
@@ -75,6 +76,12 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
 
   constructor(private fb: FormBuilder) {
     super();
+    const USUARIO_KEY = 'usuario_actual';
+    const usuario = sessionStorage.getItem(USUARIO_KEY) as string;
+    const Usuario_Sesion = JSON.parse(usuario) as Usuario;
+    this.REF_APLICATIVO = Usuario_Sesion.sistema;
+    this.REF_MODULO = Usuario_Sesion.modulo;
+    this.REF_USUARIO = Usuario_Sesion.curp;
   }
 
   ngOnInit(): void {

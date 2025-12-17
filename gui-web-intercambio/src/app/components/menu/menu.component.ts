@@ -62,7 +62,6 @@ export class MenuComponent extends GeneralComponent implements OnInit {
       this.usuario.sistema = Usuario_Sesion?.sistema as string;
       this.usuario.modulo = Usuario_Sesion?.modulo as string;
       this.usuario.ooadmin = Usuario_Sesion?.ooadmin as string;
-      console.log(usuario)
     }
   }
 
