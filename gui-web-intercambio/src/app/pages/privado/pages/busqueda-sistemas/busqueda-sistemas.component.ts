@@ -263,7 +263,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
 
   generarSolicitudAntecedentesNSS(valor: string): SolicitudAntecedentes {
     return {
-      expediente: 'CC.NL.-0621/2016',
+      expediente: this.expedienteID,
       nombre: null,
       nss: valor
     }

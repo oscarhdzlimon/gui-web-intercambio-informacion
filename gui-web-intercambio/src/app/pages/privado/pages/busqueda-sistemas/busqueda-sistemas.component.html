@@ -1,7 +1,7 @@
 <div style="margin-left: 10px;margin-right: 10px;">
   <div class="row">
     <div class="lg:col-4 col-12 flex align-items-center">
-      <span class="titulobusqueda">Expediente: CC.NL.-0615/1999</span>
+      <span class="titulobusqueda">Expediente: {{ expedienteID }}</span>
     </div>
   </div>
   <hr>
@@ -88,6 +88,7 @@
                 [data]="consulta.data()"
                 [rows]="consulta.registrosPorPagina"
                 [total]="consulta.totalRegistros"
+                [expediente]="expedienteID"
                 (pageChange)="cargarPagina($event, $index)"
                 (checkboxChanged)="cambiarEstado($event)"
               />
