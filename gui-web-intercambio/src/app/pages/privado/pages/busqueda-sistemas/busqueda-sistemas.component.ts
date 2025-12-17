@@ -3,7 +3,6 @@ import {Component, inject, OnInit, signal} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {GeneralComponent} from '@components/general.component';
 import {NgbAccordionModule} from '@ng-bootstrap/ng-bootstrap';
-import {TablaAcordeonComponent} from '@pages/privado/shared/tabla-acordeon/tabla-acordeon.component';
 import {ButtonModule} from 'primeng/button';
 import {Card} from 'primeng/card';
 import {ConfirmPopupModule} from 'primeng/confirmpopup';

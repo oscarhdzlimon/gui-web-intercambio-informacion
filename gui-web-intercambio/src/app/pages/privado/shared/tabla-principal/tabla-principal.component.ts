@@ -1,14 +1,5 @@
 import {CommonModule} from '@angular/common';
-import {
-  ChangeDetectorRef,
-  Component,
-  EventEmitter,
-  HostListener,
-  inject,
-  Input,
-  Output,
-  SimpleChanges
-} from '@angular/core';
+import {ChangeDetectorRef, Component, EventEmitter, HostListener, inject, Input, Output} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
 import {ColumnDefinition} from '@models/columa-tabla';
@@ -16,7 +7,6 @@ import {NAV} from '@utils/url-global';
 import {ButtonModule} from 'primeng/button';
 import {Card} from 'primeng/card';
 import {ConfirmPopupModule} from 'primeng/confirmpopup';
-import {InputText} from 'primeng/inputtext';
 import {PaginatorModule} from 'primeng/paginator';
 import {SelectModule} from 'primeng/select';
 import {TableModule} from 'primeng/table';
@@ -30,7 +20,6 @@ import {DataCacheService} from '@services/data-cache.service';
     ReactiveFormsModule,
     Card,
     SelectModule,
-    InputText,
     TableModule,
     ButtonModule,
     ConfirmPopupModule,

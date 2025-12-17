@@ -5,15 +5,12 @@ import {Button} from 'primeng/button';
 import {InputTextModule} from 'primeng/inputtext';
 import {CommonModule} from '@angular/common';
 import {GeneralComponent} from '@components/general.component';
-import {passwordValidator} from '@validators/password-validator';
 import {BloquearCaracterPasswordDirective} from '@directives/bloquear-caracter-password.directive';
 import {PATRON_EMAIL} from '@utils/regex';
-import {AuthService} from '@services/auth.service';
-import {ActivatedRoute, RouterLink} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 import {HttpRespuesta} from '@models/http-respuesta.interface';
-import {EmailAllowCaractersDirective} from '@directives/email-allow-caracters.directive';
-import { Usuario } from '@models/usuario';
-import { NAV } from '@utils/url-global';
+import {Usuario} from '@models/usuario';
+import {NAV} from '@utils/url-global';
 
 declare var grecaptcha: any;
 
@@ -25,9 +22,7 @@ declare var grecaptcha: any;
     InputTextModule,
     ReactiveFormsModule,
     CommonModule,
-    BloquearCaracterPasswordDirective,
-    RouterLink,
-    EmailAllowCaractersDirective
+    BloquearCaracterPasswordDirective
   ],
   templateUrl: './inicio-sesion.component.html',
   styleUrl: './inicio-sesion.component.scss',
