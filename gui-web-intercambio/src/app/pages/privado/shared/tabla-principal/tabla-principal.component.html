@@ -34,7 +34,8 @@
             <input
               id="checkbox-{{i}}"
               type="checkbox"
-              [(ngModel)]="rowData.asociar"
+              [(ngModel)]="rowData.indAsociado"
+              [disabled]="rowData.indAsociado"
               (change)="onCheckboxEvent(rowData, $event)"
             />
             <label for="checkbox-{{i}}"></label>
@@ -58,8 +59,8 @@
           </div>
         </td>
         <td pFrozenColumn alignFrozen="right" style="min-width:100px">
-          <div class="flex justify-content-center align-items-center" style="height:100%;">
-            <img src="/assets/logos/print.svg"/>
+          <div class="flex justify-content-center align-items-center" style="height:100%">
+            <img src="/assets/logos/print.svg" [ngClass]="{'cursor-pointer': rowData.indAsociado}"/>
           </div>
         </td>
       </tr>
