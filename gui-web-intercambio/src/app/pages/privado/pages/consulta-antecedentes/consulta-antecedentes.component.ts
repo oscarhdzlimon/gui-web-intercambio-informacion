@@ -249,17 +249,28 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
 
   private obtenerIdentificador(item: any): string {
 
-    // Si existe NSS, es el identificador único
+    // Persona
+    let personaId: string;
+
     if (item.nss || item.refNss) {
-      return (item.nss ?? item.refNss).trim();
+      personaId = (item.nss ?? item.refNss).trim();
+    } else {
+      const nombre = (item.nombre ?? item.nomPersona ?? '').trim().toUpperCase();
+      const paterno = (item.apellidoPaterno ?? item.nomApellidoPaterno ?? '').trim().toUpperCase();
+      const materno = (item.apellidoMaterno ?? item.nomApellidoMaterno ?? '').trim().toUpperCase();
+
+      personaId = `${nombre}-${paterno}-${materno}`;
     }
 
-    // Sin NSS → nombre + apellidos
-    const nombre = (item.nombre ?? '').trim().toUpperCase();
-    const paterno = (item.apellidoPaterno ?? '').trim().toUpperCase();
-    const materno = (item.apellidoMaterno ?? '').trim().toUpperCase(); // opcional
+    // Atributos que hacen único al registro
+    const gestion = item.gestion ?? item.numGestion ?? 0;
+    const queja = item.quejaMedica ?? item.numQuejaMedica ?? 0;
+    const inconformidad = item.inconformidades ?? item.numInconformidad ?? 0;
+    const amparo = item.amparoIndirecto ?? item.numAmparoIndirecto ?? 0;
+    const rpe = item.procedimientoRpe ?? item.numProcedimientoRpe ?? 0;
+    const juicio = item.juicioContencioso ?? item.numJuicioContencioso ?? 0;
 
-    return `${nombre}-${paterno}-${materno}`;
+    return `${personaId}|${gestion}|${queja}|${inconformidad}|${amparo}|${rpe}|${juicio}`;
   }
 
 

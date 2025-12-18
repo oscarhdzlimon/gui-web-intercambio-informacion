@@ -362,20 +362,34 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
   }
 
   private obtenerIdentificador(item: any): string {
+
     const expediente = item.expediente ?? item.refExpediente;
 
-    // Si tiene NSS, es la mejor clave
-    if (item.nss || item.refNss) {
-      const nss = item.nss ?? item.refNss;
+    // NSS + expediente (si ambos existen)
+    if ((item.nss || item.refNss) && expediente) {
+      const nss = (item.nss ?? item.refNss).trim();
       return `${nss}-${expediente}`;
     }
 
-    // Si NO tiene NSS, usamos nombre + apellidos
+    // SIN NSS pero CON expediente
+    if (!item.nss && !item.refNss && expediente) {
+      const nombre = (item.nombre ?? '').trim().toUpperCase();
+      const paterno = (item.apellidoPaterno ?? '').trim().toUpperCase();
+      const materno = (item.apellidoMaterno ?? '').trim().toUpperCase();
+
+      return `${nombre}-${paterno}-${materno}-${expediente}`;
+    }
+
+    // SIN expediente → NSS o nombre + apellidos
+    if (item.nss || item.refNss) {
+      return (item.nss ?? item.refNss).trim();
+    }
+
     const nombre = (item.nombre ?? '').trim().toUpperCase();
     const paterno = (item.apellidoPaterno ?? '').trim().toUpperCase();
-    const materno = (item.apellidoMaterno ?? '').trim().toUpperCase(); // puede venir vacío
+    const materno = (item.apellidoMaterno ?? '').trim().toUpperCase();
 
-    return `${nombre}-${paterno}-${materno}-${expediente}`;
+    return `${nombre}-${paterno}-${materno}`;
   }
 
   ejecutarConsultaTotal(): void {
