@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="servicio de estado de la busqueda">
+    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="ajustes de bitacora">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/services/busqueda-state.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/services/busqueda-state.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/shared/tabla-principal/tabla-principal.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/shared/tabla-principal/tabla-principal.component.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,6 +88,7 @@
       <workItem from="1765819098117" duration="1438000" />
       <workItem from="1765821241131" duration="1922000" />
       <workItem from="1765833097414" duration="18242000" />
+      <workItem from="1766034347323" duration="3417000" />
     </task>
     <task id="LOCAL-00001" summary="constants -&gt; tipo de antecedentes">
       <option name="closed" value="true" />
@@ -369,7 +370,31 @@
       <option name="project" value="LOCAL" />
       <updated>1765944953834</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="modificaciones servicio busqueda">
+      <option name="closed" value="true" />
+      <created>1765949718418</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1765949718418</updated>
+    </task>
+    <task id="LOCAL-00037" summary="registro de bitacora correctamente guardado">
+      <option name="closed" value="true" />
+      <created>1766035410258</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1766035410259</updated>
+    </task>
+    <task id="LOCAL-00038" summary="ajustes de bitacora">
+      <option name="closed" value="true" />
+      <created>1766036181205</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1766036181205</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -387,9 +412,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="ajustes de tabla de resultados" />
-    <MESSAGE value="ajustes paginado" />
-    <MESSAGE value="ajustes busqueda sistema" />
     <MESSAGE value="ajustes filtros busqueda sistema" />
     <MESSAGE value="ajustes valores filtros busqueda sistema" />
     <MESSAGE value="generalización busqueda sistemas" />
@@ -412,6 +434,9 @@
     <MESSAGE value="cambio expediente a null" />
     <MESSAGE value="cambio pase null" />
     <MESSAGE value="servicio de estado de la busqueda" />
-    <option name="LAST_COMMIT_MESSAGE" value="servicio de estado de la busqueda" />
+    <MESSAGE value="modificaciones servicio busqueda" />
+    <MESSAGE value="registro de bitacora correctamente guardado" />
+    <MESSAGE value="ajustes de bitacora" />
+    <option name="LAST_COMMIT_MESSAGE" value="ajustes de bitacora" />
   </component>
 </project>
