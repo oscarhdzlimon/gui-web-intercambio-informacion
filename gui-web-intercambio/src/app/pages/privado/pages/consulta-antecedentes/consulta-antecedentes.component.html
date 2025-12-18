@@ -87,7 +87,7 @@
     <!--
   PARA TEMA DE DEMO, SE OCULTA
     <div class="flex lg:col-12  col-12 justify-content-end align-items-center mt-3 gap-4">
-      <p-button type="button" [disabled]="registrosAsociacion.length === 0" (onClick)="guardarAsociacion()"
+      <p-button type="button" [disabled]="!solicitudAntecedentesService.tieneRegistros()" (onClick)="guardarAsociacion()"
                 label="Guardar"
                 [style]="{'width': '135px'}" styleClass="btn-background"/>
     </div>

@@ -24,6 +24,7 @@ import {HttpErrorResponse} from '@angular/common/http';
 import {UserService} from '@services/user.service';
 import {SesionUser} from '@models/sesion-user.interface';
 import {BusquedaStateService, FiltrosAntecedentes} from '@services/busqueda-state.service';
+import {ManejoSolicitudAntecedentesService} from '@services/manejo-solicitud-antecedentes.service';
 
 enum TipoTabla {
   NSS = 'NSS',
@@ -47,6 +48,7 @@ enum TipoTabla {
 })
 export class ConsultaAntecedentesComponent extends GeneralComponent implements OnInit {
   antecedentesService: AntecedentesService = inject(AntecedentesService);
+  solicitudAntecedentesService: ManejoSolicitudAntecedentesService = inject(ManejoSolicitudAntecedentesService);
 
   tipoconsulta: TipoDropdown[] = TIPO_CONSULTA_ANTECEDENTES;
 
@@ -54,7 +56,7 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
 
   filtroForm!: FormGroup;
 
-  // 🔑 Inicialización de los títulos base
+  // Inicialización de los títulos base
   tituloTablaBase: string = 'Resultados por NSS';
   tituloTablanombreBase: string = 'Resultados por Nombre y Apellidos';
   tituloTabla: string = 'Resultados de la búsqueda'; // Título que se muestra
@@ -72,17 +74,25 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
 
   totalAntecedentes!: TotalesAntecedentes;
 
-  registrosAsociacion: SolicitudAsociacion[] = [];
-
   REF_USUARIO: string = '';
   REF_APLICATIVO: string = '';
   REF_MODULO: string = '';
 
   userData: SesionUser | null = null;
 
+  puedeGuardar = false;
+
   constructor(private fb: FormBuilder,
               private busquedaStateService: BusquedaStateService) {
     super();
+    this.solicitudAntecedentesService.cambios$.subscribe(() => {
+      this.data.set(
+        this.sincronizarEstado(this.data())
+      );
+      this.data_nombre.set(
+        this.sincronizarEstado(this.data_nombre())
+      );
+    });
     this.userService.userData$.subscribe(user => this.userData = user);
     this.REF_APLICATIVO = this.userData?.sistemaOrigen as string;
     this.REF_MODULO = this.userData?.modulo as string;
@@ -94,6 +104,19 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
     this.suscribirATipoConsulta();
     this.recuperarUltimaBusqueda();
   }
+
+  private sincronizarEstado(
+    registros: RegistroAntecedentes[]
+  ): RegistroAntecedentes[] {
+
+    return registros.map(r => ({
+      ...r,
+      indAsociado: this.solicitudAntecedentesService.existe(
+        this.obtenerIdentificador(r)
+      )
+    }));
+  }
+
 
   recuperarUltimaBusqueda(): void {
     const filtrosGuardados = this.busquedaStateService.obtenerFiltrosAntecedentes();
@@ -173,6 +196,7 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
   }
 
   cargarPagina(event: any, tipoTabla: TipoTabla) {
+    console.log(event)
     const nuevaPagina = event.page;
     const nuevoTamanio = event.rows;
 
@@ -212,37 +236,19 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
     };
   }
 
-  cambiarEstado(event: any): void {
-    console.log('Checkbox cambiado:', event);
+  cambiarEstado(registro: RegistroAntecedentes): void {
 
-    const identificador = this.obtenerIdentificador(event);
+    const key = this.obtenerIdentificador(registro);
 
-    if (event.indAsociado) {
+    console.log(registro)
 
-      const nuevaSolicitud: SolicitudAsociacion = this.mapearASolicitud(event);
-
-      const existe = this.registrosAsociacion.some(
-        r => this.obtenerIdentificador(r) === identificador
+    if (registro.indAsociado) {
+      this.solicitudAntecedentesService.agregar(
+        key,
+        this.mapearASolicitud(registro)
       );
-
-      if (!existe) {
-        this.registrosAsociacion.push(nuevaSolicitud);
-        console.log(`Registro añadido. Total: ${this.registrosAsociacion.length}`);
-      }
-
     } else {
-
-      const totalAntes = this.registrosAsociacion.length;
-
-      console.log(this.registrosAsociacion);
-
-      this.registrosAsociacion = this.registrosAsociacion.filter(r => this.obtenerIdentificador(r) !== identificador);
-
-      console.log(this.registrosAsociacion)
-
-      if (this.registrosAsociacion.length < totalAntes) {
-        console.log(`Registro eliminado. Total: ${this.registrosAsociacion.length}`);
-      }
+      this.solicitudAntecedentesService.eliminar(key);
     }
   }
 
@@ -375,7 +381,15 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
 
         // Limpieza de datos si el criterio no aplica
         if (tipoConsultaActual === 1 || tipoConsultaActual === 3) {
-          this.data.set(dataNss.content);
+          const sincronizados = this.sincronizarEstado(
+            dataNss.content || []
+          );
+          const content = (sincronizados || []).map(
+            (row: RegistroAntecedentes) => ({
+              ...row,
+              key: this.obtenerIdentificador(row)
+            }))
+          this.data.set(content);
           this.totalregistros = dataNss.page.totalElements;
         } else {
           this.data.set([]);
@@ -383,7 +397,15 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
         }
 
         if (tipoConsultaActual === 2 || tipoConsultaActual === 3) {
-          this.data_nombre.set(dataNombre.content);
+          const sincronizados = this.sincronizarEstado(
+            dataNombre.content || []
+          );
+          const content = (sincronizados || []).map(
+            (row: RegistroAntecedentes) => ({
+              ...row,
+              key: this.obtenerIdentificador(row)
+            }))
+          this.data_nombre.set(content);
           this.totalregistrosnombre = dataNombre.page.totalElements;
         } else {
           this.data_nombre.set([]);
@@ -473,12 +495,13 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
   protected readonly TipoTabla = TipoTabla;
 
   guardarAsociacion(): void {
-    if (this.registrosAsociacion.length === 0) {
+    const registros = this.solicitudAntecedentesService.obtenerRegistros();
+    if (registros.length === 0) {
       this._alertServices.alerta('No hay registros seleccionados para asociar.');
       return;
     }
 
-    this.antecedentesService.guardarAsociacion(this.registrosAsociacion).subscribe({
+    this.antecedentesService.guardarAsociacion(registros).subscribe({
       next: data => {
         const mensajeExito = data?.mensaje || 'La asociación de registros se ha guardado exitosamente.';
 

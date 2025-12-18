@@ -62,7 +62,7 @@
             </p-button>
           </div>
           <div class="lg:col-6 col-12">
-            <p-button type="button" variant="outlined" label="Mostrar todo" [style]="{'width': '168px'}"
+            <p-button type="button" variant="outlined" label="Mostrar todo" [style]="{'width': '120px'}"
                       (click)="iniciarBusquedaTodos()"/>
           </div>
         </div>
@@ -127,7 +127,7 @@
                    style="margin-top: 10px; width: 100%;">
                 <span class="subtitulo_totales" style="margin-bottom: 5px;">Total de antecedentes</span>
                 <span
-                  class="totales itemtotal">{{ totalAntecedentes?.totalPorTipo ? totalAntecedentes.totalPorTipo?.gestion : 0 }}</span>
+                  class="totales itemtotal">{{ (totalAntecedentes && totalAntecedentes.totalPorTipo) ? totalAntecedentes.totalPorTipo.gestion : 0 }}</span>
               </div>
             </div>
 
@@ -136,7 +136,7 @@
                    style="margin-top: 10px; width: 80%;">
                 <span class="subtitulo_totales" style="margin-bottom: 5px;">Total de antecedentes asociados</span>
                 <span
-                  class="totales">{{ totalAntecedentes?.totalAsociadosPorTipo ? totalAntecedentes.totalAsociadosPorTipo.gestion : 0 }}</span>
+                  class="totales">{{ (totalAntecedentes && totalAntecedentes.totalAsociadosPorTipo) ? totalAntecedentes.totalAsociadosPorTipo.gestion : 0 }}</span>
               </div>
             </div>
           </div>
@@ -153,7 +153,7 @@
                    style="margin-top: 10px; width: 100%;">
                 <span class="subtitulo_totales" style="margin-bottom: 5px;">Total de antecedentes</span>
                 <span
-                  class="totales itemtotal">{{ totalAntecedentes?.totalPorTipo ? totalAntecedentes.totalPorTipo.quejaMedica : 0 }}</span>
+                  class="totales itemtotal">{{ (totalAntecedentes && totalAntecedentes.totalPorTipo) ? totalAntecedentes.totalPorTipo.quejaMedica : 0 }}</span>
               </div>
             </div>
 
@@ -161,7 +161,8 @@
               <div class="flex flex-column justify-content-center align-items-center"
                    style="margin-top: 10px; width: 80%;">
                 <span class="subtitulo_totales" style="margin-bottom: 5px;">Total de antecedentes asociados</span>
-                <span class="totales">{{ totalAntecedentes.totalAsociadosPorTipo.quejaMedica }}</span>
+                <span
+                  class="totales">{{ (totalAntecedentes && totalAntecedentes.totalAsociadosPorTipo) ? totalAntecedentes.totalAsociadosPorTipo.quejaMedica : 0 }}</span>
               </div>
             </div>
           </div>
@@ -177,7 +178,8 @@
               <div class="flex flex-column justify-content-center align-items-center"
                    style="margin-top: 10px; width: 100%;">
                 <span class="subtitulo_totales" style="margin-bottom: 5px;">Total de antecedentes</span>
-                <span class="totales itemtotal">{{ totalAntecedentes.totalPorTipo.inconformidad }}</span>
+                <span
+                  class="totales itemtotal">{{ (totalAntecedentes && totalAntecedentes.totalPorTipo) ? totalAntecedentes.totalPorTipo.inconformidad : 0 }}</span>
               </div>
             </div>
 
@@ -185,7 +187,8 @@
               <div class="flex flex-column justify-content-center align-items-center"
                    style="margin-top: 10px; width: 80%;">
                 <span class="subtitulo_totales" style="margin-bottom: 5px;">Total de antecedentes asociados</span>
-                <span class="totales">{{ totalAntecedentes.totalAsociadosPorTipo.inconformidad }}</span>
+                <span
+                  class="totales">{{ (totalAntecedentes && totalAntecedentes.totalAsociadosPorTipo) ? totalAntecedentes.totalAsociadosPorTipo.inconformidad : 0 }}</span>
               </div>
             </div>
           </div>
@@ -201,7 +204,8 @@
               <div class="flex flex-column justify-content-center align-items-center"
                    style="margin-top: 10px; width: 100%;">
                 <span class="subtitulo_totales" style="margin-bottom: 5px;">Total de antecedentes</span>
-                <span class="totales itemtotal">{{ totalAntecedentes.totalPorTipo.amparoIndirecto }}</span>
+                <span
+                  class="totales itemtotal">{{ (totalAntecedentes && totalAntecedentes.totalPorTipo) ? totalAntecedentes.totalPorTipo.amparoIndirecto : 0 }}</span>
               </div>
             </div>
 
@@ -209,7 +213,8 @@
               <div class="flex flex-column justify-content-center align-items-center"
                    style="margin-top: 10px; width: 80%;">
                 <span class="subtitulo_totales" style="margin-bottom: 5px;">Total de antecedentes asociados</span>
-                <span class="totales">{{ totalAntecedentes.totalAsociadosPorTipo.amparoIndirecto }}</span>
+                <span
+                  class="totales">{{ (totalAntecedentes && totalAntecedentes.totalAsociadosPorTipo) ? totalAntecedentes.totalAsociadosPorTipo.amparoIndirecto : 0 }}</span>
               </div>
             </div>
           </div>
@@ -225,7 +230,8 @@
               <div class="flex flex-column justify-content-center align-items-center"
                    style="margin-top: 10px; width: 100%;">
                 <span class="subtitulo_totales" style="margin-bottom: 5px;">Total de antecedentes</span>
-                <span class="totales itemtotal">{{ totalAntecedentes.totalPorTipo.procedimientoRpe }}</span>
+                <span
+                  class="totales itemtotal">{{ (totalAntecedentes && totalAntecedentes.totalPorTipo) ? totalAntecedentes.totalPorTipo.procedimientoRpe : 0 }}</span>
               </div>
             </div>
 
@@ -233,7 +239,8 @@
               <div class="flex flex-column justify-content-center align-items-center"
                    style="margin-top: 10px; width: 80%;">
                 <span class="subtitulo_totales" style="margin-bottom: 5px;">Total de antecedentes asociados</span>
-                <span class="totales">{{ totalAntecedentes.totalAsociadosPorTipo.procedimientoRpe }}</span>
+                <span
+                  class="totales">{{ (totalAntecedentes && totalAntecedentes.totalAsociadosPorTipo) ? totalAntecedentes.totalAsociadosPorTipo.procedimientoRpe : 0 }}</span>
               </div>
             </div>
           </div>
@@ -249,7 +256,8 @@
               <div class="flex flex-column justify-content-center align-items-center"
                    style="margin-top: 10px; width: 100%;">
                 <span class="subtitulo_totales" style="margin-bottom: 5px;">Total de antecedentes</span>
-                <span class="totales itemtotal">{{ totalAntecedentes.totalPorTipo.juicioContencioso }}</span>
+                <span
+                  class="totales itemtotal">{{ (totalAntecedentes && totalAntecedentes.totalPorTipo) ? totalAntecedentes.totalPorTipo.juicioContencioso : 0 }}</span>
               </div>
             </div>
 
@@ -257,7 +265,8 @@
               <div class="flex flex-column justify-content-center align-items-center"
                    style="margin-top: 10px; width: 80%;">
                 <span class="subtitulo_totales" style="margin-bottom: 5px;">Total de antecedentes asociados</span>
-                <span class="totales">{{ totalAntecedentes.totalAsociadosPorTipo.juicioContencioso }}</span>
+                <span
+                  class="totales">{{ (totalAntecedentes && totalAntecedentes.totalAsociadosPorTipo) ? totalAntecedentes.totalAsociadosPorTipo.juicioContencioso : 0 }}</span>
               </div>
             </div>
           </div>
