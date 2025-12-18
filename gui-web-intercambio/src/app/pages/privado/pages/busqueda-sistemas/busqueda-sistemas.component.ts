@@ -23,6 +23,8 @@ import {ActivatedRoute} from '@angular/router';
 import {SolicitudAsociacion} from '../../../../core/interfaces/solicitud-asociacion.interface';
 import {BusquedaStateService, FiltrosBusqueda} from '@services/busqueda-state.service';
 import {HttpErrorResponse} from '@angular/common/http';
+import {RegistroAntecedentes} from '../../../../core/interfaces/registro-antecedentes.interface';
+import {ManejoSolicitudAntecedentesService} from '@services/manejo-solicitud-antecedentes.service';
 
 enum TipoTabla {
   NSS = 'NSS',
@@ -50,6 +52,8 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
   nombres: TipoDropdown[] = [];
   nss: TipoDropdown[] = [];
 
+  puedeGuardar = false;
+
   expedienteID: string = '';
 
   totalAntecedentes!: TotalesAntecedentes;
@@ -58,9 +62,9 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
 
   filtroForm!: FormGroup;
 
-  registrosAsociacion: SolicitudAsociacion[] = [];
-
   consulta_todos: boolean = false; // Asumiendo que 4 es el caso 'Todos'
+
+  solicitudAntecedentesService: ManejoSolicitudAntecedentesService =  inject(ManejoSolicitudAntecedentesService);
 
   REF_USUARIO: string = '';
   REF_APLICATIVO: string = '';
@@ -70,6 +74,9 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
               private readonly route: ActivatedRoute,
               private busquedaStateService: BusquedaStateService) {
     super();
+    this.solicitudAntecedentesService.cambios$.subscribe(map => {
+      this.puedeGuardar = map.size === 0;
+    });
     this.obtenerExpediente();
     this.filtroForm = this.inicializarFiltroForm();
     this.suscribirACambiosFiltro();
@@ -331,33 +338,16 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
     };
   }
 
-  cambiarEstado(event: any): void {
-    console.log('Checkbox cambiado:', event);
+  cambiarEstado(row: RegistroAntecedentes): void {
+    const key = this.obtenerIdentificador(row);
 
-    const identificador = this.obtenerIdentificador(event);
-
-    if (event.indAsociado) {
-      const nuevaSolicitud: SolicitudAsociacion = this.mapearASolicitud(event);
-
-      const existe = this.registrosAsociacion.some(
-        r => this.obtenerIdentificador(r) === identificador
+    if (row.indAsociado) {
+      this.solicitudAntecedentesService.agregar(
+        key,
+        this.mapearASolicitud(row)
       );
-
-      if (!existe) {
-        this.registrosAsociacion.push(nuevaSolicitud);
-        console.log(`Registro añadido. Total: ${this.registrosAsociacion.length}`);
-      }
-
     } else {
-      const totalAntes = this.registrosAsociacion.length;
-
-      this.registrosAsociacion = this.registrosAsociacion.filter(
-        r => this.obtenerIdentificador(r) !== identificador
-      );
-
-      if (this.registrosAsociacion.length < totalAntes) {
-        console.log(`Registro eliminado. Total: ${this.registrosAsociacion.length}`);
-      }
+      this.solicitudAntecedentesService.eliminar(key);
     }
   }
 
@@ -430,29 +420,38 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
   }
 
   protected readonly tipoconsulta = TIPO_CONSULTA_ANTECEDENTES;
-
   guardarAsociacion(): void {
-    if (this.registrosAsociacion.length === 0) {
-      this._alertServices.alerta('No hay registros seleccionados para asociar.');
+
+    const registros = this.solicitudAntecedentesService.obtenerRegistros();
+
+    if (registros.length === 0) {
+      this._alertServices.alerta(
+        'No hay registros seleccionados para asociar.'
+      );
       return;
     }
 
-    this.antecedentesService.guardarAsociacion(this.registrosAsociacion).subscribe({
+    this.antecedentesService.guardarAsociacion(registros).subscribe({
       next: data => {
-        const mensajeExito = data?.mensaje || 'La asociación de registros se ha guardado exitosamente.';
+        const mensajeExito =
+          data?.mensaje ||
+          'La asociación de registros se ha guardado exitosamente.';
 
         this._alertServices.exito(mensajeExito);
       },
       error: (error: HttpErrorResponse) => {
 
-        let mensajeError = 'Ocurrió un error desconocido al intentar guardar la asociación.';
+        let mensajeError =
+          'Ocurrió un error desconocido al intentar guardar la asociación.';
 
-        if (error.error && error.error.mensaje) {
+        if (error.error?.mensaje) {
           mensajeError = error.error.mensaje;
         } else if (error.status === 400) {
-          mensajeError = 'Error de validación: Verifique los datos e intente de nuevo.';
+          mensajeError =
+            'Error de validación: Verifique los datos e intente de nuevo.';
         } else if (error.status === 403) {
-          mensajeError = 'No tiene permisos para realizar esta acción.';
+          mensajeError =
+            'No tiene permisos para realizar esta acción.';
         }
 
         this._alertServices.error(mensajeError);
