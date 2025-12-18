@@ -22,6 +22,7 @@ import {TablaPrincipalComponent} from '@pages/privado/shared/tabla-principal/tab
 import {ActivatedRoute} from '@angular/router';
 import {SolicitudAsociacion} from '../../../../core/interfaces/solicitud-asociacion.interface';
 import {BusquedaStateService, FiltrosBusqueda} from '@services/busqueda-state.service';
+import {HttpErrorResponse} from '@angular/common/http';
 
 enum TipoTabla {
   NSS = 'NSS',
@@ -325,20 +326,15 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
   }
 
   cambiarEstado(event: any): void {
-    console.log("Checkbox cambiado:", event);
+    console.log('Checkbox cambiado:', event);
 
-    // Identificador único para el elemento dentro del contexto de la búsqueda (usamos NSS y Expediente)
-    const identificador = `${event.nss}-${event.expediente}`;
+    const identificador = this.obtenerIdentificador(event);
 
-    if (event.asociar === true) {
-      // ASOCIAR (Agregar)
-
-      // Mapear los datos al formato de destino (SolicitudAsociacion)
+    if (event.indAsociado) {
       const nuevaSolicitud: SolicitudAsociacion = this.mapearASolicitud(event);
 
-      // Verificamos si el registro ya existe antes de añadirlo (usando el identificador)
       const existe = this.registrosAsociacion.some(
-        r => `${r.refNss}-${r.refExpediente}` === identificador
+        r => this.obtenerIdentificador(r) === identificador
       );
 
       if (!existe) {
@@ -346,14 +342,11 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
         console.log(`Registro añadido. Total: ${this.registrosAsociacion.length}`);
       }
 
-    } else if (event.asociar === false) {
-      // DESASOCIAR (Eliminar)
-
-      // Filtramos el arreglo, manteniendo solo aquellos elementos que NO coincidan con el identificador
+    } else {
       const totalAntes = this.registrosAsociacion.length;
 
       this.registrosAsociacion = this.registrosAsociacion.filter(
-        r => `${r.refNss}-${r.refExpediente}` !== identificador
+        r => this.obtenerIdentificador(r) !== identificador
       );
 
       if (this.registrosAsociacion.length < totalAntes) {
@@ -362,6 +355,22 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
     }
   }
 
+  private obtenerIdentificador(item: any): string {
+    const expediente = item.expediente ?? item.refExpediente;
+
+    // Si tiene NSS, es la mejor clave
+    if (item.nss || item.refNss) {
+      const nss = item.nss ?? item.refNss;
+      return `${nss}-${expediente}`;
+    }
+
+    // Si NO tiene NSS, usamos nombre + apellidos
+    const nombre = (item.nombre ?? '').trim().toUpperCase();
+    const paterno = (item.apellidoPaterno ?? '').trim().toUpperCase();
+    const materno = (item.apellidoMaterno ?? '').trim().toUpperCase(); // puede venir vacío
+
+    return `${nombre}-${paterno}-${materno}-${expediente}`;
+  }
 
   ejecutarConsultaTotal(): void {
     const solicitudTotal: SolicitudAntecedentes = this.generarSolicitudAntecedentesTotal();
@@ -401,4 +410,35 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
   }
 
   protected readonly tipoconsulta = TIPO_CONSULTA_ANTECEDENTES;
+
+  guardarAsociacion(): void {
+    if (this.registrosAsociacion.length === 0) {
+      this._alertServices.alerta('No hay registros seleccionados para asociar.');
+      return;
+    }
+
+    this.antecedentesService.guardarAsociacion(this.registrosAsociacion).subscribe({
+      next: data => {
+        const mensajeExito = data?.mensaje || 'La asociación de registros se ha guardado exitosamente.';
+
+        this._alertServices.exito(mensajeExito);
+      },
+      error: (error: HttpErrorResponse) => {
+
+        let mensajeError = 'Ocurrió un error desconocido al intentar guardar la asociación.';
+
+        if (error.error && error.error.mensaje) {
+          mensajeError = error.error.mensaje;
+        } else if (error.status === 400) {
+          mensajeError = 'Error de validación: Verifique los datos e intente de nuevo.';
+        } else if (error.status === 403) {
+          mensajeError = 'No tiene permisos para realizar esta acción.';
+        }
+
+        this._alertServices.error(mensajeError);
+        console.error('Error al guardar asociación:', error);
+      }
+    });
+  }
+
 }

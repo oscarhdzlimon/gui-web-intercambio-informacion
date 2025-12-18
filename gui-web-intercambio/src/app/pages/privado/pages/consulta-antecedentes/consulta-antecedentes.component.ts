@@ -246,6 +246,7 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
     }
   }
 
+
   private obtenerIdentificador(item: any): string {
 
     // Si existe NSS, es el identificador único

@@ -101,192 +101,193 @@
 
   @if (consultas.length > 0) {
     <article class="flex flex-row flex-wrap">
-
-<!--
-  PARA TEMA DE DEMO, SE OCULTA
-<div class="flex lg:col-12  col-12 justify-content-end align-items-center mt-3 ">
-        <p-button type="button" label="Guardar" styleClass="btn-buscar btn-background"
-                  [style]="{'width':'136px','margin-right':'30px'}"/>
-      </div> -->
-    </article>
-  }
-
-  @if (consultas.length > 0) {
-    <p-card class="mx-2 empty-border" [header]="'Total de antecedentes'">
-
-      <article class="flex flex-row flex-wrap">
-        <div class="lg:col-2 col-12">
-          <div class="divTotales" style="background-color: #FFF8F5;">
-            <div class="divgestion">
-              <span class="titulo_totales">Gestión</span>
-            </div>
-
-            <div class="flex flex-column justify-content-center align-items-center">
-              <div class="flex flex-column justify-content-center align-items-center divgestion2"
-                   style="margin-top: 10px; width: 100%;">
-                <span class="subtitulo_totales" style="margin-bottom: 5px;">Total de antecedentes</span>
-                <span class="totales itemtotal">{{ totalAntecedentes.totalPorTipo.gestion }}</span>
-              </div>
-            </div>
-
-            <div class="flex flex-column justify-content-center align-items-center">
-              <div class="flex flex-column justify-content-center align-items-center"
-                   style="margin-top: 10px; width: 80%;">
-                <span class="subtitulo_totales" style="margin-bottom: 5px;">Total de antecedentes asociados</span>
-                <span class="totales">{{ totalAntecedentes.totalAsociadosPorTipo.gestion }}</span>
-              </div>
-            </div>
-          </div>
+      <!--
+    PARA TEMA DE DEMO, SE OCULTA
+        <div class="flex lg:col-12  col-12 justify-content-end align-items-center mt-3 ">
+          <p-button type="button" label="Guardar" styleClass="btn-buscar btn-background"
+                    [disabled]="registrosAsociacion.length === 0" (onClick)="guardarAsociacion()"
+                    [style]="{'width':'136px','margin-right':'30px'}"/>
         </div>
-
-        <div class="lg:col-2 col-12">
-          <div class="divTotales" style="background-color: #F1FAFE;">
-            <div class="divqueja">
-              <span class="titulo_totales">Queja médica</span>
-            </div>
-
-            <div class="flex flex-column justify-content-center align-items-center">
-              <div class="flex flex-column justify-content-center align-items-center divqueja2"
-                   style="margin-top: 10px; width: 100%;">
-                <span class="subtitulo_totales" style="margin-bottom: 5px;">Total de antecedentes</span>
-                <span class="totales itemtotal">{{ totalAntecedentes.totalPorTipo.quejaMedica }}</span>
-              </div>
-            </div>
-
-            <div class="flex flex-column justify-content-center align-items-center">
-              <div class="flex flex-column justify-content-center align-items-center"
-                   style="margin-top: 10px; width: 80%;">
-                <span class="subtitulo_totales" style="margin-bottom: 5px;">Total de antecedentes asociados</span>
-                <span class="totales">{{ totalAntecedentes.totalAsociadosPorTipo.quejaMedica }}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="lg:col-2 col-12">
-          <div class="divTotales" style="background-color: #F6F9F6;">
-            <div class="divinconformidades">
-              <span class="titulo_totales">Inconformidades</span>
-            </div>
-
-            <div class="flex flex-column justify-content-center align-items-center divinconformidades2">
-              <div class="flex flex-column justify-content-center align-items-center"
-                   style="margin-top: 10px; width: 100%;">
-                <span class="subtitulo_totales" style="margin-bottom: 5px;">Total de antecedentes</span>
-                <span class="totales itemtotal">{{ totalAntecedentes.totalPorTipo.inconformidad }}</span>
-              </div>
-            </div>
-
-            <div class="flex flex-column justify-content-center align-items-center">
-              <div class="flex flex-column justify-content-center align-items-center"
-                   style="margin-top: 10px; width: 80%;">
-                <span class="subtitulo_totales" style="margin-bottom: 5px;">Total de antecedentes asociados</span>
-                <span class="totales">{{ totalAntecedentes.totalAsociadosPorTipo.inconformidad }}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="lg:col-2 col-12">
-          <div class="divTotales" style="background-color: #F5F6FF;">
-            <div class="divamparo">
-              <span class="titulo_totales">Amparo Indirecto</span>
-            </div>
-
-            <div class="flex flex-column justify-content-center align-items-center divamparo2">
-              <div class="flex flex-column justify-content-center align-items-center"
-                   style="margin-top: 10px; width: 100%;">
-                <span class="subtitulo_totales" style="margin-bottom: 5px;">Total de antecedentes</span>
-                <span class="totales itemtotal">{{ totalAntecedentes.totalPorTipo.amparoIndirecto }}</span>
-              </div>
-            </div>
-
-            <div class="flex flex-column justify-content-center align-items-center">
-              <div class="flex flex-column justify-content-center align-items-center"
-                   style="margin-top: 10px; width: 80%;">
-                <span class="subtitulo_totales" style="margin-bottom: 5px;">Total de antecedentes asociados</span>
-                <span class="totales">{{ totalAntecedentes.totalAsociadosPorTipo.amparoIndirecto }}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="lg:col-2 col-12">
-          <div class="divTotales" style="background: #FEFDFB;">
-            <div class="divprocedimiento">
-              <span class="titulo_totales">Procedimiento RPE</span>
-            </div>
-
-            <div class="flex flex-column justify-content-center align-items-center divprocedimiento2">
-              <div class="flex flex-column justify-content-center align-items-center"
-                   style="margin-top: 10px; width: 100%;">
-                <span class="subtitulo_totales" style="margin-bottom: 5px;">Total de antecedentes</span>
-                <span class="totales itemtotal">{{ totalAntecedentes.totalPorTipo.procedimientoRpe }}</span>
-              </div>
-            </div>
-
-            <div class="flex flex-column justify-content-center align-items-center">
-              <div class="flex flex-column justify-content-center align-items-center"
-                   style="margin-top: 10px; width: 80%;">
-                <span class="subtitulo_totales" style="margin-bottom: 5px;">Total de antecedentes asociados</span>
-                <span class="totales">{{ totalAntecedentes.totalAsociadosPorTipo.procedimientoRpe }}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="lg:col-2 col-12">
-          <div class="divTotales" style="background: #FEF5FA; height: 160px;">
-            <div class="divjuicio">
-              <span class="titulo_totales">Juicio Contencioso Administrativo Federal</span>
-            </div>
-
-            <div class="flex flex-column justify-content-center align-items-center divjuicio2">
-              <div class="flex flex-column justify-content-center align-items-center"
-                   style="margin-top: 10px; width: 100%;">
-                <span class="subtitulo_totales" style="margin-bottom: 5px;">Total de antecedentes</span>
-                <span class="totales itemtotal">{{ totalAntecedentes.totalPorTipo.juicioContencioso }}</span>
-              </div>
-            </div>
-
-            <div class="flex flex-column justify-content-center align-items-center">
-              <div class="flex flex-column justify-content-center align-items-center"
-                   style="margin-top: 10px; width: 80%;">
-                <span class="subtitulo_totales" style="margin-bottom: 5px;">Total de antecedentes asociados</span>
-                <span class="totales">{{ totalAntecedentes.totalAsociadosPorTipo.juicioContencioso }}</span>
-              </div>
-            </div>
-          </div>
-        </div>
+        -->
       </article>
+    }
+
+    @if (consultas.length > 0) {
+      <p-card class="mx-2 empty-border" [header]="'Total de antecedentes'">
+
+        <article class="flex flex-row flex-wrap">
+          <div class="lg:col-2 col-12">
+            <div class="divTotales" style="background-color: #FFF8F5;">
+              <div class="divgestion">
+                <span class="titulo_totales">Gestión</span>
+              </div>
+
+              <div class="flex flex-column justify-content-center align-items-center">
+                <div class="flex flex-column justify-content-center align-items-center divgestion2"
+                     style="margin-top: 10px; width: 100%;">
+                  <span class="subtitulo_totales" style="margin-bottom: 5px;">Total de antecedentes</span>
+                  <span class="totales itemtotal">{{ totalAntecedentes.totalPorTipo.gestion }}</span>
+                </div>
+              </div>
+
+              <div class="flex flex-column justify-content-center align-items-center">
+                <div class="flex flex-column justify-content-center align-items-center"
+                     style="margin-top: 10px; width: 80%;">
+                  <span class="subtitulo_totales" style="margin-bottom: 5px;">Total de antecedentes asociados</span>
+                  <span class="totales">{{ totalAntecedentes.totalAsociadosPorTipo.gestion }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="lg:col-2 col-12">
+            <div class="divTotales" style="background-color: #F1FAFE;">
+              <div class="divqueja">
+                <span class="titulo_totales">Queja médica</span>
+              </div>
+
+              <div class="flex flex-column justify-content-center align-items-center">
+                <div class="flex flex-column justify-content-center align-items-center divqueja2"
+                     style="margin-top: 10px; width: 100%;">
+                  <span class="subtitulo_totales" style="margin-bottom: 5px;">Total de antecedentes</span>
+                  <span class="totales itemtotal">{{ totalAntecedentes.totalPorTipo.quejaMedica }}</span>
+                </div>
+              </div>
+
+              <div class="flex flex-column justify-content-center align-items-center">
+                <div class="flex flex-column justify-content-center align-items-center"
+                     style="margin-top: 10px; width: 80%;">
+                  <span class="subtitulo_totales" style="margin-bottom: 5px;">Total de antecedentes asociados</span>
+                  <span class="totales">{{ totalAntecedentes.totalAsociadosPorTipo.quejaMedica }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="lg:col-2 col-12">
+            <div class="divTotales" style="background-color: #F6F9F6;">
+              <div class="divinconformidades">
+                <span class="titulo_totales">Inconformidades</span>
+              </div>
+
+              <div class="flex flex-column justify-content-center align-items-center divinconformidades2">
+                <div class="flex flex-column justify-content-center align-items-center"
+                     style="margin-top: 10px; width: 100%;">
+                  <span class="subtitulo_totales" style="margin-bottom: 5px;">Total de antecedentes</span>
+                  <span class="totales itemtotal">{{ totalAntecedentes.totalPorTipo.inconformidad }}</span>
+                </div>
+              </div>
+
+              <div class="flex flex-column justify-content-center align-items-center">
+                <div class="flex flex-column justify-content-center align-items-center"
+                     style="margin-top: 10px; width: 80%;">
+                  <span class="subtitulo_totales" style="margin-bottom: 5px;">Total de antecedentes asociados</span>
+                  <span class="totales">{{ totalAntecedentes.totalAsociadosPorTipo.inconformidad }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="lg:col-2 col-12">
+            <div class="divTotales" style="background-color: #F5F6FF;">
+              <div class="divamparo">
+                <span class="titulo_totales">Amparo Indirecto</span>
+              </div>
+
+              <div class="flex flex-column justify-content-center align-items-center divamparo2">
+                <div class="flex flex-column justify-content-center align-items-center"
+                     style="margin-top: 10px; width: 100%;">
+                  <span class="subtitulo_totales" style="margin-bottom: 5px;">Total de antecedentes</span>
+                  <span class="totales itemtotal">{{ totalAntecedentes.totalPorTipo.amparoIndirecto }}</span>
+                </div>
+              </div>
+
+              <div class="flex flex-column justify-content-center align-items-center">
+                <div class="flex flex-column justify-content-center align-items-center"
+                     style="margin-top: 10px; width: 80%;">
+                  <span class="subtitulo_totales" style="margin-bottom: 5px;">Total de antecedentes asociados</span>
+                  <span class="totales">{{ totalAntecedentes.totalAsociadosPorTipo.amparoIndirecto }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="lg:col-2 col-12">
+            <div class="divTotales" style="background: #FEFDFB;">
+              <div class="divprocedimiento">
+                <span class="titulo_totales">Procedimiento RPE</span>
+              </div>
+
+              <div class="flex flex-column justify-content-center align-items-center divprocedimiento2">
+                <div class="flex flex-column justify-content-center align-items-center"
+                     style="margin-top: 10px; width: 100%;">
+                  <span class="subtitulo_totales" style="margin-bottom: 5px;">Total de antecedentes</span>
+                  <span class="totales itemtotal">{{ totalAntecedentes.totalPorTipo.procedimientoRpe }}</span>
+                </div>
+              </div>
+
+              <div class="flex flex-column justify-content-center align-items-center">
+                <div class="flex flex-column justify-content-center align-items-center"
+                     style="margin-top: 10px; width: 80%;">
+                  <span class="subtitulo_totales" style="margin-bottom: 5px;">Total de antecedentes asociados</span>
+                  <span class="totales">{{ totalAntecedentes.totalAsociadosPorTipo.procedimientoRpe }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="lg:col-2 col-12">
+            <div class="divTotales" style="background: #FEF5FA; height: 160px;">
+              <div class="divjuicio">
+                <span class="titulo_totales">Juicio Contencioso Administrativo Federal</span>
+              </div>
+
+              <div class="flex flex-column justify-content-center align-items-center divjuicio2">
+                <div class="flex flex-column justify-content-center align-items-center"
+                     style="margin-top: 10px; width: 100%;">
+                  <span class="subtitulo_totales" style="margin-bottom: 5px;">Total de antecedentes</span>
+                  <span class="totales itemtotal">{{ totalAntecedentes.totalPorTipo.juicioContencioso }}</span>
+                </div>
+              </div>
+
+              <div class="flex flex-column justify-content-center align-items-center">
+                <div class="flex flex-column justify-content-center align-items-center"
+                     style="margin-top: 10px; width: 80%;">
+                  <span class="subtitulo_totales" style="margin-bottom: 5px;">Total de antecedentes asociados</span>
+                  <span class="totales">{{ totalAntecedentes.totalAsociadosPorTipo.juicioContencioso }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+      </p-card>
+    }
+
+    @if (consultas.length === 0) {
+      <p-card class="mx-2 empty-border" [header]="'Total de antecedentes'">
+
+        <div class="flex flex-column justify-content-center align-items-center">
+          <img class="p-0"
+               src="/assets/images/Lupa.svg" alt="Sin resultados">
+          <p class="mt-2 sinResultados">No hay resultados de búsqueda</p>
+
+        </div>
+
+      </p-card>
+    }
+
+    <p-card class="mx-2 empty-border" [header]="'Aviso de confidencialidad'">
+      <p class="aviso">La información aquí mostrada es confidencial y de propiedad del IMSS. Su uso está restringido
+        exclusivamente a las actividades de consulta autorizadas. Queda estrictamente prohibida su divulgación, copía,
+        distribución o uso para fines no establecidos.
+        Todo acceso queda registrado y auditado. El incumplimiento de esta política acarreará sanciones en términos de la
+        legislación aplicable, ya sean del orden civil, penal o de cualquier otro tipo que se puedan derivar de los mismos
+        hechos.
+      </p>
+      <br>
+      <p class="aviso">Información consultada en SSCV1, con corte al 30/10/2025; SSCV2, con corte al 30/10/2025 y SIADE,
+        con corte al 30/10/2025.</p>
     </p-card>
-  }
-
-  @if (consultas.length === 0) {
-    <p-card class="mx-2 empty-border" [header]="'Total de antecedentes'">
-
-      <div class="flex flex-column justify-content-center align-items-center">
-        <img class="p-0"
-             src="/assets/images/Lupa.svg" alt="Sin resultados">
-        <p class="mt-2 sinResultados">No hay resultados de búsqueda</p>
-
-      </div>
-
-    </p-card>
-  }
-
-  <p-card class="mx-2 empty-border" [header]="'Aviso de confidencialidad'">
-    <p class="aviso">La información aquí mostrada es confidencial y de propiedad del IMSS. Su uso está restringido
-      exclusivamente a las actividades de consulta autorizadas. Queda estrictamente prohibida su divulgación, copía,
-      distribución o uso para fines no establecidos.
-      Todo acceso queda registrado y auditado. El incumplimiento de esta política acarreará sanciones en términos de la
-      legislación aplicable, ya sean del orden civil, penal o de cualquier otro tipo que se puedan derivar de los mismos
-      hechos.
-    </p>
-    <br>
-    <p class="aviso">Información consultada en SSCV1, con corte al 30/10/2025; SSCV2, con corte al 30/10/2025 y SIADE,
-      con corte al 30/10/2025.</p>
-  </p-card>
-</div>
+  </div>
 
 
