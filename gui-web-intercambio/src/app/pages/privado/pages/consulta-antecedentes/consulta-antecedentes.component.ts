@@ -213,40 +213,52 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
   }
 
   cambiarEstado(event: any): void {
-    console.log("Checkbox cambiado:", event);
+    console.log('Checkbox cambiado:', event);
 
-    // Identificador único para el elemento dentro del contexto de la búsqueda (usamos NSS y Expediente)
-    const identificador = `${event.nss}-${event.expediente}`;
+    const identificador = this.obtenerIdentificador(event);
 
-    console.log(event.asociar)
-    if (event.asociar === true) {
-      // ASOCIAR (Agregar)
+    if (event.indAsociado) {
 
-      // Mapear los datos al formato de destino (SolicitudAsociacion)
       const nuevaSolicitud: SolicitudAsociacion = this.mapearASolicitud(event);
 
-      // Verificamos si el registro ya existe antes de añadirlo (usando el identificador)
-      const existe = this.registrosAsociacion.some(r => `${r.refNss}-${r.refExpediente}` === identificador);
+      const existe = this.registrosAsociacion.some(
+        r => this.obtenerIdentificador(r) === identificador
+      );
 
       if (!existe) {
         this.registrosAsociacion.push(nuevaSolicitud);
         console.log(`Registro añadido. Total: ${this.registrosAsociacion.length}`);
       }
 
-    } else if (event.asociar === false) {
-      // DESASOCIAR (Eliminar)
+    } else {
 
-      // Filtramos el arreglo, manteniendo solo aquellos elementos que NO coincidan con el identificador
       const totalAntes = this.registrosAsociacion.length;
 
-      this.registrosAsociacion = this.registrosAsociacion.filter(
-        r => `${r.refNss}-${r.refExpediente}` !== identificador
-      );
+      console.log(this.registrosAsociacion);
+
+      this.registrosAsociacion = this.registrosAsociacion.filter(r => this.obtenerIdentificador(r) !== identificador);
+
+      console.log(this.registrosAsociacion)
 
       if (this.registrosAsociacion.length < totalAntes) {
         console.log(`Registro eliminado. Total: ${this.registrosAsociacion.length}`);
       }
     }
+  }
+
+  private obtenerIdentificador(item: any): string {
+
+    // Si existe NSS, es el identificador único
+    if (item.nss || item.refNss) {
+      return (item.nss ?? item.refNss).trim();
+    }
+
+    // Sin NSS → nombre + apellidos
+    const nombre = (item.nombre ?? '').trim().toUpperCase();
+    const paterno = (item.apellidoPaterno ?? '').trim().toUpperCase();
+    const materno = (item.apellidoMaterno ?? '').trim().toUpperCase(); // opcional
+
+    return `${nombre}-${paterno}-${materno}`;
   }
 
 
