@@ -139,6 +139,19 @@ export class DetalleAntecedentesService {
     );
   }
 
+
+  consultarFechasCorte(filtros: DetalleAntecedenteInterface): Observable<HttpRespuesta<any>>{
+    const ruta = `${this.serverEndPointURLAntecedente}antecedentes/obtenerFechasCorte`;
+    return this.http.post<HttpRespuesta<any>>(ruta, filtros, {headers: this.header}).pipe(
+      catchError(this.handleError),
+      map((response: any) => {
+        return response
+      }),
+    );
+  }
+
+  
+
   private handleError(error: ResponseGeneral) {
     if (!error.exito) {
       this._alertServices.error("Error: " + error.mensaje ? error.mensaje : '. Contácte al administrador');
