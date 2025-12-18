@@ -64,18 +64,27 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
 
   consulta_todos: boolean = false; // Asumiendo que 4 es el caso 'Todos'
 
-  solicitudAntecedentesService: ManejoSolicitudAntecedentesService =  inject(ManejoSolicitudAntecedentesService);
+  solicitudAntecedentesService: ManejoSolicitudAntecedentesService = inject(ManejoSolicitudAntecedentesService);
 
   REF_USUARIO: string = '';
   REF_APLICATIVO: string = '';
   REF_MODULO: string = '';
 
+  accordionActivoId: string | null = null;
+
   constructor(private readonly fb: FormBuilder,
               private readonly route: ActivatedRoute,
               private busquedaStateService: BusquedaStateService) {
     super();
-    this.solicitudAntecedentesService.cambios$.subscribe(map => {
-      this.puedeGuardar = map.size === 0;
+    this.solicitudAntecedentesService.cambios$.subscribe(() => {
+      this.consultas.forEach(consulta => {
+        const dataActual = consulta.data();
+        if (dataActual?.length) {
+          consulta.data.set(
+            this.sincronizarEstado(dataActual)
+          );
+        }
+      });
     });
     this.obtenerExpediente();
     this.filtroForm = this.inicializarFiltroForm();
@@ -267,7 +276,16 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
     // Solo se suscribe al listado, ya que el total es independiente (abajo)
     listObservable.subscribe({
       next: (dataResponse) => {
-        consulta.data.set(dataResponse.content || []);
+        const sincronizados = this.sincronizarEstado(
+          dataResponse.content || []
+        );
+        const content = (sincronizados || []).map(
+          (row: RegistroAntecedentes) => ({
+            ...row,
+            key: this.obtenerIdentificador(row)
+          })
+        );
+        consulta.data.set(content);
         consulta.totalRegistros = dataResponse.page.totalElements || 0;
       },
       error: (error) => {
@@ -306,7 +324,6 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
     }
   }
 
-
   cargarPagina(event: any, index: number) {
     const consulta = this.consultas[index];
     const nuevaPagina = event.page;
@@ -340,6 +357,8 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
 
   cambiarEstado(row: RegistroAntecedentes): void {
     const key = this.obtenerIdentificador(row);
+
+    console.log(row)
 
     if (row.indAsociado) {
       this.solicitudAntecedentesService.agregar(
@@ -420,6 +439,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
   }
 
   protected readonly tipoconsulta = TIPO_CONSULTA_ANTECEDENTES;
+
   guardarAsociacion(): void {
 
     const registros = this.solicitudAntecedentesService.obtenerRegistros();
@@ -459,5 +479,20 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
       }
     });
   }
+
+  private sincronizarEstado(
+    registros: RegistroAntecedentes[]
+  ): RegistroAntecedentes[] {
+
+    return registros.map(r => ({
+      ...r,
+      indAsociado: this.solicitudAntecedentesService.existe(
+        this.obtenerIdentificador(r)
+      )
+    }));
+  }
+
+  trackConsulta = (consulta: ResultadoConsulta) =>
+    `${consulta.tipo}-${consulta.valorBusqueda}`;
 
 }

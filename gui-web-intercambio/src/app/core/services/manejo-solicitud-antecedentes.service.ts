@@ -13,12 +13,14 @@ export class ManejoSolicitudAntecedentesService {
   cambios$ = this.cambiosSubject.asObservable();
 
   agregar(key: string, solicitud: SolicitudAsociacion): void {
+    console.log('agregar', key)
     this.registros.set(key, solicitud);
     this.cambiosSubject.next(this.registros);
   }
 
   eliminar(key: string): void {
     this.registros.delete(key);
+    console.log('eliminar', key)
     this.cambiosSubject.next(this.registros);
   }
 
