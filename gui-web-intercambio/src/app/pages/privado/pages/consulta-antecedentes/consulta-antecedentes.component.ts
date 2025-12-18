@@ -62,13 +62,13 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
   tituloTabla: string = 'Resultados de la búsqueda'; // Título que se muestra
   tituloTablanombre: string = 'Resultados de la búsqueda'; // Título que se muestra
 
-  registrosPorPaginaNss: number = 5;
-  paginaActualNss: number = 0;
+  registrosPorPaginaNss: number = 10;
+  paginaActualNss: number = 1;
   totalregistros: number = 0;
   data: WritableSignal<RegistroAntecedentes[]> = signal([]);
 
-  registrosPorPaginaNombre: number = 5;
-  paginaActualNombre: number = 0;
+  registrosPorPaginaNombre: number = 10;
+  paginaActualNombre: number = 1;
   totalregistrosnombre: number = 0;
   data_nombre: WritableSignal<RegistroAntecedentes[]> = signal([]);
 
