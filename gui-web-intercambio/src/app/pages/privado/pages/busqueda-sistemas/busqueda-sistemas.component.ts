@@ -116,6 +116,12 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
     this.route.paramMap.subscribe(params => {
       this.expedienteID = params.get('expediente') ?? '';
     });
+    this.route.queryParamMap.subscribe(params => {
+      if (!params) return;
+      this.REF_USUARIO = params.get('n') as string;
+      this.REF_APLICATIVO = params.get('s') as string;
+      this.REF_MODULO = params.get('m') as string;
+    });
     this.antecedentesService.getExpediente(this.expedienteID).subscribe({
       next: (respuesta) => {
         this.nss = mapearArregloTipoDropdown(respuesta, 'nss', 'nss');
