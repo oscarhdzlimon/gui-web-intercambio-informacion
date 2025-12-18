@@ -28,6 +28,7 @@ import {DetalleAntecedentesService} from '@services/detalle-antecedentes.service
 import {Ordenamiento} from '@models/ordenamiento.enum';
 import {forkJoin} from 'rxjs';
 import {DataCacheService} from '@services/data-cache.service';
+import { DetalleAntecedentes } from '@models/detalleAntecedentes.interface';
 
 @Component({
   selector: 'app-detalle-antecedentes',
@@ -59,6 +60,13 @@ export class DetalleAntecedentesComponent extends GeneralComponent {
   lstProcedimientoRpe: WritableSignal<TablaProcedimientoRpeInterface[]> =
     signal([]);
   lstJuicio: WritableSignal<TablaJuicioContenciosoInterface[]> = signal([]);
+
+  fechasCorte: DetalleAntecedentes = {
+    fecCorteSiade: "",
+    fecCorteSsc1: "",
+    fecCorteSsc2: "",
+    nss: ""
+  };
 
   estatusPendienteDocumentacion = false;
 
@@ -93,61 +101,6 @@ export class DetalleAntecedentesComponent extends GeneralComponent {
   firstJuicio: number = 0;
   totalElementosJuicio: number = 0;
 
-  //Gestión
-  /*
-    {
-      "nombre": "ANGEL ARMANDO  BRAVO ZAMBRANO",
-      "nss": "48068225530",
-      "expediente": "0923/2020-27"
-    }
-  */
-
-  //Queja médica
-  /*
-  {
-    "nombre": "ANGEL ARMANDO  BRAVO ZAMBRANO",
-    "nss": "48068225530",
-    "expediente": "0923/2020-27"
-  }
-  */
-
-  //Inconformidad
-  /*
-    {
-      "nombre": "SANJUANA VEGA SIFUENTES",
-      "nss": "43886827680",
-      "expediente": "CC.NL.-0621/2016"
-    }
-  */
-
-  //Amparo indirecto
-  /*
-  {
-    "nombre": "ANGEL ARMANDO  BRAVO ZAMBRANO",
-    "nss": "48068225530",
-    "expediente": "0923/2020-27"
-  }
-  */
-
-  //procedimiento rpe
-  /*
-  {
-    "nombre": "RAUL  HERNANDEZ AMADOR",
-    "nss": "13896904235",
-    "expediente": "0001/2020"
-  }
-
-  */
-
-  //Juicio contencioso
-  /*
-  {
-  "nombre": "LUIS ADRIAN ARIZPE DELGADO",
-  "nss": "4312880790",
-  "expediente": "000403/2021-06-02-5"
-}
-
-  */
 
   datosUsuario = {
     nombre: 'ANGEL ARMANDO  BRAVO ZAMBRANO',
@@ -227,6 +180,10 @@ export class DetalleAntecedentesComponent extends GeneralComponent {
           parametros,
           this.datosUsuario
         ),
+      fechasCorte: 
+        this.detalleAntecedentesService.consultarFechasCorte(
+          this.datosUsuario
+        )
     }).subscribe({
       next: ({
         gestionData,
@@ -235,6 +192,7 @@ export class DetalleAntecedentesComponent extends GeneralComponent {
         amparoIndirectoData,
         procedimientoRpeData,
         juicioContenciosoData,
+        fechasCorte
       }) => {
         this.lstGestion.set(gestionData.content);
         this.totalElementosGestion = gestionData.page.totalElements;
@@ -256,6 +214,8 @@ export class DetalleAntecedentesComponent extends GeneralComponent {
 
         this.lstJuicio.set(juicioContenciosoData['content']);
         this.totalElementosJuicio = juicioContenciosoData['page'].totalElements;
+
+        this.fechasCorte = fechasCorte.respuesta
       },
     });
   }
