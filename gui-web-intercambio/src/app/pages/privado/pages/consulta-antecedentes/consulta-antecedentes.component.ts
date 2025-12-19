@@ -25,6 +25,7 @@ import {UserService} from '@services/user.service';
 import {SesionUser} from '@models/sesion-user.interface';
 import {BusquedaStateService, FiltrosAntecedentes} from '@services/busqueda-state.service';
 import {ManejoSolicitudAntecedentesService} from '@services/manejo-solicitud-antecedentes.service';
+import {SolicitudBitacora} from '../../../../core/interfaces/solicitud-bitacora.inerface';
 
 enum TipoTabla {
   NSS = 'NSS',
@@ -378,6 +379,7 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
       totalObservable
     ]).subscribe({
       next: ([dataNss, dataNombre, totalResponse]) => {
+        this.guardarBitacora();
 
         // Limpieza de datos si el criterio no aplica
         if (tipoConsultaActual === 1 || tipoConsultaActual === 3) {
@@ -523,5 +525,33 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
         console.error('Error al guardar asociación:', error);
       }
     });
+  }
+
+  guardarBitacora(): void {
+    const solicitud: SolicitudBitacora = this.generarSolicitudBitacora();
+    this.antecedentesService.guardarBitacora(solicitud).subscribe({
+      next: data => {
+      },
+      error: (error: HttpErrorResponse) => {
+      }
+    })
+  }
+
+  generarSolicitudBitacora(): SolicitudBitacora {
+    return {
+      fecCorteSiade: '',
+      fecCorteSsc1: '',
+      fecCorteSsc2: '',
+      nomApellidoMaterno: null,
+      nomApellidoPaterno: null,
+      nomPersona: this.generarNombre(),
+      refAplicativo: this.REF_APLICATIVO,
+      refExpediente: null,
+      refModulo: this.REF_MODULO,
+      refNss: this.filtroForm.get('nss')?.value,
+      refOoad: '',
+      refUsuarioAutentica: this.REF_USUARIO
+
+    }
   }
 }

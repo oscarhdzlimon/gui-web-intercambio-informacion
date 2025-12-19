@@ -8,7 +8,7 @@ export interface SolicitudBitacora {
   //filtros de la busqueda
   refExpediente: string | null,
   // va cambiar cuando se separe el nombre
-  nomPersona: string,
+  nomPersona: string | null,
   nomApellidoPaterno: null,
   nomApellidoMaterno: null,
   refNss: string | null,
