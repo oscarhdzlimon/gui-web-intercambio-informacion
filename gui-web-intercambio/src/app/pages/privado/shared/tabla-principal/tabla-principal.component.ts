@@ -114,6 +114,8 @@ export class TablaPrincipalComponent {
 
   // Evento paginador
   onPageChange(event: any) {
+    console.log(event)
+    event.page++;
     this.pageChange.emit(event);
   }
 

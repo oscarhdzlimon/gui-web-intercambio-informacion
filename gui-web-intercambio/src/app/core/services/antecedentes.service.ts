@@ -3,6 +3,7 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {environment} from '@env/environment.development';
 import {SolicitudAntecedentes} from '../interfaces/solicitud-antecedentes.interface';
 import {SolicitudAsociacion} from '../interfaces/solicitud-asociacion.interface';
+import {SolicitudBitacora} from '../interfaces/solicitud-bitacora.inerface';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +32,10 @@ export class AntecedentesService {
 
   guardarAsociacion(solicitud: SolicitudAsociacion[]) {
     return this.http.post<any>(`${this.URL_BITACORA}/asociacion`, solicitud);
+  }
+
+  guardarBitacora(solicitud: SolicitudBitacora) {
+    return this.http.post<any>(`${this.URL_BITACORA}/consulta`, solicitud);
   }
 
 }
