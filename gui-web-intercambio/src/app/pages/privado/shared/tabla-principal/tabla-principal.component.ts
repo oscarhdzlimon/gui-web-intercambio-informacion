@@ -12,6 +12,7 @@ import {SelectModule} from 'primeng/select';
 import {TableModule} from 'primeng/table';
 import {RegistroAntecedentes} from '../../../../core/interfaces/registro-antecedentes.interface';
 import {DataCacheService} from '@services/data-cache.service';
+import { ReporteAntecedentesService } from '@services/reporteAntecedentes.service';
 
 @Component({
   selector: 'app-tabla-principal',
@@ -44,6 +45,7 @@ export class TablaPrincipalComponent {
   @Output() checkboxChanged = new EventEmitter<any>();
 
   dataCacheService: DataCacheService = inject(DataCacheService);
+  reporteAntecedentesService:ReporteAntecedentesService = inject(ReporteAntecedentesService);
 
   // Definición fija de columnas
   columns: ColumnDefinition[] = [
@@ -110,6 +112,61 @@ export class TablaPrincipalComponent {
 
     // Navegar usando el UUID como parámetro posicional
     void this._router.navigate(['/privado', NAV.detalleAntecedentes, cacheId], navigationExtras);
+  }
+
+  generarPdf(registro: RegistroAntecedentes) {
+    const datosContexto = {
+      nombre: registro.nombre,
+      nss: registro.nss,
+      expediente: this.expediente,
+    };
+
+    this.reporteAntecedentesService.descargaExcelHistoricoDocs(datosContexto).subscribe({
+
+      next:(datos) => {
+        if(datos.adjuntoBase64){
+          const base64 = datos.adjuntoBase64;
+          const nombreArchivo = datos.nombreAdjunto || 'Reporte Antecedentes.pdf';
+          const contentType = 'application/pdf';
+          const pdfBlob = this.b64toBlob(base64, contentType);
+          const pdfUrl = URL.createObjectURL(pdfBlob);
+          window.open(pdfUrl, '_blank');
+        }
+      }
+    })
+  }
+
+  private b64toBlob(b64Data: string, contentType: string = '', sliceSize: number = 512): Blob {
+
+    let base64 = b64Data.split(',')[1] ? b64Data.split(',')[1] : b64Data;
+
+    // Eliminar CUALQUIER carácter que NO sea una letra/número válido para Base64, 
+    // incluyendo espacios, saltos de línea, y caracteres de control.
+    // Base64 válido solo incluye A-Z, a-z, 0-9, +, / y = (relleno).
+    base64 = base64.replace(/[^A-Za-z0-9+/=]/g, '');
+
+    try {
+      const byteCharacters = atob(base64);
+
+      const byteArrays: Uint8Array[] = [];
+      for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+        const slice = byteCharacters.slice(offset, offset + sliceSize);
+        const byteNumbers = new Array(slice.length);
+        for (let i = 0; i < slice.length; i++) {
+          byteNumbers[i] = slice.charCodeAt(i);
+        }
+        const byteArray = new Uint8Array(byteNumbers);
+        byteArrays.push(byteArray);
+      }
+
+      return new Blob(byteArrays as BlobPart[], { type: contentType });
+
+    } catch (e) {
+      // Si incluso después de la limpieza falla, la respuesta NO es Base64.
+      console.error("Error crítico: La respuesta HTTP no es un Base64 válido.", e);
+      // Lanza un error genérico o notifica al usuario.
+      throw new Error("El string Base64 no es válido o contiene caracteres ilegales.");
+    }
   }
 
   // Evento paginador
