@@ -66,7 +66,6 @@ export class InicioSesionComponent extends GeneralComponent implements OnInit,Af
   }
 
   iniciarSesion() {
-debugger
     const curpControl = this.formLogin.get('curp') !=null? this.formLogin.get('curp')!.value : '';
 
 /*     let usuario = new Usuario();
@@ -101,7 +100,6 @@ debugger
           this._router.navigate(['/privado', NAV.consultaantecedentes]);
         },
         error: (error) => {
-debugger
           if (error.error.mensaje.includes('Usuario no encontrado con email')) {
             this._alertServices.error('El correo electrónico no está registrado. Verifica tu información o regístrate.');
             return;

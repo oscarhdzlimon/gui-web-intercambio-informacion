@@ -49,7 +49,6 @@ export class AuthService {
   login(login: Login): Observable<any> {
     return this.http.post<any>(`${this.URL_BASE}${this.URL_AUTH}`, login).pipe(
       tap((respuesta: any) => {
-        debugger
         if (respuesta.exito) {
           localStorage.setItem(CME_TOKEN, respuesta.respuesta.token);
           this.settearSession(respuesta.respuesta.token);
@@ -75,7 +74,6 @@ export class AuthService {
   }
 
   private agregarUsuarioSesion(accessToken: string): void {
-    debugger
     const usuarioSesion: SesionUser = this.obtenerUsuarioDePayload(accessToken);
     this.usuarioSesionSubject.next(usuarioSesion);
   }
