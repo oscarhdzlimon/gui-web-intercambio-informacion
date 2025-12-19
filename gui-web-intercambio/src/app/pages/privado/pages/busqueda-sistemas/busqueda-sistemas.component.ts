@@ -25,6 +25,8 @@ import {BusquedaStateService, FiltrosBusqueda} from '@services/busqueda-state.se
 import {HttpErrorResponse} from '@angular/common/http';
 import {RegistroAntecedentes} from '../../../../core/interfaces/registro-antecedentes.interface';
 import {ManejoSolicitudAntecedentesService} from '@services/manejo-solicitud-antecedentes.service';
+import { DetalleAntecedentesService } from '@services/detalle-antecedentes.service';
+import { DetalleAntecedentes } from '@models/detalleAntecedentes.interface';
 
 enum TipoTabla {
   NSS = 'NSS',
@@ -47,6 +49,7 @@ enum TipoTabla {
 })
 export class BusquedaSistemasComponent extends GeneralComponent implements OnInit {
   antecedentesService: AntecedentesService = inject(AntecedentesService);
+  detalleAntecedentesService: DetalleAntecedentesService = inject(DetalleAntecedentesService);
 
   filtroResultado: TipoDropdown[] = FILTRO_RESULTADOS_EXPEDIENTE;
   nombres: TipoDropdown[] = [];
@@ -72,6 +75,13 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
 
   accordionActivoId: string | null = null;
 
+  fechasCorte: DetalleAntecedentes = {
+    fecCorteSiade: "",
+    fecCorteSsc1: "",
+    fecCorteSsc2: "",
+    nss: ""
+  };
+
   constructor(private readonly fb: FormBuilder,
               private readonly route: ActivatedRoute,
               private busquedaStateService: BusquedaStateService) {
@@ -90,6 +100,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
     this.filtroForm = this.inicializarFiltroForm();
     this.suscribirACambiosFiltro();
     this.recuperarUltimaBusqueda();
+    this.obtenerFechasCorte();
   }
 
   recuperarUltimaBusqueda(): void {
@@ -147,6 +158,23 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
       }
     })
   }
+
+  obtenerFechasCorte(){
+    const objConsulta = {
+      nombre: this.REF_USUARIO,
+      nss: null,
+      expediente: this.expedienteID,
+    }
+    this.detalleAntecedentesService.consultarFechasCorte(objConsulta).subscribe({
+      next: (datos) => {
+        this.fechasCorte = datos.respuesta
+      },
+      error: (error) => {
+        
+      }
+    })
+  }
+  
 
   ngOnInit(): void {
   }

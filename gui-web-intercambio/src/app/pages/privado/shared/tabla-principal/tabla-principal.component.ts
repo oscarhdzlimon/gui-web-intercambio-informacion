@@ -13,6 +13,7 @@ import {TableModule} from 'primeng/table';
 import {RegistroAntecedentes} from '../../../../core/interfaces/registro-antecedentes.interface';
 import {DataCacheService} from '@services/data-cache.service';
 import { ReporteAntecedentesService } from '@services/reporteAntecedentes.service';
+import { DetalleAntecedentes } from '@models/detalleAntecedentes.interface';
 
 @Component({
   selector: 'app-tabla-principal',
@@ -28,7 +29,7 @@ import { ReporteAntecedentesService } from '@services/reporteAntecedentes.servic
   templateUrl: './tabla-principal.component.html',
   styleUrl: './tabla-principal.component.scss'
 })
-export class TablaPrincipalComponent {
+export class TablaPrincipalComponent{
   protected _router: Router;
   _nav = NAV;
 
@@ -36,6 +37,12 @@ export class TablaPrincipalComponent {
   @Input() data: RegistroAntecedentes[] = [];
   @Input() showTitulo: boolean = true;
   @Input() expediente: string | null = null;
+  @Input() fechasCorte: DetalleAntecedentes = {
+    fecCorteSiade: "",
+    fecCorteSsc1: "",
+    fecCorteSsc2: "",
+    nss: ""
+  };
 
   @Input() rows: number = 10;
   @Input() first: number = 0;
@@ -121,7 +128,7 @@ export class TablaPrincipalComponent {
       expediente: this.expediente,
     };
 
-    this.reporteAntecedentesService.descargaExcelHistoricoDocs(datosContexto).subscribe({
+    this.reporteAntecedentesService.descargaExcelHistoricoDocs(datosContexto,this.fechasCorte).subscribe({
 
       next:(datos) => {
         if(datos.adjuntoBase64){

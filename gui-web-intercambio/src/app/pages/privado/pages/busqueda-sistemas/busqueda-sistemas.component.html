@@ -86,6 +86,7 @@
                 [titulo]="consulta.tituloCompleto"
                 [showTitulo]="false"
                 [data]="consulta.data()"
+                [fechasCorte]="fechasCorte"
                 [rows]="consulta.registrosPorPagina"
                 [total]="consulta.totalRegistros"
                 [expediente]="expedienteID"
@@ -297,8 +298,8 @@
       hechos.
     </p>
     <br>
-    <p class="aviso">Información consultada en SSCV1, con corte al 30/10/2025; SSCV2, con corte al 30/10/2025 y SIADE,
-      con corte al 30/10/2025.</p>
+    <p class="aviso">Información consultada en SSCV1, con corte al {{fechasCorte.fecCorteSsc1}}; SSCV2, con corte al {{fechasCorte.fecCorteSsc2}} y SIADE,
+      con corte al {{fechasCorte.fecCorteSiade}}.</p>
   </p-card>
 </div>
 
