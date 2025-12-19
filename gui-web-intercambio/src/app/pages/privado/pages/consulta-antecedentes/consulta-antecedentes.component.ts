@@ -25,8 +25,9 @@ import {UserService} from '@services/user.service';
 import {SesionUser} from '@models/sesion-user.interface';
 import {BusquedaStateService, FiltrosAntecedentes} from '@services/busqueda-state.service';
 import {ManejoSolicitudAntecedentesService} from '@services/manejo-solicitud-antecedentes.service';
-import { DetalleAntecedentesService } from '@services/detalle-antecedentes.service';
-import { DetalleAntecedentes } from '@models/detalleAntecedentes.interface';
+import {SolicitudBitacora} from '../../../../core/interfaces/solicitud-bitacora.inerface';
+import {DetalleAntecedentesService} from '@services/detalle-antecedentes.service';
+import {DetalleAntecedentes} from '@models/detalleAntecedentes.interface';
 
 enum TipoTabla {
   NSS = 'NSS',
@@ -80,6 +81,7 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
   REF_USUARIO: string = '';
   REF_APLICATIVO: string = '';
   REF_MODULO: string = '';
+  REF_OOAD: string = '';
 
   userData: SesionUser | null = null;
 
@@ -90,12 +92,6 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
     fecCorteSsc1: "",
     fecCorteSsc2: "",
     nss: ""
-  };
-
-  datosUsuario = {
-    nombre: 'ANGEL ARMANDO  BRAVO ZAMBRANO',
-    nss: '48068225530',
-    expediente: '0923/2020-27',
   };
 
   constructor(private fb: FormBuilder,
@@ -113,13 +109,13 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
     this.REF_APLICATIVO = this.userData?.sistemaOrigen as string;
     this.REF_MODULO = this.userData?.modulo as string;
     this.REF_USUARIO = this.userData?.curp as string;
+    this.REF_OOAD = this.userData?.ooad as string;
   }
 
   ngOnInit(): void {
     this.filtroForm = this.inicializarFiltroForm();
     this.suscribirATipoConsulta();
     this.recuperarUltimaBusqueda();
-    this.obtenerFechasCorte();
   }
 
   private sincronizarEstado(
@@ -395,6 +391,7 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
       totalObservable
     ]).subscribe({
       next: ([dataNss, dataNombre, totalResponse]) => {
+        this.obtenerFechasCorte();
 
         // Limpieza de datos si el criterio no aplica
         if (tipoConsultaActual === 1 || tipoConsultaActual === 3) {
@@ -542,12 +539,50 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
     });
   }
 
-  obtenerFechasCorte(){
-    this.detalleAntecedentesService.consultarFechasCorte(this.datosUsuario).subscribe({
+  obtenerFechasCorte() {
+    const datosUsuario = this.obtenerDatosUsario();
+    this.detalleAntecedentesService.consultarFechasCorte(datosUsuario).subscribe({
       next: (datos) => {
-        this.fechasCorte = datos.respuesta
-        
+        this.fechasCorte = datos.respuesta;
+        this.guardarBitacora();
       }
     })
+  }
+
+  obtenerDatosUsario() {
+    return {
+      nombre: this.generarNombre(),
+      nss: this.filtroForm.get('nss')?.value,
+      expediente: null,
+    };
+
+  }
+
+  guardarBitacora(): void {
+    const solicitud: SolicitudBitacora = this.generarSolicitudBitacora();
+    this.antecedentesService.guardarBitacora(solicitud).subscribe({
+      next: data => {
+      },
+      error: (error: HttpErrorResponse) => {
+      }
+    })
+  }
+
+  generarSolicitudBitacora(): SolicitudBitacora {
+    return {
+      fecCorteSiade: this.fechasCorte.fecCorteSiade,
+      fecCorteSsc1: this.fechasCorte.fecCorteSsc1,
+      fecCorteSsc2: this.fechasCorte.fecCorteSsc2,
+      nomApellidoMaterno: null,
+      nomApellidoPaterno: null,
+      nomPersona: this.generarNombre(),
+      refAplicativo: this.REF_APLICATIVO,
+      refExpediente: null,
+      refModulo: this.REF_MODULO,
+      refNss: this.filtroForm.get('nss')?.value,
+      refOoad: this.REF_OOAD,
+      refUsuarioAutentica: this.REF_USUARIO
+
+    }
   }
 }
