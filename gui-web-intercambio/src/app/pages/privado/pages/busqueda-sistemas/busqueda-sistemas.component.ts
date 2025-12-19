@@ -25,6 +25,9 @@ import {BusquedaStateService, FiltrosBusqueda} from '@services/busqueda-state.se
 import {HttpErrorResponse} from '@angular/common/http';
 import {RegistroAntecedentes} from '../../../../core/interfaces/registro-antecedentes.interface';
 import {ManejoSolicitudAntecedentesService} from '@services/manejo-solicitud-antecedentes.service';
+import {SolicitudBitacora} from '../../../../core/interfaces/solicitud-bitacora.inerface';
+import {DetalleAntecedentes} from '@models/detalleAntecedentes.interface';
+import {DetalleAntecedentesService} from '@services/detalle-antecedentes.service';
 
 enum TipoTabla {
   NSS = 'NSS',
@@ -65,12 +68,19 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
   consulta_todos: boolean = false; // Asumiendo que 4 es el caso 'Todos'
 
   solicitudAntecedentesService: ManejoSolicitudAntecedentesService = inject(ManejoSolicitudAntecedentesService);
+  detalleAntecedentesService: DetalleAntecedentesService = inject(DetalleAntecedentesService);
 
   REF_USUARIO: string = '';
   REF_APLICATIVO: string = '';
   REF_MODULO: string = '';
+  REF_OOAD: string = '';
 
-  accordionActivoId: string | null = null;
+  fechasCorte: DetalleAntecedentes = {
+    fecCorteSiade: "",
+    fecCorteSsc1: "",
+    fecCorteSsc2: "",
+    nss: ""
+  };
 
   constructor(private readonly fb: FormBuilder,
               private readonly route: ActivatedRoute,
@@ -137,6 +147,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
       this.REF_USUARIO = params.get('n') as string;
       this.REF_APLICATIVO = params.get('s') as string;
       this.REF_MODULO = params.get('m') as string;
+      this.REF_OOAD = params.get('o') as string;
     });
     this.antecedentesService.getExpediente(this.expedienteID).subscribe({
       next: (respuesta) => {
@@ -196,6 +207,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
       });
 
       this.ejecutarConsulta(0);
+      this.obtenerFechasCorte();
 
     }
 
@@ -213,6 +225,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
       });
 
       this.ejecutarConsulta(0);
+      this.obtenerFechasCorte()
     }
 
     if (![1, 2].includes(tipoConsulta) && this.consulta_todos) { // Caso 4: Expediente (tablas NSS y Nombre)
@@ -303,8 +316,11 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
       this.ejecutarConsulta(index);
     });
 
+
     if (this.consultas.length === 0) {
       this._alertServices.informacion('El expediente no tiene NSS ni Nombres asociados para generar consultas.');
+    } else {
+      this.obtenerFechasCorte();
     }
   }
 
@@ -495,4 +511,54 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
   trackConsulta = (consulta: ResultadoConsulta) =>
     `${consulta.tipo}-${consulta.valorBusqueda}`;
 
+
+  obtenerFechasCorte() {
+    const datosUsuario = this.obtenerDatosUsario();
+    this.detalleAntecedentesService.consultarFechasCorte(datosUsuario).subscribe({
+      next: (datos) => {
+        this.fechasCorte = datos.respuesta;
+        this.guardarBitacora();
+      }
+    })
+  }
+
+  obtenerDatosUsario() {
+    const filtro = this.filtroForm.get('filtro')?.value;
+
+    return {
+      nombre: filtro === 1 ? this.filtroForm.get('valor')?.value : null,
+      nss: filtro === 2 ? this.filtroForm.get('valor')?.value : null,
+      expediente: null,
+    };
+
+  }
+
+  guardarBitacora(): void {
+    const solicitud: SolicitudBitacora = this.generarSolicitudBitacora();
+    this.antecedentesService.guardarBitacora(solicitud).subscribe({
+      next: data => {
+      },
+      error: (error: HttpErrorResponse) => {
+      }
+    })
+  }
+
+  generarSolicitudBitacora(): SolicitudBitacora {
+    const filtro = this.filtroForm.get('filtro')?.value;
+    return {
+      fecCorteSiade: this.fechasCorte.fecCorteSiade,
+      fecCorteSsc1: this.fechasCorte.fecCorteSsc1,
+      fecCorteSsc2: this.fechasCorte.fecCorteSsc2,
+      nomApellidoMaterno: null,
+      nomApellidoPaterno: null,
+      nomPersona: filtro === 1 ? this.filtroForm.get('valor')?.value : null,
+      refAplicativo: this.REF_APLICATIVO,
+      refExpediente: null,
+      refModulo: this.REF_MODULO,
+      refNss: filtro === 2 ? this.filtroForm.get('valor')?.value : null,
+      refOoad: this.REF_OOAD,
+      refUsuarioAutentica: this.REF_USUARIO
+
+    }
+  }
 }
