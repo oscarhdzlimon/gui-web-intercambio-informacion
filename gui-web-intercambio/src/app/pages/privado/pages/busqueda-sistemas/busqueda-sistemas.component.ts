@@ -23,6 +23,8 @@ import {ActivatedRoute} from '@angular/router';
 import {SolicitudAsociacion} from '../../../../core/interfaces/solicitud-asociacion.interface';
 import {BusquedaStateService, FiltrosBusqueda} from '@services/busqueda-state.service';
 import {HttpErrorResponse} from '@angular/common/http';
+import {RegistroAntecedentes} from '../../../../core/interfaces/registro-antecedentes.interface';
+import {ManejoSolicitudAntecedentesService} from '@services/manejo-solicitud-antecedentes.service';
 
 enum TipoTabla {
   NSS = 'NSS',
@@ -50,6 +52,8 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
   nombres: TipoDropdown[] = [];
   nss: TipoDropdown[] = [];
 
+  puedeGuardar = false;
+
   expedienteID: string = '';
 
   totalAntecedentes!: TotalesAntecedentes;
@@ -58,18 +62,30 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
 
   filtroForm!: FormGroup;
 
-  registrosAsociacion: SolicitudAsociacion[] = [];
-
   consulta_todos: boolean = false; // Asumiendo que 4 es el caso 'Todos'
+
+  solicitudAntecedentesService: ManejoSolicitudAntecedentesService = inject(ManejoSolicitudAntecedentesService);
 
   REF_USUARIO: string = '';
   REF_APLICATIVO: string = '';
   REF_MODULO: string = '';
 
+  accordionActivoId: string | null = null;
+
   constructor(private readonly fb: FormBuilder,
               private readonly route: ActivatedRoute,
               private busquedaStateService: BusquedaStateService) {
     super();
+    this.solicitudAntecedentesService.cambios$.subscribe(() => {
+      this.consultas.forEach(consulta => {
+        const dataActual = consulta.data();
+        if (dataActual?.length) {
+          consulta.data.set(
+            this.sincronizarEstado(dataActual)
+          );
+        }
+      });
+    });
     this.obtenerExpediente();
     this.filtroForm = this.inicializarFiltroForm();
     this.suscribirACambiosFiltro();
@@ -260,7 +276,16 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
     // Solo se suscribe al listado, ya que el total es independiente (abajo)
     listObservable.subscribe({
       next: (dataResponse) => {
-        consulta.data.set(dataResponse.content || []);
+        const sincronizados = this.sincronizarEstado(
+          dataResponse.content || []
+        );
+        const content = (sincronizados || []).map(
+          (row: RegistroAntecedentes) => ({
+            ...row,
+            key: this.obtenerIdentificador(row)
+          })
+        );
+        consulta.data.set(content);
         consulta.totalRegistros = dataResponse.page.totalElements || 0;
       },
       error: (error) => {
@@ -299,7 +324,6 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
     }
   }
 
-
   cargarPagina(event: any, index: number) {
     const consulta = this.consultas[index];
     const nuevaPagina = event.page;
@@ -331,51 +355,50 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
     };
   }
 
-  cambiarEstado(event: any): void {
-    console.log('Checkbox cambiado:', event);
+  cambiarEstado(row: RegistroAntecedentes): void {
+    const key = this.obtenerIdentificador(row);
 
-    const identificador = this.obtenerIdentificador(event);
+    console.log(row)
 
-    if (event.indAsociado) {
-      const nuevaSolicitud: SolicitudAsociacion = this.mapearASolicitud(event);
-
-      const existe = this.registrosAsociacion.some(
-        r => this.obtenerIdentificador(r) === identificador
+    if (row.indAsociado) {
+      this.solicitudAntecedentesService.agregar(
+        key,
+        this.mapearASolicitud(row)
       );
-
-      if (!existe) {
-        this.registrosAsociacion.push(nuevaSolicitud);
-        console.log(`Registro añadido. Total: ${this.registrosAsociacion.length}`);
-      }
-
     } else {
-      const totalAntes = this.registrosAsociacion.length;
-
-      this.registrosAsociacion = this.registrosAsociacion.filter(
-        r => this.obtenerIdentificador(r) !== identificador
-      );
-
-      if (this.registrosAsociacion.length < totalAntes) {
-        console.log(`Registro eliminado. Total: ${this.registrosAsociacion.length}`);
-      }
+      this.solicitudAntecedentesService.eliminar(key);
     }
   }
 
   private obtenerIdentificador(item: any): string {
+
     const expediente = item.expediente ?? item.refExpediente;
 
-    // Si tiene NSS, es la mejor clave
-    if (item.nss || item.refNss) {
-      const nss = item.nss ?? item.refNss;
+    // NSS + expediente (si ambos existen)
+    if ((item.nss || item.refNss) && expediente) {
+      const nss = (item.nss ?? item.refNss).trim();
       return `${nss}-${expediente}`;
     }
 
-    // Si NO tiene NSS, usamos nombre + apellidos
+    // SIN NSS pero CON expediente
+    if (!item.nss && !item.refNss && expediente) {
+      const nombre = (item.nombre ?? '').trim().toUpperCase();
+      const paterno = (item.apellidoPaterno ?? '').trim().toUpperCase();
+      const materno = (item.apellidoMaterno ?? '').trim().toUpperCase();
+
+      return `${nombre}-${paterno}-${materno}-${expediente}`;
+    }
+
+    // SIN expediente → NSS o nombre + apellidos
+    if (item.nss || item.refNss) {
+      return (item.nss ?? item.refNss).trim();
+    }
+
     const nombre = (item.nombre ?? '').trim().toUpperCase();
     const paterno = (item.apellidoPaterno ?? '').trim().toUpperCase();
-    const materno = (item.apellidoMaterno ?? '').trim().toUpperCase(); // puede venir vacío
+    const materno = (item.apellidoMaterno ?? '').trim().toUpperCase();
 
-    return `${nombre}-${paterno}-${materno}-${expediente}`;
+    return `${nombre}-${paterno}-${materno}`;
   }
 
   ejecutarConsultaTotal(): void {
@@ -418,27 +441,37 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
   protected readonly tipoconsulta = TIPO_CONSULTA_ANTECEDENTES;
 
   guardarAsociacion(): void {
-    if (this.registrosAsociacion.length === 0) {
-      this._alertServices.alerta('No hay registros seleccionados para asociar.');
+
+    const registros = this.solicitudAntecedentesService.obtenerRegistros();
+
+    if (registros.length === 0) {
+      this._alertServices.alerta(
+        'No hay registros seleccionados para asociar.'
+      );
       return;
     }
 
-    this.antecedentesService.guardarAsociacion(this.registrosAsociacion).subscribe({
+    this.antecedentesService.guardarAsociacion(registros).subscribe({
       next: data => {
-        const mensajeExito = data?.mensaje || 'La asociación de registros se ha guardado exitosamente.';
+        const mensajeExito =
+          data?.mensaje ||
+          'La asociación de registros se ha guardado exitosamente.';
 
         this._alertServices.exito(mensajeExito);
       },
       error: (error: HttpErrorResponse) => {
 
-        let mensajeError = 'Ocurrió un error desconocido al intentar guardar la asociación.';
+        let mensajeError =
+          'Ocurrió un error desconocido al intentar guardar la asociación.';
 
-        if (error.error && error.error.mensaje) {
+        if (error.error?.mensaje) {
           mensajeError = error.error.mensaje;
         } else if (error.status === 400) {
-          mensajeError = 'Error de validación: Verifique los datos e intente de nuevo.';
+          mensajeError =
+            'Error de validación: Verifique los datos e intente de nuevo.';
         } else if (error.status === 403) {
-          mensajeError = 'No tiene permisos para realizar esta acción.';
+          mensajeError =
+            'No tiene permisos para realizar esta acción.';
         }
 
         this._alertServices.error(mensajeError);
@@ -446,5 +479,20 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
       }
     });
   }
+
+  private sincronizarEstado(
+    registros: RegistroAntecedentes[]
+  ): RegistroAntecedentes[] {
+
+    return registros.map(r => ({
+      ...r,
+      indAsociado: this.solicitudAntecedentesService.existe(
+        this.obtenerIdentificador(r)
+      )
+    }));
+  }
+
+  trackConsulta = (consulta: ResultadoConsulta) =>
+    `${consulta.tipo}-${consulta.valorBusqueda}`;
 
 }

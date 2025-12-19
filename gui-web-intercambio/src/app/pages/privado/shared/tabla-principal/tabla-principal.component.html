@@ -3,7 +3,8 @@
     [value]="data"
     [scrollable]="true"
     scrollHeight="400px"
-    responsiveLayout="scroll">
+    responsiveLayout="scroll"
+    dataKey="key">
 
     <!-- Header -->
     <ng-template pTemplate="header">
@@ -32,13 +33,13 @@
 
           <div class="checkbox-container">
             <input
-              id="checkbox-{{i}}"
+              id="checkbox-{{rowData.key}}"
               type="checkbox"
               [(ngModel)]="rowData.indAsociado"
               [disabled]="rowData.indAsociado && rowData.idBitacoraAsociacion"
               (change)="onCheckboxEvent(rowData, $event)"
             />
-            <label for="checkbox-{{i}}"></label>
+            <label for="checkbox-{{rowData.key}}"></label>
           </div>
 
         </td>
@@ -64,6 +65,7 @@
             />
           </div>
         </td>
+        {{ rowData.key}}
       </tr>
     </ng-template>
 
