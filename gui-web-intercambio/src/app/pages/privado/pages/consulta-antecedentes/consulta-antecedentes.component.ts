@@ -78,6 +78,7 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
   REF_USUARIO: string = '';
   REF_APLICATIVO: string = '';
   REF_MODULO: string = '';
+  REF_OOAD: string = '';
 
   userData: SesionUser | null = null;
 
@@ -98,6 +99,7 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
     this.REF_APLICATIVO = this.userData?.sistemaOrigen as string;
     this.REF_MODULO = this.userData?.modulo as string;
     this.REF_USUARIO = this.userData?.curp as string;
+    this.REF_OOAD = this.userData?.ooad as string;
   }
 
   ngOnInit(): void {
@@ -549,7 +551,7 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
       refExpediente: null,
       refModulo: this.REF_MODULO,
       refNss: this.filtroForm.get('nss')?.value,
-      refOoad: '',
+      refOoad: this.REF_OOAD,
       refUsuarioAutentica: this.REF_USUARIO
 
     }
