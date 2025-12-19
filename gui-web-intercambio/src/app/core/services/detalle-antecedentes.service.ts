@@ -7,6 +7,7 @@ import { HttpRespuesta } from '@models/http-respuesta.interface';
 import { DetalleAntecedenteInterface } from '@models/detalle-antecedente.interface';
 import { ParametrosInterface } from '@models/parametros.interface';
 import { ResponseGeneral } from '@models/responseGeneral';
+import { DetalleAntecedentes } from '@models/detalleAntecedentes.interface';
 
 @Injectable({
   providedIn: 'root'

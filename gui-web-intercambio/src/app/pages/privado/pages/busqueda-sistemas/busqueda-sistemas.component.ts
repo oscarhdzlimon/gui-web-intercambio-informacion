@@ -50,6 +50,7 @@ enum TipoTabla {
 })
 export class BusquedaSistemasComponent extends GeneralComponent implements OnInit {
   antecedentesService: AntecedentesService = inject(AntecedentesService);
+  detalleAntecedentesService: DetalleAntecedentesService = inject(DetalleAntecedentesService);
 
   filtroResultado: TipoDropdown[] = FILTRO_RESULTADOS_EXPEDIENTE;
   nombres: TipoDropdown[] = [];
@@ -68,7 +69,6 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
   consulta_todos: boolean = false; // Asumiendo que 4 es el caso 'Todos'
 
   solicitudAntecedentesService: ManejoSolicitudAntecedentesService = inject(ManejoSolicitudAntecedentesService);
-  detalleAntecedentesService: DetalleAntecedentesService = inject(DetalleAntecedentesService);
 
   REF_USUARIO: string = '';
   REF_APLICATIVO: string = '';
@@ -315,7 +315,6 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
     this.consultas.forEach((_, index) => {
       this.ejecutarConsulta(index);
     });
-
 
     if (this.consultas.length === 0) {
       this._alertServices.informacion('El expediente no tiene NSS ni Nombres asociados para generar consultas.');
