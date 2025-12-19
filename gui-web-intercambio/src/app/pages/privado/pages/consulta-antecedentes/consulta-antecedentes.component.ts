@@ -25,6 +25,8 @@ import {UserService} from '@services/user.service';
 import {SesionUser} from '@models/sesion-user.interface';
 import {BusquedaStateService, FiltrosAntecedentes} from '@services/busqueda-state.service';
 import {ManejoSolicitudAntecedentesService} from '@services/manejo-solicitud-antecedentes.service';
+import { DetalleAntecedentesService } from '@services/detalle-antecedentes.service';
+import { DetalleAntecedentes } from '@models/detalleAntecedentes.interface';
 
 enum TipoTabla {
   NSS = 'NSS',
@@ -49,6 +51,7 @@ enum TipoTabla {
 export class ConsultaAntecedentesComponent extends GeneralComponent implements OnInit {
   antecedentesService: AntecedentesService = inject(AntecedentesService);
   solicitudAntecedentesService: ManejoSolicitudAntecedentesService = inject(ManejoSolicitudAntecedentesService);
+  detalleAntecedentesService: DetalleAntecedentesService = inject(DetalleAntecedentesService);
 
   tipoconsulta: TipoDropdown[] = TIPO_CONSULTA_ANTECEDENTES;
 
@@ -82,6 +85,19 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
 
   puedeGuardar = false;
 
+  fechasCorte: DetalleAntecedentes = {
+    fecCorteSiade: "",
+    fecCorteSsc1: "",
+    fecCorteSsc2: "",
+    nss: ""
+  };
+
+  datosUsuario = {
+    nombre: 'ANGEL ARMANDO  BRAVO ZAMBRANO',
+    nss: '48068225530',
+    expediente: '0923/2020-27',
+  };
+
   constructor(private fb: FormBuilder,
               private busquedaStateService: BusquedaStateService) {
     super();
@@ -103,6 +119,7 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
     this.filtroForm = this.inicializarFiltroForm();
     this.suscribirATipoConsulta();
     this.recuperarUltimaBusqueda();
+    this.obtenerFechasCorte();
   }
 
   private sincronizarEstado(
@@ -523,5 +540,14 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
         console.error('Error al guardar asociación:', error);
       }
     });
+  }
+
+  obtenerFechasCorte(){
+    this.detalleAntecedentesService.consultarFechasCorte(this.datosUsuario).subscribe({
+      next: (datos) => {
+        this.fechasCorte = datos.respuesta
+        
+      }
+    })
   }
 }

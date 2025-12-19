@@ -35,7 +35,7 @@
             <input
               id="checkbox-{{rowData.key}}"
               type="checkbox"
-              [(ngModel)]="rowData.indAsociado"
+              [(ngModel)]="rowData.indAsociado!!"
               [disabled]="rowData.indAsociado && rowData.idBitacoraAsociacion"
               (change)="onCheckboxEvent(rowData, $event)"
             />
@@ -62,6 +62,7 @@
         <td pFrozenColumn alignFrozen="right" style="min-width:100px">
           <div class="flex justify-content-center align-items-center" style="height:100%">
             <img src="/assets/logos/print.svg" [ngClass]="{'cursor-pointer': rowData.indAsociado && rowData.idBitacoraAsociacion}"
+             (click)="generarPdf(rowData)"
             />
           </div>
         </td>
