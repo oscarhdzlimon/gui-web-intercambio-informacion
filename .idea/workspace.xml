@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="guardado de bitacora">
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/models/detalle-antecedente.interface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/models/detalle-antecedente.interface.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.ts" afterDir="false" />
+    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="guardado de bitacora -&gt; consulta">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,7 +73,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-c7e53b3be11b-JavaScript-WS-253.28294.332" />
+        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-WS-253.29346.143" />
       </set>
     </attachedChunks>
   </component>
@@ -88,6 +88,7 @@
       <workItem from="1765821241131" duration="1922000" />
       <workItem from="1765833097414" duration="18242000" />
       <workItem from="1766034347323" duration="8894000" />
+      <workItem from="1766170592189" duration="2129000" />
     </task>
     <task id="LOCAL-00001" summary="constants -&gt; tipo de antecedentes">
       <option name="closed" value="true" />
@@ -457,7 +458,15 @@
       <option name="project" value="LOCAL" />
       <updated>1766168568100</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="guardado de bitacora -&gt; consulta">
+      <option name="closed" value="true" />
+      <created>1766169926776</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1766169926776</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -475,7 +484,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="ajustes de css por url" />
     <MESSAGE value="ajustes por url" />
     <MESSAGE value="soolicitud e interface asociacion" />
     <MESSAGE value="apartado de asignacion" />
@@ -500,6 +508,7 @@
     <MESSAGE value="fix tablas paginado" />
     <MESSAGE value="ajustes de elementos de solicitud" />
     <MESSAGE value="guardado de bitacora" />
-    <option name="LAST_COMMIT_MESSAGE" value="guardado de bitacora" />
+    <MESSAGE value="guardado de bitacora -&gt; consulta" />
+    <option name="LAST_COMMIT_MESSAGE" value="guardado de bitacora -&gt; consulta" />
   </component>
 </project>
