@@ -93,9 +93,9 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
   };
 
   datosUsuario = {
-    nombre: 'ANGEL ARMANDO  BRAVO ZAMBRANO',
-    nss: '48068225530',
-    expediente: '0923/2020-27',
+    nombre: '',
+    nss: '',
+    expediente: '',
   };
 
   constructor(private fb: FormBuilder,
@@ -113,6 +113,8 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
     this.REF_APLICATIVO = this.userData?.sistemaOrigen as string;
     this.REF_MODULO = this.userData?.modulo as string;
     this.REF_USUARIO = this.userData?.curp as string;
+    this.datosUsuario.nombre = this.userData?.nombreCompleto || '';
+    
   }
 
   ngOnInit(): void {

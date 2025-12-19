@@ -7,6 +7,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '@env/environment.development';
 import { Observable, catchError, map, throwError } from 'rxjs';
 import { SolicitudAntecedentes } from '../interfaces/solicitud-antecedentes.interface';
+import { DetalleAntecedentes } from '@models/detalleAntecedentes.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -24,12 +25,20 @@ export class ReporteAntecedentesService {
   constructor(private http: HttpClient) {}
 
   descargaExcelHistoricoDocs(
-    solicitud: SolicitudAntecedentes
+    solicitud: SolicitudAntecedentes,
+    fechasCorte: DetalleAntecedentes
   ): Observable<any> {
     const ruta = `${this.serverAntecedentes}antecedentes/reporte/antecedentes`;
 
+    const obj = {
+        ...solicitud,
+        fecCorteSiade: fechasCorte.fecCorteSiade,
+        fecCorteSsc1: fechasCorte.fecCorteSsc1,
+        fecCorteSsc2: fechasCorte.fecCorteSsc2
+    }
+
     const options = { headers: this.header };
-    return this.http.post<any>(ruta, solicitud, options).pipe(
+    return this.http.post<any>(ruta, obj, options).pipe(
       catchError(this.handleError),
       map((response: any) => {
         return response;
