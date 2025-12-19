@@ -26,8 +26,8 @@ import {SesionUser} from '@models/sesion-user.interface';
 import {BusquedaStateService, FiltrosAntecedentes} from '@services/busqueda-state.service';
 import {ManejoSolicitudAntecedentesService} from '@services/manejo-solicitud-antecedentes.service';
 import {SolicitudBitacora} from '../../../../core/interfaces/solicitud-bitacora.inerface';
-import { DetalleAntecedentesService } from '@services/detalle-antecedentes.service';
-import { DetalleAntecedentes } from '@models/detalleAntecedentes.interface';
+import {DetalleAntecedentesService} from '@services/detalle-antecedentes.service';
+import {DetalleAntecedentes} from '@models/detalleAntecedentes.interface';
 
 enum TipoTabla {
   NSS = 'NSS',
@@ -94,12 +94,6 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
     nss: ""
   };
 
-  datosUsuario = {
-    nombre: 'ANGEL ARMANDO  BRAVO ZAMBRANO',
-    nss: '48068225530',
-    expediente: '0923/2020-27',
-  };
-
   constructor(private fb: FormBuilder,
               private busquedaStateService: BusquedaStateService) {
     super();
@@ -122,7 +116,6 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
     this.filtroForm = this.inicializarFiltroForm();
     this.suscribirATipoConsulta();
     this.recuperarUltimaBusqueda();
-    this.obtenerFechasCorte();
   }
 
   private sincronizarEstado(
@@ -398,7 +391,7 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
       totalObservable
     ]).subscribe({
       next: ([dataNss, dataNombre, totalResponse]) => {
-        this.guardarBitacora();
+        this.obtenerFechasCorte();
 
         // Limpieza de datos si el criterio no aplica
         if (tipoConsultaActual === 1 || tipoConsultaActual === 3) {
@@ -546,13 +539,23 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
     });
   }
 
-  obtenerFechasCorte(){
-    this.detalleAntecedentesService.consultarFechasCorte(this.datosUsuario).subscribe({
+  obtenerFechasCorte() {
+    const datosUsuario = this.obtenerDatosUsario();
+    this.detalleAntecedentesService.consultarFechasCorte(datosUsuario).subscribe({
       next: (datos) => {
-        this.fechasCorte = datos.respuesta
-
+        this.fechasCorte = datos.respuesta;
+        this.guardarBitacora();
       }
     })
+  }
+
+  obtenerDatosUsario() {
+    return {
+      nombre: this.generarNombre(),
+      nss: this.filtroForm.get('nss')?.value,
+      expediente: null,
+    };
+
   }
 
   guardarBitacora(): void {
@@ -567,9 +570,9 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
 
   generarSolicitudBitacora(): SolicitudBitacora {
     return {
-      fecCorteSiade: '',
-      fecCorteSsc1: '',
-      fecCorteSsc2: '',
+      fecCorteSiade: this.fechasCorte.fecCorteSiade,
+      fecCorteSsc1: this.fechasCorte.fecCorteSsc1,
+      fecCorteSsc2: this.fechasCorte.fecCorteSsc2,
       nomApellidoMaterno: null,
       nomApellidoPaterno: null,
       nomPersona: this.generarNombre(),

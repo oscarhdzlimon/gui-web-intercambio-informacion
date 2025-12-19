@@ -4,8 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="ajustes de elementos de solicitud">
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/interfaces/solicitud-bitacora.inerface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/interfaces/solicitud-bitacora.inerface.ts" afterDir="false" />
+    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="guardado de bitacora">
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/models/detalle-antecedente.interface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/models/detalle-antecedente.interface.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -441,7 +441,23 @@
       <option name="project" value="LOCAL" />
       <updated>1766167193666</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="guardado de bitacora">
+      <option name="closed" value="true" />
+      <created>1766168124567</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1766168124567</updated>
+    </task>
+    <task id="LOCAL-00046" summary="guardado de bitacora">
+      <option name="closed" value="true" />
+      <created>1766168568100</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1766168568100</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -459,7 +475,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="totales" />
     <MESSAGE value="ajustes de css por url" />
     <MESSAGE value="ajustes por url" />
     <MESSAGE value="soolicitud e interface asociacion" />
@@ -484,6 +499,7 @@
     <MESSAGE value="se mantienen los registros pero revisar el paginado" />
     <MESSAGE value="fix tablas paginado" />
     <MESSAGE value="ajustes de elementos de solicitud" />
-    <option name="LAST_COMMIT_MESSAGE" value="ajustes de elementos de solicitud" />
+    <MESSAGE value="guardado de bitacora" />
+    <option name="LAST_COMMIT_MESSAGE" value="guardado de bitacora" />
   </component>
 </project>
