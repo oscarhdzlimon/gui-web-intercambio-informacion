@@ -525,8 +525,8 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
     const filtro = this.filtroForm.get('filtro')?.value;
 
     return {
-      nombre: filtro === 1 ? this.filtroForm.get('valor')?.value : null,
-      nss: filtro === 2 ? this.filtroForm.get('valor')?.value : null,
+      nombre: filtro === 2 ? this.filtroForm.get('valor')?.value : null,
+      nss: filtro === 1 ? this.filtroForm.get('valor')?.value : null,
       expediente: this.expedienteID,
     };
 
@@ -550,11 +550,11 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
       fecCorteSsc2: this.fechasCorte.fecCorteSsc2,
       nomApellidoMaterno: null,
       nomApellidoPaterno: null,
-      nomPersona: filtro === 1 ? this.filtroForm.get('valor')?.value : null,
+      nomPersona: filtro === 2 ? this.filtroForm.get('valor')?.value : null,
       refAplicativo: this.REF_APLICATIVO,
       refExpediente: this.expedienteID,
       refModulo: this.REF_MODULO,
-      refNss: filtro === 2 ? this.filtroForm.get('valor')?.value : null,
+      refNss: filtro === 1 ? this.filtroForm.get('valor')?.value : null,
       refOoad: this.REF_OOAD,
       refUsuarioAutentica: this.REF_USUARIO
 
