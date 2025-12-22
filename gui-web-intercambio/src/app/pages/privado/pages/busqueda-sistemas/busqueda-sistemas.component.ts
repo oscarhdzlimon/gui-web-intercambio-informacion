@@ -355,7 +355,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
       refUsuarioAutentica: this.REF_USUARIO, // Contexto del componente
       refAplicativoAsociacion: this.REF_APLICATIVO, // Contexto del componente
       refModuloAsociacion: this.REF_MODULO, // Contexto del componente
-      refExpediente: evento.expediente,
+      refExpediente: this.expedienteID,
       nomPersona: evento.nombre,
       nomApellidoPaterno: evento.apellidoPaterno,
       nomApellidoMaterno: evento.apellidoMaterno,
@@ -527,7 +527,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
     return {
       nombre: filtro === 1 ? this.filtroForm.get('valor')?.value : null,
       nss: filtro === 2 ? this.filtroForm.get('valor')?.value : null,
-      expediente: null,
+      expediente: this.expedienteID,
     };
 
   }
@@ -552,7 +552,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
       nomApellidoPaterno: null,
       nomPersona: filtro === 1 ? this.filtroForm.get('valor')?.value : null,
       refAplicativo: this.REF_APLICATIVO,
-      refExpediente: null,
+      refExpediente: this.expedienteID,
       refModulo: this.REF_MODULO,
       refNss: filtro === 2 ? this.filtroForm.get('valor')?.value : null,
       refOoad: this.REF_OOAD,
