@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="ajustes busqueda sistema">
+    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="corrección filtros -&gt; busqueda sistemas">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/shared/tabla-principal/tabla-principal.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/shared/tabla-principal/tabla-principal.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/shared/tabla-principal/tabla-principal.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/shared/tabla-principal/tabla-principal.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,23 +92,7 @@
       <workItem from="1766034347323" duration="8894000" />
       <workItem from="1766170592189" duration="2919000" />
       <workItem from="1766376395266" duration="21000" />
-      <workItem from="1766414048967" duration="935000" />
-    </task>
-    <task id="LOCAL-00001" summary="constants -&gt; tipo de antecedentes">
-      <option name="closed" value="true" />
-      <created>1765835757907</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1765835757907</updated>
-    </task>
-    <task id="LOCAL-00002" summary="ajustes de filtros -&gt; antecedentes">
-      <option name="closed" value="true" />
-      <created>1765838497316</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1765838497316</updated>
+      <workItem from="1766414048967" duration="4215000" />
     </task>
     <task id="LOCAL-00003" summary="limpieza de validadores -&gt; antecedentes">
       <option name="closed" value="true" />
@@ -484,7 +470,23 @@
       <option name="project" value="LOCAL" />
       <updated>1766414257078</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="corrección filtros -&gt; consulta antecedente">
+      <option name="closed" value="true" />
+      <created>1766421642442</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1766421642442</updated>
+    </task>
+    <task id="LOCAL-00051" summary="corrección filtros -&gt; busqueda sistemas">
+      <option name="closed" value="true" />
+      <created>1766421753653</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1766421753654</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -502,8 +504,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="apartado de asignacion" />
-    <MESSAGE value="ajustes de servicios" />
     <MESSAGE value="ajustes menu" />
     <MESSAGE value="consulta antecedentes" />
     <MESSAGE value="faltantes de homologar" />
@@ -527,6 +527,8 @@
     <MESSAGE value="guardado de bitacora -&gt; consulta" />
     <MESSAGE value="guardado de bitacora -&gt; url" />
     <MESSAGE value="ajustes busqueda sistema" />
-    <option name="LAST_COMMIT_MESSAGE" value="ajustes busqueda sistema" />
+    <MESSAGE value="corrección filtros -&gt; consulta antecedente" />
+    <MESSAGE value="corrección filtros -&gt; busqueda sistemas" />
+    <option name="LAST_COMMIT_MESSAGE" value="corrección filtros -&gt; busqueda sistemas" />
   </component>
 </project>

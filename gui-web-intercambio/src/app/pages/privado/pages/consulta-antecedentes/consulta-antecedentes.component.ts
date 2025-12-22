@@ -129,12 +129,18 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
     registros: RegistroAntecedentes[]
   ): RegistroAntecedentes[] {
 
-    return registros.map(r => ({
-      ...r,
-      indAsociado: this.solicitudAntecedentesService.existe(
-        this.obtenerIdentificador(r)
-      )
-    }));
+    return registros.map(r => {
+      if (r.indAsociado && r.idBitacoraAsociacion) {
+        return r;
+      }
+
+      return {
+        ...r,
+        indAsociado: this.solicitudAntecedentesService.existe(
+          this.obtenerIdentificador(r)
+        )
+      }
+    });
   }
 
 
