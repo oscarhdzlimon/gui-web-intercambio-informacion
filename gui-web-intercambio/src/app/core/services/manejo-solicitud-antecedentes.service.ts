@@ -32,7 +32,7 @@ export class ManejoSolicitudAntecedentesService {
     return Array.from(this.registros.values());
   }
 
-  tieneRegistros(): boolean {
-    return this.registros.size > 0;
+  limpiar(): void {
+    this.registros.clear();
   }
 }

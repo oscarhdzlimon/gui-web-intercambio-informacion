@@ -473,6 +473,12 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
           'La asociación de registros se ha guardado exitosamente.';
 
         this._alertServices.exito(mensajeExito);
+        this.solicitudAntecedentesService.limpiar();
+
+        this.consultas.forEach((_, index) => {
+          this.ejecutarConsulta(index);
+        });
+
       },
       error: (error: HttpErrorResponse) => {
 

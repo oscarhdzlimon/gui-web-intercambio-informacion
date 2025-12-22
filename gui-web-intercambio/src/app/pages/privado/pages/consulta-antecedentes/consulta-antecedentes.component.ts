@@ -266,8 +266,6 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
 
     const key = this.obtenerIdentificador(registro);
 
-    console.log(registro)
-
     if (registro.indAsociado) {
       this.solicitudAntecedentesService.agregar(
         key,
@@ -531,8 +529,9 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
     this.antecedentesService.guardarAsociacion(registros).subscribe({
       next: data => {
         const mensajeExito = data?.mensaje || 'La asociación de registros se ha guardado exitosamente.';
-
         this._alertServices.exito(mensajeExito);
+        this.solicitudAntecedentesService.limpiar();
+        this.paginar();
       },
       error: (error: HttpErrorResponse) => {
 
@@ -595,7 +594,6 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
       refNss: this.filtroForm.get('nss')?.value,
       refOoad: this.REF_OOAD,
       refUsuarioAutentica: this.REF_USUARIO
-
     }
   }
 }
