@@ -1,5 +1,5 @@
 import {CommonModule} from '@angular/common';
-import {ChangeDetectorRef, Component, EventEmitter, HostListener, inject, Input, Output} from '@angular/core';
+import {ChangeDetectorRef, Component, EventEmitter, HostListener, inject, input, Input, Output} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ActivatedRoute, NavigationExtras, Router} from '@angular/router';
 import {ColumnDefinition} from '@models/columa-tabla';
@@ -12,8 +12,8 @@ import {SelectModule} from 'primeng/select';
 import {TableModule} from 'primeng/table';
 import {RegistroAntecedentes} from '../../../../core/interfaces/registro-antecedentes.interface';
 import {DataCacheService} from '@services/data-cache.service';
-import { ReporteAntecedentesService } from '@services/reporteAntecedentes.service';
-import { DetalleAntecedentes } from '@models/detalleAntecedentes.interface';
+import {ReporteAntecedentesService} from '@services/reporteAntecedentes.service';
+import {DetalleAntecedentes} from '@models/detalleAntecedentes.interface';
 
 @Component({
   selector: 'app-tabla-principal',
@@ -29,12 +29,11 @@ import { DetalleAntecedentes } from '@models/detalleAntecedentes.interface';
   templateUrl: './tabla-principal.component.html',
   styleUrl: './tabla-principal.component.scss'
 })
-export class TablaPrincipalComponent{
+export class TablaPrincipalComponent {
   protected _router: Router;
   _nav = NAV;
 
   @Input() titulo: string = '';
-  @Input() data: RegistroAntecedentes[] = [];
   @Input() showTitulo: boolean = true;
   @Input() expediente: string | null = null;
   @Input() fechasCorte: DetalleAntecedentes = {
@@ -48,11 +47,13 @@ export class TablaPrincipalComponent{
   @Input() first: number = 0;
   @Input() total: number = 0;
 
+  readonly data = input<RegistroAntecedentes[]>([]);
+
   @Output() pageChange = new EventEmitter<any>();
   @Output() checkboxChanged = new EventEmitter<any>();
 
   dataCacheService: DataCacheService = inject(DataCacheService);
-  reporteAntecedentesService:ReporteAntecedentesService = inject(ReporteAntecedentesService);
+  reporteAntecedentesService: ReporteAntecedentesService = inject(ReporteAntecedentesService);
 
   // Definición fija de columnas
   columns: ColumnDefinition[] = [
@@ -128,10 +129,10 @@ export class TablaPrincipalComponent{
       expediente: this.expediente,
     };
 
-    this.reporteAntecedentesService.descargaExcelHistoricoDocs(datosContexto,this.fechasCorte).subscribe({
+    this.reporteAntecedentesService.descargaExcelHistoricoDocs(datosContexto, this.fechasCorte).subscribe({
 
-      next:(datos) => {
-        if(datos.adjuntoBase64){
+      next: (datos) => {
+        if (datos.adjuntoBase64) {
           const base64 = datos.adjuntoBase64;
           const nombreArchivo = datos.nombreAdjunto || 'Reporte Antecedentes.pdf';
           const contentType = 'application/pdf';
@@ -147,7 +148,7 @@ export class TablaPrincipalComponent{
 
     let base64 = b64Data.split(',')[1] ? b64Data.split(',')[1] : b64Data;
 
-    // Eliminar CUALQUIER carácter que NO sea una letra/número válido para Base64, 
+    // Eliminar CUALQUIER carácter que NO sea una letra/número válido para Base64,
     // incluyendo espacios, saltos de línea, y caracteres de control.
     // Base64 válido solo incluye A-Z, a-z, 0-9, +, / y = (relleno).
     base64 = base64.replace(/[^A-Za-z0-9+/=]/g, '');
@@ -166,7 +167,7 @@ export class TablaPrincipalComponent{
         byteArrays.push(byteArray);
       }
 
-      return new Blob(byteArrays as BlobPart[], { type: contentType });
+      return new Blob(byteArrays as BlobPart[], {type: contentType});
 
     } catch (e) {
       // Si incluso después de la limpieza falla, la respuesta NO es Base64.
@@ -187,7 +188,6 @@ export class TablaPrincipalComponent{
   onCheckboxEvent(row: any, event: Event) {
     const input = event.target as HTMLInputElement;
     const value = input.checked;
-
     this.checkboxChanged.emit(row);
   }
 

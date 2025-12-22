@@ -1,6 +1,6 @@
 <p-card class="mx-2 empty-border no-padding-card" [header]="showTitulo ? titulo :  ''">
   <p-table
-    [value]="data"
+    [value]="data()"
     [scrollable]="true"
     scrollHeight="400px"
     responsiveLayout="scroll"
@@ -35,7 +35,7 @@
             <input
               id="checkbox-{{rowData.key}}"
               type="checkbox"
-              [(ngModel)]="rowData.indAsociado!!"
+              [(ngModel)]="rowData.indAsociado"
               [disabled]="rowData.indAsociado && rowData.idBitacoraAsociacion"
               (change)="onCheckboxEvent(rowData, $event)"
             />
