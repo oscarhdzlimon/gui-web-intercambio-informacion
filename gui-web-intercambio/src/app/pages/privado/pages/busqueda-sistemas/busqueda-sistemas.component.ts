@@ -28,6 +28,7 @@ import {ManejoSolicitudAntecedentesService} from '@services/manejo-solicitud-ant
 import {SolicitudBitacora} from '../../../../core/interfaces/solicitud-bitacora.inerface';
 import {DetalleAntecedentes} from '@models/detalleAntecedentes.interface';
 import {DetalleAntecedentesService} from '@services/detalle-antecedentes.service';
+import { ReporteAntecedentes } from '@models/reporteAntecedentes.interface';
 
 enum TipoTabla {
   NSS = 'NSS',
@@ -571,6 +572,23 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
       refOoad: this.REF_OOAD,
       refUsuarioAutentica: this.REF_USUARIO
 
+    }
+  }
+
+  generarObjReporteAntecedentes(): ReporteAntecedentes{
+
+
+    return  {
+      nombre: "",
+      nss: "",
+      expediente: "",
+      fecCorteSiade: this.fechasCorte.fecCorteSiade,
+      fecCorteSsc1: this.fechasCorte.fecCorteSsc1,
+      fecCorteSsc2: this.fechasCorte.fecCorteSsc2,
+      nombreConsultor: this.REF_USUARIO,
+      ooad: this.REF_OOAD,
+      aplicativoOrigen: this.REF_APLICATIVO,
+      moduloOrigen: this.REF_MODULO,
     }
   }
 }

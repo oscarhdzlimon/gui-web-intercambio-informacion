@@ -28,6 +28,7 @@ import {ManejoSolicitudAntecedentesService} from '@services/manejo-solicitud-ant
 import {SolicitudBitacora} from '../../../../core/interfaces/solicitud-bitacora.inerface';
 import {DetalleAntecedentesService} from '@services/detalle-antecedentes.service';
 import {DetalleAntecedentes} from '@models/detalleAntecedentes.interface';
+import { ReporteAntecedentes } from '@models/reporteAntecedentes.interface';
 
 enum TipoTabla {
   NSS = 'NSS',
@@ -99,6 +100,8 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
     nss: '',
     expediente: '',
   };
+
+  objReporteAntecedentes!: ReporteAntecedentes;
 
   constructor(private fb: FormBuilder,
               private busquedaStateService: BusquedaStateService) {
@@ -594,6 +597,22 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
       refNss: this.filtroForm.get('nss')?.value,
       refOoad: this.REF_OOAD,
       refUsuarioAutentica: this.REF_USUARIO
+    }
+  }
+  
+  generarObjReporteAntecedentes(): ReporteAntecedentes{
+    
+    return  {
+      nombre: "",
+      nss: "",
+      expediente: "",
+      fecCorteSiade: this.fechasCorte.fecCorteSiade,
+      fecCorteSsc1: this.fechasCorte.fecCorteSsc1,
+      fecCorteSsc2: this.fechasCorte.fecCorteSsc2,
+      nombreConsultor: this.datosUsuario.nombre,
+      ooad: this.REF_OOAD,
+      aplicativoOrigen: this.REF_APLICATIVO,
+      moduloOrigen: this.REF_MODULO,
     }
   }
 }
