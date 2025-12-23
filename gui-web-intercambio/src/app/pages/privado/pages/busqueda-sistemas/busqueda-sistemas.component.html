@@ -102,14 +102,11 @@
 
   @if (consultas.length > 0) {
     <article class="flex flex-row flex-wrap">
-      <!--
-    PARA TEMA DE DEMO, SE OCULTA
-        <div class="flex lg:col-12  col-12 justify-content-end align-items-center mt-3 ">
-          <p-button type="button" label="Guardar" styleClass="btn-buscar btn-background"
-                    [disabled]="puedeGuardar" (onClick)="guardarAsociacion()"
-                    [style]="{'width':'136px','margin-right':'30px'}"/>
-        </div>
-        -->
+      <div class="flex lg:col-12  col-12 justify-content-end align-items-center mt-3 ">
+        <p-button type="button" label="Guardar" styleClass="btn-buscar btn-background"
+                  [disabled]="puedeGuardar" (onClick)="guardarAsociacion()"
+                  [style]="{'width':'136px','margin-right':'30px'}"/>
+      </div>
     </article>
   }
 
@@ -298,8 +295,9 @@
       hechos.
     </p>
     <br>
-    <p class="aviso">Información consultada en SSCV1, con corte al {{fechasCorte.fecCorteSsc1}}; SSCV2, con corte al {{fechasCorte.fecCorteSsc2}} y SIADE,
-      con corte al {{fechasCorte.fecCorteSiade}}.</p>
+    <p class="aviso">Información consultada en SSCV1, con corte al {{ fechasCorte.fecCorteSsc1 }}; SSCV2, con corte
+      al {{ fechasCorte.fecCorteSsc2 }} y SIADE,
+      con corte al {{ fechasCorte.fecCorteSiade }}.</p>
   </p-card>
 </div>
 

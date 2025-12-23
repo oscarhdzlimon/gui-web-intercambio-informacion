@@ -35,4 +35,8 @@ export class ManejoSolicitudAntecedentesService {
   limpiar(): void {
     this.registros.clear();
   }
+
+  tieneRegistros(): boolean {
+    return this.registros.size > 0;
+  }
 }
