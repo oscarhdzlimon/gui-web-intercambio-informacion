@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="correccion al obtener y mostrar elementos de la asoociación">
+    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="ajustes al guardar solicitud de antecedentes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/services/manejo-solicitud-antecedentes.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/services/manejo-solicitud-antecedentes.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,15 +91,8 @@
       <workItem from="1766034347323" duration="8894000" />
       <workItem from="1766170592189" duration="2919000" />
       <workItem from="1766376395266" duration="21000" />
-      <workItem from="1766414048967" duration="6758000" />
-    </task>
-    <task id="LOCAL-00004" summary="ajuste servicio de antecedentes">
-      <option name="closed" value="true" />
-      <created>1765838956021</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1765838956021</updated>
+      <workItem from="1766414048967" duration="8293000" />
+      <workItem from="1766520540227" duration="517000" />
     </task>
     <task id="LOCAL-00005" summary="ajustes solicitud de antecedentes">
       <option name="closed" value="true" />
@@ -486,7 +478,15 @@
       <option name="project" value="LOCAL" />
       <updated>1766427970218</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="ajustes al guardar solicitud de antecedentes">
+      <option name="closed" value="true" />
+      <created>1766430752986</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1766430752986</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -504,7 +504,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="consulta antecedentes" />
     <MESSAGE value="faltantes de homologar" />
     <MESSAGE value="ajustes de ref" />
     <MESSAGE value="ajustes de rutas" />
@@ -529,6 +528,7 @@
     <MESSAGE value="corrección filtros -&gt; consulta antecedente" />
     <MESSAGE value="corrección filtros -&gt; busqueda sistemas" />
     <MESSAGE value="correccion al obtener y mostrar elementos de la asoociación" />
-    <option name="LAST_COMMIT_MESSAGE" value="correccion al obtener y mostrar elementos de la asoociación" />
+    <MESSAGE value="ajustes al guardar solicitud de antecedentes" />
+    <option name="LAST_COMMIT_MESSAGE" value="ajustes al guardar solicitud de antecedentes" />
   </component>
 </project>
