@@ -68,8 +68,8 @@
     [titulo]="tituloTabla"
     [data]="data()"
     [rows]="5"
-    [fechasCorte]="fechasCorte"
     [total]="totalregistros"
+    [datosUsuario]="generarObjReporteAntecedentes()"
     (pageChange)="cargarPagina($event, TipoTabla.NSS)"
     (checkboxChanged)="cambiarEstado($event)"/>
 }
@@ -78,7 +78,6 @@
   <app-tabla-principal [titulo]="tituloTablanombre"
                        [data]="data_nombre()"
                        [rows]="10"
-                       [fechasCorte]="fechasCorte"
                        [total]="totalregistrosnombre"
                        (pageChange)="cargarPagina($event, TipoTabla.NOMBRE)"
                        (checkboxChanged)="cambiarEstado($event)"/>

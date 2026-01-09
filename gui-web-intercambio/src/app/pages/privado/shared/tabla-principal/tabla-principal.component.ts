@@ -14,6 +14,7 @@ import {RegistroAntecedentes} from '../../../../core/interfaces/registro-anteced
 import {DataCacheService} from '@services/data-cache.service';
 import {ReporteAntecedentesService} from '@services/reporteAntecedentes.service';
 import {DetalleAntecedentes} from '@models/detalleAntecedentes.interface';
+import { ReporteAntecedentes } from '@models/reporteAntecedentes.interface';
 
 @Component({
   selector: 'app-tabla-principal',
@@ -27,7 +28,7 @@ import {DetalleAntecedentes} from '@models/detalleAntecedentes.interface';
     ConfirmPopupModule,
     PaginatorModule, FormsModule],
   templateUrl: './tabla-principal.component.html',
-  styleUrl: './tabla-principal.component.scss'
+  styleUrl: './tabla-principal.component.scss' 
 })
 export class TablaPrincipalComponent {
   protected _router: Router;
@@ -36,12 +37,7 @@ export class TablaPrincipalComponent {
   @Input() titulo: string = '';
   @Input() showTitulo: boolean = true;
   @Input() expediente: string | null = null;
-  @Input() fechasCorte: DetalleAntecedentes = {
-    fecCorteSiade: "",
-    fecCorteSsc1: "",
-    fecCorteSsc2: "",
-    nss: ""
-  };
+  @Input() datosUsuario!: ReporteAntecedentes;
 
   @Input() rows: number = 10;
   @Input() first: number = 0;
@@ -120,13 +116,14 @@ export class TablaPrincipalComponent {
   }
 
   generarPdf(registro: RegistroAntecedentes) {
-    const datosContexto = {
+    const obj: ReporteAntecedentes = { 
+      ...this.datosUsuario,
       nombre: registro.nombre,
       nss: registro.nss,
-      expediente: this.expediente,
-    };
+      expediente: this.expediente
+    }
 
-    this.reporteAntecedentesService.descargaExcelHistoricoDocs(datosContexto, this.fechasCorte).subscribe({
+    this.reporteAntecedentesService.descargaExcelHistoricoDocs(obj).subscribe({
 
       next: (datos) => {
         if (datos.adjuntoBase64) {
@@ -138,7 +135,7 @@ export class TablaPrincipalComponent {
           window.open(pdfUrl, '_blank');
         }
       }
-    })
+    });
   }
 
   private b64toBlob(b64Data: string, contentType: string = '', sliceSize: number = 512): Blob {
