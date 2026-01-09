@@ -39,13 +39,14 @@
     </div>
     <div class="col-12 md:col-6">
       <div class="etiquetasmodal divetiqueta">Nombre del / los afectado(s)</div>
-      <div class="divcontenido">{{ datosDetalle.nombreAfectado }}</div>
+      <div class="divcontenido">{{ datosDetalle.nombreAfectado }} {{ datosDetalle.apellidoPaternoAfectado }} {{ datosDetalle.apellidoMaternoAfectado }}</div>
+      
     </div>
     <div class="col-12 md:col-6">
       <div class="etiquetasmodal divetiqueta">
         Nombre del / los peticionario(s)
       </div>
-      <div class="divcontenido">{{ datosDetalle.nombrePeticionario }}</div>
+      <div class="divcontenido">{{ datosDetalle.nombrePeticionario }} {{ datosDetalle.apellidoPaternoPeticionario }} {{ datosDetalle.apellidoMaternoPeticionario }}</div>
     </div>
     <div class="col-12 md:col-6">
       <div class="etiquetasmodal divetiqueta">NSS</div>
@@ -76,7 +77,7 @@
         Fecha de cierre del acuerdo/juicio/procedimiento/queja médica /gestión
       </div>
       <div class="divcontenido">
-        {{ datosDetalle.fechaCierreAcuerdoFormateada }}
+        {{ datosDetalle.fechaCierreFormateada }}
       </div>
     </div>
     } @if(datosDetalle.titulo == 'Detalle de Queja médica'){
@@ -92,7 +93,7 @@
       <div class="etiquetasmodal divetiqueta">
         Nombre del / los peticionario(s)
       </div>
-      <div class="divcontenido">{{ datosDetalle.nombrePeticionario }}</div>
+      <div class="divcontenido">{{ datosDetalle.nombrePeticionario }} {{ datosDetalle.apellidoPaternoPeticionario }} {{ datosDetalle.apellidoMaternoPeticionario }}</div>
     </div>
     <div class="col-12 md:col-6">
       <div class="etiquetasmodal divetiqueta">CURP</div>

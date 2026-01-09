@@ -106,6 +106,7 @@ export class DetalleAntecedentesComponent extends GeneralComponent {
     nombre: 'ANGEL ARMANDO  BRAVO ZAMBRANO',
     nss: '48068225530',
     expediente: '0923/2020-27',
+    id:''
   };
 
   constructor(
@@ -118,6 +119,7 @@ export class DetalleAntecedentesComponent extends GeneralComponent {
     super();
     this.route.paramMap.subscribe((params) => {
       const cacheId = params.get('id');
+      this.datosUsuario.id = cacheId!;
 
       if (cacheId) {
         // 1. Recuperar el objeto completo del caché
@@ -154,36 +156,36 @@ export class DetalleAntecedentesComponent extends GeneralComponent {
     forkJoin({
       gestionData: this.detalleAntecedentesService.consultarGestion(
         parametros,
-        this.datosUsuario
+        this.datosUsuario.id
       ),
       quejaMedicaData: this.detalleAntecedentesService.consultarQuejaMedica(
         parametros,
-        this.datosUsuario
+        this.datosUsuario.id
       ),
       inconformidadesData:
         this.detalleAntecedentesService.consultarInconformidad(
           parametros,
-          this.datosUsuario
+          this.datosUsuario.id
         ),
       amparoIndirectoData:
         this.detalleAntecedentesService.consultarAmparoIndirecto(
           parametros,
-          this.datosUsuario
+          this.datosUsuario.id
         ),
       procedimientoRpeData:
         this.detalleAntecedentesService.consultarProcedimiento(
           parametros,
-          this.datosUsuario
+          this.datosUsuario.id
         ),
       juicioContenciosoData:
         this.detalleAntecedentesService.consultarJuicioContencioso(
           parametros,
-          this.datosUsuario
+          this.datosUsuario.id
         ),
-      fechasCorte: 
+     /* fechasCorte: 
         this.detalleAntecedentesService.consultarFechasCorte(
           this.datosUsuario
-        )
+        )*/
     }).subscribe({
       next: ({
         gestionData,
@@ -192,7 +194,7 @@ export class DetalleAntecedentesComponent extends GeneralComponent {
         amparoIndirectoData,
         procedimientoRpeData,
         juicioContenciosoData,
-        fechasCorte
+        //fechasCorte
       }) => {
         this.lstGestion.set(gestionData.content);
         this.totalElementosGestion = gestionData.page.totalElements;
@@ -215,7 +217,7 @@ export class DetalleAntecedentesComponent extends GeneralComponent {
         this.lstJuicio.set(juicioContenciosoData['content']);
         this.totalElementosJuicio = juicioContenciosoData['page'].totalElements;
 
-        this.fechasCorte = fechasCorte.respuesta
+        //this.fechasCorte = fechasCorte.respuesta
       },
     });
   }
@@ -292,7 +294,7 @@ export class DetalleAntecedentesComponent extends GeneralComponent {
     };
 
     this.detalleAntecedentesService
-      .consultarQuejaMedica(parametros, this.datosUsuario)
+      .consultarQuejaMedica(parametros, this.datosUsuario.id)
       .subscribe({
         next: (datos) => {
           this.lstQueja.set(datos['content']);
@@ -309,7 +311,7 @@ export class DetalleAntecedentesComponent extends GeneralComponent {
     };
 
     this.detalleAntecedentesService
-      .consultarGestion(parametros, this.datosUsuario)
+      .consultarGestion(parametros, this.datosUsuario.id)
       .subscribe({
         next: (datos) => {
           this.lstGestion.set(datos.content);
@@ -326,7 +328,7 @@ export class DetalleAntecedentesComponent extends GeneralComponent {
     };
 
     this.detalleAntecedentesService
-      .consultarInconformidad(parametros, this.datosUsuario)
+      .consultarInconformidad(parametros, this.datosUsuario.id)
       .subscribe({
         next: (datos) => {
           this.lstInconformidad.set(datos['content']);
@@ -343,7 +345,7 @@ export class DetalleAntecedentesComponent extends GeneralComponent {
     };
 
     this.detalleAntecedentesService
-      .consultarAmparoIndirecto(parametros, this.datosUsuario)
+      .consultarAmparoIndirecto(parametros, this.datosUsuario.id)
       .subscribe({
         next: (datos) => {
           this.lstAmparo.set(datos['content']);
@@ -360,7 +362,7 @@ export class DetalleAntecedentesComponent extends GeneralComponent {
     };
 
     this.detalleAntecedentesService
-      .consultarProcedimiento(parametros, this.datosUsuario)
+      .consultarProcedimiento(parametros, this.datosUsuario.id)
       .subscribe({
         next: (datos) => {
           this.lstProcedimientoRpe.set(datos['content']);
@@ -377,7 +379,7 @@ export class DetalleAntecedentesComponent extends GeneralComponent {
     };
 
     this.detalleAntecedentesService
-      .consultarJuicioContencioso(parametros, this.datosUsuario)
+      .consultarJuicioContencioso(parametros, this.datosUsuario.id)
       .subscribe({
         next: (datos) => {
           this.lstJuicio.set(datos['content']);
