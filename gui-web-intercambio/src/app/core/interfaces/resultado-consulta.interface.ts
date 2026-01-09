@@ -1,5 +1,6 @@
 import {RegistroAntecedentes} from './registro-antecedentes.interface';
 import {WritableSignal} from '@angular/core';
+import {NombreTipoDropdown} from './nombre-tipo-dropdown.interface';
 
 enum TipoTabla {
   NSS = '1',
@@ -14,5 +15,6 @@ export interface ResultadoConsulta {
   paginaActual: number;
   registrosPorPagina: number;
   totalRegistros: number;
-  valorBusqueda: string | null;
+  valorBusqueda: string | NombreTipoDropdown;
 }
+

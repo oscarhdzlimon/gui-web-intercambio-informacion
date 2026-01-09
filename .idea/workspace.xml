@@ -4,13 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="limpieza de servicios">
-      <change afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/interfaces/consulta-descifrada.interface.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/interfaces/nombre-tipo-dropdown.interface.ts" afterDir="false" />
+    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="ajustes de consulta por nss">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/interfaces/resultado-consulta.interface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/interfaces/resultado-consulta.interface.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/services/antecedentes.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/services/antecedentes.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -100,15 +96,7 @@
       <workItem from="1767111634106" duration="669000" />
       <workItem from="1767118150936" duration="3257000" />
       <workItem from="1767891732696" duration="7482000" />
-      <workItem from="1767937805716" duration="11877000" />
-    </task>
-    <task id="LOCAL-00008" summary="ajustes de solicitudes">
-      <option name="closed" value="true" />
-      <created>1765842415901</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1765842415901</updated>
+      <workItem from="1767937805716" duration="13122000" />
     </task>
     <task id="LOCAL-00009" summary="ajustes de tabla de resultados">
       <option name="closed" value="true" />
@@ -494,7 +482,15 @@
       <option name="project" value="LOCAL" />
       <updated>1767976373671</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL-00057" summary="ajustes de consulta por nss">
+      <option name="closed" value="true" />
+      <created>1767985803575</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1767985803575</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -512,7 +508,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="mantener los query params en cambio de página" />
     <MESSAGE value="regresar a la pagina anterior desde detalle antecedentes" />
     <MESSAGE value="cambio expediente a null" />
     <MESSAGE value="cambio pase null" />
@@ -537,6 +532,7 @@
     <MESSAGE value="habilitacion de botones de asociacion" />
     <MESSAGE value="ajustes de params servicios y limpieza de elementos" />
     <MESSAGE value="limpieza de servicios" />
-    <option name="LAST_COMMIT_MESSAGE" value="limpieza de servicios" />
+    <MESSAGE value="ajustes de consulta por nss" />
+    <option name="LAST_COMMIT_MESSAGE" value="ajustes de consulta por nss" />
   </component>
 </project>

@@ -212,8 +212,6 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
       consulta_todos: this.consulta_todos
     };
 
-    console.log(filtros)
-    debugger
 
     if (this.filtroForm.invalid && !this.consulta_todos) {
       this._alertServices.informacion('Debe seleccionar el filtro y proporcionar el valor de búsqueda.');
@@ -251,7 +249,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
       this.consultas.push({
         tipo: TipoTabla.NOMBRE,
         tituloBase: 'Resultados por Nombre y Apellidos',
-        tituloCompleto: `Resultados por Nombre y Apellidos: ${valor}`,
+        tituloCompleto: `Resultados por Nombre y Apellidos: ${valor.nombreCompleto}`,
         data: signal([]),
         paginaActual: 0,
         registrosPorPagina: 10,
@@ -303,15 +301,17 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
     const consulta: ResultadoConsulta = this.consultas[index];
     if (!consulta) return;
 
+    const label: string = (typeof consulta.valorBusqueda === 'string') ? consulta.valorBusqueda : consulta.valorBusqueda.nombreCompleto;
+
     // Actualizar título
-    consulta.tituloCompleto = `${consulta.tituloBase}: ${consulta.valorBusqueda || 'Expediente'}`;
+    consulta.tituloCompleto = `${consulta.tituloBase}: ${label || 'Expediente'}`;
 
     // Preparar la solicitud específica (NSS o Nombre)
     let solicitud: SolicitudBusquedaPaginado;
     if (consulta.tipo === TipoTabla.NSS) {
       solicitud = this.generarSolicitudAntecedentesNSS(consulta.valorBusqueda as string);
     } else { // TipoTabla.NOMBRE
-      solicitud = this.generarSolicitudAntecedentesNombre(consulta.valorBusqueda as string);
+      solicitud = this.generarSolicitudAntecedentesNombre(consulta.valorBusqueda);
     }
 
     // Petición de Listado
@@ -358,7 +358,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
     }
   }
 
-  generarSolicitudAntecedentesNombre(valor: string): SolicitudBusquedaPaginado {
+  generarSolicitudAntecedentesNombre(valor: any): SolicitudBusquedaPaginado {
     return {
       expediente: this.REF_SISTEMA.expediente,
       ooad_UMAE: this.REF_SISTEMA.ooad_UMAE,
@@ -366,9 +366,9 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
       sistema: this.REF_SISTEMA.sistema,
       modulo: this.REF_SISTEMA.modulo,
       personas: [{
-        "nom_nombre_afectado": "SANJUANA",
-        "nom_apellido_paterno_afectado": "VEGA",
-        "nom_apellido_materno_afectado": "SIFUENTES"
+        nom_nombre_afectado: valor.nom_nombre_afectado,
+        nom_apellido_paterno_afectado: valor.nom_apellido_paterno_afectado,
+        nom_apellido_materno_afectado: valor.nom_apellido_materno_afectado,
       }]
     }
   }
