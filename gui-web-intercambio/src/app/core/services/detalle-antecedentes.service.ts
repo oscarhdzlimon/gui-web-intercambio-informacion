@@ -27,17 +27,17 @@ export class DetalleAntecedentesService {
   });
 
   consultarGestion(params:ParametrosInterface,
-    filtros: DetalleAntecedenteInterface): Observable<any>{
+    id: string): Observable<any>{
   
     const {page, size, sort} = params;
 
     let parametros = new HttpParams();
     parametros = parametros.set('page', page);
     parametros = parametros.set('size', size);
-    parametros = parametros.set('sort', sort || 'asc');
+    parametros = parametros.set('id', id);
     
     const ruta = `${this.serverEndPointURLAntecedente}antecedentes/Detalle/Gestion`;
-    return this.http.post<HttpRespuesta<any>>(ruta, filtros, {headers: this.header, params: parametros}).pipe(
+    return this.http.post<HttpRespuesta<any>>(ruta, {}, {headers: this.header, params: parametros}).pipe(
       catchError(this.handleError),
       map((response: any) => {
         return response
@@ -46,17 +46,17 @@ export class DetalleAntecedentesService {
   }
 
   consultarQuejaMedica(params:ParametrosInterface,
-    filtros: DetalleAntecedenteInterface): Observable<HttpRespuesta<any>>{
+    id: string): Observable<HttpRespuesta<any>>{
   
     const {page, size, sort} = params;
 
     let parametros = new HttpParams();
     parametros = parametros.set('page', page);
     parametros = parametros.set('size', size);
-    parametros = parametros.set('sort', sort || 'asc');
+    parametros = parametros.set('id', id);
     
     const ruta = `${this.serverEndPointURLAntecedente}antecedentes/Detalle/QuejaMedica`;
-    return this.http.post<HttpRespuesta<any>>(ruta, filtros, {headers: this.header, params: parametros}).pipe(
+    return this.http.post<HttpRespuesta<any>>(ruta, {}, {headers: this.header, params: parametros}).pipe(
       catchError(this.handleError),
       map((response: any) => {
         return response
@@ -65,17 +65,17 @@ export class DetalleAntecedentesService {
   }
   
   consultarInconformidad(params:ParametrosInterface,
-    filtros: DetalleAntecedenteInterface): Observable<HttpRespuesta<any>>{
+    id: string): Observable<HttpRespuesta<any>>{
   
     const {page, size, sort} = params;
 
     let parametros = new HttpParams();
     parametros = parametros.set('page', page);
     parametros = parametros.set('size', size);
-    parametros = parametros.set('sort', sort || 'asc');
+    parametros = parametros.set('id', id);
     
     const ruta = `${this.serverEndPointURLAntecedente}antecedentes/Detalle/Inconformidad`;
-    return this.http.post<HttpRespuesta<any>>(ruta, filtros, {headers: this.header, params: parametros}).pipe(
+    return this.http.post<HttpRespuesta<any>>(ruta, {}, {headers: this.header, params: parametros}).pipe(
       catchError(this.handleError),
       map((response: any) => {
         return response
@@ -84,17 +84,17 @@ export class DetalleAntecedentesService {
   }
   
   consultarAmparoIndirecto(params:ParametrosInterface,
-    filtros: DetalleAntecedenteInterface): Observable<HttpRespuesta<any>>{
+    id: string): Observable<HttpRespuesta<any>>{
   
     const {page, size, sort} = params;
 
     let parametros = new HttpParams();
     parametros = parametros.set('page', page);
     parametros = parametros.set('size', size);
-    parametros = parametros.set('sort', sort || 'asc');
+    parametros = parametros.set('id', id);
     
     const ruta = `${this.serverEndPointURLAntecedente}antecedentes/Detalle/AmparoDirecto`;
-    return this.http.post<HttpRespuesta<any>>(ruta, filtros, {headers: this.header, params: parametros}).pipe(
+    return this.http.post<HttpRespuesta<any>>(ruta, {}, {headers: this.header, params: parametros}).pipe(
       catchError(this.handleError),
       map((response: any) => {
         return response
@@ -103,17 +103,17 @@ export class DetalleAntecedentesService {
   }
   
   consultarProcedimiento(params:ParametrosInterface,
-    filtros: DetalleAntecedenteInterface): Observable<HttpRespuesta<any>>{
+    id: string): Observable<HttpRespuesta<any>>{
   
     const {page, size, sort} = params;
 
     let parametros = new HttpParams();
     parametros = parametros.set('page', page);
     parametros = parametros.set('size', size);
-    parametros = parametros.set('sort', sort || 'asc');
+    parametros = parametros.set('id', id);
     
     const ruta = `${this.serverEndPointURLAntecedente}antecedentes/Detalle/ProcedimientoRPE`;
-    return this.http.post<HttpRespuesta<any>>(ruta, filtros, {headers: this.header, params: parametros}).pipe(
+    return this.http.post<HttpRespuesta<any>>(ruta, {}, {headers: this.header, params: parametros}).pipe(
       catchError(this.handleError),
       map((response: any) => {
         return response
@@ -122,17 +122,17 @@ export class DetalleAntecedentesService {
   }
 
   consultarJuicioContencioso(params:ParametrosInterface,
-    filtros: DetalleAntecedenteInterface): Observable<HttpRespuesta<any>>{
+    id: string): Observable<HttpRespuesta<any>>{
   
     const {page, size, sort} = params;
 
     let parametros = new HttpParams();
     parametros = parametros.set('page', page);
     parametros = parametros.set('size', size);
-    parametros = parametros.set('sort', sort || 'asc');
+    parametros = parametros.set('id', id);
     
     const ruta = `${this.serverEndPointURLAntecedente}antecedentes/Detalle/JuicioContencioso`;
-    return this.http.post<HttpRespuesta<any>>(ruta, filtros, {headers: this.header, params: parametros}).pipe(
+    return this.http.post<HttpRespuesta<any>>(ruta, {}, {headers: this.header, params: parametros}).pipe(
       catchError(this.handleError),
       map((response: any) => {
         return response
