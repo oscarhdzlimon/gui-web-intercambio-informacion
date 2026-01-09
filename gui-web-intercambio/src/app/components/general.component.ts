@@ -3,13 +3,9 @@ import {Component, inject} from "@angular/core";
 import {Mensajes} from "@utils/mensajes";
 import {Router} from '@angular/router';
 import {NAV} from "@utils/url-global";
-import {CatalogosGeneralesService} from "@services/catalogos-generales.service";
-import {RegistroMedicoService} from "@services/registro-medico.service";
 import {AlertService} from "@services/alert.service";
 import {AuthService} from "@services/auth.service";
 import {DocumentoService} from "@services/documentos.service";
-import {SessionTimerService} from "@services/sesion-timer.service";
-import {ConvocatoriaService} from "@services/convocatoria.service";
 
 @Component({
   selector: 'app-general',

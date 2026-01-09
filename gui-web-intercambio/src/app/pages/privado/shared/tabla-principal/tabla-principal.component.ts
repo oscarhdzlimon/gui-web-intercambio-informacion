@@ -106,16 +106,13 @@ export class TablaPrincipalComponent {
       expediente: this.expediente,
     };
 
-    // Guardar el objeto de datos y obtener el UUID
-    const cacheId: string = this.dataCacheService.saveData(datosContexto);
-
     const navigationExtras: NavigationExtras = {
       queryParams: this.currentQueryParams,
       queryParamsHandling: 'preserve'
     };
 
     // Navegar usando el UUID como parámetro posicional
-    void this._router.navigate(['/privado', NAV.detalleAntecedentes, cacheId], navigationExtras);
+    void this._router.navigate(['/privado', NAV.detalleAntecedentes, registro.id], navigationExtras);
   }
 
   generarPdf(registro: RegistroAntecedentes) {

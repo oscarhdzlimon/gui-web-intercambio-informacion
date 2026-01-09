@@ -1,5 +1,5 @@
 import {CommonModule} from '@angular/common';
-import {Component, inject, OnInit, signal} from '@angular/core';
+import {Component, inject, OnInit, signal, WritableSignal} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {GeneralComponent} from '@components/general.component';
 import {NgbAccordionModule} from '@ng-bootstrap/ng-bootstrap';
@@ -28,11 +28,13 @@ import {ManejoSolicitudAntecedentesService} from '@services/manejo-solicitud-ant
 import {SolicitudBitacora} from '../../../../core/interfaces/solicitud-bitacora.inerface';
 import {DetalleAntecedentes} from '@models/detalleAntecedentes.interface';
 import {DetalleAntecedentesService} from '@services/detalle-antecedentes.service';
-import { ReporteAntecedentes } from '@models/reporteAntecedentes.interface';
+import {SolicitudBusquedaPaginado} from '../../../../core/interfaces/solicitud-busqueda-antecedentes.interface';
+import {ConsultaDescifrada} from '../../../../core/interfaces/consulta-descifrada.interface';
+import {NombreTipoDropdown} from '../../../../core/interfaces/nombre-tipo-dropdown.interface';
 
 enum TipoTabla {
-  NSS = 'NSS',
-  NOMBRE = 'NOMBRE'
+  NSS = '1',
+  NOMBRE = '2'
 }
 
 @Component({
@@ -55,6 +57,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
 
   filtroResultado: TipoDropdown[] = FILTRO_RESULTADOS_EXPEDIENTE;
   nombres: TipoDropdown[] = [];
+  nombresSolicitud: NombreTipoDropdown[] = [];
   nss: TipoDropdown[] = [];
 
   puedeGuardar = false;
@@ -82,6 +85,8 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
     fecCorteSsc2: "",
     nss: ""
   };
+
+  REF_SISTEMA!: ConsultaDescifrada;
 
   constructor(private readonly fb: FormBuilder,
               private readonly route: ActivatedRoute,
@@ -150,14 +155,40 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
       this.REF_MODULO = params.get('m') as string;
       this.REF_OOAD = params.get('o') as string;
     });
-    this.antecedentesService.getExpediente(this.expedienteID).subscribe({
-      next: (respuesta) => {
-        this.nss = mapearArregloTipoDropdown(respuesta, 'nss', 'nss');
-        this.nombres = mapearArregloTipoDropdown(respuesta, 'nombreCompleto', 'nombreCompleto');
-      },
-      error: (error) => {
+    this.obtenerDatosCifrados();
+  }
+
+  obtenerDatosCifrados() {
+    this.REF_SISTEMA = {
+      "expediente": "CC.NL.-0102/1999",
+      "personas": [
+        {
+          "cve_nss": "64856648410",
+          "nom_nombre_afectado": "ROSSANA MARIA",
+          "nom_apellido_paterno_afectado": "CARDENAS",
+          "nom_apellido_materno_afectado": "CERVANTES"
+        }, {
+          "cve_nss": "45906106971",
+          "nom_nombre_afectado": "BEATRIZ",
+          "nom_apellido_paterno_afectado": "JIMÉNEZ",
+          "nom_apellido_materno_afectado": "MÁXIMO"
+        }
+
+      ],
+      "ooad_UMAE": "1",
+      "usuarioLogueado": "usuario",
+      "sistema": "1",
+      "modulo": "3"
+    }
+    this.nombresSolicitud = this.REF_SISTEMA.personas.map(n => {
+      return {
+        nom_nombre_afectado: n.nom_nombre_afectado,
+        nom_apellido_paterno_afectado: n.nom_apellido_paterno_afectado,
+        nom_apellido_materno_afectado: n.nom_apellido_materno_afectado,
+        nombreCompleto: `${n.nom_nombre_afectado} ${n.nom_apellido_paterno_afectado} ${n.nom_apellido_materno_afectado}`,
       }
-    })
+    });
+    this.nss = mapearArregloTipoDropdown(this.REF_SISTEMA.personas, 'cve_nss', 'cve_nss');
   }
 
   ngOnInit(): void {
@@ -181,6 +212,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
       consulta_todos: this.consulta_todos
     };
 
+
     if (this.filtroForm.invalid && !this.consulta_todos) {
       this._alertServices.informacion('Debe seleccionar el filtro y proporcionar el valor de búsqueda.');
       return;
@@ -202,7 +234,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
         tituloCompleto: `Resultados por NSS: ${valor}`,
         data: signal([]),
         paginaActual: 0,
-        registrosPorPagina: 5,
+        registrosPorPagina: 10,
         totalRegistros: 0,
         valorBusqueda: valor
       });
@@ -217,10 +249,10 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
       this.consultas.push({
         tipo: TipoTabla.NOMBRE,
         tituloBase: 'Resultados por Nombre y Apellidos',
-        tituloCompleto: `Resultados por Nombre y Apellidos: ${valor}`,
+        tituloCompleto: `Resultados por Nombre y Apellidos: ${valor.nombreCompleto}`,
         data: signal([]),
         paginaActual: 0,
-        registrosPorPagina: 5,
+        registrosPorPagina: 10,
         totalRegistros: 0,
         valorBusqueda: valor
       });
@@ -269,22 +301,27 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
     const consulta: ResultadoConsulta = this.consultas[index];
     if (!consulta) return;
 
+    const label: string = (typeof consulta.valorBusqueda === 'string') ? consulta.valorBusqueda : consulta.valorBusqueda.nombreCompleto;
+
     // Actualizar título
-    consulta.tituloCompleto = `${consulta.tituloBase}: ${consulta.valorBusqueda || 'Expediente'}`;
+    consulta.tituloCompleto = `${consulta.tituloBase}: ${label || 'Expediente'}`;
 
     // Preparar la solicitud específica (NSS o Nombre)
-    let solicitud: SolicitudAntecedentes;
+    let solicitud: SolicitudBusquedaPaginado;
     if (consulta.tipo === TipoTabla.NSS) {
       solicitud = this.generarSolicitudAntecedentesNSS(consulta.valorBusqueda as string);
     } else { // TipoTabla.NOMBRE
-      solicitud = this.generarSolicitudAntecedentesNombre(consulta.valorBusqueda as string);
+      solicitud = this.generarSolicitudAntecedentesNombre(consulta.valorBusqueda);
     }
+
+    const tipoConsulta = consulta.tipo === TipoTabla.NSS ? 1 : 2;
 
     // Petición de Listado
     const listObservable: Observable<any> = this.antecedentesService.getLstAntecedentes(
       consulta.registrosPorPagina,
       consulta.paginaActual,
-      solicitud
+      solicitud,
+      tipoConsulta
     );
 
     // Solo se suscribe al listado, ya que el total es independiente (abajo)
@@ -324,19 +361,29 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
     }
   }
 
-  generarSolicitudAntecedentesNombre(valor: string): SolicitudAntecedentes {
+  generarSolicitudAntecedentesNombre(valor: any): SolicitudBusquedaPaginado {
     return {
-      expediente: this.expedienteID,
-      nombre: valor,
-      nss: null
+      expediente: this.REF_SISTEMA.expediente,
+      ooad_UMAE: this.REF_SISTEMA.ooad_UMAE,
+      usuarioLogueado: this.REF_SISTEMA.usuarioLogueado,
+      sistema: this.REF_SISTEMA.sistema,
+      modulo: this.REF_SISTEMA.modulo,
+      personas: [{
+        nom_nombre_afectado: valor.nom_nombre_afectado,
+        nom_apellido_paterno_afectado: valor.nom_apellido_paterno_afectado,
+        nom_apellido_materno_afectado: valor.nom_apellido_materno_afectado,
+      }]
     }
   }
 
-  generarSolicitudAntecedentesNSS(valor: string): SolicitudAntecedentes {
+  generarSolicitudAntecedentesNSS(valor: string): SolicitudBusquedaPaginado {
     return {
-      expediente: this.expedienteID,
-      nombre: null,
-      nss: valor
+      expediente: this.REF_SISTEMA.expediente,
+      ooad_UMAE: this.REF_SISTEMA.ooad_UMAE,
+      usuarioLogueado: this.REF_SISTEMA.usuarioLogueado,
+      sistema: this.REF_SISTEMA.sistema,
+      modulo: this.REF_SISTEMA.modulo,
+      personas: [{cve_nss: valor}]
     }
   }
 
@@ -572,23 +619,6 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
       refOoad: this.REF_OOAD,
       refUsuarioAutentica: this.REF_USUARIO
 
-    }
-  }
-
-  generarObjReporteAntecedentes(): ReporteAntecedentes{
-
-
-    return  {
-      nombre: "",
-      nss: "",
-      expediente: "",
-      fecCorteSiade: this.fechasCorte.fecCorteSiade,
-      fecCorteSsc1: this.fechasCorte.fecCorteSsc1,
-      fecCorteSsc2: this.fechasCorte.fecCorteSsc2,
-      nombreConsultor: this.REF_USUARIO,
-      ooad: this.REF_OOAD,
-      aplicativoOrigen: this.REF_APLICATIVO,
-      moduloOrigen: this.REF_MODULO,
     }
   }
 }
