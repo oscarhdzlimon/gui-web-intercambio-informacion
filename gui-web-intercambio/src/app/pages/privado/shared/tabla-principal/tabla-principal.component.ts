@@ -28,13 +28,14 @@ import { ReporteAntecedentes } from '@models/reporteAntecedentes.interface';
     ConfirmPopupModule,
     PaginatorModule, FormsModule],
   templateUrl: './tabla-principal.component.html',
-  styleUrl: './tabla-principal.component.scss' 
+  styleUrl: './tabla-principal.component.scss'
 })
 export class TablaPrincipalComponent {
   protected _router: Router;
   _nav = NAV;
 
   @Input() titulo: string = '';
+  @Input() tipoBusqueda: string = '';
   @Input() showTitulo: boolean = true;
   @Input() expediente: string | null = null;
   @Input() datosUsuario!: ReporteAntecedentes;
@@ -100,15 +101,13 @@ export class TablaPrincipalComponent {
   }
 
   ver(registro: RegistroAntecedentes): void {
-    const datosContexto = {
-      nombre: registro.nombre,
-      nss: registro.nss,
-      expediente: this.expediente,
-    };
 
     const navigationExtras: NavigationExtras = {
-      queryParams: this.currentQueryParams,
-      queryParamsHandling: 'preserve'
+      queryParams: {
+        ...this.currentQueryParams,
+        tipoBusqueda: this.tipoBusqueda
+      },
+      queryParamsHandling: 'merge'
     };
 
     // Navegar usando el UUID como parámetro posicional
@@ -116,7 +115,7 @@ export class TablaPrincipalComponent {
   }
 
   generarPdf(registro: RegistroAntecedentes) {
-    const obj: ReporteAntecedentes = { 
+    const obj: ReporteAntecedentes = {
       ...this.datosUsuario,
       nombre: registro.nombre,
       nss: registro.nss,

@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="correcciones de tipoConsulta">
+    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="correcciones de objeto de reporte">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/shared/tabla-principal/tabla-principal.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/shared/tabla-principal/tabla-principal.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,15 +96,7 @@
       <workItem from="1767111634106" duration="669000" />
       <workItem from="1767118150936" duration="3257000" />
       <workItem from="1767891732696" duration="7482000" />
-      <workItem from="1767937805716" duration="20223000" />
-    </task>
-    <task id="LOCAL-00013" summary="ajustes busqueda sistema">
-      <option name="closed" value="true" />
-      <created>1765859852743</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1765859852743</updated>
+      <workItem from="1767937805716" duration="23173000" />
     </task>
     <task id="LOCAL-00014" summary="ajustes filtros busqueda sistema">
       <option name="closed" value="true" />
@@ -488,7 +482,15 @@
       <option name="project" value="LOCAL" />
       <updated>1767994166879</updated>
     </task>
-    <option name="localTasksCounter" value="62" />
+    <task id="LOCAL-00062" summary="correcciones de objeto de reporte">
+      <option name="closed" value="true" />
+      <created>1767995417183</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1767995417183</updated>
+    </task>
+    <option name="localTasksCounter" value="63" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -506,7 +508,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="modificaciones servicio busqueda" />
     <MESSAGE value="registro de bitacora correctamente guardado" />
     <MESSAGE value="ajustes de bitacora" />
     <MESSAGE value="apartados para busqueda" />
@@ -531,6 +532,7 @@
     <MESSAGE value="ajustes de tipo de busqueda" />
     <MESSAGE value="corrección de id para detalle" />
     <MESSAGE value="correcciones de tipoConsulta" />
-    <option name="LAST_COMMIT_MESSAGE" value="correcciones de tipoConsulta" />
+    <MESSAGE value="correcciones de objeto de reporte" />
+    <option name="LAST_COMMIT_MESSAGE" value="correcciones de objeto de reporte" />
   </component>
 </project>
