@@ -31,6 +31,7 @@ import {DetalleAntecedentesService} from '@services/detalle-antecedentes.service
 import {SolicitudBusquedaPaginado} from '../../../../core/interfaces/solicitud-busqueda-antecedentes.interface';
 import {ConsultaDescifrada} from '../../../../core/interfaces/consulta-descifrada.interface';
 import {NombreTipoDropdown} from '../../../../core/interfaces/nombre-tipo-dropdown.interface';
+import {ReporteAntecedentes} from '@models/reporteAntecedentes.interface';
 
 enum TipoTabla {
   NSS = '1',
@@ -465,9 +466,10 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
   }
 
   ejecutarConsultaTotal(): void {
-    const solicitudTotal: SolicitudAntecedentes = this.generarSolicitudAntecedentesTotal();
+    const solicitudTotal: SolicitudAntecedentes | SolicitudBusquedaPaginado = this.generarSolicitudAntecedentesTotal();
+    const tipoConsulta = this.filtroForm.get('filtro')?.value;
 
-    this.antecedentesService.getTotalAntecedentes(solicitudTotal).subscribe({
+    this.antecedentesService.getTotalAntecedentes(solicitudTotal, tipoConsulta).subscribe({
       next: (totalResponse) => {
         this.totalAntecedentes = totalResponse;
       },
@@ -479,7 +481,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
     });
   }
 
-  generarSolicitudAntecedentesTotal(): SolicitudAntecedentes {
+  generarSolicitudAntecedentesTotal(): SolicitudAntecedentes | SolicitudBusquedaPaginado {
     const tipoConsulta = this.filtroForm.get('filtro')?.value;
     const valorBusqueda = this.filtroForm.get('valor')?.value;
 
@@ -488,17 +490,9 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
     }
 
     if (tipoConsulta === 1) { // Caso 1: Búsqueda por NSS
-      return {
-        expediente: this.expedienteID,
-        nombre: null,
-        nss: valorBusqueda
-      };
+      return this.generarSolicitudAntecedentesNSS(valorBusqueda);
     } else
-      return {
-        expediente: this.expedienteID,
-        nombre: valorBusqueda, // Enviar el Nombre como un arreglo de un elemento
-        nss: null
-      };
+      return this.generarSolicitudAntecedentesNombre(valorBusqueda);
   }
 
   protected readonly tipoconsulta = TIPO_CONSULTA_ANTECEDENTES;
@@ -619,6 +613,22 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
       refOoad: this.REF_OOAD,
       refUsuarioAutentica: this.REF_USUARIO
 
+    }
+  }
+
+  generarObjReporteAntecedentes(): ReporteAntecedentes{
+
+    return  {
+      nombre: "",
+      nss: "",
+      expediente: "",
+      fecCorteSiade: this.fechasCorte.fecCorteSiade,
+      fecCorteSsc1: this.fechasCorte.fecCorteSsc1,
+      fecCorteSsc2: this.fechasCorte.fecCorteSsc2,
+      nombreConsultor: this.REF_USUARIO,
+      ooad: this.REF_OOAD,
+      aplicativoOrigen: this.REF_APLICATIVO,
+      moduloOrigen: this.REF_MODULO,
     }
   }
 }
