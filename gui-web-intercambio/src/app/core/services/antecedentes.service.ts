@@ -15,13 +15,13 @@ export class AntecedentesService {
 
   http: HttpClient = inject(HttpClient);
 
-  getLstAntecedentes(size: number, page: number, solicitud: SolicitudBusquedaPaginado | SolicitudAntecedentes) {
+  getLstAntecedentes(size: number, page: number, solicitud: SolicitudBusquedaPaginado | SolicitudAntecedentes, tipoBusqueda: number = 1) {
     const params = new HttpParams()
       .set('page', page)
       .set('size', size)
-      .set('tipoBusqueda', 2);
+      .set('tipoBusqueda', tipoBusqueda);
 
-    console.log(params)
+    console.log(solicitud)
 
     const body = {
       "expediente": "CC.NL.-0102/1999",
@@ -38,7 +38,7 @@ export class AntecedentesService {
       "ooad_UMAE": "ECATEPEC"
     }
 
-    return this.http.post<any>(`${this.URL_BASE}/General`, body, {params});
+    return this.http.post<any>(`${this.URL_BASE}/General`, solicitud, {params});
   }
 
   getTotalAntecedentes(solicitud: SolicitudAntecedentes) {

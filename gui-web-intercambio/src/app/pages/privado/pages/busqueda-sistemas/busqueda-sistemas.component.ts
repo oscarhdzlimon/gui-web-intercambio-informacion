@@ -29,10 +29,12 @@ import {SolicitudBitacora} from '../../../../core/interfaces/solicitud-bitacora.
 import {DetalleAntecedentes} from '@models/detalleAntecedentes.interface';
 import {DetalleAntecedentesService} from '@services/detalle-antecedentes.service';
 import {SolicitudBusquedaPaginado} from '../../../../core/interfaces/solicitud-busqueda-antecedentes.interface';
+import {ConsultaDescifrada} from '../../../../core/interfaces/consulta-descifrada.interface';
+import {NombreTipoDropdown} from '../../../../core/interfaces/nombre-tipo-dropdown.interface';
 
 enum TipoTabla {
-  NSS = 'NSS',
-  NOMBRE = 'NOMBRE'
+  NSS = '1',
+  NOMBRE = '2'
 }
 
 @Component({
@@ -55,6 +57,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
 
   filtroResultado: TipoDropdown[] = FILTRO_RESULTADOS_EXPEDIENTE;
   nombres: TipoDropdown[] = [];
+  nombresSolicitud: NombreTipoDropdown[] = [];
   nss: TipoDropdown[] = [];
 
   puedeGuardar = false;
@@ -63,62 +66,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
 
   totalAntecedentes!: TotalesAntecedentes;
 
-  consultas: ResultadoConsulta[] = [{
-    tipo: TipoTabla.NSS,
-    tituloBase: 'NSS Algo',
-    tituloCompleto: 'Busqueda por Algo',
-    data: signal([
-      {
-        "idBitacoraAsociacion": null,
-        "indAsociado": false,
-        "nss": "64856648410",
-        "expediente": "CC.DFS.-0650/2004",
-        "apellidoMaterno": "CERVANTES",
-        "apellidoPaterno": "CARDENAS",
-        "quejaMedica": 0,
-        "amparoIndirecto": 0,
-        "juicioContencioso": 0,
-        "gestion": 0,
-        "nombre": "  ROSSANA MARIA",
-        "procedimientoRpe": 0,
-        "inconformidades": 1
-      },
-      {
-        "idBitacoraAsociacion": null,
-        "indAsociado": false,
-        "nss": "64856648410",
-        "expediente": "CC.DFS.-0636/2007",
-        "apellidoMaterno": "CERVANTES",
-        "apellidoPaterno": "CARDENAS",
-        "quejaMedica": 0,
-        "amparoIndirecto": 0,
-        "juicioContencioso": 0,
-        "gestion": 0,
-        "nombre": "  ROSSANA MARIA",
-        "procedimientoRpe": 0,
-        "inconformidades": 1
-      },
-      {
-        "idBitacoraAsociacion": null,
-        "indAsociado": false,
-        "nss": "45906106971",
-        "expediente": "1110/2024-432",
-        "apellidoMaterno": "MÁXIMO",
-        "apellidoPaterno": "JIMÉNEZ",
-        "quejaMedica": 0,
-        "amparoIndirecto": 1,
-        "juicioContencioso": 0,
-        "gestion": 0,
-        "nombre": "BEATRIZ",
-        "procedimientoRpe": 0,
-        "inconformidades": 0
-      }]),
-    paginaActual: 1,
-    registrosPorPagina: 10,
-    totalRegistros: 15,
-    valorBusqueda: null
-
-  }];
+  consultas: ResultadoConsulta[] = [];
 
   filtroForm!: FormGroup;
 
@@ -137,6 +85,8 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
     fecCorteSsc2: "",
     nss: ""
   };
+
+  REF_SISTEMA!: ConsultaDescifrada;
 
   constructor(private readonly fb: FormBuilder,
               private readonly route: ActivatedRoute,
@@ -205,14 +155,40 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
       this.REF_MODULO = params.get('m') as string;
       this.REF_OOAD = params.get('o') as string;
     });
-    this.antecedentesService.getExpediente(this.expedienteID).subscribe({
-      next: (respuesta) => {
-        this.nss = mapearArregloTipoDropdown(respuesta, 'nss', 'nss');
-        this.nombres = mapearArregloTipoDropdown(respuesta, 'nombreCompleto', 'nombreCompleto');
-      },
-      error: (error) => {
+    this.obtenerDatosCifrados();
+  }
+
+  obtenerDatosCifrados() {
+    this.REF_SISTEMA = {
+      "expediente": "CC.NL.-0102/1999",
+      "personas": [
+        {
+          "cve_nss": "64856648410",
+          "nom_nombre_afectado": "ROSSANA MARIA",
+          "nom_apellido_paterno_afectado": "CARDENAS",
+          "nom_apellido_materno_afectado": "CERVANTES"
+        }, {
+          "cve_nss": "45906106971",
+          "nom_nombre_afectado": "BEATRIZ",
+          "nom_apellido_paterno_afectado": "JIMÉNEZ",
+          "nom_apellido_materno_afectado": "MÁXIMO"
+        }
+
+      ],
+      "ooad_UMAE": "1",
+      "usuarioLogueado": "usuario",
+      "sistema": "1",
+      "modulo": "3"
+    }
+    this.nombresSolicitud = this.REF_SISTEMA.personas.map(n => {
+      return {
+        nom_nombre_afectado: n.nom_nombre_afectado,
+        nom_apellido_paterno_afectado: n.nom_apellido_paterno_afectado,
+        nom_apellido_materno_afectado: n.nom_apellido_materno_afectado,
+        nombreCompleto: `${n.nom_nombre_afectado} ${n.nom_apellido_paterno_afectado} ${n.nom_apellido_materno_afectado}`,
       }
-    })
+    });
+    this.nss = mapearArregloTipoDropdown(this.REF_SISTEMA.personas, 'cve_nss', 'cve_nss');
   }
 
   ngOnInit(): void {
@@ -236,6 +212,9 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
       consulta_todos: this.consulta_todos
     };
 
+    console.log(filtros)
+    debugger
+
     if (this.filtroForm.invalid && !this.consulta_todos) {
       this._alertServices.informacion('Debe seleccionar el filtro y proporcionar el valor de búsqueda.');
       return;
@@ -257,7 +236,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
         tituloCompleto: `Resultados por NSS: ${valor}`,
         data: signal([]),
         paginaActual: 0,
-        registrosPorPagina: 5,
+        registrosPorPagina: 10,
         totalRegistros: 0,
         valorBusqueda: valor
       });
@@ -275,7 +254,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
         tituloCompleto: `Resultados por Nombre y Apellidos: ${valor}`,
         data: signal([]),
         paginaActual: 0,
-        registrosPorPagina: 5,
+        registrosPorPagina: 10,
         totalRegistros: 0,
         valorBusqueda: valor
       });
@@ -381,27 +360,27 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
 
   generarSolicitudAntecedentesNombre(valor: string): SolicitudBusquedaPaginado {
     return {
-      expediente: '',
-      ooad_UMAE: '',
-      usuarioLogueado: '',
-      sistema: '',
-      modulo: '',
-      personas: [{ cve_nss: '' }]
-    }
-  }
-
-  generarSolicitudAntecedentesNSS(valor: string): SolicitudBusquedaPaginado {
-    return {
-      expediente: "CC.NL.-0102/1999",
-      ooad_UMAE: '',
-      usuarioLogueado: '',
-      sistema: '',
-      modulo: '',
+      expediente: this.REF_SISTEMA.expediente,
+      ooad_UMAE: this.REF_SISTEMA.ooad_UMAE,
+      usuarioLogueado: this.REF_SISTEMA.usuarioLogueado,
+      sistema: this.REF_SISTEMA.sistema,
+      modulo: this.REF_SISTEMA.modulo,
       personas: [{
         "nom_nombre_afectado": "SANJUANA",
         "nom_apellido_paterno_afectado": "VEGA",
         "nom_apellido_materno_afectado": "SIFUENTES"
       }]
+    }
+  }
+
+  generarSolicitudAntecedentesNSS(valor: string): SolicitudBusquedaPaginado {
+    return {
+      expediente: this.REF_SISTEMA.expediente,
+      ooad_UMAE: this.REF_SISTEMA.ooad_UMAE,
+      usuarioLogueado: this.REF_SISTEMA.usuarioLogueado,
+      sistema: this.REF_SISTEMA.sistema,
+      modulo: this.REF_SISTEMA.modulo,
+      personas: [{cve_nss: valor}]
     }
   }
 

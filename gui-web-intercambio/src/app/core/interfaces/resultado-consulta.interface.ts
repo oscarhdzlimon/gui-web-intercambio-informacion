@@ -2,8 +2,8 @@ import {RegistroAntecedentes} from './registro-antecedentes.interface';
 import {WritableSignal} from '@angular/core';
 
 enum TipoTabla {
-  NSS = 'NSS',
-  NOMBRE = 'NOMBRE'
+  NSS = '1',
+  NOMBRE = '2'
 }
 
 export interface ResultadoConsulta {
