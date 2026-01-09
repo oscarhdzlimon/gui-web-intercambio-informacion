@@ -567,8 +567,11 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
 
 
   obtenerFechasCorte() {
-    const datosUsuario = this.obtenerDatosUsario();
-    this.detalleAntecedentesService.consultarFechasCorte(datosUsuario).subscribe({
+
+    const solicitudFechaCorte: SolicitudAntecedentes | SolicitudBusquedaPaginado = this.generarSolicitudAntecedentesTotal();
+    const tipoConsulta = this.filtroForm.get('filtro')?.value;
+
+    this.detalleAntecedentesService.consultarFechasCorte(solicitudFechaCorte, tipoConsulta).subscribe({
       next: (datos) => {
         this.fechasCorte = datos.respuesta;
         this.guardarBitacora();
