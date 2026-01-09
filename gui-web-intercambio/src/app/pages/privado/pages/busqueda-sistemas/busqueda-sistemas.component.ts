@@ -314,11 +314,14 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
       solicitud = this.generarSolicitudAntecedentesNombre(consulta.valorBusqueda);
     }
 
+    const tipoConsulta = consulta.tipo === TipoTabla.NSS ? 1 : 2;
+
     // Petición de Listado
     const listObservable: Observable<any> = this.antecedentesService.getLstAntecedentes(
       consulta.registrosPorPagina,
       consulta.paginaActual,
-      solicitud
+      solicitud,
+      tipoConsulta
     );
 
     // Solo se suscribe al listado, ya que el total es independiente (abajo)

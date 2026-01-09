@@ -21,22 +21,7 @@ export class AntecedentesService {
       .set('size', size)
       .set('tipoBusqueda', tipoBusqueda);
 
-    console.log(solicitud)
-
-    const body = {
-      "expediente": "CC.NL.-0102/1999",
-      "personas": [
-        {
-          "nom_nombre_afectado": "SANJUANA",
-          "nom_apellido_paterno_afectado": "VEGA",
-          "nom_apellido_materno_afectado": "SIFUENTES"
-        }
-      ],
-      "usuarioLogueado": "Leandro",
-      "sistema": "1",
-      "modulo": "1",
-      "ooad_UMAE": "ECATEPEC"
-    }
+    console.log(tipoBusqueda)
 
     return this.http.post<any>(`${this.URL_BASE}/General`, solicitud, {params});
   }
