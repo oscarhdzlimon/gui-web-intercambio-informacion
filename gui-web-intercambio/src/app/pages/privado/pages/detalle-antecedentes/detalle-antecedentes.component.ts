@@ -121,24 +121,6 @@ export class DetalleAntecedentesComponent extends GeneralComponent {
       const cacheId = params.get('id');
       this.datosUsuario.id = cacheId!;
 
-      if (cacheId) {
-        // 1. Recuperar el objeto completo del caché
-        const datosRecuperados = this.dataCacheService.retrieveData(cacheId);
-
-        if (datosRecuperados) {
-          console.log('Datos cargados desde el caché:', datosRecuperados);
-          this.datosUsuario = datosRecuperados;
-        } else {
-          // Manejo de error si el ID no se encuentra (Ej: al refrescar sin datos guardados)
-          console.warn(
-            'Advertencia: No se encontraron datos para el ID de caché:',
-            cacheId
-          );
-          this.regresar();
-        }
-
-        // this.iniciarCargaDeDatos();
-      }
     });
   }
 
@@ -182,7 +164,7 @@ export class DetalleAntecedentesComponent extends GeneralComponent {
           parametros,
           this.datosUsuario.id
         ),
-     /* fechasCorte: 
+     /* fechasCorte:
         this.detalleAntecedentesService.consultarFechasCorte(
           this.datosUsuario
         )*/
