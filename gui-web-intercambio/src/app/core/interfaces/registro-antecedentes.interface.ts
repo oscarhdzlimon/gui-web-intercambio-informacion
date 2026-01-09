@@ -1,6 +1,7 @@
 export interface RegistroAntecedentes {
   idBitacoraAsociacion: number | null;
   indAsociado: boolean;
+  id: string,
   nss: string;
   nombre: string;
   expediente: string;
