@@ -26,8 +26,11 @@ export class AntecedentesService {
     return this.http.post<any>(`${this.URL_BASE}/General`, solicitud, {params});
   }
 
-  getTotalAntecedentes(solicitud: SolicitudAntecedentes) {
-    return this.http.post<any>(`${this.URL_BASE}/totales`, solicitud);
+  getTotalAntecedentes(solicitud: SolicitudAntecedentes | SolicitudBusquedaPaginado, tipoBusqueda: number = 1) {
+    const params = new HttpParams()
+      .set('tipoBusqueda', tipoBusqueda);
+
+    return this.http.post<any>(`${this.URL_BASE}/totales`, solicitud, { params });
   }
 
   getExpediente(expediente: string) {

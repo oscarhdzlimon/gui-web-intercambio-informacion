@@ -465,9 +465,10 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
   }
 
   ejecutarConsultaTotal(): void {
-    const solicitudTotal: SolicitudAntecedentes = this.generarSolicitudAntecedentesTotal();
+    const solicitudTotal: SolicitudAntecedentes | SolicitudBusquedaPaginado = this.generarSolicitudAntecedentesTotal();
+    const tipoConsulta = this.filtroForm.get('filtro')?.value;
 
-    this.antecedentesService.getTotalAntecedentes(solicitudTotal).subscribe({
+    this.antecedentesService.getTotalAntecedentes(solicitudTotal, tipoConsulta).subscribe({
       next: (totalResponse) => {
         this.totalAntecedentes = totalResponse;
       },
@@ -479,7 +480,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
     });
   }
 
-  generarSolicitudAntecedentesTotal(): SolicitudAntecedentes {
+  generarSolicitudAntecedentesTotal(): SolicitudAntecedentes | SolicitudBusquedaPaginado {
     const tipoConsulta = this.filtroForm.get('filtro')?.value;
     const valorBusqueda = this.filtroForm.get('valor')?.value;
 
@@ -488,17 +489,9 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
     }
 
     if (tipoConsulta === 1) { // Caso 1: Búsqueda por NSS
-      return {
-        expediente: this.expedienteID,
-        nombre: null,
-        nss: valorBusqueda
-      };
+      return this.generarSolicitudAntecedentesNSS(valorBusqueda);
     } else
-      return {
-        expediente: this.expedienteID,
-        nombre: valorBusqueda, // Enviar el Nombre como un arreglo de un elemento
-        nss: null
-      };
+      return this.generarSolicitudAntecedentesNombre(valorBusqueda);
   }
 
   protected readonly tipoconsulta = TIPO_CONSULTA_ANTECEDENTES;
