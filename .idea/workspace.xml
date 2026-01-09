@@ -4,10 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="ajustes al guardar solicitud de antecedentes">
+    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="habilitacion de botones de asociacion">
+      <change afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/interfaces/solicitud-busqueda-antecedentes.interface.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/app.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/components/menu/menu.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/components/menu/menu.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/components/svg-animation/svg-animation.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/components/svg-animation/svg-animation.component.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/components/svg-animation/svg-animation.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/services/antecedentes.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/services/antecedentes.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +80,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-WS-253.29346.143" />
+        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-WS-253.29346.242" />
       </set>
     </attachedChunks>
   </component>
@@ -92,15 +98,11 @@
       <workItem from="1766170592189" duration="2919000" />
       <workItem from="1766376395266" duration="21000" />
       <workItem from="1766414048967" duration="8293000" />
-      <workItem from="1766520540227" duration="517000" />
-    </task>
-    <task id="LOCAL-00005" summary="ajustes solicitud de antecedentes">
-      <option name="closed" value="true" />
-      <created>1765839326411</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1765839326411</updated>
+      <workItem from="1766520540227" duration="1248000" />
+      <workItem from="1767111634106" duration="669000" />
+      <workItem from="1767118150936" duration="3257000" />
+      <workItem from="1767891732696" duration="7482000" />
+      <workItem from="1767937805716" duration="3039000" />
     </task>
     <task id="LOCAL-00006" summary="ajustes totales antecedentes">
       <option name="closed" value="true" />
@@ -486,7 +488,15 @@
       <option name="project" value="LOCAL" />
       <updated>1766430752986</updated>
     </task>
-    <option name="localTasksCounter" value="54" />
+    <task id="LOCAL-00054" summary="habilitacion de botones de asociacion">
+      <option name="closed" value="true" />
+      <created>1766521172460</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1766521172461</updated>
+    </task>
+    <option name="localTasksCounter" value="55" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -504,7 +514,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="faltantes de homologar" />
     <MESSAGE value="ajustes de ref" />
     <MESSAGE value="ajustes de rutas" />
     <MESSAGE value="mantener los query params en cambio de página" />
@@ -529,6 +538,7 @@
     <MESSAGE value="corrección filtros -&gt; busqueda sistemas" />
     <MESSAGE value="correccion al obtener y mostrar elementos de la asoociación" />
     <MESSAGE value="ajustes al guardar solicitud de antecedentes" />
-    <option name="LAST_COMMIT_MESSAGE" value="ajustes al guardar solicitud de antecedentes" />
+    <MESSAGE value="habilitacion de botones de asociacion" />
+    <option name="LAST_COMMIT_MESSAGE" value="habilitacion de botones de asociacion" />
   </component>
 </project>

@@ -4,6 +4,7 @@ import {environment} from '@env/environment.development';
 import {SolicitudAntecedentes} from '../interfaces/solicitud-antecedentes.interface';
 import {SolicitudAsociacion} from '../interfaces/solicitud-asociacion.interface';
 import {SolicitudBitacora} from '../interfaces/solicitud-bitacora.inerface';
+import {SolicitudBusquedaPaginado} from '../interfaces/solicitud-busqueda-antecedentes.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -14,12 +15,30 @@ export class AntecedentesService {
 
   http: HttpClient = inject(HttpClient);
 
-  getLstAntecedentes(size: number, page: number, solicitud: SolicitudAntecedentes) {
-    const params = new HttpParams();
-    params.append('size', size);
-    params.append('page', page);
+  getLstAntecedentes(size: number, page: number, solicitud: SolicitudBusquedaPaginado | SolicitudAntecedentes) {
+    const params = new HttpParams()
+      .set('page', page)
+      .set('size', size)
+      .set('tipoBusqueda', 2);
 
-    return this.http.post<any>(`${this.URL_BASE}/General`, solicitud, {params});
+    console.log(params)
+
+    const body = {
+      "expediente": "CC.NL.-0102/1999",
+      "personas": [
+        {
+          "nom_nombre_afectado": "SANJUANA",
+          "nom_apellido_paterno_afectado": "VEGA",
+          "nom_apellido_materno_afectado": "SIFUENTES"
+        }
+      ],
+      "usuarioLogueado": "Leandro",
+      "sistema": "1",
+      "modulo": "1",
+      "ooad_UMAE": "ECATEPEC"
+    }
+
+    return this.http.post<any>(`${this.URL_BASE}/General`, body, {params});
   }
 
   getTotalAntecedentes(solicitud: SolicitudAntecedentes) {

@@ -1,5 +1,5 @@
 import {CommonModule} from '@angular/common';
-import {Component, inject, OnInit, signal} from '@angular/core';
+import {Component, inject, OnInit, signal, WritableSignal} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {GeneralComponent} from '@components/general.component';
 import {NgbAccordionModule} from '@ng-bootstrap/ng-bootstrap';
@@ -28,6 +28,7 @@ import {ManejoSolicitudAntecedentesService} from '@services/manejo-solicitud-ant
 import {SolicitudBitacora} from '../../../../core/interfaces/solicitud-bitacora.inerface';
 import {DetalleAntecedentes} from '@models/detalleAntecedentes.interface';
 import {DetalleAntecedentesService} from '@services/detalle-antecedentes.service';
+import {SolicitudBusquedaPaginado} from '../../../../core/interfaces/solicitud-busqueda-antecedentes.interface';
 
 enum TipoTabla {
   NSS = 'NSS',
@@ -62,7 +63,62 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
 
   totalAntecedentes!: TotalesAntecedentes;
 
-  consultas: ResultadoConsulta[] = [];
+  consultas: ResultadoConsulta[] = [{
+    tipo: TipoTabla.NSS,
+    tituloBase: 'NSS Algo',
+    tituloCompleto: 'Busqueda por Algo',
+    data: signal([
+      {
+        "idBitacoraAsociacion": null,
+        "indAsociado": false,
+        "nss": "64856648410",
+        "expediente": "CC.DFS.-0650/2004",
+        "apellidoMaterno": "CERVANTES",
+        "apellidoPaterno": "CARDENAS",
+        "quejaMedica": 0,
+        "amparoIndirecto": 0,
+        "juicioContencioso": 0,
+        "gestion": 0,
+        "nombre": "  ROSSANA MARIA",
+        "procedimientoRpe": 0,
+        "inconformidades": 1
+      },
+      {
+        "idBitacoraAsociacion": null,
+        "indAsociado": false,
+        "nss": "64856648410",
+        "expediente": "CC.DFS.-0636/2007",
+        "apellidoMaterno": "CERVANTES",
+        "apellidoPaterno": "CARDENAS",
+        "quejaMedica": 0,
+        "amparoIndirecto": 0,
+        "juicioContencioso": 0,
+        "gestion": 0,
+        "nombre": "  ROSSANA MARIA",
+        "procedimientoRpe": 0,
+        "inconformidades": 1
+      },
+      {
+        "idBitacoraAsociacion": null,
+        "indAsociado": false,
+        "nss": "45906106971",
+        "expediente": "1110/2024-432",
+        "apellidoMaterno": "MÁXIMO",
+        "apellidoPaterno": "JIMÉNEZ",
+        "quejaMedica": 0,
+        "amparoIndirecto": 1,
+        "juicioContencioso": 0,
+        "gestion": 0,
+        "nombre": "BEATRIZ",
+        "procedimientoRpe": 0,
+        "inconformidades": 0
+      }]),
+    paginaActual: 1,
+    registrosPorPagina: 10,
+    totalRegistros: 15,
+    valorBusqueda: null
+
+  }];
 
   filtroForm!: FormGroup;
 
@@ -272,7 +328,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
     consulta.tituloCompleto = `${consulta.tituloBase}: ${consulta.valorBusqueda || 'Expediente'}`;
 
     // Preparar la solicitud específica (NSS o Nombre)
-    let solicitud: SolicitudAntecedentes;
+    let solicitud: SolicitudBusquedaPaginado;
     if (consulta.tipo === TipoTabla.NSS) {
       solicitud = this.generarSolicitudAntecedentesNSS(consulta.valorBusqueda as string);
     } else { // TipoTabla.NOMBRE
@@ -323,19 +379,29 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
     }
   }
 
-  generarSolicitudAntecedentesNombre(valor: string): SolicitudAntecedentes {
+  generarSolicitudAntecedentesNombre(valor: string): SolicitudBusquedaPaginado {
     return {
-      expediente: this.expedienteID,
-      nombre: valor,
-      nss: null
+      expediente: '',
+      ooad_UMAE: '',
+      usuarioLogueado: '',
+      sistema: '',
+      modulo: '',
+      personas: [{ cve_nss: '' }]
     }
   }
 
-  generarSolicitudAntecedentesNSS(valor: string): SolicitudAntecedentes {
+  generarSolicitudAntecedentesNSS(valor: string): SolicitudBusquedaPaginado {
     return {
-      expediente: this.expedienteID,
-      nombre: null,
-      nss: valor
+      expediente: "CC.NL.-0102/1999",
+      ooad_UMAE: '',
+      usuarioLogueado: '',
+      sistema: '',
+      modulo: '',
+      personas: [{
+        "nom_nombre_afectado": "SANJUANA",
+        "nom_apellido_paterno_afectado": "VEGA",
+        "nom_apellido_materno_afectado": "SIFUENTES"
+      }]
     }
   }
 

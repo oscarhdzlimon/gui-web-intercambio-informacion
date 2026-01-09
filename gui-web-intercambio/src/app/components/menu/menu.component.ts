@@ -1,5 +1,4 @@
 import {Component, HostListener, inject, OnInit} from '@angular/core';
-import {Avatar} from 'primeng/avatar';
 import {GeneralComponent} from '../general.component';
 import {SesionUser} from '@models/sesion-user.interface';
 import {UserService} from '@services/user.service';
@@ -13,7 +12,6 @@ import {ActivatedRoute} from '@angular/router';
 @Component({
   selector: 'app-menu',
   imports: [
-    Avatar,
     SpeedDial,
     PrimeTemplate,
     ButtonModule
