@@ -52,8 +52,8 @@
                             <tr>
                                 <td><div>{{ gestion.consecutivo }}</div></td>
                                 <td><div>{{ gestion.folio }}</div></td>
-                                <td><div>{{ gestion.nombreAfectado }}</div></td>
-                                <td><div>{{ gestion.nombrePeticionario }}</div></td>
+                                <td><div>{{ gestion.nombreAfectado }} {{ gestion.apellidoPaternoAfectado }} {{ gestion.apellidoMaternoAfectado }}</div></td>
+                                <td><div>{{ gestion.nombrePeticionario }} {{ gestion.apellidoPaternoPeticionario }} {{ gestion.apellidoMaternoPeticionario }}</div></td>
                                 <td><div>{{ gestion.nss }}</div></td>
                                 <td><div>{{ gestion.fechaSucesoFormateada }}</div></td>
                                 <td><div>{{ gestion.ooadInvolucrado }}</div></td>
@@ -172,7 +172,7 @@
                                     <td><div>{{ queja.consecutivo }}</div></td>
                                     <td><div>{{ queja.folio }}</div></td>
                                     <td><div>{{ queja.nombrePromovente }}</div></td>
-                                    <td><div>{{ queja.nombrePeticionario }}</div></td>
+                                    <td><div>{{ queja.nombrePeticionario }} {{ queja.apellidoPaternoPeticionario }} {{ queja.apellidoMaternoPeticionario }}</div></td>
                                     <td><div>{{ queja.curp }}</div></td>
                                     <td><div>{{ queja.nss }}</div></td>
                                     <td><div>{{ queja.fechaSucesoFormateada }}</div></td>
