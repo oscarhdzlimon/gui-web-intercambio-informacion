@@ -247,6 +247,7 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
 
   private mapearASolicitud(evento: any): SolicitudAsociacion {
     return {
+      refExpedientePersona: '',
       idBitacoraAsociacion: evento.idBitacoraAsociacion,
       refUsuarioAutentica: this.REF_USUARIO, // Contexto del componente
       refAplicativoAsociacion: this.REF_APLICATIVO, // Contexto del componente

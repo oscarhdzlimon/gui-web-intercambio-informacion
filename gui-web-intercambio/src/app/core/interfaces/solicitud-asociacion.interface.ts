@@ -4,7 +4,7 @@ export interface SolicitudAsociacion {
   refAplicativoAsociacion: string,
   refModuloAsociacion: string,
   refExpediente: string,
-  refExpedientePersona?: string,
+  refExpedientePersona: string,
   nomPersona: string,
   nomApellidoPaterno: string,
   nomApellidoMaterno: string,
