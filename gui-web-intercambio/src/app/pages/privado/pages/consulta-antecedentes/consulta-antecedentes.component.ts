@@ -32,8 +32,8 @@ import {ReporteAntecedentes} from '@models/reporteAntecedentes.interface';
 import {SolicitudBusquedaPaginado} from '../../../../core/interfaces/solicitud-busqueda-antecedentes.interface';
 
 enum TipoTabla {
-  NSS = 'NSS',
-  NOMBRE = 'NOMBRE'
+  NSS = '1',
+  NOMBRE = '2'
 }
 
 @Component({
@@ -390,12 +390,12 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
 
     if (tipoConsultaActual === 1 || tipoConsultaActual === 3) {
       const solicitudNss: SolicitudBusquedaPaginado = this.generarSolicitudAntecedentesNSS();
-      listObservableNss = this.antecedentesService.getLstAntecedentes(this.registrosPorPaginaNss, pagNss, solicitudNss);
+      listObservableNss = this.antecedentesService.getLstAntecedentes(this.registrosPorPaginaNss, pagNss, solicitudNss, 1);
     }
 
     if (tipoConsultaActual === 2 || tipoConsultaActual === 3) {
       const solicitudNombre: SolicitudBusquedaPaginado = this.generarSolicitudAntecedentesNombre();
-      listObservableNombre = this.antecedentesService.getLstAntecedentes(this.registrosPorPaginaNombre, pagNombre, solicitudNombre);
+      listObservableNombre = this.antecedentesService.getLstAntecedentes(this.registrosPorPaginaNombre, pagNombre, solicitudNombre, 2);
     }
 
     // --- Ejecución de las búsquedas paralelas ---
