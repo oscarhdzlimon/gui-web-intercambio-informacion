@@ -68,8 +68,6 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
 
   puedeGuardar = false;
 
-  expedienteID: string = '';
-
   totalAntecedentes!: TotalesAntecedentes;
 
   consultas: ResultadoConsulta[] = [];
@@ -80,11 +78,6 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
 
   solicitudAntecedentesService: ManejoSolicitudAntecedentesService = inject(ManejoSolicitudAntecedentesService);
   cifradoService: CryptoService = inject(CryptoService);
-
-  REF_USUARIO: string = '';
-  REF_APLICATIVO: string = '';
-  REF_MODULO: string = '';
-  REF_OOAD: string = '';
 
   fechasCorte: DetalleAntecedentes = {
     fecCorteSiade: "",
@@ -112,7 +105,6 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
     this.obtenerParametros();
     this.filtroForm = this.inicializarFiltroForm();
     this.suscribirACambiosFiltro();
-    this.recuperarUltimaBusqueda();
   }
 
   recuperarUltimaBusqueda(): void {
@@ -162,12 +154,12 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
   async obtenerExpediente() {
     try {
       // IMPORTANTE: Añadir 'await' aquí
-      console.log(this.cifrado)
       this.REF_SISTEMA = await this.cifradoService.decryptToObject<any>(
         this.cifrado,
         this.AES_KEY_BASE64
       );
       this.obtenerDatosCifrados();
+      this.recuperarUltimaBusqueda();
     } catch (error) {
       console.error("Error al descifrar. Posibles causas: Clave incorrecta o JSON malformado", error);
     }
@@ -589,12 +581,12 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
       nomApellidoMaterno: null,
       nomApellidoPaterno: null,
       nomPersona: filtro === 2 ? this.filtroForm.get('valor')?.value : null,
-      refAplicativo: this.REF_APLICATIVO,
-      refExpediente: this.expedienteID,
-      refModulo: this.REF_MODULO,
+      refAplicativo: this.REF_SISTEMA.sistema,
+      refExpediente: this.REF_SISTEMA.expediente,
+      refModulo: this.REF_SISTEMA.modulo,
       refNss: filtro === 1 ? this.filtroForm.get('valor')?.value : null,
-      refOoad: this.REF_OOAD,
-      refUsuarioAutentica: this.REF_USUARIO
+      refOoad: this.REF_SISTEMA.ooad_UMAE,
+      refUsuarioAutentica: this.REF_SISTEMA.usuarioLogueado
 
     }
   }
@@ -608,10 +600,10 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
       fecCorteSiade: this.fechasCorte.fecCorteSiade,
       fecCorteSsc1: this.fechasCorte.fecCorteSsc1,
       fecCorteSsc2: this.fechasCorte.fecCorteSsc2,
-      nombreConsultor: this.REF_USUARIO,
-      ooad: this.REF_OOAD,
-      aplicativoOrigen: this.REF_APLICATIVO,
-      moduloOrigen: this.REF_MODULO,
+      nombreConsultor: this.REF_SISTEMA.usuarioLogueado,
+      ooad: this.REF_SISTEMA.ooad_UMAE,
+      aplicativoOrigen: this.REF_SISTEMA.sistema,
+      moduloOrigen: this.REF_SISTEMA.modulo,
     }
   }
 }

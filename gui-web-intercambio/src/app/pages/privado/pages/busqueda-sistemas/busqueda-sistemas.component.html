@@ -1,7 +1,7 @@
 <div style="margin-left: 10px;margin-right: 10px;">
   <div class="row">
     <div class="lg:col-4 col-12 flex align-items-center">
-      <span class="titulobusqueda">Expediente: {{ expedienteID }}</span>
+      <span class="titulobusqueda">Expediente: {{ REF_SISTEMA.expediente }}</span>
     </div>
   </div>
   <hr>
@@ -90,7 +90,7 @@
                 [datosUsuario]="generarObjReporteAntecedentes()"
                 [rows]="consulta.registrosPorPagina"
                 [total]="consulta.totalRegistros"
-                [expediente]="expedienteID"
+                [expediente]="REF_SISTEMA.expediente"
                 (pageChange)="cargarPagina($event, $index)"
                 (checkboxChanged)="cambiarEstado($event)"
               />
