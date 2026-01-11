@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="quitar cache de id">
+    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="ajuste fechas">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/services/detalle-antecedentes.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/services/detalle-antecedentes.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,103 +96,7 @@
       <workItem from="1767111634106" duration="669000" />
       <workItem from="1767118150936" duration="3257000" />
       <workItem from="1767891732696" duration="7482000" />
-      <workItem from="1767937805716" duration="27006000" />
-    </task>
-    <task id="LOCAL-00016" summary="generalización busqueda sistemas">
-      <option name="closed" value="true" />
-      <created>1765884565590</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1765884565590</updated>
-    </task>
-    <task id="LOCAL-00017" summary="prueba -&gt; caso especifico nombre o nss">
-      <option name="closed" value="true" />
-      <created>1765884836822</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1765884836822</updated>
-    </task>
-    <task id="LOCAL-00018" summary="vista por acordeon">
-      <option name="closed" value="true" />
-      <created>1765885522544</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1765885522544</updated>
-    </task>
-    <task id="LOCAL-00019" summary="ajustes prueba busqueda completa">
-      <option name="closed" value="true" />
-      <created>1765891086977</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1765891086977</updated>
-    </task>
-    <task id="LOCAL-00020" summary="totales">
-      <option name="closed" value="true" />
-      <created>1765891651291</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1765891651291</updated>
-    </task>
-    <task id="LOCAL-00021" summary="ajustes de css por url">
-      <option name="closed" value="true" />
-      <created>1765901597637</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1765901597637</updated>
-    </task>
-    <task id="LOCAL-00022" summary="ajustes por url">
-      <option name="closed" value="true" />
-      <created>1765902463408</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1765902463408</updated>
-    </task>
-    <task id="LOCAL-00023" summary="soolicitud e interface asociacion">
-      <option name="closed" value="true" />
-      <created>1765908756009</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1765908756009</updated>
-    </task>
-    <task id="LOCAL-00024" summary="apartado de asignacion">
-      <option name="closed" value="true" />
-      <created>1765926737851</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1765926737851</updated>
-    </task>
-    <task id="LOCAL-00025" summary="ajustes de servicios">
-      <option name="closed" value="true" />
-      <created>1765929132747</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1765929132747</updated>
-    </task>
-    <task id="LOCAL-00026" summary="ajustes menu">
-      <option name="closed" value="true" />
-      <created>1765930514213</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1765930514213</updated>
-    </task>
-    <task id="LOCAL-00027" summary="consulta antecedentes">
-      <option name="closed" value="true" />
-      <created>1765931788188</created>
-      <option name="number" value="00027" />
-      <option name="presentableId" value="LOCAL-00027" />
-      <option name="project" value="LOCAL" />
-      <updated>1765931788188</updated>
+      <workItem from="1767937805716" duration="46684000" />
     </task>
     <task id="LOCAL-00028" summary="faltantes de homologar">
       <option name="closed" value="true" />
@@ -490,7 +394,103 @@
       <option name="project" value="LOCAL" />
       <updated>1768000234406</updated>
     </task>
-    <option name="localTasksCounter" value="65" />
+    <task id="LOCAL-00065" summary="consulta de fechas de corte">
+      <option name="closed" value="true" />
+      <created>1768002746341</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1768002746341</updated>
+    </task>
+    <task id="LOCAL-00066" summary="ajustes previos a asociación">
+      <option name="closed" value="true" />
+      <created>1768090076681</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1768090076681</updated>
+    </task>
+    <task id="LOCAL-00067" summary="servicio de cifrado">
+      <option name="closed" value="true" />
+      <created>1768097370233</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1768097370233</updated>
+    </task>
+    <task id="LOCAL-00068" summary="servicio de cifrado">
+      <option name="closed" value="true" />
+      <created>1768097889337</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1768097889337</updated>
+    </task>
+    <task id="LOCAL-00069" summary="redirección por url cifrada">
+      <option name="closed" value="true" />
+      <created>1768105834765</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1768105834765</updated>
+    </task>
+    <task id="LOCAL-00070" summary="ajustes para recuperar consultas">
+      <option name="closed" value="true" />
+      <created>1768106837127</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1768106837127</updated>
+    </task>
+    <task id="LOCAL-00071" summary="ajustes para lectura de datos del usuario por URL">
+      <option name="closed" value="true" />
+      <created>1768107704770</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1768107704770</updated>
+    </task>
+    <task id="LOCAL-00072" summary="ajustes de busqueda interna -&gt; por nss">
+      <option name="closed" value="true" />
+      <created>1768110197883</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1768110197884</updated>
+    </task>
+    <task id="LOCAL-00073" summary="ajustes de busqueda interna -&gt; por nombre">
+      <option name="closed" value="true" />
+      <created>1768110319468</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1768110319468</updated>
+    </task>
+    <task id="LOCAL-00074" summary="ajustes de busqueda interna -&gt; por nombre">
+      <option name="closed" value="true" />
+      <created>1768110571120</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1768110571120</updated>
+    </task>
+    <task id="LOCAL-00075" summary="ajuste totales">
+      <option name="closed" value="true" />
+      <created>1768110873258</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1768110873258</updated>
+    </task>
+    <task id="LOCAL-00076" summary="ajuste fechas">
+      <option name="closed" value="true" />
+      <created>1768112217264</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1768112217264</updated>
+    </task>
+    <option name="localTasksCounter" value="77" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -508,16 +508,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="apartados para busqueda" />
-    <MESSAGE value="ajustes identificadores para solicitud" />
-    <MESSAGE value="actualización de busqueda con servicio de solicitud" />
-    <MESSAGE value="se mantienen los registros pero revisar el paginado" />
-    <MESSAGE value="fix tablas paginado" />
-    <MESSAGE value="ajustes de elementos de solicitud" />
-    <MESSAGE value="guardado de bitacora" />
-    <MESSAGE value="guardado de bitacora -&gt; consulta" />
-    <MESSAGE value="guardado de bitacora -&gt; url" />
-    <MESSAGE value="ajustes busqueda sistema" />
     <MESSAGE value="corrección filtros -&gt; consulta antecedente" />
     <MESSAGE value="corrección filtros -&gt; busqueda sistemas" />
     <MESSAGE value="correccion al obtener y mostrar elementos de la asoociación" />
@@ -533,6 +523,16 @@
     <MESSAGE value="correcciones de objeto de reporte" />
     <MESSAGE value="ajuste de parametros al abrir el detalle" />
     <MESSAGE value="quitar cache de id" />
-    <option name="LAST_COMMIT_MESSAGE" value="quitar cache de id" />
+    <MESSAGE value="consulta de fechas de corte" />
+    <MESSAGE value="ajustes previos a asociación" />
+    <MESSAGE value="servicio de cifrado" />
+    <MESSAGE value="redirección por url cifrada" />
+    <MESSAGE value="ajustes para recuperar consultas" />
+    <MESSAGE value="ajustes para lectura de datos del usuario por URL" />
+    <MESSAGE value="ajustes de busqueda interna -&gt; por nss" />
+    <MESSAGE value="ajustes de busqueda interna -&gt; por nombre" />
+    <MESSAGE value="ajuste totales" />
+    <MESSAGE value="ajuste fechas" />
+    <option name="LAST_COMMIT_MESSAGE" value="ajuste fechas" />
   </component>
 </project>

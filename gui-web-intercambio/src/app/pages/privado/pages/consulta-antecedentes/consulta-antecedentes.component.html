@@ -69,6 +69,7 @@
     [data]="data()"
     [rows]="5"
     [total]="totalregistros"
+    [tipoBusqueda]="'1'"
     [datosUsuario]="generarObjReporteAntecedentes()"
     (pageChange)="cargarPagina($event, TipoTabla.NSS)"
     (checkboxChanged)="cambiarEstado($event)"/>
@@ -77,6 +78,7 @@
 @if (data_nombre().length > 0) {
   <app-tabla-principal [titulo]="tituloTablanombre"
                        [data]="data_nombre()"
+                       [tipoBusqueda]="'2'"
                        [rows]="10"
                        [total]="totalregistrosnombre"
                        (pageChange)="cargarPagina($event, TipoTabla.NOMBRE)"

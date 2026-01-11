@@ -8,6 +8,7 @@ import {ButtonModule} from 'primeng/button';
 import {ClickService} from '@services/click.service';
 import {Usuario} from '@models/usuario';
 import {ActivatedRoute} from '@angular/router';
+import {CryptoService} from '@services/crypto.service';
 
 @Component({
   selector: 'app-menu',
@@ -20,6 +21,8 @@ import {ActivatedRoute} from '@angular/router';
   styleUrl: './menu.component.scss'
 })
 export class MenuComponent extends GeneralComponent implements OnInit {
+
+  readonly AES_KEY_BASE64: string = "mZzG9Fz9P0n4z7mZlKz8B9nX0mJ8vF7PZKX2vZx5QmE=";
 
   clickService = inject(ClickService);
   userService = inject(UserService);
@@ -35,7 +38,8 @@ export class MenuComponent extends GeneralComponent implements OnInit {
 
   isMobileView: boolean = false;
 
-  constructor(private readonly route: ActivatedRoute) {
+  constructor(private readonly route: ActivatedRoute,
+              private readonly cifrarServicio: CryptoService) {
     super();
   }
 
@@ -61,13 +65,31 @@ export class MenuComponent extends GeneralComponent implements OnInit {
     }
   }
 
-  leerInformacionUsuario(): void {
-    this.route.queryParamMap.subscribe(params => {
+  leerInformacionUsuario() {
+    this.route.queryParamMap.subscribe(async params => {
       if (!params) return;
-      this.usuario.nombreCompleto = params.get('n') as string;
-      this.usuario.sistema = params.get('s') as string;
-      this.usuario.modulo = params.get('m') as string;
-      this.usuario.ooadmin = params.get('o') as string;
+      const dataCifrada: string | null = params.get('valor');
+      if (!dataCifrada) return;
+      try {
+        const resultado = await this.cifrarServicio.decryptToObject<any>(
+          dataCifrada,
+          this.AES_KEY_BASE64
+        );
+
+        // Mapeamos los campos del objeto descifrado a tu objeto 'usuario'
+        // Adaptando los nombres de la interfaz a lo que tu menú necesita
+        this.usuario.nombreCompleto = resultado.usuarioLogueado;
+        this.usuario.sistema = resultado.sistema;
+        this.usuario.modulo = resultado.modulo;
+        this.usuario.ooadmin = resultado.ooad_UMAE;
+
+        // Si necesitas la lista de personas o el expediente, ya los tienes aquí:
+        // this.listaPersonas = resultado.personas;
+
+      } catch (error) {
+        console.error("Error al procesar la información de seguridad:", error);
+        // Aquí podrías redirigir a una página de error o login
+      }
     });
   }
 

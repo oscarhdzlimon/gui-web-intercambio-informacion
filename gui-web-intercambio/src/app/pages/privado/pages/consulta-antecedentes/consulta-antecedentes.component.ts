@@ -28,11 +28,12 @@ import {ManejoSolicitudAntecedentesService} from '@services/manejo-solicitud-ant
 import {SolicitudBitacora} from '../../../../core/interfaces/solicitud-bitacora.inerface';
 import {DetalleAntecedentesService} from '@services/detalle-antecedentes.service';
 import {DetalleAntecedentes} from '@models/detalleAntecedentes.interface';
-import { ReporteAntecedentes } from '@models/reporteAntecedentes.interface';
+import {ReporteAntecedentes} from '@models/reporteAntecedentes.interface';
+import {SolicitudBusquedaPaginado} from '../../../../core/interfaces/solicitud-busqueda-antecedentes.interface';
 
 enum TipoTabla {
-  NSS = 'NSS',
-  NOMBRE = 'NOMBRE'
+  NSS = '1',
+  NOMBRE = '2'
 }
 
 @Component({
@@ -246,6 +247,7 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
 
   private mapearASolicitud(evento: any): SolicitudAsociacion {
     return {
+      refExpedientePersona: '',
       idBitacoraAsociacion: evento.idBitacoraAsociacion,
       refUsuarioAutentica: this.REF_USUARIO, // Contexto del componente
       refAplicativoAsociacion: this.REF_APLICATIVO, // Contexto del componente
@@ -367,8 +369,6 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
       tipoconsulta: this.filtroForm.get('tipoconsulta')?.value
     }
 
-    console.log(filtros);
-
     this.busquedaStateService.guardarFiltrosAntecedentes(filtros);
 
     this.actualizarTitulosTabla(tipoConsultaActual);
@@ -382,19 +382,20 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
       content: [],
       page: {size: 0, number: 0, totalElements: 0, totalPages: 0}
     });
-    const solicitud: SolicitudAntecedentes = this.generarSolicitudAntecedentes();
-    let totalObservable: Observable<TotalesAntecedentes> = this.antecedentesService.getTotalAntecedentes(solicitud);
+    const solicitud: SolicitudBusquedaPaginado = this.generarSolicitudAntecedentes();
+    const tipoConsulta = tipoConsultaActual === 1 ? 1 : 2
+    let totalObservable: Observable<TotalesAntecedentes> = this.antecedentesService.getTotalAntecedentes(solicitud, tipoConsulta);
 
     // --- Lógica de bifurcación de búsqueda ---
 
     if (tipoConsultaActual === 1 || tipoConsultaActual === 3) {
-      const solicitudNss: SolicitudAntecedentes = this.generarSolicitudAntecedentesNSS();
-      listObservableNss = this.antecedentesService.getLstAntecedentes(this.registrosPorPaginaNss, pagNss, solicitudNss);
+      const solicitudNss: SolicitudBusquedaPaginado = this.generarSolicitudAntecedentesNSS();
+      listObservableNss = this.antecedentesService.getLstAntecedentes(this.registrosPorPaginaNss, pagNss, solicitudNss, 1);
     }
 
     if (tipoConsultaActual === 2 || tipoConsultaActual === 3) {
-      const solicitudNombre: SolicitudAntecedentes = this.generarSolicitudAntecedentesNombre();
-      listObservableNombre = this.antecedentesService.getLstAntecedentes(this.registrosPorPaginaNombre, pagNombre, solicitudNombre);
+      const solicitudNombre: SolicitudBusquedaPaginado = this.generarSolicitudAntecedentesNombre();
+      listObservableNombre = this.antecedentesService.getLstAntecedentes(this.registrosPorPaginaNombre, pagNombre, solicitudNombre, 2);
     }
 
     // --- Ejecución de las búsquedas paralelas ---
@@ -457,27 +458,47 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
     });
   }
 
-  generarSolicitudAntecedentes(): SolicitudAntecedentes {
+  generarSolicitudAntecedentes(): SolicitudBusquedaPaginado {
     return {
       expediente: null,
-      nombre: this.generarNombre(),
-      nss: this.filtroForm.get('nss')?.value
+      ooad_UMAE: this.REF_OOAD,
+      usuarioLogueado: this.REF_USUARIO,
+      sistema: this.REF_APLICATIVO,
+      modulo: this.REF_APLICATIVO,
+      personas: [{
+        nom_nombre_afectado: this.filtroForm.get('nombre')?.value,
+        nom_apellido_paterno_afectado: this.filtroForm.get('apaterno')?.value,
+        nom_apellido_materno_afectado: this.filtroForm.get('amaterno')?.value,
+        cve_nss: this.filtroForm.get('nss')?.value
+      }]
     }
   }
 
-  generarSolicitudAntecedentesNSS(): SolicitudAntecedentes {
+  generarSolicitudAntecedentesNSS(): SolicitudBusquedaPaginado {
     return {
       expediente: null,
-      nombre: null,
-      nss: this.filtroForm.get('nss')?.value
+      ooad_UMAE: this.REF_OOAD,
+      usuarioLogueado: this.REF_USUARIO,
+      sistema: this.REF_APLICATIVO,
+      modulo: this.REF_APLICATIVO,
+      personas: [{
+        cve_nss: this.filtroForm.get('nss')?.value
+      }]
     }
   }
 
-  generarSolicitudAntecedentesNombre(): SolicitudAntecedentes {
+  generarSolicitudAntecedentesNombre(): SolicitudBusquedaPaginado {
     return {
       expediente: null,
-      nombre: this.generarNombre(),
-      nss: null
+      ooad_UMAE: this.REF_OOAD,
+      usuarioLogueado: this.REF_USUARIO,
+      sistema: this.REF_APLICATIVO,
+      modulo: this.REF_APLICATIVO,
+      personas: [{
+        nom_nombre_afectado: this.filtroForm.get('nombre')?.value,
+        nom_apellido_paterno_afectado: this.filtroForm.get('apaterno')?.value,
+        nom_apellido_materno_afectado: this.filtroForm.get('amaterno')?.value,
+      }]
     }
   }
 
@@ -510,12 +531,12 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
 
     // Reiniciar paginación y datos de AMBAS tablas
     this.paginaActualNss = 0;
-    this.registrosPorPaginaNss = 5;
+    this.registrosPorPaginaNss = 10;
     this.totalregistros = 0;
     this.data.set([]);
 
     this.paginaActualNombre = 0;
-    this.registrosPorPaginaNombre = 5;
+    this.registrosPorPaginaNombre = 10;
     this.totalregistrosnombre = 0;
     this.data_nombre.set([]);
   }
@@ -555,22 +576,17 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
   }
 
   obtenerFechasCorte() {
-    const datosUsuario = this.obtenerDatosUsario();
-    this.detalleAntecedentesService.consultarFechasCorte(datosUsuario).subscribe({
+    const tipoConsultaActual = this.filtroForm.get('tipoconsulta')?.value;
+    const tipoConsulta = tipoConsultaActual === 1 ? 1 : 2
+
+    const solicitud = tipoConsultaActual === 1 ? this.generarSolicitudAntecedentesNSS() : this.generarSolicitudAntecedentesNombre();
+
+    this.detalleAntecedentesService.consultarFechasCorte(solicitud, tipoConsulta).subscribe({
       next: (datos) => {
         this.fechasCorte = datos.respuesta;
         this.guardarBitacora();
       }
     })
-  }
-
-  obtenerDatosUsario() {
-    return {
-      nombre: this.generarNombre(),
-      nss: this.filtroForm.get('nss')?.value,
-      expediente: null,
-    };
-
   }
 
   guardarBitacora(): void {
@@ -599,10 +615,10 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
       refUsuarioAutentica: this.REF_USUARIO
     }
   }
-  
-  generarObjReporteAntecedentes(): ReporteAntecedentes{
-    
-    return  {
+
+  generarObjReporteAntecedentes(): ReporteAntecedentes {
+
+    return {
       nombre: "",
       nss: "",
       expediente: "",
