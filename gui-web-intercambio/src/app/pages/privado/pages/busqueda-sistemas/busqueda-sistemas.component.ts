@@ -32,6 +32,7 @@ import {SolicitudBusquedaPaginado} from '../../../../core/interfaces/solicitud-b
 import {ConsultaDescifrada} from '../../../../core/interfaces/consulta-descifrada.interface';
 import {NombreTipoDropdown} from '../../../../core/interfaces/nombre-tipo-dropdown.interface';
 import {ReporteAntecedentes} from '@models/reporteAntecedentes.interface';
+import {CryptoService} from '@services/crypto.service';
 
 enum TipoTabla {
   NSS = '1',
@@ -53,6 +54,10 @@ enum TipoTabla {
   styleUrl: './busqueda-sistemas.component.scss'
 })
 export class BusquedaSistemasComponent extends GeneralComponent implements OnInit {
+  readonly AES_KEY_BASE64: string = "mZzG9Fz9P0n4z7mZlKz8B9nX0mJ8vF7PZKX2vZx5QmE=";
+
+  cifrado = 'H9CacsJvgaCyTIDdfeaUdfcnkFWMvPyiN3h3Qvk3I1UA%2BLgR2A1idqDjNwFlszKBDMMmCRd21WFxvM60QQsB%2BMQcxnK9Bho8U8myQ%2BeaRc5UoW78tX5RfQBcxu1OETjNjfuqqQp69QYjpgaZEPqiozqcZEbl6brK5I4pq4nSM0cnBnuu4mblQknl%2FkjFuZDirajz6cN3A3rnVgVQ4%2FapqOSJlPEmnW1lgyMPJWlKpuByoiEdb5OpgDBP1ct%2Bve80TaLAlwDAofqrtEYWjuE2AfDYllxI%2FwPsIQpEE%2BMQ1meSiSTSRZT21fDchvCrCNKzWnZyjAOCAoH4yKTxZcth1YWynHivtq0NWgD1szZaVowb8C6a7txLfY12sm6Ca7XcbcprnYQUzizGw8tNzkEv6jaZ8k3BOxvkHGq9YZHdpVTiPY12dvPnc1z9n3gXxRNpas04w41UFLglfRa0ze%2BCVwmlq9AVqDTlysUpUBsw9YwAWo9kfA8TY5q%2BXmfGCkjTwHpCK5OH87nIbuoWNrb2WzHkq8EaG%2BIU0ReHIQe1vgqEnhdmwTtC6%2FQuXa0yjuoDmYQCghmWhEFl3Mk7UHYGzumgFzeXu8KN249ft0QLJgj6uC5afGmsO1ZdbJYpmj2%2BaQ9kKgxl2EOcv6KpHldw2%2BRhNICgKVnwU36wJdDOtl%2FQYnhccpgFJaLFdHyQGEeRM%2B9%2BdEKAeMmVaQm%2BlBjXPEHJdtQJkoHi3c2cTF5ygA7AKOJ4Yn60qdgq7%2FDC0rq5%2FJUWKp4dDASg4WnaG4rUCbZEMY2Tml%2FrUGqV%2Bm3TVCVQlc8PrFUrF%2FZcFNsXwEgw'
+
   antecedentesService: AntecedentesService = inject(AntecedentesService);
   detalleAntecedentesService: DetalleAntecedentesService = inject(DetalleAntecedentesService);
 
@@ -74,6 +79,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
   consulta_todos: boolean = false; // Asumiendo que 4 es el caso 'Todos'
 
   solicitudAntecedentesService: ManejoSolicitudAntecedentesService = inject(ManejoSolicitudAntecedentesService);
+  cifradoService: CryptoService = inject(CryptoService);
 
   REF_USUARIO: string = '';
   REF_APLICATIVO: string = '';
@@ -145,7 +151,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
     });
   }
 
-  obtenerExpediente() {
+  async obtenerExpediente() {
     /*
     this.route.paramMap.subscribe(params => {
       this.expedienteID = params.get('expediente') ?? '';
@@ -158,31 +164,20 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
       this.REF_OOAD = params.get('o') as string;
     });
      */
-    this.obtenerDatosCifrados();
+    try {
+      // IMPORTANTE: Añadir 'await' aquí
+      const decifrado = await this.cifradoService.decryptToObject<any>(
+        this.cifrado,
+        this.AES_KEY_BASE64
+      );
+      this.REF_SISTEMA = decifrado;
+      this.obtenerDatosCifrados();
+    } catch (error) {
+      console.error("Error al descifrar. Posibles causas: Clave incorrecta o JSON malformado", error);
+    }
   }
 
   obtenerDatosCifrados() {
-    this.REF_SISTEMA = {
-      "expediente": "CC.NL.-0102/1999",
-      "personas": [
-        {
-          "cve_nss": "64856648410",
-          "nom_nombre_afectado": "ROSSANA MARIA",
-          "nom_apellido_paterno_afectado": "CARDENAS",
-          "nom_apellido_materno_afectado": "CERVANTES"
-        }, {
-          "cve_nss": "45906106971",
-          "nom_nombre_afectado": "BEATRIZ",
-          "nom_apellido_paterno_afectado": "JIMÉNEZ",
-          "nom_apellido_materno_afectado": "MÁXIMO"
-        }
-
-      ],
-      "ooad_UMAE": "1",
-      "usuarioLogueado": "usuario",
-      "sistema": "1",
-      "modulo": "3"
-    }
     this.nombresSolicitud = this.REF_SISTEMA.personas.map(n => {
       return {
         nom_nombre_afectado: n.nom_nombre_afectado,
