@@ -109,7 +109,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
         }
       });
     });
-    this.obtenerExpediente();
+    this.obtenerParametros();
     this.filtroForm = this.inicializarFiltroForm();
     this.suscribirACambiosFiltro();
     this.recuperarUltimaBusqueda();
@@ -151,15 +151,18 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
     });
   }
 
-  async obtenerExpediente() {
-    /*
+  obtenerParametros(): void {
     this.route.queryParamMap.subscribe(params => {
       if (!params) return;
-      this.REF_USUARIO = params.get('value') as string;
+      this.cifrado = params.get('valor') as string;
+      void this.obtenerExpediente();
     });
-     */
+  }
+
+  async obtenerExpediente() {
     try {
       // IMPORTANTE: Añadir 'await' aquí
+      console.log(this.cifrado)
       this.REF_SISTEMA = await this.cifradoService.decryptToObject<any>(
         this.cifrado,
         this.AES_KEY_BASE64
