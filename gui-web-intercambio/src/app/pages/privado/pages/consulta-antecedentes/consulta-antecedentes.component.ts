@@ -28,7 +28,8 @@ import {ManejoSolicitudAntecedentesService} from '@services/manejo-solicitud-ant
 import {SolicitudBitacora} from '../../../../core/interfaces/solicitud-bitacora.inerface';
 import {DetalleAntecedentesService} from '@services/detalle-antecedentes.service';
 import {DetalleAntecedentes} from '@models/detalleAntecedentes.interface';
-import { ReporteAntecedentes } from '@models/reporteAntecedentes.interface';
+import {ReporteAntecedentes} from '@models/reporteAntecedentes.interface';
+import {SolicitudBusquedaPaginado} from '../../../../core/interfaces/solicitud-busqueda-antecedentes.interface';
 
 enum TipoTabla {
   NSS = 'NSS',
@@ -382,18 +383,18 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
       content: [],
       page: {size: 0, number: 0, totalElements: 0, totalPages: 0}
     });
-    const solicitud: SolicitudAntecedentes = this.generarSolicitudAntecedentes();
+    const solicitud: SolicitudBusquedaPaginado = this.generarSolicitudAntecedentes();
     let totalObservable: Observable<TotalesAntecedentes> = this.antecedentesService.getTotalAntecedentes(solicitud);
 
     // --- Lógica de bifurcación de búsqueda ---
 
     if (tipoConsultaActual === 1 || tipoConsultaActual === 3) {
-      const solicitudNss: SolicitudAntecedentes = this.generarSolicitudAntecedentesNSS();
+      const solicitudNss: SolicitudBusquedaPaginado = this.generarSolicitudAntecedentesNSS();
       listObservableNss = this.antecedentesService.getLstAntecedentes(this.registrosPorPaginaNss, pagNss, solicitudNss);
     }
 
     if (tipoConsultaActual === 2 || tipoConsultaActual === 3) {
-      const solicitudNombre: SolicitudAntecedentes = this.generarSolicitudAntecedentesNombre();
+      const solicitudNombre: SolicitudBusquedaPaginado = this.generarSolicitudAntecedentesNombre();
       listObservableNombre = this.antecedentesService.getLstAntecedentes(this.registrosPorPaginaNombre, pagNombre, solicitudNombre);
     }
 
@@ -457,27 +458,46 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
     });
   }
 
-  generarSolicitudAntecedentes(): SolicitudAntecedentes {
+  generarSolicitudAntecedentes(): SolicitudBusquedaPaginado {
     return {
       expediente: null,
-      nombre: this.generarNombre(),
-      nss: this.filtroForm.get('nss')?.value
+      ooad_UMAE: this.REF_OOAD,
+      usuarioLogueado: this.REF_USUARIO,
+      sistema: this.REF_APLICATIVO,
+      modulo: this.REF_APLICATIVO,
+      personas: [{
+        nom_nombre_afectado: this.filtroForm.get('nombre')?.value,
+        nom_apellido_paterno_afectado: this.filtroForm.get('apaterno')?.value,
+        nom_apellido_materno_afectado: this.filtroForm.get('amaterno')?.value,
+      }]
     }
   }
 
-  generarSolicitudAntecedentesNSS(): SolicitudAntecedentes {
+  generarSolicitudAntecedentesNSS(): SolicitudBusquedaPaginado {
     return {
       expediente: null,
-      nombre: null,
-      nss: this.filtroForm.get('nss')?.value
+      ooad_UMAE: this.REF_OOAD,
+      usuarioLogueado: this.REF_USUARIO,
+      sistema: this.REF_APLICATIVO,
+      modulo: this.REF_APLICATIVO,
+      personas: [{
+        cve_nss: this.filtroForm.get('nss')?.value
+      }]
     }
   }
 
-  generarSolicitudAntecedentesNombre(): SolicitudAntecedentes {
+  generarSolicitudAntecedentesNombre(): SolicitudBusquedaPaginado {
     return {
       expediente: null,
-      nombre: this.generarNombre(),
-      nss: null
+      ooad_UMAE: this.REF_OOAD,
+      usuarioLogueado: this.REF_USUARIO,
+      sistema: this.REF_APLICATIVO,
+      modulo: this.REF_APLICATIVO,
+      personas: [{
+        nom_nombre_afectado: this.filtroForm.get('nombre')?.value,
+        nom_apellido_paterno_afectado: this.filtroForm.get('apaterno')?.value,
+        nom_apellido_materno_afectado: this.filtroForm.get('amaterno')?.value,
+      }]
     }
   }
 
@@ -599,10 +619,10 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
       refUsuarioAutentica: this.REF_USUARIO
     }
   }
-  
-  generarObjReporteAntecedentes(): ReporteAntecedentes{
-    
-    return  {
+
+  generarObjReporteAntecedentes(): ReporteAntecedentes {
+
+    return {
       nombre: "",
       nss: "",
       expediente: "",

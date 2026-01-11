@@ -15,7 +15,7 @@ export class AntecedentesService {
 
   http: HttpClient = inject(HttpClient);
 
-  getLstAntecedentes(size: number, page: number, solicitud: SolicitudBusquedaPaginado | SolicitudAntecedentes, tipoBusqueda: number = 1) {
+  getLstAntecedentes(size: number, page: number, solicitud: SolicitudBusquedaPaginado, tipoBusqueda: number = 1) {
     const params = new HttpParams()
       .set('page', page)
       .set('size', size)

@@ -1,6 +1,6 @@
 export interface SolicitudBusquedaPaginado {
   personas: ({ cve_nss: string } | Persona )[]
-  expediente: string,
+  expediente: string | null,
   ooad_UMAE: string,
   usuarioLogueado: string,
   sistema: string,
