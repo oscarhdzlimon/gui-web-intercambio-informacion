@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="ajustes previos a asociación">
-      <change afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/services/crypto.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="servicio de cifrado">
       <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -96,15 +94,7 @@
       <workItem from="1767111634106" duration="669000" />
       <workItem from="1767118150936" duration="3257000" />
       <workItem from="1767891732696" duration="7482000" />
-      <workItem from="1767937805716" duration="37148000" />
-    </task>
-    <task id="LOCAL-00018" summary="vista por acordeon">
-      <option name="closed" value="true" />
-      <created>1765885522544</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1765885522544</updated>
+      <workItem from="1767937805716" duration="37721000" />
     </task>
     <task id="LOCAL-00019" summary="ajustes prueba busqueda completa">
       <option name="closed" value="true" />
@@ -490,7 +480,15 @@
       <option name="project" value="LOCAL" />
       <updated>1768090076681</updated>
     </task>
-    <option name="localTasksCounter" value="67" />
+    <task id="LOCAL-00067" summary="servicio de cifrado">
+      <option name="closed" value="true" />
+      <created>1768097370233</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1768097370233</updated>
+    </task>
+    <option name="localTasksCounter" value="68" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -508,7 +506,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="actualización de busqueda con servicio de solicitud" />
     <MESSAGE value="se mantienen los registros pero revisar el paginado" />
     <MESSAGE value="fix tablas paginado" />
     <MESSAGE value="ajustes de elementos de solicitud" />
@@ -533,6 +530,7 @@
     <MESSAGE value="quitar cache de id" />
     <MESSAGE value="consulta de fechas de corte" />
     <MESSAGE value="ajustes previos a asociación" />
-    <option name="LAST_COMMIT_MESSAGE" value="ajustes previos a asociación" />
+    <MESSAGE value="servicio de cifrado" />
+    <option name="LAST_COMMIT_MESSAGE" value="servicio de cifrado" />
   </component>
 </project>

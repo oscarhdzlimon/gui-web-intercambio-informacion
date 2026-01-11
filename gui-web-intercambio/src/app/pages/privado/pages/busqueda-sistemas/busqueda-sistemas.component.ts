@@ -10,7 +10,7 @@ import {PaginatorModule} from 'primeng/paginator';
 import {PopoverModule} from 'primeng/popover';
 import {SelectModule} from 'primeng/select';
 import {TableModule} from 'primeng/table';
-import {FILTRO_RESULTADOS_EXPEDIENTE, TIPO_CONSULTA_ANTECEDENTES} from '@utils/constants';
+import {FILTRO_RESULTADOS_EXPEDIENTE} from '@utils/constants';
 import {TipoDropdown} from '@models/tipo-dropdown.interface';
 import {AntecedentesService} from '@services/antecedentes.service';
 import {mapearArregloTipoDropdown} from '@utils/funciones';
@@ -153,24 +153,17 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
 
   async obtenerExpediente() {
     /*
-    this.route.paramMap.subscribe(params => {
-      this.expedienteID = params.get('expediente') ?? '';
-    });
     this.route.queryParamMap.subscribe(params => {
       if (!params) return;
-      this.REF_USUARIO = params.get('n') as string;
-      this.REF_APLICATIVO = params.get('s') as string;
-      this.REF_MODULO = params.get('m') as string;
-      this.REF_OOAD = params.get('o') as string;
+      this.REF_USUARIO = params.get('value') as string;
     });
      */
     try {
       // IMPORTANTE: Añadir 'await' aquí
-      const decifrado = await this.cifradoService.decryptToObject<any>(
+      this.REF_SISTEMA = await this.cifradoService.decryptToObject<any>(
         this.cifrado,
         this.AES_KEY_BASE64
       );
-      this.REF_SISTEMA = decifrado;
       this.obtenerDatosCifrados();
     } catch (error) {
       console.error("Error al descifrar. Posibles causas: Clave incorrecta o JSON malformado", error);
