@@ -1,5 +1,5 @@
 import {CommonModule} from '@angular/common';
-import {Component, inject, OnInit, signal, WritableSignal} from '@angular/core';
+import {Component, inject, OnInit, signal} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {GeneralComponent} from '@components/general.component';
 import {NgbAccordionModule} from '@ng-bootstrap/ng-bootstrap';
@@ -146,6 +146,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
   }
 
   obtenerExpediente() {
+    /*
     this.route.paramMap.subscribe(params => {
       this.expedienteID = params.get('expediente') ?? '';
     });
@@ -156,6 +157,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
       this.REF_MODULO = params.get('m') as string;
       this.REF_OOAD = params.get('o') as string;
     });
+     */
     this.obtenerDatosCifrados();
   }
 
@@ -334,7 +336,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
         const content = (sincronizados || []).map(
           (row: RegistroAntecedentes) => ({
             ...row,
-            key: this.obtenerIdentificador(row)
+            key: row.id
           })
         );
         consulta.data.set(content);
@@ -401,10 +403,11 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
   private mapearASolicitud(evento: any): SolicitudAsociacion {
     return {
       idBitacoraAsociacion: evento.idBitacoraAsociacion,
-      refUsuarioAutentica: this.REF_USUARIO, // Contexto del componente
-      refAplicativoAsociacion: this.REF_APLICATIVO, // Contexto del componente
-      refModuloAsociacion: this.REF_MODULO, // Contexto del componente
-      refExpediente: this.expedienteID,
+      refUsuarioAutentica: this.REF_SISTEMA.usuarioLogueado, // Contexto del componente
+      refAplicativoAsociacion: this.REF_SISTEMA.sistema, // Contexto del componente
+      refModuloAsociacion: this.REF_SISTEMA.modulo, // Contexto del componente
+      refExpediente: this.REF_SISTEMA.expediente,
+      refExpedientePersona: evento.expediente,
       nomPersona: evento.nombre,
       nomApellidoPaterno: evento.apellidoPaterno,
       nomApellidoMaterno: evento.apellidoMaterno,
@@ -420,17 +423,15 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
   }
 
   cambiarEstado(row: RegistroAntecedentes): void {
-    const key = this.obtenerIdentificador(row);
 
-    console.log(row)
-
+    console.log(this.mapearASolicitud(row))
     if (row.indAsociado) {
       this.solicitudAntecedentesService.agregar(
-        key,
+        row.id,
         this.mapearASolicitud(row)
       );
     } else {
-      this.solicitudAntecedentesService.eliminar(key);
+      this.solicitudAntecedentesService.eliminar(row.id);
     }
   }
 
@@ -495,7 +496,6 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
       return this.generarSolicitudAntecedentesNombre(valorBusqueda);
   }
 
-  protected readonly tipoconsulta = TIPO_CONSULTA_ANTECEDENTES;
 
   guardarAsociacion(): void {
 
@@ -556,7 +556,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
       return {
         ...r,
         indAsociado: this.solicitudAntecedentesService.existe(
-          this.obtenerIdentificador(r)
+          r.id
         )
       }
     });
@@ -577,17 +577,6 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
         this.guardarBitacora();
       }
     })
-  }
-
-  obtenerDatosUsario() {
-    const filtro = this.filtroForm.get('filtro')?.value;
-
-    return {
-      nombre: filtro === 2 ? this.filtroForm.get('valor')?.value : null,
-      nss: filtro === 1 ? this.filtroForm.get('valor')?.value : null,
-      expediente: this.expedienteID,
-    };
-
   }
 
   guardarBitacora(): void {
@@ -619,9 +608,9 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
     }
   }
 
-  generarObjReporteAntecedentes(): ReporteAntecedentes{
+  generarObjReporteAntecedentes(): ReporteAntecedentes {
 
-    return  {
+    return {
       nombre: "",
       nss: "",
       expediente: "",
