@@ -588,15 +588,6 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
     })
   }
 
-  obtenerDatosUsario() {
-    return {
-      nombre: this.generarNombre(),
-      nss: this.filtroForm.get('nss')?.value,
-      expediente: null,
-    };
-
-  }
-
   guardarBitacora(): void {
     const solicitud: SolicitudBitacora = this.generarSolicitudBitacora();
     this.antecedentesService.guardarBitacora(solicitud).subscribe({
