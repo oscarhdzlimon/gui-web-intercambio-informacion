@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="ajustes de busqueda interna -&gt; por nss">
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.ts" afterDir="false" />
-    </list>
+    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="ajustes de busqueda interna -&gt; por nombre" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -94,23 +92,7 @@
       <workItem from="1767111634106" duration="669000" />
       <workItem from="1767118150936" duration="3257000" />
       <workItem from="1767891732696" duration="7482000" />
-      <workItem from="1767937805716" duration="44152000" />
-    </task>
-    <task id="LOCAL-00024" summary="apartado de asignacion">
-      <option name="closed" value="true" />
-      <created>1765926737851</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1765926737851</updated>
-    </task>
-    <task id="LOCAL-00025" summary="ajustes de servicios">
-      <option name="closed" value="true" />
-      <created>1765929132747</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1765929132747</updated>
+      <workItem from="1767937805716" duration="44530000" />
     </task>
     <task id="LOCAL-00026" summary="ajustes menu">
       <option name="closed" value="true" />
@@ -488,7 +470,23 @@
       <option name="project" value="LOCAL" />
       <updated>1768110197884</updated>
     </task>
-    <option name="localTasksCounter" value="73" />
+    <task id="LOCAL-00073" summary="ajustes de busqueda interna -&gt; por nombre">
+      <option name="closed" value="true" />
+      <created>1768110319468</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1768110319468</updated>
+    </task>
+    <task id="LOCAL-00074" summary="ajustes de busqueda interna -&gt; por nombre">
+      <option name="closed" value="true" />
+      <created>1768110571120</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1768110571120</updated>
+    </task>
+    <option name="localTasksCounter" value="75" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -506,7 +504,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="guardado de bitacora -&gt; consulta" />
     <MESSAGE value="guardado de bitacora -&gt; url" />
     <MESSAGE value="ajustes busqueda sistema" />
     <MESSAGE value="corrección filtros -&gt; consulta antecedente" />
@@ -531,6 +528,7 @@
     <MESSAGE value="ajustes para recuperar consultas" />
     <MESSAGE value="ajustes para lectura de datos del usuario por URL" />
     <MESSAGE value="ajustes de busqueda interna -&gt; por nss" />
-    <option name="LAST_COMMIT_MESSAGE" value="ajustes de busqueda interna -&gt; por nss" />
+    <MESSAGE value="ajustes de busqueda interna -&gt; por nombre" />
+    <option name="LAST_COMMIT_MESSAGE" value="ajustes de busqueda interna -&gt; por nombre" />
   </component>
 </project>

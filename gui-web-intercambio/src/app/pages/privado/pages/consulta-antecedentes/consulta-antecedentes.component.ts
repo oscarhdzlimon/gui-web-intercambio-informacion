@@ -368,8 +368,6 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
       tipoconsulta: this.filtroForm.get('tipoconsulta')?.value
     }
 
-    console.log(filtros);
-
     this.busquedaStateService.guardarFiltrosAntecedentes(filtros);
 
     this.actualizarTitulosTabla(tipoConsultaActual);
@@ -384,7 +382,8 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
       page: {size: 0, number: 0, totalElements: 0, totalPages: 0}
     });
     const solicitud: SolicitudBusquedaPaginado = this.generarSolicitudAntecedentes();
-    let totalObservable: Observable<TotalesAntecedentes> = this.antecedentesService.getTotalAntecedentes(solicitud);
+    const tipoConsulta = tipoConsultaActual === 1 ? 1 : 2
+    let totalObservable: Observable<TotalesAntecedentes> = this.antecedentesService.getTotalAntecedentes(solicitud, tipoConsulta);
 
     // --- Lógica de bifurcación de búsqueda ---
 
@@ -469,6 +468,7 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
         nom_nombre_afectado: this.filtroForm.get('nombre')?.value,
         nom_apellido_paterno_afectado: this.filtroForm.get('apaterno')?.value,
         nom_apellido_materno_afectado: this.filtroForm.get('amaterno')?.value,
+        cve_nss: this.filtroForm.get('nss')?.value
       }]
     }
   }
