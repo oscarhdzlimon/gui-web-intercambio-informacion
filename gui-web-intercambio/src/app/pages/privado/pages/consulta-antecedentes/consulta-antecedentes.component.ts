@@ -530,12 +530,12 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
 
     // Reiniciar paginación y datos de AMBAS tablas
     this.paginaActualNss = 0;
-    this.registrosPorPaginaNss = 5;
+    this.registrosPorPaginaNss = 10;
     this.totalregistros = 0;
     this.data.set([]);
 
     this.paginaActualNombre = 0;
-    this.registrosPorPaginaNombre = 5;
+    this.registrosPorPaginaNombre = 10;
     this.totalregistrosnombre = 0;
     this.data_nombre.set([]);
   }
