@@ -575,8 +575,12 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
   }
 
   obtenerFechasCorte() {
-    const datosUsuario = this.obtenerDatosUsario();
-    this.detalleAntecedentesService.consultarFechasCorte(datosUsuario).subscribe({
+    const tipoConsultaActual = this.filtroForm.get('tipoconsulta')?.value;
+    const tipoConsulta = tipoConsultaActual === 1 ? 1 : 2
+
+    const solicitud = tipoConsultaActual === 1 ? this.generarSolicitudAntecedentesNSS() : this.generarSolicitudAntecedentesNombre();
+
+    this.detalleAntecedentesService.consultarFechasCorte(solicitud, tipoConsulta).subscribe({
       next: (datos) => {
         this.fechasCorte = datos.respuesta;
         this.guardarBitacora();
