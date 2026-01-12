@@ -87,6 +87,8 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
 
   REF_SISTEMA!: ConsultaDescifrada;
 
+  private idsCargadosNSS = new Set<string | number>();
+
   constructor(private readonly fb: FormBuilder,
               private readonly route: ActivatedRoute,
               private busquedaStateService: BusquedaStateService) {
@@ -190,6 +192,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
   iniciarBusqueda(): void {
     const tipoConsulta = this.filtroForm.get('filtro')?.value;
     const valor = this.filtroForm.get('valor')?.value;
+    this.idsCargadosNSS.clear();
 
     const filtros: FiltrosBusqueda = {
       filtro: tipoConsulta,
@@ -221,7 +224,8 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
         paginaActual: 0,
         registrosPorPagina: 10,
         totalRegistros: 0,
-        valorBusqueda: valor
+        valorBusqueda: valor,
+        esPaginadoManual: false
       });
 
       this.ejecutarConsulta(0);
@@ -239,7 +243,8 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
         paginaActual: 0,
         registrosPorPagina: 10,
         totalRegistros: 0,
-        valorBusqueda: valor
+        valorBusqueda: valor,
+        esPaginadoManual: false
       });
 
       this.ejecutarConsulta(0);
@@ -257,7 +262,8 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
         paginaActual: 0,
         registrosPorPagina: 10,
         totalRegistros: 0,
-        valorBusqueda: nss.value as string
+        valorBusqueda: nss.value as string,
+        esPaginadoManual: false
       }));
 
       // Creamos la tabla de Nombre para el Expediente
@@ -269,13 +275,12 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
         paginaActual: 0,
         registrosPorPagina: 10,
         totalRegistros: 0,
-        valorBusqueda: valor
+        valorBusqueda: valor,
+        esPaginadoManual: true
       }));
 
 
       this.consultas = [...nss, ...nombres];
-
-      console.log(this.consultas)
 
       this.obtenerDatosExpediente();
     }
@@ -305,7 +310,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
 
     // Petición de Listado
     const listObservable: Observable<any> = this.antecedentesService.getLstAntecedentes(
-      consulta.registrosPorPagina,
+      consulta.esPaginadoManual ? 100 : consulta.registrosPorPagina,
       consulta.paginaActual,
       solicitud,
       tipoConsulta
@@ -314,17 +319,30 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
     // Solo se suscribe al listado, ya que el total es independiente (abajo)
     listObservable.subscribe({
       next: (dataResponse) => {
-        const sincronizados = this.sincronizarEstado(
-          dataResponse.content || []
-        );
-        const content = (sincronizados || []).map(
-          (row: RegistroAntecedentes) => ({
-            ...row,
-            key: row.id
-          })
-        );
-        consulta.data.set(content);
-        consulta.totalRegistros = dataResponse.page.totalElements || 0;
+        let content = dataResponse.content || [];
+
+        if (consulta.tipo === TipoTabla.NSS) {
+          // Guardar IDs encontrados por NSS para referencia
+          content.forEach((r: any) => this.idsCargadosNSS.add(r.id));
+        } else if (consulta.tipo === TipoTabla.NOMBRE && this.consulta_todos) {
+          // FILTRAR DUPLICADOS: Si el ID ya fue cargado por una tabla NSS, lo quitamos
+          content = content.filter((r: any) => !this.idsCargadosNSS.has(r.id));
+        }
+
+        const sincronizados = this.sincronizarEstado(content);
+        const finalData = sincronizados.map((row: RegistroAntecedentes) => ({
+          ...row,
+          key: row.id
+        }));
+
+        // Si es manual, aquí harías el slice para tu tabla local (0, 10)
+        if (consulta.esPaginadoManual) {
+          consulta.data.set(finalData.slice(0, 10));
+          consulta.totalRegistros = finalData.length;
+        } else {
+          consulta.data.set(finalData);
+          consulta.totalRegistros = dataResponse.page.totalElements || 0;
+        }
       },
       error: (error) => {
         this._alertServices.error(`Error al obtener resultados por ${consulta.tipo}.`);
@@ -417,37 +435,6 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
     } else {
       this.solicitudAntecedentesService.eliminar(row.id);
     }
-  }
-
-  private obtenerIdentificador(item: any): string {
-
-    const expediente = item.expediente ?? item.refExpediente;
-
-    // NSS + expediente (si ambos existen)
-    if ((item.nss || item.refNss) && expediente) {
-      const nss = (item.nss ?? item.refNss).trim();
-      return `${nss}-${expediente}`;
-    }
-
-    // SIN NSS pero CON expediente
-    if (!item.nss && !item.refNss && expediente) {
-      const nombre = (item.nombre ?? '').trim().toUpperCase();
-      const paterno = (item.apellidoPaterno ?? '').trim().toUpperCase();
-      const materno = (item.apellidoMaterno ?? '').trim().toUpperCase();
-
-      return `${nombre}-${paterno}-${materno}-${expediente}`;
-    }
-
-    // SIN expediente → NSS o nombre + apellidos
-    if (item.nss || item.refNss) {
-      return (item.nss ?? item.refNss).trim();
-    }
-
-    const nombre = (item.nombre ?? '').trim().toUpperCase();
-    const paterno = (item.apellidoPaterno ?? '').trim().toUpperCase();
-    const materno = (item.apellidoMaterno ?? '').trim().toUpperCase();
-
-    return `${nombre}-${paterno}-${materno}`;
   }
 
   ejecutarConsultaTotal(): void {
