@@ -318,11 +318,12 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
     // Solo se suscribe al listado, ya que el total es independiente (abajo)
     listObservable.subscribe({
       next: (dataResponse) => {
-        let content = dataResponse.content || [];
+        let content = dataResponse.busquedaAntecedentesAgrupacionDtos.content || [];
+        const idNss = dataResponse.idNss || [];
 
         if (consulta.tipo === TipoTabla.NSS) {
           // Guardar IDs encontrados por NSS para referencia
-          content.forEach((r: any) => this.idsCargadosNSS.add(r.id));
+          idNss.forEach((id: any) => this.idsCargadosNSS.add(id));
         } else if (consulta.tipo === TipoTabla.NOMBRE && this.consulta_todos) {
           // FILTRAR DUPLICADOS: Si el ID ya fue cargado por una tabla NSS, lo quitamos
           content = content.filter((r: any) => !this.idsCargadosNSS.has(r.id));
