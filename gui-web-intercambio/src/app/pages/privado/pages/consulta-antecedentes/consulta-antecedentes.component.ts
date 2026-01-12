@@ -411,7 +411,7 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
         // Limpieza de datos si el criterio no aplica
         if (tipoConsultaActual === 1 || tipoConsultaActual === 3) {
           const sincronizados = this.sincronizarEstado(
-            dataNss.content || []
+            dataNss.busquedaAntecedentesAgrupacionDtos.content || []
           );
           const content = (sincronizados || []).map(
             (row: RegistroAntecedentes) => ({
@@ -419,7 +419,7 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
               key: this.obtenerIdentificador(row)
             }))
           this.data.set(content);
-          this.totalregistros = dataNss.page.totalElements;
+          this.totalregistros = dataNss.busquedaAntecedentesAgrupacionDtos.page.totalElements;
         } else {
           this.data.set([]);
           this.totalregistros = 0;
@@ -427,7 +427,7 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
 
         if (tipoConsultaActual === 2 || tipoConsultaActual === 3) {
           const sincronizados = this.sincronizarEstado(
-            dataNombre.content || []
+            dataNombre.busquedaAntecedentesAgrupacionDtos.content || []
           );
           const content = (sincronizados || []).map(
             (row: RegistroAntecedentes) => ({
@@ -435,7 +435,7 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
               key: this.obtenerIdentificador(row)
             }))
           this.data_nombre.set(content);
-          this.totalregistrosnombre = dataNombre.page.totalElements;
+          this.totalregistrosnombre = dataNombre.busquedaAntecedentesAgrupacionDtos.page.totalElements;
         } else {
           this.data_nombre.set([]);
           this.totalregistrosnombre = 0;
