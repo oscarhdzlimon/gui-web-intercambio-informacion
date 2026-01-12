@@ -274,7 +274,8 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
         registrosPorPagina: 10,
         totalRegistros: 0,
         valorBusqueda: valor,
-        esPaginadoManual: true
+        esPaginadoManual: true,
+        datosCompletosFiltrados: [],
       }));
 
 
@@ -335,6 +336,10 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
 
         // Si es manual, aquí harías el slice para tu tabla local (0, 10)
         if (consulta.esPaginadoManual) {
+          const filtrados = content.filter((r: any) => !this.idsCargadosNSS.has(r.id));
+          consulta.datosCompletosFiltrados = filtrados;
+          consulta.totalRegistros = filtrados.length;
+
           consulta.data.set(finalData.slice(0, 10));
           consulta.totalRegistros = finalData.length;
         } else {
@@ -394,6 +399,10 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
     const consulta = this.consultas[index];
     const nuevaPagina = event.page;
 
+    if (consulta.esPaginadoManual) {
+      consulta.paginaActual = nuevaPagina;
+      this.actualizarPaginaLocal(index);
+    }
     if (consulta && (consulta.paginaActual !== nuevaPagina)) {
       consulta.paginaActual = nuevaPagina;
       this.ejecutarConsulta(index); // Ejecuta la búsqueda para esta consulta
@@ -591,6 +600,17 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
       aplicativoOrigen: this.REF_SISTEMA.sistema,
       moduloOrigen: this.REF_SISTEMA.modulo,
     }
+  }
+
+  actualizarPaginaLocal(index: number): void {
+    const consulta = this.consultas[index];
+    const inicio = consulta.paginaActual * consulta.registrosPorPagina;
+    const fin = inicio + consulta.registrosPorPagina;
+
+    if (!consulta.datosCompletosFiltrados) return;
+    const paginados = consulta.datosCompletosFiltrados.slice(inicio, fin);
+
+    consulta.data.set(this.sincronizarEstado(paginados));
   }
 
   get puedeGuardar() {

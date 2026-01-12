@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="modificacion para paginado completo">
+    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="correcciones para asociar">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/interfaces/resultado-consulta.interface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/interfaces/resultado-consulta.interface.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -95,23 +96,7 @@
       <workItem from="1767111634106" duration="669000" />
       <workItem from="1767118150936" duration="3257000" />
       <workItem from="1767891732696" duration="7482000" />
-      <workItem from="1767937805716" duration="51898000" />
-    </task>
-    <task id="LOCAL-00032" summary="regresar a la pagina anterior desde detalle antecedentes">
-      <option name="closed" value="true" />
-      <created>1765935193425</created>
-      <option name="number" value="00032" />
-      <option name="presentableId" value="LOCAL-00032" />
-      <option name="project" value="LOCAL" />
-      <updated>1765935193425</updated>
-    </task>
-    <task id="LOCAL-00033" summary="cambio expediente a null">
-      <option name="closed" value="true" />
-      <created>1765935898331</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1765935898331</updated>
+      <workItem from="1767937805716" duration="53773000" />
     </task>
     <task id="LOCAL-00034" summary="cambio pase null">
       <option name="closed" value="true" />
@@ -489,7 +474,23 @@
       <option name="project" value="LOCAL" />
       <updated>1768190678704</updated>
     </task>
-    <option name="localTasksCounter" value="81" />
+    <task id="LOCAL-00081" summary="correcciones para asociar">
+      <option name="closed" value="true" />
+      <created>1768191595582</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1768191595582</updated>
+    </task>
+    <task id="LOCAL-00082" summary="correcciones para asociar">
+      <option name="closed" value="true" />
+      <created>1768191621096</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1768191621096</updated>
+    </task>
+    <option name="localTasksCounter" value="83" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -507,7 +508,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="habilitacion de botones de asociacion" />
     <MESSAGE value="ajustes de params servicios y limpieza de elementos" />
     <MESSAGE value="limpieza de servicios" />
     <MESSAGE value="ajustes de consulta por nss" />
@@ -532,6 +532,7 @@
     <MESSAGE value="ajustes para asociacion -&gt; consulta antecedentes" />
     <MESSAGE value="ajustes para busqueda completa" />
     <MESSAGE value="modificacion para paginado completo" />
-    <option name="LAST_COMMIT_MESSAGE" value="modificacion para paginado completo" />
+    <MESSAGE value="correcciones para asociar" />
+    <option name="LAST_COMMIT_MESSAGE" value="correcciones para asociar" />
   </component>
 </project>
