@@ -105,7 +105,11 @@ export class TablaPrincipalComponent {
     const navigationExtras: NavigationExtras = {
       queryParams: {
         ...this.currentQueryParams,
-        tipoBusqueda: this.tipoBusqueda
+        tipoBusqueda: this.tipoBusqueda,
+        nss: registro.nss,
+        n: registro.nombre,
+        ap: registro.apellidoPaterno,
+        am: registro.apellidoMaterno
       },
       queryParamsHandling: 'merge'
     };
