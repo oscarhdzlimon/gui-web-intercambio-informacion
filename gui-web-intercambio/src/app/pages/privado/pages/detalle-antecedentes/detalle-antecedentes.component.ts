@@ -1,5 +1,5 @@
 import {CommonModule, Location} from '@angular/common';
-import {Component, signal, WritableSignal,} from '@angular/core';
+import {Component, inject, signal, WritableSignal,} from '@angular/core';
 
 import {ReactiveFormsModule,} from '@angular/forms';
 import {GeneralComponent} from '@components/general.component';
@@ -29,6 +29,11 @@ import {Ordenamiento} from '@models/ordenamiento.enum';
 import {forkJoin} from 'rxjs';
 import {DataCacheService} from '@services/data-cache.service';
 import { DetalleAntecedentes } from '@models/detalleAntecedentes.interface';
+import { SesionUser } from '@models/sesion-user.interface';
+import { UserService } from '@services/user.service';
+import { ConsultaDescifrada } from '../../../../core/interfaces/consulta-descifrada.interface';
+import { CryptoService } from '@services/crypto.service';
+import { SolicitudBusquedaPaginado } from '../../../../core/interfaces/solicitud-busqueda-antecedentes.interface';
 
 @Component({
   selector: 'app-detalle-antecedentes',
@@ -49,6 +54,23 @@ import { DetalleAntecedentes } from '@models/detalleAntecedentes.interface';
   providers: [DialogService],
 })
 export class DetalleAntecedentesComponent extends GeneralComponent {
+  userService: UserService = inject(UserService);
+  cifradoService: CryptoService = inject(CryptoService);
+
+  readonly AES_KEY_BASE64: string = "mZzG9Fz9P0n4z7mZlKz8B9nX0mJ8vF7PZKX2vZx5QmE=";
+  cifrado = ''
+  tipoBusqueda!: string;
+
+  REF_SISTEMA!: ConsultaDescifrada;
+  REF_USUARIO: string = '';
+  REF_APLICATIVO: string = '';
+  REF_MODULO: string = '';
+  REF_OOAD: string = '';
+  REF_NSS: string = '';
+  REF_NOMBRE: string = '';
+  REF_APATERNO: string = '';
+  REF_AMATERNO: string = '';
+
   idpagina: number = 0;
   ruta = this._nav.consultaantecedentes;
   titulo = 'Antecedentes';
@@ -101,11 +123,12 @@ export class DetalleAntecedentesComponent extends GeneralComponent {
   firstJuicio: number = 0;
   totalElementosJuicio: number = 0;
 
+  userData: SesionUser | null = null;
 
   datosUsuario = {
-    nombre: 'ANGEL ARMANDO  BRAVO ZAMBRANO',
-    nss: '48068225530',
-    expediente: '0923/2020-27',
+    nombre: '',
+    nss: '',
+    expediente: '',
     id:''
   };
 
@@ -117,11 +140,15 @@ export class DetalleAntecedentesComponent extends GeneralComponent {
     private _location: Location
   ) {
     super();
-    this.route.paramMap.subscribe((params) => {
-      const cacheId = params.get('id');
-      this.datosUsuario.id = cacheId!;
 
-    });
+    this.userService.userData$.subscribe(user => this.userData = user);
+    this.REF_APLICATIVO = this.userData?.sistemaOrigen as string;
+    this.REF_MODULO = this.userData?.modulo as string;
+    this.REF_USUARIO = this.userData?.curp as string;
+    this.REF_OOAD = this.userData?.ooad as string;
+    
+    this.obtenerParametros()
+    
   }
 
   tabla!: Array<any>;
@@ -129,12 +156,18 @@ export class DetalleAntecedentesComponent extends GeneralComponent {
 
   ngOnInit(): void {
     this.llenarTablas();
-
     this.idpagina = Number(this.route.snapshot.paramMap.get('id'));
+
   }
 
   llenarTablas() {
     const parametros = { page: 0, size: 10, sort: Ordenamiento.ASC };
+
+
+    const objFechas: SolicitudBusquedaPaginado = this.objFechasCorte();
+
+
+
     forkJoin({
       gestionData: this.detalleAntecedentesService.consultarGestion(
         parametros,
@@ -164,10 +197,10 @@ export class DetalleAntecedentesComponent extends GeneralComponent {
           parametros,
           this.datosUsuario.id
         ),
-     /* fechasCorte:
+      fechasCorte:
         this.detalleAntecedentesService.consultarFechasCorte(
-          this.datosUsuario
-        )*/
+          objFechas, +this.tipoBusqueda
+        )
     }).subscribe({
       next: ({
         gestionData,
@@ -176,7 +209,7 @@ export class DetalleAntecedentesComponent extends GeneralComponent {
         amparoIndirectoData,
         procedimientoRpeData,
         juicioContenciosoData,
-        //fechasCorte
+        fechasCorte
       }) => {
         this.lstGestion.set(gestionData.content);
         this.totalElementosGestion = gestionData.page.totalElements;
@@ -199,11 +232,30 @@ export class DetalleAntecedentesComponent extends GeneralComponent {
         this.lstJuicio.set(juicioContenciosoData['content']);
         this.totalElementosJuicio = juicioContenciosoData['page'].totalElements;
 
-        //this.fechasCorte = fechasCorte.respuesta
+        this.fechasCorte = fechasCorte.respuesta
       },
     });
   }
 
+  objFechasCorte(): SolicitudBusquedaPaginado{
+    return {
+      expediente: this.REF_SISTEMA?.expediente || '', 
+
+      personas: [
+        {
+          cve_nss: this.REF_NSS,
+          nom_nombre_afectado: this.REF_NOMBRE,
+          nom_apellido_paterno_afectado: this.REF_APATERNO,
+          nom_apellido_materno_afectado: this.REF_AMATERNO
+        }
+      ],
+      usuarioLogueado: this.REF_USUARIO,
+      sistema: this.REF_APLICATIVO,
+      modulo: this.REF_MODULO,
+      ooad_UMAE: this.REF_OOAD
+    }
+  }
+   
   public btnVerDetalle(
     registro: TablaDetalleGestionInterface,
     idRegistro: number,
@@ -369,6 +421,41 @@ export class DetalleAntecedentesComponent extends GeneralComponent {
         },
       });
   }
+
+  obtenerParametros(){
+    this.route.paramMap.subscribe((params) => {
+      const cacheId = params.get('id');
+      this.datosUsuario.id = cacheId!;
+    });
+    
+    this.route.queryParams.subscribe((qp) => {
+      this.tipoBusqueda = qp['tipoBusqueda'] as string;
+      this.REF_NSS = qp['nss'] as string;
+      this.REF_NOMBRE = qp['n'] as string;
+      this.REF_APATERNO = qp['ap'] as string;
+      this.REF_AMATERNO = qp['am'] as string;
+      if(qp['valor']){
+        this.cifrado = qp['valor'] as string;
+        void this.obtenerExpediente()
+      }
+    });
+    
+  }
+
+  async obtenerExpediente() {
+    try {
+      // IMPORTANTE: Añadir 'await' aquí
+      this.REF_SISTEMA = await this.cifradoService.decryptToObject<any>(
+        this.cifrado,
+        this.AES_KEY_BASE64
+      );
+      
+    } catch (error) {
+      console.error("Error al descifrar. Posibles causas: Clave incorrecta o JSON malformado", error);
+    }
+  }
+
+ 
 
   cargarPagina(event: any) {
     console.log('Paginación:', event);
