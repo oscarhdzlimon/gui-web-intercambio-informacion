@@ -21,7 +21,6 @@ export class AntecedentesService {
       .set('size', size)
       .set('tipoBusqueda', tipoBusqueda);
 
-    console.log(tipoBusqueda)
 
     return this.http.post<any>(`${this.URL_BASE}/General`, solicitud, {params});
   }
@@ -30,7 +29,11 @@ export class AntecedentesService {
     const params = new HttpParams()
       .set('tipoBusqueda', tipoBusqueda);
 
-    return this.http.post<any>(`${this.URL_BASE}/totales`, solicitud, { params });
+    if (!tipoBusqueda) {
+      return this.http.post<any>(`${this.URL_BASE}/totales`, solicitud);
+    }
+
+    return this.http.post<any>(`${this.URL_BASE}/totales`, solicitud, {params});
   }
 
   getExpediente(expediente: string) {

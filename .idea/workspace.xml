@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="consulta paginado manual">
+    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="ajustess pra busqueda de personas">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/services/antecedentes.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/services/antecedentes.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -94,15 +96,7 @@
       <workItem from="1767111634106" duration="669000" />
       <workItem from="1767118150936" duration="3257000" />
       <workItem from="1767891732696" duration="7482000" />
-      <workItem from="1767937805716" duration="54154000" />
-    </task>
-    <task id="LOCAL-00036" summary="modificaciones servicio busqueda">
-      <option name="closed" value="true" />
-      <created>1765949718418</created>
-      <option name="number" value="00036" />
-      <option name="presentableId" value="LOCAL-00036" />
-      <option name="project" value="LOCAL" />
-      <updated>1765949718418</updated>
+      <workItem from="1767937805716" duration="58828000" />
     </task>
     <task id="LOCAL-00037" summary="registro de bitacora correctamente guardado">
       <option name="closed" value="true" />
@@ -488,7 +482,15 @@
       <option name="project" value="LOCAL" />
       <updated>1768226214228</updated>
     </task>
-    <option name="localTasksCounter" value="85" />
+    <task id="LOCAL-00085" summary="ajustess pra busqueda de personas">
+      <option name="closed" value="true" />
+      <created>1768226471828</created>
+      <option name="number" value="00085" />
+      <option name="presentableId" value="LOCAL-00085" />
+      <option name="project" value="LOCAL" />
+      <updated>1768226471828</updated>
+    </task>
+    <option name="localTasksCounter" value="86" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -506,7 +508,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="limpieza de servicios" />
     <MESSAGE value="ajustes de consulta por nss" />
     <MESSAGE value="ajustes de consulta por nombre" />
     <MESSAGE value="ajustes de tipo de busqueda" />
@@ -531,6 +532,7 @@
     <MESSAGE value="modificacion para paginado completo" />
     <MESSAGE value="correcciones para asociar" />
     <MESSAGE value="consulta paginado manual" />
-    <option name="LAST_COMMIT_MESSAGE" value="consulta paginado manual" />
+    <MESSAGE value="ajustess pra busqueda de personas" />
+    <option name="LAST_COMMIT_MESSAGE" value="ajustess pra busqueda de personas" />
   </component>
 </project>

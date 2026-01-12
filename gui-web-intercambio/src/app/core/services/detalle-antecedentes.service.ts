@@ -1,13 +1,13 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Injectable, inject } from '@angular/core';
-import { environment } from '@env/environment.development';
-import { AlertService } from './alert.service';
-import { Observable, catchError, map, throwError } from 'rxjs';
-import { HttpRespuesta } from '@models/http-respuesta.interface';
-import { DetalleAntecedenteInterface } from '@models/detalle-antecedente.interface';
-import { ParametrosInterface } from '@models/parametros.interface';
-import { ResponseGeneral } from '@models/responseGeneral';
-import { DetalleAntecedentes } from '@models/detalleAntecedentes.interface';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {Injectable, inject} from '@angular/core';
+import {environment} from '@env/environment.development';
+import {AlertService} from './alert.service';
+import {Observable, catchError, map, throwError} from 'rxjs';
+import {HttpRespuesta} from '@models/http-respuesta.interface';
+import {DetalleAntecedenteInterface} from '@models/detalle-antecedente.interface';
+import {ParametrosInterface} from '@models/parametros.interface';
+import {ResponseGeneral} from '@models/responseGeneral';
+import {DetalleAntecedentes} from '@models/detalleAntecedentes.interface';
 import {SolicitudBusquedaPaginado} from '../interfaces/solicitud-busqueda-antecedentes.interface';
 
 @Injectable({
@@ -27,8 +27,8 @@ export class DetalleAntecedentesService {
     'Access-Control-Allow-Methods': 'POST',
   });
 
-  consultarGestion(params:ParametrosInterface,
-    id: string): Observable<any>{
+  consultarGestion(params: ParametrosInterface,
+                   id: string): Observable<any> {
 
     const {page, size, sort} = params;
 
@@ -46,8 +46,8 @@ export class DetalleAntecedentesService {
     );
   }
 
-  consultarQuejaMedica(params:ParametrosInterface,
-    id: string): Observable<HttpRespuesta<any>>{
+  consultarQuejaMedica(params: ParametrosInterface,
+                       id: string): Observable<HttpRespuesta<any>> {
 
     const {page, size, sort} = params;
 
@@ -65,8 +65,8 @@ export class DetalleAntecedentesService {
     );
   }
 
-  consultarInconformidad(params:ParametrosInterface,
-    id: string): Observable<HttpRespuesta<any>>{
+  consultarInconformidad(params: ParametrosInterface,
+                         id: string): Observable<HttpRespuesta<any>> {
 
     const {page, size, sort} = params;
 
@@ -84,8 +84,8 @@ export class DetalleAntecedentesService {
     );
   }
 
-  consultarAmparoIndirecto(params:ParametrosInterface,
-    id: string): Observable<HttpRespuesta<any>>{
+  consultarAmparoIndirecto(params: ParametrosInterface,
+                           id: string): Observable<HttpRespuesta<any>> {
 
     const {page, size, sort} = params;
 
@@ -103,8 +103,8 @@ export class DetalleAntecedentesService {
     );
   }
 
-  consultarProcedimiento(params:ParametrosInterface,
-    id: string): Observable<HttpRespuesta<any>>{
+  consultarProcedimiento(params: ParametrosInterface,
+                         id: string): Observable<HttpRespuesta<any>> {
 
     const {page, size, sort} = params;
 
@@ -122,8 +122,8 @@ export class DetalleAntecedentesService {
     );
   }
 
-  consultarJuicioContencioso(params:ParametrosInterface,
-    id: string): Observable<HttpRespuesta<any>>{
+  consultarJuicioContencioso(params: ParametrosInterface,
+                             id: string): Observable<HttpRespuesta<any>> {
 
     const {page, size, sort} = params;
 
@@ -142,21 +142,23 @@ export class DetalleAntecedentesService {
   }
 
 
-  consultarFechasCorte(filtros: DetalleAntecedenteInterface | SolicitudBusquedaPaginado, tipoBusqueda: number = 1): Observable<HttpRespuesta<any>>{
+  consultarFechasCorte(filtros: DetalleAntecedenteInterface | SolicitudBusquedaPaginado, tipoBusqueda: number = 1): Observable<HttpRespuesta<any>> {
     const ruta = `${this.serverEndPointURLAntecedente}antecedentes/obtenerFechasCorte`;
 
     const params = new HttpParams()
       .set('tipoBusqueda', tipoBusqueda);
 
+    if (!tipoBusqueda) {
+      return this.http.post<HttpRespuesta<any>>(ruta, filtros, {headers: this.header})
+    }
 
-    return this.http.post<HttpRespuesta<any>>(ruta, filtros, {headers: this.header, params }).pipe(
+    return this.http.post<HttpRespuesta<any>>(ruta, filtros, {headers: this.header, params}).pipe(
       catchError(this.handleError),
       map((response: any) => {
         return response
       }),
     );
   }
-
 
 
   private handleError(error: ResponseGeneral) {
