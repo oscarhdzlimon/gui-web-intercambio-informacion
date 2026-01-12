@@ -60,6 +60,10 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
 
   userService = inject(UserService);
 
+  private idsCargadosNSS = new Set<string>();
+
+  private dataNombreCompleta: RegistroAntecedentes[] = [];
+
   filtroForm!: FormGroup;
 
   // Inicialización de los títulos base
@@ -237,10 +241,16 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
         this.paginar();
       }
     } else if (tipoTabla === TipoTabla.NOMBRE) {
-      if (this.paginaActualNombre !== nuevaPagina || this.registrosPorPaginaNombre !== nuevoTamanio) {
-        this.paginaActualNombre = nuevaPagina;
-        this.registrosPorPaginaNombre = nuevoTamanio;
-        this.paginar();
+      this.paginaActualNombre = nuevaPagina;
+      this.registrosPorPaginaNombre = nuevoTamanio;
+
+      const tipoConsultaActual = this.filtroForm.get('tipoconsulta')?.value;
+
+      if (tipoConsultaActual === 3) {
+        // PAGINADO MANUAL: No llamar al server, solo rebanar el array
+        this.actualizarPaginaNombreLocal();
+      } else {
+        this.paginar(); // Caso 2 normal: va al servidor
       }
     }
   }
@@ -400,6 +410,8 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
 
     // --- Ejecución de las búsquedas paralelas ---
 
+    const sizeNombre = tipoConsultaActual === 3 ? 100 : this.registrosPorPaginaNombre;
+
     forkJoin([
       listObservableNss,
       listObservableNombre,
@@ -407,35 +419,43 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
     ]).subscribe({
       next: ([dataNss, dataNombre, totalResponse]) => {
         this.obtenerFechasCorte();
+        this.idsCargadosNSS.clear(); // Limpiar rastro de duplicados
 
         // Limpieza de datos si el criterio no aplica
         if (tipoConsultaActual === 1 || tipoConsultaActual === 3) {
-          const sincronizados = this.sincronizarEstado(
-            dataNss.busquedaAntecedentesAgrupacionDtos.content || []
-          );
-          const content = (sincronizados || []).map(
-            (row: RegistroAntecedentes) => ({
-              ...row,
-              key: this.obtenerIdentificador(row)
-            }))
-          this.data.set(content);
+          const contentNss = dataNss.busquedaAntecedentesAgrupacionDtos.content || [];
+          const procesadosNss = contentNss.map((row: any) => {
+            const key = this.obtenerIdentificador(row);
+            this.idsCargadosNSS.add(key); // Registrar ID
+            return {...row, key};
+          });
+
+          this.data.set(this.sincronizarEstado(procesadosNss));
           this.totalregistros = dataNss.busquedaAntecedentesAgrupacionDtos.page.totalElements;
+
         } else {
           this.data.set([]);
           this.totalregistros = 0;
         }
 
         if (tipoConsultaActual === 2 || tipoConsultaActual === 3) {
-          const sincronizados = this.sincronizarEstado(
-            dataNombre.busquedaAntecedentesAgrupacionDtos.content || []
-          );
-          const content = (sincronizados || []).map(
-            (row: RegistroAntecedentes) => ({
-              ...row,
-              key: this.obtenerIdentificador(row)
-            }))
-          this.data_nombre.set(content);
-          this.totalregistrosnombre = dataNombre.busquedaAntecedentesAgrupacionDtos.page.totalElements;
+          const rawNombre = dataNombre.busquedaAntecedentesAgrupacionDtos.content || [];
+
+          // Filtrar registros que ya existen en la tabla NSS
+          const filtrados = rawNombre
+            .map((row: any) => ({...row, key: this.obtenerIdentificador(row)}))
+            .filter((row: any) => !this.idsCargadosNSS.has(row.key));
+
+          if (tipoConsultaActual === 3) {
+            // Guardar para paginado manual
+            this.dataNombreCompleta = filtrados;
+            this.totalregistrosnombre = filtrados.length;
+            this.actualizarPaginaNombreLocal();
+          } else {
+            // Paginado normal de backend
+            this.data_nombre.set(this.sincronizarEstado(filtrados));
+            this.totalregistrosnombre = dataNombre.busquedaAntecedentesAgrupacionDtos.page.totalElements;
+          }
         } else {
           this.data_nombre.set([]);
           this.totalregistrosnombre = 0;
@@ -634,5 +654,13 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
       aplicativoOrigen: this.REF_APLICATIVO,
       moduloOrigen: this.REF_MODULO,
     }
+  }
+
+  actualizarPaginaNombreLocal(): void {
+    const inicio = this.paginaActualNombre * this.registrosPorPaginaNombre;
+    const fin = inicio + this.registrosPorPaginaNombre;
+
+    const pagina = this.dataNombreCompleta.slice(inicio, fin);
+    this.data_nombre.set(this.sincronizarEstado(pagina));
   }
 }
