@@ -577,9 +577,13 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
 
   obtenerFechasCorte() {
     const tipoConsultaActual = this.filtroForm.get('tipoconsulta')?.value;
-    const tipoConsulta = tipoConsultaActual === 1 ? 1 : 2
+    const tipoConsulta = [1, 2].includes(tipoConsultaActual) ? tipoConsultaActual : null
 
-    const solicitud = tipoConsultaActual === 1 ? this.generarSolicitudAntecedentesNSS() : this.generarSolicitudAntecedentesNombre();
+    let solicitud = tipoConsultaActual === 1 ? this.generarSolicitudAntecedentesNSS() : this.generarSolicitudAntecedentesNombre();
+
+    if (!tipoConsulta) {
+      solicitud = this.generarSolicitudAntecedentes();
+    }
 
     this.detalleAntecedentesService.consultarFechasCorte(solicitud, tipoConsulta).subscribe({
       next: (datos) => {
