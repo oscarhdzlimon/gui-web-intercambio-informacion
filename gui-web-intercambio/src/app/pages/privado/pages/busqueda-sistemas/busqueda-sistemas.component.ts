@@ -395,6 +395,17 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
     }
   }
 
+  generarSolicitudAntecedentesTotales(): SolicitudBusquedaPaginado {
+    return {
+      expediente: this.REF_SISTEMA.expediente,
+      ooad_UMAE: this.REF_SISTEMA.ooad_UMAE,
+      usuarioLogueado: this.REF_SISTEMA.usuarioLogueado,
+      sistema: this.REF_SISTEMA.sistema,
+      modulo: this.REF_SISTEMA.modulo,
+      personas: this.REF_SISTEMA.personas
+    }
+  }
+
   cargarPagina(event: any, index: number) {
     const consulta = this.consultas[index];
     const nuevaPagina = event.page;
@@ -466,7 +477,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
     const valorBusqueda = this.filtroForm.get('valor')?.value;
 
     if (this.consulta_todos) {
-      return {expediente: null, nombre: null, nss: null};
+      return this.generarSolicitudAntecedentesTotales();
     }
 
     if (tipoConsulta === 1) { // Caso 1: Búsqueda por NSS

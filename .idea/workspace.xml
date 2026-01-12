@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="correcciones para asociar">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/interfaces/resultado-consulta.interface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/interfaces/resultado-consulta.interface.ts" afterDir="false" />
+    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="consulta paginado manual">
       <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -96,23 +94,7 @@
       <workItem from="1767111634106" duration="669000" />
       <workItem from="1767118150936" duration="3257000" />
       <workItem from="1767891732696" duration="7482000" />
-      <workItem from="1767937805716" duration="53773000" />
-    </task>
-    <task id="LOCAL-00034" summary="cambio pase null">
-      <option name="closed" value="true" />
-      <created>1765936474155</created>
-      <option name="number" value="00034" />
-      <option name="presentableId" value="LOCAL-00034" />
-      <option name="project" value="LOCAL" />
-      <updated>1765936474155</updated>
-    </task>
-    <task id="LOCAL-00035" summary="servicio de estado de la busqueda">
-      <option name="closed" value="true" />
-      <created>1765944953834</created>
-      <option name="number" value="00035" />
-      <option name="presentableId" value="LOCAL-00035" />
-      <option name="project" value="LOCAL" />
-      <updated>1765944953834</updated>
+      <workItem from="1767937805716" duration="54154000" />
     </task>
     <task id="LOCAL-00036" summary="modificaciones servicio busqueda">
       <option name="closed" value="true" />
@@ -490,7 +472,23 @@
       <option name="project" value="LOCAL" />
       <updated>1768191621096</updated>
     </task>
-    <option name="localTasksCounter" value="83" />
+    <task id="LOCAL-00083" summary="consulta paginado manual">
+      <option name="closed" value="true" />
+      <created>1768226013482</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1768226013482</updated>
+    </task>
+    <task id="LOCAL-00084" summary="consulta paginado manual">
+      <option name="closed" value="true" />
+      <created>1768226214228</created>
+      <option name="number" value="00084" />
+      <option name="presentableId" value="LOCAL-00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1768226214228</updated>
+    </task>
+    <option name="localTasksCounter" value="85" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -508,7 +506,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="ajustes de params servicios y limpieza de elementos" />
     <MESSAGE value="limpieza de servicios" />
     <MESSAGE value="ajustes de consulta por nss" />
     <MESSAGE value="ajustes de consulta por nombre" />
@@ -533,6 +530,7 @@
     <MESSAGE value="ajustes para busqueda completa" />
     <MESSAGE value="modificacion para paginado completo" />
     <MESSAGE value="correcciones para asociar" />
-    <option name="LAST_COMMIT_MESSAGE" value="correcciones para asociar" />
+    <MESSAGE value="consulta paginado manual" />
+    <option name="LAST_COMMIT_MESSAGE" value="consulta paginado manual" />
   </component>
 </project>
