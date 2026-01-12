@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="ajuste fechas">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.ts" afterDir="false" />
+    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="consulta paginado manual">
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,7 +22,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="Dev" />
+        <entry key="$PROJECT_DIR$" value="dev_eduardo" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -52,25 +50,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;dev__eduardo&quot;,
-    &quot;javascript.preferred.runtime.type.id&quot;: &quot;node&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/epgomez/Documents/gui-web-intercambio-informacion&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\epgomez\\Documents\\gui-web-intercambio-informacion\\gui-web-intercambio\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "git-widget-placeholder": "dev__eduardo__totales",
+    "javascript.preferred.runtime.type.id": "node",
+    "last_opened_file_path": "C:/Users/epgomez/Documents/gui-web-intercambio-informacion",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "ts.external.directory.path": "C:\\Users\\epgomez\\Documents\\gui-web-intercambio-informacion\\gui-web-intercambio\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -96,71 +94,7 @@
       <workItem from="1767111634106" duration="669000" />
       <workItem from="1767118150936" duration="3257000" />
       <workItem from="1767891732696" duration="7482000" />
-      <workItem from="1767937805716" duration="46684000" />
-    </task>
-    <task id="LOCAL-00028" summary="faltantes de homologar">
-      <option name="closed" value="true" />
-      <created>1765933360119</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1765933360119</updated>
-    </task>
-    <task id="LOCAL-00029" summary="ajustes de ref">
-      <option name="closed" value="true" />
-      <created>1765933934911</created>
-      <option name="number" value="00029" />
-      <option name="presentableId" value="LOCAL-00029" />
-      <option name="project" value="LOCAL" />
-      <updated>1765933934911</updated>
-    </task>
-    <task id="LOCAL-00030" summary="ajustes de rutas">
-      <option name="closed" value="true" />
-      <created>1765934187224</created>
-      <option name="number" value="00030" />
-      <option name="presentableId" value="LOCAL-00030" />
-      <option name="project" value="LOCAL" />
-      <updated>1765934187224</updated>
-    </task>
-    <task id="LOCAL-00031" summary="mantener los query params en cambio de página">
-      <option name="closed" value="true" />
-      <created>1765934790158</created>
-      <option name="number" value="00031" />
-      <option name="presentableId" value="LOCAL-00031" />
-      <option name="project" value="LOCAL" />
-      <updated>1765934790159</updated>
-    </task>
-    <task id="LOCAL-00032" summary="regresar a la pagina anterior desde detalle antecedentes">
-      <option name="closed" value="true" />
-      <created>1765935193425</created>
-      <option name="number" value="00032" />
-      <option name="presentableId" value="LOCAL-00032" />
-      <option name="project" value="LOCAL" />
-      <updated>1765935193425</updated>
-    </task>
-    <task id="LOCAL-00033" summary="cambio expediente a null">
-      <option name="closed" value="true" />
-      <created>1765935898331</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1765935898331</updated>
-    </task>
-    <task id="LOCAL-00034" summary="cambio pase null">
-      <option name="closed" value="true" />
-      <created>1765936474155</created>
-      <option name="number" value="00034" />
-      <option name="presentableId" value="LOCAL-00034" />
-      <option name="project" value="LOCAL" />
-      <updated>1765936474155</updated>
-    </task>
-    <task id="LOCAL-00035" summary="servicio de estado de la busqueda">
-      <option name="closed" value="true" />
-      <created>1765944953834</created>
-      <option name="number" value="00035" />
-      <option name="presentableId" value="LOCAL-00035" />
-      <option name="project" value="LOCAL" />
-      <updated>1765944953834</updated>
+      <workItem from="1767937805716" duration="54154000" />
     </task>
     <task id="LOCAL-00036" summary="modificaciones servicio busqueda">
       <option name="closed" value="true" />
@@ -490,7 +424,71 @@
       <option name="project" value="LOCAL" />
       <updated>1768112217264</updated>
     </task>
-    <option name="localTasksCounter" value="77" />
+    <task id="LOCAL-00077" summary="ajuste tipo de busqueda -&gt; consulta antecedentes">
+      <option name="closed" value="true" />
+      <created>1768167273399</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1768167273399</updated>
+    </task>
+    <task id="LOCAL-00078" summary="ajustes para asociacion -&gt; consulta antecedentes">
+      <option name="closed" value="true" />
+      <created>1768167355924</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1768167355924</updated>
+    </task>
+    <task id="LOCAL-00079" summary="ajustes para busqueda completa">
+      <option name="closed" value="true" />
+      <created>1768189860887</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1768189860887</updated>
+    </task>
+    <task id="LOCAL-00080" summary="modificacion para paginado completo">
+      <option name="closed" value="true" />
+      <created>1768190678704</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1768190678704</updated>
+    </task>
+    <task id="LOCAL-00081" summary="correcciones para asociar">
+      <option name="closed" value="true" />
+      <created>1768191595582</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1768191595582</updated>
+    </task>
+    <task id="LOCAL-00082" summary="correcciones para asociar">
+      <option name="closed" value="true" />
+      <created>1768191621096</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1768191621096</updated>
+    </task>
+    <task id="LOCAL-00083" summary="consulta paginado manual">
+      <option name="closed" value="true" />
+      <created>1768226013482</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1768226013482</updated>
+    </task>
+    <task id="LOCAL-00084" summary="consulta paginado manual">
+      <option name="closed" value="true" />
+      <created>1768226214228</created>
+      <option name="number" value="00084" />
+      <option name="presentableId" value="LOCAL-00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1768226214228</updated>
+    </task>
+    <option name="localTasksCounter" value="85" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -508,12 +506,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="corrección filtros -&gt; consulta antecedente" />
-    <MESSAGE value="corrección filtros -&gt; busqueda sistemas" />
-    <MESSAGE value="correccion al obtener y mostrar elementos de la asoociación" />
-    <MESSAGE value="ajustes al guardar solicitud de antecedentes" />
-    <MESSAGE value="habilitacion de botones de asociacion" />
-    <MESSAGE value="ajustes de params servicios y limpieza de elementos" />
     <MESSAGE value="limpieza de servicios" />
     <MESSAGE value="ajustes de consulta por nss" />
     <MESSAGE value="ajustes de consulta por nombre" />
@@ -533,6 +525,12 @@
     <MESSAGE value="ajustes de busqueda interna -&gt; por nombre" />
     <MESSAGE value="ajuste totales" />
     <MESSAGE value="ajuste fechas" />
-    <option name="LAST_COMMIT_MESSAGE" value="ajuste fechas" />
+    <MESSAGE value="ajuste tipo de busqueda -&gt; consulta antecedentes" />
+    <MESSAGE value="ajustes para asociacion -&gt; consulta antecedentes" />
+    <MESSAGE value="ajustes para busqueda completa" />
+    <MESSAGE value="modificacion para paginado completo" />
+    <MESSAGE value="correcciones para asociar" />
+    <MESSAGE value="consulta paginado manual" />
+    <option name="LAST_COMMIT_MESSAGE" value="consulta paginado manual" />
   </component>
 </project>

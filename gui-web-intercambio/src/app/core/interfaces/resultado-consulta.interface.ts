@@ -16,5 +16,7 @@ export interface ResultadoConsulta {
   registrosPorPagina: number;
   totalRegistros: number;
   valorBusqueda: string | NombreTipoDropdown;
+  esPaginadoManual?: boolean,
+  datosCompletosFiltrados?: RegistroAntecedentes[],
 }
 
