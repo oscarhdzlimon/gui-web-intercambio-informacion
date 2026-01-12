@@ -62,7 +62,6 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
   detalleAntecedentesService: DetalleAntecedentesService = inject(DetalleAntecedentesService);
 
   filtroResultado: TipoDropdown[] = FILTRO_RESULTADOS_EXPEDIENTE;
-  nombres: TipoDropdown[] = [];
   nombresSolicitud: NombreTipoDropdown[] = [];
   nss: TipoDropdown[] = [];
 
@@ -262,19 +261,21 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
       }));
 
       // Creamos la tabla de Nombre para el Expediente
-      const nombres = this.nombres.map((nombre) => ({
+      const nombres = this.nombresSolicitud.map((valor) => ({
         tipo: TipoTabla.NOMBRE,
         tituloBase: 'Resultados Nombre por Expediente',
-        tituloCompleto: `Resultados Nombre por Expediente: ${nombre.value}`,
+        tituloCompleto: `Resultados Nombre por Expediente: ${valor.nombreCompleto}`,
         data: signal([]),
         paginaActual: 0,
         registrosPorPagina: 10,
         totalRegistros: 0,
-        valorBusqueda: nombre.value as string
+        valorBusqueda: valor
       }));
 
 
       this.consultas = [...nss, ...nombres];
+
+      console.log(this.consultas)
 
       this.obtenerDatosExpediente();
     }
@@ -546,7 +547,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
   }
 
   trackConsulta = (consulta: ResultadoConsulta) =>
-    `${consulta.tipo}-${consulta.valorBusqueda}`;
+    `${consulta.tipo}-${consulta.tituloCompleto}`;
 
 
   obtenerFechasCorte() {
