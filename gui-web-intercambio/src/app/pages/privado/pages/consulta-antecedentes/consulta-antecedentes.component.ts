@@ -383,7 +383,7 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
       page: {size: 0, number: 0, totalElements: 0, totalPages: 0}
     });
     const solicitud: SolicitudBusquedaPaginado = this.generarSolicitudAntecedentes();
-    const tipoConsulta = tipoConsultaActual === 1 ? 1 : 2
+    const tipoConsulta = [1, 2].includes(tipoConsultaActual) ? tipoConsultaActual : null;
     let totalObservable: Observable<TotalesAntecedentes> = this.antecedentesService.getTotalAntecedentes(solicitud, tipoConsulta);
 
     // --- Lógica de bifurcación de búsqueda ---
