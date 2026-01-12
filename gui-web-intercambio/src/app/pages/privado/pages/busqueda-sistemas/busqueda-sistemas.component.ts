@@ -402,6 +402,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
     if (consulta.esPaginadoManual) {
       consulta.paginaActual = nuevaPagina;
       this.actualizarPaginaLocal(index);
+      return;
     }
     if (consulta && (consulta.paginaActual !== nuevaPagina)) {
       consulta.paginaActual = nuevaPagina;
