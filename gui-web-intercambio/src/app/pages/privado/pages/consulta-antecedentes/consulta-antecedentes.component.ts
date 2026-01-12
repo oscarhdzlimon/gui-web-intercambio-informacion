@@ -643,7 +643,10 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
   generarObjReporteAntecedentes(): ReporteAntecedentes {
 
     return {
+      id: "",
       nombre: "",
+      apellidoPaterno: "",
+      apellidoMaterno: "",
       nss: "",
       expediente: "",
       fecCorteSiade: this.fechasCorte.fecCorteSiade,

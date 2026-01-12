@@ -602,7 +602,10 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
   generarObjReporteAntecedentes(): ReporteAntecedentes {
 
     return {
+      id: "",
       nombre: "",
+      apellidoPaterno: "",
+      apellidoMaterno: "",
       nss: "",
       expediente: "",
       fecCorteSiade: this.fechasCorte.fecCorteSiade,
