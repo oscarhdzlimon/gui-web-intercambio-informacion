@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="ajustes para busqueda completa">
+    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="modificacion para paginado completo">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/interfaces/resultado-consulta.interface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/interfaces/resultado-consulta.interface.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -24,7 +23,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="Dev" />
+        <entry key="$PROJECT_DIR$" value="dev_eduardo" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -52,25 +51,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;dev__eduardo&quot;,
-    &quot;javascript.preferred.runtime.type.id&quot;: &quot;node&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/epgomez/Documents/gui-web-intercambio-informacion&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\epgomez\\Documents\\gui-web-intercambio-informacion\\gui-web-intercambio\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "git-widget-placeholder": "dev__eduardo__totales",
+    "javascript.preferred.runtime.type.id": "node",
+    "last_opened_file_path": "C:/Users/epgomez/Documents/gui-web-intercambio-informacion",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "ts.external.directory.path": "C:\\Users\\epgomez\\Documents\\gui-web-intercambio-informacion\\gui-web-intercambio\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -96,15 +95,7 @@
       <workItem from="1767111634106" duration="669000" />
       <workItem from="1767118150936" duration="3257000" />
       <workItem from="1767891732696" duration="7482000" />
-      <workItem from="1767937805716" duration="50841000" />
-    </task>
-    <task id="LOCAL-00031" summary="mantener los query params en cambio de página">
-      <option name="closed" value="true" />
-      <created>1765934790158</created>
-      <option name="number" value="00031" />
-      <option name="presentableId" value="LOCAL-00031" />
-      <option name="project" value="LOCAL" />
-      <updated>1765934790159</updated>
+      <workItem from="1767937805716" duration="51898000" />
     </task>
     <task id="LOCAL-00032" summary="regresar a la pagina anterior desde detalle antecedentes">
       <option name="closed" value="true" />
@@ -490,7 +481,15 @@
       <option name="project" value="LOCAL" />
       <updated>1768189860887</updated>
     </task>
-    <option name="localTasksCounter" value="80" />
+    <task id="LOCAL-00080" summary="modificacion para paginado completo">
+      <option name="closed" value="true" />
+      <created>1768190678704</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1768190678704</updated>
+    </task>
+    <option name="localTasksCounter" value="81" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -508,7 +507,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="ajustes al guardar solicitud de antecedentes" />
     <MESSAGE value="habilitacion de botones de asociacion" />
     <MESSAGE value="ajustes de params servicios y limpieza de elementos" />
     <MESSAGE value="limpieza de servicios" />
@@ -533,6 +531,7 @@
     <MESSAGE value="ajuste tipo de busqueda -&gt; consulta antecedentes" />
     <MESSAGE value="ajustes para asociacion -&gt; consulta antecedentes" />
     <MESSAGE value="ajustes para busqueda completa" />
-    <option name="LAST_COMMIT_MESSAGE" value="ajustes para busqueda completa" />
+    <MESSAGE value="modificacion para paginado completo" />
+    <option name="LAST_COMMIT_MESSAGE" value="modificacion para paginado completo" />
   </component>
 </project>

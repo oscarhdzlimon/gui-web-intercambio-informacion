@@ -65,8 +65,6 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
   nombresSolicitud: NombreTipoDropdown[] = [];
   nss: TipoDropdown[] = [];
 
-  puedeGuardar = false;
-
   totalAntecedentes!: TotalesAntecedentes;
 
   consultas: ResultadoConsulta[] = [];
@@ -593,5 +591,9 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
       aplicativoOrigen: this.REF_SISTEMA.sistema,
       moduloOrigen: this.REF_SISTEMA.modulo,
     }
+  }
+
+  get puedeGuardar() {
+    return this.solicitudAntecedentesService.tieneRegistros()
   }
 }
