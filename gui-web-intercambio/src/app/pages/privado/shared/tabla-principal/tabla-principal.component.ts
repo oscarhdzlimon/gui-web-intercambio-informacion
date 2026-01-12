@@ -105,7 +105,11 @@ export class TablaPrincipalComponent {
     const navigationExtras: NavigationExtras = {
       queryParams: {
         ...this.currentQueryParams,
-        tipoBusqueda: this.tipoBusqueda
+        tipoBusqueda: this.tipoBusqueda,
+        nss: registro.nss,
+        n: registro.nombre,
+        ap: registro.apellidoPaterno,
+        am: registro.apellidoMaterno
       },
       queryParamsHandling: 'merge'
     };
@@ -115,9 +119,12 @@ export class TablaPrincipalComponent {
   }
 
   generarPdf(registro: RegistroAntecedentes) {
-    const obj: ReporteAntecedentes = {
+    const obj: ReporteAntecedentes = { 
       ...this.datosUsuario,
+      id: registro.id,
       nombre: registro.nombre,
+      apellidoPaterno: registro.apellidoPaterno,
+      apellidoMaterno: registro.apellidoMaterno,
       nss: registro.nss,
       expediente: this.expediente
     }
