@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="totales -&gt; caso 3">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.ts" afterDir="false" />
-    </list>
+    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="correcciones de consulta" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -95,15 +92,7 @@
       <workItem from="1767111634106" duration="669000" />
       <workItem from="1767118150936" duration="3257000" />
       <workItem from="1767891732696" duration="7482000" />
-      <workItem from="1767937805716" duration="64282000" />
-    </task>
-    <task id="LOCAL-00042" summary="se mantienen los registros pero revisar el paginado">
-      <option name="closed" value="true" />
-      <created>1766099447338</created>
-      <option name="number" value="00042" />
-      <option name="presentableId" value="LOCAL-00042" />
-      <option name="project" value="LOCAL" />
-      <updated>1766099447338</updated>
+      <workItem from="1767937805716" duration="65003000" />
     </task>
     <task id="LOCAL-00043" summary="fix tablas paginado">
       <option name="closed" value="true" />
@@ -489,7 +478,15 @@
       <option name="project" value="LOCAL" />
       <updated>1768246170421</updated>
     </task>
-    <option name="localTasksCounter" value="91" />
+    <task id="LOCAL-00091" summary="correcciones de consulta">
+      <option name="closed" value="true" />
+      <created>1768248243335</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1768248243335</updated>
+    </task>
+    <option name="localTasksCounter" value="92" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -507,7 +504,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="correcciones de objeto de reporte" />
     <MESSAGE value="ajuste de parametros al abrir el detalle" />
     <MESSAGE value="quitar cache de id" />
     <MESSAGE value="consulta de fechas de corte" />
@@ -532,6 +528,7 @@
     <MESSAGE value="consultas individuales -&gt; ajustes" />
     <MESSAGE value="fechas corte -&gt; caso 3" />
     <MESSAGE value="totales -&gt; caso 3" />
-    <option name="LAST_COMMIT_MESSAGE" value="totales -&gt; caso 3" />
+    <MESSAGE value="correcciones de consulta" />
+    <option name="LAST_COMMIT_MESSAGE" value="correcciones de consulta" />
   </component>
 </project>
