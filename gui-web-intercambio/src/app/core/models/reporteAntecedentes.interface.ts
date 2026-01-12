@@ -1,7 +1,10 @@
 export interface ReporteAntecedentes{
-    nombre: string,
-    nss: string,
+    id: string,
     expediente: string | null,
+    nombre: string,
+    apellidoPaterno: string | null,
+    apellidoMaterno: string | null,
+    nss: string,
     fecCorteSiade: string,
     fecCorteSsc1: string,
     fecCorteSsc2: string,
