@@ -345,7 +345,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
           consulta.totalRegistros = finalData.length;
         } else {
           consulta.data.set(finalData);
-          consulta.totalRegistros = dataResponse.page.totalElements || 0;
+          consulta.totalRegistros = dataResponse.busquedaAntecedentesAgrupacionDtos.page.totalElements || 0;
         }
       },
       error: (error) => {
