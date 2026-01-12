@@ -95,7 +95,7 @@
   </article>
 }
 
-@if (data().length > 0) {
+@if (data().length > 0 || data_nombre().length > 0) {
   <p-card class="mx-2 empty-border" [header]="'Total de antecedentes'">
 
     <article class="flex flex-row flex-wrap">
