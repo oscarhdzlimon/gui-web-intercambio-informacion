@@ -12,6 +12,7 @@ import {CME_TOKEN} from '@utils/constants';
 import {UserIdleService} from 'angular-user-idle';
 import {TIEMPO_MAXIMO_SESION} from '@utils/tokens';
 import {TiempoSesion} from '@models/tiempo-sesion.interface';
+import {BusquedaStateService} from '@services/busqueda-state.service';
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +30,7 @@ export class AuthService {
   http = inject(HttpClient);
   router = inject(Router);
   usuarioService = inject(UserService);
+  busqueda =  inject(BusquedaStateService)
 
   get usuarioSesion() {
     return this.usuarioSesionSubject.value;
@@ -100,6 +102,7 @@ export class AuthService {
     this.usuarioService.clearUser();
     this.usuarioSesionSubject.next(null);
     this.detenerTemporizadorSesion();
+    this.busqueda.eliminarFiltros();
     void this.router.navigate(['/']);
   }
 

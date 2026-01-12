@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="correcciones de consulta" />
+    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="ajuste de visibilidad de totales">
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/services/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/services/auth.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/services/busqueda-state.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/services/busqueda-state.service.ts" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -92,15 +95,7 @@
       <workItem from="1767111634106" duration="669000" />
       <workItem from="1767118150936" duration="3257000" />
       <workItem from="1767891732696" duration="7482000" />
-      <workItem from="1767937805716" duration="65003000" />
-    </task>
-    <task id="LOCAL-00043" summary="fix tablas paginado">
-      <option name="closed" value="true" />
-      <created>1766100349772</created>
-      <option name="number" value="00043" />
-      <option name="presentableId" value="LOCAL-00043" />
-      <option name="project" value="LOCAL" />
-      <updated>1766100349772</updated>
+      <workItem from="1767937805716" duration="65410000" />
     </task>
     <task id="LOCAL-00044" summary="ajustes de elementos de solicitud">
       <option name="closed" value="true" />
@@ -486,7 +481,15 @@
       <option name="project" value="LOCAL" />
       <updated>1768248243335</updated>
     </task>
-    <option name="localTasksCounter" value="92" />
+    <task id="LOCAL-00092" summary="ajuste de visibilidad de totales">
+      <option name="closed" value="true" />
+      <created>1768251556816</created>
+      <option name="number" value="00092" />
+      <option name="presentableId" value="LOCAL-00092" />
+      <option name="project" value="LOCAL" />
+      <updated>1768251556816</updated>
+    </task>
+    <option name="localTasksCounter" value="93" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -504,7 +507,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="ajuste de parametros al abrir el detalle" />
     <MESSAGE value="quitar cache de id" />
     <MESSAGE value="consulta de fechas de corte" />
     <MESSAGE value="ajustes previos a asociación" />
@@ -529,6 +531,7 @@
     <MESSAGE value="fechas corte -&gt; caso 3" />
     <MESSAGE value="totales -&gt; caso 3" />
     <MESSAGE value="correcciones de consulta" />
-    <option name="LAST_COMMIT_MESSAGE" value="correcciones de consulta" />
+    <MESSAGE value="ajuste de visibilidad de totales" />
+    <option name="LAST_COMMIT_MESSAGE" value="ajuste de visibilidad de totales" />
   </component>
 </project>

@@ -44,6 +44,11 @@ export class BusquedaStateService {
     this.filtrosAntecedentes.next(filtros);
   }
 
+  eliminarFiltros() {
+    this.filtrosSource.next(null);
+    this.filtrosAntecedentes.next(null);
+  }
+
   /**
    * Obtiene los filtros actuales de forma síncrona.
    */
