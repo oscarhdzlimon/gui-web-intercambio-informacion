@@ -1,6 +1,6 @@
 export interface ReporteAntecedentes{
-    id: string,
     expediente: string | null,
+    tipoBusqueda: number | null,
     nombre: string,
     apellidoPaterno: string | null,
     apellidoMaterno: string | null,
@@ -11,5 +11,5 @@ export interface ReporteAntecedentes{
     nombreConsultor: string,
     ooad: string,
     aplicativoOrigen: string,
-    moduloOrigen: string
+    moduloOrigen: string   
 }
