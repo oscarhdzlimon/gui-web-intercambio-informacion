@@ -121,7 +121,7 @@ export class TablaPrincipalComponent {
   generarPdf(registro: RegistroAntecedentes) {
     const obj: ReporteAntecedentes = { 
       ...this.datosUsuario,
-      id: registro.id,
+      tipoBusqueda: +this.tipoBusqueda,
       nombre: registro.nombre,
       apellidoPaterno: registro.apellidoPaterno,
       apellidoMaterno: registro.apellidoMaterno,
