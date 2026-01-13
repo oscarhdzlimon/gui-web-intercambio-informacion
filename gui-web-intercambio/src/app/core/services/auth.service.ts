@@ -43,7 +43,8 @@ export class AuthService {
   constructor(private userIdleService: UserIdleService,
               @Inject(TIEMPO_MAXIMO_SESION) private tiempoSesion: TiempoSesion) {
     const rutaExclusion = '/privado/busqueda-sistema';
-    if (!this.router.url.includes(rutaExclusion)) {
+    const rutaDetalle = '/privado/detalle-antecedentes';
+    if (!this.router.url.includes(rutaExclusion) && !this.router.url.includes(rutaDetalle)) {
       this.recuperarSesionAlRecargarPagina();
     }
   }

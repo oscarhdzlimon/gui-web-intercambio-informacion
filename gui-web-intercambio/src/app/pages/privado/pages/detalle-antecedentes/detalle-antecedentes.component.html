@@ -268,7 +268,7 @@
           @if (lstQueja().length > 0) {
             <p-paginator styleClass="justify-content-end" [showFirstLastIcon]="false" [first]="firstQueja"
                          [rows]="rows" [totalRecords]="totalElementosQueja"
-                         (onPageChange)="onPageChange($event, 'quejaMedica')">
+                         (onPageChange)="onPageChange($event, 'queja')">
 
 
               <ng-template pTemplate="previouspagelinkicon">
@@ -567,7 +567,7 @@
 
             <p-paginator styleClass="justify-content-end" [showFirstLastIcon]="false" [first]="firstAmparoIndirecto"
                          [rows]="rows" [totalRecords]="totalElementosAmparoIndirecto"
-                         (onPageChange)="onPageChange($event,'amparoIndirecto')">
+                         (onPageChange)="onPageChange($event,'amparo')">
 
 
               <ng-template pTemplate="previouspagelinkicon">
@@ -723,7 +723,7 @@
           @if (lstProcedimientoRpe().length > 0) {
             <p-paginator styleClass="justify-content-end" [showFirstLastIcon]="false" [first]="firstProcedimientoRpe"
                          [rows]="rows" [totalRecords]="totalElementosProcedimientoRpe"
-                         (onPageChange)="onPageChange($event,'procedimientoRpe')">
+                         (onPageChange)="onPageChange($event,'procedimiento')">
 
 
               <ng-template pTemplate="previouspagelinkicon">
