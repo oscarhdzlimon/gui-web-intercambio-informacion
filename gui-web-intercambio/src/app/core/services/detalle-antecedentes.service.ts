@@ -10,6 +10,14 @@ import {ResponseGeneral} from '@models/responseGeneral';
 import {DetalleAntecedentes} from '@models/detalleAntecedentes.interface';
 import {SolicitudBusquedaPaginado} from '../interfaces/solicitud-busqueda-antecedentes.interface';
 
+interface datosUsuario {
+  nombre: string,
+  apellidoPaterno: string,
+  apellidoMaterno: string
+  nss: string,
+  tipoBusqueda: string,
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -27,18 +35,10 @@ export class DetalleAntecedentesService {
     'Access-Control-Allow-Methods': 'POST',
   });
 
-  consultarGestion(params: ParametrosInterface,
-                   id: string): Observable<any> {
-
-    const {page, size, sort} = params;
-
-    let parametros = new HttpParams();
-    parametros = parametros.set('page', page);
-    parametros = parametros.set('size', size);
-    parametros = parametros.set('id', id);
+  consultarGestion(body: datosUsuario): Observable<any> {
 
     const ruta = `${this.serverEndPointURLAntecedente}antecedentes/Detalle/Gestion`;
-    return this.http.post<HttpRespuesta<any>>(ruta, {}, {headers: this.header, params: parametros}).pipe(
+    return this.http.post<HttpRespuesta<any>>(ruta, body, {headers: this.header}).pipe(
       catchError(this.handleError),
       map((response: any) => {
         return response

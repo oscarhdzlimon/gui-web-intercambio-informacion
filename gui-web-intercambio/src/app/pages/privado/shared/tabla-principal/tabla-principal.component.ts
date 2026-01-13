@@ -115,11 +115,11 @@ export class TablaPrincipalComponent {
     };
 
     // Navegar usando el UUID como parámetro posicional
-    void this._router.navigate(['/privado', NAV.detalleAntecedentes, registro.id], navigationExtras);
+    void this._router.navigate(['/privado', NAV.detalleAntecedentes], navigationExtras);
   }
 
   generarPdf(registro: RegistroAntecedentes) {
-    const obj: ReporteAntecedentes = { 
+    const obj: ReporteAntecedentes = {
       ...this.datosUsuario,
       tipoBusqueda: +this.tipoBusqueda,
       nombre: registro.nombre,

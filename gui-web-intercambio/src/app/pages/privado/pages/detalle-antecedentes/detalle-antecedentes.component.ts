@@ -1,5 +1,5 @@
 import {CommonModule, Location} from '@angular/common';
-import {Component, inject, signal, WritableSignal,} from '@angular/core';
+import {Component, computed, inject, OnInit, signal, WritableSignal,} from '@angular/core';
 
 import {ReactiveFormsModule,} from '@angular/forms';
 import {GeneralComponent} from '@components/general.component';
@@ -28,12 +28,12 @@ import {DetalleAntecedentesService} from '@services/detalle-antecedentes.service
 import {Ordenamiento} from '@models/ordenamiento.enum';
 import {forkJoin} from 'rxjs';
 import {DataCacheService} from '@services/data-cache.service';
-import { DetalleAntecedentes } from '@models/detalleAntecedentes.interface';
-import { SesionUser } from '@models/sesion-user.interface';
-import { UserService } from '@services/user.service';
-import { ConsultaDescifrada } from '../../../../core/interfaces/consulta-descifrada.interface';
-import { CryptoService } from '@services/crypto.service';
-import { SolicitudBusquedaPaginado } from '../../../../core/interfaces/solicitud-busqueda-antecedentes.interface';
+import {DetalleAntecedentes} from '@models/detalleAntecedentes.interface';
+import {SesionUser} from '@models/sesion-user.interface';
+import {UserService} from '@services/user.service';
+import {ConsultaDescifrada} from '../../../../core/interfaces/consulta-descifrada.interface';
+import {CryptoService} from '@services/crypto.service';
+import {SolicitudBusquedaPaginado} from '../../../../core/interfaces/solicitud-busqueda-antecedentes.interface';
 
 @Component({
   selector: 'app-detalle-antecedentes',
@@ -53,7 +53,7 @@ import { SolicitudBusquedaPaginado } from '../../../../core/interfaces/solicitud
   styleUrl: './detalle-antecedentes.component.scss',
   providers: [DialogService],
 })
-export class DetalleAntecedentesComponent extends GeneralComponent {
+export class DetalleAntecedentesComponent extends GeneralComponent implements OnInit {
   userService: UserService = inject(UserService);
   cifradoService: CryptoService = inject(CryptoService);
 
@@ -71,17 +71,63 @@ export class DetalleAntecedentesComponent extends GeneralComponent {
   REF_APATERNO: string = '';
   REF_AMATERNO: string = '';
 
+  paginacion = {
+    queja: { first: signal(0), rows: 5 },
+    gestion: { first: signal(0), rows: 5 },
+    inconformidad: { first: signal(0), rows: 5 },
+    amparo: { first: signal(0), rows: 5 },
+    procedimiento: { first: signal(0), rows: 5 },
+    juicio: { first: signal(0), rows: 5 },
+  };
+
+  totalQuejas = signal(0);
+  totalGestion = signal(0);
+  totalInconformidad = signal(0);
+  totalAmparo = signal(0);
+  totalProcedimiento = signal(0);
+  totalJuicio = signal(0);
+
+  private dataFull = signal<any>(null);
+
   idpagina: number = 0;
   ruta = this._nav.consultaantecedentes;
   titulo = 'Antecedentes';
 
-  lstGestion: WritableSignal<TablaDetalleGestionInterface[]> = signal([]);
-  lstQueja: WritableSignal<TablaQuejaMedicaInterface[]> = signal([]);
-  lstInconformidad: WritableSignal<TablaInconformidades[]> = signal([]);
-  lstAmparo: WritableSignal<TablaAmparoIndirecto[]> = signal([]);
-  lstProcedimientoRpe: WritableSignal<TablaProcedimientoRpeInterface[]> =
-    signal([]);
-  lstJuicio: WritableSignal<TablaJuicioContenciosoInterface[]> = signal([]);
+  lstQueja = computed(() => {
+    const data = this.dataFull()?.quejas || [];
+    const inicio = this.paginacion.queja.first();
+    return data.slice(inicio, inicio + this.paginacion.queja.rows);
+  });
+
+  lstGestion = computed(() => {
+    const data = this.dataFull()?.gestion || [];
+    const inicio = this.paginacion.gestion.first();
+    return data.slice(inicio, inicio + this.paginacion.gestion.rows);
+  });
+
+  lstInconformidad = computed(() => {
+    const data = this.dataFull()?.incoformidad || [];
+    const inicio = this.paginacion.inconformidad.first();
+    return data.slice(inicio, inicio + this.paginacion.inconformidad.rows);
+  });
+
+  lstAmparo = computed(() => {
+    const data = this.dataFull()?.amparo || [];
+    const inicio = this.paginacion.amparo.first();
+    return data.slice(inicio, inicio + this.paginacion.amparo.rows);
+  });
+
+  lstProcedimientoRpe = computed(() => {
+    const data = this.dataFull()?.procedimiento || [];
+    const inicio = this.paginacion.procedimiento.first();
+    return data.slice(inicio, inicio + this.paginacion.procedimiento.rows);
+  });
+
+  lstJuicio = computed(() => {
+    const data = this.dataFull()?.juicio || [];
+    const inicio = this.paginacion.juicio.first();
+    return data.slice(inicio, inicio + this.paginacion.juicio.rows);
+  });
 
   fechasCorte: DetalleAntecedentes = {
     fecCorteSiade: "",
@@ -129,7 +175,7 @@ export class DetalleAntecedentesComponent extends GeneralComponent {
     nombre: '',
     nss: '',
     expediente: '',
-    id:''
+    id: ''
   };
 
   constructor(
@@ -146,100 +192,49 @@ export class DetalleAntecedentesComponent extends GeneralComponent {
     this.REF_MODULO = this.userData?.modulo as string;
     this.REF_USUARIO = this.userData?.curp as string;
     this.REF_OOAD = this.userData?.ooad as string;
-    
-    this.obtenerParametros()
-    
+    this.obtenerParametros();
+
   }
 
   tabla!: Array<any>;
   tabla2!: Array<any>;
 
   ngOnInit(): void {
-    this.llenarTablas();
     this.idpagina = Number(this.route.snapshot.paramMap.get('id'));
-
+    this.obtenerValoresTablas();
   }
 
-  llenarTablas() {
-    const parametros = { page: 0, size: 10, sort: Ordenamiento.ASC };
-
-
-    const objFechas: SolicitudBusquedaPaginado = this.objFechasCorte();
-
-
-
-    forkJoin({
-      gestionData: this.detalleAntecedentesService.consultarGestion(
-        parametros,
-        this.datosUsuario.id
-      ),
-      quejaMedicaData: this.detalleAntecedentesService.consultarQuejaMedica(
-        parametros,
-        this.datosUsuario.id
-      ),
-      inconformidadesData:
-        this.detalleAntecedentesService.consultarInconformidad(
-          parametros,
-          this.datosUsuario.id
-        ),
-      amparoIndirectoData:
-        this.detalleAntecedentesService.consultarAmparoIndirecto(
-          parametros,
-          this.datosUsuario.id
-        ),
-      procedimientoRpeData:
-        this.detalleAntecedentesService.consultarProcedimiento(
-          parametros,
-          this.datosUsuario.id
-        ),
-      juicioContenciosoData:
-        this.detalleAntecedentesService.consultarJuicioContencioso(
-          parametros,
-          this.datosUsuario.id
-        ),
-      fechasCorte:
-        this.detalleAntecedentesService.consultarFechasCorte(
-          objFechas, +this.tipoBusqueda
-        )
-    }).subscribe({
-      next: ({
-        gestionData,
-        quejaMedicaData,
-        inconformidadesData,
-        amparoIndirectoData,
-        procedimientoRpeData,
-        juicioContenciosoData,
-        fechasCorte
-      }) => {
-        this.lstGestion.set(gestionData.content);
-        this.totalElementosGestion = gestionData.page.totalElements;
-
-        this.lstQueja.set(quejaMedicaData['content']);
-        this.totalElementosQueja = quejaMedicaData['page'].totalElements;
-
-        this.lstInconformidad.set(inconformidadesData['content']);
-        this.totalElementosInconformidad =
-          inconformidadesData['page'].totalElements;
-
-        this.lstAmparo.set(amparoIndirectoData['content']);
-        this.totalElementosAmparoIndirecto =
-          amparoIndirectoData['page'].totalElements;
-
-        this.lstProcedimientoRpe.set(procedimientoRpeData['content']);
-        this.totalElementosProcedimientoRpe =
-          procedimientoRpeData['page'].totalElements;
-
-        this.lstJuicio.set(juicioContenciosoData['content']);
-        this.totalElementosJuicio = juicioContenciosoData['page'].totalElements;
-
-        this.fechasCorte = fechasCorte.respuesta
-      },
-    });
+  obtenerValoresTablas(): void {
+    const busqueda = {
+      nombre: this.REF_NOMBRE,
+      apellidoPaterno: this.REF_APATERNO,
+      apellidoMaterno: this.REF_AMATERNO,
+      nss: this.REF_NSS,
+      tipoBusqueda: this.tipoBusqueda,
+    }
+    this.detalleAntecedentesService.consultarGestion(busqueda).subscribe({
+      next: (respuesta: any) => {
+        this.dataFull.set(respuesta);
+        this.totalQuejas.set(respuesta.quejas?.length || 0);
+        this.totalGestion.set(respuesta.gestion?.length || 0);
+        this.totalInconformidad.set(respuesta.incoformidad?.length || 0);
+        this.totalAmparo.set(respuesta.amparo?.length || 0);
+        this.totalProcedimiento.set(respuesta.procedimiento?.length || 0);
+        this.totalJuicio.set(respuesta.juicio?.length || 0);
+        },
+      error: err => {
+      }
+    })
   }
 
-  objFechasCorte(): SolicitudBusquedaPaginado{
+
+  onPageChange(event: any, seccion: keyof typeof this.paginacion) {
+    this.paginacion[seccion].first.set(event.first);
+  }
+
+  objFechasCorte(): SolicitudBusquedaPaginado {
     return {
-      expediente: this.REF_SISTEMA?.expediente || '', 
+      expediente: this.REF_SISTEMA?.expediente || '',
 
       personas: [
         {
@@ -255,7 +250,9 @@ export class DetalleAntecedentesComponent extends GeneralComponent {
       ooad_UMAE: this.REF_OOAD
     }
   }
-   
+
+
+
   public btnVerDetalle(
     registro: TablaDetalleGestionInterface,
     idRegistro: number,
@@ -263,7 +260,7 @@ export class DetalleAntecedentesComponent extends GeneralComponent {
   ) {
     const dtosUsuario = this.datosUsuario;
     this.ref = this.dialogService.open(DetalleComponent, {
-      data: { ...registro, titulo, dtosUsuario },
+      data: {...registro, titulo, dtosUsuario},
       modal: true,
       width: '40vw',
       height: '80vh',
@@ -280,61 +277,12 @@ export class DetalleAntecedentesComponent extends GeneralComponent {
     });
   }
 
-  onPageChange(event: any, from: string) {
-    if (from == 'quejaMedica') {
-      this.paginaActualQueja = event.page;
-      this.firstQueja = event.first;
-      this.paginarQueja();
-    }
-
-    if (from == 'inconformidad') {
-      this.paginaActualInconformidad = event.page;
-      this.firstInconformidad = event.first;
-      this.paginarInconformidad();
-    }
-
-    if (from == 'amparoIndirecto') {
-      this.paginaActualAmparoIndirecto = event.page;
-      this.firstAmparoIndirecto = event.first;
-      this.paginarAmparoIndirecto();
-    }
-
-    if (from == 'procedimientoRpe') {
-      this.paginaActualProcedimientoRpe = event.page;
-      this.firstProcedimientoRpe = event.first;
-      this.paginarProcedimientoRpe();
-    }
-
-    if (from == 'juicio') {
-      this.paginaActualJuicio = event.page;
-      this.firstJuicio = event.first;
-      this.paginarJuicio();
-    }
-  }
-
   onPageChangeGestion(event: any): void {
     if (event.page) {
       this.paginaActualGestion = event.page;
     }
     this.firstGestion = event.first;
     this.paginarGestion();
-  }
-
-  paginarQueja() {
-    const parametros = {
-      page: this.paginaActualQueja,
-      size: 10,
-      sort: Ordenamiento.ASC,
-    };
-
-    this.detalleAntecedentesService
-      .consultarQuejaMedica(parametros, this.datosUsuario.id)
-      .subscribe({
-        next: (datos) => {
-          this.lstQueja.set(datos['content']);
-          this.totalElementosQueja = datos['page'].totalElements;
-        },
-      });
   }
 
   paginarGestion() {
@@ -344,102 +292,26 @@ export class DetalleAntecedentesComponent extends GeneralComponent {
       sort: Ordenamiento.ASC,
     };
 
-    this.detalleAntecedentesService
-      .consultarGestion(parametros, this.datosUsuario.id)
-      .subscribe({
-        next: (datos) => {
-          this.lstGestion.set(datos.content);
-          this.totalElementosGestion = datos.page.totalElements;
-        },
-      });
   }
 
-  paginarInconformidad() {
-    const parametros = {
-      page: this.paginaActualInconformidad,
-      size: 10,
-      sort: Ordenamiento.ASC,
-    };
-
-    this.detalleAntecedentesService
-      .consultarInconformidad(parametros, this.datosUsuario.id)
-      .subscribe({
-        next: (datos) => {
-          this.lstInconformidad.set(datos['content']);
-          this.totalElementosInconformidad = datos['page'].totalElements;
-        },
-      });
-  }
-
-  paginarAmparoIndirecto() {
-    const parametros = {
-      page: this.paginaActualAmparoIndirecto,
-      size: 10,
-      sort: Ordenamiento.ASC,
-    };
-
-    this.detalleAntecedentesService
-      .consultarAmparoIndirecto(parametros, this.datosUsuario.id)
-      .subscribe({
-        next: (datos) => {
-          this.lstAmparo.set(datos['content']);
-          this.totalElementosAmparoIndirecto = datos['page'].totalElements;
-        },
-      });
-  }
-
-  paginarProcedimientoRpe() {
-    const parametros = {
-      page: this.paginaActualProcedimientoRpe,
-      size: 10,
-      sort: Ordenamiento.ASC,
-    };
-
-    this.detalleAntecedentesService
-      .consultarProcedimiento(parametros, this.datosUsuario.id)
-      .subscribe({
-        next: (datos) => {
-          this.lstProcedimientoRpe.set(datos['content']);
-          this.totalElementosProcedimientoRpe = datos['page'].totalElements;
-        },
-      });
-  }
-
-  paginarJuicio() {
-    const parametros = {
-      page: this.paginaActualJuicio,
-      size: 10,
-      sort: Ordenamiento.ASC,
-    };
-
-    this.detalleAntecedentesService
-      .consultarJuicioContencioso(parametros, this.datosUsuario.id)
-      .subscribe({
-        next: (datos) => {
-          this.lstJuicio.set(datos['content']);
-          this.totalElementosJuicio = datos['page'].totalElements;
-        },
-      });
-  }
-
-  obtenerParametros(){
+  obtenerParametros() {
     this.route.paramMap.subscribe((params) => {
       const cacheId = params.get('id');
       this.datosUsuario.id = cacheId!;
     });
-    
+
     this.route.queryParams.subscribe((qp) => {
       this.tipoBusqueda = qp['tipoBusqueda'] as string;
       this.REF_NSS = qp['nss'] as string;
       this.REF_NOMBRE = qp['n'] as string;
       this.REF_APATERNO = qp['ap'] as string;
       this.REF_AMATERNO = qp['am'] as string;
-      if(qp['valor']){
+      if (qp['valor']) {
         this.cifrado = qp['valor'] as string;
         void this.obtenerExpediente()
       }
     });
-    
+
   }
 
   async obtenerExpediente() {
@@ -449,17 +321,17 @@ export class DetalleAntecedentesComponent extends GeneralComponent {
         this.cifrado,
         this.AES_KEY_BASE64
       );
-      
+
     } catch (error) {
       console.error("Error al descifrar. Posibles causas: Clave incorrecta o JSON malformado", error);
     }
   }
 
- 
 
   cargarPagina(event: any) {
     console.log('Paginación:', event);
   }
+
   cambiarEstado(event: any) {
     console.log('Checkbox cambiado:', event);
   }
