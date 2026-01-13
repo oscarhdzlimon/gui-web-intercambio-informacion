@@ -218,7 +218,9 @@ export class DetalleAntecedentesComponent extends GeneralComponent implements On
         this.totalQuejas.set(respuesta.quejas?.length || 0);
         this.totalGestion.set(respuesta.gestion?.length || 0);
         this.totalInconformidad.set(respuesta.incoformidad?.length || 0);
-        console.log(respuesta);
+        this.totalAmparo.set(respuesta.amparo?.length || 0);
+        this.totalProcedimiento.set(respuesta.procedimiento?.length || 0);
+        this.totalJuicio.set(respuesta.juicio?.length || 0);
         },
       error: err => {
       }

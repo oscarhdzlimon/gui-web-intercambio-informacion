@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="ajustes css para nueva consulta detalle de registros">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/services/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/services/auth.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/detalle-antecedentes/detalle-antecedentes.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/detalle-antecedentes/detalle-antecedentes.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/detalle-antecedentes/detalle-antecedentes.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/detalle-antecedentes/detalle-antecedentes.component.ts" afterDir="false" />
-    </list>
+    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="ajustes para nueva consulta detalle de registros" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -97,15 +92,7 @@
       <workItem from="1767111634106" duration="669000" />
       <workItem from="1767118150936" duration="3257000" />
       <workItem from="1767891732696" duration="7482000" />
-      <workItem from="1767937805716" duration="76207000" />
-    </task>
-    <task id="LOCAL-00048" summary="guardado de bitacora -&gt; url">
-      <option name="closed" value="true" />
-      <created>1766177560088</created>
-      <option name="number" value="00048" />
-      <option name="presentableId" value="LOCAL-00048" />
-      <option name="project" value="LOCAL" />
-      <updated>1766177560088</updated>
+      <workItem from="1767937805716" duration="77664000" />
     </task>
     <task id="LOCAL-00049" summary="ajustes busqueda sistema">
       <option name="closed" value="true" />
@@ -491,7 +478,15 @@
       <option name="project" value="LOCAL" />
       <updated>1768327651425</updated>
     </task>
-    <option name="localTasksCounter" value="97" />
+    <task id="LOCAL-00097" summary="ajustes para nueva consulta detalle de registros">
+      <option name="closed" value="true" />
+      <created>1768330905852</created>
+      <option name="number" value="00097" />
+      <option name="presentableId" value="LOCAL-00097" />
+      <option name="project" value="LOCAL" />
+      <updated>1768330905852</updated>
+    </task>
+    <option name="localTasksCounter" value="98" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -509,7 +504,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="redirección por url cifrada" />
     <MESSAGE value="ajustes para recuperar consultas" />
     <MESSAGE value="ajustes para lectura de datos del usuario por URL" />
     <MESSAGE value="ajustes de busqueda interna -&gt; por nss" />
@@ -534,6 +528,7 @@
     <MESSAGE value="ajuste en totales" />
     <MESSAGE value="ajuste para nueva consulta detalle de registros" />
     <MESSAGE value="ajustes css para nueva consulta detalle de registros" />
-    <option name="LAST_COMMIT_MESSAGE" value="ajustes css para nueva consulta detalle de registros" />
+    <MESSAGE value="ajustes para nueva consulta detalle de registros" />
+    <option name="LAST_COMMIT_MESSAGE" value="ajustes para nueva consulta detalle de registros" />
   </component>
 </project>
