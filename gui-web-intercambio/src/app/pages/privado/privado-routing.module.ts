@@ -29,7 +29,7 @@ const routes: Routes = [{
     },
 
     {
-      path: `${NAV.detalleAntecedentes}/:id`,
+      path: `${NAV.detalleAntecedentes}`,
       component: DetalleAntecedentesComponent,
     },
   ]

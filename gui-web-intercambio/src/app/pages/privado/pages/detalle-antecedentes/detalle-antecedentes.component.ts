@@ -1,5 +1,5 @@
 import {CommonModule, Location} from '@angular/common';
-import {Component, inject, signal, WritableSignal,} from '@angular/core';
+import {Component, inject, OnInit, signal, WritableSignal,} from '@angular/core';
 
 import {ReactiveFormsModule,} from '@angular/forms';
 import {GeneralComponent} from '@components/general.component';
@@ -28,12 +28,12 @@ import {DetalleAntecedentesService} from '@services/detalle-antecedentes.service
 import {Ordenamiento} from '@models/ordenamiento.enum';
 import {forkJoin} from 'rxjs';
 import {DataCacheService} from '@services/data-cache.service';
-import { DetalleAntecedentes } from '@models/detalleAntecedentes.interface';
-import { SesionUser } from '@models/sesion-user.interface';
-import { UserService } from '@services/user.service';
-import { ConsultaDescifrada } from '../../../../core/interfaces/consulta-descifrada.interface';
-import { CryptoService } from '@services/crypto.service';
-import { SolicitudBusquedaPaginado } from '../../../../core/interfaces/solicitud-busqueda-antecedentes.interface';
+import {DetalleAntecedentes} from '@models/detalleAntecedentes.interface';
+import {SesionUser} from '@models/sesion-user.interface';
+import {UserService} from '@services/user.service';
+import {ConsultaDescifrada} from '../../../../core/interfaces/consulta-descifrada.interface';
+import {CryptoService} from '@services/crypto.service';
+import {SolicitudBusquedaPaginado} from '../../../../core/interfaces/solicitud-busqueda-antecedentes.interface';
 
 @Component({
   selector: 'app-detalle-antecedentes',
@@ -53,7 +53,7 @@ import { SolicitudBusquedaPaginado } from '../../../../core/interfaces/solicitud
   styleUrl: './detalle-antecedentes.component.scss',
   providers: [DialogService],
 })
-export class DetalleAntecedentesComponent extends GeneralComponent {
+export class DetalleAntecedentesComponent extends GeneralComponent implements OnInit {
   userService: UserService = inject(UserService);
   cifradoService: CryptoService = inject(CryptoService);
 
@@ -129,7 +129,7 @@ export class DetalleAntecedentesComponent extends GeneralComponent {
     nombre: '',
     nss: '',
     expediente: '',
-    id:''
+    id: ''
   };
 
   constructor(
@@ -146,100 +146,37 @@ export class DetalleAntecedentesComponent extends GeneralComponent {
     this.REF_MODULO = this.userData?.modulo as string;
     this.REF_USUARIO = this.userData?.curp as string;
     this.REF_OOAD = this.userData?.ooad as string;
-    
-    this.obtenerParametros()
-    
+    this.obtenerParametros();
+
   }
 
   tabla!: Array<any>;
   tabla2!: Array<any>;
 
   ngOnInit(): void {
-    this.llenarTablas();
     this.idpagina = Number(this.route.snapshot.paramMap.get('id'));
-
+    this.obtenerValoresTablas();
   }
 
-  llenarTablas() {
-    const parametros = { page: 0, size: 10, sort: Ordenamiento.ASC };
-
-
-    const objFechas: SolicitudBusquedaPaginado = this.objFechasCorte();
-
-
-
-    forkJoin({
-      gestionData: this.detalleAntecedentesService.consultarGestion(
-        parametros,
-        this.datosUsuario.id
-      ),
-      quejaMedicaData: this.detalleAntecedentesService.consultarQuejaMedica(
-        parametros,
-        this.datosUsuario.id
-      ),
-      inconformidadesData:
-        this.detalleAntecedentesService.consultarInconformidad(
-          parametros,
-          this.datosUsuario.id
-        ),
-      amparoIndirectoData:
-        this.detalleAntecedentesService.consultarAmparoIndirecto(
-          parametros,
-          this.datosUsuario.id
-        ),
-      procedimientoRpeData:
-        this.detalleAntecedentesService.consultarProcedimiento(
-          parametros,
-          this.datosUsuario.id
-        ),
-      juicioContenciosoData:
-        this.detalleAntecedentesService.consultarJuicioContencioso(
-          parametros,
-          this.datosUsuario.id
-        ),
-      fechasCorte:
-        this.detalleAntecedentesService.consultarFechasCorte(
-          objFechas, +this.tipoBusqueda
-        )
-    }).subscribe({
-      next: ({
-        gestionData,
-        quejaMedicaData,
-        inconformidadesData,
-        amparoIndirectoData,
-        procedimientoRpeData,
-        juicioContenciosoData,
-        fechasCorte
-      }) => {
-        this.lstGestion.set(gestionData.content);
-        this.totalElementosGestion = gestionData.page.totalElements;
-
-        this.lstQueja.set(quejaMedicaData['content']);
-        this.totalElementosQueja = quejaMedicaData['page'].totalElements;
-
-        this.lstInconformidad.set(inconformidadesData['content']);
-        this.totalElementosInconformidad =
-          inconformidadesData['page'].totalElements;
-
-        this.lstAmparo.set(amparoIndirectoData['content']);
-        this.totalElementosAmparoIndirecto =
-          amparoIndirectoData['page'].totalElements;
-
-        this.lstProcedimientoRpe.set(procedimientoRpeData['content']);
-        this.totalElementosProcedimientoRpe =
-          procedimientoRpeData['page'].totalElements;
-
-        this.lstJuicio.set(juicioContenciosoData['content']);
-        this.totalElementosJuicio = juicioContenciosoData['page'].totalElements;
-
-        this.fechasCorte = fechasCorte.respuesta
+  obtenerValoresTablas(): void {
+    const busqueda = {
+      nombre: this.REF_NOMBRE,
+      apellidoPaterno: this.REF_APATERNO,
+      apellidoMaterno: this.REF_AMATERNO,
+      nss: this.REF_NSS,
+      tipoBusqueda: this.tipoBusqueda,
+    }
+    this.detalleAntecedentesService.consultarGestion(busqueda).subscribe({
+      next: data => {
       },
-    });
+      error: err => {
+      }
+    })
   }
 
-  objFechasCorte(): SolicitudBusquedaPaginado{
+  objFechasCorte(): SolicitudBusquedaPaginado {
     return {
-      expediente: this.REF_SISTEMA?.expediente || '', 
+      expediente: this.REF_SISTEMA?.expediente || '',
 
       personas: [
         {
@@ -255,7 +192,7 @@ export class DetalleAntecedentesComponent extends GeneralComponent {
       ooad_UMAE: this.REF_OOAD
     }
   }
-   
+
   public btnVerDetalle(
     registro: TablaDetalleGestionInterface,
     idRegistro: number,
@@ -263,7 +200,7 @@ export class DetalleAntecedentesComponent extends GeneralComponent {
   ) {
     const dtosUsuario = this.datosUsuario;
     this.ref = this.dialogService.open(DetalleComponent, {
-      data: { ...registro, titulo, dtosUsuario },
+      data: {...registro, titulo, dtosUsuario},
       modal: true,
       width: '40vw',
       height: '80vh',
@@ -344,14 +281,6 @@ export class DetalleAntecedentesComponent extends GeneralComponent {
       sort: Ordenamiento.ASC,
     };
 
-    this.detalleAntecedentesService
-      .consultarGestion(parametros, this.datosUsuario.id)
-      .subscribe({
-        next: (datos) => {
-          this.lstGestion.set(datos.content);
-          this.totalElementosGestion = datos.page.totalElements;
-        },
-      });
   }
 
   paginarInconformidad() {
@@ -422,24 +351,24 @@ export class DetalleAntecedentesComponent extends GeneralComponent {
       });
   }
 
-  obtenerParametros(){
+  obtenerParametros() {
     this.route.paramMap.subscribe((params) => {
       const cacheId = params.get('id');
       this.datosUsuario.id = cacheId!;
     });
-    
+
     this.route.queryParams.subscribe((qp) => {
       this.tipoBusqueda = qp['tipoBusqueda'] as string;
       this.REF_NSS = qp['nss'] as string;
       this.REF_NOMBRE = qp['n'] as string;
       this.REF_APATERNO = qp['ap'] as string;
       this.REF_AMATERNO = qp['am'] as string;
-      if(qp['valor']){
+      if (qp['valor']) {
         this.cifrado = qp['valor'] as string;
         void this.obtenerExpediente()
       }
     });
-    
+
   }
 
   async obtenerExpediente() {
@@ -449,17 +378,17 @@ export class DetalleAntecedentesComponent extends GeneralComponent {
         this.cifrado,
         this.AES_KEY_BASE64
       );
-      
+
     } catch (error) {
       console.error("Error al descifrar. Posibles causas: Clave incorrecta o JSON malformado", error);
     }
   }
 
- 
 
   cargarPagina(event: any) {
     console.log('Paginación:', event);
   }
+
   cambiarEstado(event: any) {
     console.log('Checkbox cambiado:', event);
   }

@@ -4,8 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="eliminacion de filtros">
+    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="ajuste en totales">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/services/detalle-antecedentes.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/services/detalle-antecedentes.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/detalle-antecedentes/detalle-antecedentes.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/detalle-antecedentes/detalle-antecedentes.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/privado-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/privado-routing.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/shared/tabla-principal/tabla-principal.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/shared/tabla-principal/tabla-principal.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,15 +98,7 @@
       <workItem from="1767111634106" duration="669000" />
       <workItem from="1767118150936" duration="3257000" />
       <workItem from="1767891732696" duration="7482000" />
-      <workItem from="1767937805716" duration="68016000" />
-    </task>
-    <task id="LOCAL-00045" summary="guardado de bitacora">
-      <option name="closed" value="true" />
-      <created>1766168124567</created>
-      <option name="number" value="00045" />
-      <option name="presentableId" value="LOCAL-00045" />
-      <option name="project" value="LOCAL" />
-      <updated>1766168124567</updated>
+      <workItem from="1767937805716" duration="73169000" />
     </task>
     <task id="LOCAL-00046" summary="guardado de bitacora">
       <option name="closed" value="true" />
@@ -488,7 +484,15 @@
       <option name="project" value="LOCAL" />
       <updated>1768251828364</updated>
     </task>
-    <option name="localTasksCounter" value="94" />
+    <task id="LOCAL-00094" summary="ajuste en totales">
+      <option name="closed" value="true" />
+      <created>1768258113143</created>
+      <option name="number" value="00094" />
+      <option name="presentableId" value="LOCAL-00094" />
+      <option name="project" value="LOCAL" />
+      <updated>1768258113144</updated>
+    </task>
+    <option name="localTasksCounter" value="95" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -506,7 +510,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="consulta de fechas de corte" />
     <MESSAGE value="ajustes previos a asociación" />
     <MESSAGE value="servicio de cifrado" />
     <MESSAGE value="redirección por url cifrada" />
@@ -531,6 +534,7 @@
     <MESSAGE value="correcciones de consulta" />
     <MESSAGE value="ajuste de visibilidad de totales" />
     <MESSAGE value="eliminacion de filtros" />
-    <option name="LAST_COMMIT_MESSAGE" value="eliminacion de filtros" />
+    <MESSAGE value="ajuste en totales" />
+    <option name="LAST_COMMIT_MESSAGE" value="ajuste en totales" />
   </component>
 </project>
