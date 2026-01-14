@@ -94,7 +94,7 @@ export class DetalleAntecedentesComponent extends GeneralComponent implements On
   titulo = 'Antecedentes';
 
   lstQueja = computed(() => {
-    const data = this.dataFull()?.quejas || [];
+    const data = this.dataFull()?.queja || [];
     const inicio = this.paginacion.queja.first();
     return data.slice(inicio, inicio + this.paginacion.queja.rows);
   });
@@ -118,7 +118,7 @@ export class DetalleAntecedentesComponent extends GeneralComponent implements On
   });
 
   lstProcedimientoRpe = computed(() => {
-    const data = this.dataFull()?.procedimiento || [];
+    const data = this.dataFull()?.procedimientos || [];
     const inicio = this.paginacion.procedimiento.first();
     return data.slice(inicio, inicio + this.paginacion.procedimiento.rows);
   });
