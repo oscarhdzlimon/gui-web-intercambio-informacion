@@ -65,6 +65,7 @@
 
 @if (data().length > 0) {
   <app-tabla-principal
+    [asociar]="false"
     [titulo]="tituloTabla"
     [data]="data()"
     [rows]="5"
@@ -85,7 +86,7 @@
                        (checkboxChanged)="cambiarEstado($event)"/>
 }
 
-@if (data().length > 0 || data_nombre().length > 0) {
+<!--
   <article class="flex flex-row flex-wrap">
     <div class="flex lg:col-12  col-12 justify-content-end align-items-center mt-3 gap-4">
       <p-button type="button" [disabled]="!solicitudAntecedentesService.tieneRegistros()" (onClick)="guardarAsociacion()"
@@ -93,7 +94,7 @@
                 [style]="{'width': '135px'}" styleClass="btn-background"/>
     </div>
   </article>
-}
+-->
 
 @if (data().length > 0 || data_nombre().length > 0) {
   <p-card class="mx-2 empty-border" [header]="'Total de antecedentes'">
@@ -216,7 +217,8 @@
     hechos.
   </p>
   <br>
-  <p class="aviso">Información consultada en SSCV1, con corte al {{fechasCorte.fecCorteSsc1}}; SSCV2, con corte al {{fechasCorte.fecCorteSsc2}} y SIADE,
+  <p class="aviso">Información consultada en SSCV1, con corte al {{ fechasCorte.fecCorteSsc1 }}; SSCV2, con corte
+    al {{ fechasCorte.fecCorteSsc2 }} y SIADE,
     con
-    corte al {{fechasCorte.fecCorteSiade}}.</p>
+    corte al {{ fechasCorte.fecCorteSiade }}.</p>
 </p-card>

@@ -9,7 +9,9 @@
     <!-- Header -->
     <ng-template pTemplate="header">
       <tr>
-        <th scope="col" style="min-width:80px">Asociar</th>
+        @if (asociar) {
+          <th scope="col" style="min-width:80px">Asociar</th>
+        }
         <th scope="col" style="min-width:100px">NSS</th>
         <th scope="col" style="min-width:150px">Nombre</th>
         <th scope="col" style="min-width:150px">Apellido paterno</th>
@@ -29,20 +31,22 @@
     <!-- Body -->
     <ng-template pTemplate="body" let-rowData let-i="rowIndex">
       <tr>
-        <td style="min-width:80px">
+        @if (asociar) {
+          <td style="min-width:80px">
 
-          <div class="checkbox-container">
-            <input
-              id="checkbox-{{rowData.id}}"
-              type="checkbox"
-              [(ngModel)]="rowData.indAsociado"
-              [disabled]="rowData.indAsociado && rowData.idBitacoraAsociacion"
-              (change)="onCheckboxEvent(rowData, $event)"
-            />
-            <label for="checkbox-{{rowData.key}}"></label>
-          </div>
+            <div class="checkbox-container">
+              <input
+                id="checkbox-{{rowData.id}}"
+                type="checkbox"
+                [(ngModel)]="rowData.indAsociado"
+                [disabled]="rowData.indAsociado && rowData.idBitacoraAsociacion"
+                (change)="onCheckboxEvent(rowData, $event)"
+              />
+              <label for="checkbox-{{rowData.key}}"></label>
+            </div>
 
-        </td>
+          </td>
+        }
         <td style="min-width:100px">{{ rowData.nss }}</td>
         <td style="min-width:150px">{{ rowData.nombre }}</td>
         <td style="min-width:150px">{{ rowData.apellidoPaterno }}</td>
@@ -61,9 +65,12 @@
         </td>
         <td pFrozenColumn alignFrozen="right" style="min-width:100px">
           <div class="flex justify-content-center align-items-center" style="height:100%">
-            <img src="/assets/logos/print.svg" [ngClass]="{'cursor-pointer': rowData.indAsociado && rowData.idBitacoraAsociacion}"
-             (click)="generarPdf(rowData)"
-            />
+            @if (rowData.indAsociado && rowData.idBitacoraAsociacion) {
+              <img src="/assets/logos/print.svg"
+                   [ngClass]="{'cursor-pointer': rowData.indAsociado && rowData.idBitacoraAsociacion}"
+                   (click)="generarPdf(rowData)"
+              />
+            }
           </div>
         </td>
       </tr>
