@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="ajustes para nueva consulta detalle de registros" />
+    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="ajustes para nueva consulta detalle de registros">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/detalle-antecedentes/detalle-antecedentes.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/detalle-antecedentes/detalle-antecedentes.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/detalle-antecedentes/detalle-antecedentes.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/detalle-antecedentes/detalle-antecedentes.component.ts" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -92,15 +96,7 @@
       <workItem from="1767111634106" duration="669000" />
       <workItem from="1767118150936" duration="3257000" />
       <workItem from="1767891732696" duration="7482000" />
-      <workItem from="1767937805716" duration="77664000" />
-    </task>
-    <task id="LOCAL-00049" summary="ajustes busqueda sistema">
-      <option name="closed" value="true" />
-      <created>1766414257078</created>
-      <option name="number" value="00049" />
-      <option name="presentableId" value="LOCAL-00049" />
-      <option name="project" value="LOCAL" />
-      <updated>1766414257078</updated>
+      <workItem from="1767937805716" duration="79491000" />
     </task>
     <task id="LOCAL-00050" summary="corrección filtros -&gt; consulta antecedente">
       <option name="closed" value="true" />
@@ -486,7 +482,15 @@
       <option name="project" value="LOCAL" />
       <updated>1768330905852</updated>
     </task>
-    <option name="localTasksCounter" value="98" />
+    <task id="LOCAL-00098" summary="ajustes para nueva consulta detalle de registros">
+      <option name="closed" value="true" />
+      <created>1768345976685</created>
+      <option name="number" value="00098" />
+      <option name="presentableId" value="LOCAL-00098" />
+      <option name="project" value="LOCAL" />
+      <updated>1768345976685</updated>
+    </task>
+    <option name="localTasksCounter" value="99" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
