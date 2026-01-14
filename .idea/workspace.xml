@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="ajustes de manejo de busquedas">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/interfaces/registro-antecedentes.interface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/interfaces/registro-antecedentes.interface.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/interfaces/resultado-consulta.interface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/interfaces/resultado-consulta.interface.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" afterDir="false" />
-    </list>
+    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="ajustes para manejo de registros repetidos" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -97,15 +92,7 @@
       <workItem from="1767111634106" duration="669000" />
       <workItem from="1767118150936" duration="3257000" />
       <workItem from="1767891732696" duration="7482000" />
-      <workItem from="1767937805716" duration="80797000" />
-    </task>
-    <task id="LOCAL-00052" summary="correccion al obtener y mostrar elementos de la asoociación">
-      <option name="closed" value="true" />
-      <created>1766427970218</created>
-      <option name="number" value="00052" />
-      <option name="presentableId" value="LOCAL-00052" />
-      <option name="project" value="LOCAL" />
-      <updated>1766427970218</updated>
+      <workItem from="1767937805716" duration="81740000" />
     </task>
     <task id="LOCAL-00053" summary="ajustes al guardar solicitud de antecedentes">
       <option name="closed" value="true" />
@@ -491,7 +478,15 @@
       <option name="project" value="LOCAL" />
       <updated>1768353526664</updated>
     </task>
-    <option name="localTasksCounter" value="101" />
+    <task id="LOCAL-00101" summary="ajustes para manejo de registros repetidos">
+      <option name="closed" value="true" />
+      <created>1768354714705</created>
+      <option name="number" value="00101" />
+      <option name="presentableId" value="LOCAL-00101" />
+      <option name="project" value="LOCAL" />
+      <updated>1768354714705</updated>
+    </task>
+    <option name="localTasksCounter" value="102" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -509,7 +504,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="ajustes de busqueda interna -&gt; por nss" />
     <MESSAGE value="ajustes de busqueda interna -&gt; por nombre" />
     <MESSAGE value="ajuste totales" />
     <MESSAGE value="ajuste fechas" />
@@ -534,6 +528,7 @@
     <MESSAGE value="ajustes para nueva consulta detalle de registros" />
     <MESSAGE value="limpieza pagindao consulta detalle de antecedentes" />
     <MESSAGE value="ajustes de manejo de busquedas" />
-    <option name="LAST_COMMIT_MESSAGE" value="ajustes de manejo de busquedas" />
+    <MESSAGE value="ajustes para manejo de registros repetidos" />
+    <option name="LAST_COMMIT_MESSAGE" value="ajustes para manejo de registros repetidos" />
   </component>
 </project>
