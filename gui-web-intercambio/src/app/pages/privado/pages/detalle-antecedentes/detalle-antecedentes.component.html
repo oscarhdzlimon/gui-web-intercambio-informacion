@@ -6,15 +6,11 @@
 </div>
 <div class="seccionA">
   Resultado de la búsqueda por
-  @if (datosUsuario.nss && datosUsuario.nombre) {
-    NSS: {{ datosUsuario.nss }} y nombre: {{ datosUsuario.nombre }}
-  } @else {
-    @if (datosUsuario.nss) {
-      NSS: {{ datosUsuario.nss }}
-    }
-    @if (datosUsuario.nombre) {
-      Nombre: {{ datosUsuario.nombre }}
-    }
+  @if (tipoBusqueda === '1') {
+    NSS: {{ this.REF_NSS }}
+  }
+  @if (datosUsuario.nombre) {
+    Nombre: {{ this.REF_NOMBRE }} {{ this.REF_APATERNO }} {{ this.REF_AMATERNO }}
   }
 
 
@@ -113,7 +109,8 @@
             </ng-template>
           </p-table>
           @if (lstGestion().length > 0) {
-            <p-paginator styleClass="justify-content-end" [showFirstLastIcon]="false" [first]="paginacion.gestion.first()"
+            <p-paginator styleClass="justify-content-end" [showFirstLastIcon]="false"
+                         [first]="paginacion.gestion.first()"
                          [rows]="paginacion.gestion.rows" [totalRecords]="totalGestion()"
                          (onPageChange)="onPageChange($event, 'gestion')">
               <ng-template pTemplate="previouspagelinkicon">
@@ -414,7 +411,8 @@
             </ng-template>
           </p-table>
           @if (lstInconformidad().length > 0) {
-            <p-paginator styleClass="justify-content-end" [showFirstLastIcon]="false" [first]="paginacion.inconformidad.first()"
+            <p-paginator styleClass="justify-content-end" [showFirstLastIcon]="false"
+                         [first]="paginacion.inconformidad.first()"
                          [rows]="paginacion.inconformidad.rows" [totalRecords]="totalInconformidad()"
                          (onPageChange)="onPageChange($event,'inconformidad')">
 
@@ -565,7 +563,8 @@
           </p-table>
           @if (lstAmparo().length > 0) {
 
-            <p-paginator styleClass="justify-content-end" [showFirstLastIcon]="false" [first]="paginacion.amparo.first()"
+            <p-paginator styleClass="justify-content-end" [showFirstLastIcon]="false"
+                         [first]="paginacion.amparo.first()"
                          [rows]="paginacion.amparo.rows" [totalRecords]="totalAmparo()"
                          (onPageChange)="onPageChange($event,'amparo')">
 
@@ -721,7 +720,8 @@
             </ng-template>
           </p-table>
           @if (lstProcedimientoRpe().length > 0) {
-            <p-paginator styleClass="justify-content-end" [showFirstLastIcon]="false" [first]="paginacion.procedimiento.first()"
+            <p-paginator styleClass="justify-content-end" [showFirstLastIcon]="false"
+                         [first]="paginacion.procedimiento.first()"
                          [rows]="paginacion.procedimiento.rows" [totalRecords]="totalProcedimiento()"
                          (onPageChange)="onPageChange($event,'procedimiento')">
 
@@ -879,7 +879,8 @@
             </ng-template>
           </p-table>
           @if (lstJuicio().length > 0) {
-            <p-paginator styleClass="justify-content-end" [showFirstLastIcon]="false" [first]="paginacion.juicio.first()"
+            <p-paginator styleClass="justify-content-end" [showFirstLastIcon]="false"
+                         [first]="paginacion.juicio.first()"
                          [rows]="paginacion.juicio.rows" [totalRecords]="totalJuicio()"
                          (onPageChange)="onPageChange($event, 'juicio')">
 
