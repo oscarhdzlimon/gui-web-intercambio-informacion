@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="ajustes para manejo de registros repetidos" />
+    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="ajustes solicitud de asignacion">
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -92,15 +94,7 @@
       <workItem from="1767111634106" duration="669000" />
       <workItem from="1767118150936" duration="3257000" />
       <workItem from="1767891732696" duration="7482000" />
-      <workItem from="1767937805716" duration="81740000" />
-    </task>
-    <task id="LOCAL-00053" summary="ajustes al guardar solicitud de antecedentes">
-      <option name="closed" value="true" />
-      <created>1766430752986</created>
-      <option name="number" value="00053" />
-      <option name="presentableId" value="LOCAL-00053" />
-      <option name="project" value="LOCAL" />
-      <updated>1766430752986</updated>
+      <workItem from="1767937805716" duration="82033000" />
     </task>
     <task id="LOCAL-00054" summary="habilitacion de botones de asociacion">
       <option name="closed" value="true" />
@@ -486,7 +480,15 @@
       <option name="project" value="LOCAL" />
       <updated>1768354714705</updated>
     </task>
-    <option name="localTasksCounter" value="102" />
+    <task id="LOCAL-00102" summary="ajustes solicitud de asignacion">
+      <option name="closed" value="true" />
+      <created>1768356081632</created>
+      <option name="number" value="00102" />
+      <option name="presentableId" value="LOCAL-00102" />
+      <option name="project" value="LOCAL" />
+      <updated>1768356081632</updated>
+    </task>
+    <option name="localTasksCounter" value="103" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -504,7 +506,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="ajustes de busqueda interna -&gt; por nombre" />
     <MESSAGE value="ajuste totales" />
     <MESSAGE value="ajuste fechas" />
     <MESSAGE value="ajuste tipo de busqueda -&gt; consulta antecedentes" />
@@ -529,6 +530,7 @@
     <MESSAGE value="limpieza pagindao consulta detalle de antecedentes" />
     <MESSAGE value="ajustes de manejo de busquedas" />
     <MESSAGE value="ajustes para manejo de registros repetidos" />
-    <option name="LAST_COMMIT_MESSAGE" value="ajustes para manejo de registros repetidos" />
+    <MESSAGE value="ajustes solicitud de asignacion" />
+    <option name="LAST_COMMIT_MESSAGE" value="ajustes solicitud de asignacion" />
   </component>
 </project>

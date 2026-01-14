@@ -424,12 +424,14 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
 
   private mapearASolicitud(evento: any): SolicitudAsociacion {
     return {
+      cveAsunto: 0,
+      idPersona: evento.idPersona,
       idBitacoraAsociacion: evento.idBitacoraAsociacion,
       refUsuarioAutentica: this.REF_SISTEMA.usuarioLogueado, // Contexto del componente
       refAplicativoAsociacion: this.REF_SISTEMA.sistema, // Contexto del componente
       refModuloAsociacion: this.REF_SISTEMA.modulo, // Contexto del componente
       refExpediente: this.REF_SISTEMA.expediente,
-      refExpedientePersona: evento.expediente,
+      refExpedientePersona: evento.refExpedientePersona,
       nomPersona: evento.nombre,
       nomApellidoPaterno: evento.apellidoPaterno,
       nomApellidoMaterno: evento.apellidoMaterno,
