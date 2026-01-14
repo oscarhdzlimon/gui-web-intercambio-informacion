@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="ajustes para nueva consulta detalle de registros">
+    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="ajustes de manejo de busquedas">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/detalle-antecedentes/detalle-antecedentes.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/detalle-antecedentes/detalle-antecedentes.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/detalle-antecedentes/detalle-antecedentes.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/detalle-antecedentes/detalle-antecedentes.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/interfaces/registro-antecedentes.interface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/interfaces/registro-antecedentes.interface.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/interfaces/resultado-consulta.interface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/interfaces/resultado-consulta.interface.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,23 +97,7 @@
       <workItem from="1767111634106" duration="669000" />
       <workItem from="1767118150936" duration="3257000" />
       <workItem from="1767891732696" duration="7482000" />
-      <workItem from="1767937805716" duration="79491000" />
-    </task>
-    <task id="LOCAL-00050" summary="corrección filtros -&gt; consulta antecedente">
-      <option name="closed" value="true" />
-      <created>1766421642442</created>
-      <option name="number" value="00050" />
-      <option name="presentableId" value="LOCAL-00050" />
-      <option name="project" value="LOCAL" />
-      <updated>1766421642442</updated>
-    </task>
-    <task id="LOCAL-00051" summary="corrección filtros -&gt; busqueda sistemas">
-      <option name="closed" value="true" />
-      <created>1766421753653</created>
-      <option name="number" value="00051" />
-      <option name="presentableId" value="LOCAL-00051" />
-      <option name="project" value="LOCAL" />
-      <updated>1766421753654</updated>
+      <workItem from="1767937805716" duration="80797000" />
     </task>
     <task id="LOCAL-00052" summary="correccion al obtener y mostrar elementos de la asoociación">
       <option name="closed" value="true" />
@@ -490,7 +475,23 @@
       <option name="project" value="LOCAL" />
       <updated>1768345976685</updated>
     </task>
-    <option name="localTasksCounter" value="99" />
+    <task id="LOCAL-00099" summary="limpieza pagindao consulta detalle de antecedentes">
+      <option name="closed" value="true" />
+      <created>1768353207335</created>
+      <option name="number" value="00099" />
+      <option name="presentableId" value="LOCAL-00099" />
+      <option name="project" value="LOCAL" />
+      <updated>1768353207335</updated>
+    </task>
+    <task id="LOCAL-00100" summary="ajustes de manejo de busquedas">
+      <option name="closed" value="true" />
+      <created>1768353526664</created>
+      <option name="number" value="00100" />
+      <option name="presentableId" value="LOCAL-00100" />
+      <option name="project" value="LOCAL" />
+      <updated>1768353526664</updated>
+    </task>
+    <option name="localTasksCounter" value="101" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -508,8 +509,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="ajustes para recuperar consultas" />
-    <MESSAGE value="ajustes para lectura de datos del usuario por URL" />
     <MESSAGE value="ajustes de busqueda interna -&gt; por nss" />
     <MESSAGE value="ajustes de busqueda interna -&gt; por nombre" />
     <MESSAGE value="ajuste totales" />
@@ -533,6 +532,8 @@
     <MESSAGE value="ajuste para nueva consulta detalle de registros" />
     <MESSAGE value="ajustes css para nueva consulta detalle de registros" />
     <MESSAGE value="ajustes para nueva consulta detalle de registros" />
-    <option name="LAST_COMMIT_MESSAGE" value="ajustes para nueva consulta detalle de registros" />
+    <MESSAGE value="limpieza pagindao consulta detalle de antecedentes" />
+    <MESSAGE value="ajustes de manejo de busquedas" />
+    <option name="LAST_COMMIT_MESSAGE" value="ajustes de manejo de busquedas" />
   </component>
 </project>

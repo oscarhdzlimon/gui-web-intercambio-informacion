@@ -18,5 +18,6 @@ export interface ResultadoConsulta {
   valorBusqueda: string | NombreTipoDropdown;
   esPaginadoManual?: boolean,
   datosCompletosFiltrados?: RegistroAntecedentes[],
+  
 }
 

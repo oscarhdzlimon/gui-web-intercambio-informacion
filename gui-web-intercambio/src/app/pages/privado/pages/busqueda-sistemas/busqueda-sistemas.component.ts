@@ -326,13 +326,13 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
           idNss.forEach((id: any) => this.idsCargadosNSS.add(id));
         } else if (consulta.tipo === TipoTabla.NOMBRE && this.consulta_todos) {
           // FILTRAR DUPLICADOS: Si el ID ya fue cargado por una tabla NSS, lo quitamos
-          content = content.filter((r: any) => !this.idsCargadosNSS.has(r.id));
+          content = content.filter((r: any) => !this.idsCargadosNSS.has(r.idPersona));
         }
 
         const sincronizados = this.sincronizarEstado(content);
         const finalData = sincronizados.map((row: RegistroAntecedentes) => ({
           ...row,
-          key: row.id
+          key: row.idPersona
         }));
 
         // Si es manual, aquí harías el slice para tu tabla local (0, 10)
@@ -446,14 +446,13 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
 
   cambiarEstado(row: RegistroAntecedentes): void {
 
-    console.log(this.mapearASolicitud(row))
     if (row.indAsociado) {
       this.solicitudAntecedentesService.agregar(
-        row.id,
+        row.idPersona,
         this.mapearASolicitud(row)
       );
     } else {
-      this.solicitudAntecedentesService.eliminar(row.id);
+      this.solicitudAntecedentesService.eliminar(row.idPersona);
     }
   }
 
@@ -547,7 +546,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
       return {
         ...r,
         indAsociado: this.solicitudAntecedentesService.existe(
-          r.id
+          r.idPersona
         )
       }
     });
