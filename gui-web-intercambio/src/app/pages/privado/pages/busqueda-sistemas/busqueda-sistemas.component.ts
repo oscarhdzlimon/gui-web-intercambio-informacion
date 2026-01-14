@@ -409,7 +409,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
 
   cargarPagina(event: any, index: number) {
     const consulta = this.consultas[index];
-    const nuevaPagina = event.page;
+    const nuevaPagina = event.page - 1;
 
     if (consulta.esPaginadoManual) {
       consulta.paginaActual = nuevaPagina;

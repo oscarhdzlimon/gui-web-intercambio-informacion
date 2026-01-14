@@ -231,7 +231,7 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
 
   cargarPagina(event: any, tipoTabla: TipoTabla) {
     console.log(event)
-    const nuevaPagina = event.page;
+    const nuevaPagina = event.page - 1;
     const nuevoTamanio = event.rows;
 
     if (tipoTabla === TipoTabla.NSS) {

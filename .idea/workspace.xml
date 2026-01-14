@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="ajustes solicitud de asignacion">
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" afterDir="false" />
+    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="correcciones de consulta por login">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/detalle-antecedentes/detalle-antecedentes.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/detalle-antecedentes/detalle-antecedentes.component.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,23 +95,7 @@
       <workItem from="1767111634106" duration="669000" />
       <workItem from="1767118150936" duration="3257000" />
       <workItem from="1767891732696" duration="7482000" />
-      <workItem from="1767937805716" duration="82033000" />
-    </task>
-    <task id="LOCAL-00054" summary="habilitacion de botones de asociacion">
-      <option name="closed" value="true" />
-      <created>1766521172460</created>
-      <option name="number" value="00054" />
-      <option name="presentableId" value="LOCAL-00054" />
-      <option name="project" value="LOCAL" />
-      <updated>1766521172461</updated>
-    </task>
-    <task id="LOCAL-00055" summary="ajustes de params servicios y limpieza de elementos">
-      <option name="closed" value="true" />
-      <created>1767976215050</created>
-      <option name="number" value="00055" />
-      <option name="presentableId" value="LOCAL-00055" />
-      <option name="project" value="LOCAL" />
-      <updated>1767976215051</updated>
+      <workItem from="1767937805716" duration="86744000" />
     </task>
     <task id="LOCAL-00056" summary="limpieza de servicios">
       <option name="closed" value="true" />
@@ -488,7 +473,23 @@
       <option name="project" value="LOCAL" />
       <updated>1768356081632</updated>
     </task>
-    <option name="localTasksCounter" value="103" />
+    <task id="LOCAL-00103" summary="ajustes solicitud de asociación">
+      <option name="closed" value="true" />
+      <created>1768356195983</created>
+      <option name="number" value="00103" />
+      <option name="presentableId" value="LOCAL-00103" />
+      <option name="project" value="LOCAL" />
+      <updated>1768356195983</updated>
+    </task>
+    <task id="LOCAL-00104" summary="correcciones de consulta por login">
+      <option name="closed" value="true" />
+      <created>1768407427849</created>
+      <option name="number" value="00104" />
+      <option name="presentableId" value="LOCAL-00104" />
+      <option name="project" value="LOCAL" />
+      <updated>1768407427849</updated>
+    </task>
+    <option name="localTasksCounter" value="105" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -506,8 +507,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="ajuste totales" />
-    <MESSAGE value="ajuste fechas" />
     <MESSAGE value="ajuste tipo de busqueda -&gt; consulta antecedentes" />
     <MESSAGE value="ajustes para asociacion -&gt; consulta antecedentes" />
     <MESSAGE value="ajustes para busqueda completa" />
@@ -531,6 +530,8 @@
     <MESSAGE value="ajustes de manejo de busquedas" />
     <MESSAGE value="ajustes para manejo de registros repetidos" />
     <MESSAGE value="ajustes solicitud de asignacion" />
-    <option name="LAST_COMMIT_MESSAGE" value="ajustes solicitud de asignacion" />
+    <MESSAGE value="ajustes solicitud de asociación" />
+    <MESSAGE value="correcciones de consulta por login" />
+    <option name="LAST_COMMIT_MESSAGE" value="correcciones de consulta por login" />
   </component>
 </project>
