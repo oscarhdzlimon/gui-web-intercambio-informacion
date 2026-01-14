@@ -6,15 +6,11 @@
 </div>
 <div class="seccionA">
   Resultado de la búsqueda por
-  @if (datosUsuario.nss && datosUsuario.nombre) {
-    NSS: {{ datosUsuario.nss }} y nombre: {{ datosUsuario.nombre }}
-  } @else {
-    @if (datosUsuario.nss) {
-      NSS: {{ datosUsuario.nss }}
-    }
-    @if (datosUsuario.nombre) {
-      Nombre: {{ datosUsuario.nombre }}
-    }
+  @if (tipoBusqueda === '1') {
+    NSS: {{ this.REF_NSS }}
+  }
+  @if (datosUsuario.nombre) {
+    Nombre: {{ this.REF_NOMBRE }} {{ this.REF_APATERNO }} {{ this.REF_AMATERNO }}
   }
 
 
@@ -113,9 +109,10 @@
             </ng-template>
           </p-table>
           @if (lstGestion().length > 0) {
-            <p-paginator styleClass="justify-content-end" [showFirstLastIcon]="false" [first]="firstGestion"
-                         [rows]="rows" [totalRecords]="totalElementosGestion"
-                         (onPageChange)="onPageChangeGestion($event)">
+            <p-paginator styleClass="justify-content-end" [showFirstLastIcon]="false"
+                         [first]="paginacion.gestion.first()"
+                         [rows]="paginacion.gestion.rows" [totalRecords]="totalGestion()"
+                         (onPageChange)="onPageChange($event, 'gestion')">
               <ng-template pTemplate="previouspagelinkicon">
                 <div class="flex align-items-center">
                   <span class="pi pi-chevron-left text-xl font-normal mr-2"></span>
@@ -130,7 +127,7 @@
               </ng-template>
             </p-paginator>
           }
-          <span class="font-semibold mr-4 resultados">Resultados {{ totalElementosGestion }}</span>
+          <span class="font-semibold mr-4 resultados">Resultados {{ totalGestion() }}</span>
         </ng-template>
 
         <!--<app-tabla-antecedentes
@@ -266,8 +263,8 @@
             </ng-template>
           </p-table>
           @if (lstQueja().length > 0) {
-            <p-paginator styleClass="justify-content-end" [showFirstLastIcon]="false" [first]="firstQueja"
-                         [rows]="rows" [totalRecords]="totalElementosQueja"
+            <p-paginator styleClass="justify-content-end" [showFirstLastIcon]="false" [first]="paginacion.queja.first()"
+                         [rows]="paginacion.queja.rows" [totalRecords]="totalQuejas()"
                          (onPageChange)="onPageChange($event, 'queja')">
 
 
@@ -288,7 +285,7 @@
             </p-paginator>
 
           }
-          <span class="font-semibold mr-4 resultados">Resultados {{ totalElementosQueja }}</span>
+          <span class="font-semibold mr-4 resultados">Resultados {{ totalQuejas() }}</span>
         </ng-template>
       </div>
     </div>
@@ -414,8 +411,9 @@
             </ng-template>
           </p-table>
           @if (lstInconformidad().length > 0) {
-            <p-paginator styleClass="justify-content-end" [showFirstLastIcon]="false" [first]="firstInconformidad"
-                         [rows]="rows" [totalRecords]="totalElementosInconformidad"
+            <p-paginator styleClass="justify-content-end" [showFirstLastIcon]="false"
+                         [first]="paginacion.inconformidad.first()"
+                         [rows]="paginacion.inconformidad.rows" [totalRecords]="totalInconformidad()"
                          (onPageChange)="onPageChange($event,'inconformidad')">
 
 
@@ -435,7 +433,7 @@
 
             </p-paginator>
           }
-          <span class="font-semibold mr-4 resultados">Resultados {{ totalElementosInconformidad }}</span>
+          <span class="font-semibold mr-4 resultados">Resultados {{ totalInconformidad() }}</span>
 
 
         </ng-template>
@@ -565,8 +563,9 @@
           </p-table>
           @if (lstAmparo().length > 0) {
 
-            <p-paginator styleClass="justify-content-end" [showFirstLastIcon]="false" [first]="firstAmparoIndirecto"
-                         [rows]="rows" [totalRecords]="totalElementosAmparoIndirecto"
+            <p-paginator styleClass="justify-content-end" [showFirstLastIcon]="false"
+                         [first]="paginacion.amparo.first()"
+                         [rows]="paginacion.amparo.rows" [totalRecords]="totalAmparo()"
                          (onPageChange)="onPageChange($event,'amparo')">
 
 
@@ -586,7 +585,7 @@
 
             </p-paginator>
           }
-          <span class="font-semibold mr-4 resultados">Resultados {{ totalElementosAmparoIndirecto }}</span>
+          <span class="font-semibold mr-4 resultados">Resultados {{ totalAmparo() }}</span>
 
 
         </ng-template>
@@ -721,8 +720,9 @@
             </ng-template>
           </p-table>
           @if (lstProcedimientoRpe().length > 0) {
-            <p-paginator styleClass="justify-content-end" [showFirstLastIcon]="false" [first]="firstProcedimientoRpe"
-                         [rows]="rows" [totalRecords]="totalElementosProcedimientoRpe"
+            <p-paginator styleClass="justify-content-end" [showFirstLastIcon]="false"
+                         [first]="paginacion.procedimiento.first()"
+                         [rows]="paginacion.procedimiento.rows" [totalRecords]="totalProcedimiento()"
                          (onPageChange)="onPageChange($event,'procedimiento')">
 
 
@@ -743,7 +743,7 @@
             </p-paginator>
 
           }
-          <span class="font-semibold mr-4 resultados">Resultados {{ totalElementosProcedimientoRpe }}</span>
+          <span class="font-semibold mr-4 resultados">Resultados {{ totalProcedimiento() }}</span>
         </ng-template>
       </div>
     </div>
@@ -879,8 +879,9 @@
             </ng-template>
           </p-table>
           @if (lstJuicio().length > 0) {
-            <p-paginator styleClass="justify-content-end" [showFirstLastIcon]="false" [first]="firstJuicio"
-                         [rows]="rows" [totalRecords]="totalElementosJuicio"
+            <p-paginator styleClass="justify-content-end" [showFirstLastIcon]="false"
+                         [first]="paginacion.juicio.first()"
+                         [rows]="paginacion.juicio.rows" [totalRecords]="totalJuicio()"
                          (onPageChange)="onPageChange($event, 'juicio')">
 
 
@@ -901,7 +902,7 @@
             </p-paginator>
 
           }
-          <span class="font-semibold mr-4 resultados">Resultados {{ totalElementosJuicio }}</span>
+          <span class="font-semibold mr-4 resultados">Resultados {{ totalJuicio() }}</span>
 
 
         </ng-template>

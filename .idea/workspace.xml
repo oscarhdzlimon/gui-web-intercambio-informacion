@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="ajustes para nueva consulta detalle de registros" />
+    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="ajustes solicitud de asignacion">
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -92,47 +94,7 @@
       <workItem from="1767111634106" duration="669000" />
       <workItem from="1767118150936" duration="3257000" />
       <workItem from="1767891732696" duration="7482000" />
-      <workItem from="1767937805716" duration="77664000" />
-    </task>
-    <task id="LOCAL-00049" summary="ajustes busqueda sistema">
-      <option name="closed" value="true" />
-      <created>1766414257078</created>
-      <option name="number" value="00049" />
-      <option name="presentableId" value="LOCAL-00049" />
-      <option name="project" value="LOCAL" />
-      <updated>1766414257078</updated>
-    </task>
-    <task id="LOCAL-00050" summary="corrección filtros -&gt; consulta antecedente">
-      <option name="closed" value="true" />
-      <created>1766421642442</created>
-      <option name="number" value="00050" />
-      <option name="presentableId" value="LOCAL-00050" />
-      <option name="project" value="LOCAL" />
-      <updated>1766421642442</updated>
-    </task>
-    <task id="LOCAL-00051" summary="corrección filtros -&gt; busqueda sistemas">
-      <option name="closed" value="true" />
-      <created>1766421753653</created>
-      <option name="number" value="00051" />
-      <option name="presentableId" value="LOCAL-00051" />
-      <option name="project" value="LOCAL" />
-      <updated>1766421753654</updated>
-    </task>
-    <task id="LOCAL-00052" summary="correccion al obtener y mostrar elementos de la asoociación">
-      <option name="closed" value="true" />
-      <created>1766427970218</created>
-      <option name="number" value="00052" />
-      <option name="presentableId" value="LOCAL-00052" />
-      <option name="project" value="LOCAL" />
-      <updated>1766427970218</updated>
-    </task>
-    <task id="LOCAL-00053" summary="ajustes al guardar solicitud de antecedentes">
-      <option name="closed" value="true" />
-      <created>1766430752986</created>
-      <option name="number" value="00053" />
-      <option name="presentableId" value="LOCAL-00053" />
-      <option name="project" value="LOCAL" />
-      <updated>1766430752986</updated>
+      <workItem from="1767937805716" duration="82033000" />
     </task>
     <task id="LOCAL-00054" summary="habilitacion de botones de asociacion">
       <option name="closed" value="true" />
@@ -486,7 +448,47 @@
       <option name="project" value="LOCAL" />
       <updated>1768330905852</updated>
     </task>
-    <option name="localTasksCounter" value="98" />
+    <task id="LOCAL-00098" summary="ajustes para nueva consulta detalle de registros">
+      <option name="closed" value="true" />
+      <created>1768345976685</created>
+      <option name="number" value="00098" />
+      <option name="presentableId" value="LOCAL-00098" />
+      <option name="project" value="LOCAL" />
+      <updated>1768345976685</updated>
+    </task>
+    <task id="LOCAL-00099" summary="limpieza pagindao consulta detalle de antecedentes">
+      <option name="closed" value="true" />
+      <created>1768353207335</created>
+      <option name="number" value="00099" />
+      <option name="presentableId" value="LOCAL-00099" />
+      <option name="project" value="LOCAL" />
+      <updated>1768353207335</updated>
+    </task>
+    <task id="LOCAL-00100" summary="ajustes de manejo de busquedas">
+      <option name="closed" value="true" />
+      <created>1768353526664</created>
+      <option name="number" value="00100" />
+      <option name="presentableId" value="LOCAL-00100" />
+      <option name="project" value="LOCAL" />
+      <updated>1768353526664</updated>
+    </task>
+    <task id="LOCAL-00101" summary="ajustes para manejo de registros repetidos">
+      <option name="closed" value="true" />
+      <created>1768354714705</created>
+      <option name="number" value="00101" />
+      <option name="presentableId" value="LOCAL-00101" />
+      <option name="project" value="LOCAL" />
+      <updated>1768354714705</updated>
+    </task>
+    <task id="LOCAL-00102" summary="ajustes solicitud de asignacion">
+      <option name="closed" value="true" />
+      <created>1768356081632</created>
+      <option name="number" value="00102" />
+      <option name="presentableId" value="LOCAL-00102" />
+      <option name="project" value="LOCAL" />
+      <updated>1768356081632</updated>
+    </task>
+    <option name="localTasksCounter" value="103" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -504,10 +506,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="ajustes para recuperar consultas" />
-    <MESSAGE value="ajustes para lectura de datos del usuario por URL" />
-    <MESSAGE value="ajustes de busqueda interna -&gt; por nss" />
-    <MESSAGE value="ajustes de busqueda interna -&gt; por nombre" />
     <MESSAGE value="ajuste totales" />
     <MESSAGE value="ajuste fechas" />
     <MESSAGE value="ajuste tipo de busqueda -&gt; consulta antecedentes" />
@@ -529,6 +527,10 @@
     <MESSAGE value="ajuste para nueva consulta detalle de registros" />
     <MESSAGE value="ajustes css para nueva consulta detalle de registros" />
     <MESSAGE value="ajustes para nueva consulta detalle de registros" />
-    <option name="LAST_COMMIT_MESSAGE" value="ajustes para nueva consulta detalle de registros" />
+    <MESSAGE value="limpieza pagindao consulta detalle de antecedentes" />
+    <MESSAGE value="ajustes de manejo de busquedas" />
+    <MESSAGE value="ajustes para manejo de registros repetidos" />
+    <MESSAGE value="ajustes solicitud de asignacion" />
+    <option name="LAST_COMMIT_MESSAGE" value="ajustes solicitud de asignacion" />
   </component>
 </project>

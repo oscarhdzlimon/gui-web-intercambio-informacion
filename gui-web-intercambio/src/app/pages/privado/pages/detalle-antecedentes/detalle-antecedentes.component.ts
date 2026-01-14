@@ -144,31 +144,6 @@ export class DetalleAntecedentesComponent extends GeneralComponent implements On
   first: number = 0;
   totalElementos: number = 0;
   rows: number = 10;
-
-  paginaActualGestion: number = 0;
-  firstGestion: number = 0;
-  totalElementosGestion: number = 0;
-
-  paginaActualQueja: number = 0;
-  firstQueja: number = 0;
-  totalElementosQueja: number = 0;
-
-  paginaActualInconformidad: number = 0;
-  firstInconformidad: number = 0;
-  totalElementosInconformidad: number = 0;
-
-  paginaActualAmparoIndirecto: number = 0;
-  firstAmparoIndirecto: number = 0;
-  totalElementosAmparoIndirecto: number = 0;
-
-  paginaActualProcedimientoRpe: number = 0;
-  firstProcedimientoRpe: number = 0;
-  totalElementosProcedimientoRpe: number = 0;
-
-  paginaActualJuicio: number = 0;
-  firstJuicio: number = 0;
-  totalElementosJuicio: number = 0;
-
   userData: SesionUser | null = null;
 
   datosUsuario = {
@@ -275,23 +250,6 @@ export class DetalleAntecedentesComponent extends GeneralComponent implements On
       },
       styleClass: 'oferta-detail',
     });
-  }
-
-  onPageChangeGestion(event: any): void {
-    if (event.page) {
-      this.paginaActualGestion = event.page;
-    }
-    this.firstGestion = event.first;
-    this.paginarGestion();
-  }
-
-  paginarGestion() {
-    const parametros = {
-      page: this.paginaActualGestion,
-      size: 10,
-      sort: Ordenamiento.ASC,
-    };
-
   }
 
   obtenerParametros() {
