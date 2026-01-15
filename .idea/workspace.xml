@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="correcciones de consulta por login">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/detalle-antecedentes/detalle-antecedentes.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/detalle-antecedentes/detalle-antecedentes.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/detalle-antecedentes/detalle-antecedentes.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/detalle-antecedentes/detalle-antecedentes.component.ts" afterDir="false" />
-    </list>
+    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="correcciones de antecedentes" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -96,15 +92,7 @@
       <workItem from="1767111634106" duration="669000" />
       <workItem from="1767118150936" duration="3257000" />
       <workItem from="1767891732696" duration="7482000" />
-      <workItem from="1767937805716" duration="91079000" />
-    </task>
-    <task id="LOCAL-00057" summary="ajustes de consulta por nss">
-      <option name="closed" value="true" />
-      <created>1767985803575</created>
-      <option name="number" value="00057" />
-      <option name="presentableId" value="LOCAL-00057" />
-      <option name="project" value="LOCAL" />
-      <updated>1767985803575</updated>
+      <workItem from="1767937805716" duration="91434000" />
     </task>
     <task id="LOCAL-00058" summary="ajustes de consulta por nombre">
       <option name="closed" value="true" />
@@ -490,7 +478,15 @@
       <option name="project" value="LOCAL" />
       <updated>1768409268384</updated>
     </task>
-    <option name="localTasksCounter" value="106" />
+    <task id="LOCAL-00106" summary="correcciones de antecedentes">
+      <option name="closed" value="true" />
+      <created>1768427258064</created>
+      <option name="number" value="00106" />
+      <option name="presentableId" value="LOCAL-00106" />
+      <option name="project" value="LOCAL" />
+      <updated>1768427258064</updated>
+    </task>
+    <option name="localTasksCounter" value="107" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -508,7 +504,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="ajuste tipo de busqueda -&gt; consulta antecedentes" />
     <MESSAGE value="ajustes para asociacion -&gt; consulta antecedentes" />
     <MESSAGE value="ajustes para busqueda completa" />
     <MESSAGE value="modificacion para paginado completo" />
@@ -533,6 +528,7 @@
     <MESSAGE value="ajustes solicitud de asignacion" />
     <MESSAGE value="ajustes solicitud de asociación" />
     <MESSAGE value="correcciones de consulta por login" />
-    <option name="LAST_COMMIT_MESSAGE" value="correcciones de consulta por login" />
+    <MESSAGE value="correcciones de antecedentes" />
+    <option name="LAST_COMMIT_MESSAGE" value="correcciones de antecedentes" />
   </component>
 </project>
