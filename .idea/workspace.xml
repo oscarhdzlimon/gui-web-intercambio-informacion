@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="correcciones de busqueda sistema">
+    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="ajustes cveAsunto -&gt; asociacion">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/interfaces/solicitud-asociacion.interface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/interfaces/solicitud-asociacion.interface.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/shared/tabla-principal/tabla-principal.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/shared/tabla-principal/tabla-principal.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,23 +95,7 @@
       <workItem from="1767111634106" duration="669000" />
       <workItem from="1767118150936" duration="3257000" />
       <workItem from="1767891732696" duration="7482000" />
-      <workItem from="1767937805716" duration="95287000" />
-    </task>
-    <task id="LOCAL-00060" summary="corrección de id para detalle">
-      <option name="closed" value="true" />
-      <created>1767990595593</created>
-      <option name="number" value="00060" />
-      <option name="presentableId" value="LOCAL-00060" />
-      <option name="project" value="LOCAL" />
-      <updated>1767990595593</updated>
-    </task>
-    <task id="LOCAL-00061" summary="correcciones de tipoConsulta">
-      <option name="closed" value="true" />
-      <created>1767994166879</created>
-      <option name="number" value="00061" />
-      <option name="presentableId" value="LOCAL-00061" />
-      <option name="project" value="LOCAL" />
-      <updated>1767994166879</updated>
+      <workItem from="1767937805716" duration="97674000" />
     </task>
     <task id="LOCAL-00062" summary="correcciones de objeto de reporte">
       <option name="closed" value="true" />
@@ -492,7 +473,23 @@
       <option name="project" value="LOCAL" />
       <updated>1768516614035</updated>
     </task>
-    <option name="localTasksCounter" value="109" />
+    <task id="LOCAL-00109" summary="ajustes cveAsunto">
+      <option name="closed" value="true" />
+      <created>1768517368069</created>
+      <option name="number" value="00109" />
+      <option name="presentableId" value="LOCAL-00109" />
+      <option name="project" value="LOCAL" />
+      <updated>1768517368069</updated>
+    </task>
+    <task id="LOCAL-00110" summary="ajustes cveAsunto -&gt; asociacion">
+      <option name="closed" value="true" />
+      <created>1768518144404</created>
+      <option name="number" value="00110" />
+      <option name="presentableId" value="LOCAL-00110" />
+      <option name="project" value="LOCAL" />
+      <updated>1768518144404</updated>
+    </task>
+    <option name="localTasksCounter" value="111" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -510,8 +507,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="ajustes para busqueda completa" />
-    <MESSAGE value="modificacion para paginado completo" />
     <MESSAGE value="correcciones para asociar" />
     <MESSAGE value="consulta paginado manual" />
     <MESSAGE value="ajustess pra busqueda de personas" />
@@ -535,6 +530,8 @@
     <MESSAGE value="correcciones de consulta por login" />
     <MESSAGE value="correcciones de antecedentes" />
     <MESSAGE value="correcciones de busqueda sistema" />
-    <option name="LAST_COMMIT_MESSAGE" value="correcciones de busqueda sistema" />
+    <MESSAGE value="ajustes cveAsunto" />
+    <MESSAGE value="ajustes cveAsunto -&gt; asociacion" />
+    <option name="LAST_COMMIT_MESSAGE" value="ajustes cveAsunto -&gt; asociacion" />
   </component>
 </project>

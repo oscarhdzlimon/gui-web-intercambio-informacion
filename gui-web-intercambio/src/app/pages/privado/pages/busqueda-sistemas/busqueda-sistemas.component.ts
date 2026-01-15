@@ -175,6 +175,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
       }
     });
     this.nss = mapearArregloTipoDropdown(this.REF_SISTEMA.personas, 'cve_nss', 'cve_nss');
+    this.nss = [... this.nss].filter(nss => !!nss.value);
   }
 
   ngOnInit(): void {
