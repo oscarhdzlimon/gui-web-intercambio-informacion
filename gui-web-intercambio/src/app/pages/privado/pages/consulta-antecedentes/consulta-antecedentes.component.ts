@@ -257,7 +257,7 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
 
   private mapearASolicitud(evento: any): SolicitudAsociacion {
     return {
-      cveAsunto: 0,
+      cveAsunto: '',
       idPersona: evento.idPersona,
       refExpedientePersona: evento.refExpedientePersona,
       idBitacoraAsociacion: evento.idBitacoraAsociacion,

@@ -15,6 +15,6 @@ export interface SolicitudAsociacion {
   numAmparoIndirecto: number,
   numProcedimientoRpe: number,
   numJuicioContencioso: number,
-  cveAsunto: number,
+  cveAsunto: string,
   idPersona: number,
 }

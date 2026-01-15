@@ -425,7 +425,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
 
   private mapearASolicitud(evento: any): SolicitudAsociacion {
     return {
-      cveAsunto: 0,
+      cveAsunto: this.REF_SISTEMA.cveAsunto,
       idPersona: evento.idPersona,
       idBitacoraAsociacion: evento.idBitacoraAsociacion,
       refUsuarioAutentica: this.REF_SISTEMA.usuarioLogueado, // Contexto del componente
@@ -448,7 +448,6 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
   }
 
   cambiarEstado(row: RegistroAntecedentes): void {
-
     if (row.indAsociado) {
       this.solicitudAntecedentesService.agregar(
         row.idPersona,
@@ -594,9 +593,9 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
       fecCorteSiade: this.fechasCorte.fecCorteSiade,
       fecCorteSsc1: this.fechasCorte.fecCorteSsc1,
       fecCorteSsc2: this.fechasCorte.fecCorteSsc2,
-      nomApellidoMaterno: null,
-      nomApellidoPaterno: null,
-      nomPersona: filtro === 2 ? this.filtroForm.get('valor')?.value : null,
+      nomApellidoMaterno: filtro === 2 ? this.filtroForm.get('valor')?.value.nom_apellido_materno_afectado : null,
+      nomApellidoPaterno: filtro === 2 ? this.filtroForm.get('valor')?.value.nom_apellido_paterno_afectado : null,
+      nomPersona: filtro === 2 ? this.filtroForm.get('valor')?.value.nom_nombre_afectado : null,
       refAplicativo: this.REF_SISTEMA.sistema,
       refExpediente: this.REF_SISTEMA.expediente,
       refModulo: this.REF_SISTEMA.modulo,
