@@ -33,6 +33,7 @@ import {ConsultaDescifrada} from '../../../../core/interfaces/consulta-descifrad
 import {NombreTipoDropdown} from '../../../../core/interfaces/nombre-tipo-dropdown.interface';
 import {ReporteAntecedentes} from '@models/reporteAntecedentes.interface';
 import {CryptoService} from '@services/crypto.service';
+import {ParamsAsociacion} from '../../../../core/interfaces/params-asociacion.interface';
 
 enum TipoTabla {
   NSS = '1',
@@ -493,6 +494,12 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
 
     const registros = this.solicitudAntecedentesService.obtenerRegistros();
 
+    const params: ParamsAsociacion = {
+      cveAsunto: this.REF_SISTEMA.cveAsunto,
+      idModulo: this.REF_SISTEMA.modulo,
+      sistema: this.REF_SISTEMA.sistema
+    }
+
     if (registros.length === 0) {
       this._alertServices.alerta(
         'No hay registros seleccionados para asociar.'
@@ -500,7 +507,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
       return;
     }
 
-    this.antecedentesService.guardarAsociacion(registros).subscribe({
+    this.antecedentesService.guardarAsociacion(registros, params).subscribe({
       next: data => {
         const mensajeExito =
           data?.mensaje ||
