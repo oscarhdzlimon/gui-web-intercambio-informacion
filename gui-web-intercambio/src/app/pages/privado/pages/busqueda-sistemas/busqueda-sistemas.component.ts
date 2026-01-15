@@ -494,7 +494,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
     const registros = this.solicitudAntecedentesService.obtenerRegistros();
 
     const params: ParamsAsociacion = {
-      cveAsunto: this.REF_SISTEMA.cveAsunto,
+      cveAsunto: this.REF_SISTEMA.cveAsunto ?? 0,
       idModulo: this.REF_SISTEMA.modulo,
       sistema: this.REF_SISTEMA.sistema
     }
