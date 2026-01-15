@@ -174,6 +174,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
         nombreCompleto: `${n.nom_nombre_afectado} ${n.nom_apellido_paterno_afectado} ${n.nom_apellido_materno_afectado}`,
       }
     });
+    this.nombresSolicitud = [...this.nombresSolicitud].filter(nombre => !!nombre.nom_nombre_afectado);
     this.nss = mapearArregloTipoDropdown(this.REF_SISTEMA.personas, 'cve_nss', 'cve_nss');
     this.nss = [... this.nss].filter(nss => !!nss.value);
   }
