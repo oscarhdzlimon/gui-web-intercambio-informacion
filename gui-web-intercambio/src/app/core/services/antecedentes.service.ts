@@ -5,6 +5,7 @@ import {SolicitudAntecedentes} from '../interfaces/solicitud-antecedentes.interf
 import {SolicitudAsociacion} from '../interfaces/solicitud-asociacion.interface';
 import {SolicitudBitacora} from '../interfaces/solicitud-bitacora.inerface';
 import {SolicitudBusquedaPaginado} from '../interfaces/solicitud-busqueda-antecedentes.interface';
+import {ParamsAsociacion} from '../interfaces/params-asociacion.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -40,8 +41,12 @@ export class AntecedentesService {
     return this.http.post<any>(`${this.URL_BASE}/expediente/personas`, {expediente});
   }
 
-  guardarAsociacion(solicitud: SolicitudAsociacion[]) {
-    return this.http.post<any>(`${this.URL_BITACORA}/asociacion`, solicitud);
+  guardarAsociacion(solicitud: SolicitudAsociacion[], paramsAsociacion: ParamsAsociacion) {
+    const params = new HttpParams()
+      .set('sistema', paramsAsociacion.sistema)
+      .set('idModulo', paramsAsociacion.idModulo)
+      .set('cveAsunto', paramsAsociacion.cveAsunto);
+    return this.http.post<any>(`${this.URL_BITACORA}/asociacion`, solicitud, { params });
   }
 
   guardarBitacora(solicitud: SolicitudBitacora) {

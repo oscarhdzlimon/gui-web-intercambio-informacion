@@ -257,7 +257,7 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
 
   private mapearASolicitud(evento: any): SolicitudAsociacion {
     return {
-      cveAsunto: 0,
+      cveAsunto: '',
       idPersona: evento.idPersona,
       refExpedientePersona: evento.refExpedientePersona,
       idBitacoraAsociacion: evento.idBitacoraAsociacion,
@@ -572,29 +572,6 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
       return;
     }
 
-    this.antecedentesService.guardarAsociacion(registros).subscribe({
-      next: data => {
-        const mensajeExito = data?.mensaje || 'La asociación de registros se ha guardado exitosamente.';
-        this._alertServices.exito(mensajeExito);
-        this.solicitudAntecedentesService.limpiar();
-        this.paginar();
-      },
-      error: (error: HttpErrorResponse) => {
-
-        let mensajeError = 'Ocurrió un error desconocido al intentar guardar la asociación.';
-
-        if (error.error && error.error.mensaje) {
-          mensajeError = error.error.mensaje;
-        } else if (error.status === 400) {
-          mensajeError = 'Error de validación: Verifique los datos e intente de nuevo.';
-        } else if (error.status === 403) {
-          mensajeError = 'No tiene permisos para realizar esta acción.';
-        }
-
-        this._alertServices.error(mensajeError);
-        console.error('Error al guardar asociación:', error);
-      }
-    });
   }
 
   obtenerFechasCorte() {

@@ -33,6 +33,7 @@ import {ConsultaDescifrada} from '../../../../core/interfaces/consulta-descifrad
 import {NombreTipoDropdown} from '../../../../core/interfaces/nombre-tipo-dropdown.interface';
 import {ReporteAntecedentes} from '@models/reporteAntecedentes.interface';
 import {CryptoService} from '@services/crypto.service';
+import {ParamsAsociacion} from '../../../../core/interfaces/params-asociacion.interface';
 
 enum TipoTabla {
   NSS = '1',
@@ -424,7 +425,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
 
   private mapearASolicitud(evento: any): SolicitudAsociacion {
     return {
-      cveAsunto: 0,
+      cveAsunto: this.REF_SISTEMA.cveAsunto,
       idPersona: evento.idPersona,
       idBitacoraAsociacion: evento.idBitacoraAsociacion,
       refUsuarioAutentica: this.REF_SISTEMA.usuarioLogueado, // Contexto del componente
@@ -447,7 +448,6 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
   }
 
   cambiarEstado(row: RegistroAntecedentes): void {
-
     if (row.indAsociado) {
       this.solicitudAntecedentesService.agregar(
         row.idPersona,
@@ -493,6 +493,12 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
 
     const registros = this.solicitudAntecedentesService.obtenerRegistros();
 
+    const params: ParamsAsociacion = {
+      cveAsunto: this.REF_SISTEMA.cveAsunto ?? 0,
+      idModulo: this.REF_SISTEMA.modulo,
+      sistema: this.REF_SISTEMA.sistema
+    }
+
     if (registros.length === 0) {
       this._alertServices.alerta(
         'No hay registros seleccionados para asociar.'
@@ -500,7 +506,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
       return;
     }
 
-    this.antecedentesService.guardarAsociacion(registros).subscribe({
+    this.antecedentesService.guardarAsociacion(registros, params).subscribe({
       next: data => {
         const mensajeExito =
           data?.mensaje ||
@@ -587,9 +593,9 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
       fecCorteSiade: this.fechasCorte.fecCorteSiade,
       fecCorteSsc1: this.fechasCorte.fecCorteSsc1,
       fecCorteSsc2: this.fechasCorte.fecCorteSsc2,
-      nomApellidoMaterno: null,
-      nomApellidoPaterno: null,
-      nomPersona: filtro === 2 ? this.filtroForm.get('valor')?.value : null,
+      nomApellidoMaterno: filtro === 2 ? this.filtroForm.get('valor')?.value.nom_apellido_materno_afectado : null,
+      nomApellidoPaterno: filtro === 2 ? this.filtroForm.get('valor')?.value.nom_apellido_paterno_afectado : null,
+      nomPersona: filtro === 2 ? this.filtroForm.get('valor')?.value.nom_nombre_afectado : null,
       refAplicativo: this.REF_SISTEMA.sistema,
       refExpediente: this.REF_SISTEMA.expediente,
       refModulo: this.REF_SISTEMA.modulo,

@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="correcciones de antecedentes" />
+    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="correcciones de busqueda sistema">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/interfaces/solicitud-asociacion.interface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/interfaces/solicitud-asociacion.interface.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/shared/tabla-principal/tabla-principal.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/shared/tabla-principal/tabla-principal.component.ts" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -92,23 +98,7 @@
       <workItem from="1767111634106" duration="669000" />
       <workItem from="1767118150936" duration="3257000" />
       <workItem from="1767891732696" duration="7482000" />
-      <workItem from="1767937805716" duration="91434000" />
-    </task>
-    <task id="LOCAL-00058" summary="ajustes de consulta por nombre">
-      <option name="closed" value="true" />
-      <created>1767986978593</created>
-      <option name="number" value="00058" />
-      <option name="presentableId" value="LOCAL-00058" />
-      <option name="project" value="LOCAL" />
-      <updated>1767986978593</updated>
-    </task>
-    <task id="LOCAL-00059" summary="ajustes de tipo de busqueda">
-      <option name="closed" value="true" />
-      <created>1767989915851</created>
-      <option name="number" value="00059" />
-      <option name="presentableId" value="LOCAL-00059" />
-      <option name="project" value="LOCAL" />
-      <updated>1767989915851</updated>
+      <workItem from="1767937805716" duration="95287000" />
     </task>
     <task id="LOCAL-00060" summary="corrección de id para detalle">
       <option name="closed" value="true" />
@@ -486,7 +476,23 @@
       <option name="project" value="LOCAL" />
       <updated>1768427258064</updated>
     </task>
-    <option name="localTasksCounter" value="107" />
+    <task id="LOCAL-00107" summary="correcciones de antecedentes">
+      <option name="closed" value="true" />
+      <created>1768437543232</created>
+      <option name="number" value="00107" />
+      <option name="presentableId" value="LOCAL-00107" />
+      <option name="project" value="LOCAL" />
+      <updated>1768437543232</updated>
+    </task>
+    <task id="LOCAL-00108" summary="correcciones de busqueda sistema">
+      <option name="closed" value="true" />
+      <created>1768516614034</created>
+      <option name="number" value="00108" />
+      <option name="presentableId" value="LOCAL-00108" />
+      <option name="project" value="LOCAL" />
+      <updated>1768516614035</updated>
+    </task>
+    <option name="localTasksCounter" value="109" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -504,7 +510,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="ajustes para asociacion -&gt; consulta antecedentes" />
     <MESSAGE value="ajustes para busqueda completa" />
     <MESSAGE value="modificacion para paginado completo" />
     <MESSAGE value="correcciones para asociar" />
@@ -529,6 +534,7 @@
     <MESSAGE value="ajustes solicitud de asociación" />
     <MESSAGE value="correcciones de consulta por login" />
     <MESSAGE value="correcciones de antecedentes" />
-    <option name="LAST_COMMIT_MESSAGE" value="correcciones de antecedentes" />
+    <MESSAGE value="correcciones de busqueda sistema" />
+    <option name="LAST_COMMIT_MESSAGE" value="correcciones de busqueda sistema" />
   </component>
 </project>

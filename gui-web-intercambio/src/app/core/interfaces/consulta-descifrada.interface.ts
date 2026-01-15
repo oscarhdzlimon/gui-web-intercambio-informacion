@@ -4,7 +4,8 @@ export interface ConsultaDescifrada {
   ooad_UMAE: string,
   usuarioLogueado: string,
   sistema: string,
-  modulo: string
+  modulo: string,
+  cveAsunto: string
 }
 
 interface Persona {
