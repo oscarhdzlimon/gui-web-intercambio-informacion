@@ -13,6 +13,7 @@ import {ParamsAsociacion} from '../interfaces/params-asociacion.interface';
 export class AntecedentesService {
   private readonly URL_BASE: string = environment.api.apiAntecedentes + 'antecedentes';
   private readonly URL_BITACORA: string = environment.api.apiBitacora + 'bitacora';
+  private readonly URL_SSCV1: string = environment.api.sscv1 + 'actualizar';
 
   http: HttpClient = inject(HttpClient);
 
@@ -53,4 +54,7 @@ export class AntecedentesService {
     return this.http.post<any>(`${this.URL_BITACORA}/consulta`, solicitud);
   }
 
+  actualizarSSCV1(solicitud: any) {
+    return this.http.post<any>(`${this.URL_SSCV1}`, solicitud);
+  }
 }
