@@ -644,7 +644,8 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
 
   guardarEnSSCV1(): void {
     const consulta = {
-      expediente: this.REF_SISTEMA.expediente,
+    /*  expediente: this.REF_SISTEMA.expediente, */
+      expediente: 'CC.JAL.-0000/0000',
       sistema: this.REF_SISTEMA.sistema,
       modulo: this.REF_SISTEMA.modulo,
       ooadUmae: this.REF_SISTEMA.ooad_UMAE,
