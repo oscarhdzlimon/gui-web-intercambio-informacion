@@ -8,5 +8,8 @@ export interface ConfigEnvironment {
     apiDocumentos: string;
     apiAntecedentes: string;
     apiBitacora: string;
+  },
+  key: {
+    AES_KEY_BASE64: string
   }
 }
