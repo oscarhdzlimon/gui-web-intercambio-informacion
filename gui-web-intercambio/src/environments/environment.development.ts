@@ -12,6 +12,9 @@ export const environment: ConfigEnvironment = {
     apiDocumentos: 'http://10.166.120:1057/mscme-documentos/api',
     apiAntecedentes: 'http://10.166.0.120:1060/msinif-antecedentes/api/v1/',
     apiBitacora: 'http://10.166.0.120:1060/msinif-antecedentes/api/',
+  },
+  key: {
+    AES_KEY_BASE64: 'mZzG9Fz9P0n4z7mZlKz8B9nX0mJ8vF7PZKX2vZx5QmE'
   }
 }
 

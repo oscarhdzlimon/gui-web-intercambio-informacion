@@ -34,6 +34,7 @@ import {NombreTipoDropdown} from '../../../../core/interfaces/nombre-tipo-dropdo
 import {ReporteAntecedentes} from '@models/reporteAntecedentes.interface';
 import {CryptoService} from '@services/crypto.service';
 import {ParamsAsociacion} from '../../../../core/interfaces/params-asociacion.interface';
+import {environment} from '@env/environment.development';
 
 enum TipoTabla {
   NSS = '1',
@@ -55,7 +56,6 @@ enum TipoTabla {
   styleUrl: './busqueda-sistemas.component.scss'
 })
 export class BusquedaSistemasComponent extends GeneralComponent implements OnInit {
-  readonly AES_KEY_BASE64: string = "mZzG9Fz9P0n4z7mZlKz8B9nX0mJ8vF7PZKX2vZx5QmE=";
 
   cifrado: string = '';
 
@@ -156,7 +156,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
       // IMPORTANTE: Añadir 'await' aquí
       this.REF_SISTEMA = await this.cifradoService.decryptToObject<any>(
         this.cifrado,
-        this.AES_KEY_BASE64
+        environment.key.AES_KEY_BASE64
       );
       this.obtenerDatosCifrados();
       this.recuperarUltimaBusqueda();
