@@ -4,13 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="cambio de variable a environment">
+    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="correccion para sscv1 -&lt; pruebas">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/models/config-environment.interface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/models/config-environment.interface.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/services/antecedentes.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/services/antecedentes.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/environments/environment.development.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/environments/environment.development.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/environments/environment.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/environments/environment.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,23 +95,7 @@
       <workItem from="1767111634106" duration="669000" />
       <workItem from="1767118150936" duration="3257000" />
       <workItem from="1767891732696" duration="7482000" />
-      <workItem from="1767937805716" duration="102970000" />
-    </task>
-    <task id="LOCAL-00065" summary="consulta de fechas de corte">
-      <option name="closed" value="true" />
-      <created>1768002746341</created>
-      <option name="number" value="00065" />
-      <option name="presentableId" value="LOCAL-00065" />
-      <option name="project" value="LOCAL" />
-      <updated>1768002746341</updated>
-    </task>
-    <task id="LOCAL-00066" summary="ajustes previos a asociación">
-      <option name="closed" value="true" />
-      <created>1768090076681</created>
-      <option name="number" value="00066" />
-      <option name="presentableId" value="LOCAL-00066" />
-      <option name="project" value="LOCAL" />
-      <updated>1768090076681</updated>
+      <workItem from="1767937805716" duration="105338000" />
     </task>
     <task id="LOCAL-00067" summary="servicio de cifrado">
       <option name="closed" value="true" />
@@ -493,7 +473,23 @@
       <option name="project" value="LOCAL" />
       <updated>1768585453450</updated>
     </task>
-    <option name="localTasksCounter" value="114" />
+    <task id="LOCAL-00114" summary="correccion para sscv1">
+      <option name="closed" value="true" />
+      <created>1768604174136</created>
+      <option name="number" value="00114" />
+      <option name="presentableId" value="LOCAL-00114" />
+      <option name="project" value="LOCAL" />
+      <updated>1768604174137</updated>
+    </task>
+    <task id="LOCAL-00115" summary="correccion para sscv1 -&lt; pruebas">
+      <option name="closed" value="true" />
+      <created>1768606199393</created>
+      <option name="number" value="00115" />
+      <option name="presentableId" value="LOCAL-00115" />
+      <option name="project" value="LOCAL" />
+      <updated>1768606199393</updated>
+    </task>
+    <option name="localTasksCounter" value="116" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -511,8 +507,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="ajustess pra busqueda de personas" />
-    <MESSAGE value="adecuaciones fecha corte + totales" />
     <MESSAGE value="ajuste de id's" />
     <MESSAGE value="consultas individuales -&gt; ajustes" />
     <MESSAGE value="fechas corte -&gt; caso 3" />
@@ -536,6 +530,8 @@
     <MESSAGE value="ajustes cveAsunto -&gt; asociacion" />
     <MESSAGE value="correccion cuando no viene nss" />
     <MESSAGE value="cambio de variable a environment" />
-    <option name="LAST_COMMIT_MESSAGE" value="cambio de variable a environment" />
+    <MESSAGE value="correccion para sscv1" />
+    <MESSAGE value="correccion para sscv1 -&lt; pruebas" />
+    <option name="LAST_COMMIT_MESSAGE" value="correccion para sscv1 -&lt; pruebas" />
   </component>
 </project>
