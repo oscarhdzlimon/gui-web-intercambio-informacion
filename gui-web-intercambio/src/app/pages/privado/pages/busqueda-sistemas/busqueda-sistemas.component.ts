@@ -515,6 +515,10 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
           'La asociación de registros se ha guardado exitosamente.';
 
         this._alertServices.exito(mensajeExito);
+
+        if (this.REF_SISTEMA.sistema === '1') {
+          this.guardarEnSSCV1();
+        }
         this.solicitudAntecedentesService.limpiar();
 
         this.consultas.forEach((_, index) => {
@@ -636,6 +640,27 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
     const paginados = consulta.datosCompletosFiltrados.slice(inicio, fin);
 
     consulta.data.set(this.sincronizarEstado(paginados));
+  }
+
+  guardarEnSSCV1(): void {
+    const consulta = {
+      expediente: this.REF_SISTEMA.expediente,
+      sistema: this.REF_SISTEMA.sistema,
+      modulo: this.REF_SISTEMA.modulo,
+      ooadUmae: this.REF_SISTEMA.ooad_UMAE,
+    }
+    this.antecedentesService.actualizarSSCV1(consulta).subscribe({
+      next: (response) => {
+          if (response) {
+            console.log('Actualizado correctamente SSCV1');
+          } else {
+            console.log('Error', consulta);
+          }
+      },
+      error: (error) => {
+        console.error(error);
+      }
+    })
   }
 
   get puedeGuardar() {

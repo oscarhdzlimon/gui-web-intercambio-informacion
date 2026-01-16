@@ -4,9 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="ajustes cveAsunto -&gt; asociacion">
+    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="cambio de variable a environment">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/models/config-environment.interface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/models/config-environment.interface.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/services/antecedentes.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/services/antecedentes.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/environments/environment.development.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/environments/environment.development.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/environments/environment.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/environments/environment.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,31 +99,7 @@
       <workItem from="1767111634106" duration="669000" />
       <workItem from="1767118150936" duration="3257000" />
       <workItem from="1767891732696" duration="7482000" />
-      <workItem from="1767937805716" duration="97674000" />
-    </task>
-    <task id="LOCAL-00062" summary="correcciones de objeto de reporte">
-      <option name="closed" value="true" />
-      <created>1767995417183</created>
-      <option name="number" value="00062" />
-      <option name="presentableId" value="LOCAL-00062" />
-      <option name="project" value="LOCAL" />
-      <updated>1767995417183</updated>
-    </task>
-    <task id="LOCAL-00063" summary="ajuste de parametros al abrir el detalle">
-      <option name="closed" value="true" />
-      <created>1767998913302</created>
-      <option name="number" value="00063" />
-      <option name="presentableId" value="LOCAL-00063" />
-      <option name="project" value="LOCAL" />
-      <updated>1767998913302</updated>
-    </task>
-    <task id="LOCAL-00064" summary="quitar cache de id">
-      <option name="closed" value="true" />
-      <created>1768000234406</created>
-      <option name="number" value="00064" />
-      <option name="presentableId" value="LOCAL-00064" />
-      <option name="project" value="LOCAL" />
-      <updated>1768000234406</updated>
+      <workItem from="1767937805716" duration="102970000" />
     </task>
     <task id="LOCAL-00065" summary="consulta de fechas de corte">
       <option name="closed" value="true" />
@@ -489,7 +469,31 @@
       <option name="project" value="LOCAL" />
       <updated>1768518144404</updated>
     </task>
-    <option name="localTasksCounter" value="111" />
+    <task id="LOCAL-00111" summary="correccion cuando no viene nss">
+      <option name="closed" value="true" />
+      <created>1768521108370</created>
+      <option name="number" value="00111" />
+      <option name="presentableId" value="LOCAL-00111" />
+      <option name="project" value="LOCAL" />
+      <updated>1768521108370</updated>
+    </task>
+    <task id="LOCAL-00112" summary="correccion cuando no viene nss">
+      <option name="closed" value="true" />
+      <created>1768521197924</created>
+      <option name="number" value="00112" />
+      <option name="presentableId" value="LOCAL-00112" />
+      <option name="project" value="LOCAL" />
+      <updated>1768521197924</updated>
+    </task>
+    <task id="LOCAL-00113" summary="cambio de variable a environment">
+      <option name="closed" value="true" />
+      <created>1768585453450</created>
+      <option name="number" value="00113" />
+      <option name="presentableId" value="LOCAL-00113" />
+      <option name="project" value="LOCAL" />
+      <updated>1768585453450</updated>
+    </task>
+    <option name="localTasksCounter" value="114" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -507,8 +511,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="correcciones para asociar" />
-    <MESSAGE value="consulta paginado manual" />
     <MESSAGE value="ajustess pra busqueda de personas" />
     <MESSAGE value="adecuaciones fecha corte + totales" />
     <MESSAGE value="ajuste de id's" />
@@ -532,6 +534,8 @@
     <MESSAGE value="correcciones de busqueda sistema" />
     <MESSAGE value="ajustes cveAsunto" />
     <MESSAGE value="ajustes cveAsunto -&gt; asociacion" />
-    <option name="LAST_COMMIT_MESSAGE" value="ajustes cveAsunto -&gt; asociacion" />
+    <MESSAGE value="correccion cuando no viene nss" />
+    <MESSAGE value="cambio de variable a environment" />
+    <option name="LAST_COMMIT_MESSAGE" value="cambio de variable a environment" />
   </component>
 </project>
