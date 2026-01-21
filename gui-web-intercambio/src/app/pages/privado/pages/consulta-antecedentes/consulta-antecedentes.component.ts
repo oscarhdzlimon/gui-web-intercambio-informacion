@@ -247,7 +247,7 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
       const tipoConsultaActual = this.filtroForm.get('tipoconsulta')?.value;
 
       if (tipoConsultaActual === 3) {
-        // PAGINADO MANUAL: No llamar al server, solo rebanar el array
+        // PAGINADO MANUAL: No llamar al server, solo cortar el array
         this.actualizarPaginaNombreLocal();
       } else {
         this.paginar(); // Caso 2 normal: va al servidor

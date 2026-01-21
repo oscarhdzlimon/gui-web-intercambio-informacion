@@ -4,9 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="correccion para sscv1 -&lt; pruebas">
+    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="correccion para sscv1 -&lt; revert comentarios">
+      <change afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/interfaces/consulta-interna-antecedentes.interface.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/interfaces/respuesta-interna-antecedentes.interface.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/services/antecedentes.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/services/antecedentes.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,15 +98,7 @@
       <workItem from="1767111634106" duration="669000" />
       <workItem from="1767118150936" duration="3257000" />
       <workItem from="1767891732696" duration="7482000" />
-      <workItem from="1767937805716" duration="105338000" />
-    </task>
-    <task id="LOCAL-00067" summary="servicio de cifrado">
-      <option name="closed" value="true" />
-      <created>1768097370233</created>
-      <option name="number" value="00067" />
-      <option name="presentableId" value="LOCAL-00067" />
-      <option name="project" value="LOCAL" />
-      <updated>1768097370233</updated>
+      <workItem from="1767937805716" duration="111492000" />
     </task>
     <task id="LOCAL-00068" summary="servicio de cifrado">
       <option name="closed" value="true" />
@@ -489,7 +484,15 @@
       <option name="project" value="LOCAL" />
       <updated>1768606199393</updated>
     </task>
-    <option name="localTasksCounter" value="116" />
+    <task id="LOCAL-00116" summary="correccion para sscv1 -&lt; revert comentarios">
+      <option name="closed" value="true" />
+      <created>1768607085043</created>
+      <option name="number" value="00116" />
+      <option name="presentableId" value="LOCAL-00116" />
+      <option name="project" value="LOCAL" />
+      <updated>1768607085043</updated>
+    </task>
+    <option name="localTasksCounter" value="117" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -507,7 +510,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="ajuste de id's" />
     <MESSAGE value="consultas individuales -&gt; ajustes" />
     <MESSAGE value="fechas corte -&gt; caso 3" />
     <MESSAGE value="totales -&gt; caso 3" />
@@ -532,6 +534,7 @@
     <MESSAGE value="cambio de variable a environment" />
     <MESSAGE value="correccion para sscv1" />
     <MESSAGE value="correccion para sscv1 -&lt; pruebas" />
-    <option name="LAST_COMMIT_MESSAGE" value="correccion para sscv1 -&lt; pruebas" />
+    <MESSAGE value="correccion para sscv1 -&lt; revert comentarios" />
+    <option name="LAST_COMMIT_MESSAGE" value="correccion para sscv1 -&lt; revert comentarios" />
   </component>
 </project>
