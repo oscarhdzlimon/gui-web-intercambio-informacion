@@ -4,12 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="correccion para sscv1 -&lt; revert comentarios">
-      <change afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/interfaces/consulta-interna-antecedentes.interface.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/interfaces/respuesta-interna-antecedentes.interface.ts" afterDir="false" />
+    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="modificaciones de respuesta, consulta servicios para peticiones internas">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/interfaces/respuesta-interna-antecedentes.interface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/interfaces/respuesta-interna-antecedentes.interface.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/services/antecedentes.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/services/antecedentes.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/shared/tabla-principal/tabla-principal.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/shared/tabla-principal/tabla-principal.component.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,15 +99,7 @@
       <workItem from="1767111634106" duration="669000" />
       <workItem from="1767118150936" duration="3257000" />
       <workItem from="1767891732696" duration="7482000" />
-      <workItem from="1767937805716" duration="111492000" />
-    </task>
-    <task id="LOCAL-00068" summary="servicio de cifrado">
-      <option name="closed" value="true" />
-      <created>1768097889337</created>
-      <option name="number" value="00068" />
-      <option name="presentableId" value="LOCAL-00068" />
-      <option name="project" value="LOCAL" />
-      <updated>1768097889337</updated>
+      <workItem from="1767937805716" duration="117472000" />
     </task>
     <task id="LOCAL-00069" summary="redirección por url cifrada">
       <option name="closed" value="true" />
@@ -492,7 +485,15 @@
       <option name="project" value="LOCAL" />
       <updated>1768607085043</updated>
     </task>
-    <option name="localTasksCounter" value="117" />
+    <task id="LOCAL-00117" summary="modificaciones de respuesta, consulta servicios para peticiones internas">
+      <option name="closed" value="true" />
+      <created>1769011365920</created>
+      <option name="number" value="00117" />
+      <option name="presentableId" value="LOCAL-00117" />
+      <option name="project" value="LOCAL" />
+      <updated>1769011365920</updated>
+    </task>
+    <option name="localTasksCounter" value="118" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -510,7 +511,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="consultas individuales -&gt; ajustes" />
     <MESSAGE value="fechas corte -&gt; caso 3" />
     <MESSAGE value="totales -&gt; caso 3" />
     <MESSAGE value="correcciones de consulta" />
@@ -535,6 +535,7 @@
     <MESSAGE value="correccion para sscv1" />
     <MESSAGE value="correccion para sscv1 -&lt; pruebas" />
     <MESSAGE value="correccion para sscv1 -&lt; revert comentarios" />
-    <option name="LAST_COMMIT_MESSAGE" value="correccion para sscv1 -&lt; revert comentarios" />
+    <MESSAGE value="modificaciones de respuesta, consulta servicios para peticiones internas" />
+    <option name="LAST_COMMIT_MESSAGE" value="modificaciones de respuesta, consulta servicios para peticiones internas" />
   </component>
 </project>

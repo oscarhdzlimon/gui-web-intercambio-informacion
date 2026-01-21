@@ -64,16 +64,15 @@
 </p-card>
 
 @if (data().length > 0) {
-  <app-tabla-principal
-    [asociar]="false"
-    [titulo]="tituloTabla"
-    [data]="data()"
-    [rows]="5"
-    [total]="totalregistros"
-    [tipoBusqueda]="'1'"
-    [datosUsuario]="generarObjReporteAntecedentes()"
-    (pageChange)="cargarPagina($event, TipoTabla.NSS)"
-    (checkboxChanged)="cambiarEstado($event)"/>
+  <app-tabla-principal [asociar]="false"
+                       [titulo]="tituloTabla"
+                       [data]="data()"
+                       [rows]="5"
+                       [total]="totalregistros"
+                       [tipoBusqueda]="'1'"
+                       [datosUsuario]="generarObjReporteAntecedentes()"
+                       (pageChange)="cargarPagina($event, TipoTabla.NSS)"
+                       (checkboxChanged)="cambiarEstado($event)"/>
 }
 
 @if (data_nombre().length > 0) {

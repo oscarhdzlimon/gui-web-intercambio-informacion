@@ -4,7 +4,7 @@ export interface RespuestaInternaAntecedentes {
   totalesGenerales: RespuestaTotales
 }
 
-interface RegistroInternoAntecedentes {
+export interface RegistroInternoAntecedentes {
   nss: string,
   numId: number,
   nombreFull: string,

@@ -30,6 +30,10 @@ import {DetalleAntecedentesService} from '@services/detalle-antecedentes.service
 import {DetalleAntecedentes} from '@models/detalleAntecedentes.interface';
 import {ReporteAntecedentes} from '@models/reporteAntecedentes.interface';
 import {SolicitudBusquedaPaginado} from '../../../../core/interfaces/solicitud-busqueda-antecedentes.interface';
+import {
+  RegistroInternoAntecedentes,
+  RespuestaInternaAntecedentes
+} from '../../../../core/interfaces/respuesta-interna-antecedentes.interface';
 
 enum TipoTabla {
   NSS = '1',
@@ -63,6 +67,7 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
   private idsCargadosNSS = new Set<string>();
 
   private dataNombreCompleta: RegistroAntecedentes[] = [];
+  private dataNssCompleta: RegistroAntecedentes[] = [];
 
   filtroForm!: FormGroup;
 
@@ -73,12 +78,12 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
   tituloTablanombre: string = 'Resultados de la búsqueda'; // Título que se muestra
 
   registrosPorPaginaNss: number = 10;
-  paginaActualNss: number = 1;
+  paginaActualNss: number = 0;
   totalregistros: number = 0;
   data: WritableSignal<RegistroAntecedentes[]> = signal([]);
 
   registrosPorPaginaNombre: number = 10;
-  paginaActualNombre: number = 1;
+  paginaActualNombre: number = 0;
   totalregistrosnombre: number = 0;
   data_nombre: WritableSignal<RegistroAntecedentes[]> = signal([]);
 
@@ -230,28 +235,12 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
   }
 
   cargarPagina(event: any, tipoTabla: TipoTabla) {
-    console.log(event)
-    const nuevaPagina = event.page - 1;
-    const nuevoTamanio = event.rows;
-
     if (tipoTabla === TipoTabla.NSS) {
-      if (this.paginaActualNss !== nuevaPagina || this.registrosPorPaginaNss !== nuevoTamanio) {
-        this.paginaActualNss = nuevaPagina;
-        this.registrosPorPaginaNss = nuevoTamanio;
-        this.paginar();
-      }
-    } else if (tipoTabla === TipoTabla.NOMBRE) {
-      this.paginaActualNombre = nuevaPagina;
-      this.registrosPorPaginaNombre = nuevoTamanio;
-
-      const tipoConsultaActual = this.filtroForm.get('tipoconsulta')?.value;
-
-      if (tipoConsultaActual === 3) {
-        // PAGINADO MANUAL: No llamar al server, solo cortar el array
-        this.actualizarPaginaNombreLocal();
-      } else {
-        this.paginar(); // Caso 2 normal: va al servidor
-      }
+      this.registrosPorPaginaNss = event.rows;
+      this.paginar(event.page - 1, undefined, true);
+    } else {
+      this.registrosPorPaginaNombre = event.rows;
+      this.paginar(undefined, event.page - 1, true);
     }
   }
 
@@ -282,7 +271,6 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
   cambiarEstado(registro: RegistroAntecedentes): void {
 
     const key = this.obtenerIdentificador(registro);
-
     if (registro.indAsociado) {
       this.solicitudAntecedentesService.agregar(
         key,
@@ -349,135 +337,84 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
 
   }
 
-  paginar(paginaNss?: number, paginaNombre?: number): void {
+  paginar(paginaNss: number | undefined, paginaNombre: number | undefined, consultaLocal: boolean = false): void {
     const tipoConsultaActual = this.filtroForm.get('tipoconsulta')?.value;
 
-    if (paginaNss !== undefined) {
-      this.paginaActualNss = paginaNss;
-      if (tipoConsultaActual === 1 || tipoConsultaActual === 3) {
-        this.paginaActualNombre = 0;
-      }
-    }
-    if (paginaNombre !== undefined) {
-      this.paginaActualNombre = paginaNombre;
-      if (tipoConsultaActual === 2 || tipoConsultaActual === 3) {
-        this.paginaActualNss = 0;
-      }
-    }
-
-    const pagNss = paginaNss !== undefined ? paginaNss : this.paginaActualNss;
-    const pagNombre = paginaNombre !== undefined ? paginaNombre : this.paginaActualNombre;
-
-    if (this.filtroForm.invalid) {
-      this._alertServices.informacion('Debe completar los campos requeridos para realizar la búsqueda.');
+    // CASO A: Navegación entre páginas (Manual/Local)
+    if (![undefined, 0].includes(paginaNss) || ![undefined, 0].includes(paginaNombre) || consultaLocal) {
+      if (paginaNss !== undefined) this.paginaActualNss = paginaNss;
+      if (paginaNombre !== undefined) this.paginaActualNombre = paginaNombre;
+      this.renderizarPaginasActuales();
       return;
     }
 
-    const filtros: FiltrosAntecedentes = {
-      amaterno: this.filtroForm.get('amaterno')?.value,
-      apaterno: this.filtroForm.get('apaterno')?.value,
-      nombre: this.filtroForm.get('nombre')?.value,
-      nss: this.filtroForm.get('nss')?.value,
-      tipoconsulta: this.filtroForm.get('tipoconsulta')?.value
+    // CASO B: Búsqueda inicial (Petición al Servidor)
+    if (this.filtroForm.invalid) {
+      this._alertServices.informacion('Debe completar los campos requeridos.');
+      return;
     }
 
-    this.busquedaStateService.guardarFiltrosAntecedentes(filtros);
+    const filtros = this.obtenerFiltrosNormalizados();
+    let obs$: Observable<RespuestaInternaAntecedentes>;
 
-    this.actualizarTitulosTabla(tipoConsultaActual);
-
-    // Definir los observables de búsqueda necesarios
-    let listObservableNss: Observable<any> = of({
-      content: [],
-      page: {size: 0, number: 0, totalElements: 0, totalPages: 0}
-    });
-    let listObservableNombre: Observable<any> = of({
-      content: [],
-      page: {size: 0, number: 0, totalElements: 0, totalPages: 0}
-    });
-    const solicitud: SolicitudBusquedaPaginado = this.generarSolicitudAntecedentes();
-    const tipoConsulta = [1, 2].includes(tipoConsultaActual) ? tipoConsultaActual : null;
-    let totalObservable: Observable<TotalesAntecedentes> = this.antecedentesService.getTotalAntecedentes(solicitud, tipoConsulta);
-
-    // --- Lógica de bifurcación de búsqueda ---
-
-    if (tipoConsultaActual === 1 || tipoConsultaActual === 3) {
-      const solicitudNss: SolicitudBusquedaPaginado = this.generarSolicitudAntecedentesNSS();
-      listObservableNss = this.antecedentesService.getLstAntecedentes(this.registrosPorPaginaNss, pagNss, solicitudNss, 1);
+    switch (tipoConsultaActual) {
+      case 1: // NSS
+        obs$ = this.antecedentesService.getLstAntecedentesByNSS(filtros.nss);
+        break;
+      case 2: // Nombre
+        obs$ = this.antecedentesService.getLstAntecedentesByNombre({
+          nombre: filtros.nombre,
+          apPaterno: filtros.apPaterno,
+          apMaterno: filtros.apMaterno
+        });
+        break;
+      case 3: // Ambos
+        obs$ = this.antecedentesService.getLstAntecedentesByAmbos({
+          nss: filtros.nss,
+          nombre: filtros.nombre,
+          apPaterno: filtros.apPaterno,
+          apMaterno: filtros.apMaterno
+        });
+        break;
+      default:
+        return;
     }
 
-    if (tipoConsultaActual === 2 || tipoConsultaActual === 3) {
-      const solicitudNombre: SolicitudBusquedaPaginado = this.generarSolicitudAntecedentesNombre();
-      listObservableNombre = this.antecedentesService.getLstAntecedentes(this.registrosPorPaginaNombre, pagNombre, solicitudNombre, 2);
-    }
+    obs$.subscribe({
+      next: (res) => {
+        // Guardar data completa mapeada
+        this.dataNssCompleta = (res.listaPorNss || []).map(i => this.mapearRespuesta(i));
+        this.dataNombreCompleta = (res.listaPorNombre || []).map(i => this.mapearRespuesta(i));
 
-    // --- Ejecución de las búsquedas paralelas ---
+        // Calcular totales internamente
+        this.totalAntecedentes = this.calcularTotalesManuales(this.dataNssCompleta, this.dataNombreCompleta);
 
-    const sizeNombre = tipoConsultaActual === 3 ? 100 : this.registrosPorPaginaNombre;
+        // Resetear paginación
+        this.totalregistros = this.dataNssCompleta.length;
+        this.totalregistrosnombre = this.dataNombreCompleta.length;
+        this.paginaActualNss = 0;
+        this.paginaActualNombre = 0;
 
-    forkJoin([
-      listObservableNss,
-      listObservableNombre,
-      totalObservable
-    ]).subscribe({
-      next: ([dataNss, dataNombre, totalResponse]) => {
+        // Mostrar resultados
+        this.renderizarPaginasActuales();
         this.obtenerFechasCorte();
-        this.idsCargadosNSS.clear(); // Limpiar rastro de duplicados
-
-        // Limpieza de datos si el criterio no aplica
-        if (tipoConsultaActual === 1 || tipoConsultaActual === 3) {
-          const contentNss = dataNss.busquedaAntecedentesAgrupacionDtos.content || [];
-          const procesadosNss = contentNss.map((row: any) => {
-            const key = this.obtenerIdentificador(row);
-            this.idsCargadosNSS.add(key); // Registrar ID
-            return {...row, key};
-          });
-
-          this.data.set(this.sincronizarEstado(procesadosNss));
-          this.totalregistros = dataNss.busquedaAntecedentesAgrupacionDtos.page.totalElements;
-
-        } else {
-          this.data.set([]);
-          this.totalregistros = 0;
-        }
-
-        if (tipoConsultaActual === 2 || tipoConsultaActual === 3) {
-          const rawNombre = dataNombre.busquedaAntecedentesAgrupacionDtos.content || [];
-
-          // Filtrar registros que ya existen en la tabla NSS
-          const filtrados = rawNombre
-            .map((row: any) => ({...row, key: this.obtenerIdentificador(row)}))
-            .filter((row: any) => !this.idsCargadosNSS.has(row.key));
-
-          if (tipoConsultaActual === 3) {
-            // Guardar para paginado manual
-            this.dataNombreCompleta = filtrados;
-            this.totalregistrosnombre = filtrados.length;
-            this.actualizarPaginaNombreLocal();
-          } else {
-            // Paginado normal de backend
-            this.data_nombre.set(this.sincronizarEstado(filtrados));
-            this.totalregistrosnombre = dataNombre.busquedaAntecedentesAgrupacionDtos.page.totalElements;
-          }
-        } else {
-          this.data_nombre.set([]);
-          this.totalregistrosnombre = 0;
-        }
-
-        this.totalAntecedentes = totalResponse;
 
         if (this.totalregistros === 0 && this.totalregistrosnombre === 0) {
-          this._alertServices.informacion('No se encontraron antecedentes con los criterios seleccionados.');
+          this._alertServices.informacion('No se encontraron resultados.');
         }
       },
-      error: (error) => {
-        this._alertServices.error('Ocurrió un error al obtener los antecedentes.');
-        console.error('Error al paginar/obtener totales:', error);
-        this.data.set([]);
-        this.data_nombre.set([]);
-        this.totalregistros = 0;
-        this.totalregistrosnombre = 0;
-      }
+      error: () => this._alertServices.error('Error al consultar antecedentes.')
     });
+  }
+
+  private obtenerFiltrosNormalizados() {
+    const f = this.filtroForm.getRawValue();
+    return {
+      nss: f.nss?.trim(),
+      nombre: f.nombre?.trim().toUpperCase(),
+      apPaterno: f.apaterno?.trim().toUpperCase(),
+      apMaterno: f.amaterno?.trim().toUpperCase() || ''
+    };
   }
 
   generarSolicitudAntecedentes(): SolicitudBusquedaPaginado {
@@ -620,7 +557,6 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
   }
 
   generarObjReporteAntecedentes(): ReporteAntecedentes {
-
     return {
       tipoBusqueda: null,
       nombre: "",
@@ -638,11 +574,75 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
     }
   }
 
-  actualizarPaginaNombreLocal(): void {
-    const inicio = this.paginaActualNombre * this.registrosPorPaginaNombre;
-    const fin = inicio + this.registrosPorPaginaNombre;
+  private mapearRespuesta(item: RegistroInternoAntecedentes): RegistroAntecedentes {
+    return {
+      idBitacoraAsociacion: null,
+      indAsociado: false,
+      idPersona: item.numId.toString(),
+      nss: item.nss,
+      nombre: item.nombre,
+      apellidoPaterno: item.apellidoPaterno,
+      apellidoMaterno: item.apellidoMaterno,
+      expediente: '',
+      gestion: item.totalesProcedimiento.Gestion || 0,
+      quejaMedica: item.totalesProcedimiento["Queja de servicio"] || 0,
+      inconformidades: item.totalesProcedimiento.IC || 0,
+      amparoIndirecto: item.totalesProcedimiento.MAI || 0,
+      procedimientoRpe: item.totalesProcedimiento.RP || 0,
+      juicioContencioso: item.totalesProcedimiento.JF || 0,
+    };
+  }
 
-    const pagina = this.dataNombreCompleta.slice(inicio, fin);
-    this.data_nombre.set(this.sincronizarEstado(pagina));
+  private renderizarPaginasActuales(): void {
+    // Slice para tabla NSS
+    const startNss = this.paginaActualNss * this.registrosPorPaginaNss;
+    let endNss = startNss + this.registrosPorPaginaNss;
+    endNss = endNss > this.totalregistros ? this.totalregistros - 1 : endNss - 1;
+    this.data.set(this.sincronizarEstado(this.dataNssCompleta.slice(startNss, endNss)));
+
+    // Slice para tabla Nombre
+    const startNom = this.paginaActualNombre * this.registrosPorPaginaNombre;
+    let endNom = startNom + this.registrosPorPaginaNombre;
+    endNom = endNom > this.totalregistrosnombre ? this.totalregistrosnombre - 1 : endNom - 1;
+    this.data_nombre.set(this.sincronizarEstado(this.dataNombreCompleta.slice(startNom, endNom)));
+  }
+
+  private calcularTotalesManuales(listaNss: RegistroAntecedentes[], listaNombre: RegistroAntecedentes[]): TotalesAntecedentes {
+    // Estructura inicial con acumuladores en 0
+    const totales: TotalesAntecedentes = {
+      totalPorTipo: {
+        procedimientoRpe: 0,
+        juicioContencioso: 0,
+        inconformidad: 0,
+        quejaMedica: 0,
+        amparoIndirecto: 0,
+        gestion: 0
+      },
+      totalAsociadosPorTipo: {
+        procedimientoRpe: 0,
+        juicioContencioso: 0,
+        inconformidad: 0,
+        quejaMedica: 0,
+        amparoIndirecto: 0,
+        gestion: 0
+      }
+    };
+
+    const todas = [...listaNss, ...listaNombre];
+    const totalRegistros = todas.length;
+
+    for (let i = 0; i < totalRegistros; i++) {
+      const registro = todas[i];
+      const t = totales.totalPorTipo;
+
+      t.procedimientoRpe += registro.procedimientoRpe || 0;
+      t.juicioContencioso += registro.juicioContencioso || 0;
+      t.inconformidad += registro.inconformidades || 0;
+      t.quejaMedica += registro.quejaMedica || 0;
+      t.amparoIndirecto += registro.amparoIndirecto || 0;
+      t.gestion += registro.gestion || 0;
+    }
+
+    return totales;
   }
 }
