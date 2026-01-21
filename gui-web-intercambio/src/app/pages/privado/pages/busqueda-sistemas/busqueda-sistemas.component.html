@@ -85,7 +85,7 @@
             <div ngbAccordionBody style="padding: 0">
               <div class="my-4"></div>
               <app-tabla-principal
-                [titulo]="consulta.tituloCompleto"
+                [titulo]="'Busqueda por ' + consulta.tituloCompleto"
                 [showTitulo]="false"
                 [data]="consulta.data()"
                 [tipoBusqueda]="consulta.tipo"

@@ -17,24 +17,28 @@ import {mapearArregloTipoDropdown} from '@utils/funciones';
 import {ResultadoConsulta} from '../../../../core/interfaces/resultado-consulta.interface';
 import {TotalesAntecedentes} from '../../../../core/interfaces/totales-antecedentes.interface';
 import {SolicitudAntecedentes} from '../../../../core/interfaces/solicitud-antecedentes.interface';
-import {Observable} from 'rxjs';
 import {TablaPrincipalComponent} from '@pages/privado/shared/tabla-principal/tabla-principal.component';
 import {ActivatedRoute} from '@angular/router';
 import {SolicitudAsociacion} from '../../../../core/interfaces/solicitud-asociacion.interface';
-import {BusquedaStateService, FiltrosBusqueda} from '@services/busqueda-state.service';
+import {BusquedaStateService} from '@services/busqueda-state.service';
 import {HttpErrorResponse} from '@angular/common/http';
 import {RegistroAntecedentes} from '../../../../core/interfaces/registro-antecedentes.interface';
 import {ManejoSolicitudAntecedentesService} from '@services/manejo-solicitud-antecedentes.service';
 import {SolicitudBitacora} from '../../../../core/interfaces/solicitud-bitacora.inerface';
 import {DetalleAntecedentes} from '@models/detalleAntecedentes.interface';
 import {DetalleAntecedentesService} from '@services/detalle-antecedentes.service';
-import {SolicitudBusquedaPaginado} from '../../../../core/interfaces/solicitud-busqueda-antecedentes.interface';
+import {
+  NuevaPersona,
+  NuevaSolicitudBusquedaPaginado,
+  SolicitudBusquedaPaginado
+} from '../../../../core/interfaces/solicitud-busqueda-antecedentes.interface';
 import {ConsultaDescifrada} from '../../../../core/interfaces/consulta-descifrada.interface';
 import {NombreTipoDropdown} from '../../../../core/interfaces/nombre-tipo-dropdown.interface';
 import {ReporteAntecedentes} from '@models/reporteAntecedentes.interface';
 import {CryptoService} from '@services/crypto.service';
 import {ParamsAsociacion} from '../../../../core/interfaces/params-asociacion.interface';
 import {environment} from '@env/environment.development';
+import {RespuestaAntecedentes, TotalAntecedentes} from '../../../../core/interfaces/respuesta-antecedentes.interface';
 
 enum TipoTabla {
   NSS = '1',
@@ -85,8 +89,6 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
   };
 
   REF_SISTEMA!: ConsultaDescifrada;
-
-  private idsCargadosNSS = new Set<string | number>();
 
   constructor(private readonly fb: FormBuilder,
               private readonly route: ActivatedRoute,
@@ -153,7 +155,6 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
 
   async obtenerExpediente() {
     try {
-      // IMPORTANTE: Añadir 'await' aquí
       this.REF_SISTEMA = await this.cifradoService.decryptToObject<any>(
         this.cifrado,
         environment.key.AES_KEY_BASE64
@@ -176,7 +177,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
     });
     this.nombresSolicitud = [...this.nombresSolicitud].filter(nombre => !!nombre.nom_nombre_afectado);
     this.nss = mapearArregloTipoDropdown(this.REF_SISTEMA.personas, 'cve_nss', 'cve_nss');
-    this.nss = [... this.nss].filter(nss => !!nss.value);
+    this.nss = [...this.nss].filter(nss => !!nss.value);
   }
 
   ngOnInit(): void {
@@ -190,187 +191,115 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
     this.iniciarBusqueda();
   }
 
+  generarNuevaSolicitud(tipoConsulta: number, valor: any): NuevaSolicitudBusquedaPaginado {
+    let personas: NuevaPersona[] = [];
+
+    if (this.consulta_todos) {
+      // Caso Expediente: Enviamos todos los NSS y todos los Nombres
+      const nssPersonas = this.nss.map(n => ({
+        nss: n.value as string,
+        nombre: null,
+        apellidoPaterno: null,
+        apellidoMaterno: null
+      }));
+      const nombrePersonas = this.nombresSolicitud.map(n => ({
+        nss: null,
+        nombre: n.nom_nombre_afectado,
+        apellidoPaterno: n.nom_apellido_paterno_afectado,
+        apellidoMaterno: n.nom_apellido_materno_afectado
+      }));
+      personas = [...nssPersonas, ...nombrePersonas];
+    } else if (tipoConsulta === 1) {
+      // Caso NSS único
+      personas = [{nss: valor, nombre: null, apellidoPaterno: null, apellidoMaterno: null}];
+    } else {
+      // Caso Nombre único
+      personas = [{
+        nss: null,
+        nombre: valor.nom_nombre_afectado,
+        apellidoPaterno: valor.nom_apellido_paterno_afectado,
+        apellidoMaterno: valor.nom_apellido_materno_afectado
+      }];
+    }
+
+    return {
+      personas,
+      expediente: this.REF_SISTEMA.expediente,
+      ooad_UMAE: this.REF_SISTEMA.ooad_UMAE,
+      usuarioLogueado: this.REF_SISTEMA.usuarioLogueado,
+      sistema: this.REF_SISTEMA.sistema,
+      modulo: this.REF_SISTEMA.modulo
+    };
+  }
+
   iniciarBusqueda(): void {
     const tipoConsulta = this.filtroForm.get('filtro')?.value;
     const valor = this.filtroForm.get('valor')?.value;
-    this.idsCargadosNSS.clear();
-
-    const filtros: FiltrosBusqueda = {
-      filtro: tipoConsulta,
-      valor: valor,
-      consulta_todos: this.consulta_todos
-    };
-
 
     if (this.filtroForm.invalid && !this.consulta_todos) {
       this._alertServices.informacion('Debe seleccionar el filtro y proporcionar el valor de búsqueda.');
       return;
     }
 
-    this.busquedaStateService.guardarFiltros(filtros);
+    this.configurarEstructuraTablas(tipoConsulta, valor);
 
-    // Limpiar consultas y totales anteriores
-    this.consultas = [];
-    this.totalAntecedentes = null as any;
+    const solicitud = this.generarNuevaSolicitud(tipoConsulta, valor);
 
-    // Construir las estructuras ResultadoConsulta necesarias
+    this.antecedentesService.getLstAntecedentesGeneral(solicitud).subscribe({
+      next: (res: RespuestaAntecedentes) => {
+        this.totalAntecedentes = this.ajustarTotales(res.totalesGenerales);
 
-    if (tipoConsulta === 1) { // Caso 1: Búsqueda por NSS (solo tabla NSS)
-      this.consulta_todos = false;
-      this.consultas.push({
-        tipo: TipoTabla.NSS,
-        tituloBase: 'Resultados por NSS',
-        tituloCompleto: `Resultados por NSS: ${valor}`,
-        data: signal([]),
-        paginaActual: 0,
-        registrosPorPagina: 10,
-        totalRegistros: 0,
-        valorBusqueda: valor,
-        esPaginadoManual: false
-      });
+        // Repartir datos a cada tabla y realizar el primer slice local
+        this.consultas.forEach(consulta => {
 
-      this.ejecutarConsulta(0);
-      this.obtenerFechasCorte();
+          let rawItems: any[] = [];
+          if (consulta.tipo === TipoTabla.NSS) {
+            rawItems = res.resultadosPorNss[consulta.valorBusqueda as string] || [];
+          } else {
+            const key = (consulta.valorBusqueda as NombreTipoDropdown).nombreCompleto;
+            rawItems = res.resultadosPorNombre[key] || [];
+          }
 
-    }
+          const itemsMapeados: RegistroAntecedentes[] = rawItems.map(item => ({
+            idBitacoraAsociacion: item.idBitacoraAsociacion || null,
+            indAsociado: item.indAsociado || false,
+            idPersona: String(item.numId || item.idPersona), // Asegurar que sea string
+            nss: item.nss,
+            nombre: item.nombre,
+            expediente: item.expediente || this.REF_SISTEMA.expediente,
+            apellidoPaterno: item.apellidoPaterno,
+            apellidoMaterno: item.apellidoMaterno,
+            // Mapeo de los totales que vienen del objeto 'totalesProcedimiento' del JSON original
+            gestion: item.totalesProcedimiento?.gestion || 0,
+            quejaMedica: item.totalesProcedimiento?.queja_de_servicio || 0,
+            amparoIndirecto: item.totalesProcedimiento?.mai || 0,
+            juicioContencioso: item.totalesProcedimiento?.jf || 0,
+            inconformidades: item.totalesProcedimiento?.ic || 0,
+            procedimientoRpe: item.totalesProcedimiento?.rp || 0
+          }));
 
-    if (tipoConsulta === 2) { // Caso 2: Búsqueda por Nombre (solo tabla Nombre)
-      this.consulta_todos = false;
-      this.consultas.push({
-        tipo: TipoTabla.NOMBRE,
-        tituloBase: 'Resultados por Nombre y Apellidos',
-        tituloCompleto: `Resultados por Nombre y Apellidos: ${valor.nombreCompleto}`,
-        data: signal([]),
-        paginaActual: 0,
-        registrosPorPagina: 10,
-        totalRegistros: 0,
-        valorBusqueda: valor,
-        esPaginadoManual: false
-      });
+          consulta.datosCompletos = itemsMapeados;
+          consulta.totalRegistros = itemsMapeados.length;
+          this.actualizarPaginaLocal(this.consultas.indexOf(consulta));
+        });
 
-      this.ejecutarConsulta(0);
-      this.obtenerFechasCorte()
-    }
-
-    if (![1, 2].includes(tipoConsulta) && this.consulta_todos) { // Caso 4: Expediente (tablas NSS y Nombre)
-
-      // Creamos la tabla de NSS para el Expediente
-      const nss = this.nss.map((nss) => ({
-        tipo: TipoTabla.NSS,
-        tituloBase: 'Resultados NSS por Expediente',
-        tituloCompleto: `Resultados NSS por Expediente: ${nss.value}`,
-        data: signal([]),
-        paginaActual: 0,
-        registrosPorPagina: 10,
-        totalRegistros: 0,
-        valorBusqueda: nss.value as string,
-        esPaginadoManual: false
-      }));
-
-      // Creamos la tabla de Nombre para el Expediente
-      const nombres = this.nombresSolicitud.map((valor) => ({
-        tipo: TipoTabla.NOMBRE,
-        tituloBase: 'Resultados Nombre por Expediente',
-        tituloCompleto: `Resultados Nombre por Expediente: ${valor.nombreCompleto}`,
-        data: signal([]),
-        paginaActual: 0,
-        registrosPorPagina: 10,
-        totalRegistros: 0,
-        valorBusqueda: valor,
-        esPaginadoManual: true,
-        datosCompletosFiltrados: [],
-      }));
-
-
-      this.consultas = [...nss, ...nombres];
-
-      this.obtenerDatosExpediente();
-    }
-
-    this.ejecutarConsultaTotal();
-
-  }
-
-  ejecutarConsulta(index: number): void {
-    const consulta: ResultadoConsulta = this.consultas[index];
-    if (!consulta) return;
-
-    const label: string = (typeof consulta.valorBusqueda === 'string') ? consulta.valorBusqueda : consulta.valorBusqueda.nombreCompleto;
-
-    // Actualizar título
-    consulta.tituloCompleto = `${consulta.tituloBase}: ${label || 'Expediente'}`;
-
-    // Preparar la solicitud específica (NSS o Nombre)
-    let solicitud: SolicitudBusquedaPaginado;
-    if (consulta.tipo === TipoTabla.NSS) {
-      solicitud = this.generarSolicitudAntecedentesNSS(consulta.valorBusqueda as string);
-    } else { // TipoTabla.NOMBRE
-      solicitud = this.generarSolicitudAntecedentesNombre(consulta.valorBusqueda);
-    }
-
-    const tipoConsulta = consulta.tipo === TipoTabla.NSS ? 1 : 2;
-
-    // Petición de Listado
-    const listObservable: Observable<any> = this.antecedentesService.getLstAntecedentes(
-      consulta.esPaginadoManual ? 100 : consulta.registrosPorPagina,
-      consulta.paginaActual,
-      solicitud,
-      tipoConsulta
-    );
-
-    // Solo se suscribe al listado, ya que el total es independiente (abajo)
-    listObservable.subscribe({
-      next: (dataResponse) => {
-        let content = dataResponse.busquedaAntecedentesAgrupacionDtos.content || [];
-        const idNss = dataResponse.idNss || [];
-
-        if (consulta.tipo === TipoTabla.NSS) {
-          // Guardar IDs encontrados por NSS para referencia
-          idNss.forEach((id: any) => this.idsCargadosNSS.add(id));
-        } else if (consulta.tipo === TipoTabla.NOMBRE && this.consulta_todos) {
-          // FILTRAR DUPLICADOS: Si el ID ya fue cargado por una tabla NSS, lo quitamos
-          content = content.filter((r: any) => !this.idsCargadosNSS.has(r.idPersona));
-        }
-
-        const sincronizados = this.sincronizarEstado(content);
-        const finalData = sincronizados.map((row: RegistroAntecedentes) => ({
-          ...row,
-          key: row.idPersona
-        }));
-
-        // Si es manual, aquí harías el slice para tu tabla local (0, 10)
-        if (consulta.esPaginadoManual) {
-          const filtrados = content.filter((r: any) => !this.idsCargadosNSS.has(r.id));
-          consulta.datosCompletosFiltrados = filtrados;
-          consulta.totalRegistros = filtrados.length;
-
-          consulta.data.set(finalData.slice(0, 10));
-          consulta.totalRegistros = finalData.length;
-        } else {
-          consulta.data.set(finalData);
-          consulta.totalRegistros = dataResponse.busquedaAntecedentesAgrupacionDtos.page.totalElements || 0;
-        }
+        this.obtenerFechasCorte();
       },
-      error: (error) => {
-        this._alertServices.error(`Error al obtener resultados por ${consulta.tipo}.`);
-        console.error(error);
-        consulta.data.set([]);
-        consulta.totalRegistros = 0;
-      }
+      error: () => this._alertServices.error('Error al obtener antecedentes')
     });
-
   }
 
-  obtenerDatosExpediente(): void {
-    this.consultas.forEach((_, index) => {
-      this.ejecutarConsulta(index);
-    });
+  actualizarPaginaLocal(index: number): void {
+    const c = this.consultas[index];
 
-    if (this.consultas.length === 0) {
-      this._alertServices.informacion('El expediente no tiene NSS ni Nombres asociados para generar consultas.');
-    } else {
-      this.obtenerFechasCorte();
-    }
+    const inicio = c.paginaActual * c.registrosPorPagina;
+    const fin = inicio + c.registrosPorPagina;
+
+    const segmentacion = (c.datosCompletos || []).slice(inicio, fin);
+
+    const datosSincronizados = this.sincronizarEstado(segmentacion);
+
+    c.data.set(datosSincronizados);
   }
 
   generarSolicitudAntecedentesNombre(valor: any): SolicitudBusquedaPaginado {
@@ -410,18 +339,14 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
     }
   }
 
-  cargarPagina(event: any, index: number) {
+  cargarPagina(event: any, index: number): void {
     const consulta = this.consultas[index];
-    const nuevaPagina = event.page - 1;
 
-    if (consulta.esPaginadoManual) {
-      consulta.paginaActual = nuevaPagina;
+    if (consulta) {
+      consulta.paginaActual = event.page;
+      consulta.registrosPorPagina = event.rows;
+
       this.actualizarPaginaLocal(index);
-      return;
-    }
-    if (consulta && (consulta.paginaActual !== nuevaPagina)) {
-      consulta.paginaActual = nuevaPagina;
-      this.ejecutarConsulta(index); // Ejecuta la búsqueda para esta consulta
     }
   }
 
@@ -458,22 +383,6 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
     } else {
       this.solicitudAntecedentesService.eliminar(row.idPersona);
     }
-  }
-
-  ejecutarConsultaTotal(): void {
-    const solicitudTotal: SolicitudAntecedentes | SolicitudBusquedaPaginado = this.generarSolicitudAntecedentesTotal();
-    const tipoConsulta = this.filtroForm.get('filtro')?.value;
-
-    this.antecedentesService.getTotalAntecedentes(solicitudTotal, tipoConsulta).subscribe({
-      next: (totalResponse) => {
-        this.totalAntecedentes = totalResponse;
-      },
-      error: (error) => {
-        this._alertServices.error('Ocurrió un error al obtener los totales de antecedentes.');
-        console.error('Error al obtener totales:', error);
-        this.totalAntecedentes = null as any;
-      }
-    });
   }
 
   generarSolicitudAntecedentesTotal(): SolicitudAntecedentes | SolicitudBusquedaPaginado {
@@ -522,7 +431,6 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
         this.solicitudAntecedentesService.limpiar();
 
         this.consultas.forEach((_, index) => {
-          this.ejecutarConsulta(index);
         });
 
       },
@@ -631,17 +539,6 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
     }
   }
 
-  actualizarPaginaLocal(index: number): void {
-    const consulta = this.consultas[index];
-    const inicio = consulta.paginaActual * consulta.registrosPorPagina;
-    const fin = inicio + consulta.registrosPorPagina;
-
-    if (!consulta.datosCompletosFiltrados) return;
-    const paginados = consulta.datosCompletosFiltrados.slice(inicio, fin);
-
-    consulta.data.set(this.sincronizarEstado(paginados));
-  }
-
   guardarEnSSCV1(): void {
     const consulta = {
       expediente: this.REF_SISTEMA.expediente,
@@ -651,16 +548,67 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
     }
     this.antecedentesService.actualizarSSCV1(consulta).subscribe({
       next: (response) => {
-          if (response) {
-            console.log('Actualizado correctamente SSCV1');
-          } else {
-            console.log('Error', consulta);
-          }
+        if (response) {
+          console.log('Actualizado correctamente SSCV1');
+        } else {
+          console.log('Error', consulta);
+        }
       },
       error: (error) => {
         console.error(error);
       }
     })
+  }
+
+  configurarEstructuraTablas(tipo: number, valor: any): void {
+    this.consultas = [];
+
+    if (this.consulta_todos) {
+      // Tablas de NSS
+      this.nss.forEach(n => this.consultas.push(this.crearObjetoConsulta(TipoTabla.NSS, n.value as string)));
+      // Tablas de Nombre
+      this.nombresSolicitud.forEach(nom => this.consultas.push(this.crearObjetoConsulta(TipoTabla.NOMBRE, nom)));
+    } else {
+      this.consultas.push(this.crearObjetoConsulta(tipo === 1 ? TipoTabla.NSS : TipoTabla.NOMBRE, valor));
+    }
+  }
+
+  private crearObjetoConsulta(tipo: TipoTabla, valor: any): ResultadoConsulta {
+    const label = tipo === TipoTabla.NSS ? valor : valor.nombreCompleto;
+    return {
+      tipo,
+      tituloBase: tipo === TipoTabla.NSS ? 'Resultados por NSS' : 'Resultados por Nombre',
+      tituloCompleto: `${tipo === TipoTabla.NSS ? 'NSS' : 'Nombre'}: ${label}`,
+      data: signal([]),
+      paginaActual: 0,
+      registrosPorPagina: 10,
+      totalRegistros: 0,
+      valorBusqueda: valor,
+      datosCompletos: []
+    };
+  }
+
+
+  private ajustarTotales(totales: TotalAntecedentes): TotalesAntecedentes {
+    // Estructura inicial con acumuladores en 0
+    return {
+      totalPorTipo: {
+        procedimientoRpe: totales.rp,
+        juicioContencioso: totales.jf,
+        inconformidad: totales.ic,
+        quejaMedica: totales.queja_de_servicio,
+        amparoIndirecto: totales.mai,
+        gestion: totales.gestion
+      },
+      totalAsociadosPorTipo: {
+        procedimientoRpe: 0,
+        juicioContencioso: 0,
+        inconformidad: 0,
+        quejaMedica: 0,
+        amparoIndirecto: 0,
+        gestion: 0
+      }
+    };
   }
 
   get puedeGuardar() {

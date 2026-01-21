@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="correccion para sscv1 -&lt; pruebas">
+    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="modificaciones de busqueda de sistemas">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,25 +51,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "git-widget-placeholder": "dev__eduardo__totales",
-    "javascript.preferred.runtime.type.id": "node",
-    "last_opened_file_path": "C:/Users/epgomez/Documents/gui-web-intercambio-informacion",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "ts.external.directory.path": "C:\\Users\\epgomez\\Documents\\gui-web-intercambio-informacion\\gui-web-intercambio\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;dev__eduardo__totales&quot;,
+    &quot;javascript.preferred.runtime.type.id&quot;: &quot;node&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/epgomez/Documents/gui-web-intercambio-informacion&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\epgomez\\Documents\\gui-web-intercambio-informacion\\gui-web-intercambio\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -95,63 +95,7 @@
       <workItem from="1767111634106" duration="669000" />
       <workItem from="1767118150936" duration="3257000" />
       <workItem from="1767891732696" duration="7482000" />
-      <workItem from="1767937805716" duration="105338000" />
-    </task>
-    <task id="LOCAL-00067" summary="servicio de cifrado">
-      <option name="closed" value="true" />
-      <created>1768097370233</created>
-      <option name="number" value="00067" />
-      <option name="presentableId" value="LOCAL-00067" />
-      <option name="project" value="LOCAL" />
-      <updated>1768097370233</updated>
-    </task>
-    <task id="LOCAL-00068" summary="servicio de cifrado">
-      <option name="closed" value="true" />
-      <created>1768097889337</created>
-      <option name="number" value="00068" />
-      <option name="presentableId" value="LOCAL-00068" />
-      <option name="project" value="LOCAL" />
-      <updated>1768097889337</updated>
-    </task>
-    <task id="LOCAL-00069" summary="redirección por url cifrada">
-      <option name="closed" value="true" />
-      <created>1768105834765</created>
-      <option name="number" value="00069" />
-      <option name="presentableId" value="LOCAL-00069" />
-      <option name="project" value="LOCAL" />
-      <updated>1768105834765</updated>
-    </task>
-    <task id="LOCAL-00070" summary="ajustes para recuperar consultas">
-      <option name="closed" value="true" />
-      <created>1768106837127</created>
-      <option name="number" value="00070" />
-      <option name="presentableId" value="LOCAL-00070" />
-      <option name="project" value="LOCAL" />
-      <updated>1768106837127</updated>
-    </task>
-    <task id="LOCAL-00071" summary="ajustes para lectura de datos del usuario por URL">
-      <option name="closed" value="true" />
-      <created>1768107704770</created>
-      <option name="number" value="00071" />
-      <option name="presentableId" value="LOCAL-00071" />
-      <option name="project" value="LOCAL" />
-      <updated>1768107704770</updated>
-    </task>
-    <task id="LOCAL-00072" summary="ajustes de busqueda interna -&gt; por nss">
-      <option name="closed" value="true" />
-      <created>1768110197883</created>
-      <option name="number" value="00072" />
-      <option name="presentableId" value="LOCAL-00072" />
-      <option name="project" value="LOCAL" />
-      <updated>1768110197884</updated>
-    </task>
-    <task id="LOCAL-00073" summary="ajustes de busqueda interna -&gt; por nombre">
-      <option name="closed" value="true" />
-      <created>1768110319468</created>
-      <option name="number" value="00073" />
-      <option name="presentableId" value="LOCAL-00073" />
-      <option name="project" value="LOCAL" />
-      <updated>1768110319468</updated>
+      <workItem from="1767937805716" duration="125067000" />
     </task>
     <task id="LOCAL-00074" summary="ajustes de busqueda interna -&gt; por nombre">
       <option name="closed" value="true" />
@@ -489,7 +433,63 @@
       <option name="project" value="LOCAL" />
       <updated>1768606199393</updated>
     </task>
-    <option name="localTasksCounter" value="116" />
+    <task id="LOCAL-00116" summary="correccion para sscv1 -&lt; revert comentarios">
+      <option name="closed" value="true" />
+      <created>1768607085043</created>
+      <option name="number" value="00116" />
+      <option name="presentableId" value="LOCAL-00116" />
+      <option name="project" value="LOCAL" />
+      <updated>1768607085043</updated>
+    </task>
+    <task id="LOCAL-00117" summary="modificaciones de respuesta, consulta servicios para peticiones internas">
+      <option name="closed" value="true" />
+      <created>1769011365920</created>
+      <option name="number" value="00117" />
+      <option name="presentableId" value="LOCAL-00117" />
+      <option name="project" value="LOCAL" />
+      <updated>1769011365920</updated>
+    </task>
+    <task id="LOCAL-00118" summary="modificaciones de paginado sin filtrar por id's">
+      <option name="closed" value="true" />
+      <created>1769017474396</created>
+      <option name="number" value="00118" />
+      <option name="presentableId" value="LOCAL-00118" />
+      <option name="project" value="LOCAL" />
+      <updated>1769017474396</updated>
+    </task>
+    <task id="LOCAL-00119" summary="correcciones de totales">
+      <option name="closed" value="true" />
+      <created>1769019038859</created>
+      <option name="number" value="00119" />
+      <option name="presentableId" value="LOCAL-00119" />
+      <option name="project" value="LOCAL" />
+      <updated>1769019038860</updated>
+    </task>
+    <task id="LOCAL-00120" summary="correcciones de css + totales">
+      <option name="closed" value="true" />
+      <created>1769031221427</created>
+      <option name="number" value="00120" />
+      <option name="presentableId" value="LOCAL-00120" />
+      <option name="project" value="LOCAL" />
+      <updated>1769031221427</updated>
+    </task>
+    <task id="LOCAL-00121" summary="ajustes para ejecutar nueva solicitud">
+      <option name="closed" value="true" />
+      <created>1769032046228</created>
+      <option name="number" value="00121" />
+      <option name="presentableId" value="LOCAL-00121" />
+      <option name="project" value="LOCAL" />
+      <updated>1769032046228</updated>
+    </task>
+    <task id="LOCAL-00122" summary="modificaciones de busqueda de sistemas">
+      <option name="closed" value="true" />
+      <created>1769036641743</created>
+      <option name="number" value="00122" />
+      <option name="presentableId" value="LOCAL-00122" />
+      <option name="project" value="LOCAL" />
+      <updated>1769036641743</updated>
+    </task>
+    <option name="localTasksCounter" value="123" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -507,13 +507,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="ajuste de id's" />
-    <MESSAGE value="consultas individuales -&gt; ajustes" />
-    <MESSAGE value="fechas corte -&gt; caso 3" />
-    <MESSAGE value="totales -&gt; caso 3" />
-    <MESSAGE value="correcciones de consulta" />
-    <MESSAGE value="ajuste de visibilidad de totales" />
-    <MESSAGE value="eliminacion de filtros" />
     <MESSAGE value="ajuste en totales" />
     <MESSAGE value="ajuste para nueva consulta detalle de registros" />
     <MESSAGE value="ajustes css para nueva consulta detalle de registros" />
@@ -532,6 +525,13 @@
     <MESSAGE value="cambio de variable a environment" />
     <MESSAGE value="correccion para sscv1" />
     <MESSAGE value="correccion para sscv1 -&lt; pruebas" />
-    <option name="LAST_COMMIT_MESSAGE" value="correccion para sscv1 -&lt; pruebas" />
+    <MESSAGE value="correccion para sscv1 -&lt; revert comentarios" />
+    <MESSAGE value="modificaciones de respuesta, consulta servicios para peticiones internas" />
+    <MESSAGE value="modificaciones de paginado sin filtrar por id's" />
+    <MESSAGE value="correcciones de totales" />
+    <MESSAGE value="correcciones de css + totales" />
+    <MESSAGE value="ajustes para ejecutar nueva solicitud" />
+    <MESSAGE value="modificaciones de busqueda de sistemas" />
+    <option name="LAST_COMMIT_MESSAGE" value="modificaciones de busqueda de sistemas" />
   </component>
 </project>
