@@ -14,26 +14,28 @@ import {SelectModule} from 'primeng/select';
 import {TableModule} from 'primeng/table';
 import {TIPO_CONSULTA_ANTECEDENTES} from '@utils/constants';
 import {filter} from 'rxjs/operators';
-import {SolicitudAntecedentes} from '../../../../core/interfaces/solicitud-antecedentes.interface';
 import {AntecedentesService} from '@services/antecedentes.service';
-import {forkJoin, Observable, of} from 'rxjs';
 import {TotalesAntecedentes} from '../../../../core/interfaces/totales-antecedentes.interface';
 import {RegistroAntecedentes} from '../../../../core/interfaces/registro-antecedentes.interface';
 import {SolicitudAsociacion} from '../../../../core/interfaces/solicitud-asociacion.interface';
 import {HttpErrorResponse} from '@angular/common/http';
 import {UserService} from '@services/user.service';
 import {SesionUser} from '@models/sesion-user.interface';
-import {BusquedaStateService, FiltrosAntecedentes} from '@services/busqueda-state.service';
+import {BusquedaStateService} from '@services/busqueda-state.service';
 import {ManejoSolicitudAntecedentesService} from '@services/manejo-solicitud-antecedentes.service';
 import {SolicitudBitacora} from '../../../../core/interfaces/solicitud-bitacora.inerface';
 import {DetalleAntecedentesService} from '@services/detalle-antecedentes.service';
 import {DetalleAntecedentes} from '@models/detalleAntecedentes.interface';
 import {ReporteAntecedentes} from '@models/reporteAntecedentes.interface';
-import {SolicitudBusquedaPaginado} from '../../../../core/interfaces/solicitud-busqueda-antecedentes.interface';
 import {
-  RegistroInternoAntecedentes,
-  RespuestaInternaAntecedentes, RespuestaTotales
-} from '../../../../core/interfaces/respuesta-interna-antecedentes.interface';
+  NuevaPersona,
+  NuevaSolicitudBusquedaPaginado,
+  SolicitudBusquedaPaginado
+} from '../../../../core/interfaces/solicitud-busqueda-antecedentes.interface';
+import {
+  NuevoRegistroAntecedentes,
+  RespuestaAntecedentes, TotalAntecedentes
+} from '../../../../core/interfaces/respuesta-antecedentes.interface';
 
 enum TipoTabla {
   NSS = '1',
@@ -107,8 +109,6 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
     expediente: '',
   };
 
-  objReporteAntecedentes!: ReporteAntecedentes;
-
   constructor(private fb: FormBuilder,
               private busquedaStateService: BusquedaStateService) {
     super();
@@ -134,9 +134,7 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
     this.recuperarUltimaBusqueda();
   }
 
-  private sincronizarEstado(
-    registros: RegistroAntecedentes[]
-  ): RegistroAntecedentes[] {
+  private sincronizarEstado(registros: RegistroAntecedentes[]): RegistroAntecedentes[] {
 
     return registros.map(r => {
       if (r.indAsociado && r.idBitacoraAsociacion) {
@@ -315,28 +313,27 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
     });
   }
 
-  actualizarTitulosTabla(tipoConsultaActual: number): void {
-    const nss = this.filtroForm.get('nss')?.value;
-    const nombreCompleto = this.generarNombre();
-
+  actualizarTitulosTabla(res: RespuestaAntecedentes): void {
     this.tituloTabla = this.tituloTablaBase;
     this.tituloTablanombre = this.tituloTablanombreBase;
 
-    // Concatena el valor de búsqueda al título
-    if ((tipoConsultaActual === 1 || tipoConsultaActual === 3) && nss) {
-      this.tituloTabla = `${this.tituloTablaBase}: ${nss}`;
+    // Extraer la llave del Record de NSS
+    const llavesNss = Object.keys(res.resultadosPorNss);
+    if (llavesNss.length > 0) {
+      // Tomamos la primera llave que representa el criterio de búsqueda
+      this.tituloTabla = `${this.tituloTablaBase}: ${llavesNss[0]}`;
     }
 
-    if ((tipoConsultaActual === 2 || tipoConsultaActual === 3) && nombreCompleto) {
-      this.tituloTablanombre = `${this.tituloTablanombreBase}: ${nombreCompleto}`;
+    // Extraer la llave del Record de Nombre
+    const llavesNombre = Object.keys(res.resultadosPorNombre);
+    if (llavesNombre.length > 0) {
+      this.tituloTablanombre = `${this.tituloTablanombreBase}: ${llavesNombre[0]}`;
     }
-
   }
 
   paginar(paginaNss: number | undefined, paginaNombre: number | undefined, consultaLocal: boolean = false): void {
-    const tipoConsultaActual = this.filtroForm.get('tipoconsulta')?.value;
 
-    // CASO A: Navegación entre páginas (Manual/Local)
+    // CASO A: Navegación Local
     if (![undefined, 0].includes(paginaNss) || ![undefined, 0].includes(paginaNombre) || consultaLocal) {
       if (paginaNss !== undefined) this.paginaActualNss = paginaNss;
       if (paginaNombre !== undefined) this.paginaActualNombre = paginaNombre;
@@ -344,54 +341,35 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
       return;
     }
 
-    // CASO B: Búsqueda inicial (Petición al Servidor)
+    // CASO B: Búsqueda inicial (Servicio Unificado)
     if (this.filtroForm.invalid) {
       this._alertServices.informacion('Debe completar los campos requeridos.');
       return;
     }
 
-    const filtros = this.obtenerFiltrosNormalizados();
-    let obs$: Observable<RespuestaInternaAntecedentes>;
+    const payload: NuevaSolicitudBusquedaPaginado = this.generarPayloadGeneral();
 
-    switch (tipoConsultaActual) {
-      case 1: // NSS
-        obs$ = this.antecedentesService.getLstAntecedentesByNSS(filtros.nss);
-        break;
-      case 2: // Nombre
-        obs$ = this.antecedentesService.getLstAntecedentesByNombre({
-          nombre: filtros.nombre,
-          apPaterno: filtros.apPaterno,
-          apMaterno: filtros.apMaterno
-        });
-        break;
-      case 3: // Ambos
-        obs$ = this.antecedentesService.getLstAntecedentesByAmbos({
-          nss: filtros.nss,
-          nombre: filtros.nombre,
-          apPaterno: filtros.apPaterno,
-          apMaterno: filtros.apMaterno
-        });
-        break;
-      default:
-        return;
-    }
+    this.antecedentesService.getLstAntecedentesGeneral(payload).subscribe({
+      next: (res: RespuestaAntecedentes) => {
+        this.actualizarTitulosTabla(res);
 
-    obs$.subscribe({
-      next: (res) => {
-        // Guardar data completa mapeada
-        this.dataNssCompleta = (res.listaPorNss || []).map(i => this.mapearRespuesta(i));
-        this.dataNombreCompleta = (res.listaPorNombre || []).map(i => this.mapearRespuesta(i));
+        // Aplanar resultados por NSS: Object.values devuelve un array de arrays, usamos flat()
+        const rawNss = Object.values(res.resultadosPorNss).flat();
+        this.dataNssCompleta = rawNss.map(i => this.mapearRespuesta(i));
 
-        // Calcular totales internamente
+        // Aplanar resultados por Nombre
+        const rawNombre = Object.values(res.resultadosPorNombre).flat();
+        this.dataNombreCompleta = rawNombre.map(i => this.mapearRespuesta(i));
+
+        // Ajustar Totales (usando el objeto directo del backend)
         this.totalAntecedentes = this.ajustarTotales(res.totalesGenerales);
 
-        // Resetear paginación
+        // Resetear paginación y renderizar
         this.totalregistros = this.dataNssCompleta.length;
         this.totalregistrosnombre = this.dataNombreCompleta.length;
         this.paginaActualNss = 0;
         this.paginaActualNombre = 0;
 
-        // Mostrar resultados
         this.renderizarPaginasActuales();
         this.obtenerFechasCorte();
 
@@ -399,18 +377,8 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
           this._alertServices.informacion('No se encontraron resultados.');
         }
       },
-      error: () => this._alertServices.error('Error al consultar antecedentes.')
+      error: () => this._alertServices.error('Error al consultar el servicio general de antecedentes.')
     });
-  }
-
-  private obtenerFiltrosNormalizados() {
-    const f = this.filtroForm.getRawValue();
-    return {
-      nss: f.nss?.trim(),
-      nombre: f.nombre?.trim().toUpperCase(),
-      apPaterno: f.apaterno?.trim().toUpperCase(),
-      apMaterno: f.amaterno?.trim().toUpperCase() || ''
-    };
   }
 
   generarSolicitudAntecedentes(): SolicitudBusquedaPaginado {
@@ -570,7 +538,7 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
     }
   }
 
-  private mapearRespuesta(item: RegistroInternoAntecedentes): RegistroAntecedentes {
+  private mapearRespuesta(item: NuevoRegistroAntecedentes): RegistroAntecedentes {
     return {
       idBitacoraAsociacion: null,
       indAsociado: false,
@@ -590,20 +558,18 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
   }
 
   private renderizarPaginasActuales(): void {
-    // Slice para tabla NSS
+    // Tabla NSS
     const startNss = this.paginaActualNss * this.registrosPorPaginaNss;
-    let endNss = startNss + this.registrosPorPaginaNss;
-    endNss = endNss > this.totalregistros ? this.totalregistros - 1 : endNss - 1;
+    const endNss = startNss + this.registrosPorPaginaNss;
     this.data.set(this.sincronizarEstado(this.dataNssCompleta.slice(startNss, endNss)));
 
-    // Slice para tabla Nombre
+    // Tabla Nombre
     const startNom = this.paginaActualNombre * this.registrosPorPaginaNombre;
-    let endNom = startNom + this.registrosPorPaginaNombre;
-    endNom = endNom > this.totalregistrosnombre ? this.totalregistrosnombre - 1 : endNom - 1;
+    const endNom = startNom + this.registrosPorPaginaNombre;
     this.data_nombre.set(this.sincronizarEstado(this.dataNombreCompleta.slice(startNom, endNom)));
   }
 
-  private ajustarTotales(totales: RespuestaTotales): TotalesAntecedentes {
+  private ajustarTotales(totales: TotalAntecedentes): TotalesAntecedentes {
     // Estructura inicial con acumuladores en 0
     return {
       totalPorTipo: {
@@ -622,6 +588,28 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
         amparoIndirecto: 0,
         gestion: 0
       }
+    };
+  }
+
+  private generarPayloadGeneral(): NuevaSolicitudBusquedaPaginado {
+    const f = this.filtroForm.getRawValue();
+
+    // Estructura de la persona según los filtros
+    const persona: NuevaPersona = {
+      nss: f.nss?.trim() || null,
+      nombre: f.nombre?.trim().toUpperCase() || null,
+      apellidoPaterno: f.apaterno?.trim().toUpperCase() || null,
+      apellidoMaterno: f.amaterno?.trim().toUpperCase() || null
+    };
+
+    // Se retorna como un array
+    return {
+      personas: [persona],
+      expediente: null,
+      ooad_UMAE: this.REF_OOAD,
+      usuarioLogueado: this.REF_USUARIO,
+      sistema: this.REF_APLICATIVO,
+      modulo: this.REF_MODULO
     };
   }
 }

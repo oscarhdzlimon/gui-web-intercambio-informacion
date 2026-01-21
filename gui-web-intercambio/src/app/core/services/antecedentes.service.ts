@@ -9,9 +9,7 @@ import {
   SolicitudBusquedaPaginado
 } from '../interfaces/solicitud-busqueda-antecedentes.interface';
 import {ParamsAsociacion} from '../interfaces/params-asociacion.interface';
-import {BusquedaInternaNombre, BusquedaInternaNombreNSS} from '../interfaces/consulta-interna-antecedentes.interface';
 import {Observable} from 'rxjs';
-import {RespuestaInternaAntecedentes} from '../interfaces/respuesta-interna-antecedentes.interface';
 import {RespuestaAntecedentes} from '../interfaces/respuesta-antecedentes.interface';
 
 @Injectable({
@@ -60,37 +58,7 @@ export class AntecedentesService {
     return this.http.post<any>(`${this.URL_SSCV1}`, solicitud);
   }
 
-  getLstAntecedentesByNSS(nss: string): Observable<RespuestaInternaAntecedentes> {
-    const params = new HttpParams()
-      .set('nss', nss);
-    return this.http.get(`${this.URL_BASE}/busqueda-nss`, {params}) as Observable<RespuestaInternaAntecedentes>;
-  }
-
-  getLstAntecedentesByNombre({nombre, apPaterno, apMaterno}: BusquedaInternaNombre): Observable<RespuestaInternaAntecedentes> {
-    const params = new HttpParams()
-      .set('nombre', nombre)
-      .set('apPaterno', apPaterno);
-
-    if (apMaterno) {
-      params.set('apMaterno', apMaterno);
-    }
-
-    return this.http.get(`${this.URL_BASE}/busqueda-nombre`, {params}) as Observable<RespuestaInternaAntecedentes>;
-  }
-
-  getLstAntecedentesByAmbos({nombre, apPaterno, apMaterno, nss}: BusquedaInternaNombreNSS): Observable<RespuestaInternaAntecedentes> {
-    const params = new HttpParams()
-      .set('nss', nss)
-      .set('nombre', nombre)
-      .set('apMaterno', apPaterno);
-
-    if (apMaterno) {
-      params.set('apMaterno', apMaterno);
-    }
-    return this.http.get(`${this.URL_BASE}/busqueda-ambos`, {params})  as Observable<RespuestaInternaAntecedentes>;
-  }
-
-  getLstAntecedentesGeneral(consulta: NuevaSolicitudBusquedaPaginado[]): Observable<RespuestaAntecedentes> {
+  getLstAntecedentesGeneral(consulta: NuevaSolicitudBusquedaPaginado): Observable<RespuestaAntecedentes> {
     return this.http.post(`${this.URL_BASE}/General`, consulta) as Observable<RespuestaAntecedentes>;
   }
 }

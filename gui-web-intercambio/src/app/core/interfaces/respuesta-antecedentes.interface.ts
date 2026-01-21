@@ -1,4 +1,4 @@
-interface TotalAntecedentes {
+export interface TotalAntecedentes {
   rp: number;
   jf: number;
   ic: number;
@@ -7,7 +7,7 @@ interface TotalAntecedentes {
   gestion: number;
 }
 
-interface RegistroAntecedentes {
+export interface NuevoRegistroAntecedentes {
   nss: string;
   numId: number;
   nombreFull: string;
@@ -19,8 +19,8 @@ interface RegistroAntecedentes {
 }
 
 export interface RespuestaAntecedentes {
-  // Record<string, RegistroAntecedentes[]> permite que las llaves sean cualquier string (el NSS o Nombre)
-  resultadosPorNss: Record<string, RegistroAntecedentes[]>;
-  resultadosPorNombre: Record<string, RegistroAntecedentes[]>;
+  // Record<string, NuevoRegistroAntecedentes[]> permite que las llaves sean cualquier string (el NSS o Nombre)
+  resultadosPorNss: Record<string, NuevoRegistroAntecedentes[]>;
+  resultadosPorNombre: Record<string, NuevoRegistroAntecedentes[]>;
   totalesGenerales: TotalAntecedentes;
 }
