@@ -57,8 +57,7 @@
 }
 
 .divTotales {
-  width: 220px;
-  height: 168px;
+  width: 200px;
   gap: 4px;
 
   opacity: 1;
@@ -72,8 +71,8 @@
   height: 52px;
   display: flex;
   /* Centra los elementos hijos verticalmente */
-  align-items: center;
-
+  align-items: end;
+  padding-bottom: 2px;
 }
 
 .divgestion2 {
@@ -86,7 +85,8 @@
   height: 52px;
   display: flex;
   /* Centra los elementos hijos verticalmente */
-  align-items: center;
+  align-items: end;
+  padding-bottom: 2px;
 }
 
 .divqueja2 {
@@ -99,7 +99,8 @@
   height: 52px;
   display: flex;
   /* Centra los elementos hijos verticalmente */
-  align-items: center;
+  align-items: end;
+  padding-bottom: 2px;
 }
 
 .divinconformidades2 {
@@ -111,7 +112,8 @@
   height: 52px;
   display: flex;
   /* Centra los elementos hijos verticalmente */
-  align-items: center;
+  align-items: end;
+  padding-bottom: 2px;
 }
 
 .divamparo2 {
@@ -123,8 +125,8 @@
   height: 52px;
   display: flex;
   /* Centra los elementos hijos verticalmente */
-  align-items: center;
-
+  align-items: end;
+  padding-bottom: 2px;
 }
 
 .divprocedimiento2 {
