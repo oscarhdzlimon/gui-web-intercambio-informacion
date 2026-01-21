@@ -2,42 +2,42 @@
 
 .login-titulo {
   color: #DDB649;
-font-family: 'Inter', sans-serif;
-font-size: 70px;
-font-style: normal;
-font-weight: 700;
-line-height: 60px; /* 114.583% */
+  font-family: 'Inter', sans-serif;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 60px; /* 114.583% */
 }
 
 .login-subtitulo {
   color: #FFF;
-font-family: 'Inter', sans-serif;
-font-size: 70px !important;
-font-style: normal;
-font-weight: 700;
-line-height: 60px !important;
+  font-family: 'Inter', sans-serif;
+  font-size: 40px !important;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 60px !important;
 }
 
-.etiquetasesion{
+.etiquetasesion {
   color: #404041;
 
 
-font-feature-settings: 'liga' off, 'clig' off;
-font-family: "Noto Sans";
-font-size: 13px;
-font-style: normal;
-font-weight: 700;
-line-height: 130%;
+  font-feature-settings: 'liga' off, 'clig' off;
+  font-family: "Noto Sans";
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 130%;
 }
 
 /* 📱 NUEVO BLOQUE: Estilos para Móviles y Tabletas (MAX-WIDTH) */
 @media screen and (max-width: 991px) {
   .login-titulo {
     /* Sobrescribe explícitamente el tamaño grande si existe */
-    font-size: 3rem !important; 
+    font-size: 3rem !important;
     line-height: 1.2 !important;
   }
-  
+
   .login-subtitulo {
     font-size: 1.5rem !important;
     line-height: 1.2 !important;
@@ -46,14 +46,15 @@ line-height: 130%;
 
 .login-card-titulo {
   color: #000;
-font-feature-settings: 'liga' off, 'clig' off;
+  font-feature-settings: 'liga' off, 'clig' off;
 
-/* NotoGob/H5 SB Title Text */
-font-family: "Noto Sans";
-font-size: 27px;
-font-style: normal;
-font-weight: 600;
-line-height: 120%; /* 24px */ /* 24px */
+  /* NotoGob/H5 SB Title Text */
+  font-family: "Noto Sans";
+  font-size: 27px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 120%; /* 24px */
+  /* 24px */
 }
 
 .field-label {
@@ -68,58 +69,60 @@ line-height: 120%; /* 24px */ /* 24px */
 
 .ph-custom::placeholder {
   color: #8E90A4;
-font-feature-settings: 'liga' off, 'clig' off;
-font-family: "Noto Sans";
-font-size: 14px;
-font-style: normal;
-font-weight: 400;
-line-height: 120%; /* 16.8px */
+  font-feature-settings: 'liga' off, 'clig' off;
+  font-family: "Noto Sans";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%; /* 16.8px */
 }
 
 .ph-custom:disabled {
-  background-color: #f5f6f7 !important;   /* Ejemplo color */
+  background-color: #f5f6f7 !important; /* Ejemplo color */
   color: #8E90A4 !important;
 }
 
 .ph-custom {
- color: #1B353A;
-font-feature-settings: 'liga' off, 'clig' off;
-font-family: "Noto Sans";
-font-size: 14px;
-font-style: normal;
-font-weight: 400;
-line-height: 120%; /* 16.8px */
+  color: #1B353A;
+  font-feature-settings: 'liga' off, 'clig' off;
+  font-family: "Noto Sans";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%; /* 16.8px */
 }
 
 .custom-dropdown .p-dropdown-label.p-placeholder {
   color: #8E90A4 !important;
-font-feature-settings: 'liga' off, 'clig' off;
-font-family: "Noto Sans";
-font-size: 14px;
-font-style: normal;
-font-weight: 400;
-line-height: 120%; /* 16.8px */         /* opcional */
+  font-feature-settings: 'liga' off, 'clig' off;
+  font-family: "Noto Sans";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%; /* 16.8px */
+  /* opcional */
 }
 
 /* Estilo del texto seleccionado */
 .custom-dropdown .p-dropdown-label {
-    color: #1B353A !important;
-font-feature-settings: 'liga' off, 'clig' off;
-font-family: "Noto Sans";
-font-size: 14px;
-font-style: normal;
-font-weight: 400;
-line-height: 120%; /* 16.8px */        /* negritas opcional */
+  color: #1B353A !important;
+  font-feature-settings: 'liga' off, 'clig' off;
+  font-family: "Noto Sans";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%; /* 16.8px */
+  /* negritas opcional */
 }
 
 .field-label-obligatorio {
-    color: #626262;
-    font-feature-settings: "liga" off, "clig" off;
-    font-size: 10px;
-    font-style: normal;
-    font-weight: 500;
-    
-    text-align: end;
+  color: #626262;
+  font-feature-settings: "liga" off, "clig" off;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 500;
+
+  text-align: end;
 }
 
 .login-hipervinculo {
@@ -253,111 +256,121 @@ line-height: 120%; /* 16.8px */        /* negritas opcional */
   color: var(--gob-mx-base-blanco);
   font-weight: 600;
 }
-.aviso{
-  font-family: Noto Sans;
-font-weight: 500;
-font-style: Medium;
-font-size: 13.5px;
 
-line-height: 150%;
-letter-spacing: -1.9%;
-vertical-align: middle;
+.aviso {
+  font-family: Noto Sans;
+  font-weight: 500;
+  font-style: Medium;
+  font-size: 13.5px;
+
+  line-height: 150%;
+  letter-spacing: -1.9%;
+  vertical-align: middle;
 
 }
-.titulo_totales{
+
+.titulo_totales {
   font-family: Noto Sans;
-font-weight: 600;
-font-style: SemiBold;
-font-size: 14px;
-line-height: 100%;
-letter-spacing: 0%;
-vertical-align: middle;
+  font-weight: 600;
+  font-style: SemiBold;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  vertical-align: middle;
 
 }
-.subtitulo_totales{
-  font-family: Noto Sans;
-font-weight: 400;
-font-style: Regular;
-font-size: 12px;
 
-line-height: 100%;
-letter-spacing: 0%;
-text-align: center;
-vertical-align: middle;
+.subtitulo_totales {
+  font-family: Noto Sans;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 12px;
+
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-align: center;
+  vertical-align: middle;
 
 }
-.totales{
-  font-family: Noto Sans;
-font-weight: 700;
-font-style: Bold;
-font-size: 14px;
 
-line-height: 100%;
-letter-spacing: 0%;
-vertical-align: middle;
+.totales {
+  font-family: Noto Sans;
+  font-weight: 700;
+  font-style: Bold;
+  font-size: 14px;
+
+  line-height: 100%;
+  letter-spacing: 0%;
+  vertical-align: middle;
 
 }
-.sinResultados{
-    font-family: Noto Sans;
-font-weight: 300;
-font-style: Light;
-font-size: 16px;
 
-line-height: 120%;
-letter-spacing: 0%;
-text-align: center;
-vertical-align: middle;
+.sinResultados {
+  font-family: Noto Sans;
+  font-weight: 300;
+  font-style: Light;
+  font-size: 16px;
+
+  line-height: 120%;
+  letter-spacing: 0%;
+  text-align: center;
+  vertical-align: middle;
 
 }
-.titulobusqueda{
+
+.titulobusqueda {
   font-family: Noto Sans;
-font-weight: 600;
-font-style: SemiBold;
-font-size: 24px;
-line-height: 120%;
-letter-spacing: 0%;
-vertical-align: middle;
+  font-weight: 600;
+  font-style: SemiBold;
+  font-size: 24px;
+  line-height: 120%;
+  letter-spacing: 0%;
+  vertical-align: middle;
 
 }
-.tituloInputBusqueda{
+
+.tituloInputBusqueda {
   font-family: Noto Sans;
-font-weight: 600;
-font-style: SemiBold;
-font-size: 12px;
-line-height: 100%;
-letter-spacing: 0%;
-vertical-align: middle;
+  font-weight: 600;
+  font-style: SemiBold;
+  font-size: 12px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  vertical-align: middle;
 
 }
-.inputtext{
+
+.inputtext {
   font-family: Noto Sans;
-font-weight: 400;
-font-style: Regular;
-font-size: 12px;
-line-height: 100%;
-letter-spacing: 0%;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 12px;
+  line-height: 100%;
+  letter-spacing: 0%;
 
 }
-.textresultado{
+
+.textresultado {
   font-family: Noto Sans;
-font-weight: 400;
-font-style: Regular;
-font-size: 12px;
-line-height: 100%;
-letter-spacing: 0%;
-text-align: center;
-vertical-align: middle;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 12px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-align: center;
+  vertical-align: middle;
 
 }
-.texttotal{
+
+.texttotal {
   font-family: Noto Sans;
-font-weight: 600;
-font-style: SemiBold;
-font-size: 14px;
-line-height: 100%;
-letter-spacing: 0%;
-text-align: center;
-vertical-align: middle;
+  font-weight: 600;
+  font-style: SemiBold;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-align: center;
+  vertical-align: middle;
 
 }
 
@@ -554,7 +567,7 @@ vertical-align: middle;
   line-height: 120%; /* 21.6px */
 }
 
-.info-monto{
+.info-monto {
   color: #fff;
   font-feature-settings: 'liga' off, 'clig' off;
   font-size: 12px;
@@ -606,7 +619,7 @@ vertical-align: middle;
   white-space: nowrap;
 }
 
-.etiqueta1modal{
+.etiqueta1modal {
   color: var(--grises-404040, #404040);
   /* Typography/Modal/Data */
   font-family: "Noto Sans";
@@ -616,13 +629,13 @@ vertical-align: middle;
   line-height: normal;
 }
 
-.etiquetasmodal{
+.etiquetasmodal {
   color: var(--Text-Secondary, #445461);
 
-/* Typography/Modal/Display */
-font-family: "Noto Sans";
-font-size: 14px;
-font-style: normal;
-font-weight: 600;
-line-height: normal;
+  /* Typography/Modal/Display */
+  font-family: "Noto Sans";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
 }
