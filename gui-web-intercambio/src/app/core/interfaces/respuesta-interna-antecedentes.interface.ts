@@ -15,7 +15,7 @@ export interface RegistroInternoAntecedentes {
   totalTodos: number
 }
 
-interface RespuestaTotales {
+export interface RespuestaTotales {
   RP: number,
   JF: number,
   IC: number,

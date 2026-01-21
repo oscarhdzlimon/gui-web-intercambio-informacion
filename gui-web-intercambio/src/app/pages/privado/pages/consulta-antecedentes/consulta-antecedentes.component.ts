@@ -32,7 +32,7 @@ import {ReporteAntecedentes} from '@models/reporteAntecedentes.interface';
 import {SolicitudBusquedaPaginado} from '../../../../core/interfaces/solicitud-busqueda-antecedentes.interface';
 import {
   RegistroInternoAntecedentes,
-  RespuestaInternaAntecedentes
+  RespuestaInternaAntecedentes, RespuestaTotales
 } from '../../../../core/interfaces/respuesta-interna-antecedentes.interface';
 
 enum TipoTabla {
@@ -64,8 +64,6 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
 
   userService = inject(UserService);
 
-  private idsCargadosNSS = new Set<string>();
-
   private dataNombreCompleta: RegistroAntecedentes[] = [];
   private dataNssCompleta: RegistroAntecedentes[] = [];
 
@@ -95,8 +93,6 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
   REF_OOAD: string = '';
 
   userData: SesionUser | null = null;
-
-  puedeGuardar = false;
 
   fechasCorte: DetalleAntecedentes = {
     fecCorteSiade: "",
@@ -387,7 +383,7 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
         this.dataNombreCompleta = (res.listaPorNombre || []).map(i => this.mapearRespuesta(i));
 
         // Calcular totales internamente
-        this.totalAntecedentes = this.calcularTotalesManuales(this.dataNssCompleta, this.dataNombreCompleta);
+        this.totalAntecedentes = this.ajustarTotales(res.totalesGenerales);
 
         // Resetear paginación
         this.totalregistros = this.dataNssCompleta.length;
@@ -607,16 +603,16 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
     this.data_nombre.set(this.sincronizarEstado(this.dataNombreCompleta.slice(startNom, endNom)));
   }
 
-  private calcularTotalesManuales(listaNss: RegistroAntecedentes[], listaNombre: RegistroAntecedentes[]): TotalesAntecedentes {
+  private ajustarTotales(totales: RespuestaTotales): TotalesAntecedentes {
     // Estructura inicial con acumuladores en 0
-    const totales: TotalesAntecedentes = {
+    return {
       totalPorTipo: {
-        procedimientoRpe: 0,
-        juicioContencioso: 0,
-        inconformidad: 0,
-        quejaMedica: 0,
-        amparoIndirecto: 0,
-        gestion: 0
+        procedimientoRpe: totales.RP,
+        juicioContencioso: totales.JF,
+        inconformidad: totales.IC,
+        quejaMedica: totales["Queja de servicio"],
+        amparoIndirecto: totales.MAI,
+        gestion: totales.Gestion
       },
       totalAsociadosPorTipo: {
         procedimientoRpe: 0,
@@ -627,22 +623,5 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
         gestion: 0
       }
     };
-
-    const todas = [...listaNss, ...listaNombre];
-    const totalRegistros = todas.length;
-
-    for (let i = 0; i < totalRegistros; i++) {
-      const registro = todas[i];
-      const t = totales.totalPorTipo;
-
-      t.procedimientoRpe += registro.procedimientoRpe || 0;
-      t.juicioContencioso += registro.juicioContencioso || 0;
-      t.inconformidad += registro.inconformidades || 0;
-      t.quejaMedica += registro.quejaMedica || 0;
-      t.amparoIndirecto += registro.amparoIndirecto || 0;
-      t.gestion += registro.gestion || 0;
-    }
-
-    return totales;
   }
 }
