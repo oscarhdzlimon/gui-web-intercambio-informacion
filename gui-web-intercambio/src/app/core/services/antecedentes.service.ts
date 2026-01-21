@@ -4,11 +4,15 @@ import {environment} from '@env/environment.development';
 import {SolicitudAntecedentes} from '../interfaces/solicitud-antecedentes.interface';
 import {SolicitudAsociacion} from '../interfaces/solicitud-asociacion.interface';
 import {SolicitudBitacora} from '../interfaces/solicitud-bitacora.inerface';
-import {SolicitudBusquedaPaginado} from '../interfaces/solicitud-busqueda-antecedentes.interface';
+import {
+  NuevaSolicitudBusquedaPaginado,
+  SolicitudBusquedaPaginado
+} from '../interfaces/solicitud-busqueda-antecedentes.interface';
 import {ParamsAsociacion} from '../interfaces/params-asociacion.interface';
 import {BusquedaInternaNombre, BusquedaInternaNombreNSS} from '../interfaces/consulta-interna-antecedentes.interface';
 import {Observable} from 'rxjs';
 import {RespuestaInternaAntecedentes} from '../interfaces/respuesta-interna-antecedentes.interface';
+import {RespuestaAntecedentes} from '../interfaces/respuesta-antecedentes.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -84,5 +88,9 @@ export class AntecedentesService {
       params.set('apMaterno', apMaterno);
     }
     return this.http.get(`${this.URL_BASE}/busqueda-ambos`, {params})  as Observable<RespuestaInternaAntecedentes>;
+  }
+
+  getLstAntecedentesGeneral(consulta: NuevaSolicitudBusquedaPaginado[]): Observable<RespuestaAntecedentes> {
+    return this.http.post(`${this.URL_BASE}/General`, consulta) as Observable<RespuestaAntecedentes>;
   }
 }
