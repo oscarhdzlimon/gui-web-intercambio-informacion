@@ -16,10 +16,10 @@ export interface RegistroInternoAntecedentes {
 }
 
 export interface RespuestaTotales {
-  RP: number,
-  JF: number,
-  IC: number,
-  "Queja de servicio": number,
-  MAI: number,
-  Gestion: number
+  rp: number,
+  jf: number,
+  ic: number,
+  queja_de_servicio: number,
+  mai: number,
+  gestion: number
 }

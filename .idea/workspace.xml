@@ -4,13 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="modificaciones de respuesta, consulta servicios para peticiones internas">
+    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="correcciones de totales">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/interfaces/respuesta-interna-antecedentes.interface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/interfaces/respuesta-interna-antecedentes.interface.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/services/antecedentes.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/services/antecedentes.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/shared/tabla-principal/tabla-principal.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/shared/tabla-principal/tabla-principal.component.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,23 +97,7 @@
       <workItem from="1767111634106" duration="669000" />
       <workItem from="1767118150936" duration="3257000" />
       <workItem from="1767891732696" duration="7482000" />
-      <workItem from="1767937805716" duration="117472000" />
-    </task>
-    <task id="LOCAL-00069" summary="redirección por url cifrada">
-      <option name="closed" value="true" />
-      <created>1768105834765</created>
-      <option name="number" value="00069" />
-      <option name="presentableId" value="LOCAL-00069" />
-      <option name="project" value="LOCAL" />
-      <updated>1768105834765</updated>
-    </task>
-    <task id="LOCAL-00070" summary="ajustes para recuperar consultas">
-      <option name="closed" value="true" />
-      <created>1768106837127</created>
-      <option name="number" value="00070" />
-      <option name="presentableId" value="LOCAL-00070" />
-      <option name="project" value="LOCAL" />
-      <updated>1768106837127</updated>
+      <workItem from="1767937805716" duration="122239000" />
     </task>
     <task id="LOCAL-00071" summary="ajustes para lectura de datos del usuario por URL">
       <option name="closed" value="true" />
@@ -493,7 +475,23 @@
       <option name="project" value="LOCAL" />
       <updated>1769011365920</updated>
     </task>
-    <option name="localTasksCounter" value="118" />
+    <task id="LOCAL-00118" summary="modificaciones de paginado sin filtrar por id's">
+      <option name="closed" value="true" />
+      <created>1769017474396</created>
+      <option name="number" value="00118" />
+      <option name="presentableId" value="LOCAL-00118" />
+      <option name="project" value="LOCAL" />
+      <updated>1769017474396</updated>
+    </task>
+    <task id="LOCAL-00119" summary="correcciones de totales">
+      <option name="closed" value="true" />
+      <created>1769019038859</created>
+      <option name="number" value="00119" />
+      <option name="presentableId" value="LOCAL-00119" />
+      <option name="project" value="LOCAL" />
+      <updated>1769019038860</updated>
+    </task>
+    <option name="localTasksCounter" value="120" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -511,8 +509,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fechas corte -&gt; caso 3" />
-    <MESSAGE value="totales -&gt; caso 3" />
     <MESSAGE value="correcciones de consulta" />
     <MESSAGE value="ajuste de visibilidad de totales" />
     <MESSAGE value="eliminacion de filtros" />
@@ -536,6 +532,8 @@
     <MESSAGE value="correccion para sscv1 -&lt; pruebas" />
     <MESSAGE value="correccion para sscv1 -&lt; revert comentarios" />
     <MESSAGE value="modificaciones de respuesta, consulta servicios para peticiones internas" />
-    <option name="LAST_COMMIT_MESSAGE" value="modificaciones de respuesta, consulta servicios para peticiones internas" />
+    <MESSAGE value="modificaciones de paginado sin filtrar por id's" />
+    <MESSAGE value="correcciones de totales" />
+    <option name="LAST_COMMIT_MESSAGE" value="correcciones de totales" />
   </component>
 </project>

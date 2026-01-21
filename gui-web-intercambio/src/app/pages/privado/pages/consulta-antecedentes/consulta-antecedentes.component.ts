@@ -580,12 +580,12 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
       apellidoPaterno: item.apellidoPaterno,
       apellidoMaterno: item.apellidoMaterno,
       expediente: '',
-      gestion: item.totalesProcedimiento.Gestion || 0,
-      quejaMedica: item.totalesProcedimiento["Queja de servicio"] || 0,
-      inconformidades: item.totalesProcedimiento.IC || 0,
-      amparoIndirecto: item.totalesProcedimiento.MAI || 0,
-      procedimientoRpe: item.totalesProcedimiento.RP || 0,
-      juicioContencioso: item.totalesProcedimiento.JF || 0,
+      gestion: item.totalesProcedimiento.gestion || 0,
+      quejaMedica: item.totalesProcedimiento.queja_de_servicio || 0,
+      inconformidades: item.totalesProcedimiento.ic || 0,
+      amparoIndirecto: item.totalesProcedimiento.mai || 0,
+      procedimientoRpe: item.totalesProcedimiento.rp || 0,
+      juicioContencioso: item.totalesProcedimiento.jf || 0,
     };
   }
 
@@ -607,12 +607,12 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
     // Estructura inicial con acumuladores en 0
     return {
       totalPorTipo: {
-        procedimientoRpe: totales.RP,
-        juicioContencioso: totales.JF,
-        inconformidad: totales.IC,
-        quejaMedica: totales["Queja de servicio"],
-        amparoIndirecto: totales.MAI,
-        gestion: totales.Gestion
+        procedimientoRpe: totales.rp,
+        juicioContencioso: totales.jf,
+        inconformidad: totales.ic,
+        quejaMedica: totales.queja_de_servicio,
+        amparoIndirecto: totales.mai,
+        gestion: totales.gestion
       },
       totalAsociadosPorTipo: {
         procedimientoRpe: 0,
