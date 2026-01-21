@@ -12,12 +12,10 @@ export interface ResultadoConsulta {
   tituloBase: string;
   tituloCompleto: string;
   data: WritableSignal<RegistroAntecedentes[]>;
+  datosCompletos: RegistroAntecedentes[];
   paginaActual: number;
   registrosPorPagina: number;
   totalRegistros: number;
   valorBusqueda: string | NombreTipoDropdown;
-  esPaginadoManual?: boolean,
-  datosCompletosFiltrados?: RegistroAntecedentes[],
-  
 }
 
