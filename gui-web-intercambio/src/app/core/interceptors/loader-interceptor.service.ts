@@ -10,7 +10,7 @@ export class LoadingInterceptor implements HttpInterceptor {
 
   private count = 0;
 
-  private readonly excludeService: Array<string> = ['login',];
+  private readonly excludeService: Array<string> = ['login', 'antecedentes/obtenerFechasCorte', 'bitacora/consulta'];
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
