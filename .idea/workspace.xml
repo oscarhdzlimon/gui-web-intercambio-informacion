@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="ajustes de tamaño">
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.html" afterDir="false" />
+    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="ajustes de interceptor">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,22 +96,6 @@
       <workItem from="1767118150936" duration="3257000" />
       <workItem from="1767891732696" duration="7482000" />
       <workItem from="1767937805716" duration="125067000" />
-    </task>
-    <task id="LOCAL-00076" summary="ajuste fechas">
-      <option name="closed" value="true" />
-      <created>1768112217264</created>
-      <option name="number" value="00076" />
-      <option name="presentableId" value="LOCAL-00076" />
-      <option name="project" value="LOCAL" />
-      <updated>1768112217264</updated>
-    </task>
-    <task id="LOCAL-00077" summary="ajuste tipo de busqueda -&gt; consulta antecedentes">
-      <option name="closed" value="true" />
-      <created>1768167273399</created>
-      <option name="number" value="00077" />
-      <option name="presentableId" value="LOCAL-00077" />
-      <option name="project" value="LOCAL" />
-      <updated>1768167273399</updated>
     </task>
     <task id="LOCAL-00078" summary="ajustes para asociacion -&gt; consulta antecedentes">
       <option name="closed" value="true" />
@@ -488,7 +473,23 @@
       <option name="project" value="LOCAL" />
       <updated>1769037278392</updated>
     </task>
-    <option name="localTasksCounter" value="125" />
+    <task id="LOCAL-00125" summary="correccion de asociación">
+      <option name="closed" value="true" />
+      <created>1769040103032</created>
+      <option name="number" value="00125" />
+      <option name="presentableId" value="LOCAL-00125" />
+      <option name="project" value="LOCAL" />
+      <updated>1769040103032</updated>
+    </task>
+    <task id="LOCAL-00126" summary="ajustes de interceptor">
+      <option name="closed" value="true" />
+      <created>1769040485189</created>
+      <option name="number" value="00126" />
+      <option name="presentableId" value="LOCAL-00126" />
+      <option name="project" value="LOCAL" />
+      <updated>1769040485189</updated>
+    </task>
+    <option name="localTasksCounter" value="127" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -506,8 +507,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="ajustes css para nueva consulta detalle de registros" />
-    <MESSAGE value="ajustes para nueva consulta detalle de registros" />
     <MESSAGE value="limpieza pagindao consulta detalle de antecedentes" />
     <MESSAGE value="ajustes de manejo de busquedas" />
     <MESSAGE value="ajustes para manejo de registros repetidos" />
@@ -531,6 +530,8 @@
     <MESSAGE value="modificaciones de busqueda de sistemas" />
     <MESSAGE value="correcciones de css" />
     <MESSAGE value="ajustes de tamaño" />
-    <option name="LAST_COMMIT_MESSAGE" value="ajustes de tamaño" />
+    <MESSAGE value="correccion de asociación" />
+    <MESSAGE value="ajustes de interceptor" />
+    <option name="LAST_COMMIT_MESSAGE" value="ajustes de interceptor" />
   </component>
 </project>
