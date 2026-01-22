@@ -23,4 +23,5 @@ export interface RespuestaAntecedentes {
   resultadosPorNss: Record<string, NuevoRegistroAntecedentes[]>;
   resultadosPorNombre: Record<string, NuevoRegistroAntecedentes[]>;
   totalesGenerales: TotalAntecedentes;
+  totalesAsociados: TotalAntecedentes;
 }
