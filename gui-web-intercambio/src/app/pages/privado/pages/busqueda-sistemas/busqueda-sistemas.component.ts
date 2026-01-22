@@ -433,8 +433,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
         }
         this.solicitudAntecedentesService.limpiar();
 
-        this.consultas.forEach((_, index) => {
-        });
+        this.iniciarBusqueda();
 
       },
       error: (error: HttpErrorResponse) => {

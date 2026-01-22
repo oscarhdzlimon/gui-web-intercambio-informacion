@@ -4,12 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="corrección de busqueda por nombre">
+    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="ajustes de tabla">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/interfaces/registro-antecedentes.interface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/interfaces/registro-antecedentes.interface.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/shared/tabla-principal/tabla-principal.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/shared/tabla-principal/tabla-principal.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/shared/tabla-principal/tabla-principal.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/shared/tabla-principal/tabla-principal.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,22 +97,6 @@
       <workItem from="1767118150936" duration="3257000" />
       <workItem from="1767891732696" duration="7482000" />
       <workItem from="1767937805716" duration="125067000" />
-    </task>
-    <task id="LOCAL-00080" summary="modificacion para paginado completo">
-      <option name="closed" value="true" />
-      <created>1768190678704</created>
-      <option name="number" value="00080" />
-      <option name="presentableId" value="LOCAL-00080" />
-      <option name="project" value="LOCAL" />
-      <updated>1768190678704</updated>
-    </task>
-    <task id="LOCAL-00081" summary="correcciones para asociar">
-      <option name="closed" value="true" />
-      <created>1768191595582</created>
-      <option name="number" value="00081" />
-      <option name="presentableId" value="LOCAL-00081" />
-      <option name="project" value="LOCAL" />
-      <updated>1768191595582</updated>
     </task>
     <task id="LOCAL-00082" summary="correcciones para asociar">
       <option name="closed" value="true" />
@@ -492,7 +474,23 @@
       <option name="project" value="LOCAL" />
       <updated>1769042973853</updated>
     </task>
-    <option name="localTasksCounter" value="129" />
+    <task id="LOCAL-00129" summary="ajustes de key en tabla por idNum">
+      <option name="closed" value="true" />
+      <created>1769044599635</created>
+      <option name="number" value="00129" />
+      <option name="presentableId" value="LOCAL-00129" />
+      <option name="project" value="LOCAL" />
+      <updated>1769044599635</updated>
+    </task>
+    <task id="LOCAL-00130" summary="ajustes de tabla">
+      <option name="closed" value="true" />
+      <created>1769045924780</created>
+      <option name="number" value="00130" />
+      <option name="presentableId" value="LOCAL-00130" />
+      <option name="project" value="LOCAL" />
+      <updated>1769045924780</updated>
+    </task>
+    <option name="localTasksCounter" value="131" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -510,8 +508,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="ajustes para manejo de registros repetidos" />
-    <MESSAGE value="ajustes solicitud de asignacion" />
     <MESSAGE value="ajustes solicitud de asociación" />
     <MESSAGE value="correcciones de consulta por login" />
     <MESSAGE value="correcciones de antecedentes" />
@@ -535,6 +531,8 @@
     <MESSAGE value="ajustes de interceptor" />
     <MESSAGE value="corrección de apellido materno" />
     <MESSAGE value="corrección de busqueda por nombre" />
-    <option name="LAST_COMMIT_MESSAGE" value="corrección de busqueda por nombre" />
+    <MESSAGE value="ajustes de key en tabla por idNum" />
+    <MESSAGE value="ajustes de tabla" />
+    <option name="LAST_COMMIT_MESSAGE" value="ajustes de tabla" />
   </component>
 </project>

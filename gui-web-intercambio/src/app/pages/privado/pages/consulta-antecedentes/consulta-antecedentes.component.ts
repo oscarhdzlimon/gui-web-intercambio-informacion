@@ -96,10 +96,24 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
 
   userData: SesionUser | null = null;
 
+  fecha = new Date();
+
   fechasCorte: DetalleAntecedentes = {
-    fecCorteSiade: "",
-    fecCorteSsc1: "",
-    fecCorteSsc2: "",
+    fecCorteSiade: this.fecha.toLocaleDateString('es-ES', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric'
+    }),
+    fecCorteSsc1: this.fecha.toLocaleDateString('es-ES', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric'
+    }),
+    fecCorteSsc2: this.fecha.toLocaleDateString('es-ES', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric'
+    }),
     nss: ""
   };
 
@@ -371,7 +385,7 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
         this.paginaActualNombre = 0;
 
         this.renderizarPaginasActuales();
-        this.obtenerFechasCorte();
+        this.guardarBitacora();
 
         if (this.totalregistros === 0 && this.totalregistrosnombre === 0) {
           this._alertServices.informacion('No se encontraron resultados.');
@@ -473,24 +487,6 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
       return;
     }
 
-  }
-
-  obtenerFechasCorte() {
-    const tipoConsultaActual = this.filtroForm.get('tipoconsulta')?.value;
-    const tipoConsulta = [1, 2].includes(tipoConsultaActual) ? tipoConsultaActual : null
-
-    let solicitud = tipoConsultaActual === 1 ? this.generarSolicitudAntecedentesNSS() : this.generarSolicitudAntecedentesNombre();
-
-    if (!tipoConsulta) {
-      solicitud = this.generarSolicitudAntecedentes();
-    }
-
-    this.detalleAntecedentesService.consultarFechasCorte(solicitud, tipoConsulta).subscribe({
-      next: (datos) => {
-        this.fechasCorte = datos.respuesta;
-        this.guardarBitacora();
-      }
-    })
   }
 
   guardarBitacora(): void {
