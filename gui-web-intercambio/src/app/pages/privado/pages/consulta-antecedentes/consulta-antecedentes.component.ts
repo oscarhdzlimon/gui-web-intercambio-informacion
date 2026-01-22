@@ -602,7 +602,6 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
     this.detalleAntecedentesService.consultarFechasCorte().subscribe({
       next: (datos) => {
         this.fechasCorte = datos.respuesta;
-        this.guardarBitacora();
       }
     })
   }
