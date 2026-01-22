@@ -9,7 +9,7 @@ import {
   Output,
   SimpleChanges
 } from '@angular/core';
-import {CurrencyPipe,CommonModule, } from "@angular/common";
+import {CommonModule, CurrencyPipe, TitleCasePipe,} from "@angular/common";
 import {Card} from 'primeng/card';
 import {Rating} from 'primeng/rating';
 import {FormsModule} from '@angular/forms';
@@ -19,7 +19,6 @@ import {EstadoOfertaService} from '@services/estado-oferta.service';
 import {ConvocatoriaService} from '@services/convocatoria.service';
 import {UserService} from '@services/user.service';
 import {SesionUser} from '@models/sesion-user.interface';
-import {TitleCasePipe} from '@angular/common';
 import {SvgAnimationService} from '@services/svg-animation.service';
 
 
@@ -90,7 +89,7 @@ export class OfertaCardComponent  implements OnInit, OnChanges {
     };
 
   constructor(private readonly currencyPipe: CurrencyPipe) {
-    
+
     this.checkScreenSize();
   }
 
@@ -108,7 +107,7 @@ export class OfertaCardComponent  implements OnInit, OnChanges {
     this.value = this.detalleOportunidad.esFavorita ? 1 : 0;
 
 
-   
+
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -152,5 +151,5 @@ export class OfertaCardComponent  implements OnInit, OnChanges {
     });
   }
 
- 
+
 }

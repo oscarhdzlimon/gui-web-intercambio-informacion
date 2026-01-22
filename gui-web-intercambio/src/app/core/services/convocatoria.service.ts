@@ -13,7 +13,6 @@ import {AlertService} from './alert.service';
 import {dataGenerales, DatosGeneralesRequest} from '@models/datosGenerales';
 import {ResponseGeneral} from '@models/responseGeneral';
 import {SolicitudGuardarDocumentacion} from '@models/solicitud-guardar-documentacion.interface';
-import {FiltrosPLazaInterface} from '@models/filtros-plaza.interface';
 import {HttpRespuesta} from '@models/http-respuesta.interface';
 
 @Injectable({

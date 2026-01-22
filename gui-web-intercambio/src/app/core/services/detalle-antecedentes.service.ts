@@ -1,13 +1,11 @@
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {Injectable, inject} from '@angular/core';
+import {inject, Injectable} from '@angular/core';
 import {environment} from '@env/environment.development';
 import {AlertService} from './alert.service';
-import {Observable, catchError, map, throwError} from 'rxjs';
+import {catchError, map, Observable, throwError} from 'rxjs';
 import {HttpRespuesta} from '@models/http-respuesta.interface';
 import {DetalleAntecedenteInterface} from '@models/detalle-antecedente.interface';
-import {ParametrosInterface} from '@models/parametros.interface';
 import {ResponseGeneral} from '@models/responseGeneral';
-import {DetalleAntecedentes} from '@models/detalleAntecedentes.interface';
 import {SolicitudBusquedaPaginado} from '../interfaces/solicitud-busqueda-antecedentes.interface';
 
 interface datosUsuario {

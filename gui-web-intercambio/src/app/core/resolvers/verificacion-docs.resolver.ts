@@ -1,7 +1,7 @@
-import { inject } from "@angular/core";
-import { ResolveFn } from "@angular/router";
-import { CatalogosGeneralesService } from "@services/catalogos-generales.service";
-import { forkJoin } from "rxjs";
+import {inject} from "@angular/core";
+import {ResolveFn} from "@angular/router";
+import {CatalogosGeneralesService} from "@services/catalogos-generales.service";
+import {forkJoin} from "rxjs";
 
 export const verficacionDocsResolver: ResolveFn<any> = (route, state) => {
   const catalogosService = inject(CatalogosGeneralesService);

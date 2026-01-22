@@ -1,14 +1,8 @@
-import {
-  HttpClient,
-  HttpErrorResponse,
-  HttpHeaders,
-} from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { environment } from '@env/environment.development';
-import { Observable, catchError, map, throwError } from 'rxjs';
-import { SolicitudAntecedentes } from '../interfaces/solicitud-antecedentes.interface';
-import { DetalleAntecedentes } from '@models/detalleAntecedentes.interface';
-import { ReporteAntecedentes } from '@models/reporteAntecedentes.interface';
+import {HttpClient, HttpErrorResponse, HttpHeaders,} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {environment} from '@env/environment.development';
+import {catchError, map, Observable, throwError} from 'rxjs';
+import {ReporteAntecedentes} from '@models/reporteAntecedentes.interface';
 
 @Injectable({
   providedIn: 'root',

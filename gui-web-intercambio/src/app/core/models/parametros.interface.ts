@@ -1,4 +1,4 @@
-import { Ordenamiento } from "./ordenamiento.enum";
+import {Ordenamiento} from "./ordenamiento.enum";
 
 export interface ParametrosInterface{
     page: number,
