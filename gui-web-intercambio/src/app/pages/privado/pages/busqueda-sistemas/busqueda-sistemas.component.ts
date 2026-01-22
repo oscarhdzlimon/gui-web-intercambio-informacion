@@ -168,11 +168,12 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
 
   obtenerDatosCifrados() {
     this.nombresSolicitud = this.REF_SISTEMA.personas.map(n => {
+      const apellido_materno = n.nom_apellido_materno_afectado ?? '';
       return {
         nom_nombre_afectado: n.nom_nombre_afectado,
         nom_apellido_paterno_afectado: n.nom_apellido_paterno_afectado,
-        nom_apellido_materno_afectado: n.nom_apellido_materno_afectado,
-        nombreCompleto: `${n.nom_nombre_afectado} ${n.nom_apellido_paterno_afectado} ${n.nom_apellido_materno_afectado}`,
+        nom_apellido_materno_afectado: apellido_materno,
+        nombreCompleto: `${n.nom_nombre_afectado} ${n.nom_apellido_paterno_afectado} ${apellido_materno}`,
       }
     });
     this.nombresSolicitud = [...this.nombresSolicitud].filter(nombre => !!nombre.nom_nombre_afectado);
@@ -256,7 +257,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
           if (consulta.tipo === TipoTabla.NSS) {
             rawItems = res.resultadosPorNss[consulta.valorBusqueda as string] || [];
           } else {
-            const key = (consulta.valorBusqueda as NombreTipoDropdown).nombreCompleto;
+            const key = (consulta.valorBusqueda as NombreTipoDropdown).nombreCompleto.trim();
             rawItems = res.resultadosPorNombre[key] || [];
           }
 
@@ -343,7 +344,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
     const consulta = this.consultas[index];
 
     if (consulta) {
-      consulta.paginaActual = event.page;
+      consulta.paginaActual = event.page - 1;
       consulta.registrosPorPagina = event.rows;
 
       this.actualizarPaginaLocal(index);
