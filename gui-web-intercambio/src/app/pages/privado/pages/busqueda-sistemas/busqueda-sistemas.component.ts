@@ -81,10 +81,24 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
   solicitudAntecedentesService: ManejoSolicitudAntecedentesService = inject(ManejoSolicitudAntecedentesService);
   cifradoService: CryptoService = inject(CryptoService);
 
+  fecha = new Date();
+
   fechasCorte: DetalleAntecedentes = {
-    fecCorteSiade: "",
-    fecCorteSsc1: "",
-    fecCorteSsc2: "",
+    fecCorteSiade: this.fecha.toLocaleDateString('es-ES', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric'
+    }),
+    fecCorteSsc1: this.fecha.toLocaleDateString('es-ES', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric'
+    }),
+    fecCorteSsc2: this.fecha.toLocaleDateString('es-ES', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric'
+    }),
     nss: ""
   };
 
@@ -264,7 +278,8 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
           const itemsMapeados: RegistroAntecedentes[] = rawItems.map(item => ({
             idBitacoraAsociacion: item.idBitacoraAsociacion || null,
             indAsociado: item.indAsociado || false,
-            idPersona: String(item.numId || item.idPersona), // Asegurar que sea string
+            numId: item.numId, // Asegurar que sea string
+            idPersona: String(item.numId),
             nss: item.nss,
             nombre: item.nombre,
             expediente: item.expediente || this.REF_SISTEMA.expediente,
@@ -284,7 +299,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
           this.actualizarPaginaLocal(this.consultas.indexOf(consulta));
         });
 
-        this.obtenerFechasCorte();
+        this.guardarBitacora();
       },
       error: () => this._alertServices.error('Error al obtener antecedentes')
     });
@@ -354,7 +369,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
   private mapearASolicitud(evento: any): SolicitudAsociacion {
     return {
       cveAsunto: this.REF_SISTEMA.cveAsunto,
-      idPersona: evento.idPersona,
+      idPersona: evento.numId,
       idBitacoraAsociacion: evento.idBitacoraAsociacion,
       refUsuarioAutentica: this.REF_SISTEMA.usuarioLogueado, // Contexto del componente
       refAplicativoAsociacion: this.REF_SISTEMA.sistema, // Contexto del componente
@@ -376,13 +391,14 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
   }
 
   cambiarEstado(row: RegistroAntecedentes): void {
+    const numId = row.numId ?? 0;
     if (row.indAsociado) {
       this.solicitudAntecedentesService.agregar(
-        row.idPersona,
+        numId.toString(),
         this.mapearASolicitud(row)
       );
     } else {
-      this.solicitudAntecedentesService.eliminar(row.idPersona);
+      this.solicitudAntecedentesService.eliminar(numId.toString());
     }
   }
 
@@ -431,8 +447,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
         }
         this.solicitudAntecedentesService.limpiar();
 
-        this.consultas.forEach((_, index) => {
-        });
+        this.iniciarBusqueda();
 
       },
       error: (error: HttpErrorResponse) => {
@@ -478,19 +493,6 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
   trackConsulta = (consulta: ResultadoConsulta) =>
     `${consulta.tipo}-${consulta.tituloCompleto}`;
 
-
-  obtenerFechasCorte() {
-
-    const solicitudFechaCorte: SolicitudAntecedentes | SolicitudBusquedaPaginado = this.generarSolicitudAntecedentesTotal();
-    const tipoConsulta = this.filtroForm.get('filtro')?.value;
-
-    this.detalleAntecedentesService.consultarFechasCorte(solicitudFechaCorte, tipoConsulta).subscribe({
-      next: (datos) => {
-        this.fechasCorte = datos.respuesta;
-        this.guardarBitacora();
-      }
-    })
-  }
 
   guardarBitacora(): void {
     const solicitud: SolicitudBitacora = this.generarSolicitudBitacora();

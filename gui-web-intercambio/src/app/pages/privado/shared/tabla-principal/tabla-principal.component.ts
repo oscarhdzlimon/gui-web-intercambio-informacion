@@ -189,6 +189,7 @@ export class TablaPrincipalComponent {
   onCheckboxEvent(row: any, event: Event) {
     const input = event.target as HTMLInputElement;
     const value = input.checked;
+    console.log(row, event)
     this.checkboxChanged.emit(row);
   }
 

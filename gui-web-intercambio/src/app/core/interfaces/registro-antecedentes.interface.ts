@@ -13,4 +13,5 @@ export interface RegistroAntecedentes {
   juicioContencioso: number;
   inconformidades: number;
   procedimientoRpe: number;
+  numId?: number;
 }

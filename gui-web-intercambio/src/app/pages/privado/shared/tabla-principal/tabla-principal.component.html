@@ -36,15 +36,14 @@
 
             <div class="checkbox-container">
               <input
-                id="checkbox-{{rowData.idPersona}}"
+                id="checkbox-{{rowData.numId}}"
                 type="checkbox"
                 [(ngModel)]="rowData.indAsociado"
                 [disabled]="rowData.indAsociado && rowData.idBitacoraAsociacion"
                 (change)="onCheckboxEvent(rowData, $event)"
               />
-              <label for="checkbox-{{rowData.key}}"></label>
+              <label for="checkbox-{{rowData.numId}}"></label>
             </div>
-
           </td>
         }
         <td style="min-width:100px">{{ rowData.nss }}</td>
