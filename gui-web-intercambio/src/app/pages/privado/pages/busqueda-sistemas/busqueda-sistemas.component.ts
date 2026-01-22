@@ -377,7 +377,6 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
   }
 
   cambiarEstado(row: RegistroAntecedentes): void {
-    console.log(row)
     const numId = row.numId ?? 0;
     if (row.indAsociado) {
       this.solicitudAntecedentesService.agregar(
