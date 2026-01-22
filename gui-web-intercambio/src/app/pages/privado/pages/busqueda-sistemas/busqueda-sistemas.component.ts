@@ -262,7 +262,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
 
     this.antecedentesService.getLstAntecedentesGeneral(solicitud).subscribe({
       next: (res: RespuestaAntecedentes) => {
-        this.totalAntecedentes = this.ajustarTotales(res.totalesGenerales);
+        this.totalAntecedentes = this.ajustarTotales(res.totalesGenerales, res.totalesAsociados);
 
         // Repartir datos a cada tabla y realizar el primer slice local
         this.consultas.forEach(consulta => {
@@ -592,7 +592,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
   }
 
 
-  private ajustarTotales(totales: TotalAntecedentes): TotalesAntecedentes {
+  private ajustarTotales(totales: TotalAntecedentes, totalesAsociados: TotalAntecedentes): TotalesAntecedentes {
     // Estructura inicial con acumuladores en 0
     return {
       totalPorTipo: {
@@ -604,12 +604,12 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
         gestion: totales.gestion
       },
       totalAsociadosPorTipo: {
-        procedimientoRpe: 0,
-        juicioContencioso: 0,
-        inconformidad: 0,
-        quejaMedica: 0,
-        amparoIndirecto: 0,
-        gestion: 0
+        procedimientoRpe: totalesAsociados.rp,
+        juicioContencioso: totalesAsociados.jf,
+        inconformidad: totalesAsociados.ic,
+        quejaMedica: totalesAsociados.queja_de_servicio,
+        amparoIndirecto: totalesAsociados.mai,
+        gestion: totalesAsociados.gestion
       }
     };
   }
