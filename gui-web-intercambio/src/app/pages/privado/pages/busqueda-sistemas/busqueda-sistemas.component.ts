@@ -81,24 +81,11 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
   solicitudAntecedentesService: ManejoSolicitudAntecedentesService = inject(ManejoSolicitudAntecedentesService);
   cifradoService: CryptoService = inject(CryptoService);
 
-  fecha = new Date();
 
   fechasCorte: DetalleAntecedentes = {
-    fecCorteSiade: this.fecha.toLocaleDateString('es-ES', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric'
-    }),
-    fecCorteSsc1: this.fecha.toLocaleDateString('es-ES', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric'
-    }),
-    fecCorteSsc2: this.fecha.toLocaleDateString('es-ES', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric'
-    }),
+    fecCorteSiade: '',
+    fecCorteSsc1: '',
+    fecCorteSsc2: '',
     nss: ""
   };
 
@@ -108,6 +95,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
               private readonly route: ActivatedRoute,
               private busquedaStateService: BusquedaStateService) {
     super();
+    this.obtenerFechasCorte();
     this.solicitudAntecedentesService.cambios$.subscribe(() => {
       this.consultas.forEach(consulta => {
         const dataActual = consulta.data();
@@ -612,6 +600,16 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
         gestion: totalesAsociados.gestion
       }
     };
+  }
+
+  obtenerFechasCorte() {
+
+    this.detalleAntecedentesService.consultarFechasCorte().subscribe({
+      next: (datos) => {
+        this.fechasCorte = datos.respuesta;
+        this.guardarBitacora();
+      }
+    })
   }
 
   get puedeGuardar() {
