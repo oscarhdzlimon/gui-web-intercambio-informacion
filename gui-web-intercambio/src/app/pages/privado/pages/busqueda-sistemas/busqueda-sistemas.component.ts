@@ -257,7 +257,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
           if (consulta.tipo === TipoTabla.NSS) {
             rawItems = res.resultadosPorNss[consulta.valorBusqueda as string] || [];
           } else {
-            const key = (consulta.valorBusqueda as NombreTipoDropdown).nombreCompleto;
+            const key = (consulta.valorBusqueda as NombreTipoDropdown).nombreCompleto.trim();
             rawItems = res.resultadosPorNombre[key] || [];
           }
 
@@ -344,7 +344,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
     const consulta = this.consultas[index];
 
     if (consulta) {
-      consulta.paginaActual = event.page;
+      consulta.paginaActual = event.page - 1;
       consulta.registrosPorPagina = event.rows;
 
       this.actualizarPaginaLocal(index);
