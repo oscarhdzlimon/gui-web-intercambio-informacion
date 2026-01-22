@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="modificaciones de busqueda de sistemas">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.scss" afterDir="false" />
+    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="ajustes de tamaño">
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,22 +95,6 @@
       <workItem from="1767118150936" duration="3257000" />
       <workItem from="1767891732696" duration="7482000" />
       <workItem from="1767937805716" duration="125067000" />
-    </task>
-    <task id="LOCAL-00074" summary="ajustes de busqueda interna -&gt; por nombre">
-      <option name="closed" value="true" />
-      <created>1768110571120</created>
-      <option name="number" value="00074" />
-      <option name="presentableId" value="LOCAL-00074" />
-      <option name="project" value="LOCAL" />
-      <updated>1768110571120</updated>
-    </task>
-    <task id="LOCAL-00075" summary="ajuste totales">
-      <option name="closed" value="true" />
-      <created>1768110873258</created>
-      <option name="number" value="00075" />
-      <option name="presentableId" value="LOCAL-00075" />
-      <option name="project" value="LOCAL" />
-      <updated>1768110873258</updated>
     </task>
     <task id="LOCAL-00076" summary="ajuste fechas">
       <option name="closed" value="true" />
@@ -489,7 +472,23 @@
       <option name="project" value="LOCAL" />
       <updated>1769036641743</updated>
     </task>
-    <option name="localTasksCounter" value="123" />
+    <task id="LOCAL-00123" summary="correcciones de css">
+      <option name="closed" value="true" />
+      <created>1769037037837</created>
+      <option name="number" value="00123" />
+      <option name="presentableId" value="LOCAL-00123" />
+      <option name="project" value="LOCAL" />
+      <updated>1769037037837</updated>
+    </task>
+    <task id="LOCAL-00124" summary="ajustes de tamaño">
+      <option name="closed" value="true" />
+      <created>1769037278391</created>
+      <option name="number" value="00124" />
+      <option name="presentableId" value="LOCAL-00124" />
+      <option name="project" value="LOCAL" />
+      <updated>1769037278392</updated>
+    </task>
+    <option name="localTasksCounter" value="125" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -507,8 +506,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="ajuste en totales" />
-    <MESSAGE value="ajuste para nueva consulta detalle de registros" />
     <MESSAGE value="ajustes css para nueva consulta detalle de registros" />
     <MESSAGE value="ajustes para nueva consulta detalle de registros" />
     <MESSAGE value="limpieza pagindao consulta detalle de antecedentes" />
@@ -532,6 +529,8 @@
     <MESSAGE value="correcciones de css + totales" />
     <MESSAGE value="ajustes para ejecutar nueva solicitud" />
     <MESSAGE value="modificaciones de busqueda de sistemas" />
-    <option name="LAST_COMMIT_MESSAGE" value="modificaciones de busqueda de sistemas" />
+    <MESSAGE value="correcciones de css" />
+    <MESSAGE value="ajustes de tamaño" />
+    <option name="LAST_COMMIT_MESSAGE" value="ajustes de tamaño" />
   </component>
 </project>

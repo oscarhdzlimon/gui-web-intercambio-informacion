@@ -67,7 +67,7 @@
   <app-tabla-principal [asociar]="false"
                        [titulo]="tituloTabla"
                        [data]="data()"
-                       [rows]="5"
+                       [rows]="10"
                        [total]="totalregistros"
                        [tipoBusqueda]="'1'"
                        [datosUsuario]="generarObjReporteAntecedentes()"
@@ -76,7 +76,9 @@
 }
 
 @if (data_nombre().length > 0) {
-  <app-tabla-principal [titulo]="tituloTablanombre"
+  <app-tabla-principal
+                       [asociar]="false"
+                       [titulo]="tituloTablanombre"
                        [data]="data_nombre()"
                        [tipoBusqueda]="'2'"
                        [rows]="10"
