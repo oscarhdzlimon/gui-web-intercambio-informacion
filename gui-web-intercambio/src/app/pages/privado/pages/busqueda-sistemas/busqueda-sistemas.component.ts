@@ -264,7 +264,8 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
           const itemsMapeados: RegistroAntecedentes[] = rawItems.map(item => ({
             idBitacoraAsociacion: item.idBitacoraAsociacion || null,
             indAsociado: item.indAsociado || false,
-            idPersona: String(item.numId || item.idPersona), // Asegurar que sea string
+            numId: item.numId, // Asegurar que sea string
+            idPersona: String(item.numId),
             nss: item.nss,
             nombre: item.nombre,
             expediente: item.expediente || this.REF_SISTEMA.expediente,
@@ -354,7 +355,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
   private mapearASolicitud(evento: any): SolicitudAsociacion {
     return {
       cveAsunto: this.REF_SISTEMA.cveAsunto,
-      idPersona: evento.idPersona,
+      idPersona: evento.numId,
       idBitacoraAsociacion: evento.idBitacoraAsociacion,
       refUsuarioAutentica: this.REF_SISTEMA.usuarioLogueado, // Contexto del componente
       refAplicativoAsociacion: this.REF_SISTEMA.sistema, // Contexto del componente
@@ -376,13 +377,15 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
   }
 
   cambiarEstado(row: RegistroAntecedentes): void {
+    console.log(row)
+    const numId = row.numId ?? 0;
     if (row.indAsociado) {
       this.solicitudAntecedentesService.agregar(
-        row.idPersona,
+        numId.toString(),
         this.mapearASolicitud(row)
       );
     } else {
-      this.solicitudAntecedentesService.eliminar(row.idPersona);
+      this.solicitudAntecedentesService.eliminar(numId.toString());
     }
   }
 
