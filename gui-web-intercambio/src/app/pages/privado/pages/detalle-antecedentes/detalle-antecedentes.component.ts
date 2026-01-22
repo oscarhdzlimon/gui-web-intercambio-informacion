@@ -1,5 +1,5 @@
 import {CommonModule, Location} from '@angular/common';
-import {Component, computed, inject, OnInit, signal, WritableSignal,} from '@angular/core';
+import {Component, computed, inject, OnInit, signal,} from '@angular/core';
 
 import {ReactiveFormsModule,} from '@angular/forms';
 import {GeneralComponent} from '@components/general.component';
@@ -11,22 +11,13 @@ import {PopoverModule} from 'primeng/popover';
 import {SelectModule} from 'primeng/select';
 import {TableModule} from 'primeng/table';
 import {NgbAccordionModule} from '@ng-bootstrap/ng-bootstrap';
-import {
-  TablaAmparoIndirecto,
-  TablaDetalleGestionInterface,
-  TablaInconformidades,
-  TablaJuicioContenciosoInterface,
-  TablaProcedimientoRpeInterface,
-  TablaQuejaMedicaInterface,
-} from '@models/tablas-detalle-antecedentes.interface';
+import {TablaDetalleGestionInterface,} from '@models/tablas-detalle-antecedentes.interface';
 import {DialogService, DynamicDialogRef} from 'primeng/dynamicdialog';
 import {DetalleComponent} from './detalle/detalle.component';
 import {FooterGenericoComponent} from '../../shared/footer-generico/footer-generico.component';
 import {HeaderGenericoComponent} from '../../shared/header-generico/header-generico.component';
 import {ActivatedRoute} from '@angular/router';
 import {DetalleAntecedentesService} from '@services/detalle-antecedentes.service';
-import {Ordenamiento} from '@models/ordenamiento.enum';
-import {forkJoin} from 'rxjs';
 import {DataCacheService} from '@services/data-cache.service';
 import {DetalleAntecedentes} from '@models/detalleAntecedentes.interface';
 import {SesionUser} from '@models/sesion-user.interface';

@@ -34,7 +34,8 @@ import {
 } from '../../../../core/interfaces/solicitud-busqueda-antecedentes.interface';
 import {
   NuevoRegistroAntecedentes,
-  RespuestaAntecedentes, TotalAntecedentes
+  RespuestaAntecedentes,
+  TotalAntecedentes
 } from '../../../../core/interfaces/respuesta-antecedentes.interface';
 
 enum TipoTabla {

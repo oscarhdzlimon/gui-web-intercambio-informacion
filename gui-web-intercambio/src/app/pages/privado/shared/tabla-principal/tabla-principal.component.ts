@@ -13,8 +13,7 @@ import {TableModule} from 'primeng/table';
 import {RegistroAntecedentes} from '../../../../core/interfaces/registro-antecedentes.interface';
 import {DataCacheService} from '@services/data-cache.service';
 import {ReporteAntecedentesService} from '@services/reporteAntecedentes.service';
-import {DetalleAntecedentes} from '@models/detalleAntecedentes.interface';
-import { ReporteAntecedentes } from '@models/reporteAntecedentes.interface';
+import {ReporteAntecedentes} from '@models/reporteAntecedentes.interface';
 
 @Component({
   selector: 'app-tabla-principal',
@@ -180,7 +179,6 @@ export class TablaPrincipalComponent {
 
   // Evento paginador
   onPageChange(event: any) {
-    console.log(event)
     event.page++;
     this.pageChange.emit(event);
   }
@@ -189,7 +187,6 @@ export class TablaPrincipalComponent {
   onCheckboxEvent(row: any, event: Event) {
     const input = event.target as HTMLInputElement;
     const value = input.checked;
-    console.log(row, event)
     this.checkboxChanged.emit(row);
   }
 

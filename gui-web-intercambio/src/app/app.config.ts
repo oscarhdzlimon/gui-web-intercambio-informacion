@@ -1,4 +1,4 @@
-import {ApplicationConfig, importProvidersFrom, provideZoneChangeDetection} from '@angular/core';
+import {ApplicationConfig, provideZoneChangeDetection} from '@angular/core';
 import {provideRouter} from '@angular/router';
 import Aura from '@primeng/themes/aura';
 import {es} from "primelocale/es.json"
@@ -11,7 +11,7 @@ import {Mensajes} from '@utils/mensajes';
 import {provideUserIdleConfig} from "angular-user-idle";
 import {TIEMPO_MAXIMO_SESION} from '@utils/tokens';
 import {TiempoSesion} from '@models/tiempo-sesion.interface';
-import { LoadingInterceptor } from '@interceptors/loader-interceptor.service';
+import {LoadingInterceptor} from '@interceptors/loader-interceptor.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [Mensajes,
@@ -41,9 +41,9 @@ export const appConfig: ApplicationConfig = {
       }
     ),
     /* {provide: HTTP_INTERCEPTORS, useClass: ApiKeyInterceptor, multi: true},*/
-    
-    
-    {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true}, 
+
+
+    {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true},
     provideAnimations(),
     provideUserIdleConfig({idle: 1140, timeout: 60, ping: 120}),
   ]
