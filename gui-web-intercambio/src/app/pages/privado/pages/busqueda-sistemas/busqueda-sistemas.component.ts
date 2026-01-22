@@ -81,10 +81,24 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
   solicitudAntecedentesService: ManejoSolicitudAntecedentesService = inject(ManejoSolicitudAntecedentesService);
   cifradoService: CryptoService = inject(CryptoService);
 
+  fecha = new Date();
+
   fechasCorte: DetalleAntecedentes = {
-    fecCorteSiade: "",
-    fecCorteSsc1: "",
-    fecCorteSsc2: "",
+    fecCorteSiade: this.fecha.toLocaleDateString('es-ES', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric'
+    }),
+    fecCorteSsc1: this.fecha.toLocaleDateString('es-ES', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric'
+    }),
+    fecCorteSsc2: this.fecha.toLocaleDateString('es-ES', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric'
+    }),
     nss: ""
   };
 
@@ -285,7 +299,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
           this.actualizarPaginaLocal(this.consultas.indexOf(consulta));
         });
 
-        this.obtenerFechasCorte();
+        this.guardarBitacora();
       },
       error: () => this._alertServices.error('Error al obtener antecedentes')
     });
@@ -479,19 +493,6 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
   trackConsulta = (consulta: ResultadoConsulta) =>
     `${consulta.tipo}-${consulta.tituloCompleto}`;
 
-
-  obtenerFechasCorte() {
-
-    const solicitudFechaCorte: SolicitudAntecedentes | SolicitudBusquedaPaginado = this.generarSolicitudAntecedentesTotal();
-    const tipoConsulta = this.filtroForm.get('filtro')?.value;
-
-    this.detalleAntecedentesService.consultarFechasCorte(solicitudFechaCorte, tipoConsulta).subscribe({
-      next: (datos) => {
-        this.fechasCorte = datos.respuesta;
-        this.guardarBitacora();
-      }
-    })
-  }
 
   guardarBitacora(): void {
     const solicitud: SolicitudBitacora = this.generarSolicitudBitacora();
