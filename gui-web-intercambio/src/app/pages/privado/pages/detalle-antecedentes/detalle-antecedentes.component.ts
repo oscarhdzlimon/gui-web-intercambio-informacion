@@ -166,6 +166,7 @@ export class DetalleAntecedentesComponent extends GeneralComponent implements On
   tabla2!: Array<any>;
 
   ngOnInit(): void {
+    this.obtenerFechasCorte();
     this.idpagina = Number(this.route.snapshot.paramMap.get('id'));
     this.obtenerValoresTablas();
   }
@@ -287,5 +288,13 @@ export class DetalleAntecedentesComponent extends GeneralComponent implements On
 
   regresar() {
     this._location.back();
+  }
+
+  obtenerFechasCorte() {
+    this.detalleAntecedentesService.consultarFechasCorte().subscribe({
+      next: (datos) => {
+        this.fechasCorte = datos.respuesta;
+      }
+    })
   }
 }

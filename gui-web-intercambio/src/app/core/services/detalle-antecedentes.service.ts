@@ -45,17 +45,10 @@ export class DetalleAntecedentesService {
   }
 
 
-  consultarFechasCorte(filtros: DetalleAntecedenteInterface | SolicitudBusquedaPaginado, tipoBusqueda: number = 1): Observable<HttpRespuesta<any>> {
+  consultarFechasCorte(): Observable<HttpRespuesta<any>> {
     const ruta = `${this.serverEndPointURLAntecedente}antecedentes/obtenerFechasCorte`;
 
-    const params = new HttpParams()
-      .set('tipoBusqueda', tipoBusqueda);
-
-    if (!tipoBusqueda) {
-      return this.http.post<HttpRespuesta<any>>(ruta, filtros, {headers: this.header})
-    }
-
-    return this.http.post<HttpRespuesta<any>>(ruta, filtros, {headers: this.header, params}).pipe(
+    return this.http.post<HttpRespuesta<any>>(ruta, {}, {headers: this.header}).pipe(
       catchError(this.handleError),
       map((response: any) => {
         return response
