@@ -97,24 +97,11 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
 
   userData: SesionUser | null = null;
 
-  fecha = new Date();
 
   fechasCorte: DetalleAntecedentes = {
-    fecCorteSiade: this.fecha.toLocaleDateString('es-ES', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric'
-    }),
-    fecCorteSsc1: this.fecha.toLocaleDateString('es-ES', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric'
-    }),
-    fecCorteSsc2: this.fecha.toLocaleDateString('es-ES', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric'
-    }),
+    fecCorteSiade: '',
+    fecCorteSsc1: '',
+    fecCorteSsc2: '',
     nss: ""
   };
 
@@ -127,6 +114,7 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
   constructor(private fb: FormBuilder,
               private busquedaStateService: BusquedaStateService) {
     super();
+    this.obtenerFechasCorte();
     this.solicitudAntecedentesService.cambios$.subscribe(() => {
       this.data.set(
         this.sincronizarEstado(this.data())
@@ -608,5 +596,14 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
       sistema: this.REF_APLICATIVO,
       modulo: this.REF_MODULO
     };
+  }
+
+  obtenerFechasCorte() {
+    this.detalleAntecedentesService.consultarFechasCorte().subscribe({
+      next: (datos) => {
+        this.fechasCorte = datos.respuesta;
+        this.guardarBitacora();
+      }
+    })
   }
 }

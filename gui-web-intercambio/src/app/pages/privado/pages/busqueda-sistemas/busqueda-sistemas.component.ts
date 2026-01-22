@@ -603,7 +603,6 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
   }
 
   obtenerFechasCorte() {
-
     this.detalleAntecedentesService.consultarFechasCorte().subscribe({
       next: (datos) => {
         this.fechasCorte = datos.respuesta;
