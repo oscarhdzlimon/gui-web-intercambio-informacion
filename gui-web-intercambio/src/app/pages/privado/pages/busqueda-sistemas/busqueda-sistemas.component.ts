@@ -114,14 +114,32 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
   recuperarUltimaBusqueda(): void {
     const filtrosGuardados = this.busquedaStateService.obtenerFiltros();
 
-    if (filtrosGuardados) {
-      // Aplicar los valores guardados a las variables del componente/formulario
-      this.filtroForm.get('filtro')?.setValue(filtrosGuardados.filtro);
-      this.filtroForm.get('valor')?.setValue(filtrosGuardados.valor);
-      this.consulta_todos = filtrosGuardados.consulta_todos;
+    if (!filtrosGuardados || filtrosGuardados.personas.length === 0) return
+    const primeraPersona = filtrosGuardados.personas[0];
 
-      this.iniciarBusqueda();
+    let tipoRescatado = 0;
+    let valorRescatado: any = null;
+
+    if (primeraPersona.nss) {
+      tipoRescatado = 1; // Caso NSS
+      valorRescatado = primeraPersona.nss;
+    } else if (primeraPersona.nombre) {
+      tipoRescatado = 2; // Caso Nombre
+      valorRescatado = {
+        nom_nombre_afectado: primeraPersona.nombre,
+        nom_apellido_paterno_afectado: primeraPersona.apellidoPaterno,
+        nom_apellido_materno_afectado: primeraPersona.apellidoMaterno
+      };
     }
+
+    this.filtroForm.get('valor')?.enable();
+
+    this.filtroForm.patchValue({
+      filtro: tipoRescatado,
+      valor: valorRescatado
+    });
+
+    this.iniciarBusqueda();
   }
 
   inicializarFiltroForm(): FormGroup {
@@ -246,7 +264,9 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
 
     this.configurarEstructuraTablas(tipoConsulta, valor);
 
+
     const solicitud = this.generarNuevaSolicitud(tipoConsulta, valor);
+    this.busquedaStateService.guardarFiltros(solicitud);
 
     this.antecedentesService.getLstAntecedentesGeneral(solicitud).subscribe({
       next: (res: RespuestaAntecedentes) => {
