@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="correcciones de recuperación de busqueda para busqueda sistemas">
+    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="correcciones de recuperación de busqueda para consulta antecedentes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/services/busqueda-state.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/services/busqueda-state.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/shared/tabla-principal/tabla-principal.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/shared/tabla-principal/tabla-principal.component.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,15 +97,7 @@
       <workItem from="1767118150936" duration="3257000" />
       <workItem from="1767891732696" duration="7482000" />
       <workItem from="1767937805716" duration="125067000" />
-      <workItem from="1769192673454" duration="5260000" />
-    </task>
-    <task id="LOCAL-00090" summary="totales -&gt; caso 3">
-      <option name="closed" value="true" />
-      <created>1768246170420</created>
-      <option name="number" value="00090" />
-      <option name="presentableId" value="LOCAL-00090" />
-      <option name="project" value="LOCAL" />
-      <updated>1768246170421</updated>
+      <workItem from="1769192673454" duration="6302000" />
     </task>
     <task id="LOCAL-00091" summary="correcciones de consulta">
       <option name="closed" value="true" />
@@ -491,7 +483,15 @@
       <option name="project" value="LOCAL" />
       <updated>1769196744128</updated>
     </task>
-    <option name="localTasksCounter" value="139" />
+    <task id="LOCAL-00139" summary="correcciones de recuperación de busqueda para consulta antecedentes">
+      <option name="closed" value="true" />
+      <created>1769198148913</created>
+      <option name="number" value="00139" />
+      <option name="presentableId" value="LOCAL-00139" />
+      <option name="project" value="LOCAL" />
+      <updated>1769198148913</updated>
+    </task>
+    <option name="localTasksCounter" value="140" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -509,7 +509,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="cambio de variable a environment" />
     <MESSAGE value="correccion para sscv1" />
     <MESSAGE value="correccion para sscv1 -&lt; pruebas" />
     <MESSAGE value="correccion para sscv1 -&lt; revert comentarios" />
@@ -534,6 +533,7 @@
     <MESSAGE value="fechas corte -&gt; consulta-antecedentes" />
     <MESSAGE value="siempre se puede imprimir desde cnsulta-antecedentes" />
     <MESSAGE value="correcciones de recuperación de busqueda para busqueda sistemas" />
-    <option name="LAST_COMMIT_MESSAGE" value="correcciones de recuperación de busqueda para busqueda sistemas" />
+    <MESSAGE value="correcciones de recuperación de busqueda para consulta antecedentes" />
+    <option name="LAST_COMMIT_MESSAGE" value="correcciones de recuperación de busqueda para consulta antecedentes" />
   </component>
 </project>

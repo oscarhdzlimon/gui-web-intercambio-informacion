@@ -155,7 +155,6 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
 
   recuperarUltimaBusqueda(): void {
     const filtrosGuardados = this.busquedaStateService.obtenerFiltrosAntecedentes();
-
     if (!filtrosGuardados || filtrosGuardados.personas.length === 0) return;
     const p = filtrosGuardados.personas[0];
     const form = this.filtroForm;
@@ -192,7 +191,7 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
       amaterno: p.apellidoMaterno
     }, {emitEvent: true});
 
-    this.paginar(0, 10);
+    this.paginar(0, 0);
   }
 
   suscribirATipoConsulta(): void {
@@ -556,7 +555,7 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
     return {
       idBitacoraAsociacion: null,
       indAsociado: false,
-      idPersona: item.numId.toString(),
+      idPersona: (item.numId ?? 0).toString(),
       nss: item.nss,
       nombre: item.nombre,
       apellidoPaterno: item.apellidoPaterno,

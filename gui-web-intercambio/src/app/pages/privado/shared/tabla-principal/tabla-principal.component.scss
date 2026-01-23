@@ -1,21 +1,17 @@
 /* Forzar el comportamiento sticky incluso si el JS de PrimeNG no ha cargado */
 :host ::ng-deep .p-datatable-scrollable .p-frozen-column {
-  position: -webkit-sticky !important;
   position: sticky !important;
   right: 0 !important; /* Para la última columna */
   z-index: 10;
-  background-color: #fff; /* O el color de fondo de tu tabla */
+  background-color: #fff;
   border-left: 1px solid #e5e7eb; /* Opcional: para separar visualmente */
 }
 
-/* Si tienes la penúltima columna también congelada (Imprimir y Visualizar) */
-/* Debemos darle un offset manual basado en el ancho que definiste (100px) */
 :host ::ng-deep .p-datatable-thead > tr > th:nth-last-child(2)[pFrozenColumn],
 :host ::ng-deep .p-datatable-tbody > tr > td:nth-last-child(2)[pFrozenColumn] {
   right: 100px !important; /* Este debe ser el ancho de la última columna */
 }
 
-/* Estabilizar el contenedor para que no colapse */
 :host ::ng-deep .p-datatable-wrapper {
   overflow-anchor: none; /* Evita saltos de scroll automáticos del navegador */
 }
