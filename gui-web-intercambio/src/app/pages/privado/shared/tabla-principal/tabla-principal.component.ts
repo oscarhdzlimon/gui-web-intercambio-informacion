@@ -38,7 +38,8 @@ export class TablaPrincipalComponent {
   @Input() showTitulo: boolean = true;
   @Input() expediente: string | null = null;
   @Input() datosUsuario!: ReporteAntecedentes;
-  @Input() asociar: boolean = true
+  @Input() asociar: boolean = true;
+  @Input() banderaImprimir: boolean = false;
 
   @Input() rows: number = 10;
   @Input() first: number = 0;

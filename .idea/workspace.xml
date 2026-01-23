@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="correccion de pFrozen + optimizacion de imports">
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/services/detalle-antecedentes.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/services/detalle-antecedentes.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" afterDir="false" />
+    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="correcciones css -&gt; columna de impresión">
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/detalle-antecedentes/detalle-antecedentes.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/detalle-antecedentes/detalle-antecedentes.component.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,62 +95,7 @@
       <workItem from="1767118150936" duration="3257000" />
       <workItem from="1767891732696" duration="7482000" />
       <workItem from="1767937805716" duration="125067000" />
-    </task>
-    <task id="LOCAL-00086" summary="adecuaciones fecha corte + totales">
-      <option name="closed" value="true" />
-      <created>1768238219304</created>
-      <option name="number" value="00086" />
-      <option name="presentableId" value="LOCAL-00086" />
-      <option name="project" value="LOCAL" />
-      <updated>1768238219304</updated>
-    </task>
-    <task id="LOCAL-00087" summary="ajuste de id's">
-      <option name="closed" value="true" />
-      <created>1768241811928</created>
-      <option name="number" value="00087" />
-      <option name="presentableId" value="LOCAL-00087" />
-      <option name="project" value="LOCAL" />
-      <updated>1768241811928</updated>
-    </task>
-    <task id="LOCAL-00088" summary="consultas individuales -&gt; ajustes">
-      <option name="closed" value="true" />
-      <created>1768245489388</created>
-      <option name="number" value="00088" />
-      <option name="presentableId" value="LOCAL-00088" />
-      <option name="project" value="LOCAL" />
-      <updated>1768245489388</updated>
-    </task>
-    <task id="LOCAL-00089" summary="fechas corte -&gt; caso 3">
-      <option name="closed" value="true" />
-      <created>1768245980551</created>
-      <option name="number" value="00089" />
-      <option name="presentableId" value="LOCAL-00089" />
-      <option name="project" value="LOCAL" />
-      <updated>1768245980551</updated>
-    </task>
-    <task id="LOCAL-00090" summary="totales -&gt; caso 3">
-      <option name="closed" value="true" />
-      <created>1768246170420</created>
-      <option name="number" value="00090" />
-      <option name="presentableId" value="LOCAL-00090" />
-      <option name="project" value="LOCAL" />
-      <updated>1768246170421</updated>
-    </task>
-    <task id="LOCAL-00091" summary="correcciones de consulta">
-      <option name="closed" value="true" />
-      <created>1768248243335</created>
-      <option name="number" value="00091" />
-      <option name="presentableId" value="LOCAL-00091" />
-      <option name="project" value="LOCAL" />
-      <updated>1768248243335</updated>
-    </task>
-    <task id="LOCAL-00092" summary="ajuste de visibilidad de totales">
-      <option name="closed" value="true" />
-      <created>1768251556816</created>
-      <option name="number" value="00092" />
-      <option name="presentableId" value="LOCAL-00092" />
-      <option name="project" value="LOCAL" />
-      <updated>1768251556816</updated>
+      <workItem from="1769192673454" duration="6787000" />
     </task>
     <task id="LOCAL-00093" summary="eliminacion de filtros">
       <option name="closed" value="true" />
@@ -489,7 +433,63 @@
       <option name="project" value="LOCAL" />
       <updated>1769101098415</updated>
     </task>
-    <option name="localTasksCounter" value="135" />
+    <task id="LOCAL-00135" summary="fechas corte -&gt; busqueda sistemas">
+      <option name="closed" value="true" />
+      <created>1769110217926</created>
+      <option name="number" value="00135" />
+      <option name="presentableId" value="LOCAL-00135" />
+      <option name="project" value="LOCAL" />
+      <updated>1769110217926</updated>
+    </task>
+    <task id="LOCAL-00136" summary="fechas corte -&gt; consulta-antecedentes">
+      <option name="closed" value="true" />
+      <created>1769110400518</created>
+      <option name="number" value="00136" />
+      <option name="presentableId" value="LOCAL-00136" />
+      <option name="project" value="LOCAL" />
+      <updated>1769110400518</updated>
+    </task>
+    <task id="LOCAL-00137" summary="siempre se puede imprimir desde cnsulta-antecedentes">
+      <option name="closed" value="true" />
+      <created>1769193433706</created>
+      <option name="number" value="00137" />
+      <option name="presentableId" value="LOCAL-00137" />
+      <option name="project" value="LOCAL" />
+      <updated>1769193433706</updated>
+    </task>
+    <task id="LOCAL-00138" summary="correcciones de recuperación de busqueda para busqueda sistemas">
+      <option name="closed" value="true" />
+      <created>1769196744128</created>
+      <option name="number" value="00138" />
+      <option name="presentableId" value="LOCAL-00138" />
+      <option name="project" value="LOCAL" />
+      <updated>1769196744128</updated>
+    </task>
+    <task id="LOCAL-00139" summary="correcciones de recuperación de busqueda para consulta antecedentes">
+      <option name="closed" value="true" />
+      <created>1769198148913</created>
+      <option name="number" value="00139" />
+      <option name="presentableId" value="LOCAL-00139" />
+      <option name="project" value="LOCAL" />
+      <updated>1769198148913</updated>
+    </task>
+    <task id="LOCAL-00140" summary="correcciones css">
+      <option name="closed" value="true" />
+      <created>1769200685443</created>
+      <option name="number" value="00140" />
+      <option name="presentableId" value="LOCAL-00140" />
+      <option name="project" value="LOCAL" />
+      <updated>1769200685443</updated>
+    </task>
+    <task id="LOCAL-00141" summary="correcciones css -&gt; columna de impresión">
+      <option name="closed" value="true" />
+      <created>1769200823764</created>
+      <option name="number" value="00141" />
+      <option name="presentableId" value="LOCAL-00141" />
+      <option name="project" value="LOCAL" />
+      <updated>1769200823764</updated>
+    </task>
+    <option name="localTasksCounter" value="142" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -507,13 +507,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="correcciones de busqueda sistema" />
-    <MESSAGE value="ajustes cveAsunto" />
-    <MESSAGE value="ajustes cveAsunto -&gt; asociacion" />
-    <MESSAGE value="correccion cuando no viene nss" />
-    <MESSAGE value="cambio de variable a environment" />
-    <MESSAGE value="correccion para sscv1" />
-    <MESSAGE value="correccion para sscv1 -&lt; pruebas" />
     <MESSAGE value="correccion para sscv1 -&lt; revert comentarios" />
     <MESSAGE value="modificaciones de respuesta, consulta servicios para peticiones internas" />
     <MESSAGE value="modificaciones de paginado sin filtrar por id's" />
@@ -532,6 +525,13 @@
     <MESSAGE value="correcciones de fecha corte" />
     <MESSAGE value="totales asociados -&gt; busqueda-sistemas" />
     <MESSAGE value="correccion de pFrozen + optimizacion de imports" />
-    <option name="LAST_COMMIT_MESSAGE" value="correccion de pFrozen + optimizacion de imports" />
+    <MESSAGE value="fechas corte -&gt; busqueda sistemas" />
+    <MESSAGE value="fechas corte -&gt; consulta-antecedentes" />
+    <MESSAGE value="siempre se puede imprimir desde cnsulta-antecedentes" />
+    <MESSAGE value="correcciones de recuperación de busqueda para busqueda sistemas" />
+    <MESSAGE value="correcciones de recuperación de busqueda para consulta antecedentes" />
+    <MESSAGE value="correcciones css" />
+    <MESSAGE value="correcciones css -&gt; columna de impresión" />
+    <option name="LAST_COMMIT_MESSAGE" value="correcciones css -&gt; columna de impresión" />
   </component>
 </project>

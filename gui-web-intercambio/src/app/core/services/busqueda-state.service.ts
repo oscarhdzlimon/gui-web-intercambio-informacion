@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
+import {NuevaSolicitudBusquedaPaginado} from '../interfaces/solicitud-busqueda-antecedentes.interface';
 
 export interface FiltrosBusqueda {
   filtro: string | null;
@@ -21,13 +22,13 @@ export interface FiltrosAntecedentes {
 export class BusquedaStateService {
 
   // Almacena el estado actual de los filtros
-  private filtrosSource = new BehaviorSubject<FiltrosBusqueda | null>(null);
+  private filtrosSource = new BehaviorSubject<NuevaSolicitudBusquedaPaginado | null>(null);
 
-  private filtrosAntecedentes = new BehaviorSubject<FiltrosAntecedentes | null>(null);
+  private filtrosAntecedentes = new BehaviorSubject<NuevaSolicitudBusquedaPaginado | null>(null);
 
-  filtrosActuales$: Observable<FiltrosBusqueda | null> = this.filtrosSource.asObservable();
+  filtrosActuales$: Observable<NuevaSolicitudBusquedaPaginado | null> = this.filtrosSource.asObservable();
 
-  filtrosAntecedentesActuales$: Observable<FiltrosAntecedentes | null> = this.filtrosAntecedentes.asObservable();
+  filtrosAntecedentesActuales$: Observable<NuevaSolicitudBusquedaPaginado | null> = this.filtrosAntecedentes.asObservable();
 
   constructor() {
   }
@@ -36,11 +37,11 @@ export class BusquedaStateService {
    * Guarda los filtros de la última consulta.
    * @param filtros El objeto de filtros a guardar.
    */
-  guardarFiltros(filtros: FiltrosBusqueda): void {
+  guardarFiltros(filtros: NuevaSolicitudBusquedaPaginado): void {
     this.filtrosSource.next(filtros);
   }
 
-  guardarFiltrosAntecedentes(filtros: FiltrosAntecedentes): void {
+  guardarFiltrosAntecedentes(filtros: NuevaSolicitudBusquedaPaginado): void {
     this.filtrosAntecedentes.next(filtros);
   }
 
@@ -52,11 +53,11 @@ export class BusquedaStateService {
   /**
    * Obtiene los filtros actuales de forma síncrona.
    */
-  obtenerFiltros(): FiltrosBusqueda | null {
+  obtenerFiltros(): NuevaSolicitudBusquedaPaginado | null {
     return this.filtrosSource.getValue();
   }
 
-  obtenerFiltrosAntecedentes(): FiltrosAntecedentes | null {
+  obtenerFiltrosAntecedentes(): NuevaSolicitudBusquedaPaginado | null {
     return this.filtrosAntecedentes.getValue();
   }
 }

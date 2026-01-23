@@ -72,6 +72,7 @@
                        [tipoBusqueda]="'1'"
                        [datosUsuario]="generarObjReporteAntecedentes()"
                        (pageChange)="cargarPagina($event, TipoTabla.NSS)"
+                       [banderaImprimir]="true"
                        (checkboxChanged)="cambiarEstado($event)"/>
 }
 
@@ -82,6 +83,7 @@
                        [data]="data_nombre()"
                        [tipoBusqueda]="'2'"
                        [rows]="10"
+                       [banderaImprimir]="true"
                        [total]="totalregistrosnombre"
                        (pageChange)="cargarPagina($event, TipoTabla.NOMBRE)"
                        (checkboxChanged)="cambiarEstado($event)"/>
