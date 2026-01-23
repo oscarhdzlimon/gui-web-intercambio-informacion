@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="correcciones de recuperación de busqueda para consulta antecedentes">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/shared/tabla-principal/tabla-principal.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/shared/tabla-principal/tabla-principal.component.scss" afterDir="false" />
+    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="correcciones css -&gt; columna de impresión">
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/detalle-antecedentes/detalle-antecedentes.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/detalle-antecedentes/detalle-antecedentes.component.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,23 +95,7 @@
       <workItem from="1767118150936" duration="3257000" />
       <workItem from="1767891732696" duration="7482000" />
       <workItem from="1767937805716" duration="125067000" />
-      <workItem from="1769192673454" duration="6302000" />
-    </task>
-    <task id="LOCAL-00091" summary="correcciones de consulta">
-      <option name="closed" value="true" />
-      <created>1768248243335</created>
-      <option name="number" value="00091" />
-      <option name="presentableId" value="LOCAL-00091" />
-      <option name="project" value="LOCAL" />
-      <updated>1768248243335</updated>
-    </task>
-    <task id="LOCAL-00092" summary="ajuste de visibilidad de totales">
-      <option name="closed" value="true" />
-      <created>1768251556816</created>
-      <option name="number" value="00092" />
-      <option name="presentableId" value="LOCAL-00092" />
-      <option name="project" value="LOCAL" />
-      <updated>1768251556816</updated>
+      <workItem from="1769192673454" duration="6787000" />
     </task>
     <task id="LOCAL-00093" summary="eliminacion de filtros">
       <option name="closed" value="true" />
@@ -491,7 +473,23 @@
       <option name="project" value="LOCAL" />
       <updated>1769198148913</updated>
     </task>
-    <option name="localTasksCounter" value="140" />
+    <task id="LOCAL-00140" summary="correcciones css">
+      <option name="closed" value="true" />
+      <created>1769200685443</created>
+      <option name="number" value="00140" />
+      <option name="presentableId" value="LOCAL-00140" />
+      <option name="project" value="LOCAL" />
+      <updated>1769200685443</updated>
+    </task>
+    <task id="LOCAL-00141" summary="correcciones css -&gt; columna de impresión">
+      <option name="closed" value="true" />
+      <created>1769200823764</created>
+      <option name="number" value="00141" />
+      <option name="presentableId" value="LOCAL-00141" />
+      <option name="project" value="LOCAL" />
+      <updated>1769200823764</updated>
+    </task>
+    <option name="localTasksCounter" value="142" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -509,8 +507,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="correccion para sscv1" />
-    <MESSAGE value="correccion para sscv1 -&lt; pruebas" />
     <MESSAGE value="correccion para sscv1 -&lt; revert comentarios" />
     <MESSAGE value="modificaciones de respuesta, consulta servicios para peticiones internas" />
     <MESSAGE value="modificaciones de paginado sin filtrar por id's" />
@@ -534,6 +530,8 @@
     <MESSAGE value="siempre se puede imprimir desde cnsulta-antecedentes" />
     <MESSAGE value="correcciones de recuperación de busqueda para busqueda sistemas" />
     <MESSAGE value="correcciones de recuperación de busqueda para consulta antecedentes" />
-    <option name="LAST_COMMIT_MESSAGE" value="correcciones de recuperación de busqueda para consulta antecedentes" />
+    <MESSAGE value="correcciones css" />
+    <MESSAGE value="correcciones css -&gt; columna de impresión" />
+    <option name="LAST_COMMIT_MESSAGE" value="correcciones css -&gt; columna de impresión" />
   </component>
 </project>
