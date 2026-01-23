@@ -24,11 +24,11 @@ export class BusquedaStateService {
   // Almacena el estado actual de los filtros
   private filtrosSource = new BehaviorSubject<NuevaSolicitudBusquedaPaginado | null>(null);
 
-  private filtrosAntecedentes = new BehaviorSubject<FiltrosAntecedentes | null>(null);
+  private filtrosAntecedentes = new BehaviorSubject<NuevaSolicitudBusquedaPaginado | null>(null);
 
   filtrosActuales$: Observable<NuevaSolicitudBusquedaPaginado | null> = this.filtrosSource.asObservable();
 
-  filtrosAntecedentesActuales$: Observable<FiltrosAntecedentes | null> = this.filtrosAntecedentes.asObservable();
+  filtrosAntecedentesActuales$: Observable<NuevaSolicitudBusquedaPaginado | null> = this.filtrosAntecedentes.asObservable();
 
   constructor() {
   }
@@ -41,7 +41,7 @@ export class BusquedaStateService {
     this.filtrosSource.next(filtros);
   }
 
-  guardarFiltrosAntecedentes(filtros: FiltrosAntecedentes): void {
+  guardarFiltrosAntecedentes(filtros: NuevaSolicitudBusquedaPaginado): void {
     this.filtrosAntecedentes.next(filtros);
   }
 
@@ -57,7 +57,7 @@ export class BusquedaStateService {
     return this.filtrosSource.getValue();
   }
 
-  obtenerFiltrosAntecedentes(): FiltrosAntecedentes | null {
+  obtenerFiltrosAntecedentes(): NuevaSolicitudBusquedaPaginado | null {
     return this.filtrosAntecedentes.getValue();
   }
 }

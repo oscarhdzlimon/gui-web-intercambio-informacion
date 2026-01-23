@@ -153,18 +153,46 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
     });
   }
 
-
   recuperarUltimaBusqueda(): void {
     const filtrosGuardados = this.busquedaStateService.obtenerFiltrosAntecedentes();
 
-    if (filtrosGuardados) {
-      this.filtroForm.get('tipoconsulta')?.setValue(filtrosGuardados.tipoconsulta);
-      this.filtroForm.get('nss')?.setValue(filtrosGuardados.nss);
-      this.filtroForm.get('nombre')?.setValue(filtrosGuardados.nombre);
-      this.filtroForm.get('apaterno')?.setValue(filtrosGuardados.apaterno);
-      this.filtroForm.get('amaterno')?.setValue(filtrosGuardados.amaterno);
-      this.paginar(0, 0);
+    if (!filtrosGuardados || filtrosGuardados.personas.length === 0) return;
+    const p = filtrosGuardados.personas[0];
+    const form = this.filtroForm;
+
+    // 1. Determinar el Tipo de Consulta
+    let tipo = 0;
+    const tieneNss = !!p.nss;
+    const tieneNombre = !!(p.nombre || p.apellidoPaterno || p.apellidoMaterno);
+
+    if (tieneNss && tieneNombre) tipo = 3;      // Ambos
+    else if (tieneNss) tipo = 1;                // Solo NSS
+    else if (tieneNombre) tipo = 2;             // Solo Nombre
+
+    // 2. Gestionar estados de los controles (Habilitar/Deshabilitar)
+    // Usamos una lógica simple: si tiene el dato o el tipo lo requiere, habilitamos
+    if (tieneNss || tipo === 3) {
+      form.get('nss')?.enable();
+    } else {
+      form.get('nss')?.disable();
     }
+
+    if (tieneNombre || tipo === 3) {
+      ['nombre', 'apaterno', 'amaterno'].forEach(c => form.get(c)?.enable());
+    } else {
+      ['nombre', 'apaterno', 'amaterno'].forEach(c => form.get(c)?.disable());
+    }
+
+    // 3. Cargar los datos al formulario
+    form.patchValue({
+      tipoconsulta: tipo,
+      nss: p.nss,
+      nombre: p.nombre,
+      apaterno: p.apellidoPaterno,
+      amaterno: p.apellidoMaterno
+    }, {emitEvent: true});
+
+    this.paginar(0, 10);
   }
 
   suscribirATipoConsulta(): void {
@@ -351,6 +379,7 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
     }
 
     const payload: NuevaSolicitudBusquedaPaginado = this.generarPayloadGeneral();
+    this.busquedaStateService.guardarFiltrosAntecedentes(payload);
 
     this.antecedentesService.getLstAntecedentesGeneral(payload).subscribe({
       next: (res: RespuestaAntecedentes) => {
