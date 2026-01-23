@@ -114,7 +114,12 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
   recuperarUltimaBusqueda(): void {
     const filtrosGuardados = this.busquedaStateService.obtenerFiltros();
 
-    if (!filtrosGuardados || filtrosGuardados.personas.length === 0) return
+    if (!filtrosGuardados || filtrosGuardados.personas.length === 0) return;
+
+    if (filtrosGuardados.personas.length > 1) {
+      this.iniciarBusquedaTodos();
+      return;
+    }
     const primeraPersona = filtrosGuardados.personas[0];
 
     let tipoRescatado = 0;

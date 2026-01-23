@@ -4,8 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="correcciones css -&gt; columna de impresión">
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/detalle-antecedentes/detalle-antecedentes.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/detalle-antecedentes/detalle-antecedentes.component.html" afterDir="false" />
+    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="correcciones css -&gt; flecha regresar">
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,15 +95,7 @@
       <workItem from="1767118150936" duration="3257000" />
       <workItem from="1767891732696" duration="7482000" />
       <workItem from="1767937805716" duration="125067000" />
-      <workItem from="1769192673454" duration="6787000" />
-    </task>
-    <task id="LOCAL-00093" summary="eliminacion de filtros">
-      <option name="closed" value="true" />
-      <created>1768251828364</created>
-      <option name="number" value="00093" />
-      <option name="presentableId" value="LOCAL-00093" />
-      <option name="project" value="LOCAL" />
-      <updated>1768251828364</updated>
+      <workItem from="1769192673454" duration="7337000" />
     </task>
     <task id="LOCAL-00094" summary="ajuste en totales">
       <option name="closed" value="true" />
@@ -489,7 +481,15 @@
       <option name="project" value="LOCAL" />
       <updated>1769200823764</updated>
     </task>
-    <option name="localTasksCounter" value="142" />
+    <task id="LOCAL-00142" summary="correcciones css -&gt; flecha regresar">
+      <option name="closed" value="true" />
+      <created>1769201216320</created>
+      <option name="number" value="00142" />
+      <option name="presentableId" value="LOCAL-00142" />
+      <option name="project" value="LOCAL" />
+      <updated>1769201216320</updated>
+    </task>
+    <option name="localTasksCounter" value="143" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -507,7 +507,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="correccion para sscv1 -&lt; revert comentarios" />
     <MESSAGE value="modificaciones de respuesta, consulta servicios para peticiones internas" />
     <MESSAGE value="modificaciones de paginado sin filtrar por id's" />
     <MESSAGE value="correcciones de totales" />
@@ -532,6 +531,7 @@
     <MESSAGE value="correcciones de recuperación de busqueda para consulta antecedentes" />
     <MESSAGE value="correcciones css" />
     <MESSAGE value="correcciones css -&gt; columna de impresión" />
-    <option name="LAST_COMMIT_MESSAGE" value="correcciones css -&gt; columna de impresión" />
+    <MESSAGE value="correcciones css -&gt; flecha regresar" />
+    <option name="LAST_COMMIT_MESSAGE" value="correcciones css -&gt; flecha regresar" />
   </component>
 </project>
