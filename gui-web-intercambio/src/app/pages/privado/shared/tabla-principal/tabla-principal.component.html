@@ -67,7 +67,13 @@
           <div class="flex justify-content-center align-items-center" style="height:100%">
             @if (rowData.indAsociado && rowData.idBitacoraAsociacion) {
               <img src="/assets/logos/print.svg"
-                   [ngClass]="{'cursor-pointer': rowData.indAsociado && rowData.idBitacoraAsociacion}"
+                   class="cursor-pointer"
+                   (click)="generarPdf(rowData)"
+              />
+            }
+            @if (banderaImprimir) {
+              <img src="/assets/logos/print.svg"
+                   class="cursor-pointer"
                    (click)="generarPdf(rowData)"
               />
             }
