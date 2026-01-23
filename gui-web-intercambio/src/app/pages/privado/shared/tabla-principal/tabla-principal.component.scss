@@ -12,6 +12,12 @@
   right: 100px !important; /* Este debe ser el ancho de la última columna */
 }
 
+:host ::ng-deep .p-datatable-thead > tr > th:nth-last-child(1)[pFrozenColumn],
+:host ::ng-deep .p-datatable-tbody > tr > td:nth-last-child(1)[pFrozenColumn] {
+  right: 0 !important; /* Este debe ser el ancho de la última columna */
+}
+
+
 :host ::ng-deep .p-datatable-wrapper {
   overflow-anchor: none; /* Evita saltos de scroll automáticos del navegador */
 }
