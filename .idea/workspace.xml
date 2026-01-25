@@ -4,8 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="correcciones css -&gt; flecha regresar">
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" afterDir="false" />
+    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="ajustes -&gt; busqueda sistemas">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/publico/pages/inicio-sesion/inicio-sesion.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/publico/pages/inicio-sesion/inicio-sesion.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/publico/pages/inicio-sesion/inicio-sesion.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/publico/pages/inicio-sesion/inicio-sesion.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,7 +75,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-WS-253.29346.242" />
+        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-WS-253.30387.83" />
       </set>
     </attachedChunks>
   </component>
@@ -95,15 +98,9 @@
       <workItem from="1767118150936" duration="3257000" />
       <workItem from="1767891732696" duration="7482000" />
       <workItem from="1767937805716" duration="125067000" />
-      <workItem from="1769192673454" duration="7337000" />
-    </task>
-    <task id="LOCAL-00094" summary="ajuste en totales">
-      <option name="closed" value="true" />
-      <created>1768258113143</created>
-      <option name="number" value="00094" />
-      <option name="presentableId" value="LOCAL-00094" />
-      <option name="project" value="LOCAL" />
-      <updated>1768258113144</updated>
+      <workItem from="1769192673454" duration="11625000" />
+      <workItem from="1769210326904" duration="74000" />
+      <workItem from="1769318424945" duration="312000" />
     </task>
     <task id="LOCAL-00095" summary="ajuste para nueva consulta detalle de registros">
       <option name="closed" value="true" />
@@ -489,7 +486,15 @@
       <option name="project" value="LOCAL" />
       <updated>1769201216320</updated>
     </task>
-    <option name="localTasksCounter" value="143" />
+    <task id="LOCAL-00143" summary="ajustes -&gt; busqueda sistemas">
+      <option name="closed" value="true" />
+      <created>1769201856438</created>
+      <option name="number" value="00143" />
+      <option name="presentableId" value="LOCAL-00143" />
+      <option name="project" value="LOCAL" />
+      <updated>1769201856438</updated>
+    </task>
+    <option name="localTasksCounter" value="144" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -507,7 +512,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="modificaciones de respuesta, consulta servicios para peticiones internas" />
     <MESSAGE value="modificaciones de paginado sin filtrar por id's" />
     <MESSAGE value="correcciones de totales" />
     <MESSAGE value="correcciones de css + totales" />
@@ -532,6 +536,7 @@
     <MESSAGE value="correcciones css" />
     <MESSAGE value="correcciones css -&gt; columna de impresión" />
     <MESSAGE value="correcciones css -&gt; flecha regresar" />
-    <option name="LAST_COMMIT_MESSAGE" value="correcciones css -&gt; flecha regresar" />
+    <MESSAGE value="ajustes -&gt; busqueda sistemas" />
+    <option name="LAST_COMMIT_MESSAGE" value="ajustes -&gt; busqueda sistemas" />
   </component>
 </project>
