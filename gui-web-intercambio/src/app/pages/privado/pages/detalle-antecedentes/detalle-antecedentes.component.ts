@@ -238,6 +238,9 @@ export class DetalleAntecedentesComponent extends GeneralComponent implements On
       if (qp['valor']) {
         this.cifrado = qp['valor'] as string;
         void this.obtenerExpediente()
+      } else {
+        this.usuarioLogueado = this.userData?.nombreCompleto ?? '';
+        this.ooadLogueado = this.userData?.ooad ?? '';
       }
     });
 

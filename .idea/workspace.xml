@@ -4,14 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="ajustes al reset de busqueda-sistemas">
+    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="readme -&gt; tanstack">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/models/config-environment.interface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/models/config-environment.interface.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/publico/pages/inicio-sesion/inicio-sesion.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/publico/pages/inicio-sesion/inicio-sesion.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/publico/pages/inicio-sesion/inicio-sesion.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/publico/pages/inicio-sesion/inicio-sesion.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/environments/environment.development.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/environments/environment.development.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/environments/environment.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/environments/environment.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/detalle-antecedentes/detalle-antecedentes.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/detalle-antecedentes/detalle-antecedentes.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,22 +97,6 @@
       <workItem from="1767891732696" duration="7482000" />
       <workItem from="1767937805716" duration="125067000" />
       <workItem from="1769192673454" duration="7337000" />
-    </task>
-    <task id="LOCAL-00104" summary="correcciones de consulta por login">
-      <option name="closed" value="true" />
-      <created>1768407427849</created>
-      <option name="number" value="00104" />
-      <option name="presentableId" value="LOCAL-00104" />
-      <option name="project" value="LOCAL" />
-      <updated>1768407427849</updated>
-    </task>
-    <task id="LOCAL-00105" summary="correcciones de consulta por login">
-      <option name="closed" value="true" />
-      <created>1768409268384</created>
-      <option name="number" value="00105" />
-      <option name="presentableId" value="LOCAL-00105" />
-      <option name="project" value="LOCAL" />
-      <updated>1768409268384</updated>
     </task>
     <task id="LOCAL-00106" summary="correcciones de antecedentes">
       <option name="closed" value="true" />
@@ -495,7 +474,23 @@
       <option name="project" value="LOCAL" />
       <updated>1769455372407</updated>
     </task>
-    <option name="localTasksCounter" value="153" />
+    <task id="LOCAL-00153" summary="implementacion de captcha">
+      <option name="closed" value="true" />
+      <created>1769461989582</created>
+      <option name="number" value="00153" />
+      <option name="presentableId" value="LOCAL-00153" />
+      <option name="project" value="LOCAL" />
+      <updated>1769461989583</updated>
+    </task>
+    <task id="LOCAL-00154" summary="readme -&gt; tanstack">
+      <option name="closed" value="true" />
+      <created>1769462209776</created>
+      <option name="number" value="00154" />
+      <option name="presentableId" value="LOCAL-00154" />
+      <option name="project" value="LOCAL" />
+      <updated>1769462209776</updated>
+    </task>
+    <option name="localTasksCounter" value="155" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -513,8 +508,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="ajustes de tamaño" />
-    <MESSAGE value="correccion de asociación" />
     <MESSAGE value="ajustes de interceptor" />
     <MESSAGE value="corrección de apellido materno" />
     <MESSAGE value="corrección de busqueda por nombre" />
@@ -538,6 +531,8 @@
     <MESSAGE value="funcion imprimir -&gt; detalle-antecedentes -&gt; busqueda sistemas" />
     <MESSAGE value="ajustes al guardar la asociación" />
     <MESSAGE value="ajustes al reset de busqueda-sistemas" />
-    <option name="LAST_COMMIT_MESSAGE" value="ajustes al reset de busqueda-sistemas" />
+    <MESSAGE value="implementacion de captcha" />
+    <MESSAGE value="readme -&gt; tanstack" />
+    <option name="LAST_COMMIT_MESSAGE" value="readme -&gt; tanstack" />
   </component>
 </project>
