@@ -589,6 +589,9 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
     onSuccess: (data) => {
       this._alertServices.exito(data?.mensaje || 'Guardado exitosamente');
       this.solicitudAntecedentesService.limpiar();
+      if (this.REF_SISTEMA.sistema === '1') {
+        this.guardarEnSSCV1();
+      }
       // Invalidar caché para refrescar la tabla automáticamente
       void this.queryClient.invalidateQueries({queryKey: ['antecedentes']});
     },
