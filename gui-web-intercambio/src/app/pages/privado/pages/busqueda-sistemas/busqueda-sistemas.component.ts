@@ -136,8 +136,9 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
       const params = this.paramBusqueda();
       const res = this.antecedentesQuery.data(); // TanStack ya resolvió el valor aquí
       const listo = this.sistemasListos();
+      const cargando = this.antecedentesQuery.isFetching(); // detectar si hay una petición actual
 
-      if (!listo || !params) return;
+      if (!listo || !params || cargando) return;
 
       if (params && this.REF_SISTEMA) {
         const tipo = params.personas[0]?.nss ? 1 : 2;
@@ -332,6 +333,8 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
 
     this.consultas = [];
 
+    void this.queryClient.resetQueries({ queryKey: ['antecedentes'] });
+
     const tipoConsulta = this.filtroForm.get('filtro')?.value;
     const valor = this.filtroForm.get('valor')?.value;
 
@@ -358,7 +361,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
 
     const datosSincronizados = this.sincronizarEstado(segmentacion);
 
-    c.data.set(datosSincronizados);
+    c.data.set([...datosSincronizados]);
   }
 
   cargarPagina(event: any, index: number): void {

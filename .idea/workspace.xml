@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="funcion imprimir -&gt; detalle-antecedentes">
+    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="ajustes al guardar la asociación">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/detalle-antecedentes/detalle-antecedentes.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/detalle-antecedentes/detalle-antecedentes.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,22 +97,6 @@
       <workItem from="1767891732696" duration="7482000" />
       <workItem from="1767937805716" duration="125067000" />
       <workItem from="1769192673454" duration="7337000" />
-    </task>
-    <task id="LOCAL-00100" summary="ajustes de manejo de busquedas">
-      <option name="closed" value="true" />
-      <created>1768353526664</created>
-      <option name="number" value="00100" />
-      <option name="presentableId" value="LOCAL-00100" />
-      <option name="project" value="LOCAL" />
-      <updated>1768353526664</updated>
-    </task>
-    <task id="LOCAL-00101" summary="ajustes para manejo de registros repetidos">
-      <option name="closed" value="true" />
-      <created>1768354714705</created>
-      <option name="number" value="00101" />
-      <option name="presentableId" value="LOCAL-00101" />
-      <option name="project" value="LOCAL" />
-      <updated>1768354714705</updated>
     </task>
     <task id="LOCAL-00102" summary="ajustes solicitud de asignacion">
       <option name="closed" value="true" />
@@ -490,7 +474,23 @@
       <option name="project" value="LOCAL" />
       <updated>1769452418925</updated>
     </task>
-    <option name="localTasksCounter" value="149" />
+    <task id="LOCAL-00149" summary="funcion imprimir -&gt; detalle-antecedentes -&gt; busqueda sistemas">
+      <option name="closed" value="true" />
+      <created>1769453518915</created>
+      <option name="number" value="00149" />
+      <option name="presentableId" value="LOCAL-00149" />
+      <option name="project" value="LOCAL" />
+      <updated>1769453518915</updated>
+    </task>
+    <task id="LOCAL-00150" summary="ajustes al guardar la asociación">
+      <option name="closed" value="true" />
+      <created>1769453756594</created>
+      <option name="number" value="00150" />
+      <option name="presentableId" value="LOCAL-00150" />
+      <option name="project" value="LOCAL" />
+      <updated>1769453756595</updated>
+    </task>
+    <option name="localTasksCounter" value="151" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -508,8 +508,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="ajustes para ejecutar nueva solicitud" />
-    <MESSAGE value="modificaciones de busqueda de sistemas" />
     <MESSAGE value="correcciones de css" />
     <MESSAGE value="ajustes de tamaño" />
     <MESSAGE value="correccion de asociación" />
@@ -533,6 +531,8 @@
     <MESSAGE value="correcciones tablas -&gt; sin resultados" />
     <MESSAGE value="btn imprimir -&gt; detalle-antecedentes" />
     <MESSAGE value="funcion imprimir -&gt; detalle-antecedentes" />
-    <option name="LAST_COMMIT_MESSAGE" value="funcion imprimir -&gt; detalle-antecedentes" />
+    <MESSAGE value="funcion imprimir -&gt; detalle-antecedentes -&gt; busqueda sistemas" />
+    <MESSAGE value="ajustes al guardar la asociación" />
+    <option name="LAST_COMMIT_MESSAGE" value="ajustes al guardar la asociación" />
   </component>
 </project>
