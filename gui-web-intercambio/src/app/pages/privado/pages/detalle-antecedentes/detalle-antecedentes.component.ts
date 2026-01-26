@@ -27,6 +27,7 @@ import {CryptoService} from '@services/crypto.service';
 import {SolicitudBusquedaPaginado} from '../../../../core/interfaces/solicitud-busqueda-antecedentes.interface';
 import {ReporteAntecedentes} from '@models/reporteAntecedentes.interface';
 import {ReporteAntecedentesService} from '@services/reporteAntecedentes.service';
+import {environment} from '@env/environment.development';
 
 @Component({
   selector: 'app-detalle-antecedentes',
@@ -55,7 +56,6 @@ export class DetalleAntecedentesComponent extends GeneralComponent implements On
   cifrado = ''
   tipoBusqueda!: string;
 
-  REF_SISTEMA!: ConsultaDescifrada;
   REF_USUARIO: string = '';
   REF_APLICATIVO: string = '';
   REF_MODULO: string = '';
@@ -66,12 +66,12 @@ export class DetalleAntecedentesComponent extends GeneralComponent implements On
   REF_AMATERNO: string = '';
 
   paginacion = {
-    queja: { first: signal(0), rows: 5 },
-    gestion: { first: signal(0), rows: 5 },
-    inconformidad: { first: signal(0), rows: 5 },
-    amparo: { first: signal(0), rows: 5 },
-    procedimiento: { first: signal(0), rows: 5 },
-    juicio: { first: signal(0), rows: 5 },
+    queja: {first: signal(0), rows: 5},
+    gestion: {first: signal(0), rows: 5},
+    inconformidad: {first: signal(0), rows: 5},
+    amparo: {first: signal(0), rows: 5},
+    procedimiento: {first: signal(0), rows: 5},
+    juicio: {first: signal(0), rows: 5},
   };
 
   totalQuejas = signal(0);
@@ -86,6 +86,9 @@ export class DetalleAntecedentesComponent extends GeneralComponent implements On
   idpagina: number = 0;
   ruta = this._nav.consultaantecedentes;
   titulo = 'Antecedentes';
+
+  usuarioLogueado = '';
+  ooadLogueado = '';
 
   lstQueja = computed(() => {
     const data = this.dataFull()?.queja || [];
@@ -185,7 +188,7 @@ export class DetalleAntecedentesComponent extends GeneralComponent implements On
         this.totalAmparo.set(respuesta.amparo?.length || 0);
         this.totalProcedimiento.set(respuesta.procedimiento?.length || 0);
         this.totalJuicio.set(respuesta.juicio?.length || 0);
-        },
+      },
       error: err => {
       }
     })
@@ -195,27 +198,6 @@ export class DetalleAntecedentesComponent extends GeneralComponent implements On
   onPageChange(event: any, seccion: keyof typeof this.paginacion) {
     this.paginacion[seccion].first.set(event.first);
   }
-
-  objFechasCorte(): SolicitudBusquedaPaginado {
-    return {
-      expediente: this.REF_SISTEMA?.expediente || '',
-
-      personas: [
-        {
-          cve_nss: this.REF_NSS,
-          nom_nombre_afectado: this.REF_NOMBRE,
-          nom_apellido_paterno_afectado: this.REF_APATERNO,
-          nom_apellido_materno_afectado: this.REF_AMATERNO
-        }
-      ],
-      usuarioLogueado: this.REF_USUARIO,
-      sistema: this.REF_APLICATIVO,
-      modulo: this.REF_MODULO,
-      ooad_UMAE: this.REF_OOAD
-    }
-  }
-
-
 
   public btnVerDetalle(
     registro: TablaDetalleGestionInterface,
@@ -264,10 +246,12 @@ export class DetalleAntecedentesComponent extends GeneralComponent implements On
   async obtenerExpediente() {
     try {
       // IMPORTANTE: Añadir 'await' aquí
-      this.REF_SISTEMA = await this.cifradoService.decryptToObject<any>(
+      const REF_SISTEMA = await this.cifradoService.decryptToObject<any>(
         this.cifrado,
         this.AES_KEY_BASE64
       );
+      this.ooadLogueado = REF_SISTEMA.ooadLogueado;
+      this.usuarioLogueado = REF_SISTEMA.usuarioLogueado;
 
     } catch (error) {
       console.error("Error al descifrar. Posibles causas: Clave incorrecta o JSON malformado", error);
@@ -302,8 +286,8 @@ export class DetalleAntecedentesComponent extends GeneralComponent implements On
       fecCorteSsc1: this.fechasCorte.fecCorteSsc1,
       fecCorteSsc2: this.fechasCorte.fecCorteSsc2,
       moduloOrigen: this.REF_NOMBRE,
-      nombreConsultor: '',
-      ooad: this.REF_OOAD,
+      nombreConsultor: this.usuarioLogueado,
+      ooad: this.ooadLogueado,
       tipoBusqueda: +this.tipoBusqueda,
       nombre: this.REF_NOMBRE,
       apellidoPaterno: this.REF_APATERNO,
@@ -359,4 +343,5 @@ export class DetalleAntecedentesComponent extends GeneralComponent implements On
       throw new Error("El string Base64 no es válido o contiene caracteres ilegales.");
     }
   }
+
 }

@@ -4,7 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="btn imprimir -&gt; detalle-antecedentes">
+    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="funcion imprimir -&gt; detalle-antecedentes">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/detalle-antecedentes/detalle-antecedentes.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/detalle-antecedentes/detalle-antecedentes.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -96,14 +97,6 @@
       <workItem from="1767891732696" duration="7482000" />
       <workItem from="1767937805716" duration="125067000" />
       <workItem from="1769192673454" duration="7337000" />
-    </task>
-    <task id="LOCAL-00099" summary="limpieza pagindao consulta detalle de antecedentes">
-      <option name="closed" value="true" />
-      <created>1768353207335</created>
-      <option name="number" value="00099" />
-      <option name="presentableId" value="LOCAL-00099" />
-      <option name="project" value="LOCAL" />
-      <updated>1768353207335</updated>
     </task>
     <task id="LOCAL-00100" summary="ajustes de manejo de busquedas">
       <option name="closed" value="true" />
@@ -489,7 +482,15 @@
       <option name="project" value="LOCAL" />
       <updated>1769451829413</updated>
     </task>
-    <option name="localTasksCounter" value="148" />
+    <task id="LOCAL-00148" summary="funcion imprimir -&gt; detalle-antecedentes">
+      <option name="closed" value="true" />
+      <created>1769452418925</created>
+      <option name="number" value="00148" />
+      <option name="presentableId" value="LOCAL-00148" />
+      <option name="project" value="LOCAL" />
+      <updated>1769452418925</updated>
+    </task>
+    <option name="localTasksCounter" value="149" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -507,7 +508,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="correcciones de css + totales" />
     <MESSAGE value="ajustes para ejecutar nueva solicitud" />
     <MESSAGE value="modificaciones de busqueda de sistemas" />
     <MESSAGE value="correcciones de css" />
@@ -532,6 +532,7 @@
     <MESSAGE value="correcciones de páginado + ajustes detalle antecedentes" />
     <MESSAGE value="correcciones tablas -&gt; sin resultados" />
     <MESSAGE value="btn imprimir -&gt; detalle-antecedentes" />
-    <option name="LAST_COMMIT_MESSAGE" value="btn imprimir -&gt; detalle-antecedentes" />
+    <MESSAGE value="funcion imprimir -&gt; detalle-antecedentes" />
+    <option name="LAST_COMMIT_MESSAGE" value="funcion imprimir -&gt; detalle-antecedentes" />
   </component>
 </project>
