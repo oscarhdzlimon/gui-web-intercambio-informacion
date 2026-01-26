@@ -103,7 +103,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
     queryFn: () => lastValueFrom(this.antecedentesService.getLstAntecedentesGeneral(this.paramBusqueda()!)),
     enabled: !!this.paramBusqueda() && this.sistemasListos(),
     refetchOnWindowFocus: false,
-    gcTime: 1000 * 60 * 10,
+    gcTime: 1000 * 60 * 30,
     staleTime: 1000 * 60 * 5,
   }));
 
