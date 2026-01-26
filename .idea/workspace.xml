@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="correcciones tablas -&gt; sin resultados" />
+    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="btn imprimir -&gt; detalle-antecedentes">
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/detalle-antecedentes/detalle-antecedentes.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/detalle-antecedentes/detalle-antecedentes.component.ts" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -94,14 +96,6 @@
       <workItem from="1767891732696" duration="7482000" />
       <workItem from="1767937805716" duration="125067000" />
       <workItem from="1769192673454" duration="7337000" />
-    </task>
-    <task id="LOCAL-00098" summary="ajustes para nueva consulta detalle de registros">
-      <option name="closed" value="true" />
-      <created>1768345976685</created>
-      <option name="number" value="00098" />
-      <option name="presentableId" value="LOCAL-00098" />
-      <option name="project" value="LOCAL" />
-      <updated>1768345976685</updated>
     </task>
     <task id="LOCAL-00099" summary="limpieza pagindao consulta detalle de antecedentes">
       <option name="closed" value="true" />
@@ -487,7 +481,15 @@
       <option name="project" value="LOCAL" />
       <updated>1769441267025</updated>
     </task>
-    <option name="localTasksCounter" value="147" />
+    <task id="LOCAL-00147" summary="btn imprimir -&gt; detalle-antecedentes">
+      <option name="closed" value="true" />
+      <created>1769451829413</created>
+      <option name="number" value="00147" />
+      <option name="presentableId" value="LOCAL-00147" />
+      <option name="project" value="LOCAL" />
+      <updated>1769451829413</updated>
+    </task>
+    <option name="localTasksCounter" value="148" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -505,7 +507,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="correcciones de totales" />
     <MESSAGE value="correcciones de css + totales" />
     <MESSAGE value="ajustes para ejecutar nueva solicitud" />
     <MESSAGE value="modificaciones de busqueda de sistemas" />
@@ -530,6 +531,7 @@
     <MESSAGE value="correcciones css -&gt; flecha regresar" />
     <MESSAGE value="correcciones de páginado + ajustes detalle antecedentes" />
     <MESSAGE value="correcciones tablas -&gt; sin resultados" />
-    <option name="LAST_COMMIT_MESSAGE" value="correcciones tablas -&gt; sin resultados" />
+    <MESSAGE value="btn imprimir -&gt; detalle-antecedentes" />
+    <option name="LAST_COMMIT_MESSAGE" value="btn imprimir -&gt; detalle-antecedentes" />
   </component>
 </project>

@@ -25,6 +25,8 @@ import {UserService} from '@services/user.service';
 import {ConsultaDescifrada} from '../../../../core/interfaces/consulta-descifrada.interface';
 import {CryptoService} from '@services/crypto.service';
 import {SolicitudBusquedaPaginado} from '../../../../core/interfaces/solicitud-busqueda-antecedentes.interface';
+import {ReporteAntecedentes} from '@models/reporteAntecedentes.interface';
+import {ReporteAntecedentesService} from '@services/reporteAntecedentes.service';
 
 @Component({
   selector: 'app-detalle-antecedentes',
@@ -47,6 +49,7 @@ import {SolicitudBusquedaPaginado} from '../../../../core/interfaces/solicitud-b
 export class DetalleAntecedentesComponent extends GeneralComponent implements OnInit {
   userService: UserService = inject(UserService);
   cifradoService: CryptoService = inject(CryptoService);
+  reporteAntecedentesService: ReporteAntecedentesService = inject(ReporteAntecedentesService);
 
   readonly AES_KEY_BASE64: string = "mZzG9Fz9P0n4z7mZlKz8B9nX0mJ8vF7PZKX2vZx5QmE=";
   cifrado = ''
@@ -127,13 +130,9 @@ export class DetalleAntecedentesComponent extends GeneralComponent implements On
     nss: ""
   };
 
-  estatusPendienteDocumentacion = false;
-
   ref: DynamicDialogRef | undefined;
 
-  paginaActual: number = 0;
   first: number = 0;
-  totalElementos: number = 0;
   rows: number = 10;
   userData: SesionUser | null = null;
 
@@ -148,7 +147,6 @@ export class DetalleAntecedentesComponent extends GeneralComponent implements On
     public dialogService: DialogService,
     private route: ActivatedRoute,
     private detalleAntecedentesService: DetalleAntecedentesService,
-    private readonly dataCacheService: DataCacheService,
     private _location: Location
   ) {
     super();
@@ -163,7 +161,6 @@ export class DetalleAntecedentesComponent extends GeneralComponent implements On
   }
 
   tabla!: Array<any>;
-  tabla2!: Array<any>;
 
   ngOnInit(): void {
     this.obtenerFechasCorte();
@@ -299,6 +296,67 @@ export class DetalleAntecedentesComponent extends GeneralComponent implements On
   }
 
   imprimir(): void {
+    const obj: ReporteAntecedentes = {
+      aplicativoOrigen: this.REF_APLICATIVO,
+      fecCorteSiade: this.fechasCorte.fecCorteSiade,
+      fecCorteSsc1: this.fechasCorte.fecCorteSsc1,
+      fecCorteSsc2: this.fechasCorte.fecCorteSsc2,
+      moduloOrigen: this.REF_NOMBRE,
+      nombreConsultor: '',
+      ooad: this.REF_OOAD,
+      tipoBusqueda: +this.tipoBusqueda,
+      nombre: this.REF_NOMBRE,
+      apellidoPaterno: this.REF_APATERNO,
+      apellidoMaterno: this.REF_AMATERNO,
+      nss: this.REF_NSS,
+      expediente: this.datosUsuario.expediente
+    }
 
+    this.reporteAntecedentesService.descargaExcelHistoricoDocs(obj).subscribe({
+
+      next: (datos) => {
+        if (datos.adjuntoBase64) {
+          const base64 = datos.adjuntoBase64;
+          const nombreArchivo = datos.nombreAdjunto || 'Reporte Antecedentes.pdf';
+          const contentType = 'application/pdf';
+          const pdfBlob = this.b64toBlob(base64, contentType);
+          const pdfUrl = URL.createObjectURL(pdfBlob);
+          window.open(pdfUrl, '_blank');
+        }
+      }
+    });
+  }
+
+  private b64toBlob(b64Data: string, contentType: string = '', sliceSize: number = 512): Blob {
+
+    let base64 = b64Data.split(',')[1] ? b64Data.split(',')[1] : b64Data;
+
+    // Eliminar CUALQUIER carácter que NO sea una letra/número válido para Base64,
+    // incluyendo espacios, saltos de línea, y caracteres de control.
+    // Base64 válido solo incluye A-Z, a-z, 0-9, +, / y = (relleno).
+    base64 = base64.replace(/[^A-Za-z0-9+/=]/g, '');
+
+    try {
+      const byteCharacters = atob(base64);
+
+      const byteArrays: Uint8Array[] = [];
+      for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+        const slice = byteCharacters.slice(offset, offset + sliceSize);
+        const byteNumbers = new Array(slice.length);
+        for (let i = 0; i < slice.length; i++) {
+          byteNumbers[i] = slice.charCodeAt(i);
+        }
+        const byteArray = new Uint8Array(byteNumbers);
+        byteArrays.push(byteArray);
+      }
+
+      return new Blob(byteArrays as BlobPart[], {type: contentType});
+
+    } catch (e) {
+      // Si incluso después de la limpieza falla, la respuesta NO es Base64.
+      console.error("Error crítico: La respuesta HTTP no es un Base64 válido.", e);
+      // Lanza un error genérico o notifica al usuario.
+      throw new Error("El string Base64 no es válido o contiene caracteres ilegales.");
+    }
   }
 }
