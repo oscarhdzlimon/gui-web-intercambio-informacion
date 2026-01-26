@@ -7,7 +7,7 @@ import {providePrimeNG} from 'primeng/config';
 import {HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
 import {provideAnimations} from '@angular/platform-browser/animations';
 import {Mensajes} from '@utils/mensajes';
-
+import { provideAngularQuery, QueryClient } from '@tanstack/angular-query-experimental';
 import {provideUserIdleConfig} from "angular-user-idle";
 import {TIEMPO_MAXIMO_SESION} from '@utils/tokens';
 import {TiempoSesion} from '@models/tiempo-sesion.interface';
@@ -15,6 +15,7 @@ import {LoadingInterceptor} from '@interceptors/loader-interceptor.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [Mensajes,
+    provideAngularQuery(new QueryClient()),
     provideZoneChangeDetection({eventCoalescing: true}),
     {
       provide: TIEMPO_MAXIMO_SESION,

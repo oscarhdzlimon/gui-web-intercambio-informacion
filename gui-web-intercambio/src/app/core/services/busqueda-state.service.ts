@@ -26,6 +26,8 @@ export class BusquedaStateService {
 
   private filtrosAntecedentes = new BehaviorSubject<NuevaSolicitudBusquedaPaginado | null>(null);
 
+  private paginasTablas = new BehaviorSubject<Record<string, number>>({});
+
   filtrosActuales$: Observable<NuevaSolicitudBusquedaPaginado | null> = this.filtrosSource.asObservable();
 
   filtrosAntecedentesActuales$: Observable<NuevaSolicitudBusquedaPaginado | null> = this.filtrosAntecedentes.asObservable();
@@ -59,5 +61,20 @@ export class BusquedaStateService {
 
   obtenerFiltrosAntecedentes(): NuevaSolicitudBusquedaPaginado | null {
     return this.filtrosAntecedentes.getValue();
+  }
+
+  guardarPaginaTabla(idTabla: string, pagina: number): void {
+    const paginas = this.paginasTablas.getValue();
+    paginas[idTabla] = pagina;
+    this.paginasTablas.next(paginas);
+  }
+
+  obtenerPaginaTabla(idTabla: string): number {
+    console.log(idTabla, this.paginasTablas.getValue()[idTabla])
+    return this.paginasTablas.getValue()[idTabla] || 0;
+  }
+
+  limpiarPaginasTablas(): void {
+    this.paginasTablas.next({}); // Resetea el diccionario de páginas a vacío
   }
 }

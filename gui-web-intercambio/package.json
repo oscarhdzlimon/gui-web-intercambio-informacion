@@ -21,6 +21,7 @@
     "@auth0/angular-jwt": "^5.2.0",
     "@ng-bootstrap/ng-bootstrap": "^18.0.0",
     "@primeng/themes": "^19.1.4",
+    "@tanstack/angular-query-experimental": "^5.90.24",
     "angular-user-idle": "^4.0.0",
     "dayjs": "^1.11.18",
     "file-saver": "^2.0.5",

@@ -95,6 +95,7 @@
                 [expediente]="REF_SISTEMA.expediente"
                 (pageChange)="cargarPagina($event, $index)"
                 (checkboxChanged)="cambiarEstado($event)"
+                [first]="consulta.paginaActual * consulta.registrosPorPagina"
               />
             </div>
           </div>
