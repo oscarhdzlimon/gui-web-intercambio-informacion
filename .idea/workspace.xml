@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="ajustes al reset de busqueda-sistemas" />
+    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="ajustes al reset de busqueda-sistemas">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/models/config-environment.interface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/models/config-environment.interface.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/publico/pages/inicio-sesion/inicio-sesion.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/publico/pages/inicio-sesion/inicio-sesion.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/publico/pages/inicio-sesion/inicio-sesion.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/publico/pages/inicio-sesion/inicio-sesion.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/environments/environment.development.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/environments/environment.development.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/environments/environment.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/environments/environment.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/index.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -94,14 +102,6 @@
       <workItem from="1767891732696" duration="7482000" />
       <workItem from="1767937805716" duration="125067000" />
       <workItem from="1769192673454" duration="7337000" />
-    </task>
-    <task id="LOCAL-00103" summary="ajustes solicitud de asociación">
-      <option name="closed" value="true" />
-      <created>1768356195983</created>
-      <option name="number" value="00103" />
-      <option name="presentableId" value="LOCAL-00103" />
-      <option name="project" value="LOCAL" />
-      <updated>1768356195983</updated>
     </task>
     <task id="LOCAL-00104" summary="correcciones de consulta por login">
       <option name="closed" value="true" />
@@ -487,7 +487,15 @@
       <option name="project" value="LOCAL" />
       <updated>1769454287836</updated>
     </task>
-    <option name="localTasksCounter" value="152" />
+    <task id="LOCAL-00152" summary="ajustes al reset de busqueda-sistemas">
+      <option name="closed" value="true" />
+      <created>1769455372407</created>
+      <option name="number" value="00152" />
+      <option name="presentableId" value="LOCAL-00152" />
+      <option name="project" value="LOCAL" />
+      <updated>1769455372407</updated>
+    </task>
+    <option name="localTasksCounter" value="153" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

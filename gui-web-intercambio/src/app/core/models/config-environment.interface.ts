@@ -11,6 +11,7 @@ export interface ConfigEnvironment {
     sscv1: string;
   },
   key: {
-    AES_KEY_BASE64: string
+    AES_KEY_BASE64: string,
+    CAPTCHA: string
   }
 }
