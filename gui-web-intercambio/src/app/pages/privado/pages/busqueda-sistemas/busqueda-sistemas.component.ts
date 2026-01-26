@@ -96,6 +96,8 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
     this.busquedaStateService.obtenerFiltros()
   );
 
+  sistemasListos = signal<boolean>(false);
+
   antecedentesQuery = injectQuery(() => ({
     queryKey: ['antecedentes', this.paramBusqueda()],
     queryFn: () => lastValueFrom(this.antecedentesService.getLstAntecedentesGeneral(this.paramBusqueda()!)),
@@ -105,12 +107,18 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
     staleTime: 1000 * 60 * 5,
   }));
 
-  sistemasListos = signal<boolean>(false);
-
   constructor(private readonly fb: FormBuilder,
               private readonly route: ActivatedRoute) {
     super();
     this.obtenerFechasCorte();
+    this.configurarCambiosEstado();
+    this.obtenerParametros();
+    this.filtroForm = this.inicializarFiltroForm();
+    this.suscribirACambiosFiltro();
+    this.configurarEffect();
+  }
+
+  configurarCambiosEstado(): void {
     this.solicitudAntecedentesService.cambios$.subscribe(() => {
       this.consultas.forEach(consulta => {
         const dataActual = consulta.data();
@@ -121,9 +129,9 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
         }
       });
     });
-    this.obtenerParametros();
-    this.filtroForm = this.inicializarFiltroForm();
-    this.suscribirACambiosFiltro();
+  }
+
+  configurarEffect(): void {
     effect(() => {
       const params = this.paramBusqueda();
       const res = this.antecedentesQuery.data(); // TanStack ya resolvió el valor aquí
@@ -136,7 +144,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
         const persona = params.personas[0];
 
 
-        // TRANSFORMACIÓN: Convertimos NuevaPersona a NombreTipoDropdown
+        // Se Convierte NuevaPersona a NombreTipoDropdown
         let valorParaTabla: any;
         if (tipo === 1) {
           valorParaTabla = persona.nss;
@@ -162,23 +170,20 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
   }
 
   private procesarResultadosTablas(res: RespuestaAntecedentes): void {
-    // 1. Iteramos sobre cada objeto de consulta (las tablas que configuraste)
+    // Iteramos sobre cada objeto de consulta
     this.consultas.forEach((consulta, index) => {
 
       let rawItems: any[] = [];
 
-      // 2. Extraer los datos según el tipo de tabla
+      // Extraer los datos según el tipo de tabla
       if (consulta.tipo === TipoTabla.NSS) {
-        // Buscamos en el diccionario de NSS
         rawItems = res.resultadosPorNss[consulta.valorBusqueda as string] || [];
       } else {
-        // Buscamos en el diccionario de Nombres (usando el nombre completo como llave)
-        console.log(consulta.valorBusqueda);
         const key = (consulta.valorBusqueda as NombreTipoDropdown).nombreCompleto.trim();
         rawItems = res.resultadosPorNombre[key] || [];
       }
 
-      // 3. Mapear los items crudos al modelo RegistroAntecedentes
+      // Mapear los items al modelo RegistroAntecedentes
       const itemsMapeados: RegistroAntecedentes[] = rawItems.map(item => ({
         idBitacoraAsociacion: item.idBitacoraAsociacion || null,
         indAsociado: item.indAsociado || false,
@@ -198,49 +203,13 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
         procedimientoRpe: item.totalesProcedimiento?.rp || 0
       }));
 
-      // 4. Actualizar el estado de la consulta específica
+      // Actualizar el estado de la consulta específica
       consulta.datosCompletos = itemsMapeados;
       consulta.totalRegistros = itemsMapeados.length;
 
-      // 5. Refrescar la vista de la página actual para esta tabla
+      // Refrescar la vista de la página actual para esta tabla
       this.actualizarPaginaLocal(index);
     });
-  }
-
-  recuperarUltimaBusqueda(): void {
-    const filtrosGuardados = this.busquedaStateService.obtenerFiltros();
-
-    if (!filtrosGuardados || filtrosGuardados.personas.length === 0) return;
-
-    if (filtrosGuardados.personas.length > 1) {
-      this.iniciarBusquedaTodos();
-      return;
-    }
-    const primeraPersona = filtrosGuardados.personas[0];
-
-    let tipoRescatado = 0;
-    let valorRescatado: any = null;
-
-    if (primeraPersona.nss) {
-      tipoRescatado = 1; // Caso NSS
-      valorRescatado = primeraPersona.nss;
-    } else if (primeraPersona.nombre) {
-      tipoRescatado = 2; // Caso Nombre
-      valorRescatado = {
-        nom_nombre_afectado: primeraPersona.nombre,
-        nom_apellido_paterno_afectado: primeraPersona.apellidoPaterno,
-        nom_apellido_materno_afectado: primeraPersona.apellidoMaterno
-      };
-    }
-
-    this.filtroForm.get('valor')?.enable();
-
-    this.filtroForm.patchValue({
-      filtro: tipoRescatado,
-      valor: valorRescatado
-    });
-
-    this.iniciarBusqueda();
   }
 
   inicializarFiltroForm(): FormGroup {
@@ -282,7 +251,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
       );
       this.obtenerDatosCifrados();
 
-      // Una vez que tenemos las listas de nombres y nss, parchamos el form
+      // Una vez que se obtienen las listas de nombres y nss, se parcha el form
       this.parchearFormularioConEstado();
       this.sistemasListos.set(true);
 
@@ -321,7 +290,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
     let personas: NuevaPersona[] = [];
 
     if (this.consulta_todos) {
-      // Caso Expediente: Enviamos todos los NSS y todos los Nombres
+      // Caso Expediente: Se envian todos los NSS y todos los Nombres
       const nssPersonas = this.nss.map(n => ({
         nss: n.value as string,
         nombre: null,
@@ -374,7 +343,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
     this.configurarEstructuraTablas(tipoConsulta, valor);
     const solicitud = this.generarNuevaSolicitud(tipoConsulta, valor);
 
-    // 3. Guardamos filtros y disparamos TanStack Query
+    //  TanStack Query
     this.busquedaStateService.guardarFiltros(solicitud);
     this.paramBusqueda.set(solicitud);
   }
@@ -384,8 +353,6 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
 
     const inicio = c.paginaActual * c.registrosPorPagina;
     const fin = inicio + c.registrosPorPagina;
-
-    console.log(inicio)
 
     const segmentacion = (c.datosCompletos || []).slice(inicio, fin);
 
@@ -397,10 +364,10 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
   cargarPagina(event: any, index: number): void {
     const consulta = this.consultas[index];
     if (consulta) {
-      const nuevaPagina = event.page - 1; // PrimeNG usa base 0 o 1 según versión, ajusta según necesites
+      const nuevaPagina = event.page - 1; // PrimeNG usa base 0 o 1 según versión
       consulta.paginaActual = nuevaPagina;
 
-      // Guardamos en el estado global para que sobreviva a la destrucción del componente
+      // Se guarda en el estado global para que sobreviva a la destrucción del componente
       let valorBusqueda;
 
       if (typeof consulta.valorBusqueda === 'string') {
@@ -470,8 +437,6 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
     registros: RegistroAntecedentes[]
   ): RegistroAntecedentes[] {
 
-    console.log(registros);
-
     return registros.map(r => {
       if (r.indAsociado && r.idBitacoraAsociacion) {
         return r;
@@ -488,7 +453,6 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
 
   trackConsulta = (consulta: ResultadoConsulta) =>
     `${consulta.tipo}-${consulta.tituloCompleto}`;
-
 
   guardarBitacora(): void {
     const solicitud: SolicitudBitacora = this.generarSolicitudBitacora();
@@ -561,16 +525,13 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
 
   configurarEstructuraTablas(tipo: number, valor: any): void {
     this.consultas = [];
-
     if (this.consulta_todos) {
       // Tablas de NSS
       this.nss.forEach(n => this.consultas.push(this.crearObjetoConsulta(TipoTabla.NSS, n.value as string)));
       // Tablas de Nombre
       this.nombresSolicitud.forEach(nom => this.consultas.push(this.crearObjetoConsulta(TipoTabla.NOMBRE, nom)));
-      console.log(this.nombresSolicitud);
     } else {
       this.consultas.push(this.crearObjetoConsulta(tipo === 1 ? TipoTabla.NSS : TipoTabla.NOMBRE, valor));
-      console.log(this.consultas)
     }
   }
 
@@ -653,7 +614,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
 
     if (primeraPersona.nss) {
       tipoRescatado = 1; // Caso NSS
-      // Buscamos el objeto exacto en el arreglo 'nss' para que el dropdown lo reconozca
+      // Se busca el objeto exacto en el arreglo 'nss' para que el dropdown lo reconozca
       valorRescatado = this.nss.find(n => n.value === primeraPersona.nss)?.value || primeraPersona.nss;
     } else if (primeraPersona.nombre) {
       tipoRescatado = 2; // Caso Nombre
@@ -675,7 +636,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
     this.filtroForm.patchValue({
       filtro: tipoRescatado,
       valor: valorRescatado
-    }, { emitEvent: false }); // 'emitEvent: false' evita bucles infinitos de validación
+    }, {emitEvent: false}); // 'emitEvent: false' evita bucles infinitos de validación
   }
 
   get puedeGuardar() {

@@ -4,19 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="correcciones css -&gt; flecha regresar">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/app.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/app.config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/services/busqueda-state.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/services/busqueda-state.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.html" afterDir="false" />
+    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="correcciones tablas -&gt; sin resultados">
       <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/detalle-antecedentes/detalle-antecedentes.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/detalle-antecedentes/detalle-antecedentes.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/detalle-antecedentes/detalle-antecedentes.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/detalle-antecedentes/detalle-antecedentes.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/detalle-oferta-laboral/detalle-oferta-laboral.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/detalle-oferta-laboral/detalle-oferta-laboral.component.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/detalle-oferta-laboral/detalle-oferta-laboral.component.ts" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,22 +96,6 @@
       <workItem from="1767891732696" duration="7482000" />
       <workItem from="1767937805716" duration="125067000" />
       <workItem from="1769192673454" duration="7337000" />
-    </task>
-    <task id="LOCAL-00094" summary="ajuste en totales">
-      <option name="closed" value="true" />
-      <created>1768258113143</created>
-      <option name="number" value="00094" />
-      <option name="presentableId" value="LOCAL-00094" />
-      <option name="project" value="LOCAL" />
-      <updated>1768258113144</updated>
-    </task>
-    <task id="LOCAL-00095" summary="ajuste para nueva consulta detalle de registros">
-      <option name="closed" value="true" />
-      <created>1768327474030</created>
-      <option name="number" value="00095" />
-      <option name="presentableId" value="LOCAL-00095" />
-      <option name="project" value="LOCAL" />
-      <updated>1768327474030</updated>
     </task>
     <task id="LOCAL-00096" summary="ajustes css para nueva consulta detalle de registros">
       <option name="closed" value="true" />
@@ -500,7 +473,23 @@
       <option name="project" value="LOCAL" />
       <updated>1769201216320</updated>
     </task>
-    <option name="localTasksCounter" value="143" />
+    <task id="LOCAL-00143" summary="correcciones de páginado + ajustes detalle antecedentes">
+      <option name="closed" value="true" />
+      <created>1769440642542</created>
+      <option name="number" value="00143" />
+      <option name="presentableId" value="LOCAL-00143" />
+      <option name="project" value="LOCAL" />
+      <updated>1769440642542</updated>
+    </task>
+    <task id="LOCAL-00144" summary="correcciones tablas -&gt; sin resultados">
+      <option name="closed" value="true" />
+      <created>1769440762882</created>
+      <option name="number" value="00144" />
+      <option name="presentableId" value="LOCAL-00144" />
+      <option name="project" value="LOCAL" />
+      <updated>1769440762882</updated>
+    </task>
+    <option name="localTasksCounter" value="145" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -518,8 +507,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="modificaciones de respuesta, consulta servicios para peticiones internas" />
-    <MESSAGE value="modificaciones de paginado sin filtrar por id's" />
     <MESSAGE value="correcciones de totales" />
     <MESSAGE value="correcciones de css + totales" />
     <MESSAGE value="ajustes para ejecutar nueva solicitud" />
@@ -543,6 +530,8 @@
     <MESSAGE value="correcciones css" />
     <MESSAGE value="correcciones css -&gt; columna de impresión" />
     <MESSAGE value="correcciones css -&gt; flecha regresar" />
-    <option name="LAST_COMMIT_MESSAGE" value="correcciones css -&gt; flecha regresar" />
+    <MESSAGE value="correcciones de páginado + ajustes detalle antecedentes" />
+    <MESSAGE value="correcciones tablas -&gt; sin resultados" />
+    <option name="LAST_COMMIT_MESSAGE" value="correcciones tablas -&gt; sin resultados" />
   </component>
 </project>
