@@ -618,7 +618,6 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
       valorRescatado = this.nss.find(n => n.value === primeraPersona.nss)?.value || primeraPersona.nss;
     } else if (primeraPersona.nombre) {
       tipoRescatado = 2; // Caso Nombre
-      // TRANSFORMACIÓN: Reconstruimos el objeto NombreTipoDropdown que espera tu componente
       valorRescatado = {
         nom_nombre_afectado: primeraPersona.nombre,
         nom_apellido_paterno_afectado: primeraPersona.apellidoPaterno,
