@@ -297,4 +297,8 @@ export class DetalleAntecedentesComponent extends GeneralComponent implements On
       }
     })
   }
+
+  imprimir(): void {
+
+  }
 }
