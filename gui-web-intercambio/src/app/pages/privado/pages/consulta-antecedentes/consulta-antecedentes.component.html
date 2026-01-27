@@ -1,5 +1,5 @@
 <p-card class="mx-2 empty-border" [header]="'Consulta'">
-  <form [formGroup]="filtroForm" (reset)="limpiar()">
+  <form [formGroup]="filtroForm">
     <article class="flex flex-row flex-wrap">
       <div class="lg:col-3 col-12">
         <div class="flex justify-content-between">
@@ -13,7 +13,7 @@
       <div class="lg:col-3 col-12">
         <div class="flex justify-content-between">
           <label class="field-label" for="nss">NSS</label>
-          <span class="field-label-obligatorio">Obligatorio</span>
+          <span class="field-label-obligatorio" *ngIf="filtroForm.get('nss')?.enabled">Obligatorio</span>
         </div>
         <input pInputText class="w-full ph-custom" type="text" id="nss"
                placeholder="Ingresa NSS"
@@ -23,7 +23,7 @@
       <div class="lg:col-3 col-12">
         <div class="flex justify-content-between">
           <label class="field-label" for="nombre">Nombre</label>
-          <span class="field-label-obligatorio">Obligatorio</span>
+          <span class="field-label-obligatorio" *ngIf="filtroForm.get('nombre')?.enabled">Obligatorio</span>
         </div>
         <input pInputText class="w-full ph-custom" type="text" id="nombre"
                placeholder="Ingresa el nombre"
@@ -33,81 +33,70 @@
       <div class="lg:col-3 col-12">
         <div class="flex justify-content-between">
           <label class="field-label" for="apaterno">Primer apellido</label>
-          <span class="field-label-obligatorio">Obligatorio</span>
+          <span class="field-label-obligatorio" *ngIf="filtroForm.get('apaterno')?.enabled">Obligatorio</span>
         </div>
         <input pInputText class="w-full ph-custom" type="text" id="apaterno"
                placeholder="Ingresa el primer apellido"
                formControlName="apaterno"
         />
       </div>
-
     </article>
+
     <article class="flex flex-row flex-wrap">
       <div class="lg:col-3 col-12">
         <div class="flex justify-content-between">
-          <label class="field-label " for="apaterno">Segundo apellido</label>
+          <label class="field-label " for="amaterno">Segundo apellido</label>
         </div>
         <input pInputText class="w-full ph-custom" type="text" id="amaterno"
                placeholder="Ingresa el segundo apellido"
                formControlName="amaterno"
         />
       </div>
-      <div class="flex lg:col-9  col-12 justify-content-end align-items-center mt-3 gap-4">
-        <p-button type="reset" [disabled]="filtroForm.pristine" variant="outlined" label="Limpiar"
-                  [style]="{'width': '135px'}"/>
-        <p-button type="button" [disabled]="filtroForm.invalid" (onClick)="paginar(0, 0)" label="Buscar"
+      <div class="flex lg:col-9 col-12 justify-content-end align-items-center mt-3 gap-4">
+        <p-button type="button" [disabled]="filtroForm.pristine" variant="outlined" label="Limpiar"
+                  (onClick)="limpiar()" [style]="{'width': '135px'}"/>
+
+        <p-button type="button"
+                  [disabled]="filtroForm.invalid || antecedentesQuery.isFetching()"
+                  [loading]="antecedentesQuery.isFetching()"
+                  (onClick)="paginar()"
+                  label="Buscar"
                   [style]="{'width': '135px'}" styleClass="btn-background"/>
       </div>
     </article>
-
   </form>
 </p-card>
 
-@if (data().length > 0) {
+@if (dataNssPaginada().length > 0) {
   <app-tabla-principal [asociar]="false"
-                       [titulo]="tituloTabla"
-                       [data]="data()"
+                       [titulo]="tituloTablaNss()"
+                       [data]="dataNssPaginada()"
                        [rows]="10"
-                       [total]="totalregistros"
+                       [total]="totalRegistrosNss"
                        [tipoBusqueda]="'1'"
-                       [datosUsuario]="generarObjReporteAntecedentes()"
                        (pageChange)="cargarPagina($event, TipoTabla.NSS)"
-                       [banderaImprimir]="true"
-                       (checkboxChanged)="cambiarEstado($event)"/>
+                       [first]="paginaActualNss * registrosPorPagina"
+                       [banderaImprimir]="true"/>
 }
 
-@if (data_nombre().length > 0) {
-  <app-tabla-principal
-                       [asociar]="false"
-                       [titulo]="tituloTablanombre"
-                       [data]="data_nombre()"
+@if (dataNombrePaginada().length > 0) {
+  <app-tabla-principal [asociar]="false"
+                       [titulo]="tituloTablaNombre()"
+                       [data]="dataNombrePaginada()"
                        [tipoBusqueda]="'2'"
                        [rows]="10"
                        [banderaImprimir]="true"
-                       [total]="totalregistrosnombre"
-                       (pageChange)="cargarPagina($event, TipoTabla.NOMBRE)"
-                       (checkboxChanged)="cambiarEstado($event)"/>
+                       [total]="totalRegistrosNombre"
+                       [first]="paginaActualNombre * registrosPorPagina"
+                       (pageChange)="cargarPagina($event, TipoTabla.NOMBRE)"/>
 }
 
-<!--
-  <article class="flex flex-row flex-wrap">
-    <div class="flex lg:col-12  col-12 justify-content-end align-items-center mt-3 gap-4">
-      <p-button type="button" [disabled]="!solicitudAntecedentesService.tieneRegistros()" (onClick)="guardarAsociacion()"
-                label="Asociar"
-                [style]="{'width': '135px'}" styleClass="btn-background"/>
-    </div>
-  </article>
--->
-
-@if (data().length > 0 || data_nombre().length > 0) {
+@if (dataNssPaginada().length > 0 || dataNombrePaginada().length > 0) {
   <p-card class="mx-2 empty-border" [header]="'Total de antecedentes'">
-
     <article class="flex flex-row flex-wrap">
       <div class="lg:col-2 col-12">
         <div class="divTotales" style="background-color: #FFF8F5;">
-          <div class="divgestion">
-            <span class="titulo_totales">Gestión</span>
-          </div>
+          <div class="divgestion"><span class="titulo_totales">Gestión</span></div>
           <div class="flex flex-column justify-content-center align-items-center">
             <div class="flex flex-column justify-content-center align-items-center"
                  style="margin-top: 10px; width: 60%;">
@@ -120,9 +109,7 @@
 
       <div class="lg:col-2 col-12">
         <div class="divTotales" style="background-color: #F1FAFE;">
-          <div class="divqueja">
-            <span class="titulo_totales">Queja médica</span>
-          </div>
+          <div class="divqueja"><span class="titulo_totales">Queja médica</span></div>
           <div class="flex flex-column justify-content-center align-items-center">
             <div class="flex flex-column justify-content-center align-items-center"
                  style="margin-top: 10px; width: 60%;">
@@ -134,10 +121,8 @@
       </div>
 
       <div class="lg:col-2 col-12">
-        <div class="divTotales" style="background-color: #F6F9F6;;">
-          <div class="divinconformidades">
-            <span class="titulo_totales">Inconformidades</span>
-          </div>
+        <div class="divTotales" style="background-color: #F6F9F6;">
+          <div class="divinconformidades"><span class="titulo_totales">Inconformidades</span></div>
           <div class="flex flex-column justify-content-center align-items-center">
             <div class="flex flex-column justify-content-center align-items-center"
                  style="margin-top: 10px; width: 60%;">
@@ -149,10 +134,8 @@
       </div>
 
       <div class="lg:col-2 col-12">
-        <div class="divTotales" style="background-color:  #F5F6FF;">
-          <div class="divamparo">
-            <span class="titulo_totales">Amparo Indirecto</span>
-          </div>
+        <div class="divTotales" style="background-color: #F5F6FF;">
+          <div class="divamparo"><span class="titulo_totales">Amparo Indirecto</span></div>
           <div class="flex flex-column justify-content-center align-items-center">
             <div class="flex flex-column justify-content-center align-items-center"
                  style="margin-top: 10px; width: 60%;">
@@ -165,9 +148,7 @@
 
       <div class="lg:col-2 col-12">
         <div class="divTotales" style="background: #FEFDFB;">
-          <div class="divprocedimiento">
-            <span class="titulo_totales">Procedimiento RPE</span>
-          </div>
+          <div class="divprocedimiento"><span class="titulo_totales">Procedimiento RPE</span></div>
           <div class="flex flex-column justify-content-center align-items-center">
             <div class="flex flex-column justify-content-center align-items-center"
                  style="margin-top: 10px; width: 60%;">
@@ -180,9 +161,7 @@
 
       <div class="lg:col-2 col-12">
         <div class="divTotales" style="background: #FEF5FA; height: 120px;">
-          <div class="divjuicio">
-            <span class="titulo_totales">Juicio Contencioso Administrativo Federal</span>
-          </div>
+          <div class="divjuicio"><span class="titulo_totales">Juicio Contencioso Administrativo Federal</span></div>
           <div class="flex flex-column justify-content-center align-items-center">
             <div class="flex flex-column justify-content-center align-items-center"
                  style="margin-top: 10px; width: 60%;">
@@ -196,21 +175,18 @@
   </p-card>
 }
 
-@if (data().length === 0 && data_nombre().length === 0) {
+@if (dataNssPaginada().length === 0 && dataNombrePaginada().length === 0 && !antecedentesQuery.isFetching()) {
   <p-card class="mx-2 empty-border" [header]="'Total de antecedentes'">
-
     <div class="flex flex-column justify-content-center align-items-center">
-      <img class="p-0"
-           src="/assets/images/Lupa.svg" alt="Sin resultados">
+      <img class="p-0" src="/assets/images/Lupa.svg" alt="Sin resultados">
       <p class="mt-2 sinResultados">No hay resultados de búsqueda</p>
-
     </div>
-
   </p-card>
 }
 
+
 <p-card class="mx-2 empty-border" [header]="'Aviso de confidencialidad'">
-  <p class="aviso">La información aquí mostrada es confidencial y de propiedad del IMSS. Su uso está rerstringido
+  <p class="aviso">La información aquí mostrada es confidencial y de propiedad del IMSS. Su uso está restringido
     exclusivamente a las actividades de consulta autorizadas. Queda estrictamente prohibido su divulgación, copía,
     distribución o uso para fines no establecidos.
     Todo acceso queda registrado y auditado. El incumplimiento de esta política acarreará sanciones en términos de
@@ -220,8 +196,10 @@
     hechos.
   </p>
   <br>
-  <p class="aviso">Información consultada en SSCV1, con corte al {{ fechasCorte.fecCorteSsc1 }}; SSCV2, con corte
-    al {{ fechasCorte.fecCorteSsc2 }} y SIADE,
-    con
-    corte al {{ fechasCorte.fecCorteSiade }}.</p>
+  @if (fechasCorte()) {
+    <p class="aviso">Información consultada en SSCV1, con corte al {{ fechasCorte()?.fecCorteSsc1 }}; SSCV2, con corte
+      al {{ fechasCorte()?.fecCorteSsc2 }} y SIADE,
+      con
+      corte al {{ fechasCorte()?.fecCorteSiade }}.</p>
+  }
 </p-card>

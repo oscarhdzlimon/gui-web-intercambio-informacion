@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="readme -&gt; tanstack">
+    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="impresion por consulta interna">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/detalle-antecedentes/detalle-antecedentes.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/detalle-antecedentes/detalle-antecedentes.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/services/busqueda-state.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/services/busqueda-state.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,14 +99,6 @@
       <workItem from="1767891732696" duration="7482000" />
       <workItem from="1767937805716" duration="125067000" />
       <workItem from="1769192673454" duration="7337000" />
-    </task>
-    <task id="LOCAL-00106" summary="correcciones de antecedentes">
-      <option name="closed" value="true" />
-      <created>1768427258064</created>
-      <option name="number" value="00106" />
-      <option name="presentableId" value="LOCAL-00106" />
-      <option name="project" value="LOCAL" />
-      <updated>1768427258064</updated>
     </task>
     <task id="LOCAL-00107" summary="correcciones de antecedentes">
       <option name="closed" value="true" />
@@ -490,7 +484,15 @@
       <option name="project" value="LOCAL" />
       <updated>1769462209776</updated>
     </task>
-    <option name="localTasksCounter" value="155" />
+    <task id="LOCAL-00155" summary="impresion por consulta interna">
+      <option name="closed" value="true" />
+      <created>1769463374563</created>
+      <option name="number" value="00155" />
+      <option name="presentableId" value="LOCAL-00155" />
+      <option name="project" value="LOCAL" />
+      <updated>1769463374563</updated>
+    </task>
+    <option name="localTasksCounter" value="156" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -508,7 +510,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="ajustes de interceptor" />
     <MESSAGE value="corrección de apellido materno" />
     <MESSAGE value="corrección de busqueda por nombre" />
     <MESSAGE value="ajustes de key en tabla por idNum" />
@@ -533,6 +534,7 @@
     <MESSAGE value="ajustes al reset de busqueda-sistemas" />
     <MESSAGE value="implementacion de captcha" />
     <MESSAGE value="readme -&gt; tanstack" />
-    <option name="LAST_COMMIT_MESSAGE" value="readme -&gt; tanstack" />
+    <MESSAGE value="impresion por consulta interna" />
+    <option name="LAST_COMMIT_MESSAGE" value="impresion por consulta interna" />
   </component>
 </project>

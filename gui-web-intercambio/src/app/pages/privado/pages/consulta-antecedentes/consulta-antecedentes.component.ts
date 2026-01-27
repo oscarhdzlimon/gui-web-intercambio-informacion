@@ -1,5 +1,5 @@
 import {CommonModule} from '@angular/common';
-import {Component, inject, OnInit, signal, WritableSignal} from '@angular/core';
+import {Component, effect, inject, OnInit, signal, WritableSignal} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {GeneralComponent} from '@components/general.component';
 import {TipoDropdown} from '@models/tipo-dropdown.interface';
@@ -17,26 +17,22 @@ import {filter} from 'rxjs/operators';
 import {AntecedentesService} from '@services/antecedentes.service';
 import {TotalesAntecedentes} from '../../../../core/interfaces/totales-antecedentes.interface';
 import {RegistroAntecedentes} from '../../../../core/interfaces/registro-antecedentes.interface';
-import {SolicitudAsociacion} from '../../../../core/interfaces/solicitud-asociacion.interface';
-import {HttpErrorResponse} from '@angular/common/http';
 import {UserService} from '@services/user.service';
 import {SesionUser} from '@models/sesion-user.interface';
 import {BusquedaStateService} from '@services/busqueda-state.service';
-import {ManejoSolicitudAntecedentesService} from '@services/manejo-solicitud-antecedentes.service';
-import {SolicitudBitacora} from '../../../../core/interfaces/solicitud-bitacora.inerface';
 import {DetalleAntecedentesService} from '@services/detalle-antecedentes.service';
 import {DetalleAntecedentes} from '@models/detalleAntecedentes.interface';
-import {ReporteAntecedentes} from '@models/reporteAntecedentes.interface';
 import {
-  NuevaPersona,
-  NuevaSolicitudBusquedaPaginado,
-  SolicitudBusquedaPaginado
+  NuevaSolicitudBusquedaPaginado
 } from '../../../../core/interfaces/solicitud-busqueda-antecedentes.interface';
 import {
   NuevoRegistroAntecedentes,
   RespuestaAntecedentes,
   TotalAntecedentes
 } from '../../../../core/interfaces/respuesta-antecedentes.interface';
+import {injectQuery, QueryClient} from '@tanstack/angular-query-experimental';
+import {lastValueFrom} from 'rxjs';
+import {SolicitudBitacora} from '../../../../core/interfaces/solicitud-bitacora.inerface';
 
 enum TipoTabla {
   NSS = '1',
@@ -45,7 +41,9 @@ enum TipoTabla {
 
 @Component({
   selector: 'app-consulta-antecedentes',
-  imports: [CommonModule,
+  standalone: true,
+  imports: [
+    CommonModule,
     ReactiveFormsModule,
     Card,
     SelectModule,
@@ -54,286 +52,169 @@ enum TipoTabla {
     ButtonModule,
     ConfirmPopupModule,
     PaginatorModule,
-    PopoverModule, TablaPrincipalComponent],
+    PopoverModule,
+    TablaPrincipalComponent
+  ],
   templateUrl: './consulta-antecedentes.component.html',
   styleUrl: './consulta-antecedentes.component.scss'
 })
 export class ConsultaAntecedentesComponent extends GeneralComponent implements OnInit {
-  antecedentesService: AntecedentesService = inject(AntecedentesService);
-  solicitudAntecedentesService: ManejoSolicitudAntecedentesService = inject(ManejoSolicitudAntecedentesService);
-  detalleAntecedentesService: DetalleAntecedentesService = inject(DetalleAntecedentesService);
 
+  private queryClient = inject(QueryClient);
+  private fb = inject(FormBuilder);
+  private busquedaStateService = inject(BusquedaStateService);
+  private antecedentesService = inject(AntecedentesService);
+  private userService = inject(UserService);
+  private detalleAntecedentesService = inject(DetalleAntecedentesService);
+
+  // --- Signals de Estado ---
+  paramBusqueda = signal<NuevaSolicitudBusquedaPaginado | null>(
+    this.busquedaStateService.obtenerFiltrosAntecedentes()
+  );
+  sistemasListos = signal<boolean>(false);
+  fechasCorte = signal<DetalleAntecedentes | null>(null);
+
+  // --- Data de la UI ---
   tipoconsulta: TipoDropdown[] = TIPO_CONSULTA_ANTECEDENTES;
-
-  userService = inject(UserService);
-
-  private dataNombreCompleta: RegistroAntecedentes[] = [];
-  private dataNssCompleta: RegistroAntecedentes[] = [];
-
   filtroForm!: FormGroup;
-
-  // Inicialización de los títulos base
-  tituloTablaBase: string = 'Resultados por NSS';
-  tituloTablanombreBase: string = 'Resultados por Nombre y Apellidos';
-  tituloTabla: string = 'Resultados de la búsqueda'; // Título que se muestra
-  tituloTablanombre: string = 'Resultados de la búsqueda'; // Título que se muestra
-
-  registrosPorPaginaNss: number = 10;
-  paginaActualNss: number = 0;
-  totalregistros: number = 0;
-  data: WritableSignal<RegistroAntecedentes[]> = signal([]);
-
-  registrosPorPaginaNombre: number = 10;
-  paginaActualNombre: number = 0;
-  totalregistrosnombre: number = 0;
-  data_nombre: WritableSignal<RegistroAntecedentes[]> = signal([]);
-
   totalAntecedentes!: TotalesAntecedentes;
-
-  REF_USUARIO: string = '';
-  REF_APLICATIVO: string = '';
-  REF_MODULO: string = '';
-  REF_OOAD: string = '';
-
   userData: SesionUser | null = null;
 
+  // Títulos
+  tituloTablaNss = signal<string>('Resultados por NSS');
+  tituloTablaNombre = signal<string>('Resultados por Nombre y Apellidos');
 
-  fechasCorte: DetalleAntecedentes = {
-    fecCorteSiade: '',
-    fecCorteSsc1: '',
-    fecCorteSsc2: '',
-    nss: ""
-  };
+  // Control de Tablas
+  dataNssCompleta: RegistroAntecedentes[] = [];
+  dataNombreCompleta: RegistroAntecedentes[] = [];
 
-  datosUsuario = {
-    nombre: '',
-    nss: '',
-    expediente: '',
-  };
+  dataNssPaginada = signal<RegistroAntecedentes[]>([]);
+  dataNombrePaginada = signal<RegistroAntecedentes[]>([]);
 
-  constructor(private fb: FormBuilder,
-              private busquedaStateService: BusquedaStateService) {
+  // Paginación
+  registrosPorPagina = 10;
+  paginaActualNss = 0;
+  totalRegistrosNss = 0;
+  paginaActualNombre = 0;
+  totalRegistrosNombre = 0;
+
+  // --- TanStack Query ---
+  antecedentesQuery = injectQuery(() => ({
+    queryKey: ['antecedentes-general', this.paramBusqueda()],
+    queryFn: () => lastValueFrom(this.antecedentesService.getLstAntecedentesGeneral(this.paramBusqueda()!)),
+    enabled: !!this.paramBusqueda() && this.sistemasListos() && !!this.fechasCorte(),
+    gcTime: 1000 * 60 * 30,
+    staleTime: 1000 * 60 * 5,
+    refetchOnWindowFocus: false
+  }));
+
+  constructor() {
     super();
+    this.filtroForm = this.inicializarFiltroForm();
     this.obtenerFechasCorte();
-    this.solicitudAntecedentesService.cambios$.subscribe(() => {
-      this.data.set(
-        this.sincronizarEstado(this.data())
-      );
-      this.data_nombre.set(
-        this.sincronizarEstado(this.data_nombre())
-      );
-    });
-    this.userService.userData$.subscribe(user => this.userData = user);
-    this.REF_APLICATIVO = this.userData?.sistemaOrigen as string;
-    this.REF_MODULO = this.userData?.modulo as string;
-    this.REF_USUARIO = this.userData?.curp as string;
-    this.REF_OOAD = this.userData?.ooad as string;
-    this.datosUsuario.nombre = this.userData?.nombreCompleto || '';
+    this.configurarSuscripcionesUsuario();
+    this.configurarEfectoBusqueda();
   }
 
   ngOnInit(): void {
-    this.filtroForm = this.inicializarFiltroForm();
     this.suscribirATipoConsulta();
     this.recuperarUltimaBusqueda();
   }
 
-  private sincronizarEstado(registros: RegistroAntecedentes[]): RegistroAntecedentes[] {
-
-    return registros.map(r => {
-      if (r.indAsociado && r.idBitacoraAsociacion) {
-        return r;
-      }
-
-      return {
-        ...r,
-        indAsociado: this.solicitudAntecedentesService.existe(
-          this.obtenerIdentificador(r)
-        )
+  private configurarSuscripcionesUsuario(): void {
+    this.userService.userData$.subscribe(user => {
+      if (user) {
+        this.userData = user;
+        this.sistemasListos.set(true);
       }
     });
   }
 
-  recuperarUltimaBusqueda(): void {
-    const filtrosGuardados = this.busquedaStateService.obtenerFiltrosAntecedentes();
-    if (!filtrosGuardados || filtrosGuardados.personas.length === 0) return;
-    const p = filtrosGuardados.personas[0];
-    const form = this.filtroForm;
+  private configurarEfectoBusqueda(): void {
+    effect(() => {
+      const res = this.antecedentesQuery.data();
+      const isFetching = this.antecedentesQuery.isFetching();
+      const params = this.paramBusqueda();
 
-    // 1. Determinar el Tipo de Consulta
-    let tipo = 0;
-    const tieneNss = !!p.nss;
-    const tieneNombre = !!(p.nombre || p.apellidoPaterno || p.apellidoMaterno);
+      if (!params) {
+        this.dataNssPaginada.set([]);
+        this.dataNombrePaginada.set([]);
+        return;
+      }
 
-    if (tieneNss && tieneNombre) tipo = 3;      // Ambos
-    else if (tieneNss) tipo = 1;                // Solo NSS
-    else if (tieneNombre) tipo = 2;             // Solo Nombre
-
-    // 2. Gestionar estados de los controles (Habilitar/Deshabilitar)
-    // Usamos una lógica simple: si tiene el dato o el tipo lo requiere, habilitamos
-    if (tieneNss || tipo === 3) {
-      form.get('nss')?.enable();
-    } else {
-      form.get('nss')?.disable();
-    }
-
-    if (tieneNombre || tipo === 3) {
-      ['nombre', 'apaterno', 'amaterno'].forEach(c => form.get(c)?.enable());
-    } else {
-      ['nombre', 'apaterno', 'amaterno'].forEach(c => form.get(c)?.disable());
-    }
-
-    // 3. Cargar los datos al formulario
-    form.patchValue({
-      tipoconsulta: tipo,
-      nss: p.nss,
-      nombre: p.nombre,
-      apaterno: p.apellidoPaterno,
-      amaterno: p.apellidoMaterno
-    }, {emitEvent: true});
-
-    this.paginar(0, 0);
-  }
-
-  suscribirATipoConsulta(): void {
-    this.filtroForm.get('tipoconsulta')?.valueChanges
-      .pipe(filter(value => value !== null && value !== undefined))
-      .subscribe(event => {
-        const tipo = typeof event === 'object' && event !== null && 'value' in event ? event.value : event;
-        this.limpiar(false); // Limpiar datos y validadores al cambiar el tipo, pero sin resetear el formulario
-        this.aplicarValidacionCondicional(tipo);
-      });
-  }
-
-  aplicarValidacionCondicional(tipo: number): void {
-    const nss = this.filtroForm.get('nss');
-    const nombre = this.filtroForm.get('nombre');
-    const apaterno = this.filtroForm.get('apaterno');
-    const amaterno = this.filtroForm.get('amaterno');
-
-    this.limpiarValidadores();
-
-    // Lógica de habilitación y validación
-    if (tipo === 1) { // NSS
-      nss?.enable();
-      nss?.setValidators([Validators.required]);
-
-    }
-    if (tipo === 2) { // Nombre y apellidos
-      nombre?.enable();
-      apaterno?.enable();
-      amaterno?.enable();
-      nombre?.setValidators([Validators.required]);
-      apaterno?.setValidators([Validators.required]);
-
-    }
-    if (tipo === 3) { // Ambos
-      nss?.enable();
-      nombre?.enable();
-      apaterno?.enable();
-      amaterno?.enable();
-      nss?.setValidators([Validators.required]);
-      nombre?.setValidators([Validators.required]);
-      apaterno?.setValidators([Validators.required]);
-    }
-
-    // Actualizar validaciones
-    [nss, nombre, apaterno, amaterno].forEach(control => {
-      control?.updateValueAndValidity();
+      if (res && !isFetching) {
+        this.procesarResultados(res);
+      }
     });
-
-    this.filtroForm.updateValueAndValidity();
   }
 
-  limpiarValidadores(): void {
-    const nss = this.filtroForm.get('nss');
-    const nombre = this.filtroForm.get('nombre');
-    const apaterno = this.filtroForm.get('apaterno');
-    const amaterno = this.filtroForm.get('amaterno');
+  private procesarResultados(res: RespuestaAntecedentes): void {
+    this.actualizarTitulos(res);
 
-    [nss, nombre, apaterno, amaterno].forEach(control => {
-      control?.clearValidators();
-      control?.setValue(null);
-      control?.disable();
-    });
+    // Mapeo de datos completos
+    this.dataNssCompleta = Object.values(res.resultadosPorNss).flat().map(i => this.mapearRespuesta(i));
+    this.dataNombreCompleta = Object.values(res.resultadosPorNombre).flat().map(i => this.mapearRespuesta(i));
 
-  }
+    this.totalRegistrosNss = this.dataNssCompleta.length;
+    this.totalRegistrosNombre = this.dataNombreCompleta.length;
 
-  cargarPagina(event: any, tipoTabla: TipoTabla) {
-    if (tipoTabla === TipoTabla.NSS) {
-      this.registrosPorPaginaNss = event.rows;
-      this.paginar(event.page - 1, undefined, true);
+    this.totalAntecedentes = this.ajustarTotales(res.totalesGenerales);
+
+    const paginasGuardadas = this.busquedaStateService.obtenerPaginasAntecedentes();
+
+    if (paginasGuardadas) {
+      this.paginaActualNss = paginasGuardadas.nssPage;
+      this.paginaActualNombre = paginasGuardadas.nombrePage;
     } else {
-      this.registrosPorPaginaNombre = event.rows;
-      this.paginar(undefined, event.page - 1, true);
-    }
-  }
-
-  private mapearASolicitud(evento: any): SolicitudAsociacion {
-    return {
-      cveAsunto: '',
-      idPersona: evento.idPersona,
-      refExpedientePersona: evento.refExpedientePersona,
-      idBitacoraAsociacion: evento.idBitacoraAsociacion,
-      refUsuarioAutentica: this.REF_USUARIO, // Contexto del componente
-      refAplicativoAsociacion: this.REF_APLICATIVO, // Contexto del componente
-      refModuloAsociacion: this.REF_MODULO, // Contexto del componente
-      refExpediente: evento.expediente,
-      nomPersona: evento.nombre,
-      nomApellidoPaterno: evento.apellidoPaterno,
-      nomApellidoMaterno: evento.apellidoMaterno,
-      refNss: evento.nss,
-      // Mapeo de nombres de propiedades
-      numGestion: evento.gestion,
-      numQuejaMedica: evento.quejaMedica,
-      numInconformidad: evento.inconformidades,
-      numAmparoIndirecto: evento.amparoIndirecto,
-      numProcedimientoRpe: evento.procedimientoRpe,
-      numJuicioContencioso: evento.juicioContencioso
-    };
-  }
-
-  cambiarEstado(registro: RegistroAntecedentes): void {
-
-    const key = this.obtenerIdentificador(registro);
-    if (registro.indAsociado) {
-      this.solicitudAntecedentesService.agregar(
-        key,
-        this.mapearASolicitud(registro)
-      );
-    } else {
-      this.solicitudAntecedentesService.eliminar(key);
-    }
-  }
-
-
-  private obtenerIdentificador(item: any): string {
-
-    // Persona
-    let personaId: string;
-
-    if (item.nss || item.refNss) {
-      personaId = (item.nss ?? item.refNss).trim();
-    } else {
-      const nombre = (item.nombre ?? item.nomPersona ?? '').trim().toUpperCase();
-      const paterno = (item.apellidoPaterno ?? item.nomApellidoPaterno ?? '').trim().toUpperCase();
-      const materno = (item.apellidoMaterno ?? item.nomApellidoMaterno ?? '').trim().toUpperCase();
-
-      personaId = `${nombre}-${paterno}-${materno}`;
+      this.paginaActualNss = 0;
+      this.paginaActualNombre = 0;
     }
 
-    // Atributos que hacen único al registro
-    const gestion = item.gestion ?? item.numGestion ?? 0;
-    const queja = item.quejaMedica ?? item.numQuejaMedica ?? 0;
-    const inconformidad = item.inconformidades ?? item.numInconformidad ?? 0;
-    const amparo = item.amparoIndirecto ?? item.numAmparoIndirecto ?? 0;
-    const rpe = item.procedimientoRpe ?? item.numProcedimientoRpe ?? 0;
-    const juicio = item.juicioContencioso ?? item.numJuicioContencioso ?? 0;
-
-    return `${personaId}|${gestion}|${queja}|${inconformidad}|${amparo}|${rpe}|${juicio}`;
+    this.renderizarPaginas();
+    this.guardarBitacora();
   }
 
+  paginar(): void {
+    if (this.filtroForm.invalid) {
+      this._alertServices.informacion('Debe completar los campos requeridos.');
+      return;
+    }
 
-  inicializarFiltroForm(): FormGroup {
+    const payload = this.generarPayload();
+    this.busquedaStateService.guardarFiltrosAntecedentes(payload);
+
+    // Al setear el signal, TanStack Query dispara la petición
+    this.paramBusqueda.set(payload);
+  }
+
+  renderizarPaginas(): void {
+    // Slice NSS
+    const startNss = this.paginaActualNss * this.registrosPorPagina;
+    this.dataNssPaginada.set(this.dataNssCompleta.slice(startNss, startNss + this.registrosPorPagina));
+
+    // Slice Nombre
+    const startNom = this.paginaActualNombre * this.registrosPorPagina;
+    this.dataNombrePaginada.set(this.dataNombreCompleta.slice(startNom, startNom + this.registrosPorPagina));
+  }
+
+  cargarPagina(event: any, tipo: TipoTabla): void {
+    if (tipo === TipoTabla.NSS) {
+      this.paginaActualNss = event.page - 1;
+    } else {
+      this.paginaActualNombre = event.page - 1;
+    }
+
+    this.busquedaStateService.guardarPaginasAntecedentes(
+      this.paginaActualNss,
+      this.paginaActualNombre
+    );
+
+    this.renderizarPaginas();
+  }
+
+  // --- Helpers y Mapeos ---
+
+  private inicializarFiltroForm(): FormGroup {
     return this.fb.group({
       tipoconsulta: ['', Validators.required],
       nss: [{value: null, disabled: true}],
@@ -343,212 +224,33 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
     });
   }
 
-  actualizarTitulosTabla(res: RespuestaAntecedentes): void {
-    this.tituloTabla = this.tituloTablaBase;
-    this.tituloTablanombre = this.tituloTablanombreBase;
-
-    // Extraer la llave del Record de NSS
-    const llavesNss = Object.keys(res.resultadosPorNss);
-    if (llavesNss.length > 0) {
-      // Tomamos la primera llave que representa el criterio de búsqueda
-      this.tituloTabla = `${this.tituloTablaBase}: ${llavesNss[0]}`;
-    }
-
-    // Extraer la llave del Record de Nombre
-    const llavesNombre = Object.keys(res.resultadosPorNombre);
-    if (llavesNombre.length > 0) {
-      this.tituloTablanombre = `${this.tituloTablanombreBase}: ${llavesNombre[0]}`;
-    }
+  private suscribirATipoConsulta(): void {
+    this.filtroForm.get('tipoconsulta')?.valueChanges
+      .pipe(filter(v => v !== null))
+      .subscribe(tipo => this.aplicarValidaciones(tipo));
   }
 
-  paginar(paginaNss: number | undefined, paginaNombre: number | undefined, consultaLocal: boolean = false): void {
+  private aplicarValidaciones(tipo: any): void {
+    const t = typeof tipo === 'object' ? tipo.value : tipo;
+    const {nss, nombre, apaterno, amaterno} = this.filtroForm.controls;
 
-    // CASO A: Navegación Local
-    if (![undefined, 0].includes(paginaNss) || ![undefined, 0].includes(paginaNombre) || consultaLocal) {
-      if (paginaNss !== undefined) this.paginaActualNss = paginaNss;
-      if (paginaNombre !== undefined) this.paginaActualNombre = paginaNombre;
-      this.renderizarPaginasActuales();
-      return;
-    }
-
-    // CASO B: Búsqueda inicial (Servicio Unificado)
-    if (this.filtroForm.invalid) {
-      this._alertServices.informacion('Debe completar los campos requeridos.');
-      return;
-    }
-
-    const payload: NuevaSolicitudBusquedaPaginado = this.generarPayloadGeneral();
-    this.busquedaStateService.guardarFiltrosAntecedentes(payload);
-
-    this.antecedentesService.getLstAntecedentesGeneral(payload).subscribe({
-      next: (res: RespuestaAntecedentes) => {
-        this.actualizarTitulosTabla(res);
-
-        // Aplanar resultados por NSS: Object.values devuelve un array de arrays, usamos flat()
-        const rawNss = Object.values(res.resultadosPorNss).flat();
-        this.dataNssCompleta = rawNss.map(i => this.mapearRespuesta(i));
-
-        // Aplanar resultados por Nombre
-        const rawNombre = Object.values(res.resultadosPorNombre).flat();
-        this.dataNombreCompleta = rawNombre.map(i => this.mapearRespuesta(i));
-
-        // Ajustar Totales (usando el objeto directo del backend)
-        this.totalAntecedentes = this.ajustarTotales(res.totalesGenerales);
-
-        // Resetear paginación y renderizar
-        this.totalregistros = this.dataNssCompleta.length;
-        this.totalregistrosnombre = this.dataNombreCompleta.length;
-        this.paginaActualNss = 0;
-        this.paginaActualNombre = 0;
-
-        this.renderizarPaginasActuales();
-        this.guardarBitacora();
-
-        if (this.totalregistros === 0 && this.totalregistrosnombre === 0) {
-          this._alertServices.informacion('No se encontraron resultados.');
-        }
-      },
-      error: () => this._alertServices.error('Error al consultar el servicio general de antecedentes.')
+    [nss, nombre, apaterno, amaterno].forEach(c => {
+      c.disable();
+      c.clearValidators();
+      c.setValue(null);
     });
-  }
 
-  generarSolicitudAntecedentes(): SolicitudBusquedaPaginado {
-    return {
-      expediente: null,
-      ooad_UMAE: this.REF_OOAD,
-      usuarioLogueado: this.REF_USUARIO,
-      sistema: this.REF_APLICATIVO,
-      modulo: this.REF_APLICATIVO,
-      personas: [{
-        nom_nombre_afectado: this.filtroForm.get('nombre')?.value,
-        nom_apellido_paterno_afectado: this.filtroForm.get('apaterno')?.value,
-        nom_apellido_materno_afectado: this.filtroForm.get('amaterno')?.value,
-        cve_nss: this.filtroForm.get('nss')?.value
-      }]
+    if (t === 1 || t === 3) {
+      nss.enable();
+      nss.setValidators(Validators.required);
     }
-  }
-
-  generarSolicitudAntecedentesNSS(): SolicitudBusquedaPaginado {
-    return {
-      expediente: null,
-      ooad_UMAE: this.REF_OOAD,
-      usuarioLogueado: this.REF_USUARIO,
-      sistema: this.REF_APLICATIVO,
-      modulo: this.REF_APLICATIVO,
-      personas: [{
-        cve_nss: this.filtroForm.get('nss')?.value
-      }]
-    }
-  }
-
-  generarSolicitudAntecedentesNombre(): SolicitudBusquedaPaginado {
-    return {
-      expediente: null,
-      ooad_UMAE: this.REF_OOAD,
-      usuarioLogueado: this.REF_USUARIO,
-      sistema: this.REF_APLICATIVO,
-      modulo: this.REF_APLICATIVO,
-      personas: [{
-        nom_nombre_afectado: this.filtroForm.get('nombre')?.value,
-        nom_apellido_paterno_afectado: this.filtroForm.get('apaterno')?.value,
-        nom_apellido_materno_afectado: this.filtroForm.get('amaterno')?.value,
-      }]
-    }
-  }
-
-  generarNombre(): string | null {
-    const nombre = this.filtroForm.get('nombre')?.value;
-    const apaterno = this.filtroForm.get('apaterno')?.value;
-    const amaterno = this.filtroForm.get('amaterno')?.value;
-
-    if (!nombre && !apaterno) return null; // Requiere al menos nombre o apellido paterno
-
-    return [nombre, apaterno, amaterno]
-      .filter(segmento => !!segmento)
-      .join(' ');
-  }
-
-  limpiar(resetForm: boolean = true): void {
-    if (resetForm) {
-      this.filtroForm.reset({
-        tipoconsulta: '',
-        nss: {value: null, disabled: true},
-        nombre: {value: null, disabled: true},
-        apaterno: {value: null, disabled: true},
-        amaterno: {value: null, disabled: true}
-      });
-      this.limpiarValidadores();
+    if (t === 2 || t === 3) {
+      [nombre, apaterno, amaterno].forEach(c => c.enable());
+      nombre.setValidators(Validators.required);
+      apaterno.setValidators(Validators.required);
     }
 
-    this.tituloTabla = 'Resultados de la búsqueda';
-    this.tituloTablanombre = 'Resultados de la búsqueda';
-
-    // Reiniciar paginación y datos de AMBAS tablas
-    this.paginaActualNss = 0;
-    this.registrosPorPaginaNss = 10;
-    this.totalregistros = 0;
-    this.data.set([]);
-
-    this.paginaActualNombre = 0;
-    this.registrosPorPaginaNombre = 10;
-    this.totalregistrosnombre = 0;
-    this.data_nombre.set([]);
-  }
-
-  protected readonly TipoTabla = TipoTabla;
-
-  guardarAsociacion(): void {
-    const registros = this.solicitudAntecedentesService.obtenerRegistros();
-    if (registros.length === 0) {
-      this._alertServices.alerta('No hay registros seleccionados para asociar.');
-      return;
-    }
-
-  }
-
-  guardarBitacora(): void {
-    const solicitud: SolicitudBitacora = this.generarSolicitudBitacora();
-    this.antecedentesService.guardarBitacora(solicitud).subscribe({
-      next: data => {
-      },
-      error: (error: HttpErrorResponse) => {
-      }
-    })
-  }
-
-  generarSolicitudBitacora(): SolicitudBitacora {
-    return {
-      fecCorteSiade: this.fechasCorte.fecCorteSiade,
-      fecCorteSsc1: this.fechasCorte.fecCorteSsc1,
-      fecCorteSsc2: this.fechasCorte.fecCorteSsc2,
-      nomApellidoMaterno: null,
-      nomApellidoPaterno: null,
-      nomPersona: this.generarNombre(),
-      refAplicativo: this.REF_APLICATIVO,
-      refExpediente: null,
-      refModulo: this.REF_MODULO,
-      refNss: this.filtroForm.get('nss')?.value,
-      refOoad: this.REF_OOAD,
-      refUsuarioAutentica: this.REF_USUARIO
-    }
-  }
-
-  generarObjReporteAntecedentes(): ReporteAntecedentes {
-    return {
-      tipoBusqueda: null,
-      nombre: "",
-      apellidoPaterno: "",
-      apellidoMaterno: "",
-      nss: "",
-      expediente: "",
-      fecCorteSiade: this.fechasCorte.fecCorteSiade,
-      fecCorteSsc1: this.fechasCorte.fecCorteSsc1,
-      fecCorteSsc2: this.fechasCorte.fecCorteSsc2,
-      nombreConsultor: this.datosUsuario.nombre,
-      ooad: this.REF_OOAD,
-      aplicativoOrigen: this.REF_APLICATIVO,
-      moduloOrigen: this.REF_MODULO,
-    }
+    this.filtroForm.updateValueAndValidity();
   }
 
   private mapearRespuesta(item: NuevoRegistroAntecedentes): RegistroAntecedentes {
@@ -570,20 +272,7 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
     };
   }
 
-  private renderizarPaginasActuales(): void {
-    // Tabla NSS
-    const startNss = this.paginaActualNss * this.registrosPorPaginaNss;
-    const endNss = startNss + this.registrosPorPaginaNss;
-    this.data.set(this.sincronizarEstado(this.dataNssCompleta.slice(startNss, endNss)));
-
-    // Tabla Nombre
-    const startNom = this.paginaActualNombre * this.registrosPorPaginaNombre;
-    const endNom = startNom + this.registrosPorPaginaNombre;
-    this.data_nombre.set(this.sincronizarEstado(this.dataNombreCompleta.slice(startNom, endNom)));
-  }
-
   private ajustarTotales(totales: TotalAntecedentes): TotalesAntecedentes {
-    // Estructura inicial con acumuladores en 0
     return {
       totalPorTipo: {
         procedimientoRpe: totales.rp,
@@ -594,43 +283,116 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
         gestion: totales.gestion
       },
       totalAsociadosPorTipo: {
-        procedimientoRpe: 0,
-        juicioContencioso: 0,
-        inconformidad: 0,
-        quejaMedica: 0,
-        amparoIndirecto: 0,
-        gestion: 0
+        procedimientoRpe: 0, juicioContencioso: 0, inconformidad: 0,
+        quejaMedica: 0, amparoIndirecto: 0, gestion: 0
       }
     };
   }
 
-  private generarPayloadGeneral(): NuevaSolicitudBusquedaPaginado {
+  private generarPayload(): NuevaSolicitudBusquedaPaginado {
     const f = this.filtroForm.getRawValue();
-
-    // Estructura de la persona según los filtros
-    const persona: NuevaPersona = {
-      nss: f.nss?.trim() || null,
-      nombre: f.nombre?.trim().toUpperCase() || null,
-      apellidoPaterno: f.apaterno?.trim().toUpperCase() || null,
-      apellidoMaterno: f.amaterno?.trim().toUpperCase() || null
-    };
-
-    // Se retorna como un array
     return {
-      personas: [persona],
+      personas: [{
+        nss: f.nss?.trim() || null,
+        nombre: f.nombre?.trim().toUpperCase() || null,
+        apellidoPaterno: f.apaterno?.trim().toUpperCase() || null,
+        apellidoMaterno: f.amaterno?.trim().toUpperCase() || null
+      }],
       expediente: null,
-      ooad_UMAE: this.REF_OOAD,
-      usuarioLogueado: this.REF_USUARIO,
-      sistema: this.REF_APLICATIVO,
-      modulo: this.REF_MODULO
+      ooad_UMAE: this.userData?.ooad || '',
+      usuarioLogueado: this.userData?.curp || '',
+      sistema: this.userData?.sistemaOrigen || '',
+      modulo: this.userData?.modulo || ''
     };
   }
 
-  obtenerFechasCorte() {
+  private actualizarTitulos(res: RespuestaAntecedentes): void {
+    const nssKey = Object.keys(res.resultadosPorNss)[0];
+    const nomKey = Object.keys(res.resultadosPorNombre)[0];
+    this.tituloTablaNss.set(nssKey ? `Resultados por NSS: ${nssKey}` : 'Resultados por NSS');
+    this.tituloTablaNombre.set(nomKey ? `Resultados por Nombre: ${nomKey}` : 'Resultados por Nombre');
+  }
+
+  recuperarUltimaBusqueda(): void {
+    const filtrosGuardados = this.busquedaStateService.obtenerFiltrosAntecedentes();
+
+    if (!filtrosGuardados || !filtrosGuardados.personas || filtrosGuardados.personas.length === 0) return;
+
+    const p = filtrosGuardados.personas[0];
+    const form = this.filtroForm;
+
+    let tipo = 0;
+    if (p.nss && (p.nombre || p.apellidoPaterno)) tipo = 3;
+    else if (p.nss) tipo = 1;
+    else if (p.nombre) tipo = 2;
+
+    this.aplicarValidaciones(tipo);
+
+    form.patchValue({
+      tipoconsulta: tipo,
+      nss: p.nss,
+      nombre: p.nombre,
+      apaterno: p.apellidoPaterno,
+      amaterno: p.apellidoMaterno
+    });
+
+    this.filtroForm.markAsDirty();
+    this.filtroForm.updateValueAndValidity();
+
+    this.paramBusqueda.set(filtrosGuardados);
+  }
+
+  private obtenerFechasCorte() {
     this.detalleAntecedentesService.consultarFechasCorte().subscribe({
       next: (datos) => {
-        this.fechasCorte = datos.respuesta;
+        this.fechasCorte.set(datos.respuesta);
       }
-    })
+    });
   }
+
+  private guardarBitacora(): void {
+    const f = this.filtroForm.getRawValue();
+    const fechas = this.fechasCorte();
+
+    if (!fechas) return;
+    const solicitud: SolicitudBitacora = {
+      fecCorteSiade: fechas.fecCorteSiade,
+      fecCorteSsc1: fechas.fecCorteSsc1,
+      fecCorteSsc2: fechas.fecCorteSsc2,
+      nomPersona: f.nombre ? `${f.nombre} ${f.apaterno} ${f.amaterno}` : null,
+      refAplicativo: this.userData?.sistemaOrigen || '',
+      refExpediente: null,
+      refModulo: this.userData?.modulo || '',
+      refNss: f.nss,
+      refOoad: this.userData?.ooad || '',
+      refUsuarioAutentica: this.userData?.curp || '',
+      nomApellidoMaterno: null,
+      nomApellidoPaterno: null
+    };
+    this.antecedentesService.guardarBitacora(solicitud).subscribe();
+  }
+
+  limpiar(): void {
+    this.paramBusqueda.set(null);
+
+    this.queryClient.removeQueries({ queryKey: ['antecedentes-general'] });
+
+    this.filtroForm.reset();
+    this.aplicarValidaciones(null);
+    this.filtroForm.markAsPristine();
+
+    this.dataNssCompleta = [];
+    this.dataNombreCompleta = [];
+    this.dataNssPaginada.set([]);
+    this.dataNombrePaginada.set([]);
+
+    this.totalRegistrosNss = 0;
+    this.totalRegistrosNombre = 0;
+    this.paginaActualNss = 0;
+    this.paginaActualNombre = 0;
+
+    this.busquedaStateService.limpiarEstadoCompleto();
+  }
+
+  protected readonly TipoTabla = TipoTabla;
 }

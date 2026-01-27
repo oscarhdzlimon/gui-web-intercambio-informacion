@@ -21,6 +21,8 @@ export interface FiltrosAntecedentes {
 })
 export class BusquedaStateService {
 
+  private readonly PAGINACION_KEY = 'paginacion_antecedentes';
+
   // Almacena el estado actual de los filtros
   private filtrosSource = new BehaviorSubject<NuevaSolicitudBusquedaPaginado | null>(null);
 
@@ -75,6 +77,21 @@ export class BusquedaStateService {
   }
 
   limpiarPaginasTablas(): void {
-    this.paginasTablas.next({}); // Resetea el diccionario de páginas a vacío
+    this.paginasTablas.next({});
+  }
+
+  guardarPaginasAntecedentes(nssPage: number, nombrePage: number): void {
+    const paginas = { nssPage, nombrePage };
+    sessionStorage.setItem(this.PAGINACION_KEY, JSON.stringify(paginas));
+  }
+
+  obtenerPaginasAntecedentes(): { nssPage: number, nombrePage: number } | null {
+    const data = sessionStorage.getItem(this.PAGINACION_KEY);
+    return data ? JSON.parse(data) : null;
+  }
+
+  limpiarEstadoCompleto(): void {
+    sessionStorage.removeItem(this.PAGINACION_KEY);
+    this.eliminarFiltros();
   }
 }
