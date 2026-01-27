@@ -1,18 +1,18 @@
 <main class="flex flex-wrap login-background">
   <aside class="lg:col-6 col-12 flex flex-column justify-content-center align-items-center lg:p-6 px-6 py-0 ">
 
-  <div>
-    <span class="login-titulo">CA</span><br>
-    <span class="login-subtitulo">Consulta de antecedentes</span>
-  </div>
+    <div>
+      <span class="login-titulo">CA</span><br>
+      <span class="login-subtitulo">Consulta de antecedentes</span>
+    </div>
     <!-- <h1 class="login-titulo">CA</h1>
     <h2 class="login-subtitulo">Consulta de antecedentes </h2> -->
 
   </aside>
   <section class="lg:col-6 col-12 lg:mb-0 mb-6 flex justify-content-end align-items-center">
-   <p-card class="px-2 login-card border-round-bottom-3xl border-round-bottom width-lg "  >
+    <p-card class="px-2 login-card border-round-bottom-3xl border-round-bottom width-lg "  >
 
-        <div class="divcardtitulo">
+      <div class="divcardtitulo">
         <span class="login-card-titulo h2cardtitulo">Inicio de sesión</span>
       </div>
 
@@ -54,22 +54,20 @@
 
           </div>
 
-         <!--  <div class="flex justify-content-end my-3">
-            <a [routerLink]="'../recuperar-contrasenia'" class="login-hipervinculo cursor-pointer">Olvidé mi
-              contraseña</a>
-          </div> -->
+          <div class="flex justify-content-center my-4">
+            <div #captchaContainer></div>
+          </div>
+          <!--  <div class="flex justify-content-end my-3">
+             <a [routerLink]="'../recuperar-contrasenia'" class="login-hipervinculo cursor-pointer">Olvidé mi
+               contraseña</a>
+           </div> -->
 
         </div>
         <div class="flex justify-content-end divboton">
 
-            <p-button type="submit" [disabled]="formLogin.invalid" label="Iniciar sesión"/>
-          </div>
+          <p-button type="submit" [disabled]="formLogin.invalid || !captchaToken()" label="Iniciar sesión"/>
+        </div>
       </form>
-
-
-
     </p-card>
-
-
-</section>
+  </section>
 </main>

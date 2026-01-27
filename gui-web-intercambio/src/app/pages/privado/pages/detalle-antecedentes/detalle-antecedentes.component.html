@@ -8,8 +8,7 @@
   Resultado de la búsqueda por
   @if (tipoBusqueda === '1') {
     NSS: {{ this.REF_NSS }}
-  }
-  @if (datosUsuario.nombre) {
+  } @else {
     Nombre: {{ this.REF_NOMBRE }} {{ this.REF_APATERNO }} {{ this.REF_AMATERNO }}
   }
 
@@ -92,10 +91,12 @@
             <ng-template #emptymessage>
               <tr>
                 <td colspan="11">
-                  <div class="flex justify-content-center align-items-center">
-                    <img class="p-0" src="/assets/images/Lupa.svg" alt="Sin resultados">
+                  <div class="empty-container">
+                    <div class="sticky-content">
+                      <img class="p-0" src="/assets/images/Lupa.svg" alt="Sin resultados">
+                      <p style="text-align: center;">Sin resultados de búsqueda</p>
+                    </div>
                   </div>
-                  <div style="text-align: center;">Sin resultados de búsqueda</div>
                 </td>
               </tr>
             </ng-template>
@@ -246,10 +247,12 @@
             <ng-template #emptymessage>
               <tr>
                 <td colspan="15">
-                  <div class="flex justify-content-center align-items-center">
-                    <img class="p-0" src="/assets/images/Lupa.svg" alt="Sin resultados">
+                  <div class="empty-container">
+                    <div class="sticky-content">
+                      <img class="p-0" src="/assets/images/Lupa.svg" alt="Sin resultados">
+                      <p style="text-align: center;">Sin resultados de búsqueda</p>
+                    </div>
                   </div>
-                  <div style="text-align: center;">Sin resultados de búsqueda</div>
                 </td>
               </tr>
             </ng-template>
@@ -394,10 +397,12 @@
             <ng-template #emptymessage>
               <tr>
                 <td colspan="15">
-                  <div class="flex justify-content-center align-items-center">
-                    <img class="p-0" src="/assets/images/Lupa.svg" alt="Sin resultados">
+                  <div class="empty-container">
+                    <div class="sticky-content">
+                      <img class="p-0" src="/assets/images/Lupa.svg" alt="Sin resultados">
+                      <p style="text-align: center;">Sin resultados de búsqueda</p>
+                    </div>
                   </div>
-                  <div style="text-align: center;">Sin resultados de búsqueda</div>
                 </td>
               </tr>
             </ng-template>
@@ -545,10 +550,12 @@
             <ng-template #emptymessage>
               <tr>
                 <td colspan="15">
-                  <div class="flex justify-content-center align-items-center">
-                    <img class="p-0" src="/assets/images/Lupa.svg" alt="Sin resultados">
+                  <div class="empty-container">
+                    <div class="sticky-content">
+                      <img class="p-0" src="/assets/images/Lupa.svg" alt="Sin resultados">
+                      <p style="text-align: center;">Sin resultados de búsqueda</p>
+                    </div>
                   </div>
-                  <div style="text-align: center;">Sin resultados de búsqueda</div>
                 </td>
               </tr>
             </ng-template>
@@ -703,10 +710,12 @@
             <ng-template #emptymessage>
               <tr>
                 <td colspan="17">
-                  <div class="flex justify-content-center align-items-center">
-                    <img class="p-0" src="/assets/images/Lupa.svg" alt="Sin resultados">
+                  <div class="empty-container">
+                    <div class="sticky-content">
+                      <img class="p-0" src="/assets/images/Lupa.svg" alt="Sin resultados">
+                      <p style="text-align: center;">Sin resultados de búsqueda</p>
+                    </div>
                   </div>
-                  <div style="text-align: center;">Sin resultados de búsqueda</div>
                 </td>
               </tr>
             </ng-template>
@@ -862,10 +871,12 @@
             <ng-template #emptymessage>
               <tr>
                 <td colspan="17">
-                  <div class="flex justify-content-center align-items-center">
-                    <img class="p-0" src="/assets/images/Lupa.svg" alt="Sin resultados">
+                  <div class="empty-container">
+                    <div class="sticky-content">
+                      <img class="p-0" src="/assets/images/Lupa.svg" alt="Sin resultados">
+                      <p style="text-align: center;">Sin resultados de búsqueda</p>
+                    </div>
                   </div>
-                  <div style="text-align: center;">Sin resultados de búsqueda</div>
                 </td>
               </tr>
             </ng-template>
@@ -910,6 +921,13 @@
     </div>
   </div>
 
+  <article class="flex flex-row flex-wrap">
+    <div class="flex lg:col-12  col-12 justify-content-end align-items-center mt-3 ">
+      <p-button type="button" label="Imprimir" styleClass="btn-buscar btn-background"
+                 (onClick)="imprimir()"
+                [style]="{'width':'136px','margin-right':'30px'}"/>
+    </div>
+  </article>
 
   <p-card class="mx-2 empty-border aviso" [header]="'Aviso de confidencialidad'">
     <article>

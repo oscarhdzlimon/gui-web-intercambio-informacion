@@ -4,8 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="correcciones css -&gt; flecha regresar">
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" afterDir="false" />
+    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="impresion por consulta interna">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/services/busqueda-state.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/services/busqueda-state.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,7 +25,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="dev_eduardo" />
+        <entry key="$PROJECT_DIR$" value="dev_eduardo_totales" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -50,25 +53,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;dev__eduardo__totales&quot;,
-    &quot;javascript.preferred.runtime.type.id&quot;: &quot;node&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/epgomez/Documents/gui-web-intercambio-informacion&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\epgomez\\Documents\\gui-web-intercambio-informacion\\gui-web-intercambio\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "git-widget-placeholder": "feature/impresion-detalle",
+    "javascript.preferred.runtime.type.id": "node",
+    "last_opened_file_path": "C:/Users/epgomez/Documents/gui-web-intercambio-informacion",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "ts.external.directory.path": "C:\\Users\\epgomez\\Documents\\gui-web-intercambio-informacion\\gui-web-intercambio\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -96,110 +99,6 @@
       <workItem from="1767891732696" duration="7482000" />
       <workItem from="1767937805716" duration="125067000" />
       <workItem from="1769192673454" duration="7337000" />
-    </task>
-    <task id="LOCAL-00094" summary="ajuste en totales">
-      <option name="closed" value="true" />
-      <created>1768258113143</created>
-      <option name="number" value="00094" />
-      <option name="presentableId" value="LOCAL-00094" />
-      <option name="project" value="LOCAL" />
-      <updated>1768258113144</updated>
-    </task>
-    <task id="LOCAL-00095" summary="ajuste para nueva consulta detalle de registros">
-      <option name="closed" value="true" />
-      <created>1768327474030</created>
-      <option name="number" value="00095" />
-      <option name="presentableId" value="LOCAL-00095" />
-      <option name="project" value="LOCAL" />
-      <updated>1768327474030</updated>
-    </task>
-    <task id="LOCAL-00096" summary="ajustes css para nueva consulta detalle de registros">
-      <option name="closed" value="true" />
-      <created>1768327651425</created>
-      <option name="number" value="00096" />
-      <option name="presentableId" value="LOCAL-00096" />
-      <option name="project" value="LOCAL" />
-      <updated>1768327651425</updated>
-    </task>
-    <task id="LOCAL-00097" summary="ajustes para nueva consulta detalle de registros">
-      <option name="closed" value="true" />
-      <created>1768330905852</created>
-      <option name="number" value="00097" />
-      <option name="presentableId" value="LOCAL-00097" />
-      <option name="project" value="LOCAL" />
-      <updated>1768330905852</updated>
-    </task>
-    <task id="LOCAL-00098" summary="ajustes para nueva consulta detalle de registros">
-      <option name="closed" value="true" />
-      <created>1768345976685</created>
-      <option name="number" value="00098" />
-      <option name="presentableId" value="LOCAL-00098" />
-      <option name="project" value="LOCAL" />
-      <updated>1768345976685</updated>
-    </task>
-    <task id="LOCAL-00099" summary="limpieza pagindao consulta detalle de antecedentes">
-      <option name="closed" value="true" />
-      <created>1768353207335</created>
-      <option name="number" value="00099" />
-      <option name="presentableId" value="LOCAL-00099" />
-      <option name="project" value="LOCAL" />
-      <updated>1768353207335</updated>
-    </task>
-    <task id="LOCAL-00100" summary="ajustes de manejo de busquedas">
-      <option name="closed" value="true" />
-      <created>1768353526664</created>
-      <option name="number" value="00100" />
-      <option name="presentableId" value="LOCAL-00100" />
-      <option name="project" value="LOCAL" />
-      <updated>1768353526664</updated>
-    </task>
-    <task id="LOCAL-00101" summary="ajustes para manejo de registros repetidos">
-      <option name="closed" value="true" />
-      <created>1768354714705</created>
-      <option name="number" value="00101" />
-      <option name="presentableId" value="LOCAL-00101" />
-      <option name="project" value="LOCAL" />
-      <updated>1768354714705</updated>
-    </task>
-    <task id="LOCAL-00102" summary="ajustes solicitud de asignacion">
-      <option name="closed" value="true" />
-      <created>1768356081632</created>
-      <option name="number" value="00102" />
-      <option name="presentableId" value="LOCAL-00102" />
-      <option name="project" value="LOCAL" />
-      <updated>1768356081632</updated>
-    </task>
-    <task id="LOCAL-00103" summary="ajustes solicitud de asociación">
-      <option name="closed" value="true" />
-      <created>1768356195983</created>
-      <option name="number" value="00103" />
-      <option name="presentableId" value="LOCAL-00103" />
-      <option name="project" value="LOCAL" />
-      <updated>1768356195983</updated>
-    </task>
-    <task id="LOCAL-00104" summary="correcciones de consulta por login">
-      <option name="closed" value="true" />
-      <created>1768407427849</created>
-      <option name="number" value="00104" />
-      <option name="presentableId" value="LOCAL-00104" />
-      <option name="project" value="LOCAL" />
-      <updated>1768407427849</updated>
-    </task>
-    <task id="LOCAL-00105" summary="correcciones de consulta por login">
-      <option name="closed" value="true" />
-      <created>1768409268384</created>
-      <option name="number" value="00105" />
-      <option name="presentableId" value="LOCAL-00105" />
-      <option name="project" value="LOCAL" />
-      <updated>1768409268384</updated>
-    </task>
-    <task id="LOCAL-00106" summary="correcciones de antecedentes">
-      <option name="closed" value="true" />
-      <created>1768427258064</created>
-      <option name="number" value="00106" />
-      <option name="presentableId" value="LOCAL-00106" />
-      <option name="project" value="LOCAL" />
-      <updated>1768427258064</updated>
     </task>
     <task id="LOCAL-00107" summary="correcciones de antecedentes">
       <option name="closed" value="true" />
@@ -489,7 +388,111 @@
       <option name="project" value="LOCAL" />
       <updated>1769201216320</updated>
     </task>
-    <option name="localTasksCounter" value="143" />
+    <task id="LOCAL-00143" summary="correcciones de páginado + ajustes detalle antecedentes">
+      <option name="closed" value="true" />
+      <created>1769440642542</created>
+      <option name="number" value="00143" />
+      <option name="presentableId" value="LOCAL-00143" />
+      <option name="project" value="LOCAL" />
+      <updated>1769440642542</updated>
+    </task>
+    <task id="LOCAL-00144" summary="correcciones tablas -&gt; sin resultados">
+      <option name="closed" value="true" />
+      <created>1769440762882</created>
+      <option name="number" value="00144" />
+      <option name="presentableId" value="LOCAL-00144" />
+      <option name="project" value="LOCAL" />
+      <updated>1769440762882</updated>
+    </task>
+    <task id="LOCAL-00145" summary="correcciones tablas -&gt; sin resultados">
+      <option name="closed" value="true" />
+      <created>1769441223318</created>
+      <option name="number" value="00145" />
+      <option name="presentableId" value="LOCAL-00145" />
+      <option name="project" value="LOCAL" />
+      <updated>1769441223318</updated>
+    </task>
+    <task id="LOCAL-00146" summary="correcciones tablas -&gt; sin resultados">
+      <option name="closed" value="true" />
+      <created>1769441267025</created>
+      <option name="number" value="00146" />
+      <option name="presentableId" value="LOCAL-00146" />
+      <option name="project" value="LOCAL" />
+      <updated>1769441267025</updated>
+    </task>
+    <task id="LOCAL-00147" summary="btn imprimir -&gt; detalle-antecedentes">
+      <option name="closed" value="true" />
+      <created>1769451829413</created>
+      <option name="number" value="00147" />
+      <option name="presentableId" value="LOCAL-00147" />
+      <option name="project" value="LOCAL" />
+      <updated>1769451829413</updated>
+    </task>
+    <task id="LOCAL-00148" summary="funcion imprimir -&gt; detalle-antecedentes">
+      <option name="closed" value="true" />
+      <created>1769452418925</created>
+      <option name="number" value="00148" />
+      <option name="presentableId" value="LOCAL-00148" />
+      <option name="project" value="LOCAL" />
+      <updated>1769452418925</updated>
+    </task>
+    <task id="LOCAL-00149" summary="funcion imprimir -&gt; detalle-antecedentes -&gt; busqueda sistemas">
+      <option name="closed" value="true" />
+      <created>1769453518915</created>
+      <option name="number" value="00149" />
+      <option name="presentableId" value="LOCAL-00149" />
+      <option name="project" value="LOCAL" />
+      <updated>1769453518915</updated>
+    </task>
+    <task id="LOCAL-00150" summary="ajustes al guardar la asociación">
+      <option name="closed" value="true" />
+      <created>1769453756594</created>
+      <option name="number" value="00150" />
+      <option name="presentableId" value="LOCAL-00150" />
+      <option name="project" value="LOCAL" />
+      <updated>1769453756595</updated>
+    </task>
+    <task id="LOCAL-00151" summary="ajustes al reset de busqueda-sistemas">
+      <option name="closed" value="true" />
+      <created>1769454287836</created>
+      <option name="number" value="00151" />
+      <option name="presentableId" value="LOCAL-00151" />
+      <option name="project" value="LOCAL" />
+      <updated>1769454287836</updated>
+    </task>
+    <task id="LOCAL-00152" summary="ajustes al reset de busqueda-sistemas">
+      <option name="closed" value="true" />
+      <created>1769455372407</created>
+      <option name="number" value="00152" />
+      <option name="presentableId" value="LOCAL-00152" />
+      <option name="project" value="LOCAL" />
+      <updated>1769455372407</updated>
+    </task>
+    <task id="LOCAL-00153" summary="implementacion de captcha">
+      <option name="closed" value="true" />
+      <created>1769461989582</created>
+      <option name="number" value="00153" />
+      <option name="presentableId" value="LOCAL-00153" />
+      <option name="project" value="LOCAL" />
+      <updated>1769461989583</updated>
+    </task>
+    <task id="LOCAL-00154" summary="readme -&gt; tanstack">
+      <option name="closed" value="true" />
+      <created>1769462209776</created>
+      <option name="number" value="00154" />
+      <option name="presentableId" value="LOCAL-00154" />
+      <option name="project" value="LOCAL" />
+      <updated>1769462209776</updated>
+    </task>
+    <task id="LOCAL-00155" summary="impresion por consulta interna">
+      <option name="closed" value="true" />
+      <created>1769463374563</created>
+      <option name="number" value="00155" />
+      <option name="presentableId" value="LOCAL-00155" />
+      <option name="project" value="LOCAL" />
+      <updated>1769463374563</updated>
+    </task>
+    <option name="localTasksCounter" value="156" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -507,16 +510,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="modificaciones de respuesta, consulta servicios para peticiones internas" />
-    <MESSAGE value="modificaciones de paginado sin filtrar por id's" />
-    <MESSAGE value="correcciones de totales" />
-    <MESSAGE value="correcciones de css + totales" />
-    <MESSAGE value="ajustes para ejecutar nueva solicitud" />
-    <MESSAGE value="modificaciones de busqueda de sistemas" />
-    <MESSAGE value="correcciones de css" />
-    <MESSAGE value="ajustes de tamaño" />
-    <MESSAGE value="correccion de asociación" />
-    <MESSAGE value="ajustes de interceptor" />
     <MESSAGE value="corrección de apellido materno" />
     <MESSAGE value="corrección de busqueda por nombre" />
     <MESSAGE value="ajustes de key en tabla por idNum" />
@@ -532,6 +525,16 @@
     <MESSAGE value="correcciones css" />
     <MESSAGE value="correcciones css -&gt; columna de impresión" />
     <MESSAGE value="correcciones css -&gt; flecha regresar" />
-    <option name="LAST_COMMIT_MESSAGE" value="correcciones css -&gt; flecha regresar" />
+    <MESSAGE value="correcciones de páginado + ajustes detalle antecedentes" />
+    <MESSAGE value="correcciones tablas -&gt; sin resultados" />
+    <MESSAGE value="btn imprimir -&gt; detalle-antecedentes" />
+    <MESSAGE value="funcion imprimir -&gt; detalle-antecedentes" />
+    <MESSAGE value="funcion imprimir -&gt; detalle-antecedentes -&gt; busqueda sistemas" />
+    <MESSAGE value="ajustes al guardar la asociación" />
+    <MESSAGE value="ajustes al reset de busqueda-sistemas" />
+    <MESSAGE value="implementacion de captcha" />
+    <MESSAGE value="readme -&gt; tanstack" />
+    <MESSAGE value="impresion por consulta interna" />
+    <option name="LAST_COMMIT_MESSAGE" value="impresion por consulta interna" />
   </component>
 </project>

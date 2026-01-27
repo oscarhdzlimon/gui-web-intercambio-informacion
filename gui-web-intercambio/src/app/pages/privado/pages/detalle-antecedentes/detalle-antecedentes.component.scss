@@ -1,66 +1,100 @@
-.seccionA{
-   /*  height: 50px;
-    background-color: #F4F7FC;
-    text-align: start;
-    vertical-align: middle;
-    padding-top: 10px;
-    border-radius: 5px;
-    color: black;
-    font-weight: 400;
+.seccionA {
+  /*  height: 50px;
+   background-color: #F4F7FC;
+   text-align: start;
+   vertical-align: middle;
+   padding-top: 10px;
+   border-radius: 5px;
+   color: black;
+   font-weight: 400;
 padding-left: 10px;
-    margin-bottom: 30px; */
-    display: flex;
-height: 60px;
-padding: 10px;
-align-items: center;
-gap: 10px;
-align-self: stretch;
-border-radius: 8px;
-background: #F4F7FC;
-color: #374957;
-text-align: right;
-font-feature-settings: 'liga' off, 'clig' off;
-font-family: "Noto Sans";
-font-size: 18px;
-font-style: normal;
-font-weight: 600;
-line-height: 120%; /* 19.2px */
+   margin-bottom: 30px; */
+  display: flex;
+  height: 60px;
+  padding: 10px;
+  align-items: center;
+  gap: 10px;
+  align-self: stretch;
+  border-radius: 8px;
+  background: #F4F7FC;
+  color: #374957;
+  text-align: right;
+  font-feature-settings: 'liga' off, 'clig' off;
+  font-family: "Noto Sans";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 120%; /* 19.2px */
 }
 
-.aviso{
-    font-size: 11px;
+.aviso {
+  font-size: 11px;
 }
 
 
-.icon{
-    width: 30px;
-    height: 30px;
+.icon {
+  width: 30px;
+  height: 30px;
 }
 
-.resultados{
-    font-size: 12px;
-    margin-top: -27px;
-    margin-left: 10px;
-    position: absolute;
-    z-index: 99;
+.resultados {
+  font-size: 12px;
+  margin-top: -27px;
+  margin-left: 10px;
+  position: absolute;
+  z-index: 99;
 }
 
 .alinear {
-  display: flex;              /* activa flexbox */
-  align-items: center;        /* centra verticalmente */
-  gap: 8px;                   /* espacio entre elementos */
+  display: flex; /* activa flexbox */
+  align-items: center; /* centra verticalmente */
+  gap: 8px; /* espacio entre elementos */
 }
-.tituloantecedentes{
-    color: #374957;
-font-feature-settings: 'liga' off, 'clig' off;
-font-family: "Noto Sans";
-font-size: 24px;
-font-style: normal;
-font-weight: 600;
-line-height: 120%; /* 28.8px */
-}
-.divacordeon{
-border-bottom: 1px solid #D6DDD6;
-background-color: #ffffff;
 
+.tituloantecedentes {
+  color: #374957;
+  font-feature-settings: 'liga' off, 'clig' off;
+  font-family: "Noto Sans";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 120%; /* 28.8px */
+}
+
+.divacordeon {
+  border-bottom: 1px solid #D6DDD6;
+  background-color: #ffffff;
+
+}
+
+.empty-container {
+  padding: 0 !important;
+  border: none !important;
+  height: 90px; /* Altura deseada para el área vacía */
+  position: relative;
+  margin-bottom: 30px;
+}
+
+/* Este contenedor es el que se queda fijo al hacer scroll */
+.sticky-content {
+  position: sticky;
+  left: 0; /* Se ancla al borde izquierdo visible */
+  width: var(--table-width, 100vw);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  pointer-events: none; /* Para que no interfiera con clicks si fuera necesario */
+  margin-bottom: 30px;
+}
+
+.empty-container img {
+  width: 100px;
+  margin-bottom: 1rem;
+  opacity: 0.7;
+}
+
+:host ::ng-deep .p-datatable-scrollable {
+  position: relative;
 }
