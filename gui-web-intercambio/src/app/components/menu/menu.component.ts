@@ -9,13 +9,17 @@ import {ClickService} from '@services/click.service';
 import {Usuario} from '@models/usuario';
 import {ActivatedRoute} from '@angular/router';
 import {CryptoService} from '@services/crypto.service';
+import {NombreModuloPipe} from '@pipes/nombre-modulo.pipe';
+import {NombreSistemaPipe} from '@pipes/nombre-sistema.pipe';
 
 @Component({
   selector: 'app-menu',
   imports: [
     SpeedDial,
     PrimeTemplate,
-    ButtonModule
+    ButtonModule,
+    NombreModuloPipe,
+    NombreSistemaPipe
   ],
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.scss'
