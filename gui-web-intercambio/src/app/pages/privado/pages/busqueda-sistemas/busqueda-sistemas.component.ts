@@ -328,12 +328,13 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
     };
   }
 
-  iniciarBusqueda(): void {
+  iniciarBusqueda(consulta_todos = true): void {
+    this.consulta_todos = consulta_todos;
     this.busquedaStateService.limpiarPaginasTablas();
 
     this.consultas = [];
 
-    void this.queryClient.resetQueries({ queryKey: ['antecedentes'] });
+    this.paramBusqueda.set(null);
 
     const tipoConsulta = this.filtroForm.get('filtro')?.value;
     const valor = this.filtroForm.get('valor')?.value;
@@ -343,11 +344,13 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
       return;
     }
 
-    this.configurarEstructuraTablas(tipoConsulta, valor);
+    void this.queryClient.removeQueries({ queryKey: ['antecedentes'] });
+
     const solicitud = this.generarNuevaSolicitud(tipoConsulta, valor);
 
     //  TanStack Query
     this.busquedaStateService.guardarFiltros(solicitud);
+    this.configurarEstructuraTablas(tipoConsulta, valor);
     this.paramBusqueda.set(solicitud);
   }
 
