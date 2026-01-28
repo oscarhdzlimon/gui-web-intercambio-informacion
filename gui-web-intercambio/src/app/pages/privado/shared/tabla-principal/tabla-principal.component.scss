@@ -21,3 +21,24 @@
 :host ::ng-deep .p-datatable-wrapper {
   overflow-anchor: none; /* Evita saltos de scroll automáticos del navegador */
 }
+
+:host ::ng-deep .p-datatable {
+  position: relative;
+
+  &::before {
+    content: "Confidencial IMSS";
+    position: absolute;
+    top: 40%;
+    left: 0;
+
+    font-size: 4rem;
+    color: rgba(0, 0, 0, 0.05);
+    font-weight: bold;
+    white-space: nowrap;
+    z-index: 1;
+    pointer-events: none;
+    user-select: none;
+    width: 100%;
+    text-align: center;
+  }
+}

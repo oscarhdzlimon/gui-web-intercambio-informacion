@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="pipes -&gt; nombres de modulo / sistema">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" afterDir="false" />
+    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="correcciones de persistencia">
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/shared/tabla-principal/tabla-principal.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/shared/tabla-principal/tabla-principal.component.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,14 +96,6 @@
       <workItem from="1767891732696" duration="7482000" />
       <workItem from="1767937805716" duration="125067000" />
       <workItem from="1769192673454" duration="7337000" />
-    </task>
-    <task id="LOCAL-00109" summary="ajustes cveAsunto">
-      <option name="closed" value="true" />
-      <created>1768517368069</created>
-      <option name="number" value="00109" />
-      <option name="presentableId" value="LOCAL-00109" />
-      <option name="project" value="LOCAL" />
-      <updated>1768517368069</updated>
     </task>
     <task id="LOCAL-00110" summary="ajustes cveAsunto -&gt; asociacion">
       <option name="closed" value="true" />
@@ -491,7 +481,15 @@
       <option name="project" value="LOCAL" />
       <updated>1769636699892</updated>
     </task>
-    <option name="localTasksCounter" value="158" />
+    <task id="LOCAL-00158" summary="correcciones de persistencia">
+      <option name="closed" value="true" />
+      <created>1769637144561</created>
+      <option name="number" value="00158" />
+      <option name="presentableId" value="LOCAL-00158" />
+      <option name="project" value="LOCAL" />
+      <updated>1769637144562</updated>
+    </task>
+    <option name="localTasksCounter" value="159" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -509,7 +507,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="corrección de busqueda por nombre" />
     <MESSAGE value="ajustes de key en tabla por idNum" />
     <MESSAGE value="ajustes de tabla" />
     <MESSAGE value="correcciones de fecha corte" />
@@ -534,6 +531,7 @@
     <MESSAGE value="readme -&gt; tanstack" />
     <MESSAGE value="impresion por consulta interna" />
     <MESSAGE value="pipes -&gt; nombres de modulo / sistema" />
-    <option name="LAST_COMMIT_MESSAGE" value="pipes -&gt; nombres de modulo / sistema" />
+    <MESSAGE value="correcciones de persistencia" />
+    <option name="LAST_COMMIT_MESSAGE" value="correcciones de persistencia" />
   </component>
 </project>
