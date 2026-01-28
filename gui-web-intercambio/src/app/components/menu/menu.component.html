@@ -49,12 +49,12 @@
             <div class="divinterno1">
               <small>Sistema de origen</small>
               <br>
-              <span class="etiquetasesion">{{ usuario.sistema }}</span>
+              <span class="etiquetasesion">{{ usuario.sistema | nombreSistema }}</span>
             </div>
             <div class="divinterno1">
               <small>Módulo</small>
               <br>
-              <span class="etiquetasesion">{{ usuario.modulo }}</span>
+              <span class="etiquetasesion">{{ usuario.modulo | nombreModulo }}</span>
             </div>
             <div class="flex align-items-center gap-2" style="margin-left: 18px">
               <img [src]="'assets/images/Unidad.svg'"/>
