@@ -288,7 +288,7 @@ export class DetalleAntecedentesComponent extends GeneralComponent implements On
       fecCorteSiade: this.fechasCorte.fecCorteSiade,
       fecCorteSsc1: this.fechasCorte.fecCorteSsc1,
       fecCorteSsc2: this.fechasCorte.fecCorteSsc2,
-      moduloOrigen: this.REF_NOMBRE,
+      moduloOrigen: this.REF_MODULO,
       nombreConsultor: this.usuarioLogueado,
       ooad: this.ooadLogueado,
       tipoBusqueda: +this.tipoBusqueda,
