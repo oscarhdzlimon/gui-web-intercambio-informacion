@@ -255,6 +255,11 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
       // Una vez que se obtienen las listas de nombres y nss, se parcha el form
       this.parchearFormularioConEstado();
       this.sistemasListos.set(true);
+      const filtrosPrevios = this.busquedaStateService.obtenerFiltros();
+
+      if (!filtrosPrevios || filtrosPrevios.personas.length === 0) {
+        this.iniciarBusquedaTodos();
+      }
 
     } catch (error) {
       console.error("Error al descifrar", error);
