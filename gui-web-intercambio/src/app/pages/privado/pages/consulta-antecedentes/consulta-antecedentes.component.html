@@ -73,6 +73,7 @@
                        [data]="dataNssPaginada()"
                        [rows]="10"
                        [total]="totalRegistrosNss"
+                       [datosUsuario]="generarObjReporteAntecedentes()"
                        [tipoBusqueda]="'1'"
                        (pageChange)="cargarPagina($event, TipoTabla.NSS)"
                        [first]="paginaActualNss * registrosPorPagina"
@@ -86,6 +87,7 @@
                        [tipoBusqueda]="'2'"
                        [rows]="10"
                        [banderaImprimir]="true"
+                       [datosUsuario]="generarObjReporteAntecedentes()"
                        [total]="totalRegistrosNombre"
                        [first]="paginaActualNombre * registrosPorPagina"
                        (pageChange)="cargarPagina($event, TipoTabla.NOMBRE)"/>

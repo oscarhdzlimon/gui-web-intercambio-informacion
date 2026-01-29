@@ -33,6 +33,8 @@ import {
 import {injectQuery, QueryClient} from '@tanstack/angular-query-experimental';
 import {lastValueFrom} from 'rxjs';
 import {SolicitudBitacora} from '../../../../core/interfaces/solicitud-bitacora.inerface';
+import {ReporteAntecedentes} from '@models/reporteAntecedentes.interface';
+import {Usuario} from '@models/usuario';
 
 enum TipoTabla {
   NSS = '1',
@@ -98,6 +100,8 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
   paginaActualNombre = 0;
   totalRegistrosNombre = 0;
 
+  usuario: Usuario = new Usuario();
+
   // --- TanStack Query ---
   antecedentesQuery = injectQuery(() => ({
     queryKey: ['antecedentes-general', this.paramBusqueda()],
@@ -110,6 +114,11 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
 
   constructor() {
     super();
+    this.userService.userData$.subscribe(user => this.userData = user);
+    this.usuario.nombreCompleto = this.userData?.nombreCompleto as string;
+    this.usuario.sistema = this.userData?.sistemaOrigen as string;
+    this.usuario.modulo = this.userData?.modulo as string;
+    this.usuario.ooadmin = this.userData?.ooad as string;
     this.filtroForm = this.inicializarFiltroForm();
     this.obtenerFechasCorte();
     this.configurarSuscripcionesUsuario();
@@ -394,5 +403,25 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
     this.busquedaStateService.limpiarEstadoCompleto();
   }
 
+  generarObjReporteAntecedentes(): ReporteAntecedentes {
+
+    return {
+      tipoBusqueda: null,
+      nombre: "",
+      apellidoPaterno: "",
+      apellidoMaterno: "",
+      nss: "",
+      expediente: "",
+      fecCorteSiade: this.fechasCorte()?.fecCorteSiade ?? '',
+      fecCorteSsc1: this.fechasCorte()?.fecCorteSsc1 ?? '',
+      fecCorteSsc2: this.fechasCorte()?.fecCorteSsc2 ?? '',
+      nombreConsultor: this.usuario.nombreCompleto,
+      ooad: this.usuario.ooadmin,
+      aplicativoOrigen: this.usuario.sistema,
+      moduloOrigen: this.usuario.modulo,
+    }
+  }
+
   protected readonly TipoTabla = TipoTabla;
+
 }

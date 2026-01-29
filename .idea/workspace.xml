@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="marca de agua tabla principal">
+    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="carga automatica de todos">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,22 +98,6 @@
       <workItem from="1767891732696" duration="7482000" />
       <workItem from="1767937805716" duration="125067000" />
       <workItem from="1769192673454" duration="7337000" />
-    </task>
-    <task id="LOCAL-00111" summary="correccion cuando no viene nss">
-      <option name="closed" value="true" />
-      <created>1768521108370</created>
-      <option name="number" value="00111" />
-      <option name="presentableId" value="LOCAL-00111" />
-      <option name="project" value="LOCAL" />
-      <updated>1768521108370</updated>
-    </task>
-    <task id="LOCAL-00112" summary="correccion cuando no viene nss">
-      <option name="closed" value="true" />
-      <created>1768521197924</created>
-      <option name="number" value="00112" />
-      <option name="presentableId" value="LOCAL-00112" />
-      <option name="project" value="LOCAL" />
-      <updated>1768521197924</updated>
     </task>
     <task id="LOCAL-00113" summary="cambio de variable a environment">
       <option name="closed" value="true" />
@@ -489,7 +475,23 @@
       <option name="project" value="LOCAL" />
       <updated>1769637686436</updated>
     </task>
-    <option name="localTasksCounter" value="160" />
+    <task id="LOCAL-00160" summary="carga automatica de todos">
+      <option name="closed" value="true" />
+      <created>1769701314519</created>
+      <option name="number" value="00160" />
+      <option name="presentableId" value="LOCAL-00160" />
+      <option name="project" value="LOCAL" />
+      <updated>1769701314519</updated>
+    </task>
+    <task id="LOCAL-00161" summary="carga automatica de todos">
+      <option name="closed" value="true" />
+      <created>1769701356175</created>
+      <option name="number" value="00161" />
+      <option name="presentableId" value="LOCAL-00161" />
+      <option name="project" value="LOCAL" />
+      <updated>1769701356175</updated>
+    </task>
+    <option name="localTasksCounter" value="162" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -507,7 +509,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="ajustes de tabla" />
     <MESSAGE value="correcciones de fecha corte" />
     <MESSAGE value="totales asociados -&gt; busqueda-sistemas" />
     <MESSAGE value="correccion de pFrozen + optimizacion de imports" />
@@ -532,6 +533,7 @@
     <MESSAGE value="pipes -&gt; nombres de modulo / sistema" />
     <MESSAGE value="correcciones de persistencia" />
     <MESSAGE value="marca de agua tabla principal" />
-    <option name="LAST_COMMIT_MESSAGE" value="marca de agua tabla principal" />
+    <MESSAGE value="carga automatica de todos" />
+    <option name="LAST_COMMIT_MESSAGE" value="carga automatica de todos" />
   </component>
 </project>
