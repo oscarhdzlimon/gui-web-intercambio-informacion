@@ -256,6 +256,10 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
       this.parchearFormularioConEstado();
       this.sistemasListos.set(true);
 
+      if (!filtrosPrevios || filtrosPrevios.personas.length === 0) {
+        this.iniciarBusquedaTodos();
+      }
+
     } catch (error) {
       console.error("Error al descifrar", error);
     }

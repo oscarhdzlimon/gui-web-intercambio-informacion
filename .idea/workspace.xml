@@ -4,8 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="correcciones de persistencia">
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/shared/tabla-principal/tabla-principal.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/shared/tabla-principal/tabla-principal.component.scss" afterDir="false" />
+    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="marca de agua tabla principal">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,14 +96,6 @@
       <workItem from="1767891732696" duration="7482000" />
       <workItem from="1767937805716" duration="125067000" />
       <workItem from="1769192673454" duration="7337000" />
-    </task>
-    <task id="LOCAL-00110" summary="ajustes cveAsunto -&gt; asociacion">
-      <option name="closed" value="true" />
-      <created>1768518144404</created>
-      <option name="number" value="00110" />
-      <option name="presentableId" value="LOCAL-00110" />
-      <option name="project" value="LOCAL" />
-      <updated>1768518144404</updated>
     </task>
     <task id="LOCAL-00111" summary="correccion cuando no viene nss">
       <option name="closed" value="true" />
@@ -489,7 +481,15 @@
       <option name="project" value="LOCAL" />
       <updated>1769637144562</updated>
     </task>
-    <option name="localTasksCounter" value="159" />
+    <task id="LOCAL-00159" summary="marca de agua tabla principal">
+      <option name="closed" value="true" />
+      <created>1769637686436</created>
+      <option name="number" value="00159" />
+      <option name="presentableId" value="LOCAL-00159" />
+      <option name="project" value="LOCAL" />
+      <updated>1769637686436</updated>
+    </task>
+    <option name="localTasksCounter" value="160" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -507,7 +507,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="ajustes de key en tabla por idNum" />
     <MESSAGE value="ajustes de tabla" />
     <MESSAGE value="correcciones de fecha corte" />
     <MESSAGE value="totales asociados -&gt; busqueda-sistemas" />
@@ -532,6 +531,7 @@
     <MESSAGE value="impresion por consulta interna" />
     <MESSAGE value="pipes -&gt; nombres de modulo / sistema" />
     <MESSAGE value="correcciones de persistencia" />
-    <option name="LAST_COMMIT_MESSAGE" value="correcciones de persistencia" />
+    <MESSAGE value="marca de agua tabla principal" />
+    <option name="LAST_COMMIT_MESSAGE" value="marca de agua tabla principal" />
   </component>
 </project>
