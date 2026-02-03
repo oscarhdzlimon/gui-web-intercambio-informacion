@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="corrección de modulo en detalle">
+    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="alerta de inactividad">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/app.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/app.config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/components/inactividad-dialog/inactividad-dialog.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/components/inactividad-dialog/inactividad-dialog.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/detalle-antecedentes/detalle-antecedentes.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/detalle-antecedentes/detalle-antecedentes.component.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +73,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-WS-253.29346.242" />
+        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-WS-253.30387.83" />
       </set>
     </attachedChunks>
   </component>
@@ -98,14 +97,7 @@
       <workItem from="1767891732696" duration="7482000" />
       <workItem from="1767937805716" duration="125067000" />
       <workItem from="1769192673454" duration="7337000" />
-    </task>
-    <task id="LOCAL-00115" summary="correccion para sscv1 -&lt; pruebas">
-      <option name="closed" value="true" />
-      <created>1768606199393</created>
-      <option name="number" value="00115" />
-      <option name="presentableId" value="LOCAL-00115" />
-      <option name="project" value="LOCAL" />
-      <updated>1768606199393</updated>
+      <workItem from="1770135663444" duration="619000" />
     </task>
     <task id="LOCAL-00116" summary="correccion para sscv1 -&lt; revert comentarios">
       <option name="closed" value="true" />
@@ -491,7 +483,15 @@
       <option name="project" value="LOCAL" />
       <updated>1769706144042</updated>
     </task>
-    <option name="localTasksCounter" value="164" />
+    <task id="LOCAL-00164" summary="alerta de inactividad">
+      <option name="closed" value="true" />
+      <created>1769726623729</created>
+      <option name="number" value="00164" />
+      <option name="presentableId" value="LOCAL-00164" />
+      <option name="project" value="LOCAL" />
+      <updated>1769726623729</updated>
+    </task>
+    <option name="localTasksCounter" value="165" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -509,7 +509,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="correccion de pFrozen + optimizacion de imports" />
     <MESSAGE value="fechas corte -&gt; busqueda sistemas" />
     <MESSAGE value="fechas corte -&gt; consulta-antecedentes" />
     <MESSAGE value="siempre se puede imprimir desde cnsulta-antecedentes" />
@@ -534,6 +533,7 @@
     <MESSAGE value="carga automatica de todos" />
     <MESSAGE value="correcciones de fecha de corte" />
     <MESSAGE value="corrección de modulo en detalle" />
-    <option name="LAST_COMMIT_MESSAGE" value="corrección de modulo en detalle" />
+    <MESSAGE value="alerta de inactividad" />
+    <option name="LAST_COMMIT_MESSAGE" value="alerta de inactividad" />
   </component>
 </project>
