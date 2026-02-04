@@ -64,6 +64,7 @@ export class DetalleAntecedentesComponent extends GeneralComponent implements On
   REF_NOMBRE: string = '';
   REF_APATERNO: string = '';
   REF_AMATERNO: string = '';
+  REF_ASOCIACION: boolean = false;
 
   paginacion = {
     queja: {first: signal(0), rows: 5},
@@ -235,6 +236,8 @@ export class DetalleAntecedentesComponent extends GeneralComponent implements On
       this.REF_NOMBRE = qp['n'] as string;
       this.REF_APATERNO = qp['ap'] as string;
       this.REF_AMATERNO = qp['am'] as string;
+      this.REF_ASOCIACION = qp['aso'] === 'true';
+
       if (qp['valor']) {
         this.cifrado = qp['valor'] as string;
         void this.obtenerExpediente()
