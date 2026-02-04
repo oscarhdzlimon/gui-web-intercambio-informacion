@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="alerta de inactividad">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/detalle-antecedentes/detalle-antecedentes.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/detalle-antecedentes/detalle-antecedentes.component.scss" afterDir="false" />
+    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="ajustes de asociación">
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/detalle-antecedentes/detalle-antecedentes.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/detalle-antecedentes/detalle-antecedentes.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/shared/tabla-principal/tabla-principal.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/shared/tabla-principal/tabla-principal.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,23 +97,8 @@
       <workItem from="1767891732696" duration="7482000" />
       <workItem from="1767937805716" duration="125067000" />
       <workItem from="1769192673454" duration="7337000" />
-      <workItem from="1770135663444" duration="619000" />
-    </task>
-    <task id="LOCAL-00116" summary="correccion para sscv1 -&lt; revert comentarios">
-      <option name="closed" value="true" />
-      <created>1768607085043</created>
-      <option name="number" value="00116" />
-      <option name="presentableId" value="LOCAL-00116" />
-      <option name="project" value="LOCAL" />
-      <updated>1768607085043</updated>
-    </task>
-    <task id="LOCAL-00117" summary="modificaciones de respuesta, consulta servicios para peticiones internas">
-      <option name="closed" value="true" />
-      <created>1769011365920</created>
-      <option name="number" value="00117" />
-      <option name="presentableId" value="LOCAL-00117" />
-      <option name="project" value="LOCAL" />
-      <updated>1769011365920</updated>
+      <workItem from="1770135663444" duration="1992000" />
+      <workItem from="1770142411370" duration="3969000" />
     </task>
     <task id="LOCAL-00118" summary="modificaciones de paginado sin filtrar por id's">
       <option name="closed" value="true" />
@@ -491,7 +476,23 @@
       <option name="project" value="LOCAL" />
       <updated>1769726623729</updated>
     </task>
-    <option name="localTasksCounter" value="165" />
+    <task id="LOCAL-00165" summary="detalle de antecedentes -&gt; tablas leyenda">
+      <option name="closed" value="true" />
+      <created>1770136394666</created>
+      <option name="number" value="00165" />
+      <option name="presentableId" value="LOCAL-00165" />
+      <option name="project" value="LOCAL" />
+      <updated>1770136394667</updated>
+    </task>
+    <task id="LOCAL-00166" summary="ajustes de asociación">
+      <option name="closed" value="true" />
+      <created>1770235572561</created>
+      <option name="number" value="00166" />
+      <option name="presentableId" value="LOCAL-00166" />
+      <option name="project" value="LOCAL" />
+      <updated>1770235572561</updated>
+    </task>
+    <option name="localTasksCounter" value="167" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -509,8 +510,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fechas corte -&gt; busqueda sistemas" />
-    <MESSAGE value="fechas corte -&gt; consulta-antecedentes" />
     <MESSAGE value="siempre se puede imprimir desde cnsulta-antecedentes" />
     <MESSAGE value="correcciones de recuperación de busqueda para busqueda sistemas" />
     <MESSAGE value="correcciones de recuperación de busqueda para consulta antecedentes" />
@@ -534,6 +533,8 @@
     <MESSAGE value="correcciones de fecha de corte" />
     <MESSAGE value="corrección de modulo en detalle" />
     <MESSAGE value="alerta de inactividad" />
-    <option name="LAST_COMMIT_MESSAGE" value="alerta de inactividad" />
+    <MESSAGE value="detalle de antecedentes -&gt; tablas leyenda" />
+    <MESSAGE value="ajustes de asociación" />
+    <option name="LAST_COMMIT_MESSAGE" value="ajustes de asociación" />
   </component>
 </project>

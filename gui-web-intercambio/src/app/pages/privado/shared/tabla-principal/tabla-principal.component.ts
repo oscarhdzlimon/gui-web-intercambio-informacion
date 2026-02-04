@@ -110,7 +110,8 @@ export class TablaPrincipalComponent {
         nss: registro.nss,
         n: registro.nombre,
         ap: registro.apellidoPaterno,
-        am: registro.apellidoMaterno
+        am: registro.apellidoMaterno,
+        aso: registro.idBitacoraAsociacion
       },
       queryParamsHandling: 'merge'
     };
