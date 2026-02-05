@@ -29,6 +29,7 @@
               <tr>
                 <th scope="col" style="min-width:120px"># consecutivo</th>
                 <th scope="col" style="min-width:150px">Folio de la gestión</th>
+                <th scope="col">Persona promovente</th>
                 <th scope="col" style="min-width:200px">Nombre del / los afectado(s)</th>
                 <th scope="col" style="min-width:150px">Nombre del / los peticionario(s)</th>
                 <th scope="col" style="min-width:150px">NSS</th>
@@ -52,6 +53,9 @@
                 </td>
                 <td>
                   <div>{{ gestion.expediente }}</div>
+                </td>
+                <td>
+                  <div>{{ gestion.nombrePromovente }}</div>
                 </td>
                 <td>
                   <div>{{ gestion.nombreAfectado }} {{ gestion.apellidoPaternoAfectado }} {{ gestion.apellidoMaternoAfectado }}</div>
@@ -477,7 +481,7 @@
                 <th scope="col">Nombre del / los peticionario(s)</th>
                 <th scope="col">NSS</th>
                 <th scope="col">Fecha del suceso</th>
-                <th scope="col">Descripción del suceso</th>
+                <th scope="col">Descripción del suceso o hechos</th>
                 <th scope="col">OOAD involucrado</th>
                 <th scope="col">Unidad involucrada</th>
                 <th scope="col">Fecha de recepción/notificación</th>
@@ -787,7 +791,6 @@
                 <th scope="col" style="min-width:120px"># consecutivo</th>
                 <th scope="col">Expediente</th>
                 <th scope="col">Persona promovente</th>
-                <th scope="col">Nombre del / los peticionario(s)</th>
                 <th scope="col">NSS</th>
                 <th scope="col">Fecha del suceso</th>
                 <th scope="col">Descripción del suceso o hechos</th>
@@ -801,7 +804,7 @@
                 <th scope="col">Cantidad pagada</th>
                 <th scope="col">¿Se Revocó Resolución de Queja Médica? Fecha de Cumplimiento</th>
                 <th scope="col">¿Susceptible a convenio?</th>
-                <th scope="col" scope="col" style="min-width: 100px" alignFrozen="right" pFrozenColumn>
+                <th scope="col"  style="min-width: 100px" alignFrozen="right" pFrozenColumn>
                   Ver detalle
                 </th>
               </tr>
@@ -817,9 +820,6 @@
                 </td>
                 <td>
                   <div>{{ juicio.nombrePromovente }}</div>
-                </td>
-                <td>
-                  <div>{{ juicio.nombrePeticionario }}</div>
                 </td>
                 <td>
                   <div>{{ juicio.nss }}</div>
