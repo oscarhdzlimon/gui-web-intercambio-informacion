@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="labels -&gt; juicio">
+    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="correcciones de variables de environment">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/detalle-antecedentes/detalle/detalle.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/detalle-antecedentes/detalle/detalle.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/detalle-antecedentes/detalle/detalle.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/detalle-antecedentes/detalle/detalle.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,15 +103,7 @@
       <workItem from="1770311479114" duration="698000" />
       <workItem from="1770331724769" duration="4513000" />
       <workItem from="1770419399454" duration="92000" />
-      <workItem from="1770836302243" duration="1676000" />
-    </task>
-    <task id="LOCAL-00123" summary="correcciones de css">
-      <option name="closed" value="true" />
-      <created>1769037037837</created>
-      <option name="number" value="00123" />
-      <option name="presentableId" value="LOCAL-00123" />
-      <option name="project" value="LOCAL" />
-      <updated>1769037037837</updated>
+      <workItem from="1770836302243" duration="3752000" />
     </task>
     <task id="LOCAL-00124" summary="ajustes de tamaño">
       <option name="closed" value="true" />
@@ -497,7 +489,15 @@
       <option name="project" value="LOCAL" />
       <updated>1770837939389</updated>
     </task>
-    <option name="localTasksCounter" value="172" />
+    <task id="LOCAL-00172" summary="correcciones de variables de environment">
+      <option name="closed" value="true" />
+      <created>1770838298103</created>
+      <option name="number" value="00172" />
+      <option name="presentableId" value="LOCAL-00172" />
+      <option name="project" value="LOCAL" />
+      <updated>1770838298103</updated>
+    </task>
+    <option name="localTasksCounter" value="173" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -515,7 +515,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="correcciones css -&gt; columna de impresión" />
     <MESSAGE value="correcciones css -&gt; flecha regresar" />
     <MESSAGE value="correcciones de páginado + ajustes detalle antecedentes" />
     <MESSAGE value="correcciones tablas -&gt; sin resultados" />
@@ -540,6 +539,7 @@
     <MESSAGE value="ajustes detalle antecedentes" />
     <MESSAGE value="labels -&gt; gestión" />
     <MESSAGE value="labels -&gt; juicio" />
-    <option name="LAST_COMMIT_MESSAGE" value="labels -&gt; juicio" />
+    <MESSAGE value="correcciones de variables de environment" />
+    <option name="LAST_COMMIT_MESSAGE" value="correcciones de variables de environment" />
   </component>
 </project>
