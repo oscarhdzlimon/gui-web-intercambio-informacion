@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="correcciones leyendas en tablas">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/detalle-antecedentes/detalle-antecedentes.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/detalle-antecedentes/detalle-antecedentes.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/detalle-antecedentes/detalle-antecedentes.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/detalle-antecedentes/detalle-antecedentes.component.ts" afterDir="false" />
+    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="labels -&gt; juicio">
       <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/detalle-antecedentes/detalle/detalle.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/detalle-antecedentes/detalle/detalle.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/detalle-antecedentes/detalle/detalle.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/detalle-antecedentes/detalle/detalle.component.ts" afterDir="false" />
     </list>
@@ -106,31 +103,7 @@
       <workItem from="1770311479114" duration="698000" />
       <workItem from="1770331724769" duration="4513000" />
       <workItem from="1770419399454" duration="92000" />
-      <workItem from="1770836302243" duration="1363000" />
-    </task>
-    <task id="LOCAL-00120" summary="correcciones de css + totales">
-      <option name="closed" value="true" />
-      <created>1769031221427</created>
-      <option name="number" value="00120" />
-      <option name="presentableId" value="LOCAL-00120" />
-      <option name="project" value="LOCAL" />
-      <updated>1769031221427</updated>
-    </task>
-    <task id="LOCAL-00121" summary="ajustes para ejecutar nueva solicitud">
-      <option name="closed" value="true" />
-      <created>1769032046228</created>
-      <option name="number" value="00121" />
-      <option name="presentableId" value="LOCAL-00121" />
-      <option name="project" value="LOCAL" />
-      <updated>1769032046228</updated>
-    </task>
-    <task id="LOCAL-00122" summary="modificaciones de busqueda de sistemas">
-      <option name="closed" value="true" />
-      <created>1769036641743</created>
-      <option name="number" value="00122" />
-      <option name="presentableId" value="LOCAL-00122" />
-      <option name="project" value="LOCAL" />
-      <updated>1769036641743</updated>
+      <workItem from="1770836302243" duration="1676000" />
     </task>
     <task id="LOCAL-00123" summary="correcciones de css">
       <option name="closed" value="true" />
@@ -500,7 +473,31 @@
       <option name="project" value="LOCAL" />
       <updated>1770332432569</updated>
     </task>
-    <option name="localTasksCounter" value="169" />
+    <task id="LOCAL-00169" summary="ajustes detalle antecedentes">
+      <option name="closed" value="true" />
+      <created>1770837696350</created>
+      <option name="number" value="00169" />
+      <option name="presentableId" value="LOCAL-00169" />
+      <option name="project" value="LOCAL" />
+      <updated>1770837696350</updated>
+    </task>
+    <task id="LOCAL-00170" summary="labels -&gt; gestión">
+      <option name="closed" value="true" />
+      <created>1770837886418</created>
+      <option name="number" value="00170" />
+      <option name="presentableId" value="LOCAL-00170" />
+      <option name="project" value="LOCAL" />
+      <updated>1770837886418</updated>
+    </task>
+    <task id="LOCAL-00171" summary="labels -&gt; juicio">
+      <option name="closed" value="true" />
+      <created>1770837939389</created>
+      <option name="number" value="00171" />
+      <option name="presentableId" value="LOCAL-00171" />
+      <option name="project" value="LOCAL" />
+      <updated>1770837939389</updated>
+    </task>
+    <option name="localTasksCounter" value="172" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -518,9 +515,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="correcciones de recuperación de busqueda para busqueda sistemas" />
-    <MESSAGE value="correcciones de recuperación de busqueda para consulta antecedentes" />
-    <MESSAGE value="correcciones css" />
     <MESSAGE value="correcciones css -&gt; columna de impresión" />
     <MESSAGE value="correcciones css -&gt; flecha regresar" />
     <MESSAGE value="correcciones de páginado + ajustes detalle antecedentes" />
@@ -543,6 +537,9 @@
     <MESSAGE value="detalle de antecedentes -&gt; tablas leyenda" />
     <MESSAGE value="ajustes de asociación" />
     <MESSAGE value="correcciones leyendas en tablas" />
-    <option name="LAST_COMMIT_MESSAGE" value="correcciones leyendas en tablas" />
+    <MESSAGE value="ajustes detalle antecedentes" />
+    <MESSAGE value="labels -&gt; gestión" />
+    <MESSAGE value="labels -&gt; juicio" />
+    <option name="LAST_COMMIT_MESSAGE" value="labels -&gt; juicio" />
   </component>
 </project>

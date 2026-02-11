@@ -7,6 +7,7 @@ import {SesionUser} from '@models/sesion-user.interface';
 import {DatePipe} from '@angular/common';
 import {ActivatedRoute} from '@angular/router';
 import {CryptoService} from '@services/crypto.service';
+import {environment} from '@env/environment.development';
 
 @Component({
   selector: 'app-detalle',
@@ -20,7 +21,7 @@ export class DetalleComponent implements OnInit {
 
   cifradoService: CryptoService = inject(CryptoService);
 
-  readonly AES_KEY_BASE64: string = "mZzG9Fz9P0n4z7mZlKz8B9nX0mJ8vF7PZKX2vZx5QmE=";
+  readonly AES_KEY_BASE64: string = environment.key.AES_KEY_BASE64;
   cifrado = ''
 
   constructor(
@@ -53,6 +54,7 @@ export class DetalleComponent implements OnInit {
   cierre: string = '';
 
   usuarioLogueado = '';
+  ooadLogueado = '';
 
   datosDetalle: any;
   fecha: Date = new Date();
@@ -83,6 +85,7 @@ export class DetalleComponent implements OnInit {
           void this.obtenerExpediente();
         } else {
           this.usuarioLogueado = this.userData?.nombreCompleto ?? '';
+          this.ooadLogueado = this.userData?.ooad ?? '';
         }
       }
     );
@@ -94,9 +97,9 @@ export class DetalleComponent implements OnInit {
         this.cifrado,
         this.AES_KEY_BASE64
       );
+      this.ooadLogueado = REF_SISTEMA.ooad_UMAE;
+      console.log(this.ooadLogueado);
       this.usuarioLogueado = REF_SISTEMA.usuarioLogueado;
-      console.log(REF_SISTEMA.usuarioLogueado)
-
     } catch (error) {
       console.error("Error al descifrar. Posibles causas: Clave incorrecta o JSON malformado", error);
     }

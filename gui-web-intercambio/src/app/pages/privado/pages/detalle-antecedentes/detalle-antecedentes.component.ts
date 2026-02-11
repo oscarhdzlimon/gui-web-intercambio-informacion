@@ -52,7 +52,7 @@ export class DetalleAntecedentesComponent extends GeneralComponent implements On
   cifradoService: CryptoService = inject(CryptoService);
   reporteAntecedentesService: ReporteAntecedentesService = inject(ReporteAntecedentesService);
 
-  readonly AES_KEY_BASE64: string = "mZzG9Fz9P0n4z7mZlKz8B9nX0mJ8vF7PZKX2vZx5QmE=";
+  readonly AES_KEY_BASE64: string = environment.key.AES_KEY_BASE64;
   cifrado = ''
   tipoBusqueda!: string;
 
