@@ -4,9 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="ajustes de asociación">
+    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="correcciones leyendas en tablas">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/detalle-antecedentes/detalle-antecedentes.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/detalle-antecedentes/detalle-antecedentes.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/detalle-antecedentes/detalle-antecedentes.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/detalle-antecedentes/detalle-antecedentes.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/detalle-antecedentes/detalle/detalle.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/detalle-antecedentes/detalle/detalle.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/detalle-antecedentes/detalle/detalle.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/detalle-antecedentes/detalle/detalle.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,15 +104,9 @@
       <workItem from="1770142411370" duration="5358000" />
       <workItem from="1770310382695" duration="11000" />
       <workItem from="1770311479114" duration="698000" />
-      <workItem from="1770331724769" duration="678000" />
-    </task>
-    <task id="LOCAL-00119" summary="correcciones de totales">
-      <option name="closed" value="true" />
-      <created>1769019038859</created>
-      <option name="number" value="00119" />
-      <option name="presentableId" value="LOCAL-00119" />
-      <option name="project" value="LOCAL" />
-      <updated>1769019038860</updated>
+      <workItem from="1770331724769" duration="4513000" />
+      <workItem from="1770419399454" duration="92000" />
+      <workItem from="1770836302243" duration="1363000" />
     </task>
     <task id="LOCAL-00120" summary="correcciones de css + totales">
       <option name="closed" value="true" />
@@ -495,7 +492,15 @@
       <option name="project" value="LOCAL" />
       <updated>1770241544478</updated>
     </task>
-    <option name="localTasksCounter" value="168" />
+    <task id="LOCAL-00168" summary="correcciones leyendas en tablas">
+      <option name="closed" value="true" />
+      <created>1770332432569</created>
+      <option name="number" value="00168" />
+      <option name="presentableId" value="LOCAL-00168" />
+      <option name="project" value="LOCAL" />
+      <updated>1770332432569</updated>
+    </task>
+    <option name="localTasksCounter" value="169" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -513,7 +518,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="siempre se puede imprimir desde cnsulta-antecedentes" />
     <MESSAGE value="correcciones de recuperación de busqueda para busqueda sistemas" />
     <MESSAGE value="correcciones de recuperación de busqueda para consulta antecedentes" />
     <MESSAGE value="correcciones css" />
@@ -538,6 +542,7 @@
     <MESSAGE value="alerta de inactividad" />
     <MESSAGE value="detalle de antecedentes -&gt; tablas leyenda" />
     <MESSAGE value="ajustes de asociación" />
-    <option name="LAST_COMMIT_MESSAGE" value="ajustes de asociación" />
+    <MESSAGE value="correcciones leyendas en tablas" />
+    <option name="LAST_COMMIT_MESSAGE" value="correcciones leyendas en tablas" />
   </component>
 </project>

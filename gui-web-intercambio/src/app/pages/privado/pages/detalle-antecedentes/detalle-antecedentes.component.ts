@@ -251,7 +251,6 @@ export class DetalleAntecedentesComponent extends GeneralComponent implements On
 
   async obtenerExpediente() {
     try {
-      // IMPORTANTE: Añadir 'await' aquí
       const REF_SISTEMA = await this.cifradoService.decryptToObject<any>(
         this.cifrado,
         this.AES_KEY_BASE64

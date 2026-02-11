@@ -5,6 +5,8 @@ import {ButtonModule} from 'primeng/button';
 import {UserService} from '@services/user.service';
 import {SesionUser} from '@models/sesion-user.interface';
 import {DatePipe} from '@angular/common';
+import {ActivatedRoute} from '@angular/router';
+import {CryptoService} from '@services/crypto.service';
 
 @Component({
   selector: 'app-detalle',
@@ -16,10 +18,16 @@ import {DatePipe} from '@angular/common';
 export class DetalleComponent implements OnInit {
   horario: string;
 
+  cifradoService: CryptoService = inject(CryptoService);
+
+  readonly AES_KEY_BASE64: string = "mZzG9Fz9P0n4z7mZlKz8B9nX0mJ8vF7PZKX2vZx5QmE=";
+  cifrado = ''
+
   constructor(
     public ref: DynamicDialogRef,
     public readonly data: DynamicDialogConfig,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private route: ActivatedRoute,
   ) {
     const ahora = new Date();
     this.horario = `Horario de consulta ${this.datePipe.transform(
@@ -27,6 +35,7 @@ export class DetalleComponent implements OnInit {
       'dd/MM/yyyy - HH:mm:ss'
     )}`;
   }
+
   userService = inject(UserService);
   userData: SesionUser | null = null;
 
@@ -42,6 +51,8 @@ export class DetalleComponent implements OnInit {
   unidad: string = '';
   estado: string = '';
   cierre: string = '';
+
+  usuarioLogueado = '';
 
   datosDetalle: any;
   fecha: Date = new Date();
@@ -63,6 +74,31 @@ export class DetalleComponent implements OnInit {
       this.unidad = this.data.data.unidad;
       this.estado = this.data.data.estado;
       this.cierre = this.data.data.fechaCierre;
+    }
+
+    this.route.queryParams.subscribe((qp) => {
+
+        if (qp['valor']) {
+          this.cifrado = qp['valor'] as string;
+          void this.obtenerExpediente();
+        } else {
+          this.usuarioLogueado = this.userData?.nombreCompleto ?? '';
+        }
+      }
+    );
+  }
+
+  async obtenerExpediente() {
+    try {
+      const REF_SISTEMA = await this.cifradoService.decryptToObject<any>(
+        this.cifrado,
+        this.AES_KEY_BASE64
+      );
+      this.usuarioLogueado = REF_SISTEMA.usuarioLogueado;
+      console.log(REF_SISTEMA.usuarioLogueado)
+
+    } catch (error) {
+      console.error("Error al descifrar. Posibles causas: Clave incorrecta o JSON malformado", error);
     }
   }
 }
