@@ -15,14 +15,20 @@
 
   <div class="divsubtitulo row col-12 flex">
     <span class="subtitulo">
-      Resultado de la búsqueda por @if(datosDetalle.dtosUsuario.nss &&
-      datosDetalle.dtosUsuario.nombre){ NSS:
+      Resultado de la búsqueda por @if (datosDetalle.dtosUsuario.nss &&
+    datosDetalle.dtosUsuario.nombre) {
+      NSS:
       {{ datosDetalle.dtosUsuario.nss }} y nombre:
-      {{ datosDetalle.dtosUsuario.nombre }} }@else {
-      @if(datosDetalle.dtosUsuario.nss){ NSS:
-      {{ datosDetalle.dtosUsuario.nss }} } @if(datosDetalle.dtosUsuario.nombre){
-      Nombre: {{ datosDetalle.dtosUsuario.nombre }}
-      } }
+      {{ datosDetalle.dtosUsuario.nombre }}
+    } @else {
+      @if (datosDetalle.dtosUsuario.nss) {
+        NSS:
+        {{ datosDetalle.dtosUsuario.nss }}
+      }
+      @if (datosDetalle.dtosUsuario.nombre) {
+        Nombre: {{ datosDetalle.dtosUsuario.nombre }}
+      }
+    }
     </span>
   </div>
 
@@ -32,450 +38,464 @@
       <div class="divcontenido">{{ datosDetalle.consecutivo }}</div>
     </div>
 
-    @if(datosDetalle.titulo == 'Detalle de Gestión'){
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">Folio de la gestión</div>
-      <div class="divcontenido">{{ datosDetalle.folio }}</div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">Nombre del / los afectado(s)</div>
-      <div class="divcontenido">{{ datosDetalle.nombreAfectado }} {{ datosDetalle.apellidoPaternoAfectado }} {{ datosDetalle.apellidoMaternoAfectado }}</div>
+    @if (datosDetalle.titulo == 'Detalle de Gestión') {
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">Folio de la gestión</div>
+        <div class="divcontenido">{{ datosDetalle.folio }}</div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">Persona promovente</div>
+        <div class="divcontenido">{{ datosDetalle.nombrePromovente }}</div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">Nombre del / los afectado(s)</div>
+        <div
+          class="divcontenido">{{ datosDetalle.nombreAfectado }} {{ datosDetalle.apellidoPaternoAfectado }} {{ datosDetalle.apellidoMaternoAfectado }}
+        </div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">
+          Nombre del / los peticionario(s)
+        </div>
+        <div
+          class="divcontenido">{{ datosDetalle.nombrePeticionario }} {{ datosDetalle.apellidoPaternoPeticionario }} {{ datosDetalle.apellidoMaternoPeticionario }}
+        </div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">NSS</div>
+        <div class="divcontenido">{{ datosDetalle.nss }}</div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">Fecha del suceso</div>
+        <div class="divcontenido">{{ datosDetalle.fechaSucesoFormateada }}</div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">OOAD involucrado</div>
+        <div class="divcontenido">{{ datosDetalle.ooadInvolucrado }}</div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">Unidad involucrada</div>
+        <div class="divcontenido">{{ datosDetalle.unidadInvolucrada }}</div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">Fecha de creación</div>
+        <div class="divcontenido">{{ datosDetalle.fechaCreacionFormateada }}</div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">Estado</div>
+        <div class="divcontenido">{{ datosDetalle.estado }}</div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">
+          Fecha de cierre del acuerdo/juicio/procedimiento/queja médica /gestión
+        </div>
+        <div class="divcontenido">
+          {{ datosDetalle.fechaCierreFormateada }}
+        </div>
+      </div>
+    }
+    @if (datosDetalle.titulo == 'Detalle de Queja médica') {
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">Folio de Queja Médica</div>
+        <div class="divcontenido">{{ datosDetalle.folio }}</div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">Persona promovente</div>
+        <div class="divcontenido">{{ datosDetalle.nombrePromovente }}</div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">
+          Nombre del / los peticionario(s)
+        </div>
+        <div
+          class="divcontenido">{{ datosDetalle.nombrePeticionario }} {{ datosDetalle.apellidoPaternoPeticionario }} {{ datosDetalle.apellidoMaternoPeticionario }}
+        </div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">CURP</div>
+        <div class="divcontenido">{{ datosDetalle.curp }}</div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">NSS</div>
+        <div class="divcontenido">{{ datosDetalle.nss }}</div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">Fecha del suceso</div>
+        <div class="divcontenido">{{ datosDetalle.fechaSucesoFormateada }}</div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">
+          Descripción del suceso o hechos
+        </div>
+        <div class="divcontenido">{{ datosDetalle.descripcionSuceso }}</div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">OOAD involucrado</div>
+        <div class="divcontenido">{{ datosDetalle.ooadInvolucrado }}</div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">Unidad involucrada</div>
+        <div class="divcontenido">{{ datosDetalle.unidadInvolucrada }}</div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">
+          Fecha de recepción/notificación
+        </div>
+        <div class="divcontenido">
+          {{ datosDetalle.fechaRecepcionFormateada }}
+        </div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">Estado</div>
+        <div class="divcontenido">{{ datosDetalle.estado }}</div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">
+          Fecha de cierre del acuerdo/juicio/procedimiento/queja médica /gestión
+        </div>
+        <div class="divcontenido">
+          {{ datosDetalle.fechaCierreAcuerdoFormateada }}
+        </div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">
+          Cierre del acuerdo/juicio/procedimiento/queja médica
+        </div>
+        <div class="divcontenido">{{ datosDetalle.cierreAcuerdo }}</div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">¿Susceptible a convenio?</div>
+        <div class="divcontenido">{{ datosDetalle.susceptibleConvenio }}</div>
+      </div>
+    }
+    @if (datosDetalle.titulo == 'Detalle de Inconformidades') {
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">No. de Expediente</div>
+        <div class="divcontenido">{{ datosDetalle.expediente }}</div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">Persona promovente</div>
+        <div class="divcontenido">{{ datosDetalle.nombrePromovente }}</div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">CURP</div>
+        <div class="divcontenido">{{ datosDetalle.curp }}</div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">NSS</div>
+        <div class="divcontenido">{{ datosDetalle.nss }}</div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">Fecha del suceso</div>
+        <div class="divcontenido">{{ datosDetalle.fechaSucesoFormateada }}</div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">
+          Descripción del suceso o hechos
+        </div>
+        <div class="divcontenido">{{ datosDetalle.descripcionSuceso }}</div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">OOAD involucrado</div>
+        <div class="divcontenido">{{ datosDetalle.ooadInvolucrado }}</div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">Unidad involucrada</div>
+        <div class="divcontenido">{{ datosDetalle.unidadInvolucrada }}</div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">
+          Fecha de recepción/notificación
+        </div>
+        <div class="divcontenido">
+          {{ datosDetalle.fechaRecepcionFormateada }}
+        </div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">Estado</div>
+        <div class="divcontenido">{{ datosDetalle.estado }}</div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">
+          Fecha de cierre del acuerdo/juicio/procedimiento/queja médica /gestión
+        </div>
+        <div class="divcontenido">
+          {{ datosDetalle.fechaCierreAcuerdoFormateada }}
+        </div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">
+          Fecha de notificación de la Resolución
+        </div>
+        <div class="divcontenido">
+          {{ datosDetalle.fechaNotificacionResolucionFormateada }}
+        </div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">
+          Cierre del acuerdo/juicio/procedimiento/queja médica
+        </div>
+        <div class="divcontenido">{{ datosDetalle.estado }}</div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">
+          ¿Se Revocó Resolución de Queja Médica? Fecha de Cumplimiento
+        </div>
+        <div class="divcontenido">
+          {{ datosDetalle.revocoResolucionFechaCumplimientoFormateada }}
+        </div>
+      </div>
+    }
+    @if (datosDetalle.titulo == 'Detalle de Amparo indirecto') {
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">Expediente</div>
+        <div class="divcontenido">{{ datosDetalle.expediente }}</div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">Persona promovente</div>
+        <div class="divcontenido">{{ datosDetalle.nombrePromovente }}</div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">
+          Nombre del / los peticionario(s)
+        </div>
+        <div class="divcontenido">{{ datosDetalle.nombrePeticionario }}</div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">NSS</div>
+        <div class="divcontenido">{{ datosDetalle.nss }}</div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">Fecha del suceso</div>
+        <div class="divcontenido">{{ datosDetalle.fechaSucesoFormateada }}</div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">Descripción del suceso o hechos</div>
+        <div class="divcontenido">{{ datosDetalle.descripcionSuceso }}</div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">OOAD involucrado</div>
+        <div class="divcontenido">{{ datosDetalle.ooadInvolucrado }}</div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">Unidad involucrada</div>
+        <div class="divcontenido">{{ datosDetalle.unidadInvolucrada }}</div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">
+          Fecha de recepción/notificación
+        </div>
+        <div class="divcontenido">
+          {{ datosDetalle.fechaRecepcionFormateada }}
+        </div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">Estado</div>
+        <div class="divcontenido">{{ datosDetalle.estado }}</div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">
+          Fecha de cierre del acuerdo/juicio/procedimiento/queja médica /gestión
+        </div>
+        <div class="divcontenido">
+          {{ datosDetalle.fechaCierreAcuerdoFormateada }}
+        </div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">
+          Fecha de notificación de la Resolución
+        </div>
+        <div class="divcontenido">
+          {{ datosDetalle.fechaNotificacionResolucionFormateada }}
+        </div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">
+          Cierre del acuerdo/juicio/procedimiento/queja médica
+        </div>
+        <div class="divcontenido">{{ datosDetalle.estado }}</div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">
+          ¿Se Revocó Resolución de Queja Médica? Fecha de Cumplimiento
+        </div>
+        <div class="divcontenido">
+          {{ datosDetalle.revocoResolucionFechaCumplimientoFormateada }}
+        </div>
+      </div>
+    }
+    @if (datosDetalle.titulo == 'Detalle de Procedimiento RPE') {
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">Expediente</div>
+        <div class="divcontenido">{{ datosDetalle.expediente }}</div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">Persona promovente</div>
+        <div class="divcontenido">{{ datosDetalle.nombrePromovente }}</div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">
+          Nombre del / los peticionario(s)
+        </div>
+        <div class="divcontenido">{{ datosDetalle.nombrePeticionario }}</div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">NSS</div>
+        <div class="divcontenido">{{ datosDetalle.nss }}</div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">Fecha del suceso</div>
+        <div class="divcontenido">{{ datosDetalle.fechaSucesoFormateada }}</div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">Descripción del suceso o hechos</div>
+        <div class="divcontenido">{{ datosDetalle.descripcionSuceso }}</div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">OOAD involucrado</div>
+        <div class="divcontenido">{{ datosDetalle.ooadInvolucrado }}</div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">Unidad involucrada</div>
+        <div class="divcontenido">{{ datosDetalle.unidadInvolucrada }}</div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">
+          Fecha de recepción/notificación
+        </div>
+        <div class="divcontenido">
+          {{ datosDetalle.fechaRecepcionFormateada }}
+        </div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">Estado</div>
+        <div class="divcontenido">{{ datosDetalle.estado }}</div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">
+          Fecha de cierre del acuerdo/juicio/procedimiento/queja médica /gestión
+        </div>
+        <div class="divcontenido">
+          {{ datosDetalle.fechaCierreAcuerdoFormateada }}
+        </div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">
+          Fecha de notificación de la Resolución
+        </div>
+        <div class="divcontenido">
+          {{ datosDetalle.fechaNotificacionResolucionFormateada }}
+        </div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">
+          Cierre del acuerdo/juicio/procedimiento/queja médica
+        </div>
+        <div class="divcontenido">{{ datosDetalle.cierreAcuerdo }}</div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">Cantidad pagada</div>
+        <div class="divcontenido">{{ datosDetalle.cantidadPagada }}</div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">
+          ¿Se Revocó Resolución de Queja Médica? Fecha de Cumplimiento
+        </div>
+        <div class="divcontenido">
+          {{ datosDetalle.revocoResolucionFechaCumplimientoFormateada }}
+        </div>
+      </div>
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">¿Susceptible a convenio?</div>
+        <div class="divcontenido">{{ datosDetalle.susceptibleConvenio }}</div>
+      </div>
+    }
+    @if (datosDetalle.titulo == 'Detalle de Juicio Constancioso Administrativo Federal') {
 
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">
-        Nombre del / los peticionario(s)
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">Expediente</div>
+        <div class="divcontenido">{{ datosDetalle.expediente }}</div>
       </div>
-      <div class="divcontenido">{{ datosDetalle.nombrePeticionario }} {{ datosDetalle.apellidoPaternoPeticionario }} {{ datosDetalle.apellidoMaternoPeticionario }}</div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">NSS</div>
-      <div class="divcontenido">{{ datosDetalle.nss }}</div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">Fecha del suceso</div>
-      <div class="divcontenido">{{ datosDetalle.fechaSucesoFormateada }}</div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">OOAD involucrado</div>
-      <div class="divcontenido">{{ datosDetalle.ooadInvolucrado }}</div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">Unidad involucrada</div>
-      <div class="divcontenido">{{ datosDetalle.unidadInvolucrada }}</div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">Fecha de creación</div>
-      <div class="divcontenido">{{ datosDetalle.fechaCreacionFormateada }}</div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">Estado</div>
-      <div class="divcontenido">{{ datosDetalle.estado }}</div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">
-        Fecha de cierre del acuerdo/juicio/procedimiento/queja médica /gestión
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">Persona promovente</div>
+        <div class="divcontenido">{{ datosDetalle.nombrePromovente }}</div>
       </div>
-      <div class="divcontenido">
-        {{ datosDetalle.fechaCierreFormateada }}
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">
+          Nombre del / los peticionario(s)
+        </div>
+        <div class="divcontenido">{{ datosDetalle.nombrePeticionario }}</div>
       </div>
-    </div>
-    } @if(datosDetalle.titulo == 'Detalle de Queja médica'){
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">Folio de Queja Médica</div>
-      <div class="divcontenido">{{ datosDetalle.folio }}</div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">Persona promovente</div>
-      <div class="divcontenido">{{ datosDetalle.nombrePromovente }}</div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">
-        Nombre del / los peticionario(s)
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">NSS</div>
+        <div class="divcontenido">{{ datosDetalle.nss }}</div>
       </div>
-      <div class="divcontenido">{{ datosDetalle.nombrePeticionario }} {{ datosDetalle.apellidoPaternoPeticionario }} {{ datosDetalle.apellidoMaternoPeticionario }}</div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">CURP</div>
-      <div class="divcontenido">{{ datosDetalle.curp }}</div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">NSS</div>
-      <div class="divcontenido">{{ datosDetalle.nss }}</div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">Fecha del suceso</div>
-      <div class="divcontenido">{{ datosDetalle.fechaSucesoFormateada }}</div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">
-        Descripción del suceso o hechos
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">Fecha del suceso</div>
+        <div class="divcontenido">{{ datosDetalle.fechaSucesoFormateada }}</div>
       </div>
-      <div class="divcontenido">{{ datosDetalle.descripcionSuceso }}</div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">OOAD involucrado</div>
-      <div class="divcontenido">{{ datosDetalle.ooadInvolucrado }}</div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">Unidad involucrada</div>
-      <div class="divcontenido">{{ datosDetalle.unidadInvolucrada }}</div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">
-        Fecha de recepción/notificación
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">Descripción del suceso o hechos</div>
+        <div class="divcontenido">{{ datosDetalle.descripcionSuceso }}</div>
       </div>
-      <div class="divcontenido">
-        {{ datosDetalle.fechaRecepcionFormateada }}
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">OOAD involucrado</div>
+        <div class="divcontenido">{{ datosDetalle.ooadInvolucrado }}</div>
       </div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">Estado</div>
-      <div class="divcontenido">{{ datosDetalle.estado }}</div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">
-        Fecha de cierre del acuerdo/juicio/procedimiento/queja médica /gestión
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">Unidad involucrada</div>
+        <div class="divcontenido">{{ datosDetalle.unidadInvolucrada }}</div>
       </div>
-      <div class="divcontenido">
-        {{ datosDetalle.fechaCierreAcuerdoFormateada }}
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">
+          Fecha de recepción/notificación
+        </div>
+        <div class="divcontenido">
+          {{ datosDetalle.fechaRecepcionFormateada }}
+        </div>
       </div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">
-        Cierre del acuerdo/juicio/procedimiento/queja médica
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">Estado</div>
+        <div class="divcontenido">{{ datosDetalle.estado }}</div>
       </div>
-      <div class="divcontenido">{{ datosDetalle.cierreAcuerdo }}</div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">¿Susceptible a convenio?</div>
-      <div class="divcontenido">{{ datosDetalle.susceptibleConvenio }}</div>
-    </div>
-    } @if(datosDetalle.titulo == 'Detalle de Inconformidades'){
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">No. de Expediente</div>
-      <div class="divcontenido">{{ datosDetalle.expediente }}</div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">Persona promovente</div>
-      <div class="divcontenido">{{ datosDetalle.nombrePromovente }}</div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">CURP</div>
-      <div class="divcontenido">{{ datosDetalle.curp }}</div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">NSS</div>
-      <div class="divcontenido">{{ datosDetalle.nss }}</div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">Fecha del suceso</div>
-      <div class="divcontenido">{{ datosDetalle.fechaSucesoFormateada }}</div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">
-        Descripción del suceso o hechos
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">
+          Fecha de cierre del acuerdo/juicio/procedimiento/queja médica /gestión
+        </div>
+        <div class="divcontenido">
+          {{ datosDetalle.fechaCierreAcuerdoFormateada }}
+        </div>
       </div>
-      <div class="divcontenido">{{ datosDetalle.descripcionSuceso }}</div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">OOAD involucrado</div>
-      <div class="divcontenido">{{ datosDetalle.ooadInvolucrado }}</div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">Unidad involucrada</div>
-      <div class="divcontenido">{{ datosDetalle.unidadInvolucrada }}</div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">
-        Fecha de recepción/notificación
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">
+          Fecha de notificación de la Resolución
+        </div>
+        <div class="divcontenido">
+          {{ datosDetalle.fechaNotificacionResolucionFormateada }}
+        </div>
       </div>
-      <div class="divcontenido">
-        {{ datosDetalle.fechaRecepcionFormateada }}
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">
+          Cierre del acuerdo/juicio/procedimiento/queja médica
+        </div>
+        <div class="divcontenido">{{ datosDetalle.cierreAcuerdo }}</div>
       </div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">Estado</div>
-      <div class="divcontenido">{{ datosDetalle.estado }}</div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">
-        Fecha de cierre del acuerdo/juicio/procedimiento/queja médica /gestión
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">Cantidad pagada</div>
+        <div class="divcontenido">{{ datosDetalle.cantidadPagada }}</div>
       </div>
-      <div class="divcontenido">
-        {{ datosDetalle.fechaCierreAcuerdoFormateada }}
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">
+          ¿Se Revocó Resolución de Queja Médica? Fecha de Cumplimiento
+        </div>
+        <div class="divcontenido">
+          {{ datosDetalle.revocoResolucionFechaCumplimientoFormateada }}
+        </div>
       </div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">
-        Fecha de notificación de la Resolución
+      <div class="col-12 md:col-6">
+        <div class="etiquetasmodal divetiqueta">¿Susceptible a convenio?</div>
+        <div class="divcontenido">{{ datosDetalle.susceptibleConvenio }}</div>
       </div>
-      <div class="divcontenido">
-        {{ datosDetalle.fechaNotificacionResolucionFormateada }}
-      </div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">
-        Cierre del acuerdo/juicio/procedimiento/queja médica
-      </div>
-      <div class="divcontenido">{{ datosDetalle.estado }}</div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">
-        ¿Se Revocó Resolución de Queja Médica? Fecha de Cumplimiento
-      </div>
-      <div class="divcontenido">
-        {{ datosDetalle.revocoResolucionFechaCumplimientoFormateada }}
-      </div>
-    </div>
-    } @if(datosDetalle.titulo == 'Detalle de Amparo indirecto'){
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">Expediente</div>
-      <div class="divcontenido">{{ datosDetalle.expediente }}</div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">Persona promovente</div>
-      <div class="divcontenido">{{ datosDetalle.nombrePromovente }}</div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">
-        Nombre del / los peticionario(s)
-      </div>
-      <div class="divcontenido">{{ datosDetalle.nombrePeticionario }}</div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">NSS</div>
-      <div class="divcontenido">{{ datosDetalle.nss }}</div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">Fecha del suceso</div>
-      <div class="divcontenido">{{ datosDetalle.fechaSucesoFormateada }}</div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">Descripción del suceso</div>
-      <div class="divcontenido">{{ datosDetalle.descripcionSuceso }}</div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">OOAD involucrado</div>
-      <div class="divcontenido">{{ datosDetalle.ooadInvolucrado }}</div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">Unidad involucrada</div>
-      <div class="divcontenido">{{ datosDetalle.unidadInvolucrada }}</div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">
-        Fecha de recepción/notificación
-      </div>
-      <div class="divcontenido">
-        {{ datosDetalle.fechaRecepcionFormateada }}
-      </div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">Estado</div>
-      <div class="divcontenido">{{ datosDetalle.estado }}</div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">
-        Fecha de cierre del acuerdo/juicio/procedimiento/queja médica /gestión
-      </div>
-      <div class="divcontenido">
-        {{ datosDetalle.fechaCierreAcuerdoFormateada }}
-      </div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">
-        Fecha de notificación de la Resolución
-      </div>
-      <div class="divcontenido">
-        {{ datosDetalle.fechaNotificacionResolucionFormateada }}
-      </div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">
-        Cierre del acuerdo/juicio/procedimiento/queja médica
-      </div>
-      <div class="divcontenido">{{ datosDetalle.estado }}</div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">
-        ¿Se Revocó Resolución de Queja Médica? Fecha de Cumplimiento
-      </div>
-      <div class="divcontenido">
-        {{ datosDetalle.revocoResolucionFechaCumplimientoFormateada }}
-      </div>
-    </div>
-    } @if(datosDetalle.titulo == 'Detalle de Procedimiento RPE'){
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">Expediente</div>
-      <div class="divcontenido">{{ datosDetalle.expediente }}</div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">Persona promovente</div>
-      <div class="divcontenido">{{ datosDetalle.nombrePromovente }}</div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">
-        Nombre del / los peticionario(s)
-      </div>
-      <div class="divcontenido">{{ datosDetalle.nombrePeticionario }}</div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">NSS</div>
-      <div class="divcontenido">{{ datosDetalle.nss }}</div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">Fecha del suceso</div>
-      <div class="divcontenido">{{ datosDetalle.fechaSucesoFormateada }}</div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">Descripción del suceso</div>
-      <div class="divcontenido">{{ datosDetalle.descripcionSuceso }}</div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">OOAD involucrado</div>
-      <div class="divcontenido">{{ datosDetalle.ooadInvolucrado }}</div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">Unidad involucrada</div>
-      <div class="divcontenido">{{ datosDetalle.unidadInvolucrada }}</div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">
-        Fecha de recepción/notificación
-      </div>
-      <div class="divcontenido">
-        {{ datosDetalle.fechaRecepcionFormateada }}
-      </div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">Estado</div>
-      <div class="divcontenido">{{ datosDetalle.estado }}</div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">
-        Fecha de cierre del acuerdo/juicio/procedimiento/queja médica /gestión
-      </div>
-      <div class="divcontenido">
-        {{ datosDetalle.fechaCierreAcuerdoFormateada }}
-      </div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">
-        Fecha de notificación de la Resolución
-      </div>
-      <div class="divcontenido">
-        {{ datosDetalle.fechaNotificacionResolucionFormateada }}
-      </div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">
-        Cierre del acuerdo/juicio/procedimiento/queja médica
-      </div>
-      <div class="divcontenido">{{ datosDetalle.cierreAcuerdo }}</div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">Cantidad pagada</div>
-      <div class="divcontenido">{{ datosDetalle.cantidadPagada }}</div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">
-        ¿Se Revocó Resolución de Queja Médica? Fecha de Cumplimiento
-      </div>
-      <div class="divcontenido">
-        {{ datosDetalle.revocoResolucionFechaCumplimientoFormateada }}
-      </div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">¿Susceptible a convenio?</div>
-      <div class="divcontenido">{{ datosDetalle.susceptibleConvenio }}</div>
-    </div>
-    } @if(datosDetalle.titulo == 'Detalle de Juicio Constancioso Administrativo Federal'){
-
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">Expediente</div>
-      <div class="divcontenido">{{ datosDetalle.expediente }}</div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">Persona promovente</div>
-      <div class="divcontenido">{{ datosDetalle.nombrePromovente }}</div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">
-        Nombre del / los peticionario(s)
-      </div>
-      <div class="divcontenido">{{ datosDetalle.nombrePeticionario }}</div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">NSS</div>
-      <div class="divcontenido">{{ datosDetalle.nss }}</div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">Fecha del suceso</div>
-      <div class="divcontenido">{{ datosDetalle.fechaSucesoFormateada }}</div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">Descripción del suceso</div>
-      <div class="divcontenido">{{ datosDetalle.descripcionSuceso }}</div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">OOAD involucrado</div>
-      <div class="divcontenido">{{ datosDetalle.ooadInvolucrado }}</div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">Unidad involucrada</div>
-      <div class="divcontenido">{{ datosDetalle.unidadInvolucrada }}</div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">
-        Fecha de recepción/notificación
-      </div>
-      <div class="divcontenido">
-        {{ datosDetalle.fechaRecepcionFormateada }}
-      </div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">Estado</div>
-      <div class="divcontenido">{{ datosDetalle.estado }}</div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">
-        Fecha de cierre del acuerdo/juicio/procedimiento/queja médica /gestión
-      </div>
-      <div class="divcontenido">
-        {{ datosDetalle.fechaCierreAcuerdoFormateada }}
-      </div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">
-        Fecha de notificación de la Resolución
-      </div>
-      <div class="divcontenido">
-        {{ datosDetalle.fechaNotificacionResolucionFormateada }}
-      </div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">
-        Cierre del acuerdo/juicio/procedimiento/queja médica
-      </div>
-      <div class="divcontenido">{{ datosDetalle.cierreAcuerdo }}</div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">Cantidad pagada</div>
-      <div class="divcontenido">{{ datosDetalle.cantidadPagada }}</div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">
-        ¿Se Revocó Resolución de Queja Médica? Fecha de Cumplimiento
-      </div>
-      <div class="divcontenido">
-        {{ datosDetalle.revocoResolucionFechaCumplimientoFormateada }}
-      </div>
-    </div>
-    <div class="col-12 md:col-6">
-      <div class="etiquetasmodal divetiqueta">¿Susceptible a convenio?</div>
-      <div class="divcontenido">{{ datosDetalle.susceptibleConvenio }}</div>
-    </div>
     }
   </div>
 </div>
