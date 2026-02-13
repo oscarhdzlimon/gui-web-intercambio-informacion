@@ -116,6 +116,36 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
     this.filtroForm = this.inicializarFiltroForm();
     this.suscribirACambiosFiltro();
     this.configurarEffect();
+    this.validarConexiones();
+  }
+
+  validarConexiones(): void {
+    const urlParams = new URLSearchParams(window.location.search);
+    const parentOrigin = urlParams.get('origin') || '*';
+
+    const isPopup = !!window.opener;
+    const isIframe = window.parent && window.parent !== window;
+    const targetWindow = window.opener || window.parent;
+
+    if (!targetWindow) return;
+
+    try {
+      targetWindow.postMessage({type: isPopup ? 'popup:ready' : 'iframe:ready'}, parentOrigin);
+
+    } catch (err) {
+      targetWindow.postMessage({
+        type: isPopup ? 'popup:error' : 'iframe:error',
+        message: 'Servicio no disponible'
+      }, parentOrigin);
+
+      //
+      if (isPopup) {
+        window.close();
+        targetWindow.postMessage({type: 'popup:close'}, parentOrigin);
+      } else if (isIframe) {
+        targetWindow.postMessage({type: 'iframe:close'}, parentOrigin);
+      }
+    }
   }
 
   configurarCambiosEstado(): void {
@@ -349,7 +379,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
       return;
     }
 
-    void this.queryClient.removeQueries({ queryKey: ['antecedentes'] });
+    void this.queryClient.removeQueries({queryKey: ['antecedentes']});
 
     const solicitud = this.generarNuevaSolicitud(tipoConsulta, valor);
 
