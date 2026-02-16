@@ -303,9 +303,9 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
     return {
       personas: [{
         nss: f.nss?.trim() || null,
-        nombre: f.nombre?.trim().toUpperCase() || null,
-        apellidoPaterno: f.apaterno?.trim().toUpperCase() || null,
-        apellidoMaterno: f.amaterno?.trim().toUpperCase() || null
+        nombre: this.limpiarTexto(f.nombre),
+        apellidoPaterno: this.limpiarTexto(f.apaterno),
+        apellidoMaterno: this.limpiarTexto(f.amaterno)
       }],
       expediente: null,
       ooad_UMAE: this.userData?.ooad || '',
@@ -420,6 +420,16 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
       aplicativoOrigen: this.usuario.sistema,
       moduloOrigen: this.usuario.modulo,
     }
+  }
+
+  private limpiarTexto(valor: string | null | undefined): string | null {
+    if (!valor) return null;
+
+    return valor
+      .trim()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toUpperCase();
   }
 
   protected readonly TipoTabla = TipoTabla;

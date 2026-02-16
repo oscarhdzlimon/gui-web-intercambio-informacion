@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="faltante -&gt; gestion">
+    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="mensajes de validación iframe">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/busqueda-sistemas/busqueda-sistemas.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/pages/privado/pages/consulta-antecedentes/consulta-antecedentes.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,25 +51,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;feature/impresion-detalle&quot;,
-    &quot;javascript.preferred.runtime.type.id&quot;: &quot;node&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/epgomez/Documents/gui-web-intercambio-informacion&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\epgomez\\Documents\\gui-web-intercambio-informacion\\gui-web-intercambio\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Node.js.consulta-antecedentes.component.ts.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "git-widget-placeholder": "feature/impresion-detalle",
+    "javascript.preferred.runtime.type.id": "node",
+    "last_opened_file_path": "C:/Users/epgomez/Documents/gui-web-intercambio-informacion",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "ts.external.directory.path": "C:\\Users\\epgomez\\Documents\\gui-web-intercambio-informacion\\gui-web-intercambio\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -105,14 +106,10 @@
       <workItem from="1770419399454" duration="92000" />
       <workItem from="1770836302243" duration="5016000" />
       <workItem from="1770937450108" duration="753000" />
-    </task>
-    <task id="LOCAL-00125" summary="correccion de asociación">
-      <option name="closed" value="true" />
-      <created>1769040103032</created>
-      <option name="number" value="00125" />
-      <option name="presentableId" value="LOCAL-00125" />
-      <option name="project" value="LOCAL" />
-      <updated>1769040103032</updated>
+      <workItem from="1771012638553" duration="2528000" />
+      <workItem from="1771268904724" duration="7000" />
+      <workItem from="1771274130017" duration="15000" />
+      <workItem from="1771280811382" duration="510000" />
     </task>
     <task id="LOCAL-00126" summary="ajustes de interceptor">
       <option name="closed" value="true" />
@@ -498,7 +495,15 @@
       <option name="project" value="LOCAL" />
       <updated>1770850677719</updated>
     </task>
-    <option name="localTasksCounter" value="174" />
+    <task id="LOCAL-00174" summary="mensajes de validación iframe">
+      <option name="closed" value="true" />
+      <created>1771012786287</created>
+      <option name="number" value="00174" />
+      <option name="presentableId" value="LOCAL-00174" />
+      <option name="project" value="LOCAL" />
+      <updated>1771012786288</updated>
+    </task>
+    <option name="localTasksCounter" value="175" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -516,7 +521,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="correcciones de páginado + ajustes detalle antecedentes" />
     <MESSAGE value="correcciones tablas -&gt; sin resultados" />
     <MESSAGE value="btn imprimir -&gt; detalle-antecedentes" />
     <MESSAGE value="funcion imprimir -&gt; detalle-antecedentes" />
@@ -541,6 +545,7 @@
     <MESSAGE value="labels -&gt; juicio" />
     <MESSAGE value="correcciones de variables de environment" />
     <MESSAGE value="faltante -&gt; gestion" />
-    <option name="LAST_COMMIT_MESSAGE" value="faltante -&gt; gestion" />
+    <MESSAGE value="mensajes de validación iframe" />
+    <option name="LAST_COMMIT_MESSAGE" value="mensajes de validación iframe" />
   </component>
 </project>
