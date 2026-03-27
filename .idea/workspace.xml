@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="eliminar acentos">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/components/menu/menu.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/components/menu/menu.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/components/menu/menu.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/components/menu/menu.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/interfaces/consulta-descifrada.interface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/gui-web-intercambio/src/app/core/interfaces/consulta-descifrada.interface.ts" afterDir="false" />
-    </list>
+    <list default="true" id="0777e006-20fc-4453-957f-b565a55619d4" name="Changes" comment="ajuste de perfil de acuerdo a la respuesta" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -117,15 +112,7 @@
       <workItem from="1771280811382" duration="580000" />
       <workItem from="1771863997847" duration="5062000" />
       <workItem from="1774629810492" duration="565000" />
-      <workItem from="1774630395894" duration="1092000" />
-    </task>
-    <task id="LOCAL-00127" summary="corrección de apellido materno">
-      <option name="closed" value="true" />
-      <created>1769042412854</created>
-      <option name="number" value="00127" />
-      <option name="presentableId" value="LOCAL-00127" />
-      <option name="project" value="LOCAL" />
-      <updated>1769042412854</updated>
+      <workItem from="1774630395894" duration="1882000" />
     </task>
     <task id="LOCAL-00128" summary="corrección de busqueda por nombre">
       <option name="closed" value="true" />
@@ -511,7 +498,15 @@
       <option name="project" value="LOCAL" />
       <updated>1771281354333</updated>
     </task>
-    <option name="localTasksCounter" value="176" />
+    <task id="LOCAL-00176" summary="ajuste de perfil de acuerdo a la respuesta">
+      <option name="closed" value="true" />
+      <created>1774631628806</created>
+      <option name="number" value="00176" />
+      <option name="presentableId" value="LOCAL-00176" />
+      <option name="project" value="LOCAL" />
+      <updated>1774631628807</updated>
+    </task>
+    <option name="localTasksCounter" value="177" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -529,7 +524,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="btn imprimir -&gt; detalle-antecedentes" />
     <MESSAGE value="funcion imprimir -&gt; detalle-antecedentes" />
     <MESSAGE value="funcion imprimir -&gt; detalle-antecedentes -&gt; busqueda sistemas" />
     <MESSAGE value="ajustes al guardar la asociación" />
@@ -554,6 +548,7 @@
     <MESSAGE value="faltante -&gt; gestion" />
     <MESSAGE value="mensajes de validación iframe" />
     <MESSAGE value="eliminar acentos" />
-    <option name="LAST_COMMIT_MESSAGE" value="eliminar acentos" />
+    <MESSAGE value="ajuste de perfil de acuerdo a la respuesta" />
+    <option name="LAST_COMMIT_MESSAGE" value="ajuste de perfil de acuerdo a la respuesta" />
   </component>
 </project>
