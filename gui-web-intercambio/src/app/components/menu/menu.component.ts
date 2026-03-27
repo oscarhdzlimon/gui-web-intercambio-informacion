@@ -90,7 +90,7 @@ export class MenuComponent extends GeneralComponent implements OnInit {
         this.usuario.sistema = resultado.sistema;
         this.usuario.modulo = resultado.modulo;
         this.usuario.ooadmin = resultado.ooad_UMAE;
-        this.perfil = resultado.perfil;
+        this.perfil = resultado.perfil ?? 'Sin Perfil Asignado';
         // Si necesitas la lista de personas o el expediente, ya los tienes aquí:
         // this.listaPersonas = resultado.personas;
 
