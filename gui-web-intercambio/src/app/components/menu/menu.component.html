@@ -15,8 +15,12 @@
     </span>
       <br>
       <span class="usuario-menu pr-4 mr-6 text-overflow-ellipsis alinear-izquierda">
-      Operativo</span>
-
+      @if (perfil) {
+        <small>{{ perfil | titlecase }}</small>
+      } @else {
+        Operativo
+      }
+      </span>
     </div>
 
     <p-speeddial [model]="items" direction="down" [transitionDelay]="80" class="absolute ajuste-avatar"
@@ -38,7 +42,11 @@
                   <p class="font-bold text-lg mb-0 alinear-izquierda">
                     {{ usuario.nombreCompleto }}
                   </p>
-                  <small>Operativo</small>
+                  @if (perfil) {
+                    <small>{{ perfil | titlecase }}</small>
+                  } @else {
+                    <small>Operativo</small>
+                  }
                 </div>
               </div>
               <i class="pi pi-times cursor-pointer" style="font-size: 1.2rem;"

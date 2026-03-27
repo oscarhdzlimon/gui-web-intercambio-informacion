@@ -5,7 +5,8 @@ export interface ConsultaDescifrada {
   usuarioLogueado: string,
   sistema: string,
   modulo: string,
-  cveAsunto: string
+  cveAsunto: string,
+  perfil: string
 }
 
 interface Persona {

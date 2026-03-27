@@ -11,6 +11,7 @@ import {ActivatedRoute} from '@angular/router';
 import {CryptoService} from '@services/crypto.service';
 import {NombreModuloPipe} from '@pipes/nombre-modulo.pipe';
 import {NombreSistemaPipe} from '@pipes/nombre-sistema.pipe';
+import {TitleCasePipe} from '@angular/common';
 
 @Component({
   selector: 'app-menu',
@@ -19,7 +20,8 @@ import {NombreSistemaPipe} from '@pipes/nombre-sistema.pipe';
     PrimeTemplate,
     ButtonModule,
     NombreModuloPipe,
-    NombreSistemaPipe
+    NombreSistemaPipe,
+    TitleCasePipe
   ],
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.scss'
@@ -31,6 +33,8 @@ export class MenuComponent extends GeneralComponent implements OnInit {
   clickService = inject(ClickService);
   userService = inject(UserService);
   userData: SesionUser | null = null;
+
+  perfil!: string;
 
   speedDialVisible: boolean = false;
 
@@ -86,7 +90,7 @@ export class MenuComponent extends GeneralComponent implements OnInit {
         this.usuario.sistema = resultado.sistema;
         this.usuario.modulo = resultado.modulo;
         this.usuario.ooadmin = resultado.ooad_UMAE;
-
+        this.perfil = resultado.perfil;
         // Si necesitas la lista de personas o el expediente, ya los tienes aquí:
         // this.listaPersonas = resultado.personas;
 
