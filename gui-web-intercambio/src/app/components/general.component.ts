@@ -5,7 +5,6 @@ import {Router} from '@angular/router';
 import {NAV} from "@utils/url-global";
 import {AlertService} from "@services/alert.service";
 import {AuthService} from "@services/auth.service";
-import {DocumentoService} from "@services/documentos.service";
 
 @Component({
   selector: 'app-general',
@@ -23,7 +22,6 @@ export class GeneralComponent {
   protected _alertServices: AlertService;
 
   protected authService = inject(AuthService);
-  protected documentoService = inject(DocumentoService);
   /* SE COMENTA TIMER */
 
   /* protected sessionTimerService= inject(SessionTimerService); */
@@ -33,7 +31,6 @@ export class GeneralComponent {
     this._Mensajes = inject(Mensajes);
     this._router = inject(Router);
     this._alertServices = inject(AlertService);
-    this.documentoService = inject(DocumentoService);
   }
 
   public onlyNumbers(event: any) {

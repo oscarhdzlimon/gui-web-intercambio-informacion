@@ -73,12 +73,15 @@
               </div>
             </div>
           </div>
+
+          @if(mostrarBoton){
           <div
             class="flex justify-content-start align-items-center gap-2 border-round card py-3 px-2 flex-row cursor-pointer hover:surface-200"
             (click)="toggleCallback($event, item)" style="background-color: #FFFBFF;">
             <i class="pi pi-sign-out" style="font-size: 1.2rem;"></i>
             <span class="text-xl">Salir</span>
           </div>
+          }
         </div>
       </ng-template>
     </p-speeddial>

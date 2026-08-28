@@ -25,6 +25,7 @@
     "angular-user-idle": "^4.0.0",
     "dayjs": "^1.11.18",
     "file-saver": "^2.0.5",
+    "force": "^0.0.3",
     "moment": "^2.30.1",
     "ngx-spinner": "^19.0.0",
     "primeflex": "^4.0.0",

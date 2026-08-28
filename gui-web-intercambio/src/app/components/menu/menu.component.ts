@@ -7,7 +7,7 @@ import {MenuItem, PrimeTemplate} from 'primeng/api';
 import {ButtonModule} from 'primeng/button';
 import {ClickService} from '@services/click.service';
 import {Usuario} from '@models/usuario';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {CryptoService} from '@services/crypto.service';
 import {NombreModuloPipe} from '@pipes/nombre-modulo.pipe';
 import {NombreSistemaPipe} from '@pipes/nombre-sistema.pipe';
@@ -32,6 +32,7 @@ export class MenuComponent extends GeneralComponent implements OnInit {
 
   clickService = inject(ClickService);
   userService = inject(UserService);
+
   userData: SesionUser | null = null;
 
   perfil!: string;
@@ -47,7 +48,8 @@ export class MenuComponent extends GeneralComponent implements OnInit {
   isMobileView: boolean = false;
 
   constructor(private readonly route: ActivatedRoute,
-              private readonly cifrarServicio: CryptoService) {
+              private readonly cifrarServicio: CryptoService,
+            public router: Router) {
     super();
   }
 
@@ -138,6 +140,12 @@ export class MenuComponent extends GeneralComponent implements OnInit {
 
   emitirClick() {
     this.clickService.emitirClick();
+  }
+
+
+  get mostrarBoton(): boolean {
+    const ruta = this.router.url;
+    return !ruta.includes('privado/busqueda-sistema');
   }
 
 }
