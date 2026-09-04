@@ -40,6 +40,7 @@ export class TablaPrincipalComponent {
   @Input() datosUsuario!: ReporteAntecedentes;
   @Input() asociar: boolean = true;
   @Input() banderaImprimir: boolean = false;
+  @Input() bloquearAsociacion: boolean = false;
 
   @Input() rows: number = 10;
   @Input() first: number = 0;
@@ -187,12 +188,16 @@ export class TablaPrincipalComponent {
 
   // Evento checkbox
   onCheckboxEvent(row: any, event: Event) {
+    if (this.bloquearAsociacion) return;
+
     const input = event.target as HTMLInputElement;
     const value = input.checked;
     this.checkboxChanged.emit(row);
   }
 
   onCheckboxChange(row: any, col: ColumnDefinition) {
+    if (this.bloquearAsociacion) return;
+
     this.checkboxChanged.emit(row);
   }
 

@@ -241,6 +241,11 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
       // Refrescar la vista de la página actual para esta tabla
       this.actualizarPaginaLocal(index);
     });
+
+    if (this.hayAsociacionesGuardadas) {
+      this.solicitudAntecedentesService.limpiar();
+      this.consultas.forEach((_, index) => this.actualizarPaginaLocal(index));
+    }
   }
 
   inicializarFiltroForm(): FormGroup {
@@ -267,8 +272,10 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
   }
 
   obtenerParametros(): void {
+
     this.route.queryParamMap.subscribe(params => {
       if (!params) return;
+
       this.cifrado = params.get('valor') as string;
       void this.obtenerExpediente();
     });
@@ -280,6 +287,8 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
         this.cifrado,
         environment.key.AES_KEY_BASE64
       );
+
+      console.log(JSON.stringify(this.REF_SISTEMA))
       this.obtenerDatosCifrados();
 
       // Una vez que se obtienen las listas de nombres y nss, se parcha el form
@@ -323,6 +332,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
   }
 
   generarNuevaSolicitud(tipoConsulta: number, valor: any): NuevaSolicitudBusquedaPaginado {
+
     let personas: NuevaPersona[] = [];
 
     if (this.consulta_todos) {
@@ -356,6 +366,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
     return {
       personas,
       expediente: this.REF_SISTEMA.expediente,
+      cveAsunto: this.REF_SISTEMA.cveAsunto,
       ooad_UMAE: this.REF_SISTEMA.ooad_UMAE,
       usuarioLogueado: this.REF_SISTEMA.usuarioLogueado,
       sistema: this.REF_SISTEMA.sistema,
@@ -449,6 +460,8 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
   }
 
   cambiarEstado(row: RegistroAntecedentes): void {
+    if (this.hayAsociacionesGuardadas) return;
+
     const numId = row.numId ?? 0;
     if (row.indAsociado) {
       this.solicitudAntecedentesService.agregar(
@@ -461,6 +474,9 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
   }
 
   guardarAsociacion(): void {
+
+    if (this.hayAsociacionesGuardadas) return;
+
     const registros = this.solicitudAntecedentesService.obtenerRegistros();
     const params: ParamsAsociacion = {
       cveAsunto: this.REF_SISTEMA.cveAsunto ?? 0,
@@ -481,6 +497,13 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
     return registros.map(r => {
       if (r.indAsociado && r.idBitacoraAsociacion) {
         return r;
+      }
+
+      if (this.hayAsociacionesGuardadas) {
+        return {
+          ...r,
+          indAsociado: false
+        };
       }
 
       return {
@@ -682,7 +705,15 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
     }, {emitEvent: false}); // 'emitEvent: false' evita bucles infinitos de validación
   }
 
+  get hayAsociacionesGuardadas(): boolean {
+    return this.consultas.some(consulta =>
+      consulta.datosCompletos.some(registro =>
+        registro.indAsociado && !!registro.idBitacoraAsociacion
+      )
+    );
+  }
+
   get puedeGuardar() {
-    return this.solicitudAntecedentesService.tieneRegistros()
+    return !this.hayAsociacionesGuardadas && this.solicitudAntecedentesService.tieneRegistros()
   }
 }

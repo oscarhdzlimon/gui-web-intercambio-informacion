@@ -16,6 +16,7 @@ interface Persona {
 export interface NuevaSolicitudBusquedaPaginado {
   personas: NuevaPersona[]
   expediente: string | null,
+  cveAsunto: string | null,
   ooad_UMAE: string,
   usuarioLogueado: string,
   sistema: string,

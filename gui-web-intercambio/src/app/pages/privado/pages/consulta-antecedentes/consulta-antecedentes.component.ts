@@ -307,6 +307,7 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
         apellidoPaterno: this.limpiarTexto(f.apaterno),
         apellidoMaterno: this.limpiarTexto(f.amaterno)
       }],
+      cveAsunto: null,
       expediente: null,
       ooad_UMAE: this.userData?.ooad || '',
       usuarioLogueado: this.userData?.curp || '',

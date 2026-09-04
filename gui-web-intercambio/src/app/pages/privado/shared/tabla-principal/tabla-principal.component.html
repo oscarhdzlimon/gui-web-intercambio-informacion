@@ -40,7 +40,7 @@
                 id="checkbox-{{rowData.numId}}"
                 type="checkbox"
                 [(ngModel)]="rowData.indAsociado"
-                [disabled]="rowData.indAsociado && rowData.idBitacoraAsociacion"
+                [disabled]="bloquearAsociacion || (rowData.indAsociado && rowData.idBitacoraAsociacion)"
                 (change)="onCheckboxEvent(rowData, $event)"
               />
               <label for="checkbox-{{rowData.numId}}"></label>
