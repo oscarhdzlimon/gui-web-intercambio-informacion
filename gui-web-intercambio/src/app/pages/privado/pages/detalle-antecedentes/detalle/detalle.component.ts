@@ -67,7 +67,7 @@ export class DetalleComponent implements OnInit {
       this.datosDetalle = this.data.data;
       this.registro = this.data.data.idRegistro;
       this.consecutivo = this.data.data.consecutivo;
-      this.folio = this.data.data.folio;
+      this.folio = this.data.data.expediente;
       this.persona = this.data.data.persona;
       this.peticionarios = this.data.data.nombrePeticionario;
       this.nss = this.data.data.nss;
