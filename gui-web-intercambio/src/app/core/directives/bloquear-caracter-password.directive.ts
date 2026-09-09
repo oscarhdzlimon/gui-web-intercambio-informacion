@@ -17,12 +17,12 @@ export class BloquearCaracterPasswordDirective {
     }
   }
 
-  @HostListener('paste', ['$event'])
+  /* @HostListener('paste', ['$event'])
   onPaste(event: ClipboardEvent) {
     const pastedText = event.clipboardData?.getData('text') || '';
     if (!PATRON_CARACTERES_ASCII.test(pastedText) || pastedText == '') {
       event.preventDefault();
     }
-  }
+  } */
 
 }

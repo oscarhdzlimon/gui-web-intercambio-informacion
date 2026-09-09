@@ -22,6 +22,7 @@ export class DetalleComponent implements OnInit {
   cifradoService: CryptoService = inject(CryptoService);
 
   readonly AES_KEY_BASE64: string = environment.key.AES_KEY_BASE64;
+  private readonly catalogoOoadUmaeUrl = 'assets/catalogo-ooad-umae.json';
   cifrado = ''
 
   constructor(
@@ -85,7 +86,7 @@ export class DetalleComponent implements OnInit {
           void this.obtenerExpediente();
         } else {
           this.usuarioLogueado = this.userData?.nombreCompleto ?? '';
-          this.ooadLogueado = this.userData?.ooad ?? '';
+          this.cargarDescripcionOoadUmae(this.userData?.ooad) ?? '';
         }
       }
     );
@@ -103,5 +104,18 @@ export class DetalleComponent implements OnInit {
     } catch (error) {
       console.error("Error al descifrar. Posibles causas: Clave incorrecta o JSON malformado", error);
     }
+  }
+
+    private cargarDescripcionOoadUmae(idOoadUmae: string | null | undefined): void {
+    const id = String(idOoadUmae ?? '').trim();
+    if (!id) return;
+
+    fetch(this.catalogoOoadUmaeUrl)
+      .then(response => response.ok ? response.json() : Promise.reject(response.status))
+      .then((catalogo: Array<{ id: string; descripcion: string }>) => {
+        const registro = catalogo.find(item => String(item.id).trim() === id);
+        if (registro) this.ooadLogueado = registro.descripcion;
+      })
+      .catch(error => console.error('Error al cargar catalogo OOAD/UMAE:', error));
   }
 }
