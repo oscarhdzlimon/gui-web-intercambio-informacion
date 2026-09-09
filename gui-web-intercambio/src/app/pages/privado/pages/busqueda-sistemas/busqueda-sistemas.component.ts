@@ -567,6 +567,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
   }
 
   guardarEnSSCV1(): void {
+
     const consulta = {
       expediente: this.REF_SISTEMA.expediente,
       sistema: this.REF_SISTEMA.sistema,
@@ -648,12 +649,14 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
   }
 
   guardarAsociacionMutation = injectMutation(() => ({
+
     mutationFn: (data: { registros: any[], params: ParamsAsociacion }) =>
       lastValueFrom(this.antecedentesService.guardarAsociacion(data.registros, data.params)),
     onSuccess: (data) => {
+
       this._alertServices.exito(data?.mensaje || 'Guardado exitosamente');
       this.solicitudAntecedentesService.limpiar();
-      if (this.REF_SISTEMA.sistema === '1') {
+      if (this.REF_SISTEMA.sistema === '1' ) {
         this.guardarEnSSCV1();
       }
       // Invalidar caché para refrescar la tabla automáticamente

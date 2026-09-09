@@ -12,6 +12,7 @@ import {CryptoService} from '@services/crypto.service';
 import {NombreModuloPipe} from '@pipes/nombre-modulo.pipe';
 import {NombreSistemaPipe} from '@pipes/nombre-sistema.pipe';
 import {TitleCasePipe} from '@angular/common';
+import { UsuarioSesion } from '@models/usuarioSesion';
 
 @Component({
   selector: 'app-menu',
@@ -43,6 +44,8 @@ export class MenuComponent extends GeneralComponent implements OnInit {
 
   usuario: Usuario = new Usuario();
 
+  private readonly catalogoOoadUmaeUrl = 'assets/catalogo-ooad-umae.json';
+
   private readonly MOBILE_BREAKPOINT = 768;
 
   isMobileView: boolean = false;
@@ -72,14 +75,28 @@ export class MenuComponent extends GeneralComponent implements OnInit {
       this.usuario.sistema = this.userData?.sistemaOrigen as string;
       this.usuario.modulo = this.userData?.modulo as string;
       this.usuario.ooadmin = this.userData?.ooad as string;
+      this.cargarDescripcionOoadUmae(this.usuario.ooadmin);
     }
   }
 
   leerInformacionUsuario() {
     this.route.queryParamMap.subscribe(async params => {
+
       if (!params) return;
       const dataCifrada: string | null = params.get('valor');
-      if (!dataCifrada) return;
+      if (!dataCifrada)
+      {
+
+        //acceso por sesion
+       const infoUsuario =  this.obtenerUsuario();
+        this.usuario.nombreCompleto = infoUsuario?.nombreCompleto ?? "";
+        this.usuario.sistema = infoUsuario?.sistemaOrigen ?? "";
+        this.usuario.modulo = infoUsuario?.modulo ?? "";
+        this.usuario.ooadmin = infoUsuario?.ooad ?? "";
+        this.cargarDescripcionOoadUmae(this.usuario.ooadmin);
+        return;
+      }
+
       try {
         const resultado = await this.cifrarServicio.decryptToObject<any>(
           dataCifrada,
@@ -92,6 +109,7 @@ export class MenuComponent extends GeneralComponent implements OnInit {
         this.usuario.sistema = resultado.sistema;
         this.usuario.modulo = resultado.modulo;
         this.usuario.ooadmin = resultado.ooad_UMAE;
+        this.cargarDescripcionOoadUmae(this.usuario.ooadmin);
         this.perfil = resultado.perfil ?? 'Sin Perfil Asignado';
         // Si necesitas la lista de personas o el expediente, ya los tienes aquí:
         // this.listaPersonas = resultado.personas;
@@ -103,16 +121,31 @@ export class MenuComponent extends GeneralComponent implements OnInit {
     });
   }
 
-  obtenerUsuario(): Usuario | null {
+  private cargarDescripcionOoadUmae(idOoadUmae: string | null | undefined): void {
+    const id = String(idOoadUmae ?? '').trim();
+    if (!id) return;
+
+    fetch(this.catalogoOoadUmaeUrl)
+      .then(response => response.ok ? response.json() : Promise.reject(response.status))
+      .then((catalogo: Array<{ id: string; descripcion: string }>) => {
+        const registro = catalogo.find(item => String(item.id).trim() === id);
+        if (registro) this.usuario.ooadmin = registro.descripcion;
+      })
+      .catch(error => console.error('Error al cargar catalogo OOAD/UMAE:', error));
+  }
+
+  obtenerUsuario(): UsuarioSesion | null {
+
     try {
-      const USUARIO_KEY = 'usuario_actual';
+
+      const token = localStorage.getItem('token') ?? "";
       // 1. Obtener la cadena JSON de sessionStorage
-      const usuarioJson = sessionStorage.getItem(USUARIO_KEY);
+      const usuarioJson =  this.authService.obtenerUsuarioDePayload(token);
 
       if (usuarioJson) {
         // 2. Deserializar la cadena JSON de vuelta al tipo Usuario
         // Usamos 'as Usuario' para forzar el tipado
-        return JSON.parse(usuarioJson) as Usuario;
+        return usuarioJson as UsuarioSesion;
       }
       return null;
 
