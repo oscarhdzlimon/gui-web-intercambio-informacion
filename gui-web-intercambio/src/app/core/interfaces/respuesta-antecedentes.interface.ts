@@ -2,7 +2,7 @@ export interface TotalAntecedentes {
   rp: number;
   jf: number;
   ic: number;
-  //queja_de_servicio: number;
+  queja_de_servicio: number;
   queja_medica: number;
   mai: number;
   gestion: number;

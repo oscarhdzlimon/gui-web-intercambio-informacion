@@ -63,9 +63,9 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
   private queryClient = inject(QueryClient);
 
   private readonly catalogoOoadUmaeUrl = 'assets/catalogo-ooad-umae.json';
-
-  cifrado: string = '';
   ooadLogueado = '';
+  cifrado: string = '';
+
 
   antecedentesService: AntecedentesService = inject(AntecedentesService);
   detalleAntecedentesService: DetalleAntecedentesService = inject(DetalleAntecedentesService);
@@ -291,7 +291,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
         environment.key.AES_KEY_BASE64
       );
 
-      console.log(JSON.stringify(this.REF_SISTEMA))
+      this.cargarDescripcionOoadUmae(this.REF_SISTEMA.ooad_UMAE);
       this.obtenerDatosCifrados();
 
       // Una vez que se obtienen las listas de nombres y nss, se parcha el form
@@ -553,7 +553,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
   generarObjReporteAntecedentes(): ReporteAntecedentes {
 
 
-    this.cargarDescripcionOoadUmae(this.REF_SISTEMA.ooad_UMAE)
+
 
     return {
       tipoBusqueda: null,
@@ -639,7 +639,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
         procedimientoRpe: totalesAsociados.rp,
         juicioContencioso: totalesAsociados.jf,
         inconformidad: totalesAsociados.ic,
-        quejaMedica: totalesAsociados.queja_medica,
+        quejaMedica: totalesAsociados.queja_de_servicio,
         amparoIndirecto: totalesAsociados.mai,
         gestion: totalesAsociados.gestion
       }

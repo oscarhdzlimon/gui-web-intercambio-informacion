@@ -69,6 +69,9 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
   private userService = inject(UserService);
   private detalleAntecedentesService = inject(DetalleAntecedentesService);
 
+  private readonly catalogoOoadUmaeUrl = 'assets/catalogo-ooad-umae.json';
+  ooadLogueado = '';
+
   // --- Signals de Estado ---
   paramBusqueda = signal<NuevaSolicitudBusquedaPaginado | null>(
     this.busquedaStateService.obtenerFiltrosAntecedentes()
@@ -119,6 +122,10 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
     this.usuario.sistema = this.userData?.sistemaOrigen as string;
     this.usuario.modulo = this.userData?.modulo as string;
     this.usuario.ooadmin = this.userData?.ooad as string;
+
+
+    this.cargarDescripcionOoadUmae(this.usuario.ooadmin);
+
     this.filtroForm = this.inicializarFiltroForm();
     this.obtenerFechasCorte();
     this.configurarSuscripcionesUsuario();
@@ -406,6 +413,7 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
 
   generarObjReporteAntecedentes(): ReporteAntecedentes {
 
+
     return {
       tipoBusqueda: null,
       nombre: "",
@@ -417,7 +425,7 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
       fecCorteSsc1: this.fechasCorte()?.fecCorteSsc1 ?? '',
       fecCorteSsc2: this.fechasCorte()?.fecCorteSsc2 ?? '',
       nombreConsultor: this.usuario.nombreCompleto,
-      ooad: this.usuario.ooadmin,
+      ooad: this.ooadLogueado,
       aplicativoOrigen: this.usuario.sistema,
       moduloOrigen: this.usuario.modulo,
     }
@@ -435,4 +443,23 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
 
   protected readonly TipoTabla = TipoTabla;
 
+
+      private cargarDescripcionOoadUmae(
+    idOoadUmae: string | null | undefined,
+  ): void {
+    const id = String(idOoadUmae ?? '').trim();
+    if (!id) return;
+
+    fetch(this.catalogoOoadUmaeUrl)
+      .then((response) =>
+        response.ok ? response.json() : Promise.reject(response.status),
+      )
+      .then((catalogo: Array<{ id: string; descripcion: string }>) => {
+        const registro = catalogo.find((item) => String(item.id).trim() === id);
+        if (registro) this.ooadLogueado = registro.descripcion;
+      })
+      .catch((error) =>
+        console.error('Error al cargar catalogo OOAD/UMAE:', error),
+      );
+  }
 }
