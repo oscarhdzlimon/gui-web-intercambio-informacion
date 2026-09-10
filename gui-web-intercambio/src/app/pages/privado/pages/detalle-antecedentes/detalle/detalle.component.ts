@@ -98,7 +98,10 @@ export class DetalleComponent implements OnInit {
         this.cifrado,
         this.AES_KEY_BASE64
       );
-      this.ooadLogueado = REF_SISTEMA.ooad_UMAE;
+      //this.ooadLogueado = REF_SISTEMA.ooad_UMAE;
+
+      this.cargarDescripcionOoadUmae(REF_SISTEMA.ooad_UMAE);
+
       console.log(this.ooadLogueado);
       this.usuarioLogueado = REF_SISTEMA.usuarioLogueado;
     } catch (error) {

@@ -62,7 +62,7 @@ export class TablaPrincipalComponent {
     {field: 'apaterno', header: 'Apellido paterno', width: '200px'},
     {field: 'amaterno', header: 'Apellido materno', width: '200px'},
     {field: 'gestion', header: 'Gestión', width: '150px'},
-    {field: 'queja', header: 'Queja médica', width: '150px'},
+    {field: 'queja_medica', header: 'Queja médica', width: '150px'},
     {field: 'inconformidades', header: 'Inconformidades', width: '150px'},
     {field: 'amparo', header: 'Amparo Indirecto', width: '150px'},
     {field: 'procedimiento', header: 'Procedimiento RP', width: '150px'},

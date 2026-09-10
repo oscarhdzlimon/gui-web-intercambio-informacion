@@ -62,7 +62,10 @@ enum TipoTabla {
 export class BusquedaSistemasComponent extends GeneralComponent implements OnInit {
   private queryClient = inject(QueryClient);
 
+  private readonly catalogoOoadUmaeUrl = 'assets/catalogo-ooad-umae.json';
+
   cifrado: string = '';
+  ooadLogueado = '';
 
   antecedentesService: AntecedentesService = inject(AntecedentesService);
   detalleAntecedentesService: DetalleAntecedentesService = inject(DetalleAntecedentesService);
@@ -549,6 +552,9 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
 
   generarObjReporteAntecedentes(): ReporteAntecedentes {
 
+
+    this.cargarDescripcionOoadUmae(this.REF_SISTEMA.ooad_UMAE)
+
     return {
       tipoBusqueda: null,
       nombre: "",
@@ -560,7 +566,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
       fecCorteSsc1: this.fechasCorte.fecCorteSsc1,
       fecCorteSsc2: this.fechasCorte.fecCorteSsc2,
       nombreConsultor: this.REF_SISTEMA.usuarioLogueado,
-      ooad: this.REF_SISTEMA.ooad_UMAE,
+      ooad: this.ooadLogueado,
       aplicativoOrigen: this.REF_SISTEMA.sistema,
       moduloOrigen: this.REF_SISTEMA.modulo,
     }
@@ -625,7 +631,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
         procedimientoRpe: totales.rp,
         juicioContencioso: totales.jf,
         inconformidad: totales.ic,
-        quejaMedica: totales.queja_de_servicio,
+        quejaMedica: totales.queja_medica,
         amparoIndirecto: totales.mai,
         gestion: totales.gestion
       },
@@ -633,7 +639,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
         procedimientoRpe: totalesAsociados.rp,
         juicioContencioso: totalesAsociados.jf,
         inconformidad: totalesAsociados.ic,
-        quejaMedica: totalesAsociados.queja_de_servicio,
+        quejaMedica: totalesAsociados.queja_medica,
         amparoIndirecto: totalesAsociados.mai,
         gestion: totalesAsociados.gestion
       }
@@ -718,5 +724,25 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
 
   get puedeGuardar() {
     return !this.hayAsociacionesGuardadas && this.solicitudAntecedentesService.tieneRegistros()
+  }
+
+
+    private cargarDescripcionOoadUmae(
+    idOoadUmae: string | null | undefined,
+  ): void {
+    const id = String(idOoadUmae ?? '').trim();
+    if (!id) return;
+
+    fetch(this.catalogoOoadUmaeUrl)
+      .then((response) =>
+        response.ok ? response.json() : Promise.reject(response.status),
+      )
+      .then((catalogo: Array<{ id: string; descripcion: string }>) => {
+        const registro = catalogo.find((item) => String(item.id).trim() === id);
+        if (registro) this.ooadLogueado = registro.descripcion;
+      })
+      .catch((error) =>
+        console.error('Error al cargar catalogo OOAD/UMAE:', error),
+      );
   }
 }

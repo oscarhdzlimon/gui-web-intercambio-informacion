@@ -1,33 +1,35 @@
-import {CommonModule, Location} from '@angular/common';
-import {Component, computed, inject, OnInit, signal,} from '@angular/core';
+import { CommonModule, Location } from '@angular/common';
+import { Component, computed, inject, OnInit, signal } from '@angular/core';
 
-import {ReactiveFormsModule,} from '@angular/forms';
-import {GeneralComponent} from '@components/general.component';
-import {ButtonModule} from 'primeng/button';
-import {Card} from 'primeng/card';
-import {ConfirmPopupModule} from 'primeng/confirmpopup';
-import {PaginatorModule} from 'primeng/paginator';
-import {PopoverModule} from 'primeng/popover';
-import {SelectModule} from 'primeng/select';
-import {TableModule} from 'primeng/table';
-import {NgbAccordionModule} from '@ng-bootstrap/ng-bootstrap';
-import {TablaDetalleGestionInterface,} from '@models/tablas-detalle-antecedentes.interface';
-import {DialogService, DynamicDialogRef} from 'primeng/dynamicdialog';
-import {DetalleComponent} from './detalle/detalle.component';
-import {FooterGenericoComponent} from '../../shared/footer-generico/footer-generico.component';
-import {HeaderGenericoComponent} from '../../shared/header-generico/header-generico.component';
-import {ActivatedRoute} from '@angular/router';
-import {DetalleAntecedentesService} from '@services/detalle-antecedentes.service';
-import {DataCacheService} from '@services/data-cache.service';
-import {DetalleAntecedentes} from '@models/detalleAntecedentes.interface';
-import {SesionUser} from '@models/sesion-user.interface';
-import {UserService} from '@services/user.service';
-import {ConsultaDescifrada} from '../../../../core/interfaces/consulta-descifrada.interface';
-import {CryptoService} from '@services/crypto.service';
-import {SolicitudBusquedaPaginado} from '../../../../core/interfaces/solicitud-busqueda-antecedentes.interface';
-import {ReporteAntecedentes} from '@models/reporteAntecedentes.interface';
-import {ReporteAntecedentesService} from '@services/reporteAntecedentes.service';
-import {environment} from '@env/environment.development';
+import { ReactiveFormsModule } from '@angular/forms';
+import { GeneralComponent } from '@components/general.component';
+import { ButtonModule } from 'primeng/button';
+import { Card } from 'primeng/card';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
+import { PaginatorModule } from 'primeng/paginator';
+import { PopoverModule } from 'primeng/popover';
+import { SelectModule } from 'primeng/select';
+import { TableModule } from 'primeng/table';
+import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
+import { TablaDetalleGestionInterface } from '@models/tablas-detalle-antecedentes.interface';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { DetalleComponent } from './detalle/detalle.component';
+import { FooterGenericoComponent } from '../../shared/footer-generico/footer-generico.component';
+import { HeaderGenericoComponent } from '../../shared/header-generico/header-generico.component';
+import { ActivatedRoute } from '@angular/router';
+import { DetalleAntecedentesService } from '@services/detalle-antecedentes.service';
+import { DataCacheService } from '@services/data-cache.service';
+import { DetalleAntecedentes } from '@models/detalleAntecedentes.interface';
+import { SesionUser } from '@models/sesion-user.interface';
+import { UserService } from '@services/user.service';
+import { ConsultaDescifrada } from '../../../../core/interfaces/consulta-descifrada.interface';
+import { CryptoService } from '@services/crypto.service';
+import { SolicitudBusquedaPaginado } from '../../../../core/interfaces/solicitud-busqueda-antecedentes.interface';
+import { ReporteAntecedentes } from '@models/reporteAntecedentes.interface';
+import { ReporteAntecedentesService } from '@services/reporteAntecedentes.service';
+import { environment } from '@env/environment.development';
+import { UsuarioSesion } from '@models/usuarioSesion';
+
 
 @Component({
   selector: 'app-detalle-antecedentes',
@@ -47,13 +49,19 @@ import {environment} from '@env/environment.development';
   styleUrl: './detalle-antecedentes.component.scss',
   providers: [DialogService],
 })
-export class DetalleAntecedentesComponent extends GeneralComponent implements OnInit {
+export class DetalleAntecedentesComponent
+  extends GeneralComponent
+  implements OnInit
+{
   userService: UserService = inject(UserService);
   cifradoService: CryptoService = inject(CryptoService);
-  reporteAntecedentesService: ReporteAntecedentesService = inject(ReporteAntecedentesService);
+  reporteAntecedentesService: ReporteAntecedentesService = inject(
+    ReporteAntecedentesService,
+  );
 
   readonly AES_KEY_BASE64: string = environment.key.AES_KEY_BASE64;
-  cifrado = ''
+  private readonly catalogoOoadUmaeUrl = 'assets/catalogo-ooad-umae.json';
+  cifrado = '';
   tipoBusqueda!: string;
 
   REF_USUARIO: string = '';
@@ -67,12 +75,12 @@ export class DetalleAntecedentesComponent extends GeneralComponent implements On
   REF_ASOCIACION: string = '';
 
   paginacion = {
-    queja: {first: signal(0), rows: 5},
-    gestion: {first: signal(0), rows: 5},
-    inconformidad: {first: signal(0), rows: 5},
-    amparo: {first: signal(0), rows: 5},
-    procedimiento: {first: signal(0), rows: 5},
-    juicio: {first: signal(0), rows: 5},
+    queja: { first: signal(0), rows: 5 },
+    gestion: { first: signal(0), rows: 5 },
+    inconformidad: { first: signal(0), rows: 5 },
+    amparo: { first: signal(0), rows: 5 },
+    procedimiento: { first: signal(0), rows: 5 },
+    juicio: { first: signal(0), rows: 5 },
   };
 
   totalQuejas = signal(0);
@@ -90,6 +98,7 @@ export class DetalleAntecedentesComponent extends GeneralComponent implements On
 
   usuarioLogueado = '';
   ooadLogueado = '';
+  ooadDescripcion = '';
 
   lstQueja = computed(() => {
     const data = this.dataFull()?.queja || [];
@@ -128,10 +137,10 @@ export class DetalleAntecedentesComponent extends GeneralComponent implements On
   });
 
   fechasCorte: DetalleAntecedentes = {
-    fecCorteSiade: "",
-    fecCorteSsc1: "",
-    fecCorteSsc2: "",
-    nss: ""
+    fecCorteSiade: '',
+    fecCorteSsc1: '',
+    fecCorteSsc2: '',
+    nss: '',
   };
 
   ref: DynamicDialogRef | undefined;
@@ -144,24 +153,23 @@ export class DetalleAntecedentesComponent extends GeneralComponent implements On
     nombre: '',
     nss: '',
     expediente: '',
-    id: ''
+    id: '',
   };
 
   constructor(
     public dialogService: DialogService,
     private route: ActivatedRoute,
     private detalleAntecedentesService: DetalleAntecedentesService,
-    private _location: Location
+    private _location: Location,
   ) {
     super();
 
-    this.userService.userData$.subscribe(user => this.userData = user);
-    this.REF_APLICATIVO = this.userData?.sistemaOrigen as string;
+    //this.userService.userData$.subscribe(user => this.userData = user);
+    /*     this.REF_APLICATIVO = this.userData?.sistemaOrigen as string;
     this.REF_MODULO = this.userData?.modulo as string;
     this.REF_USUARIO = this.userData?.curp as string;
-    this.REF_OOAD = this.userData?.ooad as string;
+    this.REF_OOAD = this.userData?.ooad as string; */
     this.obtenerParametros();
-
   }
 
   tabla!: Array<any>;
@@ -179,7 +187,7 @@ export class DetalleAntecedentesComponent extends GeneralComponent implements On
       apellidoMaterno: this.REF_AMATERNO,
       nss: this.REF_NSS,
       tipoBusqueda: this.tipoBusqueda,
-    }
+    };
     this.detalleAntecedentesService.consultarGestion(busqueda).subscribe({
       next: (respuesta: any) => {
         this.dataFull.set(respuesta);
@@ -190,11 +198,9 @@ export class DetalleAntecedentesComponent extends GeneralComponent implements On
         this.totalProcedimiento.set(respuesta.procedimiento?.length || 0);
         this.totalJuicio.set(respuesta.juicio?.length || 0);
       },
-      error: err => {
-      }
-    })
+      error: (err) => {},
+    });
   }
-
 
   onPageChange(event: any, seccion: keyof typeof this.paginacion) {
     this.paginacion[seccion].first.set(event.first);
@@ -203,11 +209,11 @@ export class DetalleAntecedentesComponent extends GeneralComponent implements On
   public btnVerDetalle(
     registro: TablaDetalleGestionInterface,
     idRegistro: number,
-    titulo: string
+    titulo: string,
   ) {
     const dtosUsuario = this.datosUsuario;
     this.ref = this.dialogService.open(DetalleComponent, {
-      data: {...registro, titulo, dtosUsuario},
+      data: { ...registro, titulo, dtosUsuario },
       modal: true,
       width: '40vw',
       height: '80vh',
@@ -240,29 +246,34 @@ export class DetalleAntecedentesComponent extends GeneralComponent implements On
 
       if (qp['valor']) {
         this.cifrado = qp['valor'] as string;
-        void this.obtenerExpediente()
+        void this.obtenerExpediente();
       } else {
-        this.usuarioLogueado = this.userData?.nombreCompleto ?? '';
-        this.ooadLogueado = this.userData?.ooad ?? '';
+        const UsuarioSesion = this.obtenerUsuario();
+        this.usuarioLogueado = UsuarioSesion?.nombreCompleto ?? '';
+        this.REF_APLICATIVO = UsuarioSesion?.sistemaOrigen ?? '';
+        this.cargarDescripcionOoadUmae(UsuarioSesion?.ooad);
       }
     });
-
   }
 
   async obtenerExpediente() {
     try {
       const REF_SISTEMA = await this.cifradoService.decryptToObject<any>(
         this.cifrado,
-        this.AES_KEY_BASE64
+        this.AES_KEY_BASE64,
       );
-      this.ooadLogueado = REF_SISTEMA.ooadLogueado;
-      this.usuarioLogueado = REF_SISTEMA.usuarioLogueado;
+      //this.ooadLogueado = REF_SISTEMA.ooadLogueado;
 
+      this.cargarDescripcionOoadUmae(REF_SISTEMA.ooad_UMAE);
+      this.usuarioLogueado = REF_SISTEMA.usuarioLogueado;
+      this.REF_APLICATIVO = REF_SISTEMA.sistema ?? '';
     } catch (error) {
-      console.error("Error al descifrar. Posibles causas: Clave incorrecta o JSON malformado", error);
+      console.error(
+        'Error al descifrar. Posibles causas: Clave incorrecta o JSON malformado',
+        error,
+      );
     }
   }
-
 
   cargarPagina(event: any) {
     console.log('Paginación:', event);
@@ -280,12 +291,12 @@ export class DetalleAntecedentesComponent extends GeneralComponent implements On
     this.detalleAntecedentesService.consultarFechasCorte().subscribe({
       next: (datos) => {
         this.fechasCorte = datos.respuesta;
-      }
-    })
+      },
+    });
   }
 
   imprimir(): void {
-    const obj: ReporteAntecedentes = {
+      const obj: ReporteAntecedentes = {
       aplicativoOrigen: this.REF_APLICATIVO,
       fecCorteSiade: this.fechasCorte.fecCorteSiade,
       fecCorteSsc1: this.fechasCorte.fecCorteSsc1,
@@ -298,26 +309,29 @@ export class DetalleAntecedentesComponent extends GeneralComponent implements On
       apellidoPaterno: this.REF_APATERNO,
       apellidoMaterno: this.REF_AMATERNO,
       nss: this.REF_NSS,
-      expediente: this.datosUsuario.expediente
-    }
+      expediente: this.datosUsuario.expediente,
+    };
 
     this.reporteAntecedentesService.descargaExcelHistoricoDocs(obj).subscribe({
-
       next: (datos) => {
         if (datos.adjuntoBase64) {
           const base64 = datos.adjuntoBase64;
-          const nombreArchivo = datos.nombreAdjunto || 'Reporte Antecedentes.pdf';
+          const nombreArchivo =
+            datos.nombreAdjunto || 'Reporte Antecedentes.pdf';
           const contentType = 'application/pdf';
           const pdfBlob = this.b64toBlob(base64, contentType);
           const pdfUrl = URL.createObjectURL(pdfBlob);
           window.open(pdfUrl, '_blank');
         }
-      }
+      },
     });
   }
 
-  private b64toBlob(b64Data: string, contentType: string = '', sliceSize: number = 512): Blob {
-
+  private b64toBlob(
+    b64Data: string,
+    contentType: string = '',
+    sliceSize: number = 512,
+  ): Blob {
     let base64 = b64Data.split(',')[1] ? b64Data.split(',')[1] : b64Data;
 
     // Eliminar CUALQUIER carácter que NO sea una letra/número válido para Base64,
@@ -329,7 +343,11 @@ export class DetalleAntecedentesComponent extends GeneralComponent implements On
       const byteCharacters = atob(base64);
 
       const byteArrays: Uint8Array[] = [];
-      for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+      for (
+        let offset = 0;
+        offset < byteCharacters.length;
+        offset += sliceSize
+      ) {
         const slice = byteCharacters.slice(offset, offset + sliceSize);
         const byteNumbers = new Array(slice.length);
         for (let i = 0; i < slice.length; i++) {
@@ -339,14 +357,71 @@ export class DetalleAntecedentesComponent extends GeneralComponent implements On
         byteArrays.push(byteArray);
       }
 
-      return new Blob(byteArrays as BlobPart[], {type: contentType});
-
+      return new Blob(byteArrays as BlobPart[], { type: contentType });
     } catch (e) {
       // Si incluso después de la limpieza falla, la respuesta NO es Base64.
-      console.error("Error crítico: La respuesta HTTP no es un Base64 válido.", e);
+      console.error(
+        'Error crítico: La respuesta HTTP no es un Base64 válido.',
+        e,
+      );
       // Lanza un error genérico o notifica al usuario.
-      throw new Error("El string Base64 no es válido o contiene caracteres ilegales.");
+      throw new Error(
+        'El string Base64 no es válido o contiene caracteres ilegales.',
+      );
     }
   }
 
+  private cargarDescripcionOoadUmae(
+    idOoadUmae: string | null | undefined,
+  ): void {
+    const id = String(idOoadUmae ?? '').trim();
+    if (!id) return;
+
+    fetch(this.catalogoOoadUmaeUrl)
+      .then((response) =>
+        response.ok ? response.json() : Promise.reject(response.status),
+      )
+      .then((catalogo: Array<{ id: string; descripcion: string }>) => {
+        const registro = catalogo.find((item) => String(item.id).trim() === id);
+        if (registro) this.ooadLogueado = registro.descripcion;
+      })
+      .catch((error) =>
+        console.error('Error al cargar catalogo OOAD/UMAE:', error),
+      );
+  }
+
+  obtenerUsuario(): UsuarioSesion | null {
+    try {
+      const token = localStorage.getItem('token') ?? '';
+      // 1. Obtener la cadena JSON de sessionStorage
+      const usuarioJson = this.authService.obtenerUsuarioDePayload(token);
+
+      if (usuarioJson) {
+        // 2. Deserializar la cadena JSON de vuelta al tipo Usuario
+        // Usamos 'as Usuario' para forzar el tipado
+        return usuarioJson as UsuarioSesion;
+      }
+      return null;
+    } catch (error) {
+      console.error('Error al recuperar el usuario de sesión:', error);
+      return null;
+    }
+  }
+
+  obtenerSistema(idSistema: string) {
+    let sistema = '';
+    switch (Number(idSistema)) {
+      case 1:
+        sistema = 'SSCV1';
+        break;
+      case 2:
+        sistema = 'SSCV2';
+        break;
+
+      case 3:
+        sistema = 'Siade';
+        break;
+    }
+    return sistema;
+  }
 }
