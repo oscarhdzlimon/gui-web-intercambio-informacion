@@ -195,7 +195,7 @@ export class DetalleAntecedentesComponent
         this.totalGestion.set(respuesta.gestion?.length || 0);
         this.totalInconformidad.set(respuesta.incoformidad?.length || 0);
         this.totalAmparo.set(respuesta.amparo?.length || 0);
-        this.totalProcedimiento.set(respuesta.procedimiento?.length || 0);
+        this.totalProcedimiento.set(respuesta.procedimientos?.length || 0);
         this.totalJuicio.set(respuesta.juicio?.length || 0);
       },
       error: (err) => {},

@@ -131,7 +131,9 @@
               </ng-template>
             </p-paginator>
           }
-          <span class="font-semibold mr-4 resultados">Resultados {{ totalGestion() }}</span>
+          @if (totalGestion() > 0) {
+            <span class="font-semibold mr-4 resultados">Resultados {{ totalGestion() }}</span>
+          }
         </ng-template>
 
         <!--<app-tabla-antecedentes
@@ -291,7 +293,9 @@
             </p-paginator>
 
           }
-          <span class="font-semibold mr-4 resultados">Resultados {{ totalQuejas() }}</span>
+          @if (totalQuejas() > 0) {
+            <span class="font-semibold mr-4 resultados">Resultados {{ totalQuejas() }}</span>
+          }
         </ng-template>
       </div>
     </div>
@@ -441,8 +445,9 @@
 
             </p-paginator>
           }
-          <span class="font-semibold mr-4 resultados">Resultados {{ totalInconformidad() }}</span>
-
+          @if (totalInconformidad() > 0) {
+            <span class="font-semibold mr-4 resultados">Resultados {{ totalInconformidad() }}</span>
+          }
 
         </ng-template>
       </div>
@@ -595,8 +600,9 @@
 
             </p-paginator>
           }
-          <span class="font-semibold mr-4 resultados">Resultados {{ totalAmparo() }}</span>
-
+          @if (totalAmparo() > 0) {
+            <span class="font-semibold mr-4 resultados">Resultados {{ totalAmparo() }}</span>
+          }
 
         </ng-template>
       </div>
@@ -755,7 +761,9 @@
             </p-paginator>
 
           }
-          <span class="font-semibold mr-4 resultados">Resultados {{ totalProcedimiento() }}</span>
+          @if (totalProcedimiento() > 0) {
+            <span class="font-semibold mr-4 resultados">Resultados {{ totalProcedimiento() }}</span>
+          }
         </ng-template>
       </div>
     </div>
@@ -803,7 +811,7 @@
                 <th scope="col">Cantidad pagada</th>
                 <th scope="col">¿Se Revocó Resolución de Queja Médica? Fecha de Cumplimiento</th>
                 <th scope="col">¿Susceptible a convenio?</th>
-                <th scope="col"  style="min-width: 100px" alignFrozen="right" pFrozenColumn>
+                <th scope="col" style="min-width: 100px" alignFrozen="right" pFrozenColumn>
                   Ver detalle
                 </th>
               </tr>
@@ -912,8 +920,9 @@
             </p-paginator>
 
           }
-          <span class="font-semibold mr-4 resultados">Resultados {{ totalJuicio() }}</span>
-
+          @if (totalJuicio() > 0) {
+            <span class="font-semibold mr-4 resultados">Resultados {{ totalJuicio() }}</span>
+          }
 
         </ng-template>
       </div>
@@ -929,7 +938,7 @@
       </div>
     </article>
   }
-  @if(!this.cifrado) {
+  @if (!this.cifrado) {
     <article class="flex flex-row flex-wrap">
       <div class="flex lg:col-12  col-12 justify-content-end align-items-center mt-3 ">
         <p-button type="button" label="Imprimir" styleClass="btn-buscar btn-background"
