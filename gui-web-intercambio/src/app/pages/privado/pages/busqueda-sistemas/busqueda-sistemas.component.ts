@@ -291,6 +291,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
         environment.key.AES_KEY_BASE64
       );
 
+
       this.cargarDescripcionOoadUmae(this.REF_SISTEMA.ooad_UMAE);
       this.obtenerDatosCifrados();
 
@@ -631,7 +632,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
         procedimientoRpe: totales.rp,
         juicioContencioso: totales.jf,
         inconformidad: totales.ic,
-        quejaMedica: totales.queja_medica,
+        quejaMedica: totales.queja_de_servicio,
         amparoIndirecto: totales.mai,
         gestion: totales.gestion
       },
