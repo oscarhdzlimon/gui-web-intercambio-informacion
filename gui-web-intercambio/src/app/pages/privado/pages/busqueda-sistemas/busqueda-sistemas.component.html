@@ -12,48 +12,69 @@
       <div class="lg:col-4 col-12 flex align-items-end">
         <span class="titulobusqueda">Resultados</span>
       </div>
-      <div class="lg:col-5 col-12 flex align-items-center">
-        <div class="flex row w-full">
+      <div class="col-12 lg:col-5">
+        <div class="grid">
           <!-- Grupo 1: Label + Select -->
-          <div class="lg:col-6 col-12">
-            <div class="flex flex-column align-items-start">
-              <label class="field-label mb-1 tituloInputBusqueda" for="tipoconsulta">Mostrar resultados por:</label>
+          <div class="col-12 lg:col-6">
+            <div class="flex flex-column">
+              <label class="field-label mb-2 tituloInputBusqueda" for="tipoconsulta">
+                Mostrar resultados por:
+              </label>
               <p-select
+                id="tipoconsulta"
                 formControlName="filtro"
                 optionLabel="label"
                 placeholder="Selecciona"
-                class="w-full"
                 optionValue="value"
                 [options]="filtroResultado"
-                [style.width.px]="154">
+                styleClass="w-full"
+                class="w-full">
               </p-select>
             </div>
           </div>
+
           <!-- Grupo 2: Label + Input -->
           @if (filtroForm.get('filtro')?.value !== 2) {
-            <div class="lg:col-6 col-12">
-              <div class="flex flex-column align-items-start">
-                <label class="field-label mb-1 tituloInputBusqueda" for="amaterno">Selecciona resultado</label>
-                <p-select formControlName="valor" [options]="nss" optionLabel="label" optionValue="value"
-                          placeholder="Selecciona una opción" class="w-full custom-dropdown ph-custom ">
+            <div class="col-12 lg:col-6">
+              <div class="flex flex-column">
+                <label class="field-label mb-2 tituloInputBusqueda" for="amaterno">
+                  Selecciona resultado
+                </label>
+                <p-select
+                  id="amaterno"
+                  formControlName="valor"
+                  [options]="nss"
+                  optionLabel="label"
+                  optionValue="value"
+                  placeholder="Selecciona una opción"
+                  styleClass="w-full custom-dropdown ph-custom"
+                  class="w-full">
                 </p-select>
               </div>
             </div>
           } @else {
-            <div class="lg:col-6 col-12">
-              <div class="flex flex-column align-items-start">
-                <label class="field-label mb-1 tituloInputBusqueda" for="amaterno">Selecciona resultado</label>
-                <p-select formControlName="valor" [options]="nombresSolicitud" optionLabel="nombreCompleto"
-                          placeholder="Selecciona una opción" class="w-full custom-dropdown ph-custom ">
+            <div class="col-12 lg:col-6">
+              <div class="flex flex-column">
+                <label class="field-label mb-2 tituloInputBusqueda" for="amaterno">
+                  Selecciona resultado
+                </label>
+                <p-select
+                  id="amaterno"
+                  formControlName="valor"
+                  [options]="nombresSolicitud"
+                  optionLabel="nombreCompleto"
+                  placeholder="Selecciona una opción"
+                  styleClass="w-full custom-dropdown ph-custom"
+                  class="w-full">
                 </p-select>
               </div>
             </div>
           }
         </div>
       </div>
-      <div class="lg:col-3 col-12 flex align-items-end justify-content-end lg:pb-2 ">
-        <div class="flex row w-full">
-          <div class="lg:col-6 col-12">
+      <div class="col-12 lg:col-3 flex align-items-end justify-content-end">
+        <div class="grid w-full m-0">
+          <div class="col-12 lg:col-6 p-1 pb-2">
             <p-button
               type="button"
               label="Buscar"
@@ -63,9 +84,15 @@
               styleClass="btn-buscar btn-background w-full">
             </p-button>
           </div>
-          <div class="lg:col-6 col-12">
-            <p-button type="button" variant="outlined" label="Mostrar todo" [style]="{'width': '120px'}"
-                      (click)="iniciarBusquedaTodos()"/>
+          <div class="col-12 lg:col-6 p-1 pb-2">
+            <p-button
+              type="button"
+              variant="outlined"
+              label="Mostrar todo"
+              (click)="iniciarBusquedaTodos()"
+              styleClass="w-full"
+              class="w-full">
+            </p-button>
           </div>
         </div>
       </div>
