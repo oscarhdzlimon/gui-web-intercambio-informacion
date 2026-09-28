@@ -1,34 +1,34 @@
-import { CommonModule, Location } from '@angular/common';
-import { Component, computed, inject, OnInit, signal } from '@angular/core';
+import {CommonModule, Location} from '@angular/common';
+import {Component, computed, inject, OnInit, signal} from '@angular/core';
 
-import { ReactiveFormsModule } from '@angular/forms';
-import { GeneralComponent } from '@components/general.component';
-import { ButtonModule } from 'primeng/button';
-import { Card } from 'primeng/card';
-import { ConfirmPopupModule } from 'primeng/confirmpopup';
-import { PaginatorModule } from 'primeng/paginator';
-import { PopoverModule } from 'primeng/popover';
-import { SelectModule } from 'primeng/select';
-import { TableModule } from 'primeng/table';
-import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
-import { TablaDetalleGestionInterface } from '@models/tablas-detalle-antecedentes.interface';
-import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { DetalleComponent } from './detalle/detalle.component';
-import { FooterGenericoComponent } from '../../shared/footer-generico/footer-generico.component';
-import { HeaderGenericoComponent } from '../../shared/header-generico/header-generico.component';
-import { ActivatedRoute } from '@angular/router';
-import { DetalleAntecedentesService } from '@services/detalle-antecedentes.service';
-import { DataCacheService } from '@services/data-cache.service';
-import { DetalleAntecedentes } from '@models/detalleAntecedentes.interface';
-import { SesionUser } from '@models/sesion-user.interface';
-import { UserService } from '@services/user.service';
-import { ConsultaDescifrada } from '../../../../core/interfaces/consulta-descifrada.interface';
-import { CryptoService } from '@services/crypto.service';
-import { SolicitudBusquedaPaginado } from '../../../../core/interfaces/solicitud-busqueda-antecedentes.interface';
-import { ReporteAntecedentes } from '@models/reporteAntecedentes.interface';
-import { ReporteAntecedentesService } from '@services/reporteAntecedentes.service';
-import { environment } from '@env/environment.development';
-import { UsuarioSesion } from '@models/usuarioSesion';
+import {ReactiveFormsModule} from '@angular/forms';
+import {GeneralComponent} from '@components/general.component';
+import {ButtonModule} from 'primeng/button';
+import {Card} from 'primeng/card';
+import {ConfirmPopupModule} from 'primeng/confirmpopup';
+import {PaginatorModule} from 'primeng/paginator';
+import {PopoverModule} from 'primeng/popover';
+import {SelectModule} from 'primeng/select';
+import {TableModule} from 'primeng/table';
+import {NgbAccordionModule} from '@ng-bootstrap/ng-bootstrap';
+import {TablaDetalleGestionInterface} from '@models/tablas-detalle-antecedentes.interface';
+import {DialogService, DynamicDialogRef} from 'primeng/dynamicdialog';
+import {DetalleComponent} from './detalle/detalle.component';
+import {FooterGenericoComponent} from '../../shared/footer-generico/footer-generico.component';
+import {HeaderGenericoComponent} from '../../shared/header-generico/header-generico.component';
+import {ActivatedRoute} from '@angular/router';
+import {DetalleAntecedentesService} from '@services/detalle-antecedentes.service';
+import {DataCacheService} from '@services/data-cache.service';
+import {DetalleAntecedentes} from '@models/detalleAntecedentes.interface';
+import {SesionUser} from '@models/sesion-user.interface';
+import {UserService} from '@services/user.service';
+import {ConsultaDescifrada} from '../../../../core/interfaces/consulta-descifrada.interface';
+import {CryptoService} from '@services/crypto.service';
+import {SolicitudBusquedaPaginado} from '../../../../core/interfaces/solicitud-busqueda-antecedentes.interface';
+import {ReporteAntecedentes} from '@models/reporteAntecedentes.interface';
+import {ReporteAntecedentesService} from '@services/reporteAntecedentes.service';
+import {environment} from '@env/environment.development';
+import {UsuarioSesion} from '@models/usuarioSesion';
 
 
 @Component({
@@ -51,8 +51,7 @@ import { UsuarioSesion } from '@models/usuarioSesion';
 })
 export class DetalleAntecedentesComponent
   extends GeneralComponent
-  implements OnInit
-{
+  implements OnInit {
   userService: UserService = inject(UserService);
   cifradoService: CryptoService = inject(CryptoService);
   reporteAntecedentesService: ReporteAntecedentesService = inject(
@@ -75,12 +74,12 @@ export class DetalleAntecedentesComponent
   REF_ASOCIACION: string = '';
 
   paginacion = {
-    queja: { first: signal(0), rows: 5 },
-    gestion: { first: signal(0), rows: 5 },
-    inconformidad: { first: signal(0), rows: 5 },
-    amparo: { first: signal(0), rows: 5 },
-    procedimiento: { first: signal(0), rows: 5 },
-    juicio: { first: signal(0), rows: 5 },
+    queja: {first: signal(0), rows: 5},
+    gestion: {first: signal(0), rows: 5},
+    inconformidad: {first: signal(0), rows: 5},
+    amparo: {first: signal(0), rows: 5},
+    procedimiento: {first: signal(0), rows: 5},
+    juicio: {first: signal(0), rows: 5},
   };
 
   totalQuejas = signal(0);
@@ -191,14 +190,15 @@ export class DetalleAntecedentesComponent
     this.detalleAntecedentesService.consultarGestion(busqueda).subscribe({
       next: (respuesta: any) => {
         this.dataFull.set(respuesta);
-        this.totalQuejas.set(respuesta.quejas?.length || 0);
+        this.totalQuejas.set(respuesta.queja?.length || 0);
         this.totalGestion.set(respuesta.gestion?.length || 0);
         this.totalInconformidad.set(respuesta.incoformidad?.length || 0);
         this.totalAmparo.set(respuesta.amparo?.length || 0);
         this.totalProcedimiento.set(respuesta.procedimientos?.length || 0);
         this.totalJuicio.set(respuesta.juicio?.length || 0);
       },
-      error: (err) => {},
+      error: (err) => {
+      },
     });
   }
 
@@ -213,7 +213,7 @@ export class DetalleAntecedentesComponent
   ) {
     const dtosUsuario = this.datosUsuario;
     this.ref = this.dialogService.open(DetalleComponent, {
-      data: { ...registro, titulo, dtosUsuario },
+      data: {...registro, titulo, dtosUsuario},
       modal: true,
       width: '40vw',
       height: '80vh',
@@ -243,6 +243,17 @@ export class DetalleAntecedentesComponent
       this.REF_APATERNO = qp['ap'] as string;
       this.REF_AMATERNO = qp['am'] as string;
       this.REF_ASOCIACION = qp['aso'] as string;
+
+      if (this.tipoBusqueda === '1') {
+        this.datosUsuario.nss = this.REF_NSS ?? '';
+        this.datosUsuario.nombre = '';
+      } else {
+        this.datosUsuario.nombre = [this.REF_NOMBRE, this.REF_APATERNO, this.REF_AMATERNO]
+          .filter(Boolean)
+          .join(' ')
+          .trim();
+        this.datosUsuario.nss = '';
+      }
 
       if (qp['valor']) {
         this.cifrado = qp['valor'] as string;
@@ -296,7 +307,7 @@ export class DetalleAntecedentesComponent
   }
 
   imprimir(): void {
-      const obj: ReporteAntecedentes = {
+    const obj: ReporteAntecedentes = {
       aplicativoOrigen: this.REF_APLICATIVO,
       fecCorteSiade: this.fechasCorte.fecCorteSiade,
       fecCorteSsc1: this.fechasCorte.fecCorteSsc1,
@@ -357,7 +368,7 @@ export class DetalleAntecedentesComponent
         byteArrays.push(byteArray);
       }
 
-      return new Blob(byteArrays as BlobPart[], { type: contentType });
+      return new Blob(byteArrays as BlobPart[], {type: contentType});
     } catch (e) {
       // Si incluso después de la limpieza falla, la respuesta NO es Base64.
       console.error(
