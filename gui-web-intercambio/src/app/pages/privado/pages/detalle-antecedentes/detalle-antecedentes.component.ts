@@ -191,7 +191,7 @@ export class DetalleAntecedentesComponent
     this.detalleAntecedentesService.consultarGestion(busqueda).subscribe({
       next: (respuesta: any) => {
         this.dataFull.set(respuesta);
-        this.totalQuejas.set(respuesta.quejas?.length || 0);
+        this.totalQuejas.set(respuesta.queja?.length || 0);
         this.totalGestion.set(respuesta.gestion?.length || 0);
         this.totalInconformidad.set(respuesta.incoformidad?.length || 0);
         this.totalAmparo.set(respuesta.amparo?.length || 0);
