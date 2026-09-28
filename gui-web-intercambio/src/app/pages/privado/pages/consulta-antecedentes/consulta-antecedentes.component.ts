@@ -280,7 +280,7 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
       apellidoMaterno: item.apellidoMaterno,
       expediente: '',
       gestion: item.totalesProcedimiento.gestion || 0,
-      quejaMedica: item.totalesProcedimiento.queja_de_servicio || 0,
+      quejaMedica: item.totalesProcedimiento.queja_medica || 0,
       inconformidades: item.totalesProcedimiento.ic || 0,
       amparoIndirecto: item.totalesProcedimiento.mai || 0,
       procedimientoRpe: item.totalesProcedimiento.rp || 0,
