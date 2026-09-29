@@ -632,7 +632,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
         procedimientoRpe: totales.rp,
         juicioContencioso: totales.jf,
         inconformidad: totales.ic,
-        quejaMedica: totales.queja_de_servicio,
+        quejaMedica: totales.queja_medica,
         amparoIndirecto: totales.mai,
         gestion: totales.gestion
       },
