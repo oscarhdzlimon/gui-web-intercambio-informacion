@@ -67,7 +67,7 @@ line-height: normal;
 font-size: 12px;
 font-style: normal;
 font-weight: 400;
-line-height: normal; 
+line-height: normal;
 color :#374957;
  padding-left: 8px;
 }
@@ -83,13 +83,68 @@ color :#374957;
 
 .item-modal {
     width: 50%;             /* Ambas columnas ocupan el ancho sin dejar espacio externo */
- 
+
     box-sizing: border-box; /* evita que el padding rompa el 50% */
-    
+
 }
 .item-modal2 {
     width: 100%;             /* Ambas columnas ocupan el ancho sin dejar espacio externo */
- 
+
     box-sizing: border-box; /* evita que el padding rompa el 50% */
-    
+
+}
+
+.campo-detalle {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Alinea los inputs en la base */
+  margin-bottom: 0.75rem;
+}
+
+.etiquetasmodal.divetiqueta {
+  font-weight: 600;
+  font-size: 0.82rem;
+  line-height: 1.25;
+  color: #374151;
+  min-height: 2.6rem;
+  display: flex;
+  padding-bottom: 4px;
+  padding-right: 8px;
+}
+
+.divcontenido {
+  background-color: #f1f5f9;
+  border-radius: 4px;
+  padding: 8px 12px;
+  font-size: 0.85rem;
+  min-height: 38px;
+  display: flex;
+  align-items: center;
+  word-break: break-word;
+}
+
+.row.flex.justify-content-between.align-items-center {
+  align-items: flex-start !important;
+  flex-wrap: nowrap !important;
+  column-gap: 0.75rem;
+}
+
+.etiqueta1modal:nth-child(1) {
+  flex: 1 1 auto !important;
+  max-width: 38% !important;
+  word-break: break-word;
+}
+
+.etiqueta1modal:nth-child(2) {
+  flex: 0 0 auto !important;
+  max-width: none !important;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.etiqueta1modal:nth-child(3) {
+  flex: 1 1 auto !important;
+  max-width: 28% !important;
+  text-align: right;
+  word-break: break-word;
 }
