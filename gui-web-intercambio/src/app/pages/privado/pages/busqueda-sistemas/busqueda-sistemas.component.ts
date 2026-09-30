@@ -230,7 +230,7 @@ export class BusquedaSistemasComponent extends GeneralComponent implements OnIni
         apellidoMaterno: item.apellidoMaterno,
         // Mapeo de totales por cada registro individual
         gestion: item.totalesProcedimiento?.gestion || 0,
-        quejaMedica: item.totalesProcedimiento?.queja_de_servicio || 0,
+        quejaMedica: item.totalesProcedimiento?.queja_medica || 0,
         amparoIndirecto: item.totalesProcedimiento?.mai || 0,
         juicioContencioso: item.totalesProcedimiento?.jf || 0,
         inconformidades: item.totalesProcedimiento?.ic || 0,
