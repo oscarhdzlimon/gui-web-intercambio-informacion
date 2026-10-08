@@ -112,7 +112,8 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
     enabled: !!this.paramBusqueda() && this.sistemasListos() && !!this.fechasCorte(),
     gcTime: 1000 * 60 * 30,
     staleTime: 1000 * 60 * 5,
-    refetchOnWindowFocus: false
+    refetchOnWindowFocus: false,
+    retry: false
   }));
 
   constructor() {
@@ -196,6 +197,11 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
       return;
     }
 
+    this.paginaActualNss = 0;
+    this.paginaActualNombre = 0;
+
+    this.busquedaStateService.guardarPaginasAntecedentes(0, 0);
+
     const payload = this.generarPayload();
     this.busquedaStateService.guardarFiltrosAntecedentes(payload);
 
@@ -211,6 +217,7 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
     // Slice Nombre
     const startNom = this.paginaActualNombre * this.registrosPorPagina;
     this.dataNombrePaginada.set(this.dataNombreCompleta.slice(startNom, startNom + this.registrosPorPagina));
+
   }
 
   cargarPagina(event: any, tipo: TipoTabla): void {
@@ -247,7 +254,8 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
   }
 
   private aplicarValidaciones(tipo: any): void {
-    const t = typeof tipo === 'object' ? tipo.value : tipo;
+    console.log(tipo)
+    const t = (tipo && typeof tipo === 'object') ? tipo.value : tipo;
     const {nss, nombre, apaterno, amaterno} = this.filtroForm.controls;
 
     [nss, nombre, apaterno, amaterno].forEach(c => {
@@ -392,7 +400,7 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
   limpiar(): void {
     this.paramBusqueda.set(null);
 
-    this.queryClient.removeQueries({ queryKey: ['antecedentes-general'] });
+    this.queryClient.removeQueries({queryKey: ['antecedentes-general']});
 
     this.filtroForm.reset();
     this.aplicarValidaciones(null);
@@ -444,7 +452,7 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
   protected readonly TipoTabla = TipoTabla;
 
 
-      private cargarDescripcionOoadUmae(
+  private cargarDescripcionOoadUmae(
     idOoadUmae: string | null | undefined,
   ): void {
     const id = String(idOoadUmae ?? '').trim();
