@@ -254,7 +254,6 @@ export class ConsultaAntecedentesComponent extends GeneralComponent implements O
   }
 
   private aplicarValidaciones(tipo: any): void {
-    console.log(tipo)
     const t = (tipo && typeof tipo === 'object') ? tipo.value : tipo;
     const {nss, nombre, apaterno, amaterno} = this.filtroForm.controls;
 
